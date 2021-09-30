@@ -14,10 +14,79 @@
 
 </description>
         
-        <pubDate>Thu, 30 Sep 2021 10:46:00 +0000</pubDate>
+        <pubDate>Wed, 29 Sep 2021 16:00:00 +0900</pubDate>
         <link>
         http://0.0.0.0:4000/helloworld</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/helloworld</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Applied Machine Learning - Assignment1</title>
+        
+          <description>&lt;p&gt;```python&lt;/p&gt;
+&lt;h1 id=&quot;this-python-3-environment-comes-with-many-helpful-analytics-libraries-installed&quot;&gt;This Python 3 environment comes with many helpful analytics libraries installed&lt;/h1&gt;
+&lt;h1 id=&quot;it-is-defined-by-the-kagglepython-docker-image-httpsgithubcomkaggledocker-python&quot;&gt;It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python&lt;/h1&gt;
+&lt;h1 id=&quot;for-example-heres-several-helpful-packages-to-load&quot;&gt;For example, here’s several helpful packages to load&lt;/h1&gt;
+
+</description>
+        
+        <pubDate>Sun, 04 Apr 2021 16:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/AppML_Assginment1</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/AppML_Assginment1</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>NLP Midterm</title>
+        
+          <description>&lt;h2 id=&quot;2020-05-10-nlp-midterm&quot;&gt;2020-05-10. NLP Midterm&lt;/h2&gt;
+
+</description>
+        
+        <pubDate>Sun, 10 May 2020 16:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/NLP_midterm</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/NLP_midterm</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Statistical Mining - HW2</title>
+        
+          <description>&lt;h3 id=&quot;2&quot;&gt;#2&lt;/h3&gt;
+
+</description>
+        
+        <pubDate>Fri, 03 Apr 2020 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/stat_HW2</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/stat_HW2</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Statistical Mining - Week2</title>
+        
+          <description>&lt;h1 id=&quot;ch-2-supervised-learning&quot;&gt;Ch 2. Supervised Learning&lt;/h1&gt;
+&lt;h4 id=&quot;format-of-supervised-learning&quot;&gt;Format of Supervised Learning:&lt;/h4&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;$ Y=f(X)+\epsilon $&lt;br /&gt;
+$f$ : Fixed but UNKNOWN function of predictors X&lt;br /&gt;
+$\rightarrow$ Supervised Learning: A set of methods estimating $f$.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+        
+        <pubDate>Mon, 16 Mar 2020 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/stat_week2</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/stat_week2</guid>
       </item>
       
     
