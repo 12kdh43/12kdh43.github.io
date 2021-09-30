@@ -41,6 +41,20 @@
     
       
       <item>
+        <title>Test</title>
+        
+          <description>&lt;p&gt;This is a test page.&lt;/p&gt;
+</description>
+        
+        <pubDate>Tue, 29 Sep 2020 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/test</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/test</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>NLP Midterm</title>
         
           <description>&lt;h2 id=&quot;2020-05-10-nlp-midterm&quot;&gt;2020-05-10. NLP Midterm&lt;/h2&gt;
