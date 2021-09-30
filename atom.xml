@@ -8,16 +8,16 @@
     
       
       <item>
-        <title>Hello, Ghost!</title>
+        <title>Hello, World!</title>
         
-          <description>&lt;h2 id=&quot;my-first-notebook-from-docker&quot;&gt;My First Notebook from Docker&lt;/h2&gt;
+          <description>&lt;h2 id=&quot;my-first-notebook-from-docker-workspace&quot;&gt;My First Notebook from Docker-workspace.&lt;/h2&gt;
 
 </description>
         
-        <pubDate>Wed, 29 Sep 2021 07:00:00 +0000</pubDate>
+        <pubDate>Thu, 30 Sep 2021 10:46:00 +0000</pubDate>
         <link>
-        http://0.0.0.0:4000/hello</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/hello</guid>
+        http://0.0.0.0:4000/helloworld</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/helloworld</guid>
       </item>
       
     
