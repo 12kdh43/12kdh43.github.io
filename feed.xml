@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-06T21:03:21+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Hello, World!</title><link href="http://0.0.0.0:4000/helloworld" rel="alternate" type="text/html" title="Hello, World!" /><published>2021-09-29T16:00:00+09:00</published><updated>2021-09-29T16:00:00+09:00</updated><id>http://0.0.0.0:4000/helloworld</id><content type="html" xml:base="http://0.0.0.0:4000/helloworld">&lt;h2 id=&quot;my-first-notebook-from-docker-workspace&quot;&gt;My First Notebook from Docker-workspace.&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-06T21:41:16+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Hello, World!</title><link href="http://0.0.0.0:4000/helloworld" rel="alternate" type="text/html" title="Hello, World!" /><published>2021-09-29T16:00:00+09:00</published><updated>2021-09-29T16:00:00+09:00</updated><id>http://0.0.0.0:4000/helloworld</id><content type="html" xml:base="http://0.0.0.0:4000/helloworld">&lt;h2 id=&quot;my-first-notebook-from-docker-workspace&quot;&gt;My First Notebook from Docker-workspace.&lt;/h2&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1257,7 +1257,30 @@ Epoch 00012: early stopping
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# from saved best model
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loaded_model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;load_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'best_model.h5'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;loaded_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;evaluate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">2020-1. NLP</summary></entry><entry><title type="html">NLP - Midterm</title><link href="http://0.0.0.0:4000/NLP_midterm" rel="alternate" type="text/html" title="NLP - Midterm" /><published>2020-05-10T16:00:00+09:00</published><updated>2020-05-10T16:00:00+09:00</updated><id>http://0.0.0.0:4000/NLP_midterm</id><content type="html" xml:base="http://0.0.0.0:4000/NLP_midterm">&lt;h2 id=&quot;2020-1-nlp&quot;&gt;2020-1. NLP&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">2020-1. NLP</summary></entry><entry><title type="html">NLP - Midterm</title><link href="http://0.0.0.0:4000/NLP_midterm" rel="alternate" type="text/html" title="NLP - Midterm" /><published>2020-05-10T16:00:00+09:00</published><updated>2020-05-10T16:00:00+09:00</updated><id>http://0.0.0.0:4000/NLP_midterm</id><content type="html" xml:base="http://0.0.0.0:4000/NLP_midterm">&lt;h2 class=&quot;no_toc&quot; id=&quot;2020-1-nlp&quot;&gt;2020-1. NLP&lt;/h2&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#1-data-info&quot; id=&quot;markdown-toc-1-data-info&quot;&gt;1. Data Info&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2-preprocessing&quot; id=&quot;markdown-toc-2-preprocessing&quot;&gt;2. Preprocessing&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#21-duplicated-data-found-in-train_data&quot; id=&quot;markdown-toc-21-duplicated-data-found-in-train_data&quot;&gt;2.1 duplicated data found in train_data&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#3-comparing-classification-models&quot; id=&quot;markdown-toc-3-comparing-classification-models&quot;&gt;3. Comparing classification models&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#31-with-tf-idf-vectorizer&quot; id=&quot;markdown-toc-31-with-tf-idf-vectorizer&quot;&gt;3.1 With Tf-idf vectorizer&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#311-multinomialnb&quot; id=&quot;markdown-toc-311-multinomialnb&quot;&gt;3.1.1 MultinomialNB&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#312-logisticregression&quot; id=&quot;markdown-toc-312-logisticregression&quot;&gt;3.1.2 LogisticRegression&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#32-with-countvectorizer&quot; id=&quot;markdown-toc-32-with-countvectorizer&quot;&gt;3.2 With CountVectorizer&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#321-multinomialnb&quot; id=&quot;markdown-toc-321-multinomialnb&quot;&gt;3.2.1 MultinomialNB&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#4-balanced-sampling-approach---imblearn&quot; id=&quot;markdown-toc-4-balanced-sampling-approach---imblearn&quot;&gt;4. Balanced sampling approach - imblearn&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#5-result-best-model&quot; id=&quot;markdown-toc-5-result-best-model&quot;&gt;5. Result: Best Model&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#comment&quot; id=&quot;markdown-toc-comment&quot;&gt;comment&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pandas&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;
@@ -1504,7 +1527,7 @@ f1-score macro avg: 0.85&lt;/p&gt;
  {'ngram_range': (1, 2), 'stop_words': None, 'clf__alpha': 0.1})
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;4-balanced-sampling-approach---imblearn&quot;&gt;4. Balanced sampling approach - imblearn&lt;/h2&gt;
+&lt;h1 id=&quot;4-balanced-sampling-approach---imblearn&quot;&gt;4. Balanced sampling approach - imblearn&lt;/h1&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.feature_extraction.text&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TfidfVectorizer&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.feature_extraction.text&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CountVectorizer&lt;/span&gt;
@@ -1600,7 +1623,7 @@ f1-score macro avg: 0.85&lt;/p&gt;
 weighted avg       0.97      0.97      0.97      1491
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;comment&quot;&gt;comment&lt;/h3&gt;
+&lt;h1 id=&quot;comment&quot;&gt;comment&lt;/h1&gt;
 &lt;p&gt;데이터사이언스 복수전공 후 첫 강의. 중간고사까지 배웠던 기본적인 전처리와 ML 함수들을 적용했다. 추가적으로 imblanced data case를 SMOTE 패키지를 사용해 간단히 처리해보았다. 당시 수업에서 가장 높은 accuracy를 기록했다.&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">2020-1. NLP</summary></entry><entry><title type="html">Statistical Mining - HW2</title><link href="http://0.0.0.0:4000/stat_HW2" rel="alternate" type="text/html" title="Statistical Mining - HW2" /><published>2020-04-03T00:00:00+09:00</published><updated>2020-04-03T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_HW2</id><content type="html" xml:base="http://0.0.0.0:4000/stat_HW2">&lt;h2 id=&quot;2020-1-statistical-mining&quot;&gt;2020-1. Statistical Mining&lt;/h2&gt;
 
 &lt;h3 id=&quot;2&quot;&gt;#2&lt;/h3&gt;
