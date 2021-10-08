@@ -1,0 +1,3149 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	
+	<!-- On Post front-matter YAML, set "use_math: true" to use LaTex -->
+	
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Data Mining - Final</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <!-- syntax.css -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+	
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="" />
+    <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
+    <link rel="canonical" href="http://0.0.0.0:4000/DM_final" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="Darron's Devlog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Data Mining - Final" />
+    <meta property="og:description" content="Final Project 1. Data Load and Preprocessing 2. Data Visualization 2.1. Stock Price Volatility 2.2. Rolling Average of Stock Price Correlation 3. Network Analysis 3.1. Build Graph with Correlation table 3.2. Setting threshold on weights 3.3. Community Detection Louvain Algorithm 1. Data Load and Preprocessing import pandas as pd import" />
+    <meta property="og:url" content="http://0.0.0.0:4000/DM_final" />
+    <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2021-05-21T00:00:00+09:00" />
+    <meta property="article:modified_time" content="2021-05-21T00:00:00+09:00" />
+    <meta property="article:tag" content="projects" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Data Mining - Final" />
+    <meta name="twitter:description" content="Final Project 1. Data Load and Preprocessing 2. Data Visualization 2.1. Stock Price Volatility 2.2. Rolling Average of Stock Price Correlation 3. Network Analysis 3.1. Build Graph with Correlation table 3.2. Setting threshold on weights 3.3. Community Detection Louvain Algorithm 1. Data Load and Preprocessing import pandas as pd import" />
+    <meta name="twitter:url" content="http://0.0.0.0:4000/" />
+    <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Darron's Devlog" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="projects" />
+    <meta name="twitter:site" content="@" />
+    <meta name="twitter:creator" content="@" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Darron's Devlog",
+        "logo": "http://0.0.0.0:4000/"
+    },
+    "url": "http://0.0.0.0:4000/DM_final",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://0.0.0.0:4000/DM_final"
+    },
+    "description": "Final Project 1. Data Load and Preprocessing 2. Data Visualization 2.1. Stock Price Volatility 2.2. Rolling Average of Stock Price Correlation 3. Network Analysis 3.1. Build Graph with Correlation table 3.2. Setting threshold on weights 3.3. Community Detection Louvain Algorithm 1. Data Load and Preprocessing import pandas as pd import"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Data Mining - Final" href="/feed.xml" />
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="/">Darron's Devlog</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
+    <li class="nav-studies" role="menuitem"><a href="/tag/jekyll/">Jekyll</a></li>
+    <li class="nav-projects" role="menuitem"><a href="/tag/projects/">Projects</a></li>
+    <li class="nav-studies" role="menuitem"><a href="/tag/studies/">Studies</a></li>
+    <li class="nav-archive" role="menuitem">
+        <a href="/archive.html">All Posts</a>
+    </li>
+</ul>
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+            
+        </div>
+        
+            <a class="subscribe-button" href="#subscribe">Search</a>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full  tag-projects  no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="21 May 2021">21 May 2021</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+                            
+                               <a href='/tag/projects/'>PROJECTS</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">Data Mining - Final</h1>
+            </header>
+	<!--
+            
+	-->
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <h1 class="no_toc" id="final-project">Final Project</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#1-data-load-and-preprocessing" id="markdown-toc-1-data-load-and-preprocessing">1. Data Load and Preprocessing</a></li>
+  <li><a href="#2-data-visualization" id="markdown-toc-2-data-visualization">2. Data Visualization</a>    <ul>
+      <li><a href="#21-stock-price-volatility" id="markdown-toc-21-stock-price-volatility">2.1. Stock Price Volatility</a></li>
+      <li><a href="#22-rolling-average-of-stock-price-correlation" id="markdown-toc-22-rolling-average-of-stock-price-correlation">2.2. Rolling Average of Stock Price Correlation</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-network-analysis" id="markdown-toc-3-network-analysis">3. Network Analysis</a>    <ul>
+      <li><a href="#31-build-graph-with-correlation-table" id="markdown-toc-31-build-graph-with-correlation-table">3.1. Build Graph with Correlation table</a></li>
+      <li><a href="#32-setting-threshold-on-weights" id="markdown-toc-32-setting-threshold-on-weights">3.2. Setting threshold on weights</a></li>
+      <li><a href="#33-community-detection" id="markdown-toc-33-community-detection">3.3. Community Detection</a></li>
+      <li><a href="#louvain-algorithm" id="markdown-toc-louvain-algorithm">Louvain Algorithm</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="1-data-load-and-preprocessing">1. Data Load and Preprocessing</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.collections</span> <span class="kn">import</span> <span class="n">LineCollection</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cluster</span><span class="p">,</span> <span class="n">covariance</span><span class="p">,</span> <span class="n">manifold</span>
+<span class="kn">from</span> <span class="nn">community</span> <span class="kn">import</span> <span class="n">community_louvain</span> <span class="k">as</span> <span class="n">louvain</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="n">cm</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="n">nx</span>
+<span class="kn">import</span> <span class="nn">networkx.algorithms.community</span> <span class="k">as</span> <span class="n">nxcom</span>
+<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="nb">reload</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_prices</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"SP500_prices.csv"</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">df_indices</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"indices.csv"</span><span class="p">)</span>
+<span class="n">df_SP500</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"SP500.csv"</span><span class="p">,</span><span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_prices</span><span class="p">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>open</th>
+      <th>high</th>
+      <th>low</th>
+      <th>close</th>
+      <th>volume</th>
+      <th>adjusted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>282821.000000</td>
+      <td>282821.000000</td>
+      <td>282821.000000</td>
+      <td>282821.000000</td>
+      <td>2.828210e+05</td>
+      <td>282821.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>139.384227</td>
+      <td>141.184891</td>
+      <td>137.569435</td>
+      <td>139.425703</td>
+      <td>4.983235e+06</td>
+      <td>137.510842</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>249.635882</td>
+      <td>253.080583</td>
+      <td>246.310869</td>
+      <td>249.739199</td>
+      <td>1.180107e+07</td>
+      <td>249.704273</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>3.220000</td>
+      <td>3.290000</td>
+      <td>3.020000</td>
+      <td>3.120000</td>
+      <td>0.000000e+00</td>
+      <td>3.092542</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>47.780000</td>
+      <td>48.419998</td>
+      <td>47.120000</td>
+      <td>47.790001</td>
+      <td>1.010000e+06</td>
+      <td>46.309925</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>86.430000</td>
+      <td>87.480003</td>
+      <td>85.320000</td>
+      <td>86.420000</td>
+      <td>2.034800e+06</td>
+      <td>84.330002</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>151.500000</td>
+      <td>153.380005</td>
+      <td>149.600006</td>
+      <td>151.570000</td>
+      <td>4.528900e+06</td>
+      <td>148.930000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>4742.610000</td>
+      <td>4832.800000</td>
+      <td>4700.000000</td>
+      <td>4776.410000</td>
+      <td>4.286171e+08</td>
+      <td>4776.410000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_prices</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>symbol</th>
+      <th>date</th>
+      <th>open</th>
+      <th>high</th>
+      <th>low</th>
+      <th>close</th>
+      <th>volume</th>
+      <th>adjusted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>AAPL</td>
+      <td>2019-01-02</td>
+      <td>38.722500</td>
+      <td>39.712502</td>
+      <td>38.557499</td>
+      <td>39.480000</td>
+      <td>148158800.0</td>
+      <td>38.505024</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AAPL</td>
+      <td>2019-01-03</td>
+      <td>35.994999</td>
+      <td>36.430000</td>
+      <td>35.500000</td>
+      <td>35.547501</td>
+      <td>365248800.0</td>
+      <td>34.669640</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AAPL</td>
+      <td>2019-01-04</td>
+      <td>36.132500</td>
+      <td>37.137501</td>
+      <td>35.950001</td>
+      <td>37.064999</td>
+      <td>234428400.0</td>
+      <td>36.149662</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AAPL</td>
+      <td>2019-01-07</td>
+      <td>37.174999</td>
+      <td>37.207500</td>
+      <td>36.474998</td>
+      <td>36.982498</td>
+      <td>219111200.0</td>
+      <td>36.069202</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>AAPL</td>
+      <td>2019-01-08</td>
+      <td>37.389999</td>
+      <td>37.955002</td>
+      <td>37.130001</td>
+      <td>37.687500</td>
+      <td>164101200.0</td>
+      <td>36.756794</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_prices_adj</span> <span class="o">=</span> <span class="n">df_prices</span><span class="p">[[</span><span class="s">'symbol'</span><span class="p">,</span><span class="s">'date'</span><span class="p">,</span> <span class="s">'adjusted'</span><span class="p">]]</span>
+<span class="n">df_prices_adj</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'symbol'</span><span class="p">,</span><span class="s">'date'</span><span class="p">,</span><span class="s">'price'</span><span class="p">]</span>
+<span class="n">df_prices_adj</span><span class="p">.</span><span class="n">tail</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>symbol</th>
+      <th>date</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>282817</th>
+      <td>NWS</td>
+      <td>2021-03-24</td>
+      <td>23.69</td>
+    </tr>
+    <tr>
+      <th>282818</th>
+      <td>NWS</td>
+      <td>2021-03-25</td>
+      <td>24.42</td>
+    </tr>
+    <tr>
+      <th>282819</th>
+      <td>NWS</td>
+      <td>2021-03-26</td>
+      <td>24.01</td>
+    </tr>
+    <tr>
+      <th>282820</th>
+      <td>NWS</td>
+      <td>2021-03-29</td>
+      <td>23.39</td>
+    </tr>
+    <tr>
+      <th>282821</th>
+      <td>NWS</td>
+      <td>2021-03-30</td>
+      <td>23.83</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_indices</span><span class="p">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>16385.000000</td>
+      <td>16215.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>8193.000000</td>
+      <td>588.995521</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>4730.086416</td>
+      <td>3309.895206</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>-36.980000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>4097.000000</td>
+      <td>1.284350</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>8193.000000</td>
+      <td>4.227200</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>12289.000000</td>
+      <td>107.426300</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>16385.000000</td>
+      <td>59221.230000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_indices</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>symbol</th>
+      <th>date</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>DPROPANEMBTX</td>
+      <td>2019-01-02</td>
+      <td>0.641</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>DPROPANEMBTX</td>
+      <td>2019-01-03</td>
+      <td>0.630</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>DPROPANEMBTX</td>
+      <td>2019-01-04</td>
+      <td>0.635</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>DPROPANEMBTX</td>
+      <td>2019-01-07</td>
+      <td>0.623</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>DPROPANEMBTX</td>
+      <td>2019-01-08</td>
+      <td>0.628</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_indices</span> <span class="o">=</span> <span class="n">df_indices</span><span class="p">[[</span><span class="s">"symbol"</span><span class="p">,</span><span class="s">"date"</span><span class="p">,</span><span class="s">"price"</span><span class="p">]]</span>
+<span class="n">df_indices</span><span class="p">.</span><span class="n">tail</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>symbol</th>
+      <th>date</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>16380</th>
+      <td>THREEFY5</td>
+      <td>2021-03-24</td>
+      <td>0.8123</td>
+    </tr>
+    <tr>
+      <th>16381</th>
+      <td>THREEFY5</td>
+      <td>2021-03-25</td>
+      <td>0.8126</td>
+    </tr>
+    <tr>
+      <th>16382</th>
+      <td>THREEFY5</td>
+      <td>2021-03-26</td>
+      <td>0.8354</td>
+    </tr>
+    <tr>
+      <th>16383</th>
+      <td>THREEFY5</td>
+      <td>2021-03-29</td>
+      <td>0.8687</td>
+    </tr>
+    <tr>
+      <th>16384</th>
+      <td>THREEFY5</td>
+      <td>2021-03-30</td>
+      <td>0.8818</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_SP500</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>symbol</th>
+      <th>company</th>
+      <th>identifier</th>
+      <th>sedol</th>
+      <th>weight</th>
+      <th>sector</th>
+      <th>shares_held</th>
+      <th>local_currency</th>
+      <th>exchange</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>AAPL</td>
+      <td>Apple Inc.</td>
+      <td>03783310</td>
+      <td>2046251</td>
+      <td>0.059338</td>
+      <td>Information Technology</td>
+      <td>161340980</td>
+      <td>USD</td>
+      <td>SP500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MSFT</td>
+      <td>Microsoft Corporation</td>
+      <td>59491810</td>
+      <td>2588173</td>
+      <td>0.055094</td>
+      <td>Information Technology</td>
+      <td>77110660</td>
+      <td>USD</td>
+      <td>SP500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AMZN</td>
+      <td>Amazon.com Inc.</td>
+      <td>02313510</td>
+      <td>2000019</td>
+      <td>0.040733</td>
+      <td>Consumer Discretionary</td>
+      <td>4376067</td>
+      <td>USD</td>
+      <td>SP500</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>FB</td>
+      <td>Facebook Inc. Class A</td>
+      <td>30303M10</td>
+      <td>B7TL820</td>
+      <td>0.021718</td>
+      <td>Communication Services</td>
+      <td>24592958</td>
+      <td>USD</td>
+      <td>SP500</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>GOOGL</td>
+      <td>Alphabet Inc. Class A</td>
+      <td>02079K30</td>
+      <td>BYVY8G0</td>
+      <td>0.019521</td>
+      <td>Communication Services</td>
+      <td>3074670</td>
+      <td>USD</td>
+      <td>SP500</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_prices_adj</span><span class="p">,</span><span class="n">df_indices</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s">'date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'date'</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s">'%Y%m%d'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s">'ignore'</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'date'</span><span class="p">,</span><span class="s">'symbol'</span><span class="p">],</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">unstack</span><span class="p">()[</span><span class="s">'price'</span><span class="p">]</span>
+<span class="n">df</span><span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'bfill'</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>symbol</th>
+      <th>A</th>
+      <th>AAL</th>
+      <th>AAP</th>
+      <th>AAPL</th>
+      <th>ABBV</th>
+      <th>ABC</th>
+      <th>ABMD</th>
+      <th>ABT</th>
+      <th>ACN</th>
+      <th>ADBE</th>
+      <th>...</th>
+      <th>XEL</th>
+      <th>XLNX</th>
+      <th>XOM</th>
+      <th>XRAY</th>
+      <th>XYL</th>
+      <th>YUM</th>
+      <th>ZBH</th>
+      <th>ZBRA</th>
+      <th>ZION</th>
+      <th>ZTS</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-01-02</th>
+      <td>64.511734</td>
+      <td>31.96316</td>
+      <td>156.2589</td>
+      <td>38.505024</td>
+      <td>79.101799</td>
+      <td>71.46416</td>
+      <td>309.96</td>
+      <td>67.034943</td>
+      <td>136.179626</td>
+      <td>224.570007</td>
+      <td>...</td>
+      <td>45.400452</td>
+      <td>84.360565</td>
+      <td>60.557911</td>
+      <td>37.21114</td>
+      <td>64.63606</td>
+      <td>87.819199</td>
+      <td>100.576180</td>
+      <td>156.24</td>
+      <td>38.71991</td>
+      <td>83.337715</td>
+    </tr>
+    <tr>
+      <th>2019-01-03</th>
+      <td>62.135132</td>
+      <td>29.58167</td>
+      <td>161.1371</td>
+      <td>34.669640</td>
+      <td>76.495514</td>
+      <td>70.42746</td>
+      <td>302.29</td>
+      <td>63.871284</td>
+      <td>131.530212</td>
+      <td>215.699997</td>
+      <td>...</td>
+      <td>45.221561</td>
+      <td>81.184296</td>
+      <td>59.628124</td>
+      <td>37.23077</td>
+      <td>62.42029</td>
+      <td>85.610275</td>
+      <td>98.756989</td>
+      <td>146.88</td>
+      <td>38.50573</td>
+      <td>80.457184</td>
+    </tr>
+    <tr>
+      <th>2019-01-04</th>
+      <td>64.285828</td>
+      <td>31.53016</td>
+      <td>157.1396</td>
+      <td>36.149662</td>
+      <td>78.959961</td>
+      <td>71.24338</td>
+      <td>313.44</td>
+      <td>65.694260</td>
+      <td>136.644577</td>
+      <td>226.190002</td>
+      <td>...</td>
+      <td>45.664082</td>
+      <td>84.943359</td>
+      <td>61.826595</td>
+      <td>38.31106</td>
+      <td>65.05392</td>
+      <td>87.838394</td>
+      <td>102.129860</td>
+      <td>152.97</td>
+      <td>39.68837</td>
+      <td>83.613907</td>
+    </tr>
+    <tr>
+      <th>2019-01-07</th>
+      <td>65.650917</td>
+      <td>32.42568</td>
+      <td>159.4450</td>
+      <td>36.069202</td>
+      <td>80.112411</td>
+      <td>71.75211</td>
+      <td>314.80</td>
+      <td>66.678070</td>
+      <td>137.119217</td>
+      <td>229.259995</td>
+      <td>...</td>
+      <td>45.466366</td>
+      <td>87.187141</td>
+      <td>62.148109</td>
+      <td>38.99852</td>
+      <td>64.09184</td>
+      <td>87.742371</td>
+      <td>102.169182</td>
+      <td>155.29</td>
+      <td>39.84668</td>
+      <td>84.117012</td>
+    </tr>
+    <tr>
+      <th>2019-01-08</th>
+      <td>66.613335</td>
+      <td>31.90411</td>
+      <td>158.3368</td>
+      <td>36.756794</td>
+      <td>80.484734</td>
+      <td>72.52003</td>
+      <td>318.42</td>
+      <td>65.877518</td>
+      <td>140.586914</td>
+      <td>232.679993</td>
+      <td>...</td>
+      <td>45.993618</td>
+      <td>85.526176</td>
+      <td>62.599968</td>
+      <td>38.73336</td>
+      <td>64.69435</td>
+      <td>87.569496</td>
+      <td>99.877983</td>
+      <td>156.33</td>
+      <td>40.20985</td>
+      <td>85.369850</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-03-24</th>
+      <td>120.656403</td>
+      <td>21.81000</td>
+      <td>181.7300</td>
+      <td>120.089996</td>
+      <td>103.059998</td>
+      <td>115.37000</td>
+      <td>294.21</td>
+      <td>118.019997</td>
+      <td>267.549988</td>
+      <td>451.510010</td>
+      <td>...</td>
+      <td>65.580002</td>
+      <td>119.959999</td>
+      <td>56.340000</td>
+      <td>60.25000</td>
+      <td>101.11000</td>
+      <td>107.080002</td>
+      <td>157.210648</td>
+      <td>463.81</td>
+      <td>53.01000</td>
+      <td>155.429993</td>
+    </tr>
+    <tr>
+      <th>2021-03-25</th>
+      <td>121.714798</td>
+      <td>22.77000</td>
+      <td>185.6500</td>
+      <td>120.589996</td>
+      <td>103.879997</td>
+      <td>117.34000</td>
+      <td>294.14</td>
+      <td>119.050003</td>
+      <td>268.609985</td>
+      <td>450.989990</td>
+      <td>...</td>
+      <td>66.000000</td>
+      <td>120.029999</td>
+      <td>56.180000</td>
+      <td>60.55000</td>
+      <td>101.93000</td>
+      <td>107.379997</td>
+      <td>157.639999</td>
+      <td>461.26</td>
+      <td>54.74000</td>
+      <td>152.880005</td>
+    </tr>
+    <tr>
+      <th>2021-03-26</th>
+      <td>125.449112</td>
+      <td>22.93000</td>
+      <td>187.3200</td>
+      <td>121.209999</td>
+      <td>105.980003</td>
+      <td>118.73000</td>
+      <td>301.40</td>
+      <td>122.070000</td>
+      <td>280.769989</td>
+      <td>469.089996</td>
+      <td>...</td>
+      <td>66.309998</td>
+      <td>123.139999</td>
+      <td>57.709999</td>
+      <td>61.28000</td>
+      <td>104.76000</td>
+      <td>108.059998</td>
+      <td>161.320007</td>
+      <td>476.96</td>
+      <td>55.85000</td>
+      <td>156.149994</td>
+    </tr>
+    <tr>
+      <th>2021-03-29</th>
+      <td>125.229446</td>
+      <td>22.91000</td>
+      <td>185.0600</td>
+      <td>121.389999</td>
+      <td>106.730003</td>
+      <td>119.05000</td>
+      <td>305.77</td>
+      <td>122.230003</td>
+      <td>279.540009</td>
+      <td>469.320007</td>
+      <td>...</td>
+      <td>67.000000</td>
+      <td>122.230003</td>
+      <td>57.400002</td>
+      <td>62.06000</td>
+      <td>104.27000</td>
+      <td>109.209999</td>
+      <td>160.210007</td>
+      <td>467.07</td>
+      <td>53.89000</td>
+      <td>158.389999</td>
+    </tr>
+    <tr>
+      <th>2021-03-30</th>
+      <td>124.650322</td>
+      <td>24.12000</td>
+      <td>186.0700</td>
+      <td>119.900002</td>
+      <td>106.790001</td>
+      <td>119.06000</td>
+      <td>309.88</td>
+      <td>119.750000</td>
+      <td>278.549988</td>
+      <td>465.459991</td>
+      <td>...</td>
+      <td>66.010002</td>
+      <td>120.300003</td>
+      <td>56.689999</td>
+      <td>63.54000</td>
+      <td>104.88000</td>
+      <td>109.769997</td>
+      <td>161.220001</td>
+      <td>474.83</td>
+      <td>55.91000</td>
+      <td>157.039993</td>
+    </tr>
+  </tbody>
+</table>
+<p>565 rows × 531 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">-</span><span class="n">df</span><span class="p">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">df</span><span class="p">.</span><span class="n">std</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>symbol</th>
+      <th>A</th>
+      <th>AAL</th>
+      <th>AAP</th>
+      <th>AAPL</th>
+      <th>ABBV</th>
+      <th>ABC</th>
+      <th>ABMD</th>
+      <th>ABT</th>
+      <th>ACN</th>
+      <th>ADBE</th>
+      <th>...</th>
+      <th>XEL</th>
+      <th>XLNX</th>
+      <th>XOM</th>
+      <th>XRAY</th>
+      <th>XYL</th>
+      <th>YUM</th>
+      <th>ZBH</th>
+      <th>ZBRA</th>
+      <th>ZION</th>
+      <th>ZTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>...</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+      <td>5.650000e+02</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>-5.533430e-16</td>
+      <td>-1.156990e-15</td>
+      <td>-2.339132e-15</td>
+      <td>2.364284e-15</td>
+      <td>-3.420666e-15</td>
+      <td>-1.307902e-15</td>
+      <td>7.797106e-16</td>
+      <td>4.426744e-15</td>
+      <td>8.551665e-16</td>
+      <td>4.326136e-15</td>
+      <td>...</td>
+      <td>-1.237476e-14</td>
+      <td>4.099769e-15</td>
+      <td>7.545587e-16</td>
+      <td>-1.760637e-16</td>
+      <td>-7.646194e-15</td>
+      <td>-1.936701e-15</td>
+      <td>-2.678683e-15</td>
+      <td>-1.810941e-15</td>
+      <td>-2.867323e-15</td>
+      <td>-3.068539e-15</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>...</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+      <td>1.000000e+00</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-1.402956e+00</td>
+      <td>-1.578205e+00</td>
+      <td>-4.368070e+00</td>
+      <td>-1.422373e+00</td>
+      <td>-1.783790e+00</td>
+      <td>-1.920594e+00</td>
+      <td>-1.960001e+00</td>
+      <td>-1.883874e+00</td>
+      <td>-2.071674e+00</td>
+      <td>-1.646058e+00</td>
+      <td>...</td>
+      <td>-2.597860e+00</td>
+      <td>-2.077320e+00</td>
+      <td>-1.906102e+00</td>
+      <td>-2.730556e+00</td>
+      <td>-2.111907e+00</td>
+      <td>-4.089893e+00</td>
+      <td>-3.106090e+00</td>
+      <td>-1.373928e+00</td>
+      <td>-2.269724e+00</td>
+      <td>-2.059833e+00</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-7.205020e-01</td>
+      <td>-1.081580e+00</td>
+      <td>-3.269484e-01</td>
+      <td>-9.160365e-01</td>
+      <td>-8.075055e-01</td>
+      <td>-6.871508e-01</td>
+      <td>-9.956515e-01</td>
+      <td>-7.258871e-01</td>
+      <td>-7.138452e-01</td>
+      <td>-9.190687e-01</td>
+      <td>...</td>
+      <td>-5.309481e-01</td>
+      <td>-7.727544e-01</td>
+      <td>-9.708038e-01</td>
+      <td>-8.461749e-01</td>
+      <td>-5.681917e-01</td>
+      <td>-6.355256e-01</td>
+      <td>-7.359661e-01</td>
+      <td>-6.979548e-01</td>
+      <td>-1.004871e+00</td>
+      <td>-7.099711e-01</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>-3.988059e-01</td>
+      <td>3.186508e-01</td>
+      <td>2.191719e-01</td>
+      <td>-2.702986e-01</td>
+      <td>-7.196453e-02</td>
+      <td>-2.771314e-01</td>
+      <td>2.134506e-01</td>
+      <td>-3.168558e-01</td>
+      <td>-2.189815e-01</td>
+      <td>-2.961142e-01</td>
+      <td>...</td>
+      <td>6.798383e-02</td>
+      <td>-1.999376e-01</td>
+      <td>3.236947e-01</td>
+      <td>1.573233e-01</td>
+      <td>-1.819963e-01</td>
+      <td>3.273311e-02</td>
+      <td>1.208611e-01</td>
+      <td>-2.155373e-01</td>
+      <td>2.149392e-01</td>
+      <td>-1.179682e-01</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>6.010351e-01</td>
+      <td>8.994444e-01</td>
+      <td>5.329562e-01</td>
+      <td>1.102648e+00</td>
+      <td>7.246279e-01</td>
+      <td>7.769495e-01</td>
+      <td>8.128134e-01</td>
+      <td>8.944433e-01</td>
+      <td>7.914156e-01</td>
+      <td>1.047349e+00</td>
+      <td>...</td>
+      <td>6.942542e-01</td>
+      <td>6.930862e-01</td>
+      <td>8.373723e-01</td>
+      <td>8.655397e-01</td>
+      <td>3.657484e-01</td>
+      <td>7.911210e-01</td>
+      <td>7.965623e-01</td>
+      <td>2.228456e-01</td>
+      <td>6.929752e-01</td>
+      <td>1.075490e+00</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2.370841e+00</td>
+      <td>1.631285e+00</td>
+      <td>2.129579e+00</td>
+      <td>2.053239e+00</td>
+      <td>2.192993e+00</td>
+      <td>2.759439e+00</td>
+      <td>1.856881e+00</td>
+      <td>2.525851e+00</td>
+      <td>2.386994e+00</td>
+      <td>1.970695e+00</td>
+      <td>...</td>
+      <td>2.121844e+00</td>
+      <td>2.439377e+00</td>
+      <td>1.533337e+00</td>
+      <td>2.122636e+00</td>
+      <td>2.542459e+00</td>
+      <td>1.801157e+00</td>
+      <td>1.843039e+00</td>
+      <td>3.113057e+00</td>
+      <td>2.442046e+00</td>
+      <td>1.818189e+00</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 531 columns</p>
+</div>
+
+<h2 id="2-data-visualization">2. Data Visualization</h2>
+
+<h3 id="21-stock-price-volatility">2.1. Stock Price Volatility</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="mi">20</span><span class="p">].</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/output_16_0.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_delta</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df_delta</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">():</span>
+    <span class="n">df_delta</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_delta</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">-</span> <span class="n">df_delta</span><span class="p">[</span><span class="n">column</span><span class="p">].</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_delta</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">df_delta</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>symbol</th>
+      <th>A</th>
+      <th>AAL</th>
+      <th>AAP</th>
+      <th>AAPL</th>
+      <th>ABBV</th>
+      <th>ABC</th>
+      <th>ABMD</th>
+      <th>ABT</th>
+      <th>ACN</th>
+      <th>ADBE</th>
+      <th>...</th>
+      <th>XEL</th>
+      <th>XLNX</th>
+      <th>XOM</th>
+      <th>XRAY</th>
+      <th>XYL</th>
+      <th>YUM</th>
+      <th>ZBH</th>
+      <th>ZBRA</th>
+      <th>ZION</th>
+      <th>ZTS</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-01-02</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-03</th>
+      <td>-0.132308</td>
+      <td>-0.278940</td>
+      <td>0.281110</td>
+      <td>-0.123113</td>
+      <td>-0.190242</td>
+      <td>-0.096013</td>
+      <td>-0.126329</td>
+      <td>-0.210193</td>
+      <td>-0.138905</td>
+      <td>-0.100851</td>
+      <td>...</td>
+      <td>-0.029680</td>
+      <td>-0.171040</td>
+      <td>-0.072336</td>
+      <td>0.002954</td>
+      <td>-0.197347</td>
+      <td>-0.215205</td>
+      <td>-0.106702</td>
+      <td>-0.114809</td>
+      <td>-0.028157</td>
+      <td>-0.119316</td>
+    </tr>
+    <tr>
+      <th>2019-01-04</th>
+      <td>0.119732</td>
+      <td>0.228224</td>
+      <td>-0.230359</td>
+      <td>0.047508</td>
+      <td>0.179889</td>
+      <td>0.075565</td>
+      <td>0.183646</td>
+      <td>0.121119</td>
+      <td>0.152796</td>
+      <td>0.119270</td>
+      <td>...</td>
+      <td>0.073418</td>
+      <td>0.202423</td>
+      <td>0.171038</td>
+      <td>0.162583</td>
+      <td>0.234564</td>
+      <td>0.217075</td>
+      <td>0.197830</td>
+      <td>0.074699</td>
+      <td>0.155477</td>
+      <td>0.130757</td>
+    </tr>
+    <tr>
+      <th>2019-01-07</th>
+      <td>0.075996</td>
+      <td>0.104891</td>
+      <td>0.132851</td>
+      <td>-0.002583</td>
+      <td>0.084121</td>
+      <td>0.047115</td>
+      <td>0.022400</td>
+      <td>0.065364</td>
+      <td>0.014180</td>
+      <td>0.034905</td>
+      <td>...</td>
+      <td>-0.032803</td>
+      <td>0.120826</td>
+      <td>0.025013</td>
+      <td>0.103462</td>
+      <td>-0.085687</td>
+      <td>-0.009355</td>
+      <td>0.002306</td>
+      <td>0.028457</td>
+      <td>0.020812</td>
+      <td>0.020839</td>
+    </tr>
+    <tr>
+      <th>2019-01-08</th>
+      <td>0.053579</td>
+      <td>-0.061091</td>
+      <td>-0.063861</td>
+      <td>0.022071</td>
+      <td>0.027177</td>
+      <td>0.071120</td>
+      <td>0.059623</td>
+      <td>-0.053189</td>
+      <td>0.103600</td>
+      <td>0.038885</td>
+      <td>...</td>
+      <td>0.087476</td>
+      <td>-0.089442</td>
+      <td>0.035154</td>
+      <td>-0.039906</td>
+      <td>0.053662</td>
+      <td>-0.016842</td>
+      <td>-0.134387</td>
+      <td>0.012757</td>
+      <td>0.047745</td>
+      <td>0.051895</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-03-24</th>
+      <td>-0.063369</td>
+      <td>-0.053879</td>
+      <td>0.126777</td>
+      <td>-0.078644</td>
+      <td>-0.129928</td>
+      <td>0.148182</td>
+      <td>-0.072635</td>
+      <td>-0.164107</td>
+      <td>0.045411</td>
+      <td>-0.098804</td>
+      <td>...</td>
+      <td>0.023227</td>
+      <td>-0.116853</td>
+      <td>0.087134</td>
+      <td>0.063104</td>
+      <td>0.063236</td>
+      <td>-0.089631</td>
+      <td>0.076719</td>
+      <td>0.014228</td>
+      <td>-0.074936</td>
+      <td>-0.025267</td>
+    </tr>
+    <tr>
+      <th>2021-03-25</th>
+      <td>0.058922</td>
+      <td>0.112443</td>
+      <td>0.225893</td>
+      <td>0.016050</td>
+      <td>0.059855</td>
+      <td>0.182449</td>
+      <td>-0.001153</td>
+      <td>0.068434</td>
+      <td>0.031668</td>
+      <td>-0.005913</td>
+      <td>...</td>
+      <td>0.069681</td>
+      <td>0.003769</td>
+      <td>-0.012448</td>
+      <td>0.045150</td>
+      <td>0.073033</td>
+      <td>0.029227</td>
+      <td>0.025183</td>
+      <td>-0.031278</td>
+      <td>0.227436</td>
+      <td>-0.105625</td>
+    </tr>
+    <tr>
+      <th>2021-03-26</th>
+      <td>0.207894</td>
+      <td>0.018741</td>
+      <td>0.096235</td>
+      <td>0.019902</td>
+      <td>0.153287</td>
+      <td>0.128733</td>
+      <td>0.119576</td>
+      <td>0.200649</td>
+      <td>0.363291</td>
+      <td>0.205795</td>
+      <td>...</td>
+      <td>0.051431</td>
+      <td>0.167471</td>
+      <td>0.119032</td>
+      <td>0.109865</td>
+      <td>0.252053</td>
+      <td>0.066249</td>
+      <td>0.215845</td>
+      <td>0.192574</td>
+      <td>0.145927</td>
+      <td>0.135448</td>
+    </tr>
+    <tr>
+      <th>2021-03-29</th>
+      <td>-0.012229</td>
+      <td>-0.002343</td>
+      <td>-0.130234</td>
+      <td>0.005778</td>
+      <td>0.054745</td>
+      <td>0.029636</td>
+      <td>0.071976</td>
+      <td>0.010631</td>
+      <td>-0.036747</td>
+      <td>0.002615</td>
+      <td>...</td>
+      <td>0.114477</td>
+      <td>-0.049003</td>
+      <td>-0.024117</td>
+      <td>0.117390</td>
+      <td>-0.043642</td>
+      <td>0.112039</td>
+      <td>-0.065105</td>
+      <td>-0.121310</td>
+      <td>-0.257674</td>
+      <td>0.092785</td>
+    </tr>
+    <tr>
+      <th>2021-03-30</th>
+      <td>-0.032241</td>
+      <td>0.141726</td>
+      <td>0.058202</td>
+      <td>-0.047828</td>
+      <td>0.004379</td>
+      <td>0.000926</td>
+      <td>0.067694</td>
+      <td>-0.164771</td>
+      <td>-0.029578</td>
+      <td>-0.043888</td>
+      <td>...</td>
+      <td>-0.164249</td>
+      <td>-0.103929</td>
+      <td>-0.055237</td>
+      <td>0.222739</td>
+      <td>0.054329</td>
+      <td>0.054558</td>
+      <td>0.059240</td>
+      <td>0.095183</td>
+      <td>0.265562</td>
+      <td>-0.055920</td>
+    </tr>
+  </tbody>
+</table>
+<p>565 rows × 531 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">df_delta</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/output_18_0.png" alt="png" /></p>
+
+<h3 id="22-rolling-average-of-stock-price-correlation">2.2. Rolling Average of Stock Price Correlation</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">calculate_corr</span><span class="p">(</span><span class="n">df_stock_returns</span><span class="p">,</span> <span class="n">returns_window</span><span class="p">,</span> <span class="n">corr_window_size</span><span class="p">,</span> <span class="n">corr_method</span><span class="p">):</span>
+    <span class="n">stocks_cross_corr_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">x_days</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">y_mean_corr</span> <span class="o">=</span> <span class="p">[]</span>        
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">returns_window</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">df_stock_returns</span><span class="p">),</span><span class="n">corr_window_size</span><span class="p">):</span>
+        <span class="n">dic_key</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">stocks_cross_corr_dict</span><span class="p">[</span><span class="n">dic_key</span><span class="p">]</span><span class="o">=</span><span class="n">df_stock_returns</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="n">W</span><span class="p">)].</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'pearson'</span><span class="p">)</span>
+        <span class="n">stocks_cross_corr_dict</span><span class="p">[</span><span class="n">dic_key</span><span class="p">].</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">x_days</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">dic_key</span><span class="p">)</span>
+        <span class="n">y_mean_corr</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">stocks_cross_corr_dict</span><span class="p">[</span><span class="n">dic_key</span><span class="p">].</span><span class="n">values</span><span class="p">.</span><span class="n">flatten</span><span class="p">().</span><span class="n">tolist</span><span class="p">()]))</span>        
+    <span class="k">return</span> <span class="n">stocks_cross_corr_dict</span><span class="p">,</span> <span class="n">x_days</span><span class="p">,</span><span class="n">y_mean_corr</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="n">start</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="n">end</span> <span class="o">=</span> <span class="mi">126</span>
+<span class="n">step</span> <span class="o">=</span> <span class="mi">21</span><span class="p">;</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+    <span class="n">x_days</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">y_mean_corr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">t</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">x_days</span><span class="p">,</span> <span class="n">y_mean_corr</span> <span class="o">=</span> <span class="n">calculate_corr</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">W</span><span class="p">,</span> <span class="s">'pearson'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_days</span><span class="p">,</span> <span class="n">y_mean_corr</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Days'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Mean Correlation'</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s">'upper left'</span><span class="p">)</span>     
+
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/output_21_0.png" alt="png" /></p>
+
+<h2 id="3-network-analysis">3. Network Analysis</h2>
+
+<h3 id="31-build-graph-with-correlation-table">3.1. Build Graph with Correlation table</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># craetes a graph from correlation matrix
+</span><span class="n">cor_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">corr</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cor_matrix</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>symbol</th>
+      <th>A</th>
+      <th>AAL</th>
+      <th>AAP</th>
+      <th>AAPL</th>
+      <th>ABBV</th>
+      <th>ABC</th>
+      <th>ABMD</th>
+      <th>ABT</th>
+      <th>ACN</th>
+      <th>ADBE</th>
+      <th>...</th>
+      <th>XEL</th>
+      <th>XLNX</th>
+      <th>XOM</th>
+      <th>XRAY</th>
+      <th>XYL</th>
+      <th>YUM</th>
+      <th>ZBH</th>
+      <th>ZBRA</th>
+      <th>ZION</th>
+      <th>ZTS</th>
+    </tr>
+    <tr>
+      <th>symbol</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>1.000000</td>
+      <td>-0.512211</td>
+      <td>0.340607</td>
+      <td>0.936847</td>
+      <td>0.901146</td>
+      <td>0.866659</td>
+      <td>0.476208</td>
+      <td>0.932064</td>
+      <td>0.916575</td>
+      <td>0.876950</td>
+      <td>...</td>
+      <td>0.581891</td>
+      <td>0.661159</td>
+      <td>-0.481706</td>
+      <td>0.276888</td>
+      <td>0.819616</td>
+      <td>0.232105</td>
+      <td>0.731162</td>
+      <td>0.947770</td>
+      <td>0.196208</td>
+      <td>0.830023</td>
+    </tr>
+    <tr>
+      <th>AAL</th>
+      <td>-0.512211</td>
+      <td>1.000000</td>
+      <td>0.452672</td>
+      <td>-0.709976</td>
+      <td>-0.567905</td>
+      <td>-0.636546</td>
+      <td>0.067317</td>
+      <td>-0.620271</td>
+      <td>-0.515571</td>
+      <td>-0.761706</td>
+      <td>...</td>
+      <td>-0.685099</td>
+      <td>0.040970</td>
+      <td>0.950026</td>
+      <td>0.414638</td>
+      <td>-0.104279</td>
+      <td>0.401344</td>
+      <td>-0.116920</td>
+      <td>-0.402034</td>
+      <td>0.675397</td>
+      <td>-0.720983</td>
+    </tr>
+    <tr>
+      <th>AAP</th>
+      <td>0.340607</td>
+      <td>0.452672</td>
+      <td>1.000000</td>
+      <td>0.132583</td>
+      <td>0.218725</td>
+      <td>0.129889</td>
+      <td>0.598790</td>
+      <td>0.206132</td>
+      <td>0.304547</td>
+      <td>0.062110</td>
+      <td>...</td>
+      <td>-0.102458</td>
+      <td>0.592191</td>
+      <td>0.471304</td>
+      <td>0.536131</td>
+      <td>0.517752</td>
+      <td>0.604171</td>
+      <td>0.464449</td>
+      <td>0.358634</td>
+      <td>0.691259</td>
+      <td>0.045798</td>
+    </tr>
+    <tr>
+      <th>AAPL</th>
+      <td>0.936847</td>
+      <td>-0.709976</td>
+      <td>0.132583</td>
+      <td>1.000000</td>
+      <td>0.883271</td>
+      <td>0.900174</td>
+      <td>0.311099</td>
+      <td>0.946722</td>
+      <td>0.931212</td>
+      <td>0.971310</td>
+      <td>...</td>
+      <td>0.752885</td>
+      <td>0.464395</td>
+      <td>-0.694573</td>
+      <td>0.138280</td>
+      <td>0.700491</td>
+      <td>0.103699</td>
+      <td>0.668931</td>
+      <td>0.859869</td>
+      <td>-0.067884</td>
+      <td>0.937015</td>
+    </tr>
+    <tr>
+      <th>ABBV</th>
+      <td>0.901146</td>
+      <td>-0.567905</td>
+      <td>0.218725</td>
+      <td>0.883271</td>
+      <td>1.000000</td>
+      <td>0.842135</td>
+      <td>0.379425</td>
+      <td>0.820668</td>
+      <td>0.826314</td>
+      <td>0.834858</td>
+      <td>...</td>
+      <td>0.525801</td>
+      <td>0.430849</td>
+      <td>-0.525965</td>
+      <td>0.167883</td>
+      <td>0.625416</td>
+      <td>0.017315</td>
+      <td>0.617159</td>
+      <td>0.868875</td>
+      <td>0.131018</td>
+      <td>0.756742</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>YUM</th>
+      <td>0.232105</td>
+      <td>0.401344</td>
+      <td>0.604171</td>
+      <td>0.103699</td>
+      <td>0.017315</td>
+      <td>0.148166</td>
+      <td>0.135065</td>
+      <td>0.246568</td>
+      <td>0.391225</td>
+      <td>0.042001</td>
+      <td>...</td>
+      <td>0.150926</td>
+      <td>0.517301</td>
+      <td>0.446745</td>
+      <td>0.791644</td>
+      <td>0.591224</td>
+      <td>1.000000</td>
+      <td>0.622313</td>
+      <td>0.311883</td>
+      <td>0.601129</td>
+      <td>0.211623</td>
+    </tr>
+    <tr>
+      <th>ZBH</th>
+      <td>0.731162</td>
+      <td>-0.116920</td>
+      <td>0.464449</td>
+      <td>0.668931</td>
+      <td>0.617159</td>
+      <td>0.647128</td>
+      <td>0.138407</td>
+      <td>0.709774</td>
+      <td>0.815626</td>
+      <td>0.581120</td>
+      <td>...</td>
+      <td>0.583386</td>
+      <td>0.473123</td>
+      <td>-0.072924</td>
+      <td>0.677935</td>
+      <td>0.793259</td>
+      <td>0.622313</td>
+      <td>1.000000</td>
+      <td>0.754226</td>
+      <td>0.495103</td>
+      <td>0.715109</td>
+    </tr>
+    <tr>
+      <th>ZBRA</th>
+      <td>0.947770</td>
+      <td>-0.402034</td>
+      <td>0.358634</td>
+      <td>0.859869</td>
+      <td>0.868875</td>
+      <td>0.842147</td>
+      <td>0.398625</td>
+      <td>0.902315</td>
+      <td>0.895845</td>
+      <td>0.774380</td>
+      <td>...</td>
+      <td>0.477856</td>
+      <td>0.635769</td>
+      <td>-0.332037</td>
+      <td>0.410140</td>
+      <td>0.824975</td>
+      <td>0.311883</td>
+      <td>0.754226</td>
+      <td>1.000000</td>
+      <td>0.353050</td>
+      <td>0.754373</td>
+    </tr>
+    <tr>
+      <th>ZION</th>
+      <td>0.196208</td>
+      <td>0.675397</td>
+      <td>0.691259</td>
+      <td>-0.067884</td>
+      <td>0.131018</td>
+      <td>0.003435</td>
+      <td>0.274263</td>
+      <td>0.036986</td>
+      <td>0.155021</td>
+      <td>-0.207014</td>
+      <td>...</td>
+      <td>-0.314988</td>
+      <td>0.431878</td>
+      <td>0.711608</td>
+      <td>0.768845</td>
+      <td>0.486766</td>
+      <td>0.601129</td>
+      <td>0.495103</td>
+      <td>0.353050</td>
+      <td>1.000000</td>
+      <td>-0.148741</td>
+    </tr>
+    <tr>
+      <th>ZTS</th>
+      <td>0.830023</td>
+      <td>-0.720983</td>
+      <td>0.045798</td>
+      <td>0.937015</td>
+      <td>0.756742</td>
+      <td>0.869275</td>
+      <td>0.075617</td>
+      <td>0.902965</td>
+      <td>0.917018</td>
+      <td>0.930572</td>
+      <td>...</td>
+      <td>0.901222</td>
+      <td>0.331572</td>
+      <td>-0.696158</td>
+      <td>0.206471</td>
+      <td>0.652798</td>
+      <td>0.211623</td>
+      <td>0.715109</td>
+      <td>0.754373</td>
+      <td>-0.148741</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>531 rows × 531 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mat_pos</span> <span class="o">=</span> <span class="n">cor_matrix</span><span class="p">[</span><span class="n">cor_matrix</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">mat_pos</span> <span class="o">=</span> <span class="n">mat_pos</span><span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">symbols</span> <span class="o">=</span> <span class="n">cor_matrix</span><span class="p">.</span><span class="n">index</span><span class="p">.</span><span class="n">values</span>
+<span class="n">mat_pos</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">asmatrix</span><span class="p">(</span><span class="n">mat_pos</span><span class="p">)</span>
+<span class="n">G_pos</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">from_numpy_matrix</span><span class="p">(</span><span class="n">mat_pos</span><span class="p">)</span>
+<span class="n">G_pos</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">relabel_nodes</span><span class="p">(</span><span class="n">G_pos</span><span class="p">,</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">symbols</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+<span class="n">G_pos</span><span class="p">.</span><span class="n">remove_edges_from</span><span class="p">(</span><span class="n">nx</span><span class="p">.</span><span class="n">selfloop_edges</span><span class="p">(</span><span class="n">G_pos</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mat_neg</span> <span class="o">=</span> <span class="n">cor_matrix</span><span class="p">[</span><span class="n">cor_matrix</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">mat_neg</span> <span class="o">=</span> <span class="n">mat_neg</span><span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">mat_neg</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">mat_neg</span><span class="p">)</span>
+<span class="n">symbols</span> <span class="o">=</span> <span class="n">cor_matrix</span><span class="p">.</span><span class="n">index</span><span class="p">.</span><span class="n">values</span>
+<span class="n">mat_neg</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">asmatrix</span><span class="p">(</span><span class="n">mat_neg</span><span class="p">)</span>
+<span class="n">G_neg</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">from_numpy_matrix</span><span class="p">(</span><span class="n">mat_neg</span><span class="p">)</span>
+<span class="n">G_neg</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">relabel_nodes</span><span class="p">(</span><span class="n">G_neg</span><span class="p">,</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">symbols</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+<span class="n">G_neg</span><span class="p">.</span><span class="n">remove_edges_from</span><span class="p">(</span><span class="n">nx</span><span class="p">.</span><span class="n">selfloop_edges</span><span class="p">(</span><span class="n">G_neg</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">list</span><span class="p">(</span><span class="n">G_pos</span><span class="p">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">True</span><span class="p">))[:</span><span class="mi">5</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">G_neg</span><span class="p">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">True</span><span class="p">))[:</span><span class="mi">5</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>([('A', 'AAP', {'weight': 0.3406072572702165}),
+  ('A', 'AAPL', {'weight': 0.9368465656977406}),
+  ('A', 'ABBV', {'weight': 0.9011464914155253}),
+  ('A', 'ABC', {'weight': 0.8666593549791352}),
+  ('A', 'ABMD', {'weight': 0.476208419378593})],
+ [('A', 'AAL', {'weight': 0.5122106576033231}),
+  ('A', 'AEP', {'weight': 0.010066159905771194}),
+  ('A', 'AFL', {'weight': 0.14527226301899576}),
+  ('A', 'AIG', {'weight': 0.21700976911380374}),
+  ('A', 'ALK', {'weight': 0.13546044591421322})])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">symbol</span> <span class="o">=</span>  <span class="n">df</span><span class="p">.</span><span class="n">columns</span>
+<span class="n">df_sector</span> <span class="o">=</span> <span class="n">df_SP500</span><span class="p">[</span><span class="n">df_SP500</span><span class="p">[</span><span class="s">'symbol'</span><span class="p">].</span><span class="n">isin</span><span class="p">(</span><span class="n">symbol</span><span class="p">)]</span>
+<span class="n">df_sector</span> <span class="o">=</span> <span class="n">df_sector</span><span class="p">[[</span><span class="s">"symbol"</span><span class="p">,</span><span class="s">"sector"</span><span class="p">]]</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">"symbol"</span><span class="p">:</span><span class="n">df_indices</span><span class="p">[</span><span class="s">"symbol"</span><span class="p">].</span><span class="n">unique</span><span class="p">(),</span> <span class="s">"sector"</span><span class="p">:</span><span class="s">"Macroeconomic Indices"</span><span class="p">})</span>
+<span class="n">df_sector</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_sector</span><span class="p">,</span><span class="n">tmp</span><span class="p">],</span><span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df_sector</span><span class="p">[</span><span class="s">'sec_idx'</span><span class="p">]</span><span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">sec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df_sector</span><span class="p">[</span><span class="s">"sector"</span><span class="p">].</span><span class="n">unique</span><span class="p">()):</span>
+    <span class="n">df_sector</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_sector</span><span class="p">[</span><span class="s">'sector'</span><span class="p">]</span><span class="o">==</span><span class="n">sec</span><span class="p">,</span><span class="s">'sec_idx'</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_sector</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>symbol</th>
+      <th>sector</th>
+      <th>sec_idx</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AAPL</td>
+      <td>Information Technology</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>MSFT</td>
+      <td>Information Technology</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AMZN</td>
+      <td>Consumer Discretionary</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>FB</td>
+      <td>Communication Services</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>GOOGL</td>
+      <td>Communication Services</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>526</th>
+      <td>GOLDAMGBD228NLBM</td>
+      <td>Macroeconomic Indices</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>527</th>
+      <td>IOER</td>
+      <td>Macroeconomic Indices</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>528</th>
+      <td>IORR</td>
+      <td>Macroeconomic Indices</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>529</th>
+      <td>THREEFY1</td>
+      <td>Macroeconomic Indices</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>530</th>
+      <td>THREEFY5</td>
+      <td>Macroeconomic Indices</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+<p>531 rows × 3 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">G_pos</span><span class="p">,</span> <span class="n">df_sector</span><span class="p">.</span><span class="n">set_index</span><span class="p">(</span><span class="s">'symbol'</span><span class="p">)[</span><span class="s">'sec_idx'</span><span class="p">],</span><span class="s">'sec_idx'</span><span class="p">)</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">G_neg</span><span class="p">,</span> <span class="n">df_sector</span><span class="p">.</span><span class="n">set_index</span><span class="p">(</span><span class="s">'symbol'</span><span class="p">)[</span><span class="s">'sec_idx'</span><span class="p">],</span><span class="s">'sec_idx'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="32-setting-threshold-on-weights">3.2. Setting threshold on weights</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">set_threshold</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">threshold</span><span class="p">):</span>
+    <span class="n">edges_rm</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">,</span> <span class="p">(</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">.</span><span class="n">data</span><span class="p">(</span><span class="s">'weight'</span><span class="p">))))</span>    
+    <span class="n">ids_rm</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edges_rm</span><span class="p">)</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">H</span><span class="p">.</span><span class="n">remove_edges_from</span><span class="p">(</span><span class="n">ids_rm</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">H</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">H_pos</span> <span class="o">=</span> <span class="n">set_threshold</span><span class="p">(</span><span class="n">G_pos</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">H_neg</span> <span class="o">=</span> <span class="n">set_threshold</span><span class="p">(</span><span class="n">G_neg</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">H_pos</span><span class="p">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">True</span><span class="p">))[:</span><span class="mi">5</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">H_neg</span><span class="p">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="bp">True</span><span class="p">))[:</span><span class="mi">5</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>([('A', 'AAPL', {'weight': 0.9368465656977406}),
+  ('A', 'ABBV', {'weight': 0.9011464914155253}),
+  ('A', 'ABC', {'weight': 0.8666593549791352}),
+  ('A', 'ABT', {'weight': 0.932064482315709}),
+  ('A', 'ACN', {'weight': 0.916574717968791})],
+ [('A', 'AAL', {'weight': 0.5122106576033231}),
+  ('A', 'BA', {'weight': 0.5064885797862092}),
+  ('A', 'BXP', {'weight': 0.522527131570438}),
+  ('A', 'CCL', {'weight': 0.5559250497113872}),
+  ('A', 'DEXCAUS', {'weight': 0.6382900166453468})])
+</code></pre></div></div>
+
+<h3 id="33-community-detection">3.3. Community Detection</h3>
+
+<h3 id="louvain-algorithm">Louvain Algorithm</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># grid search
+# for positive weights
+</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2021</span><span class="p">)</span>
+<span class="n">t</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">for</span> <span class="n">cor_thresold</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.85</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">H_pos</span> <span class="o">=</span> <span class="n">set_threshold</span><span class="p">(</span><span class="n">G_pos</span><span class="p">,</span><span class="n">cor_thresold</span><span class="p">)</span>
+    <span class="n">partition</span> <span class="o">=</span> <span class="n">louvain</span><span class="p">.</span><span class="n">best_partition</span><span class="p">(</span><span class="n">H_pos</span><span class="p">)</span>
+    <span class="n">modularity</span> <span class="o">=</span> <span class="n">louvain</span><span class="p">.</span><span class="n">modularity</span><span class="p">(</span><span class="n">partition</span><span class="p">,</span> <span class="n">H_pos</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">partition</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">H_pos</span><span class="p">.</span><span class="n">nodes</span><span class="p">()]</span>
+    <span class="n">communities</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">partition</span><span class="p">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">values</span><span class="p">))):</span>
+        <span class="n">communities</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="n">tmp</span> <span class="k">if</span> <span class="n">c</span><span class="o">==</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">sum_comm_nodes</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"{}th Total number of Communities = {}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">t</span> <span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">communities</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">comm_nodes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">communities</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comm_nodes</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">10</span><span class="p">:</span>
+            <span class="n">k</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'community {}th: '</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">comm_nodes</span><span class="p">))</span>
+        <span class="n">sum_comm_nodes</span><span class="o">+=</span><span class="nb">len</span><span class="p">(</span><span class="n">comm_nodes</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'n_big_communities: '</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="c1"># best partition with 5 big communities at cor_threshold = np.linspace(0.8,0.85,20)[8] 
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0th Total number of Communities = 28
+community 0th:  168
+community 1th:  193
+community 6th:  36
+community 7th:  102
+n_big_communities:  4
+1th Total number of Communities = 29
+community 0th:  166
+community 2th:  189
+community 4th:  105
+community 6th:  40
+n_big_communities:  4
+2th Total number of Communities = 31
+community 0th:  157
+community 2th:  188
+community 4th:  103
+community 6th:  50
+n_big_communities:  4
+3th Total number of Communities = 31
+community 0th:  161
+community 1th:  191
+community 4th:  112
+community 6th:  33
+n_big_communities:  4
+4th Total number of Communities = 34
+community 0th:  167
+community 2th:  192
+community 4th:  115
+community 8th:  18
+n_big_communities:  4
+5th Total number of Communities = 36
+community 0th:  162
+community 1th:  188
+community 4th:  103
+community 6th:  35
+n_big_communities:  4
+6th Total number of Communities = 36
+community 0th:  172
+community 1th:  180
+community 3th:  113
+community 4th:  25
+n_big_communities:  4
+7th Total number of Communities = 36
+community 0th:  152
+community 3th:  112
+community 4th:  46
+community 6th:  180
+n_big_communities:  4
+8th Total number of Communities = 41
+community 2th:  77
+community 4th:  107
+community 5th:  157
+community 7th:  37
+community 9th:  108
+n_big_communities:  5
+9th Total number of Communities = 41
+community 0th:  153
+community 4th:  103
+community 6th:  43
+community 7th:  79
+community 9th:  108
+n_big_communities:  5
+10th Total number of Communities = 41
+community 0th:  146
+community 2th:  84
+community 4th:  109
+community 6th:  41
+community 9th:  106
+n_big_communities:  5
+11th Total number of Communities = 42
+community 0th:  145
+community 2th:  178
+community 4th:  126
+community 8th:  35
+n_big_communities:  4
+12th Total number of Communities = 46
+community 0th:  147
+community 2th:  79
+community 4th:  103
+community 7th:  48
+community 28th:  105
+n_big_communities:  5
+13th Total number of Communities = 48
+community 1th:  104
+community 2th:  74
+community 4th:  107
+community 5th:  43
+community 7th:  152
+n_big_communities:  5
+14th Total number of Communities = 48
+community 1th:  103
+community 2th:  78
+community 6th:  33
+community 7th:  104
+community 38th:  162
+n_big_communities:  5
+15th Total number of Communities = 48
+community 0th:  150
+community 1th:  102
+community 2th:  75
+community 4th:  106
+community 7th:  47
+n_big_communities:  5
+16th Total number of Communities = 50
+community 0th:  145
+community 1th:  103
+community 2th:  77
+community 7th:  50
+community 8th:  104
+n_big_communities:  5
+17th Total number of Communities = 51
+community 1th:  103
+community 4th:  106
+community 6th:  40
+community 8th:  156
+community 9th:  74
+n_big_communities:  5
+18th Total number of Communities = 51
+community 1th:  103
+community 2th:  73
+community 5th:  110
+community 6th:  36
+community 41th:  156
+n_big_communities:  5
+19th Total number of Communities = 51
+community 1th:  101
+community 4th:  108
+community 5th:  42
+community 7th:  150
+community 32th:  77
+n_big_communities:  5
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2021</span><span class="p">)</span>
+<span class="n">cor_thresold</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.85</span><span class="p">,</span><span class="mi">20</span><span class="p">)[</span><span class="mi">8</span><span class="p">]</span>
+<span class="n">H_pos</span> <span class="o">=</span> <span class="n">set_threshold</span><span class="p">(</span><span class="n">G_pos</span><span class="p">,</span><span class="n">cor_thresold</span><span class="p">)</span>
+<span class="n">partition</span> <span class="o">=</span> <span class="n">louvain</span><span class="p">.</span><span class="n">best_partition</span><span class="p">(</span><span class="n">H_pos</span><span class="p">)</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">partition</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">H_pos</span><span class="p">.</span><span class="n">nodes</span><span class="p">()]</span>
+<span class="n">communities</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">partition</span><span class="p">.</span><span class="n">items</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">values</span><span class="p">))):</span>
+    <span class="n">communities</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="n">tmp</span> <span class="k">if</span> <span class="n">c</span><span class="o">==</span><span class="n">i</span><span class="p">])</span>
+<span class="n">sum_comm_nodes</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">k</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Total number of Communities = {}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">communities</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">comm_nodes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">communities</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comm_nodes</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">10</span><span class="p">:</span>
+        <span class="n">k</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'community {}th: '</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">comm_nodes</span><span class="p">))</span>
+    <span class="n">sum_comm_nodes</span><span class="o">+=</span><span class="nb">len</span><span class="p">(</span><span class="n">comm_nodes</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'n_big_communities: '</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Total number of Communities = 41
+community 0th:  164
+community 2th:  79
+community 4th:  105
+community 7th:  30
+community 9th:  108
+n_big_communities:  5
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">H_pos</span><span class="p">,</span><span class="n">partition</span><span class="p">,</span><span class="s">'community'</span><span class="p">)</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">partition</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">H_pos</span><span class="p">.</span><span class="n">nodes</span><span class="p">()]</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">draw_spring</span><span class="p">(</span><span class="n">H_pos</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s">'jet'</span><span class="p">),</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">values</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/output_39_0.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2021</span><span class="p">)</span>
+<span class="c1"># for negative weights
+</span><span class="n">t</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">for</span> <span class="n">cor_thresold</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span><span class="mf">0.65</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">H_neg</span> <span class="o">=</span> <span class="n">set_threshold</span><span class="p">(</span><span class="n">G_neg</span><span class="p">,</span><span class="n">cor_thresold</span><span class="p">)</span>
+    <span class="n">partition</span> <span class="o">=</span> <span class="n">louvain</span><span class="p">.</span><span class="n">best_partition</span><span class="p">(</span><span class="n">H_neg</span><span class="p">)</span>
+    <span class="n">modularity</span> <span class="o">=</span> <span class="n">louvain</span><span class="p">.</span><span class="n">modularity</span><span class="p">(</span><span class="n">partition</span><span class="p">,</span> <span class="n">H_neg</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">partition</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">H_neg</span><span class="p">.</span><span class="n">nodes</span><span class="p">()]</span>
+    <span class="n">communities</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">partition</span><span class="p">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">values</span><span class="p">))):</span>
+        <span class="n">communities</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="n">tmp</span> <span class="k">if</span> <span class="n">c</span><span class="o">==</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">sum_comm_nodes</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">0</span>
+    
+    <span class="k">print</span><span class="p">(</span><span class="s">"{}th Total number of Communities = {}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">t</span> <span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">communities</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">comm_nodes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">communities</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comm_nodes</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">10</span><span class="p">:</span>
+            <span class="n">k</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'community {}th: '</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">comm_nodes</span><span class="p">))</span>
+        <span class="n">sum_comm_nodes</span><span class="o">+=</span><span class="nb">len</span><span class="p">(</span><span class="n">comm_nodes</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'n_big_communities: '</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="c1"># best partition with 5 big communities at cor_threshold = np.linspace(0.6,0.65,20)[11] 
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0th Total number of Communities = 29
+community 0th:  213
+community 1th:  110
+community 2th:  161
+community 7th:  22
+n_big_communities:  4
+1th Total number of Communities = 34
+community 0th:  101
+community 1th:  90
+community 2th:  164
+community 3th:  14
+community 7th:  133
+n_big_communities:  5
+2th Total number of Communities = 35
+community 0th:  100
+community 1th:  92
+community 2th:  162
+community 7th:  133
+community 8th:  14
+n_big_communities:  5
+3th Total number of Communities = 35
+community 0th:  97
+community 1th:  95
+community 2th:  175
+community 6th:  120
+community 7th:  14
+n_big_communities:  5
+4th Total number of Communities = 35
+community 0th:  107
+community 1th:  84
+community 3th:  177
+community 6th:  119
+community 7th:  14
+n_big_communities:  5
+5th Total number of Communities = 36
+community 0th:  107
+community 1th:  82
+community 5th:  120
+community 6th:  16
+community 21th:  175
+n_big_communities:  5
+6th Total number of Communities = 35
+community 0th:  134
+community 1th:  111
+community 2th:  240
+community 6th:  15
+n_big_communities:  4
+7th Total number of Communities = 36
+community 0th:  106
+community 1th:  80
+community 5th:  120
+community 6th:  16
+community 21th:  178
+n_big_communities:  5
+8th Total number of Communities = 35
+community 1th:  170
+community 2th:  192
+community 5th:  123
+community 6th:  15
+n_big_communities:  4
+9th Total number of Communities = 37
+community 0th:  104
+community 1th:  83
+community 2th:  177
+community 5th:  119
+community 6th:  16
+n_big_communities:  5
+10th Total number of Communities = 40
+community 0th:  103
+community 1th:  83
+community 2th:  177
+community 3th:  14
+community 6th:  119
+n_big_communities:  5
+11th Total number of Communities = 41
+community 0th:  104
+community 1th:  83
+community 2th:  176
+community 3th:  13
+community 6th:  119
+n_big_communities:  5
+12th Total number of Communities = 42
+community 0th:  103
+community 1th:  81
+community 3th:  13
+community 6th:  130
+community 11th:  167
+n_big_communities:  5
+13th Total number of Communities = 42
+community 0th:  106
+community 1th:  81
+community 2th:  176
+community 6th:  118
+community 7th:  13
+n_big_communities:  5
+14th Total number of Communities = 43
+community 0th:  204
+community 1th:  165
+community 2th:  18
+community 5th:  105
+n_big_communities:  4
+15th Total number of Communities = 44
+community 0th:  105
+community 1th:  80
+community 2th:  186
+community 7th:  107
+community 8th:  14
+n_big_communities:  5
+16th Total number of Communities = 44
+community 0th:  101
+community 1th:  81
+community 2th:  167
+community 6th:  130
+community 7th:  13
+n_big_communities:  5
+17th Total number of Communities = 45
+community 1th:  156
+community 2th:  185
+community 6th:  15
+community 14th:  134
+n_big_communities:  4
+18th Total number of Communities = 48
+community 0th:  99
+community 1th:  74
+community 2th:  171
+community 5th:  128
+community 6th:  16
+n_big_communities:  5
+19th Total number of Communities = 48
+community 0th:  155
+community 1th:  183
+community 6th:  136
+community 7th:  13
+n_big_communities:  4
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2021</span><span class="p">)</span>
+<span class="n">cor_thresold</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span><span class="mf">0.65</span><span class="p">,</span><span class="mi">20</span><span class="p">)[</span><span class="mi">11</span><span class="p">]</span> 
+<span class="n">H_neg_otim</span> <span class="o">=</span> <span class="n">set_threshold</span><span class="p">(</span><span class="n">G_neg</span><span class="p">,</span><span class="n">cor_thresold</span><span class="p">)</span>
+<span class="n">partition</span> <span class="o">=</span> <span class="n">louvain</span><span class="p">.</span><span class="n">best_partition</span><span class="p">(</span><span class="n">H_neg_otim</span><span class="p">)</span>
+<span class="n">modularity</span> <span class="o">=</span> <span class="n">louvain</span><span class="p">.</span><span class="n">modularity</span><span class="p">(</span><span class="n">partition</span><span class="p">,</span> <span class="n">H_neg</span><span class="p">)</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">partition</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">H_neg</span><span class="p">.</span><span class="n">nodes</span><span class="p">()]</span>
+<span class="n">communities</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">partition</span><span class="p">.</span><span class="n">items</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">values</span><span class="p">))):</span>
+    <span class="n">communities</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="n">tmp</span> <span class="k">if</span> <span class="n">c</span><span class="o">==</span><span class="n">i</span><span class="p">])</span>
+<span class="n">sum_comm_nodes</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">k</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Total number of Communities = {}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">communities</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">comm_nodes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">communities</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comm_nodes</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">10</span><span class="p">:</span>
+        <span class="n">k</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'community {}th: '</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">comm_nodes</span><span class="p">))</span>
+    <span class="n">sum_comm_nodes</span><span class="o">+=</span><span class="nb">len</span><span class="p">(</span><span class="n">comm_nodes</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'n_big_communities: '</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Total number of Communities = 41
+community 0th:  102
+community 1th:  83
+community 3th:  13
+community 6th:  130
+community 11th:  167
+n_big_communities:  5
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">H_neg</span><span class="p">,</span> <span class="n">partition</span><span class="p">,</span><span class="s">'community'</span><span class="p">)</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">partition</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">H_neg</span><span class="p">.</span><span class="n">nodes</span><span class="p">()]</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">draw_spring</span><span class="p">(</span><span class="n">H_neg</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s">'jet'</span><span class="p">),</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">values</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/output_42_0.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nx</span><span class="p">.</span><span class="n">write_graphml</span><span class="p">(</span><span class="n">H_pos</span><span class="p">,</span> <span class="s">"model_H_pos.graphml"</span><span class="p">)</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">write_graphml</span><span class="p">(</span><span class="n">H_neg</span><span class="p">,</span> <span class="s">"model_H_neg.graphml"</span><span class="p">)</span>
+</code></pre></div></div>
+
+                </div>
+            </section>
+
+            <!-- Email subscribe form at the bottom of the page -->
+	<!--
+            
+                <section class="subscribe-form">
+                    <h3 class="subscribe-form-title">Subscribe to Darron's Devlog</h3>
+                    <p>Get the latest posts delivered right to your inbox</p>
+                    <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()" 
+               id="searchtext" type="text" name="searchtext"  
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+                </section>
+            
+	-->
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function () {
+                            var this_page_url = 'http://0.0.0.0:4000/DM_final';
+                            var this_page_identifier = '/DM_final';
+                            var this_page_title = 'Data Mining - Final';
+                        };
+                        (function() {
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                </section>
+            
+
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/built/images/blog-cover1.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; Darron's Devlog &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/projects/">Projects</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/fashion_GNN">Fashion GNN</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/AppML_Assginment1">AppML - Assignment1</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/ds_R_final">Data Science and R - Final</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/projects/">
+                                
+                                    See all 5 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/fashion_GNN">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Projects</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Fashion GNN</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>1. About
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      8 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/AppML_Assginment1">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Projects</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">AppML - Assignment1</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>2021-1. Applied Machine Learning
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      6 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="/">
+            
+            <span>Darron's Devlog</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Data Mining - Final</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Data+Mining+-+Final&amp;url=https://12kdh43.github.io/DM_final"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/DM_final"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="/">Darron's Devlog</a> &copy; 2021</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyllt/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+        <div id="subscribe" class="subscribe-overlay">
+            <a class="subscribe-overlay-close" href="#"></a>
+            <div class="subscribe-overlay-content">
+                
+                <h1 class="subscribe-overlay-title">Search Darron's Devlog</h1>
+                <p class="subscribe-overlay-description">
+				lunr.js를 이용한 posts 검색 </p>
+                <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()" 
+               id="searchtext" type="text" name="searchtext"  
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+            </div>
+        </div>
+    
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

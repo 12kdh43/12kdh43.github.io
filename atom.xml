@@ -23,6 +23,36 @@
     
       
       <item>
+        <title>Fashion GNN</title>
+        
+          <description>&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
+
+</description>
+        
+        <pubDate>Wed, 15 Sep 2021 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/fashion_GNN</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/fashion_GNN</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Data Mining - Final</title>
+        
+          <description>&lt;h1 class=&quot;no_toc&quot; id=&quot;final-project&quot;&gt;Final Project&lt;/h1&gt;
+
+</description>
+        
+        <pubDate>Fri, 21 May 2021 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/DM_final</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/DM_final</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>AppML - Assignment1</title>
         
           <description>&lt;h2 id=&quot;2021-1-applied-machine-learning&quot;&gt;2021-1. Applied Machine Learning&lt;/h2&gt;
@@ -82,6 +112,21 @@
     
       
       <item>
+        <title>Statistical Mining - Chapter 3</title>
+        
+          <description>&lt;p&gt;2020-04-03 Week 3&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 03 Apr 2020 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/stat_ch3</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/stat_ch3</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Statistical Mining - HW2</title>
         
           <description>&lt;h2 id=&quot;2020-1-statistical-mining&quot;&gt;2020-1. Statistical Mining&lt;/h2&gt;
@@ -97,16 +142,16 @@
     
       
       <item>
-        <title>Statistical Mining - Week2</title>
+        <title>Statistical Mining - Chapter 2</title>
         
-          <description>&lt;h2 id=&quot;2020-1-statistical-mining&quot;&gt;2020-1. Statistical Mining&lt;/h2&gt;
+          <description>&lt;p&gt;2020-03-16 Week 2&lt;/p&gt;
 
 </description>
         
         <pubDate>Mon, 16 Mar 2020 00:00:00 +0900</pubDate>
         <link>
-        http://0.0.0.0:4000/stat_week2</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/stat_week2</guid>
+        http://0.0.0.0:4000/stat_ch2</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/stat_ch2</guid>
       </item>
       
     
