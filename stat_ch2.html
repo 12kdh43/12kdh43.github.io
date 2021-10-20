@@ -77,7 +77,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Statistical Mining - Chapter 2" />
-    <meta property="og:description" content="2020-03-16 Week 2 Ch 2. Supervised Learning Format of Supervised Learning: $ Y=f(X)+\epsilon $ $f$ : Fixed but UNKNOWN function of predictors X $\rightarrow$ Supervised Learning: A set of methods estimating $f$. Why do we estimate $f$? 1) Prediction: Y 2) Inference: Relationship between X &amp; Y 1) Prediction: $\rightarrow\text{Prediction" />
+    <meta property="og:description" content="Chapter 2. Supervised Learning 2.1. Prediction 2.2. Inference 2.3. Estimation F: By Using Training Data 2.4. Parametric Methods: Model-based approach 2.5. Nonparametric Methods: Data-driven approach 2.5.1. Example of Nonparametric model: KNN Reg. 2.6. Trade-off between Prediction Accuray &amp; Interpretability 2.7. Model Assessment &amp; Selection 2.7.1. Mean squared error (MSE) 2.8." />
     <meta property="og:url" content="http://0.0.0.0:4000/stat_ch2" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
@@ -87,7 +87,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <meta property="article:tag" content="studies" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Statistical Mining - Chapter 2" />
-    <meta name="twitter:description" content="2020-03-16 Week 2 Ch 2. Supervised Learning Format of Supervised Learning: $ Y=f(X)+\epsilon $ $f$ : Fixed but UNKNOWN function of predictors X $\rightarrow$ Supervised Learning: A set of methods estimating $f$. Why do we estimate $f$? 1) Prediction: Y 2) Inference: Relationship between X &amp; Y 1) Prediction: $\rightarrow\text{Prediction" />
+    <meta name="twitter:description" content="Chapter 2. Supervised Learning 2.1. Prediction 2.2. Inference 2.3. Estimation F: By Using Training Data 2.4. Parametric Methods: Model-based approach 2.5. Nonparametric Methods: Data-driven approach 2.5.1. Example of Nonparametric model: KNN Reg. 2.6. Trade-off between Prediction Accuray &amp; Interpretability 2.7. Model Assessment &amp; Selection 2.7.1. Mean squared error (MSE) 2.8." />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -119,7 +119,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "@type": "WebPage",
         "@id": "http://0.0.0.0:4000/stat_ch2"
     },
-    "description": "2020-03-16 Week 2 Ch 2. Supervised Learning Format of Supervised Learning: $ Y=f(X)+\epsilon $ $f$ : Fixed but UNKNOWN function of predictors X $\rightarrow$ Supervised Learning: A set of methods estimating $f$. Why do we estimate $f$? 1) Prediction: Y 2) Inference: Relationship between X &amp; Y 1) Prediction: $\rightarrow\text{Prediction"
+    "description": "Chapter 2. Supervised Learning 2.1. Prediction 2.2. Inference 2.3. Estimation F: By Using Training Data 2.4. Parametric Methods: Model-based approach 2.5. Nonparametric Methods: Data-driven approach 2.5.1. Example of Nonparametric model: KNN Reg. 2.6. Trade-off between Prediction Accuray &amp; Interpretability 2.7. Model Assessment &amp; Selection 2.7.1. Mean squared error (MSE) 2.8."
 }
     </script>
 
@@ -207,170 +207,209 @@ into the {body} of the default.hbs template -->
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>2020-03-16 Week 2</p>
-
-<h1 id="ch-2-supervised-learning">Ch 2. Supervised Learning</h1>
-<h4 id="format-of-supervised-learning">Format of Supervised Learning:</h4>
-<blockquote>
-  <p>$ Y=f(X)+\epsilon $<br />
-$f$ : Fixed but UNKNOWN function of predictors X<br />
-$\rightarrow$ Supervised Learning: A set of methods estimating $f$.</p>
-</blockquote>
-
-<ul>
-  <li>Why do we estimate $f$?<br />
-1) Prediction: Y<br />
-2) Inference: Relationship between X &amp; Y</li>
+                    <ul id="markdown-toc">
+  <li><a href="#chapter-2-supervised-learning" id="markdown-toc-chapter-2-supervised-learning">Chapter 2. Supervised Learning</a>    <ul>
+      <li><a href="#21-prediction" id="markdown-toc-21-prediction">2.1. Prediction</a></li>
+      <li><a href="#22-inference" id="markdown-toc-22-inference">2.2. Inference</a></li>
+      <li><a href="#23-estimation-f-by-using-training-data" id="markdown-toc-23-estimation-f-by-using-training-data">2.3. Estimation F: By Using Training Data</a></li>
+      <li><a href="#24-parametric-methods-model-based-approach" id="markdown-toc-24-parametric-methods-model-based-approach">2.4. Parametric Methods: Model-based approach</a></li>
+      <li><a href="#25-nonparametric-methods-data-driven-approach" id="markdown-toc-25-nonparametric-methods-data-driven-approach">2.5. Nonparametric Methods: Data-driven approach</a>        <ul>
+          <li><a href="#251-example-of-nonparametric-model-knn-reg" id="markdown-toc-251-example-of-nonparametric-model-knn-reg">2.5.1. Example of Nonparametric model: KNN Reg.</a></li>
+        </ul>
+      </li>
+      <li><a href="#26-trade-off-between-prediction-accuray--interpretability" id="markdown-toc-26-trade-off-between-prediction-accuray--interpretability">2.6. Trade-off between Prediction Accuray &amp; Interpretability</a></li>
+      <li><a href="#27-model-assessment--selection" id="markdown-toc-27-model-assessment--selection">2.7. Model Assessment &amp; Selection</a>        <ul>
+          <li><a href="#271-mean-squared-error-mse" id="markdown-toc-271-mean-squared-error-mse">2.7.1. Mean squared error (MSE)</a></li>
+        </ul>
+      </li>
+      <li><a href="#28-bias-variance-trade-off-편향분산-교차" id="markdown-toc-28-bias-variance-trade-off-편향분산-교차">2.8. Bias-Variance Trade-off 편향분산 교차</a>        <ul>
+          <li><a href="#281-ex-trade-off-in-knn-reg" id="markdown-toc-281-ex-trade-off-in-knn-reg">2.8.1. Ex) Trade-off in KNN Reg.</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ul>
 
-<h3 id="1-prediction">1) Prediction:</h3>
-<p>$\rightarrow\text{Prediction of Y} : \hat{Y} = \hat{f}(X)\quad (\hat{f} : \text{Estimate of }f) $<br />
-$\rightarrow\text{Accuracy of }\hat{Y}\text{ depends on reducible &amp; irreducible errors}$</p>
-<blockquote>
-  <p>$E[Y-\hat{Y}]^2 = [f(X)-\hat{f}(X)]^2 + Var(\epsilon)$<br />
+<p>2020-03-16 Week 2 ~ 2020-04-03 Week 3</p>
+
+<h1 id="chapter-2-supervised-learning">Chapter 2. Supervised Learning</h1>
+
+<ul>
+  <li>
+    <p>Format of Supervised Learning:<br />
+<strong>$ Y=f(X)+\epsilon $</strong><br />
+<strong>$f$</strong> : Fixed but UNKNOWN function of predictors <strong>X</strong><br />
+$\rightarrow$ Supervised Learning: A set of methods estimating <strong>$f$</strong>.</p>
+  </li>
+  <li>
+    <p>Why do we estimate <strong>$f$</strong> ?<br />
+1) Prediction: <strong>Y</strong><br />
+2) Inference: Relationship between <strong>X</strong> &amp; <strong>Y</strong></p>
+  </li>
+</ul>
+
+<h2 id="21-prediction">2.1. Prediction</h2>
+<ul>
+  <li>
+    <p>$\text{Prediction of } \; Y : \hat{Y} = \hat{f}(X)\quad (\hat{f} : \text{Estimate of }f) $<br />
+$\text{Accuracy of } \; \hat{Y} \text{ depends on reducible &amp; irreducible errors}$</p>
+  </li>
+  <li>
+    <p><strong>$E[Y-\hat{Y}]^2 = [f(X)-\hat{f}(X)]^2 + Var(\epsilon)$</strong><br />
 $\quad (MSE)\quad\quad (reducible)\quad (irreducible)$</p>
-</blockquote>
 
-<ul>
-  <li>Reducible error : controlable, can be reduced by selecting a better model</li>
-  <li>Irreducible error: uncontrolable, nature of data</li>
+    <p>Reducible error : controlable, can be reduced by selecting a better model
+  Irreducible error: uncontrolable, nature of data</p>
+  </li>
 </ul>
 
-<h3 id="2-inference">2) Inference:</h3>
+<h2 id="22-inference">2.2. Inference</h2>
 <ul>
-  <li>Characteristics of liner &amp; nonlinear models:<br />
+  <li>Characteristics of linear &amp; nonlinear models:<br />
 1) Linear : Relatively Simple &amp; interpretable inference but poor prediction (when true function $f$ is nonlinear)<br />
 2) Nonlinear : More accurate but difficult to interpret<br />
 $\rightarrow$ Depends on your Goal of analysis</li>
 </ul>
 
-<h3 id="3-estimation-f-by-using-training-data">3) Estimation F: By Using Training Data</h3>
+<h2 id="23-estimation-f-by-using-training-data">2.3. Estimation F: By Using Training Data</h2>
 <ul>
   <li>Estimation Methods:<br />
 1) Parametric: Assume specific function $f$ (linear&amp;non- both)<br />
 2) Nonparametric: No Assumption; Data-driven method (nonlinear)</li>
 </ul>
 
-<h3 id="4-parametric-methods-model-based-approach">4) Parametric Methods: Model-based approach</h3>
+<h2 id="24-parametric-methods-model-based-approach">2.4. Parametric Methods: Model-based approach</h2>
 <ul>
-  <li>Step 1: Assume about the functional form of $f$<br />
-$\quad\text{e.x) when } X_j = ( x_{1j}, \ldots , x_{nj} ) ^T : n * 1 \space \text{obs. ; vector for the j th predictor} <br />
-\quad\quad \rightarrow linear: f(X)= \beta_0 + \beta_1X_1 + … + \beta_pX_p$</li>
-  <li>Step 2: Estimate Parameters<br />
-$\quad\quad\quad Y \approx \hat{\beta}_0 + \hat{\beta}_1X_1 + … + \hat{\beta}_pX_p = \hat{f}(X)$</li>
-  <li>Disadvantage: Specific form of $f$<br />
-$\quad\quad\quad\rightarrow$ Not match with the true $f$: poor estimation &amp; poor prediction<br />
-$\quad\quad\quad\rightarrow$ Flextible parametric model : model with more parameters<br />
-$\quad\quad\quad\quad$ Flexible model $\equiv$ Complex model<br />
-$\quad\quad\quad\quad$ but overfitting problem still remains: model follows errors or noises</li>
-</ul>
-
-<h4 id="underfitting-vs-overfitting">Underfitting vs Overfitting</h4>
-<ul>
-  <li>under: estimation has not enough accuracy, miss to capture the true structure</li>
-  <li>over: more complexity than true $f$</li>
-</ul>
-
-<h3 id="5-nonparametric-methods-data-driven-approach">5) Nonparametric Methods: Data-driven approach</h3>
-<ul>
-  <li>No assumptions about functional form of $f \Rightarrow $ wider range of possible shapes of $f$</li>
-  <li>Disadvantage:<br />
-$\quad\quad\quad\rightarrow$ A vary large # of obs. is required to get an accurae $f$ (relatively to parametric method)<br />
-$\quad\quad\quad\rightarrow$ Overfitting $\Leftrightarrow$ <strong>Level of smoothness</strong>; Model complexity (how to determine it?)
-    <h4 id="example-of-nonparametric-model-knn-reg">Example of Nonparametric model: KNN Reg.</h4>
+  <li>
+    <p>Step 1: Assume about the functional form of $f$<br />
+$\text{e.x) when } X_j = ( x_{1j}, \ldots , x_{nj} ) ^T : n \ast 1$ obs.; $\;$ vector for the $j^{th}$ predictor<br />
+$\rightarrow linear: f(X)= \beta_0 + \beta_1X_1 + … + \beta_pX_p$</p>
   </li>
-  <li>Idea: Similar inputs have Similar output</li>
-  <li>Step: when predicting $\hat{Y}_0$ with input $X_0$<br />
-1) Determine $K$ (level of smoothness) #if K==N: Y = Var(Y) / if K==1: Y = perfect fit; no training error<br />
-2) find $K$ closest training obs. from the target input point($X_0$) using Euclidean distance
-\(\rightarrow \hat{Y}_0 = \frac{1}{K}\sum_{x_i\in \mathcal N}^K y_i \quad\quad\quad\quad\quad\quad\quad\quad\quad\)
-3) average of these #k Y values = $\hat{Y}_0$</li>
-  <li>Effect of $K$ (tuning parameter/ model flexibility parameter)
+  <li>
+    <p>Step 2: Estimate Parameters<br />
+$Y \approx \hat{\beta}_0 + \hat{\beta}_1X_1 + … + \hat{\beta}_pX_p = \hat{f}(X)$</p>
+  </li>
+  <li>Disadvantage: Specific form of $f$<br />
+$\rightarrow\;$ Not match with the true $f$: poor estimation &amp; poor prediction<br />
+$\rightarrow\;$ Flextible parametric model : model with more parameters
     <ul>
-      <li>decides the level of smoothness (under or overfitting)</li>
-      <li>As $K \uparrow \Rightarrow \text{flexibility} \downarrow$ : the fitted line is simple</li>
-      <li>As $K \downarrow \Rightarrow \text{flexibility} \uparrow$ : the fitted line is wiggly</li>
+      <li>Flexible model $\equiv$ Complex model<br />
+but overfitting problem still remains: model follows errors or noises</li>
+    </ul>
+  </li>
+  <li>Underfitting vs Overfitting
+under: estimation has not enough accuracy, miss to capture the true structure<br />
+over: more complexity than true $f$</li>
+</ul>
+
+<h2 id="25-nonparametric-methods-data-driven-approach">2.5. Nonparametric Methods: Data-driven approach</h2>
+<ul>
+  <li>No assumptions about functional form of $f$<br />
+$\Rightarrow $ wider range of possible shapes of $f$</li>
+  <li>Disadvantage:
+    <ul>
+      <li>1) A vary large <strong>#</strong> of obs. is required to get an accurate $f$<br />
+(relative to a parametric method)</li>
+      <li>2) Overfitting $\Leftrightarrow$ <strong>Level of smoothness</strong>; $\;$ Model complexity<br />
+(how to determine it?)</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="6-trade-off-between-prediction-accuray--interpretability">6) Trade-off between Prediction Accuray &amp; Interpretability</h3>
+<h3 id="251-example-of-nonparametric-model-knn-reg">2.5.1. Example of Nonparametric model: KNN Reg.</h3>
 <ul>
-  <li>Restrictive model(Simple model) vs. Flexible model</li>
-  <li>our goal: inference ($\rightarrow$ restrictive model) or prediction ($\rightarrow$ flexible model)</li>
+  <li>Idea: Similar inputs have Similar output<br />
+Step: when predicting $\hat{Y}_0$ with input $X_0$
+    <ul>
+      <li>1) Determine $K$ (level of smoothness)</li>
+      <li>
+        <p>if K==N: Y = Var(Y)<br />
+if K==1: Y = perfect fit; no training error</p>
+      </li>
+      <li>
+        <p>2) find $K$ closest training obs. from the target input point($X_0$) using Euclidean distance<br />
+\(\rightarrow\hat{Y}_0 = \frac{1}{K}\sum_{x_i\in \mathcal N}^K y_i\)</p>
+      </li>
+      <li>3) average of these #k Y values = $\hat{Y}_0$</li>
+    </ul>
+  </li>
+  <li>Effect of $K$ (tuning parameter/ model flexibility parameter)
+    <ul>
+      <li>decides the level of smoothness (under or overfitting)</li>
+      <li>As $K \uparrow \; \Rightarrow \text{flexibility} \downarrow$ : the fitted line is simple</li>
+      <li>As $K \downarrow \; \Rightarrow \text{flexibility} \uparrow$ : the fitted line is wiggly</li>
+    </ul>
+  </li>
 </ul>
 
-<h3 id="7-model-assessment--selection">7) Model Assessment &amp; Selection</h3>
+<h2 id="26-trade-off-between-prediction-accuray--interpretability">2.6. Trade-off between Prediction Accuray &amp; Interpretability</h2>
+<ul>
+  <li>Restrictive model(Simple model) vs. Flexible model</li>
+  <li>our goal:<br />
+inference ($\rightarrow$ restrictive model)<br />
+prediction ($\rightarrow$ flexible model)</li>
+</ul>
+
+<h2 id="27-model-assessment--selection">2.7. Model Assessment &amp; Selection</h2>
 <ul>
   <li>Evaluate the performance of models on a given dataset  and Select the best model</li>
   <li>Criterion: Better prediction of $Y$</li>
 </ul>
 
-<blockquote>
-  <p>#When Regression problem: Mean squared error (MSE)</p>
-  <ul>
-    <li>training MSE(used for building model) is not our interest; cannot be a measure for selection<br />
-e.g) $\begin{align} R^2 = 1 - \frac{RSS}{TSS} \end {align}\text{ (Residual Sum of Squares)  / (Total Sum of Square)} \<br />
-\quad\quad \text{training RSS}= \sum(y_i - \hat{y_i})^2  \quad \text{&amp;} \quad \text{MSE} =\frac{RSS}{N}$</li>
-    <li>
-      <dl>
-        <dt>when more X variables added $\rightarrow \text{RSS&amp;MSE}\downarrow , \space R^2\uparrow$  </dt>
-        <dt>even X are not important variables</dt>
-        <dd>complex model has smaller training error (regardless of existence of test data)</dd>
-      </dl>
-    </li>
-    <li>
-      <dl>
-        <dt>Test MSE $= \begin{align}\frac{1}{m}\sum_{i=1}^m(y_i^0 - \hat{f}(x_i^0))^2 \end{align}$</dt>
-        <dd>with low test MSE $\Rightarrow$ better model<br />
+<h3 id="271-mean-squared-error-mse">2.7.1. Mean squared error (MSE)</h3>
+<ul>
+  <li>training MSE(used for building model) is not our interest; cannot be a measure for model selection
+    <ul>
+      <li>e.g.)<br />
+\(\\ R^2 = 1 - \frac{RSS}{TSS}\)<br />
+training RSS = \(\sum(y_i - \hat{y_i})^2  \quad \text{&amp;} \quad \text{MSE} =\frac{RSS}{N}\\\)<br />
+when more X variables added, $\;$ RSS &amp; MSE $\downarrow$ , $R^2 \uparrow$<br />
+even X are not important variables<br />
+complex model has smaller training error regardless of existence of test data</li>
+    </ul>
+  </li>
+  <li>
+    <p>Test MSE \(= \frac{1}{m}\sum_{i=1}^m(y_i^0 - \hat{f}(x_i^0))^2\)<br />
+Models with low test MSE are better.<br />
 $\rightarrow$ How to find optimal Flexibility?<br />
 $\rightarrow$ Test MSE(error rate) is always larger than Training MSE; We estimated model function $f$ to minimize its training error<br />
-$\rightarrow$ No test data: Sample re-use methods (e.g., bootstrap, cross-validation)</dd>
-      </dl>
-    </li>
-  </ul>
-</blockquote>
-
-<ul>
+$\rightarrow$ No test data: Sample re-use methods (e.g., bootstrap, cross-validation)</p>
+  </li>
   <li>Classification problem: Misclassification rate</li>
 </ul>
 
-<h3 id="8-bias-variance-trade-off-편향분산-교차">8) Bias-Variance Trade-off 편향분산 교차</h3>
+<h2 id="28-bias-variance-trade-off-편향분산-교차">2.8. Bias-Variance Trade-off 편향분산 교차</h2>
 <ul>
-  <li>Expected test MSE(ideal measure): $E[y_0-\hat{f}(x_0)]^2 \quad ((x_0,y_0) \text{ is a test obs})$</li>
+  <li>Expected test MSE(ideal measure): $E[y_0-\hat{f}(x_0)]^2$ when $((x_0,y_0)$ is a test obs.</li>
   <li>
-    <p>in population: #K training sets &amp; #K function $f_k$
-Estimation of expected test MSE:
-\(\hat{E}[y_0 - \hat{f}(x_0)]^2 = \frac{1}{K} \sum_{k=1}^K[y_0-\hat{f}_k(x_0)]^2\)</p>
+    <p>in population: #K training sets &amp; #K function $f_k$<br />
+Estimation of expected test MSE:  \(\\ \hat{E}[y_0 - \hat{f}(x_0)]^2 = \frac{1}{K} \sum_{k=1}^K[y_0-\hat{f}_k(x_0)]^2\)</p>
   </li>
-  <li>For given $x_0$,  (when $\epsilon$ is irreducible error)</li>
-</ul>
-
-<p>$\begin{matrix}\begin{align}
-\hat{E}[y_0 - \hat{f}(x_0)]^2 &amp;= Var(\hat{f}(x_0)) + [Bias(\hat{f}(x_0))]^2 + Var(\epsilon) \ <br />
-              \text{<Proof>} \quad&amp;= E [ \{ y_0 -E(\hat{f}(x_0)) \} - \{ \hat{f}(x_0) - E(\hat{f}(x_0)) \} ]^2 \\
-                                             &amp;= \quad E [  y_0 -E(\hat{f}(x_0)) ] ^2 \quad \quad \quad &amp; \rightarrow (1) \\
-                                             &amp; \quad \; + E [\hat{f}(x_0) - E(\hat{f}(x_0)) ] ^2 &amp; \rightarrow (2)\\
-                                             &amp; \quad \; - 2E[ \{ y_0 -E(\hat{f}(x_0)) \} \{ \hat{f}(x_0) - E(\hat{f}(x_0)) \} ] &amp; \rightarrow (3)
-\end{align}\end{matrix}$</Proof></p>
-
-<ul>
   <li>
-    <p>$\begin {matrix} \begin{align}
-(1) &amp;= E [(f(x_0) + \epsilon - E(\hat{f}(x_0)) ] ^2 <br />
-   &amp;= E[ f(x_0)^2 +\epsilon^2 + [E(\hat{f}(x_0)) ]^2 + 2f(x_0)\epsilon -2f(x_0)E(\hat{f}(x_0)) - 2\epsilon E(\hat{f}(x_0)) ] 
-          \quad \leftarrow \text{when } E(\epsilon) \text{ goes to } 0 <br />
-    &amp;= E[E(\hat{f}(x_0)) - f(x_0)] ^2 + E(\epsilon^2)  \quad  \leftarrow \text{ in E[ ] is Bias } <br />
-    &amp;= [Bias(\hat{f}(x_0))]^2 + Var(\epsilon^2)
-\end{align}\end{matrix} $</p>
+    <p>For given $x_0$,  (when $\epsilon$ is irreducible error) \(\\ \begin{align*}
+\hat{E}[y_0 - \hat{f}(x_0)]^2 &amp;= Var(\hat{f}(x_0)) + [Bias(\hat{f}(x_0))]^2 + Var(\epsilon) \\
+                      &amp;= E [ \{ y_0 -E(\hat{f}(x_0)) \} - \{ \hat{f}(x_0) - E(\hat{f}(x_0)) \} ]^2 \\
+          (1) \cdots	&amp;= E [  y_0 -E(\hat{f}(x_0)) ] ^2 \\
+          (2) \cdots	&amp; \; + E [\hat{f}(x_0) - E(\hat{f}(x_0)) ] ^2 \\
+          (3) \cdots	&amp; \; - 2E[ \{ y_0 -E(\hat{f}(x_0)) \} \{ \hat{f}(x_0) - E(\hat{f}(x_0)) \} ]
+\end{align*}\)</p>
   </li>
-  <li>$(2) = Var(\hat{f}(x_0)) \leftarrow \text { model variance (different fit’s from randomness of training sets)} $</li>
+  <li>
+    <p>(1) \(\\ \begin{align*} 
+  &amp;= E [(f(x_0) + \epsilon - E(\hat{f}(x_0)) ] ^2 \\
+  &amp;= E[ f(x_0)^2 +\epsilon^2 + [E(\hat{f}(x_0)) ]^2 + 2f(x_0)\epsilon -2f(x_0)E(\hat{f}(x_0)) - 2\epsilon E(\hat{f}(x_0)) ] \\
+  &amp; \quad \scriptstyle\text{when } E(\epsilon) \text{ goes to } 0 \\
+  &amp;= E[E(\hat{f}(x_0)) - f(x_0)] ^2 + E(\epsilon^2)  \\
+  &amp; \quad \scriptstyle{E(\hat{f}(x_0)) - f(x_0) \text{is a Bias}} \\
+  &amp;= [Bias(\hat{f}(x_0))]^2 + Var(\epsilon^2)
+\end{align*}\)</p>
+  </li>
+  <li>$(2) = Var(\hat{f}(x_0)) \leftarrow $ model variance<br />
+$\scriptstyle\text{different fit’s from randomness of training sets}$</li>
   <li>$(3) = 0$</li>
 </ul>
 
 <p>$\therefore$ Expected test MSE is consisted of Reducible Error(Var+ Bias$^2$) and Irreducible Error(Var($\epsilon$))</p>
-
-<p>2020-04-03 Week 3</p>
 
 <ul>
   <li>
@@ -387,81 +426,53 @@ Estimation of expected test MSE:
 <p>Model Flextibility $\uparrow$ $\Rightarrow$ model variance $\uparrow$ &amp; model bias $\downarrow$<br />
 Model Flextibility $\downarrow$ $\Rightarrow$ model variance $\downarrow$ &amp; model bias $\uparrow$</p>
 
-<p><img src="attachment:image.png" alt="image.png" /></p>
+<p><img src="/assets/images/tradeoff_0.png" alt="image.png" /></p>
 
 <p>$\rightarrow$ optimal model flextibility is different for <strong>each datasets</strong></p>
 
-<h3 id="trade-off-in-knn-reg">Trade-off in KNN Reg.</h3>
+<h3 id="281-ex-trade-off-in-knn-reg">2.8.1. Ex) Trade-off in KNN Reg.</h3>
 <ul>
   <li>given) Y = f (X) + $\epsilon$ with E($\epsilon$) = 0 and Var ($\epsilon$) = $\sigma^2$</li>
   <li>
-    <p>Expected test MSE at $x_0$:<br />
-$
-E[ (Y- \hat{f_k}(x_0) )^2 | X = x_0 ] <br />
-= \sigma^2 + Bias^2(\hat{f_k} (x_0)) + Var (\hat{f_k} (x_0)) <br />
-\rightarrow Bias(\hat{f_k} (x_0)) =  f(x_0) - E(\hat{f}(x_0))   \text{ : given “f” is KNN func.}\ 
-\quad= { f(x_0) - E[\frac1 K \sum_{i \in \mathcal N (x_0)} ^ K Y_i ] }  <br />
-\quad= { f(x_0)- \frac 1 K \sum E (f(x_i)+\epsilon_i)}  <br />
-\quad= f(x_0) - \frac 1 K \sum E (f(x_i)  <br />
-\rightarrow Var(\hat{f_k} (x_0)) = Var(\frac 1 K \sum_{i \in \mathcal N (x_0)} Yi )<br />
-\quad= \frac 1 {K^2} \sum  Var( Yi ) <br />
-\quad=  \frac 1 {K^2} \sum Var( f( x_i) + \epsilon_i ) <br />
-\quad=  \frac 1 {K^2} \sum \sigma^2 = \frac 1 {K^2} * K * \sigma^2 = \frac {\sigma^2} K <br />
-$
-\(\therefore \text{ Expected test MSE at } x_0 = \sigma ^2 + [f(x_0) - \frac 1 K \sum_{x_i \in \mathcal N (x_0)}^k f(x_i) ]^2 + \frac {\sigma^2} K\)</p>
+    <p>Expected test MSE at $x_0$: \(\\
+E[ (Y- \hat{f_k}(x_0) )^2 | X = x_0 ] \\
+= \sigma^2 + Bias^2(\hat{f_k} (x_0)) + Var (\hat{f_k} (x_0)) \\
+\rightarrow Bias(\hat{f_k} (x_0)) =  f(x_0) - E(\hat{f}(x_0))   \text{ : given "f" is KNN func.}\\ 
+\quad= { f(x_0) - E[\frac1 K \sum_{i \in \mathcal N (x_0)} ^ K Y_i ] }  \\
+\quad= { f(x_0)- \frac 1 K \sum E (f(x_i)+\epsilon_i)}  \\
+\quad= f(x_0) - \frac 1 K \sum E (f(x_i)  \\
+\rightarrow Var(\hat{f_k} (x_0)) = Var(\frac 1 K \sum_{i \in \mathcal N (x_0)} Yi )\\
+\quad= \frac 1 {K^2} \sum  Var( Yi ) \\
+\quad=  \frac 1 {K^2} \sum Var( f( x_i) + \epsilon_i ) \\
+\quad=  \frac 1 {K^2} \sum \sigma^2 = \frac 1 {K^2} * K * \sigma^2 = \frac {\sigma^2} K\)<br />
+\(\therefore\) Expected test MSE at \(x_0 = \sigma ^2 + [f(x_0) - \frac 1 K \sum_{x_i \in \mathcal N (x_0)}^k f(x_i) ]^2 + \frac {\sigma^2} K\)</p>
   </li>
-  <li>when we use large number of K :
-as K $\uparrow\rightarrow$ model complexity$\downarrow$ model variance $\downarrow \rightarrow$ bias $\uparrow$ :simpler model</li>
-</ul>
-
-<h3 id="in-classification-using-misclassification-rate">in Classification: Using Misclassification rate</h3>
-<p>\(= \frac 1 N \sum_{i=1}^n I(y_i \not = \hat y_i )\)</p>
-<ul>
-  <li>Bayes Classifier</li>
-  <li>KNN Classifier</li>
-</ul>
-
-<p>$
-min_\hat Y E( I(Y \not = \hat Y) <br />
-= min_\hat Y E[ E(I(Y \not = \hat Y | X) ] <br />
-= min_{\hat f (x)} E[ \sum_{g=1}^G I( Y= g\not= \hat f (x) ) P ( Y= g| X) ] <br />
-\equiv min_{\hat f (x)} \sum_{g=1}^G I ( Y=g \not= \hat f (x) ) P ( Y= g| X) <br />
-\Rightarrow \hat f (x) = min_g \sum_{g=1}^G I ( Y=g \not= \hat f (x) ) P ( Y= g| X) <br />
-\quad \equiv min_g ( 1- P ( Y= g| X) )
-$</p>
-
-<h4 id="eg">E.g)</h4>
-<p>in 3 groups -&gt; Y = 1, 2, 3<br />
+  <li>
+    <p>when we use large number of K :<br />
+as K increases, model complexity and model variance decreases, then bias increases<br />
+;which is a simpler model</p>
+  </li>
+  <li>
+    <p>Using Misclassification rate \(= \frac 1 N \sum_{i=1}^n I(y_i \not = \hat y_i )\)<br />
+(in Bayes Classifier &amp; KNN Classifier)<br />
+\(min_\hat Y E( I(Y \not = \hat Y) \\
+= min_\hat Y E[ E(I(Y \not = \hat Y | X) ] \\
+= min_{\hat f (x)} E[ \sum_{g=1}^G I( Y= g\not= \hat f (x) ) P ( Y= g| X) ] \\
+\equiv min_{\hat f (x)} \sum_{g=1}^G I ( Y=g \not= \hat f (x) ) P ( Y= g| X) \\
+\Rightarrow \hat f (x) = min_g \sum_{g=1}^G I ( Y=g \not= \hat f (x) ) P ( Y= g| X) \\
+\quad \equiv min_g ( 1- P ( Y= g| X) )\)</p>
+  </li>
+  <li>E.g)<br />
+in 3 groups -&gt; Y = 1, 2, 3<br />
 P(Y=1 | X) = 0.3 , P(Y=2 | X) = 0.5, P(Y=3 | X) =0.2<br />
 $\hat f(x) = 1 \Rightarrow$ EPE(expected prediction error; miss classification rate) = 0 * 0.3 + 1 * 0.5 + 1 * 0.2 = 0.7<br />
 $\hat f(x) = 2 \Rightarrow$ EPE = 0.5 : min value<br />
-$\hat f(x) = 3 \Rightarrow$ EPE = 0.8</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>$\therefore min_g ( 1- P ( Y= g</td>
-      <td>X) ) \</td>
-    </tr>
-    <tr>
-      <td>\quad  \equiv max_g P(Y = g</td>
-      <td>X)$</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
-    <tr>
-      <td>Bayes error rate at X = $x_0$ : $1 - max_g P(Y=g</td>
-      <td>X=x_0)$</td>
-    </tr>
-    <tr>
-      <td>Overall Bayes error rate = $1 - E[ max_g P(Y=g</td>
-      <td>X= x) ]$</td>
-    </tr>
-  </tbody>
-</table>
+$\hat f(x) = 3 \Rightarrow$ EPE = 0.8<br />
+\(\therefore min_g ( 1- P ( Y= g| X) ) \\
+\quad  \equiv max_g P(Y = g | X)\)<br />
+Bayes error rate at X = $x_0$; $\quad 1 - max_g P(Y=g|X=x_0)$<br />
+Overall Bayes error rate; $\quad 1 - E[ max_g P(Y=g | X= x) ]$</li>
+</ul>
 
 
                 </div>
