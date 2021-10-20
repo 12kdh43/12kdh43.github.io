@@ -131,7 +131,6 @@ into the {body} of the default.hbs template -->
             <ul class="nav" role="menu">
     <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
     <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
-    <li class="nav-studies" role="menuitem"><a href="/tag/jekyll/">Jekyll</a></li>
     <li class="nav-projects" role="menuitem"><a href="/tag/projects/">Projects</a></li>
     <li class="nav-studies" role="menuitem"><a href="/tag/studies/">Studies</a></li>
     <li class="nav-archive" role="menuitem">
@@ -226,16 +225,18 @@ into the {body} of the default.hbs template -->
 </span><span class="n">nrow</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<table>
-<thead><tr><th scope="col">날짜</th><th scope="col">시도</th><th scope="col">측정소명</th><th scope="col">측정소코드</th><th scope="col">아황산가스</th><th scope="col">일산화탄소</th><th scope="col">오존</th><th scope="col">이산화질소</th><th scope="col">PM10</th><th scope="col">PM2.5</th></tr></thead>
-<tbody>
-	<tr><td>2017-07-01 01</td><td>인천 옹진군  </td><td>백령도       </td><td>831492       </td><td>.0016        </td><td>.3           </td><td>.052         </td><td>.0016        </td><td>44           </td><td>35           </td></tr>
-	<tr><td>2017-07-01 02</td><td>인천 옹진군  </td><td>백령도       </td><td>831492       </td><td>.0016        </td><td>.3           </td><td>.052         </td><td>.0017        </td><td>21           </td><td>NA           </td></tr>
-	<tr><td>2017-07-01 03</td><td>인천 옹진군  </td><td>백령도       </td><td>831492       </td><td>.0017        </td><td>.3           </td><td>.051         </td><td>.0017        </td><td>32           </td><td>18           </td></tr>
-	<tr><td>2017-07-01 04</td><td>인천 옹진군  </td><td>백령도       </td><td>831492       </td><td>.0017        </td><td>.3           </td><td>.05          </td><td>.002         </td><td>10           </td><td>NA           </td></tr>
-	<tr><td>2017-07-01 05</td><td>인천 옹진군  </td><td>백령도       </td><td>831492       </td><td>.0016        </td><td>.3           </td><td>.048         </td><td>.0018        </td><td>24           </td><td>22           </td></tr>
-</tbody>
-</table>
+<div class="language-python highlighter-rouge">
+	<table>
+	<thead><tr><th scope="col">날짜</th><th scope="col">시도</th><th scope="col">측정소명</th><th scope="col">측정소코드</th><th scope="col">아황산가스</th><th scope="col">일산화탄소</th><th scope="col">오존</th><th scope="col">이산화질소</th><th scope="col">PM10</th><th scope="col">PM2.5</th></tr></thead>
+	<tbody>
+		<tr><td>2017-07-01 01</td><td>인천 옹진군  </td><td>백령도       </td><td>831492       </td><td>.0016        </td><td>.3           </td><td>.052         </td><td>.0016        </td><td>44           </td><td>35           </td></tr>
+		<tr><td>2017-07-01 02</td><td>인천 옹진군  </td><td>백령도       </td><td>831492       </td><td>.0016        </td><td>.3           </td><td>.052         </td><td>.0017        </td><td>21           </td><td>NA           </td></tr>
+		<tr><td>2017-07-01 03</td><td>인천 옹진군  </td><td>백령도       </td><td>831492       </td><td>.0017        </td><td>.3           </td><td>.051         </td><td>.0017        </td><td>32           </td><td>18           </td></tr>
+		<tr><td>2017-07-01 04</td><td>인천 옹진군  </td><td>백령도       </td><td>831492       </td><td>.0017        </td><td>.3           </td><td>.05          </td><td>.002         </td><td>10           </td><td>NA           </td></tr>
+		<tr><td>2017-07-01 05</td><td>인천 옹진군  </td><td>백령도       </td><td>831492       </td><td>.0016        </td><td>.3           </td><td>.048         </td><td>.0018        </td><td>24           </td><td>22           </td></tr>
+	</tbody>
+	</table>
+</div>
 
 <p>26304</p>
 
@@ -256,16 +257,18 @@ into the {body} of the default.hbs template -->
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">head</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="m">5</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<table>
-<thead><tr><th scope="col">year</th><th scope="col">month</th><th scope="col">day</th><th scope="col">hour</th><th scope="col">SO2</th><th scope="col">CO</th><th scope="col">O3</th><th scope="col">NO2</th><th scope="col">PM10</th><th scope="col">PM2.5</th></tr></thead>
-<tbody>
-	<tr><td>2017  </td><td>7     </td><td>1     </td><td>1     </td><td>0.0016</td><td>0.3   </td><td>0.052 </td><td>0.0016</td><td>44    </td><td>35    </td></tr>
-	<tr><td>2017  </td><td>7     </td><td>1     </td><td>2     </td><td>0.0016</td><td>0.3   </td><td>0.052 </td><td>0.0017</td><td>21    </td><td>NA    </td></tr>
-	<tr><td>2017  </td><td>7     </td><td>1     </td><td>3     </td><td>0.0017</td><td>0.3   </td><td>0.051 </td><td>0.0017</td><td>32    </td><td>18    </td></tr>
-	<tr><td>2017  </td><td>7     </td><td>1     </td><td>4     </td><td>0.0017</td><td>0.3   </td><td>0.050 </td><td>0.0020</td><td>10    </td><td>NA    </td></tr>
-	<tr><td>2017  </td><td>7     </td><td>1     </td><td>5     </td><td>0.0016</td><td>0.3   </td><td>0.048 </td><td>0.0018</td><td>24    </td><td>22    </td></tr>
-</tbody>
-</table>
+<div class="language-python highlighter-rouge">
+	<table>
+	<thead><tr><th scope="col">year</th><th scope="col">month</th><th scope="col">day</th><th scope="col">hour</th><th scope="col">SO2</th><th scope="col">CO</th><th scope="col">O3</th><th scope="col">NO2</th><th scope="col">PM10</th><th scope="col">PM2.5</th></tr></thead>
+	<tbody>
+		<tr><td>2017  </td><td>7     </td><td>1     </td><td>1     </td><td>0.0016</td><td>0.3   </td><td>0.052 </td><td>0.0016</td><td>44    </td><td>35    </td></tr>
+		<tr><td>2017  </td><td>7     </td><td>1     </td><td>2     </td><td>0.0016</td><td>0.3   </td><td>0.052 </td><td>0.0017</td><td>21    </td><td>NA    </td></tr>
+		<tr><td>2017  </td><td>7     </td><td>1     </td><td>3     </td><td>0.0017</td><td>0.3   </td><td>0.051 </td><td>0.0017</td><td>32    </td><td>18    </td></tr>
+		<tr><td>2017  </td><td>7     </td><td>1     </td><td>4     </td><td>0.0017</td><td>0.3   </td><td>0.050 </td><td>0.0020</td><td>10    </td><td>NA    </td></tr>
+		<tr><td>2017  </td><td>7     </td><td>1     </td><td>5     </td><td>0.0016</td><td>0.3   </td><td>0.048 </td><td>0.0018</td><td>24    </td><td>22    </td></tr>
+	</tbody>
+	</table>
+</div>
 
 <h2 id="22-handling-na-values">2.2. Handling NA values</h2>
 
@@ -538,16 +541,18 @@ into the {body} of the default.hbs template -->
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">head</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">11</span><span class="o">:</span><span class="m">18</span><span class="p">)],</span><span class="m">5</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<table>
-<thead><tr><th scope="col">SO2_I_p</th><th scope="col">CO_I_p</th><th scope="col">O3_I_p</th><th scope="col">NO2_I_p</th><th scope="col">PM10_I_p</th><th scope="col">PM2.5_I_p</th><th scope="col">CAI</th><th scope="col">CAI_index</th></tr></thead>
-<tbody>
-	<tr><td>4.00     </td><td>7.5      </td><td>68.44068 </td><td>2.666667 </td><td>64.00000 </td><td> 88.71711</td><td> 88.71711</td><td>1        </td></tr>
-	<tr><td>4.00     </td><td>7.5      </td><td>68.44068 </td><td>2.833333 </td><td>68.75000 </td><td>103.38782</td><td>103.38782</td><td>2        </td></tr>
-	<tr><td>4.25     </td><td>7.5      </td><td>67.61017 </td><td>2.833333 </td><td>84.66667 </td><td>131.82942</td><td>131.82942</td><td>2        </td></tr>
-	<tr><td>4.25     </td><td>7.5      </td><td>66.77966 </td><td>3.333333 </td><td>44.58333 </td><td> 66.44682</td><td> 66.77966</td><td>1        </td></tr>
-	<tr><td>4.00     </td><td>7.5      </td><td>65.11864 </td><td>3.000000 </td><td>39.95833 </td><td> 64.79737</td><td> 65.11864</td><td>1        </td></tr>
-</tbody>
-</table>
+<div class="language-python highlighter-rouge">
+	<table>
+	<thead><tr><th scope="col">SO2_I_p</th><th scope="col">CO_I_p</th><th scope="col">O3_I_p</th><th scope="col">NO2_I_p</th><th scope="col">PM10_I_p</th><th scope="col">PM2.5_I_p</th><th scope="col">CAI</th><th scope="col">CAI_index</th></tr></thead>
+	<tbody>
+		<tr><td>4.00     </td><td>7.5      </td><td>68.44068 </td><td>2.666667 </td><td>64.00000 </td><td> 88.71711</td><td> 88.71711</td><td>1        </td></tr>
+		<tr><td>4.00     </td><td>7.5      </td><td>68.44068 </td><td>2.833333 </td><td>68.75000 </td><td>103.38782</td><td>103.38782</td><td>2        </td></tr>
+		<tr><td>4.25     </td><td>7.5      </td><td>67.61017 </td><td>2.833333 </td><td>84.66667 </td><td>131.82942</td><td>131.82942</td><td>2        </td></tr>
+		<tr><td>4.25     </td><td>7.5      </td><td>66.77966 </td><td>3.333333 </td><td>44.58333 </td><td> 66.44682</td><td> 66.77966</td><td>1        </td></tr>
+		<tr><td>4.00     </td><td>7.5      </td><td>65.11864 </td><td>3.000000 </td><td>39.95833 </td><td> 64.79737</td><td> 65.11864</td><td>1        </td></tr>
+	</tbody>
+	</table>
+</div>
 
 <h2 id="32-timestep-wise-visualization">3.2. Timestep-wise Visualization</h2>
 <ul>
@@ -574,19 +579,21 @@ into the {body} of the default.hbs template -->
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`summarise()` has grouped output by 'year', 'month', 'day'. You can override using the `.groups` argument.
 </code></pre></div></div>
 
-<table>
-<thead><tr><th scope="col">time_tmp</th><th scope="col">CAI_idx</th><th scope="col">n</th></tr></thead>
-<tbody>
-	<tr><td>daytime  </td><td>0        </td><td>100      </td></tr>
-	<tr><td>daytime  </td><td>1        </td><td>886      </td></tr>
-	<tr><td>daytime  </td><td>2        </td><td> 93      </td></tr>
-	<tr><td>daytime  </td><td>3        </td><td> 17      </td></tr>
-	<tr><td>nighttime</td><td>0        </td><td> 73      </td></tr>
-	<tr><td>nighttime</td><td>1        </td><td>895      </td></tr>
-	<tr><td>nighttime</td><td>2        </td><td>115      </td></tr>
-	<tr><td>nighttime</td><td>3        </td><td> 13      </td></tr>
-</tbody>
-</table>
+<div class="language-python highlighter-rouge">
+	<table>
+	<thead><tr><th scope="col">time_tmp</th><th scope="col">CAI_idx</th><th scope="col">n</th></tr></thead>
+	<tbody>
+		<tr><td>daytime  </td><td>0        </td><td>100      </td></tr>
+		<tr><td>daytime  </td><td>1        </td><td>886      </td></tr>
+		<tr><td>daytime  </td><td>2        </td><td> 93      </td></tr>
+		<tr><td>daytime  </td><td>3        </td><td> 17      </td></tr>
+		<tr><td>nighttime</td><td>0        </td><td> 73      </td></tr>
+		<tr><td>nighttime</td><td>1        </td><td>895      </td></tr>
+		<tr><td>nighttime</td><td>2        </td><td>115      </td></tr>
+		<tr><td>nighttime</td><td>3        </td><td> 13      </td></tr>
+	</tbody>
+	</table>
+</div>
 
 <h3 id="322-daily">3.2.2. Daily</h3>
 
@@ -760,8 +767,6 @@ into the {body} of the default.hbs template -->
                         <div class="read-next-card-content">
                             <ul>
                                 
-                                
-                                  
                                 
                                   
                                     
@@ -1050,7 +1055,7 @@ into the {body} of the default.hbs template -->
 
  </script>
 
-
+	
     <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
     
         <script>

@@ -131,7 +131,6 @@ into the {body} of the default.hbs template -->
             <ul class="nav" role="menu">
     <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
     <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
-    <li class="nav-studies" role="menuitem"><a href="/tag/jekyll/">Jekyll</a></li>
     <li class="nav-projects" role="menuitem"><a href="/tag/projects/">Projects</a></li>
     <li class="nav-studies" role="menuitem"><a href="/tag/studies/">Studies</a></li>
     <li class="nav-archive" role="menuitem">
@@ -235,21 +234,8 @@ into the {body} of the default.hbs template -->
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_data</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -645,8 +631,6 @@ weighted avg       0.97      0.97      0.97      1491
                                 
                                 
                                   
-                                
-                                  
                                     
                                         
                                         
@@ -933,7 +917,7 @@ weighted avg       0.97      0.97      0.97      1491
 
  </script>
 
-
+	
     <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
     
         <script>

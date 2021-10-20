@@ -1,16 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-08T22:24:15+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Hello, World!</title><link href="http://0.0.0.0:4000/helloworld" rel="alternate" type="text/html" title="Hello, World!" /><published>2021-09-29T16:00:00+09:00</published><updated>2021-09-29T16:00:00+09:00</updated><id>http://0.0.0.0:4000/helloworld</id><content type="html" xml:base="http://0.0.0.0:4000/helloworld">&lt;h2 id=&quot;my-first-notebook-from-docker-workspace&quot;&gt;My First Notebook from Docker-workspace.&lt;/h2&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__version__&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'2.4.1'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="jekyll" /><summary type="html">My First Notebook from Docker-workspace.</summary></entry><entry><title type="html">Fashion GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-20T23:34:54+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
 
 &lt;h2 id=&quot;11-workspace&quot;&gt;1.1. Workspace&lt;/h2&gt;
 &lt;ul&gt;
@@ -354,7 +342,7 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
       &lt;li&gt;&lt;a href=&quot;#31-build-graph-with-correlation-table&quot; id=&quot;markdown-toc-31-build-graph-with-correlation-table&quot;&gt;3.1. Build Graph with Correlation table&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#32-setting-threshold-on-weights&quot; id=&quot;markdown-toc-32-setting-threshold-on-weights&quot;&gt;3.2. Setting threshold on weights&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#33-community-detection&quot; id=&quot;markdown-toc-33-community-detection&quot;&gt;3.3. Community Detection&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#louvain-algorithm&quot; id=&quot;markdown-toc-louvain-algorithm&quot;&gt;Louvain Algorithm&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#34-visualization-with-gephi&quot; id=&quot;markdown-toc-34-visualization-with-gephi&quot;&gt;3.4. Visualization with Gephi&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -385,21 +373,8 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df_prices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -491,21 +466,8 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df_prices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -584,21 +546,8 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;span class=&quot;n&quot;&gt;df_prices_adj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -645,21 +594,8 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df_indices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -715,21 +651,8 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df_indices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -783,21 +706,8 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;span class=&quot;n&quot;&gt;df_indices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -844,21 +754,8 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df_SP500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -946,21 +843,8 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;symbol&lt;/th&gt;
@@ -1287,21 +1171,8 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt; 
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;symbol&lt;/th&gt;
@@ -1537,7 +1408,7 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/output_16_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/output_16_0.png&quot; alt=&quot;png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df_delta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;column&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df_delta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tolist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
@@ -1546,21 +1417,8 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;span class=&quot;n&quot;&gt;df_delta&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;symbol&lt;/th&gt;
@@ -1888,7 +1746,7 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/output_18_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/output_18_0.png&quot; alt=&quot;png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;22-rolling-average-of-stock-price-correlation&quot;&gt;2.2. Rolling Average of Stock Price Correlation&lt;/h3&gt;
 
@@ -1925,7 +1783,7 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/output_21_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/output_21_0.png&quot; alt=&quot;png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;3-network-analysis&quot;&gt;3. Network Analysis&lt;/h2&gt;
 
@@ -1938,21 +1796,8 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;cor_matrix&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;symbol&lt;/th&gt;
@@ -2320,21 +2165,8 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df_sector&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -2448,7 +2280,9 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
 
 &lt;h3 id=&quot;33-community-detection&quot;&gt;3.3. Community Detection&lt;/h3&gt;
 
-&lt;h3 id=&quot;louvain-algorithm&quot;&gt;Louvain Algorithm&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;with Louvain Algorithm&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# grid search
 # for positive weights
@@ -2644,7 +2478,7 @@ n_big_communities:  5
 &lt;span class=&quot;n&quot;&gt;nx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;draw_spring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H_pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cmap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_cmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'jet'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node_color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;with_labels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/output_39_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/output_39_0.png&quot; alt=&quot;png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2021&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;# for negative weights
@@ -2844,11 +2678,33 @@ n_big_communities:  5
 &lt;span class=&quot;n&quot;&gt;nx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;draw_spring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H_neg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cmap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_cmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'jet'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node_color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;with_labels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/output_42_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/output_42_0.png&quot; alt=&quot;png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;34-visualization-with-gephi&quot;&gt;3.4. Visualization with Gephi&lt;/h3&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;nx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write_graphml&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H_pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;model_H_pos.graphml&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;nx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write_graphml&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H_neg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;model_H_neg.graphml&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">Final Project</summary></entry><entry><title type="html">AppML - Assignment1</title><link href="http://0.0.0.0:4000/AppML_Assginment1" rel="alternate" type="text/html" title="AppML - Assignment1" /><published>2021-04-04T16:00:00+09:00</published><updated>2021-04-04T16:00:00+09:00</updated><id>http://0.0.0.0:4000/AppML_Assginment1</id><content type="html" xml:base="http://0.0.0.0:4000/AppML_Assginment1">&lt;h2 id=&quot;2021-1-applied-machine-learning&quot;&gt;2021-1. Applied Machine Learning&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;kg-card-markdown&quot; style=&quot;flex-direction: row;&quot;&gt;
+	&lt;img src=&quot;/assets/images/H_neg1.png&quot; width=&quot;50%&quot; /&gt; 
+	&lt;img src=&quot;/assets/images/H_neg2.png&quot; width=&quot;50%&quot; /&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;kg-card-markdown&quot; style=&quot;flex-direction: row;&quot;&gt;
+	&lt;span style=&quot;display:inline-block; width:50%; white-space:pre-wrap;&quot;&gt;Clustering by Negative Correlations							&lt;/span&gt;
+	&lt;span style=&quot;display:inline-block; width:50%; white-space:pre-wrap;&quot;&gt;Clustering by Market Sectors									&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;kg-card-markdown&quot; style=&quot;flex-direction: row;&quot;&gt;
+&lt;img src=&quot;/assets/images/H_pos1.png&quot; width=&quot;50%&quot; /&gt; 
+&lt;img src=&quot;/assets/images/H_pos2.png&quot; width=&quot;50%&quot; /&gt; 
+&lt;/div&gt;
+
+&lt;div class=&quot;kg-card-markdown&quot; style=&quot;flex-direction: row;&quot;&gt;
+	&lt;span style=&quot;display:inline-block; width:50%; white-space:pre-wrap;&quot;&gt;Clustering by Positive Correlations							&lt;/span&gt;
+	&lt;span style=&quot;display:inline-block; width:50%; white-space:pre-wrap;&quot;&gt;Clustering by Market Sectors									&lt;/span&gt;
+&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">Final Project</summary></entry><entry><title type="html">AppML - Assignment1</title><link href="http://0.0.0.0:4000/AppML_Assginment1" rel="alternate" type="text/html" title="AppML - Assignment1" /><published>2021-04-04T16:00:00+09:00</published><updated>2021-04-04T16:00:00+09:00</updated><id>http://0.0.0.0:4000/AppML_Assginment1</id><content type="html" xml:base="http://0.0.0.0:4000/AppML_Assginment1">&lt;h2 id=&quot;2021-1-applied-machine-learning&quot;&gt;2021-1. Applied Machine Learning&lt;/h2&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# This Python 3 environment comes with many helpful analytics libraries installed
 # It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
@@ -2886,21 +2742,8 @@ n_big_communities:  5
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -3013,21 +2856,8 @@ n_big_communities:  5
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -3182,21 +3012,8 @@ Name: thal, dtype: int64
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'target'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;corr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -3372,21 +3189,8 @@ Name: thal, dtype: int64
 &lt;span class=&quot;n&quot;&gt;X_tr_pp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -3496,21 +3300,8 @@ Name: thal, dtype: int64
 &lt;span class=&quot;n&quot;&gt;X_tr_log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;
@@ -3796,16 +3587,18 @@ Name: thal, dtype: int64
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nrow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;table&gt;
-&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;날짜&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;시도&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;측정소명&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;측정소코드&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;아황산가스&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;일산화탄소&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;오존&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;이산화질소&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;PM10&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;PM2.5&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-&lt;tbody&gt;
-	&lt;tr&gt;&lt;td&gt;2017-07-01 01&lt;/td&gt;&lt;td&gt;인천 옹진군  &lt;/td&gt;&lt;td&gt;백령도       &lt;/td&gt;&lt;td&gt;831492       &lt;/td&gt;&lt;td&gt;.0016        &lt;/td&gt;&lt;td&gt;.3           &lt;/td&gt;&lt;td&gt;.052         &lt;/td&gt;&lt;td&gt;.0016        &lt;/td&gt;&lt;td&gt;44           &lt;/td&gt;&lt;td&gt;35           &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;2017-07-01 02&lt;/td&gt;&lt;td&gt;인천 옹진군  &lt;/td&gt;&lt;td&gt;백령도       &lt;/td&gt;&lt;td&gt;831492       &lt;/td&gt;&lt;td&gt;.0016        &lt;/td&gt;&lt;td&gt;.3           &lt;/td&gt;&lt;td&gt;.052         &lt;/td&gt;&lt;td&gt;.0017        &lt;/td&gt;&lt;td&gt;21           &lt;/td&gt;&lt;td&gt;NA           &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;2017-07-01 03&lt;/td&gt;&lt;td&gt;인천 옹진군  &lt;/td&gt;&lt;td&gt;백령도       &lt;/td&gt;&lt;td&gt;831492       &lt;/td&gt;&lt;td&gt;.0017        &lt;/td&gt;&lt;td&gt;.3           &lt;/td&gt;&lt;td&gt;.051         &lt;/td&gt;&lt;td&gt;.0017        &lt;/td&gt;&lt;td&gt;32           &lt;/td&gt;&lt;td&gt;18           &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;2017-07-01 04&lt;/td&gt;&lt;td&gt;인천 옹진군  &lt;/td&gt;&lt;td&gt;백령도       &lt;/td&gt;&lt;td&gt;831492       &lt;/td&gt;&lt;td&gt;.0017        &lt;/td&gt;&lt;td&gt;.3           &lt;/td&gt;&lt;td&gt;.05          &lt;/td&gt;&lt;td&gt;.002         &lt;/td&gt;&lt;td&gt;10           &lt;/td&gt;&lt;td&gt;NA           &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;2017-07-01 05&lt;/td&gt;&lt;td&gt;인천 옹진군  &lt;/td&gt;&lt;td&gt;백령도       &lt;/td&gt;&lt;td&gt;831492       &lt;/td&gt;&lt;td&gt;.0016        &lt;/td&gt;&lt;td&gt;.3           &lt;/td&gt;&lt;td&gt;.048         &lt;/td&gt;&lt;td&gt;.0018        &lt;/td&gt;&lt;td&gt;24           &lt;/td&gt;&lt;td&gt;22           &lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+	&lt;table&gt;
+	&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;날짜&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;시도&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;측정소명&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;측정소코드&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;아황산가스&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;일산화탄소&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;오존&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;이산화질소&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;PM10&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;PM2.5&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;&lt;td&gt;2017-07-01 01&lt;/td&gt;&lt;td&gt;인천 옹진군  &lt;/td&gt;&lt;td&gt;백령도       &lt;/td&gt;&lt;td&gt;831492       &lt;/td&gt;&lt;td&gt;.0016        &lt;/td&gt;&lt;td&gt;.3           &lt;/td&gt;&lt;td&gt;.052         &lt;/td&gt;&lt;td&gt;.0016        &lt;/td&gt;&lt;td&gt;44           &lt;/td&gt;&lt;td&gt;35           &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;2017-07-01 02&lt;/td&gt;&lt;td&gt;인천 옹진군  &lt;/td&gt;&lt;td&gt;백령도       &lt;/td&gt;&lt;td&gt;831492       &lt;/td&gt;&lt;td&gt;.0016        &lt;/td&gt;&lt;td&gt;.3           &lt;/td&gt;&lt;td&gt;.052         &lt;/td&gt;&lt;td&gt;.0017        &lt;/td&gt;&lt;td&gt;21           &lt;/td&gt;&lt;td&gt;NA           &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;2017-07-01 03&lt;/td&gt;&lt;td&gt;인천 옹진군  &lt;/td&gt;&lt;td&gt;백령도       &lt;/td&gt;&lt;td&gt;831492       &lt;/td&gt;&lt;td&gt;.0017        &lt;/td&gt;&lt;td&gt;.3           &lt;/td&gt;&lt;td&gt;.051         &lt;/td&gt;&lt;td&gt;.0017        &lt;/td&gt;&lt;td&gt;32           &lt;/td&gt;&lt;td&gt;18           &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;2017-07-01 04&lt;/td&gt;&lt;td&gt;인천 옹진군  &lt;/td&gt;&lt;td&gt;백령도       &lt;/td&gt;&lt;td&gt;831492       &lt;/td&gt;&lt;td&gt;.0017        &lt;/td&gt;&lt;td&gt;.3           &lt;/td&gt;&lt;td&gt;.05          &lt;/td&gt;&lt;td&gt;.002         &lt;/td&gt;&lt;td&gt;10           &lt;/td&gt;&lt;td&gt;NA           &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;2017-07-01 05&lt;/td&gt;&lt;td&gt;인천 옹진군  &lt;/td&gt;&lt;td&gt;백령도       &lt;/td&gt;&lt;td&gt;831492       &lt;/td&gt;&lt;td&gt;.0016        &lt;/td&gt;&lt;td&gt;.3           &lt;/td&gt;&lt;td&gt;.048         &lt;/td&gt;&lt;td&gt;.0018        &lt;/td&gt;&lt;td&gt;24           &lt;/td&gt;&lt;td&gt;22           &lt;/td&gt;&lt;/tr&gt;
+	&lt;/tbody&gt;
+	&lt;/table&gt;
+&lt;/div&gt;
 
 &lt;p&gt;26304&lt;/p&gt;
 
@@ -3826,16 +3619,18 @@ Name: thal, dtype: int64
 &lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;table&gt;
-&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;year&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;month&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;day&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;hour&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;SO2&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;CO&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;O3&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;NO2&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;PM10&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;PM2.5&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-&lt;tbody&gt;
-	&lt;tr&gt;&lt;td&gt;2017  &lt;/td&gt;&lt;td&gt;7     &lt;/td&gt;&lt;td&gt;1     &lt;/td&gt;&lt;td&gt;1     &lt;/td&gt;&lt;td&gt;0.0016&lt;/td&gt;&lt;td&gt;0.3   &lt;/td&gt;&lt;td&gt;0.052 &lt;/td&gt;&lt;td&gt;0.0016&lt;/td&gt;&lt;td&gt;44    &lt;/td&gt;&lt;td&gt;35    &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;2017  &lt;/td&gt;&lt;td&gt;7     &lt;/td&gt;&lt;td&gt;1     &lt;/td&gt;&lt;td&gt;2     &lt;/td&gt;&lt;td&gt;0.0016&lt;/td&gt;&lt;td&gt;0.3   &lt;/td&gt;&lt;td&gt;0.052 &lt;/td&gt;&lt;td&gt;0.0017&lt;/td&gt;&lt;td&gt;21    &lt;/td&gt;&lt;td&gt;NA    &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;2017  &lt;/td&gt;&lt;td&gt;7     &lt;/td&gt;&lt;td&gt;1     &lt;/td&gt;&lt;td&gt;3     &lt;/td&gt;&lt;td&gt;0.0017&lt;/td&gt;&lt;td&gt;0.3   &lt;/td&gt;&lt;td&gt;0.051 &lt;/td&gt;&lt;td&gt;0.0017&lt;/td&gt;&lt;td&gt;32    &lt;/td&gt;&lt;td&gt;18    &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;2017  &lt;/td&gt;&lt;td&gt;7     &lt;/td&gt;&lt;td&gt;1     &lt;/td&gt;&lt;td&gt;4     &lt;/td&gt;&lt;td&gt;0.0017&lt;/td&gt;&lt;td&gt;0.3   &lt;/td&gt;&lt;td&gt;0.050 &lt;/td&gt;&lt;td&gt;0.0020&lt;/td&gt;&lt;td&gt;10    &lt;/td&gt;&lt;td&gt;NA    &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;2017  &lt;/td&gt;&lt;td&gt;7     &lt;/td&gt;&lt;td&gt;1     &lt;/td&gt;&lt;td&gt;5     &lt;/td&gt;&lt;td&gt;0.0016&lt;/td&gt;&lt;td&gt;0.3   &lt;/td&gt;&lt;td&gt;0.048 &lt;/td&gt;&lt;td&gt;0.0018&lt;/td&gt;&lt;td&gt;24    &lt;/td&gt;&lt;td&gt;22    &lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+	&lt;table&gt;
+	&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;year&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;month&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;day&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;hour&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;SO2&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;CO&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;O3&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;NO2&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;PM10&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;PM2.5&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;&lt;td&gt;2017  &lt;/td&gt;&lt;td&gt;7     &lt;/td&gt;&lt;td&gt;1     &lt;/td&gt;&lt;td&gt;1     &lt;/td&gt;&lt;td&gt;0.0016&lt;/td&gt;&lt;td&gt;0.3   &lt;/td&gt;&lt;td&gt;0.052 &lt;/td&gt;&lt;td&gt;0.0016&lt;/td&gt;&lt;td&gt;44    &lt;/td&gt;&lt;td&gt;35    &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;2017  &lt;/td&gt;&lt;td&gt;7     &lt;/td&gt;&lt;td&gt;1     &lt;/td&gt;&lt;td&gt;2     &lt;/td&gt;&lt;td&gt;0.0016&lt;/td&gt;&lt;td&gt;0.3   &lt;/td&gt;&lt;td&gt;0.052 &lt;/td&gt;&lt;td&gt;0.0017&lt;/td&gt;&lt;td&gt;21    &lt;/td&gt;&lt;td&gt;NA    &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;2017  &lt;/td&gt;&lt;td&gt;7     &lt;/td&gt;&lt;td&gt;1     &lt;/td&gt;&lt;td&gt;3     &lt;/td&gt;&lt;td&gt;0.0017&lt;/td&gt;&lt;td&gt;0.3   &lt;/td&gt;&lt;td&gt;0.051 &lt;/td&gt;&lt;td&gt;0.0017&lt;/td&gt;&lt;td&gt;32    &lt;/td&gt;&lt;td&gt;18    &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;2017  &lt;/td&gt;&lt;td&gt;7     &lt;/td&gt;&lt;td&gt;1     &lt;/td&gt;&lt;td&gt;4     &lt;/td&gt;&lt;td&gt;0.0017&lt;/td&gt;&lt;td&gt;0.3   &lt;/td&gt;&lt;td&gt;0.050 &lt;/td&gt;&lt;td&gt;0.0020&lt;/td&gt;&lt;td&gt;10    &lt;/td&gt;&lt;td&gt;NA    &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;2017  &lt;/td&gt;&lt;td&gt;7     &lt;/td&gt;&lt;td&gt;1     &lt;/td&gt;&lt;td&gt;5     &lt;/td&gt;&lt;td&gt;0.0016&lt;/td&gt;&lt;td&gt;0.3   &lt;/td&gt;&lt;td&gt;0.048 &lt;/td&gt;&lt;td&gt;0.0018&lt;/td&gt;&lt;td&gt;24    &lt;/td&gt;&lt;td&gt;22    &lt;/td&gt;&lt;/tr&gt;
+	&lt;/tbody&gt;
+	&lt;/table&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;22-handling-na-values&quot;&gt;2.2. Handling NA values&lt;/h2&gt;
 
@@ -4108,16 +3903,18 @@ Name: thal, dtype: int64
 &lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;table&gt;
-&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;SO2_I_p&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;CO_I_p&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;O3_I_p&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;NO2_I_p&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;PM10_I_p&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;PM2.5_I_p&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;CAI&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;CAI_index&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-&lt;tbody&gt;
-	&lt;tr&gt;&lt;td&gt;4.00     &lt;/td&gt;&lt;td&gt;7.5      &lt;/td&gt;&lt;td&gt;68.44068 &lt;/td&gt;&lt;td&gt;2.666667 &lt;/td&gt;&lt;td&gt;64.00000 &lt;/td&gt;&lt;td&gt; 88.71711&lt;/td&gt;&lt;td&gt; 88.71711&lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;4.00     &lt;/td&gt;&lt;td&gt;7.5      &lt;/td&gt;&lt;td&gt;68.44068 &lt;/td&gt;&lt;td&gt;2.833333 &lt;/td&gt;&lt;td&gt;68.75000 &lt;/td&gt;&lt;td&gt;103.38782&lt;/td&gt;&lt;td&gt;103.38782&lt;/td&gt;&lt;td&gt;2        &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;4.25     &lt;/td&gt;&lt;td&gt;7.5      &lt;/td&gt;&lt;td&gt;67.61017 &lt;/td&gt;&lt;td&gt;2.833333 &lt;/td&gt;&lt;td&gt;84.66667 &lt;/td&gt;&lt;td&gt;131.82942&lt;/td&gt;&lt;td&gt;131.82942&lt;/td&gt;&lt;td&gt;2        &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;4.25     &lt;/td&gt;&lt;td&gt;7.5      &lt;/td&gt;&lt;td&gt;66.77966 &lt;/td&gt;&lt;td&gt;3.333333 &lt;/td&gt;&lt;td&gt;44.58333 &lt;/td&gt;&lt;td&gt; 66.44682&lt;/td&gt;&lt;td&gt; 66.77966&lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;4.00     &lt;/td&gt;&lt;td&gt;7.5      &lt;/td&gt;&lt;td&gt;65.11864 &lt;/td&gt;&lt;td&gt;3.000000 &lt;/td&gt;&lt;td&gt;39.95833 &lt;/td&gt;&lt;td&gt; 64.79737&lt;/td&gt;&lt;td&gt; 65.11864&lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+	&lt;table&gt;
+	&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;SO2_I_p&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;CO_I_p&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;O3_I_p&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;NO2_I_p&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;PM10_I_p&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;PM2.5_I_p&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;CAI&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;CAI_index&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;&lt;td&gt;4.00     &lt;/td&gt;&lt;td&gt;7.5      &lt;/td&gt;&lt;td&gt;68.44068 &lt;/td&gt;&lt;td&gt;2.666667 &lt;/td&gt;&lt;td&gt;64.00000 &lt;/td&gt;&lt;td&gt; 88.71711&lt;/td&gt;&lt;td&gt; 88.71711&lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;4.00     &lt;/td&gt;&lt;td&gt;7.5      &lt;/td&gt;&lt;td&gt;68.44068 &lt;/td&gt;&lt;td&gt;2.833333 &lt;/td&gt;&lt;td&gt;68.75000 &lt;/td&gt;&lt;td&gt;103.38782&lt;/td&gt;&lt;td&gt;103.38782&lt;/td&gt;&lt;td&gt;2        &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;4.25     &lt;/td&gt;&lt;td&gt;7.5      &lt;/td&gt;&lt;td&gt;67.61017 &lt;/td&gt;&lt;td&gt;2.833333 &lt;/td&gt;&lt;td&gt;84.66667 &lt;/td&gt;&lt;td&gt;131.82942&lt;/td&gt;&lt;td&gt;131.82942&lt;/td&gt;&lt;td&gt;2        &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;4.25     &lt;/td&gt;&lt;td&gt;7.5      &lt;/td&gt;&lt;td&gt;66.77966 &lt;/td&gt;&lt;td&gt;3.333333 &lt;/td&gt;&lt;td&gt;44.58333 &lt;/td&gt;&lt;td&gt; 66.44682&lt;/td&gt;&lt;td&gt; 66.77966&lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;4.00     &lt;/td&gt;&lt;td&gt;7.5      &lt;/td&gt;&lt;td&gt;65.11864 &lt;/td&gt;&lt;td&gt;3.000000 &lt;/td&gt;&lt;td&gt;39.95833 &lt;/td&gt;&lt;td&gt; 64.79737&lt;/td&gt;&lt;td&gt; 65.11864&lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;/tr&gt;
+	&lt;/tbody&gt;
+	&lt;/table&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;32-timestep-wise-visualization&quot;&gt;3.2. Timestep-wise Visualization&lt;/h2&gt;
 &lt;ul&gt;
@@ -4144,19 +3941,21 @@ Name: thal, dtype: int64
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;`summarise()` has grouped output by 'year', 'month', 'day'. You can override using the `.groups` argument.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;table&gt;
-&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;time_tmp&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;CAI_idx&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;n&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-&lt;tbody&gt;
-	&lt;tr&gt;&lt;td&gt;daytime  &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt;100      &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;daytime  &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;886      &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;daytime  &lt;/td&gt;&lt;td&gt;2        &lt;/td&gt;&lt;td&gt; 93      &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;daytime  &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt; 17      &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;nighttime&lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt; 73      &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;nighttime&lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;895      &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;nighttime&lt;/td&gt;&lt;td&gt;2        &lt;/td&gt;&lt;td&gt;115      &lt;/td&gt;&lt;/tr&gt;
-	&lt;tr&gt;&lt;td&gt;nighttime&lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt; 13      &lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+	&lt;table&gt;
+	&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;time_tmp&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;CAI_idx&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;n&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;&lt;td&gt;daytime  &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt;100      &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;daytime  &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;886      &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;daytime  &lt;/td&gt;&lt;td&gt;2        &lt;/td&gt;&lt;td&gt; 93      &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;daytime  &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt; 17      &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;nighttime&lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt; 73      &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;nighttime&lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;895      &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;nighttime&lt;/td&gt;&lt;td&gt;2        &lt;/td&gt;&lt;td&gt;115      &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr&gt;&lt;td&gt;nighttime&lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt; 13      &lt;/td&gt;&lt;/tr&gt;
+	&lt;/tbody&gt;
+	&lt;/table&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;322-daily&quot;&gt;3.2.2. Daily&lt;/h3&gt;
 
@@ -4633,21 +4432,8 @@ Epoch 00012: early stopping
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div&gt;
-&lt;style scoped=&quot;&quot;&gt;
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-&lt;/style&gt;
-&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;
+&lt;table&gt;
   &lt;thead&gt;
     &lt;tr style=&quot;text-align: right;&quot;&gt;
       &lt;th&gt;&lt;/th&gt;

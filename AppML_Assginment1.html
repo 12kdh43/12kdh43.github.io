@@ -131,7 +131,6 @@ into the {body} of the default.hbs template -->
             <ul class="nav" role="menu">
     <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
     <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
-    <li class="nav-studies" role="menuitem"><a href="/tag/jekyll/">Jekyll</a></li>
     <li class="nav-projects" role="menuitem"><a href="/tag/projects/">Projects</a></li>
     <li class="nav-studies" role="menuitem"><a href="/tag/studies/">Studies</a></li>
     <li class="nav-archive" role="menuitem">
@@ -219,21 +218,8 @@ into the {body} of the default.hbs template -->
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X_train</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> 
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -346,21 +332,8 @@ into the {body} of the default.hbs template -->
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y_train</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -515,21 +488,8 @@ Name: thal, dtype: int64
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="p">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_train</span><span class="p">[</span><span class="n">nums</span><span class="p">],</span><span class="n">y_train</span><span class="p">[</span><span class="s">'target'</span><span class="p">]],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">corr</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -705,21 +665,8 @@ Name: thal, dtype: int64
 <span class="n">X_tr_pp</span><span class="p">[</span><span class="n">nums</span><span class="p">].</span><span class="n">describe</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -829,21 +776,8 @@ Name: thal, dtype: int64
 <span class="n">X_tr_log</span><span class="p">[</span><span class="n">nums</span><span class="p">].</span><span class="n">describe</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -1181,8 +1115,6 @@ Name: thal, dtype: int64
                                 
                                 
                                   
-                                
-                                  
                                     
                                         
                                         
@@ -1468,7 +1400,7 @@ Name: thal, dtype: int64
 
  </script>
 
-
+	
     <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
     
         <script>

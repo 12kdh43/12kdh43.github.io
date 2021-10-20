@@ -8,21 +8,6 @@
     
       
       <item>
-        <title>Hello, World!</title>
-        
-          <description>&lt;h2 id=&quot;my-first-notebook-from-docker-workspace&quot;&gt;My First Notebook from Docker-workspace.&lt;/h2&gt;
-
-</description>
-        
-        <pubDate>Wed, 29 Sep 2021 16:00:00 +0900</pubDate>
-        <link>
-        http://0.0.0.0:4000/helloworld</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/helloworld</guid>
-      </item>
-      
-    
-      
-      <item>
         <title>Fashion GNN</title>
         
           <description>&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;

@@ -50,7 +50,7 @@
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Data Mining - Final" />
-    <meta property="og:description" content="Final Project 1. Data Load and Preprocessing 2. Data Visualization 2.1. Stock Price Volatility 2.2. Rolling Average of Stock Price Correlation 3. Network Analysis 3.1. Build Graph with Correlation table 3.2. Setting threshold on weights 3.3. Community Detection Louvain Algorithm 1. Data Load and Preprocessing import pandas as pd import" />
+    <meta property="og:description" content="Final Project 1. Data Load and Preprocessing 2. Data Visualization 2.1. Stock Price Volatility 2.2. Rolling Average of Stock Price Correlation 3. Network Analysis 3.1. Build Graph with Correlation table 3.2. Setting threshold on weights 3.3. Community Detection 3.4. Visualization with Gephi 1. Data Load and Preprocessing import pandas as" />
     <meta property="og:url" content="http://0.0.0.0:4000/DM_final" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
@@ -60,7 +60,7 @@
     <meta property="article:tag" content="projects" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Data Mining - Final" />
-    <meta name="twitter:description" content="Final Project 1. Data Load and Preprocessing 2. Data Visualization 2.1. Stock Price Volatility 2.2. Rolling Average of Stock Price Correlation 3. Network Analysis 3.1. Build Graph with Correlation table 3.2. Setting threshold on weights 3.3. Community Detection Louvain Algorithm 1. Data Load and Preprocessing import pandas as pd import" />
+    <meta name="twitter:description" content="Final Project 1. Data Load and Preprocessing 2. Data Visualization 2.1. Stock Price Volatility 2.2. Rolling Average of Stock Price Correlation 3. Network Analysis 3.1. Build Graph with Correlation table 3.2. Setting threshold on weights 3.3. Community Detection 3.4. Visualization with Gephi 1. Data Load and Preprocessing import pandas as" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -92,7 +92,7 @@
         "@type": "WebPage",
         "@id": "http://0.0.0.0:4000/DM_final"
     },
-    "description": "Final Project 1. Data Load and Preprocessing 2. Data Visualization 2.1. Stock Price Volatility 2.2. Rolling Average of Stock Price Correlation 3. Network Analysis 3.1. Build Graph with Correlation table 3.2. Setting threshold on weights 3.3. Community Detection Louvain Algorithm 1. Data Load and Preprocessing import pandas as pd import"
+    "description": "Final Project 1. Data Load and Preprocessing 2. Data Visualization 2.1. Stock Price Volatility 2.2. Rolling Average of Stock Price Correlation 3. Network Analysis 3.1. Build Graph with Correlation table 3.2. Setting threshold on weights 3.3. Community Detection 3.4. Visualization with Gephi 1. Data Load and Preprocessing import pandas as"
 }
     </script>
 
@@ -131,7 +131,6 @@ into the {body} of the default.hbs template -->
             <ul class="nav" role="menu">
     <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
     <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
-    <li class="nav-studies" role="menuitem"><a href="/tag/jekyll/">Jekyll</a></li>
     <li class="nav-projects" role="menuitem"><a href="/tag/projects/">Projects</a></li>
     <li class="nav-studies" role="menuitem"><a href="/tag/studies/">Studies</a></li>
     <li class="nav-archive" role="menuitem">
@@ -194,7 +193,7 @@ into the {body} of the default.hbs template -->
       <li><a href="#31-build-graph-with-correlation-table" id="markdown-toc-31-build-graph-with-correlation-table">3.1. Build Graph with Correlation table</a></li>
       <li><a href="#32-setting-threshold-on-weights" id="markdown-toc-32-setting-threshold-on-weights">3.2. Setting threshold on weights</a></li>
       <li><a href="#33-community-detection" id="markdown-toc-33-community-detection">3.3. Community Detection</a></li>
-      <li><a href="#louvain-algorithm" id="markdown-toc-louvain-algorithm">Louvain Algorithm</a></li>
+      <li><a href="#34-visualization-with-gephi" id="markdown-toc-34-visualization-with-gephi">3.4. Visualization with Gephi</a></li>
     </ul>
   </li>
 </ul>
@@ -225,21 +224,8 @@ into the {body} of the default.hbs template -->
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_prices</span><span class="p">.</span><span class="n">describe</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -331,21 +317,8 @@ into the {body} of the default.hbs template -->
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_prices</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -424,21 +397,8 @@ into the {body} of the default.hbs template -->
 <span class="n">df_prices_adj</span><span class="p">.</span><span class="n">tail</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -485,21 +445,8 @@ into the {body} of the default.hbs template -->
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_indices</span><span class="p">.</span><span class="n">describe</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -555,21 +502,8 @@ into the {body} of the default.hbs template -->
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_indices</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -623,21 +557,8 @@ into the {body} of the default.hbs template -->
 <span class="n">df_indices</span><span class="p">.</span><span class="n">tail</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -684,21 +605,8 @@ into the {body} of the default.hbs template -->
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_SP500</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -786,21 +694,8 @@ into the {body} of the default.hbs template -->
 <span class="n">df</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th>symbol</th>
@@ -1127,21 +1022,8 @@ into the {body} of the default.hbs template -->
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">describe</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge"> 
+<table>
   <thead>
     <tr style="text-align: right;">
       <th>symbol</th>
@@ -1377,7 +1259,7 @@ into the {body} of the default.hbs template -->
 <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p><img src="/assets/images/output_16_0.png" alt="png" /></p>
+<p><img src="/assets/images/output_16_0.png" alt="png" width="80%" height="80%" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_delta</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df_delta</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">():</span>
@@ -1386,21 +1268,8 @@ into the {body} of the default.hbs template -->
 <span class="n">df_delta</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th>symbol</th>
@@ -1728,7 +1597,7 @@ into the {body} of the default.hbs template -->
 <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p><img src="/assets/images/output_18_0.png" alt="png" /></p>
+<p><img src="/assets/images/output_18_0.png" alt="png" width="80%" height="80%" /></p>
 
 <h3 id="22-rolling-average-of-stock-price-correlation">2.2. Rolling Average of Stock Price Correlation</h3>
 
@@ -1765,7 +1634,7 @@ into the {body} of the default.hbs template -->
 <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>
 
-<p><img src="/assets/images/output_21_0.png" alt="png" /></p>
+<p><img src="/assets/images/output_21_0.png" alt="png" width="80%" height="80%" /></p>
 
 <h2 id="3-network-analysis">3. Network Analysis</h2>
 
@@ -1778,21 +1647,8 @@ into the {body} of the default.hbs template -->
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cor_matrix</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th>symbol</th>
@@ -2160,21 +2016,8 @@ into the {body} of the default.hbs template -->
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_sector</span>
 </code></pre></div></div>
 
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div class="language-python highlighter-rouge">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -2288,7 +2131,9 @@ into the {body} of the default.hbs template -->
 
 <h3 id="33-community-detection">3.3. Community Detection</h3>
 
-<h3 id="louvain-algorithm">Louvain Algorithm</h3>
+<ul>
+  <li>with Louvain Algorithm</li>
+</ul>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># grid search
 # for positive weights
@@ -2484,7 +2329,7 @@ n_big_communities:  5
 <span class="n">nx</span><span class="p">.</span><span class="n">draw_spring</span><span class="p">(</span><span class="n">H_pos</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s">'jet'</span><span class="p">),</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">values</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/assets/images/output_39_0.png" alt="png" /></p>
+<p><img src="/assets/images/output_39_0.png" alt="png" width="80%" height="80%" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2021</span><span class="p">)</span>
 <span class="c1"># for negative weights
@@ -2684,11 +2529,33 @@ n_big_communities:  5
 <span class="n">nx</span><span class="p">.</span><span class="n">draw_spring</span><span class="p">(</span><span class="n">H_neg</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s">'jet'</span><span class="p">),</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">values</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="/assets/images/output_42_0.png" alt="png" /></p>
+<p><img src="/assets/images/output_42_0.png" alt="png" width="80%" height="80%" /></p>
+
+<h3 id="34-visualization-with-gephi">3.4. Visualization with Gephi</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nx</span><span class="p">.</span><span class="n">write_graphml</span><span class="p">(</span><span class="n">H_pos</span><span class="p">,</span> <span class="s">"model_H_pos.graphml"</span><span class="p">)</span>
 <span class="n">nx</span><span class="p">.</span><span class="n">write_graphml</span><span class="p">(</span><span class="n">H_neg</span><span class="p">,</span> <span class="s">"model_H_neg.graphml"</span><span class="p">)</span>
 </code></pre></div></div>
+
+<div class="kg-card-markdown" style="flex-direction: row;">
+	<img src="/assets/images/H_neg1.png" width="50%" /> 
+	<img src="/assets/images/H_neg2.png" width="50%" />
+</div>
+
+<div class="kg-card-markdown" style="flex-direction: row;">
+	<span style="display:inline-block; width:50%; white-space:pre-wrap;">Clustering by Negative Correlations							</span>
+	<span style="display:inline-block; width:50%; white-space:pre-wrap;">Clustering by Market Sectors									</span>
+</div>
+
+<div class="kg-card-markdown" style="flex-direction: row;">
+<img src="/assets/images/H_pos1.png" width="50%" /> 
+<img src="/assets/images/H_pos2.png" width="50%" /> 
+</div>
+
+<div class="kg-card-markdown" style="flex-direction: row;">
+	<span style="display:inline-block; width:50%; white-space:pre-wrap;">Clustering by Positive Correlations							</span>
+	<span style="display:inline-block; width:50%; white-space:pre-wrap;">Clustering by Market Sectors									</span>
+</div>
 
                 </div>
             </section>
@@ -2783,8 +2650,6 @@ n_big_communities:  5
                         <div class="read-next-card-content">
                             <ul>
                                 
-                                
-                                  
                                 
                                   
                                     
@@ -3073,7 +2938,7 @@ n_big_communities:  5
 
  </script>
 
-
+	
     <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
     
         <script>
