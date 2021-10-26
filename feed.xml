@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-26T15:38:04+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-26T17:57:21+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
 
 &lt;h2 id=&quot;11-workspace&quot;&gt;1.1. Workspace&lt;/h2&gt;
 &lt;ul&gt;
@@ -2686,9 +2686,12 @@ n_big_communities:  5
 &lt;span class=&quot;n&quot;&gt;nx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write_graphml&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H_neg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;model_H_neg.graphml&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
+&lt;p&gt;&lt;img src=&quot;/assets/images/gephi_4.png&quot; alt=&quot;png&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;!--
 &lt;div class=&quot;kg-card-markdown&quot; style=&quot;flex-direction: row;&quot;&gt;
-	&lt;img src=&quot;/assets/images/H_neg1.png&quot; width=&quot;50%&quot; /&gt; 
-	&lt;img src=&quot;/assets/images/H_neg2.png&quot; width=&quot;50%&quot; /&gt;
+	&lt;img src=&quot;/assets/images/H_neg1.png&quot; width=&quot;50%&quot;&gt; 
+	&lt;img src=&quot;/assets/images/H_neg2.png&quot; width=&quot;50%&quot;&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;kg-card-markdown&quot; style=&quot;flex-direction: row;&quot;&gt;
@@ -2697,14 +2700,15 @@ n_big_communities:  5
 &lt;/div&gt;
 
 &lt;div class=&quot;kg-card-markdown&quot; style=&quot;flex-direction: row;&quot;&gt;
-&lt;img src=&quot;/assets/images/H_pos1.png&quot; width=&quot;50%&quot; /&gt; 
-&lt;img src=&quot;/assets/images/H_pos2.png&quot; width=&quot;50%&quot; /&gt; 
+&lt;img src=&quot;/assets/images/H_pos1.png&quot; width=&quot;50%&quot;&gt; 
+&lt;img src=&quot;/assets/images/H_pos2.png&quot; width=&quot;50%&quot;&gt; 
 &lt;/div&gt;
 
 &lt;div class=&quot;kg-card-markdown&quot; style=&quot;flex-direction: row;&quot;&gt;
 	&lt;span style=&quot;display:inline-block; width:50%; white-space:pre-wrap;&quot;&gt;Clustering by Positive Correlations							&lt;/span&gt;
 	&lt;span style=&quot;display:inline-block; width:50%; white-space:pre-wrap;&quot;&gt;Clustering by Market Sectors									&lt;/span&gt;
-&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">Final Project</summary></entry><entry><title type="html">AppML - Assignment1</title><link href="http://0.0.0.0:4000/AppML_Assginment1" rel="alternate" type="text/html" title="AppML - Assignment1" /><published>2021-04-04T16:00:00+09:00</published><updated>2021-04-04T16:00:00+09:00</updated><id>http://0.0.0.0:4000/AppML_Assginment1</id><content type="html" xml:base="http://0.0.0.0:4000/AppML_Assginment1">&lt;h2 id=&quot;2021-1-applied-machine-learning&quot;&gt;2021-1. Applied Machine Learning&lt;/h2&gt;
+&lt;/div&gt;
+--&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">Final Project</summary></entry><entry><title type="html">AppML - Assignment1</title><link href="http://0.0.0.0:4000/AppML_Assginment1" rel="alternate" type="text/html" title="AppML - Assignment1" /><published>2021-04-04T16:00:00+09:00</published><updated>2021-04-04T16:00:00+09:00</updated><id>http://0.0.0.0:4000/AppML_Assginment1</id><content type="html" xml:base="http://0.0.0.0:4000/AppML_Assginment1">&lt;h2 id=&quot;2021-1-applied-machine-learning&quot;&gt;2021-1. Applied Machine Learning&lt;/h2&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# This Python 3 environment comes with many helpful analytics libraries installed
 # It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
