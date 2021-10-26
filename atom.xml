@@ -8,7 +8,7 @@
     
       
       <item>
-        <title>Fashion GNN</title>
+        <title>Fashion Coordinator Chatbot Dataset with GNN</title>
         
           <description>&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
 
@@ -23,7 +23,21 @@
     
       
       <item>
-        <title>Data Mining - Final</title>
+        <title>Data Mining - K-POP Fandom Data Analysis with Graph ML</title>
+        
+          <description>
+</description>
+        
+        <pubDate>Wed, 02 Jun 2021 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/DM_final_exam</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/DM_final_exam</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Data Mining - Stock Market Graph Analysis</title>
         
           <description>&lt;h1 class=&quot;no_toc&quot; id=&quot;final-project&quot;&gt;Final Project&lt;/h1&gt;
 
@@ -31,16 +45,16 @@
         
         <pubDate>Fri, 21 May 2021 00:00:00 +0900</pubDate>
         <link>
-        http://0.0.0.0:4000/DM_final</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/DM_final</guid>
+        http://0.0.0.0:4000/DM_final_proj</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/DM_final_proj</guid>
       </item>
       
     
       
       <item>
-        <title>AppML - Assignment1</title>
+        <title>Applied ML - Heart Disease Pred</title>
         
-          <description>&lt;h2 id=&quot;2021-1-applied-machine-learning&quot;&gt;2021-1. Applied Machine Learning&lt;/h2&gt;
+          <description>&lt;h2 id=&quot;2021-1-applied-machine-learning-assignment1&quot;&gt;2021-1. Applied Machine Learning Assignment1&lt;/h2&gt;
 
 </description>
         
@@ -53,7 +67,7 @@
     
       
       <item>
-        <title>Data Science and R - Final</title>
+        <title>Data Science and R - Air Pollution Data Analysis</title>
         
           <description>
 </description>
@@ -67,7 +81,7 @@
     
       
       <item>
-        <title>NLP - Final</title>
+        <title>NLP - Korean Language Text Analysis with RNN</title>
         
           <description>&lt;h2 id=&quot;2020-1-nlp&quot;&gt;2020-1. NLP&lt;/h2&gt;
 
@@ -82,7 +96,7 @@
     
       
       <item>
-        <title>NLP - Midterm</title>
+        <title>NLP - Text Analysis with ML algorithms</title>
         
           <description>&lt;h2 class=&quot;no_toc&quot; id=&quot;2020-1-nlp&quot;&gt;2020-1. NLP&lt;/h2&gt;
 

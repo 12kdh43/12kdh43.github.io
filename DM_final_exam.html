@@ -1,0 +1,3017 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	
+	<!-- On Post front-matter YAML, set "use_math: true" to use LaTex -->
+	
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Data Mining - K-POP Fandom Data Analysis with Graph ML</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <!-- syntax.css -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+	
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="" />
+    <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
+    <link rel="canonical" href="http://0.0.0.0:4000/DM_final_exam" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="Darron's Devlog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Data Mining - K-POP Fandom Data Analysis with Graph ML" />
+    <meta property="og:description" content="1. Introduction 2. Supporting Activities 2.1. Fandom Supporting Ratio (Total Supporting activities in Total activities) 2.2. Case by Gender Type 2.3. Case by Agents (Sum of artists data in a company) 3. Correlation between supporting and supported activities 3.1. by Pearson correlation 3.2. by Spearman rank correlation 4. Hyphothesis test" />
+    <meta property="og:url" content="http://0.0.0.0:4000/DM_final_exam" />
+    <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2021-06-02T00:00:00+09:00" />
+    <meta property="article:modified_time" content="2021-06-02T00:00:00+09:00" />
+    <meta property="article:tag" content="projects" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Data Mining - K-POP Fandom Data Analysis with Graph ML" />
+    <meta name="twitter:description" content="1. Introduction 2. Supporting Activities 2.1. Fandom Supporting Ratio (Total Supporting activities in Total activities) 2.2. Case by Gender Type 2.3. Case by Agents (Sum of artists data in a company) 3. Correlation between supporting and supported activities 3.1. by Pearson correlation 3.2. by Spearman rank correlation 4. Hyphothesis test" />
+    <meta name="twitter:url" content="http://0.0.0.0:4000/" />
+    <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Darron's Devlog" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="projects" />
+    <meta name="twitter:site" content="@" />
+    <meta name="twitter:creator" content="@" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Darron's Devlog",
+        "logo": "http://0.0.0.0:4000/"
+    },
+    "url": "http://0.0.0.0:4000/DM_final_exam",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://0.0.0.0:4000/DM_final_exam"
+    },
+    "description": "1. Introduction 2. Supporting Activities 2.1. Fandom Supporting Ratio (Total Supporting activities in Total activities) 2.2. Case by Gender Type 2.3. Case by Agents (Sum of artists data in a company) 3. Correlation between supporting and supported activities 3.1. by Pearson correlation 3.2. by Spearman rank correlation 4. Hyphothesis test"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Data Mining - K-POP Fandom Data Analysis with Graph ML" href="/feed.xml" />
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="/">Darron's Devlog</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
+    <li class="nav-projects" role="menuitem"><a href="/tag/projects/">Projects</a></li>
+    <li class="nav-studies" role="menuitem"><a href="/tag/studies/">Studies</a></li>
+    <li class="nav-archive" role="menuitem">
+        <a href="/archive.html">All Posts</a>
+    </li>
+</ul>
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+            
+        </div>
+        
+            <a class="subscribe-button" href="#subscribe">Search</a>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full  tag-projects  no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime=" 2 June 2021"> 2 June 2021</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+                            
+                               <a href='/tag/projects/'>PROJECTS</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">Data Mining - K-POP Fandom Data Analysis with Graph ML</h1>
+            </header>
+	<!--
+            
+	-->
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <ul id="markdown-toc">
+  <li><a href="#1-introduction" id="markdown-toc-1-introduction">1. Introduction</a></li>
+  <li><a href="#2-supporting-activities" id="markdown-toc-2-supporting-activities">2. Supporting Activities</a>    <ul>
+      <li><a href="#21-fandom-supporting-ratio-total-supporting-activities-in-total-activities" id="markdown-toc-21-fandom-supporting-ratio-total-supporting-activities-in-total-activities">2.1. Fandom Supporting Ratio (Total Supporting activities in Total activities)</a></li>
+      <li><a href="#22-case-by-gender-type" id="markdown-toc-22-case-by-gender-type">2.2. Case by Gender Type</a></li>
+      <li><a href="#23-case-by-agents-sum-of-artists-data-in-a-company" id="markdown-toc-23-case-by-agents-sum-of-artists-data-in-a-company">2.3. Case by Agents (Sum of artists data in a company)</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-correlation-between-supporting-and-supported-activities" id="markdown-toc-3-correlation-between-supporting-and-supported-activities">3. Correlation between supporting and supported activities</a>    <ul>
+      <li><a href="#31-by-pearson-correlation" id="markdown-toc-31-by-pearson-correlation">3.1. by Pearson correlation</a></li>
+      <li><a href="#32-by-spearman-rank-correlation" id="markdown-toc-32-by-spearman-rank-correlation">3.2. by Spearman rank correlation</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-hyphothesis-test-by-independent-t-test" id="markdown-toc-4-hyphothesis-test-by-independent-t-test">4. Hyphothesis test by independent t-test</a>    <ul>
+      <li><a href="#41-supported-activities-and-gender-types" id="markdown-toc-41-supported-activities-and-gender-types">4.1. Supported activities and gender types</a></li>
+      <li><a href="#42-supporting-activities-and-gender-types" id="markdown-toc-42-supporting-activities-and-gender-types">4.2. Supporting activities and gender types</a></li>
+    </ul>
+  </li>
+  <li><a href="#5-graph-analysis" id="markdown-toc-5-graph-analysis">5. Graph Analysis</a>    <ul>
+      <li><a href="#51-generating-graphs-with-different-time-periods" id="markdown-toc-51-generating-graphs-with-different-time-periods">5.1. Generating graphs with different time periods</a></li>
+      <li><a href="#52-cumulative-distribution-functioncdf-with-g0s-degree" id="markdown-toc-52-cumulative-distribution-functioncdf-with-g0s-degree">5.2. Cumulative Distribution Function(CDF) with G0’s degree</a></li>
+      <li><a href="#53-top-5-fandoms-in-g0-sorted-by-pagerank-and-degree-centrality" id="markdown-toc-53-top-5-fandoms-in-g0-sorted-by-pagerank-and-degree-centrality">5.3. Top 5 fandoms in G0 sorted by Pagerank and Degree Centrality</a></li>
+      <li><a href="#54-supporting-supported-cases-by-gender-types-in-g0" id="markdown-toc-54-supporting-supported-cases-by-gender-types-in-g0">5.4. Supporting-supported cases by gender types in G0</a></li>
+    </ul>
+  </li>
+  <li><a href="#6-comparison-between-g1-and-g2" id="markdown-toc-6-comparison-between-g1-and-g2">6. Comparison between G1 and G2</a>    <ul>
+      <li><a href="#61-persistence-of-edges-supporting-and-gender-types" id="markdown-toc-61-persistence-of-edges-supporting-and-gender-types">6.1. Persistence of edges-supporting and gender types</a></li>
+      <li><a href="#62-graph-role-extraction-by-rolx-algorithm" id="markdown-toc-62-graph-role-extraction-by-rolx-algorithm">6.2. Graph Role Extraction by RolX algorithm</a></li>
+      <li><a href="#63-community-detection-by-girvan-newman-algorithm" id="markdown-toc-63-community-detection-by-girvan-newman-algorithm">6.3. Community Detection by Girvan-Newman algorithm</a></li>
+      <li><a href="#64-page-rank-and-degree-centrality-in-g1-g2" id="markdown-toc-64-page-rank-and-degree-centrality-in-g1-g2">6.4. Page Rank and Degree Centrality in G1, G2</a></li>
+    </ul>
+  </li>
+  <li><a href="#7-effect-of-the-fandom-activities-on-the-monthly-chart" id="markdown-toc-7-effect-of-the-fandom-activities-on-the-monthly-chart">7. Effect of the fandom activities on the monthly chart</a></li>
+</ul>
+
+<h1 id="1-introduction">1. Introduction</h1>
+
+<ul>
+  <li>
+    <p>In K-POP scene, a fandom plays a critical role in the success of their idol. They even cooperate with other fandoms to achieve their goal. For example, they do “supports”; steam albums or encourage to vote in awards for another idol and get helped in the same way when their idol release an album or be nominated for an award. With these data collected in 2018, we will find out the effect of the fandom activities.</p>
+  </li>
+  <li>fandom information data: {fandom_id, fandom_name, nov_post, dec_post, nov_support, dec_support, type(gender)}</li>
+  <li>fandom support activities data: {source, target, nov_support, dec_support}</li>
+  <li>monthly chart data: {album, artist, rank, title, start, end}</li>
+  <li>fandoms metadata: {fandom_name, artist, agent, year(debut), #articles}</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">Series</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="n">nx</span>
+</code></pre></div></div>
+
+<h1 id="2-supporting-activities">2. Supporting Activities</h1>
+
+<h2 id="21-fandom-supporting-ratio-total-supporting-activities-in-total-activities">2.1. Fandom Supporting Ratio (Total Supporting activities in Total activities)</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nodes</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'./dataset/fandom_nodes_2018.csv'</span><span class="p">)</span>
+<span class="n">nodes</span><span class="p">[</span><span class="s">'total_support'</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">'nov_support'</span><span class="p">,</span><span class="s">'dec_support'</span><span class="p">]].</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">nodes</span><span class="p">[</span><span class="s">'total_activity'</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">'nov_post'</span><span class="p">,</span><span class="s">'dec_post'</span><span class="p">,</span><span class="s">'nov_support'</span><span class="p">,</span><span class="s">'dec_support'</span><span class="p">]].</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">nodes</span><span class="p">[</span><span class="s">'support_ratio'</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s">'total_support'</span><span class="p">]</span> <span class="o">/</span> <span class="n">nodes</span><span class="p">[</span><span class="s">'total_activity'</span><span class="p">]</span>
+<span class="n">nodes</span><span class="p">[</span><span class="s">'support_ratio'</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s">'support_ratio'</span><span class="p">].</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nodes</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="s">'total_support'</span><span class="p">,</span><span class="s">'total_activity'</span><span class="p">,</span><span class="s">'support_ratio'</span><span class="p">]].</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s">'support_ratio'</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fandom_id</th>
+      <th>total_support</th>
+      <th>total_activity</th>
+      <th>support_ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>213</th>
+      <td>oh_soul</td>
+      <td>14</td>
+      <td>28</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>283</th>
+      <td>tbz1206</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>myname</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2PM</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>imcenter</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>259</th>
+      <td>shinjihoon</td>
+      <td>921</td>
+      <td>1848</td>
+      <td>0.498377</td>
+    </tr>
+    <tr>
+      <th>180</th>
+      <td>livematilda0317</td>
+      <td>1458</td>
+      <td>2932</td>
+      <td>0.497271</td>
+    </tr>
+    <tr>
+      <th>315</th>
+      <td>xtracam</td>
+      <td>2527</td>
+      <td>5083</td>
+      <td>0.497147</td>
+    </tr>
+    <tr>
+      <th>303</th>
+      <td>we100</td>
+      <td>2848</td>
+      <td>5759</td>
+      <td>0.494530</td>
+    </tr>
+    <tr>
+      <th>201</th>
+      <td>namyujin</td>
+      <td>516</td>
+      <td>1048</td>
+      <td>0.492366</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<ul>
+  <li>5 fandoms with very few activities seems to be not quite active in the period.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nodes</span><span class="p">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>nov_post</th>
+      <th>dec_post</th>
+      <th>nov_support</th>
+      <th>dec_support</th>
+      <th>type</th>
+      <th>total_support</th>
+      <th>total_activity</th>
+      <th>support_ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>330.000000</td>
+      <td>330.000000</td>
+      <td>330.000000</td>
+      <td>330.000000</td>
+      <td>330.000000</td>
+      <td>330.000000</td>
+      <td>330.000000</td>
+      <td>330.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>5854.921212</td>
+      <td>5249.675758</td>
+      <td>1455.627273</td>
+      <td>859.090909</td>
+      <td>0.493939</td>
+      <td>2314.718182</td>
+      <td>13419.315152</td>
+      <td>0.226563</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>17573.678298</td>
+      <td>16329.999791</td>
+      <td>2329.251725</td>
+      <td>1166.459438</td>
+      <td>0.500723</td>
+      <td>3310.463410</td>
+      <td>35436.387630</td>
+      <td>0.174810</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>250.000000</td>
+      <td>127.500000</td>
+      <td>19.750000</td>
+      <td>7.250000</td>
+      <td>0.000000</td>
+      <td>53.750000</td>
+      <td>656.250000</td>
+      <td>0.043461</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>1739.000000</td>
+      <td>1472.000000</td>
+      <td>535.500000</td>
+      <td>403.500000</td>
+      <td>0.000000</td>
+      <td>984.500000</td>
+      <td>4776.000000</td>
+      <td>0.221352</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>5047.000000</td>
+      <td>4258.000000</td>
+      <td>1736.750000</td>
+      <td>1187.500000</td>
+      <td>1.000000</td>
+      <td>3077.750000</td>
+      <td>13687.000000</td>
+      <td>0.397054</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>261517.000000</td>
+      <td>249246.000000</td>
+      <td>12462.000000</td>
+      <td>6989.000000</td>
+      <td>1.000000</td>
+      <td>16917.000000</td>
+      <td>525546.000000</td>
+      <td>0.500000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="22-case-by-gender-type">2.2. Case by Gender Type</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">edges</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'./dataset/fandom_edges_2018.csv'</span><span class="p">)</span>
+<span class="n">edges</span><span class="p">[</span><span class="s">'total_support'</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">'nov_support'</span><span class="p">,</span><span class="s">'dec_support'</span><span class="p">]].</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_supported</span> <span class="o">=</span> <span class="n">edges</span><span class="p">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'target'</span><span class="p">]).</span><span class="nb">sum</span><span class="p">()</span>
+<span class="n">df_supported</span> <span class="o">=</span> <span class="n">df_supported</span><span class="p">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_supported</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="s">'nov_supported'</span><span class="p">,</span><span class="s">'dec_supported'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span><span class="n">df_supported</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">'outer'</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Supporting Top 10 fandoms for both genders
+</span><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="s">'total_support'</span><span class="p">]].</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s">'total_support'</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fandom_id</th>
+      <th>total_support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>308</th>
+      <td>winner</td>
+      <td>16917</td>
+    </tr>
+    <tr>
+      <th>301</th>
+      <td>wannaonego</td>
+      <td>16036</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>btob</td>
+      <td>15739</td>
+    </tr>
+    <tr>
+      <th>181</th>
+      <td>lovelyz</td>
+      <td>15328</td>
+    </tr>
+    <tr>
+      <th>209</th>
+      <td>nuest</td>
+      <td>14895</td>
+    </tr>
+    <tr>
+      <th>292</th>
+      <td>twice</td>
+      <td>14783</td>
+    </tr>
+    <tr>
+      <th>183</th>
+      <td>mamamoo</td>
+      <td>14472</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>bts</td>
+      <td>14006</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>roykim</td>
+      <td>13149</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>gx9</td>
+      <td>11954</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Supporting Top 10 fandoms for boy groups
+</span><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'type'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">,[</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="s">'total_support'</span><span class="p">]].</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s">'total_support'</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fandom_id</th>
+      <th>total_support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>308</th>
+      <td>winner</td>
+      <td>16917</td>
+    </tr>
+    <tr>
+      <th>301</th>
+      <td>wannaonego</td>
+      <td>16036</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>btob</td>
+      <td>15739</td>
+    </tr>
+    <tr>
+      <th>209</th>
+      <td>nuest</td>
+      <td>14895</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>bts</td>
+      <td>14006</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>roykim</td>
+      <td>13149</td>
+    </tr>
+    <tr>
+      <th>298</th>
+      <td>vikon</td>
+      <td>10589</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>highlight</td>
+      <td>10575</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>jsh</td>
+      <td>9673</td>
+    </tr>
+    <tr>
+      <th>288</th>
+      <td>tj3579</td>
+      <td>9314</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Supporting Top 10 fandoms for girl groups
+</span><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'type'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">,[</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="s">'total_support'</span><span class="p">]].</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s">'total_support'</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fandom_id</th>
+      <th>total_support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>181</th>
+      <td>lovelyz</td>
+      <td>15328</td>
+    </tr>
+    <tr>
+      <th>292</th>
+      <td>twice</td>
+      <td>14783</td>
+    </tr>
+    <tr>
+      <th>183</th>
+      <td>mamamoo</td>
+      <td>14472</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>gx9</td>
+      <td>11954</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>gf</td>
+      <td>11564</td>
+    </tr>
+    <tr>
+      <th>234</th>
+      <td>real__izo</td>
+      <td>11104</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>blackpink</td>
+      <td>10678</td>
+    </tr>
+    <tr>
+      <th>214</th>
+      <td>ohmygirl</td>
+      <td>9091</td>
+    </tr>
+    <tr>
+      <th>236</th>
+      <td>redvelvetreveluv</td>
+      <td>8155</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>fromis</td>
+      <td>8003</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Supported Top 10 fandoms for both genders
+</span><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">]].</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s">'total_supported'</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fandom_id</th>
+      <th>total_supported</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>301</th>
+      <td>wannaonego</td>
+      <td>33609.0</td>
+    </tr>
+    <tr>
+      <th>181</th>
+      <td>lovelyz</td>
+      <td>29083.0</td>
+    </tr>
+    <tr>
+      <th>234</th>
+      <td>real__izo</td>
+      <td>25459.0</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>bts</td>
+      <td>24865.0</td>
+    </tr>
+    <tr>
+      <th>308</th>
+      <td>winner</td>
+      <td>21896.0</td>
+    </tr>
+    <tr>
+      <th>209</th>
+      <td>nuest</td>
+      <td>19312.0</td>
+    </tr>
+    <tr>
+      <th>183</th>
+      <td>mamamoo</td>
+      <td>18795.0</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>gf</td>
+      <td>14899.0</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>jsh</td>
+      <td>14437.0</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>roykim</td>
+      <td>14267.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Supported Top 10 fandoms for boyt groups
+</span><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'type'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">,[</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">]].</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s">'total_supported'</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fandom_id</th>
+      <th>total_supported</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>301</th>
+      <td>wannaonego</td>
+      <td>33609.0</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>bts</td>
+      <td>24865.0</td>
+    </tr>
+    <tr>
+      <th>308</th>
+      <td>winner</td>
+      <td>21896.0</td>
+    </tr>
+    <tr>
+      <th>209</th>
+      <td>nuest</td>
+      <td>19312.0</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>jsh</td>
+      <td>14437.0</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>roykim</td>
+      <td>14267.0</td>
+    </tr>
+    <tr>
+      <th>298</th>
+      <td>vikon</td>
+      <td>14245.0</td>
+    </tr>
+    <tr>
+      <th>137</th>
+      <td>kim</td>
+      <td>13884.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6kies</td>
+      <td>13565.0</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>btob</td>
+      <td>11493.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Supported Top 10 fandoms for girl groups
+</span><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'type'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">,[</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">]].</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s">'total_supported'</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fandom_id</th>
+      <th>total_supported</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>181</th>
+      <td>lovelyz</td>
+      <td>29083.0</td>
+    </tr>
+    <tr>
+      <th>234</th>
+      <td>real__izo</td>
+      <td>25459.0</td>
+    </tr>
+    <tr>
+      <th>183</th>
+      <td>mamamoo</td>
+      <td>18795.0</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>gf</td>
+      <td>14899.0</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>fromis</td>
+      <td>13957.0</td>
+    </tr>
+    <tr>
+      <th>292</th>
+      <td>twice</td>
+      <td>12942.0</td>
+    </tr>
+    <tr>
+      <th>214</th>
+      <td>ohmygirl</td>
+      <td>12335.0</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>blackpink</td>
+      <td>9632.0</td>
+    </tr>
+    <tr>
+      <th>262</th>
+      <td>shitaomiu</td>
+      <td>8563.0</td>
+    </tr>
+    <tr>
+      <th>125</th>
+      <td>jungchaeyeon</td>
+      <td>6820.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="23-case-by-agents-sum-of-artists-data-in-a-company">2.3. Case by Agents (Sum of artists data in a company)</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">meta</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_json</span><span class="p">(</span><span class="s">'./dataset/fandom_meta_2018.json'</span><span class="p">)</span>
+<span class="n">df_meta</span> <span class="o">=</span> <span class="n">meta</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_meta</span><span class="p">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">'fandom_name'</span><span class="p">:</span><span class="s">'fandom_id'</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">df_meta</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">df_meta</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s">'fandom_id'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Supporting Top 10 Agents
+</span><span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'agent'</span><span class="p">])[[</span><span class="s">'total_support'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">]].</span><span class="nb">sum</span><span class="p">().</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'total_support'</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_support</th>
+      <th>total_supported</th>
+    </tr>
+    <tr>
+      <th>agent</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>YG Entertainment</th>
+      <td>67790</td>
+      <td>81735.0</td>
+    </tr>
+    <tr>
+      <th>JYP Entertainment</th>
+      <td>54025</td>
+      <td>41464.0</td>
+    </tr>
+    <tr>
+      <th>Off The Record</th>
+      <td>47300</td>
+      <td>75508.0</td>
+    </tr>
+    <tr>
+      <th>Swing Entertainment</th>
+      <td>41180</td>
+      <td>73716.0</td>
+    </tr>
+    <tr>
+      <th>SM Entertainment</th>
+      <td>38862</td>
+      <td>23736.0</td>
+    </tr>
+    <tr>
+      <th>PLEDIS Entertainment</th>
+      <td>38839</td>
+      <td>43115.0</td>
+    </tr>
+    <tr>
+      <th>Cube Entertainment</th>
+      <td>30991</td>
+      <td>20990.0</td>
+    </tr>
+    <tr>
+      <th>Woollim Entertainment</th>
+      <td>22780</td>
+      <td>35219.0</td>
+    </tr>
+    <tr>
+      <th>Jellyfish Entertainment</th>
+      <td>17606</td>
+      <td>7583.0</td>
+    </tr>
+    <tr>
+      <th>Fantagio Music</th>
+      <td>15853</td>
+      <td>8202.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Supported Top 10 Agents
+</span><span class="n">df</span><span class="p">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'agent'</span><span class="p">])[[</span><span class="s">'total_support'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">]].</span><span class="nb">sum</span><span class="p">().</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'total_supported'</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">).</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_support</th>
+      <th>total_supported</th>
+    </tr>
+    <tr>
+      <th>agent</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>YG Entertainment</th>
+      <td>67790</td>
+      <td>81735.0</td>
+    </tr>
+    <tr>
+      <th>Off The Record</th>
+      <td>47300</td>
+      <td>75508.0</td>
+    </tr>
+    <tr>
+      <th>Swing Entertainment</th>
+      <td>41180</td>
+      <td>73716.0</td>
+    </tr>
+    <tr>
+      <th>PLEDIS Entertainment</th>
+      <td>38839</td>
+      <td>43115.0</td>
+    </tr>
+    <tr>
+      <th>JYP Entertainment</th>
+      <td>54025</td>
+      <td>41464.0</td>
+    </tr>
+    <tr>
+      <th>Woollim Entertainment</th>
+      <td>22780</td>
+      <td>35219.0</td>
+    </tr>
+    <tr>
+      <th>Big Hit Entertainment</th>
+      <td>14006</td>
+      <td>24865.0</td>
+    </tr>
+    <tr>
+      <th>SM Entertainment</th>
+      <td>38862</td>
+      <td>23736.0</td>
+    </tr>
+    <tr>
+      <th>Cube Entertainment</th>
+      <td>30991</td>
+      <td>20990.0</td>
+    </tr>
+    <tr>
+      <th>AKS</th>
+      <td>8554</td>
+      <td>19646.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h1 id="3-correlation-between-supporting-and-supported-activities">3. Correlation between supporting and supported activities</h1>
+
+<h2 id="31-by-pearson-correlation">3.1. by Pearson correlation</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'total_activity'</span><span class="p">],</span><span class="n">df</span><span class="p">[</span><span class="s">'total_support'</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'total_activity'</span><span class="p">],</span><span class="n">df</span><span class="p">[</span><span class="s">'total_supported'</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(0.538005581735917, 3.725917667518625e-26)
+(0.5114446175904475, 2.1548883750451727e-23)
+</code></pre></div></div>
+
+<h2 id="32-by-spearman-rank-correlation">3.2. by Spearman rank correlation</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'total_activity'</span><span class="p">],</span><span class="n">df</span><span class="p">[</span><span class="s">'total_support'</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'total_activity'</span><span class="p">],</span><span class="n">df</span><span class="p">[</span><span class="s">'total_supported'</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SpearmanrResult(correlation=0.8461473515842707, pvalue=1.1711298194140583e-91)
+SpearmanrResult(correlation=0.8244727920052708, pvalue=4.2257040130501645e-83)
+</code></pre></div></div>
+
+<ul>
+  <li>Spearman rank method shows better correlation and confidence level in average.</li>
+</ul>
+
+<h1 id="4-hyphothesis-test-by-independent-t-test">4. Hyphothesis test by independent t-test</h1>
+
+<h2 id="41-supported-activities-and-gender-types">4.1. Supported activities and gender types</h2>
+<ul>
+  <li>H_0: There is a difference in supported activities between girl and boy groups.</li>
+  <li>H_1: There is no difference in supported activities between girl and boy groups.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">boy</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'type'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">,[</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">,</span><span class="s">'total_support'</span><span class="p">]]</span>
+<span class="n">girl</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'type'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">,[</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">,</span><span class="s">'total_support'</span><span class="p">]]</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">boy</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">girl</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(163, 167)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># t-test
+</span><span class="n">stats</span><span class="p">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">boy</span><span class="p">[</span><span class="s">'total_supported'</span><span class="p">],</span> <span class="n">girl</span><span class="p">[</span><span class="s">'total_supported'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ttest_indResult(statistic=1.494285307111671, pvalue=0.1360624474957505)
+</code></pre></div></div>
+
+<h2 id="42-supporting-activities-and-gender-types">4.2. Supporting activities and gender types</h2>
+<ul>
+  <li>H_0: There is a difference in supporting activities between girl and boy groups.</li>
+  <li>H_1: There is no difference in supporting activities between girl and boy groups.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># t-test
+</span><span class="n">stats</span><span class="p">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">boy</span><span class="p">[</span><span class="s">'total_support'</span><span class="p">],</span> <span class="n">girl</span><span class="p">[</span><span class="s">'total_support'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ttest_indResult(statistic=1.33823756824641, pvalue=0.1817459557355244)
+</code></pre></div></div>
+
+<ul>
+  <li>both H_0’s would not be rejected</li>
+</ul>
+
+<h1 id="5-graph-analysis">5. Graph Analysis</h1>
+
+<h2 id="51-generating-graphs-with-different-time-periods">5.1. Generating graphs with different time periods</h2>
+
+<ul>
+  <li>G0; graph with data in entire period<br />
+G1; grpah with data in november<br />
+G2; grpah with data in december</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total_edges</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[[</span><span class="s">'source'</span><span class="p">,</span><span class="s">'target'</span><span class="p">,</span><span class="s">'total_support'</span><span class="p">]].</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'total_support'</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">total_edges</span> <span class="o">=</span> <span class="n">total_edges</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">total_edges</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span><span class="p">),]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G0</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">DiGraph</span><span class="p">(</span><span class="n">total_edges</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="s">'source'</span><span class="p">,</span><span class="s">'target'</span><span class="p">)].</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_edge_attributes</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span> <span class="n">total_edges</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'source'</span><span class="p">,</span> <span class="s">'target'</span><span class="p">])[</span><span class="s">'total_support'</span><span class="p">],</span> <span class="s">'weight'</span><span class="p">)</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span><span class="n">df</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'fandom_id'</span><span class="p">])[</span><span class="s">'agent'</span><span class="p">],</span><span class="s">'agent'</span><span class="p">)</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span><span class="n">df</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'fandom_id'</span><span class="p">])[</span><span class="s">'year(debut)'</span><span class="p">],</span><span class="s">'debut_year'</span><span class="p">)</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span><span class="n">df</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'fandom_id'</span><span class="p">])[</span><span class="s">'type'</span><span class="p">],</span><span class="s">'gender_type'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nov_edges</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[[</span><span class="s">'source'</span><span class="p">,</span><span class="s">'target'</span><span class="p">,</span><span class="s">'nov_support'</span><span class="p">]].</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'nov_support'</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">nov_edges</span> <span class="o">=</span> <span class="n">nov_edges</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nov_edges</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span><span class="p">),]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G1</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">DiGraph</span><span class="p">(</span><span class="n">nov_edges</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="s">'source'</span><span class="p">,</span><span class="s">'target'</span><span class="p">)].</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_edge_attributes</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">nov_edges</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'source'</span><span class="p">,</span> <span class="s">'target'</span><span class="p">])[</span><span class="s">'nov_support'</span><span class="p">],</span> <span class="s">'weight'</span><span class="p">)</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span><span class="n">df</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'fandom_id'</span><span class="p">])[</span><span class="s">'agent'</span><span class="p">],</span><span class="s">'agent'</span><span class="p">)</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span><span class="n">df</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'fandom_id'</span><span class="p">])[</span><span class="s">'year(debut)'</span><span class="p">],</span><span class="s">'debut_year'</span><span class="p">)</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span><span class="n">df</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'fandom_id'</span><span class="p">])[</span><span class="s">'type'</span><span class="p">],</span><span class="s">'gender_type'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dec_edges</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[[</span><span class="s">'source'</span><span class="p">,</span><span class="s">'target'</span><span class="p">,</span><span class="s">'dec_support'</span><span class="p">]].</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'dec_support'</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">dec_edges</span> <span class="o">=</span> <span class="n">dec_edges</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dec_edges</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span><span class="p">),]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G2</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">DiGraph</span><span class="p">(</span><span class="n">dec_edges</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="s">'source'</span><span class="p">,</span><span class="s">'target'</span><span class="p">)].</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_edge_attributes</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="n">dec_edges</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'source'</span><span class="p">,</span> <span class="s">'target'</span><span class="p">])[</span><span class="s">'dec_support'</span><span class="p">],</span> <span class="s">'weight'</span><span class="p">)</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span><span class="n">df</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'fandom_id'</span><span class="p">])[</span><span class="s">'agent'</span><span class="p">],</span><span class="s">'agent'</span><span class="p">)</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span><span class="n">df</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'fandom_id'</span><span class="p">])[</span><span class="s">'year(debut)'</span><span class="p">],</span><span class="s">'debut_year'</span><span class="p">)</span>
+<span class="n">nx</span><span class="p">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span><span class="n">df</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'fandom_id'</span><span class="p">])[</span><span class="s">'type'</span><span class="p">],</span><span class="s">'gender_type'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G0</span><span class="p">.</span><span class="n">nodes</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">G0</span><span class="p">.</span><span class="n">edges</span><span class="p">))</span> 
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G1</span><span class="p">.</span><span class="n">nodes</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">G1</span><span class="p">.</span><span class="n">edges</span><span class="p">))</span> 
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G2</span><span class="p">.</span><span class="n">nodes</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">G2</span><span class="p">.</span><span class="n">edges</span><span class="p">))</span> 
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>59 236
+62 236
+90 236
+</code></pre></div></div>
+
+<h2 id="52-cumulative-distribution-functioncdf-with-g0s-degree">5.2. Cumulative Distribution Function(CDF) with G0’s degree</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G0_degree</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">nx</span><span class="p">.</span><span class="n">degree</span><span class="p">(</span><span class="n">G0</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">hist</span><span class="p">(</span><span class="n">G0_degree</span><span class="p">.</span><span class="n">values</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/output_47_0.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cdf</span> <span class="o">=</span> <span class="n">stats</span><span class="p">.</span><span class="n">norm</span><span class="p">().</span><span class="n">cdf</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">G0_degree</span><span class="p">.</span><span class="n">values</span><span class="p">()))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">G0_degree</span><span class="p">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">cdf</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/output_48_0.png" alt="png" /></p>
+
+<h2 id="53-top-5-fandoms-in-g0-sorted-by-pagerank-and-degree-centrality">5.3. Top 5 fandoms in G0 sorted by Pagerank and Degree Centrality</h2>
+
+<ul>
+  <li>in both results, top fandoms shows very high scores in features - supporting, supported, total activites, while the average of supporting/supported activities for all data is  2,314 and the average of total activities for all data is about 13,419.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">viewer</span><span class="p">(</span><span class="n">_dict_data</span><span class="p">,</span> <span class="n">col_name</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">().</span><span class="n">from_dict</span><span class="p">(</span><span class="n">_dict_data</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s">'index'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">col_name</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">.</span><span class="n">set_index</span><span class="p">(</span><span class="s">'fandom_id'</span><span class="p">).</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s">'right'</span><span class="p">).</span><span class="n">sort_values</span><span class="p">(</span><span class="n">col_name</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pagerank</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">pagerank</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span>
+<span class="n">pagerank</span> <span class="o">=</span> <span class="n">viewer</span><span class="p">(</span><span class="n">pagerank</span><span class="p">,</span> <span class="s">'pagerank'</span><span class="p">)</span>
+<span class="n">pagerank</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)[[</span><span class="s">'type'</span><span class="p">,</span><span class="s">'total_support'</span><span class="p">,</span><span class="s">'total_activity'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">,</span><span class="s">'agent'</span><span class="p">,</span><span class="s">'year(debut)'</span><span class="p">,</span><span class="s">'pagerank'</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>type</th>
+      <th>total_support</th>
+      <th>total_activity</th>
+      <th>total_supported</th>
+      <th>agent</th>
+      <th>year(debut)</th>
+      <th>pagerank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>wannaonego</th>
+      <td>1</td>
+      <td>16036</td>
+      <td>77608</td>
+      <td>33609.0</td>
+      <td>Swing Entertainment</td>
+      <td>2017</td>
+      <td>0.131164</td>
+    </tr>
+    <tr>
+      <th>real__izo</th>
+      <td>0</td>
+      <td>11104</td>
+      <td>90757</td>
+      <td>25459.0</td>
+      <td>Off The Record</td>
+      <td>2018</td>
+      <td>0.081406</td>
+    </tr>
+    <tr>
+      <th>lovelyz</th>
+      <td>0</td>
+      <td>15328</td>
+      <td>171752</td>
+      <td>29083.0</td>
+      <td>Woollim Entertainment</td>
+      <td>2014</td>
+      <td>0.076592</td>
+    </tr>
+    <tr>
+      <th>jsh</th>
+      <td>1</td>
+      <td>9673</td>
+      <td>20872</td>
+      <td>14437.0</td>
+      <td>Antenna</td>
+      <td>2016</td>
+      <td>0.065368</td>
+    </tr>
+    <tr>
+      <th>nuest</th>
+      <td>1</td>
+      <td>14895</td>
+      <td>56741</td>
+      <td>19312.0</td>
+      <td>PLEDIS Entertainment</td>
+      <td>2012</td>
+      <td>0.064216</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">degree_centrality</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">degree_centrality</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span>
+<span class="n">degree_centrality</span> <span class="o">=</span> <span class="n">viewer</span><span class="p">(</span><span class="n">degree_centrality</span><span class="p">,</span> <span class="s">'degree_centrality'</span><span class="p">)</span>
+<span class="n">degree_centrality</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)[[</span><span class="s">'type'</span><span class="p">,</span><span class="s">'total_support'</span><span class="p">,</span><span class="s">'total_activity'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">,</span><span class="s">'agent'</span><span class="p">,</span><span class="s">'year(debut)'</span><span class="p">,</span><span class="s">'degree_centrality'</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>type</th>
+      <th>total_support</th>
+      <th>total_activity</th>
+      <th>total_supported</th>
+      <th>agent</th>
+      <th>year(debut)</th>
+      <th>degree_centrality</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>wannaonego</th>
+      <td>1</td>
+      <td>16036</td>
+      <td>77608</td>
+      <td>33609.0</td>
+      <td>Swing Entertainment</td>
+      <td>2017</td>
+      <td>0.827586</td>
+    </tr>
+    <tr>
+      <th>lovelyz</th>
+      <td>0</td>
+      <td>15328</td>
+      <td>171752</td>
+      <td>29083.0</td>
+      <td>Woollim Entertainment</td>
+      <td>2014</td>
+      <td>0.482759</td>
+    </tr>
+    <tr>
+      <th>winner</th>
+      <td>1</td>
+      <td>16917</td>
+      <td>41928</td>
+      <td>21896.0</td>
+      <td>YG Entertainment</td>
+      <td>2014</td>
+      <td>0.465517</td>
+    </tr>
+    <tr>
+      <th>nuest</th>
+      <td>1</td>
+      <td>14895</td>
+      <td>56741</td>
+      <td>19312.0</td>
+      <td>PLEDIS Entertainment</td>
+      <td>2012</td>
+      <td>0.448276</td>
+    </tr>
+    <tr>
+      <th>bts</th>
+      <td>1</td>
+      <td>14006</td>
+      <td>125849</td>
+      <td>24865.0</td>
+      <td>Big Hit Entertainment</td>
+      <td>2013</td>
+      <td>0.431034</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[[</span><span class="s">'total_support'</span><span class="p">,</span><span class="s">'total_activity'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">]].</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_support</th>
+      <th>total_activity</th>
+      <th>total_supported</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>330.000000</td>
+      <td>330.000000</td>
+      <td>330.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2314.718182</td>
+      <td>13419.315152</td>
+      <td>2314.718182</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>3310.463410</td>
+      <td>35436.387630</td>
+      <td>4464.948830</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>53.750000</td>
+      <td>656.250000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>984.500000</td>
+      <td>4776.000000</td>
+      <td>511.500000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>3077.750000</td>
+      <td>13687.000000</td>
+      <td>2923.500000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>16917.000000</td>
+      <td>525546.000000</td>
+      <td>33609.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="54-supporting-supported-cases-by-gender-types-in-g0">5.4. Supporting-supported cases by gender types in G0</h2>
+
+<ul>
+  <li>Generally, boy group fandoms are more supporting.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G0_support</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">().</span><span class="n">from_dict</span><span class="p">({</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">G0</span><span class="p">.</span><span class="n">edges</span><span class="p">})</span>
+<span class="n">G0_support</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'source'</span><span class="p">,</span><span class="s">'target'</span><span class="p">]</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">().</span><span class="n">from_dict</span><span class="p">({</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G0</span><span class="p">.</span><span class="n">nodes</span><span class="p">.</span><span class="n">data</span><span class="p">(</span><span class="s">'gender_type'</span><span class="p">)})</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'source'</span><span class="p">,</span><span class="s">'source_gender'</span><span class="p">]</span>
+<span class="n">G0_support</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">G0_support</span><span class="p">,</span><span class="n">tmp</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">)</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'target'</span><span class="p">,</span><span class="s">'target_gender'</span><span class="p">]</span>
+<span class="n">G0_support</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">G0_support</span><span class="p">,</span><span class="n">tmp</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G0_support</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>source</th>
+      <th>target</th>
+      <th>source_gender</th>
+      <th>target_gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>winner</td>
+      <td>day6</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>btob</td>
+      <td>mamamoo</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mmld</td>
+      <td>ohmygirl</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>nuest</td>
+      <td>got7vlive</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>nuest</td>
+      <td>ch_freemonth</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>231</th>
+      <td>sanarang</td>
+      <td>twice</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>232</th>
+      <td>6kies</td>
+      <td>wannaonego</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>233</th>
+      <td>redvelvetreveluv</td>
+      <td>wannaonego</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>234</th>
+      <td>mamamoo</td>
+      <td>twice</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>235</th>
+      <td>gx9</td>
+      <td>vikon</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>236 rows × 4 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># boy -&gt; boy
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G0_support</span><span class="p">[(</span><span class="n">G0_support</span><span class="p">.</span><span class="n">source_gender</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">G0_support</span><span class="p">.</span><span class="n">target_gender</span><span class="o">==</span><span class="mi">1</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">G0_support</span><span class="p">))</span>
+<span class="c1"># boy -&gt; girl
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G0_support</span><span class="p">[(</span><span class="n">G0_support</span><span class="p">.</span><span class="n">source_gender</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">G0_support</span><span class="p">.</span><span class="n">target_gender</span><span class="o">==</span><span class="mi">0</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">G0_support</span><span class="p">))</span>
+<span class="c1"># girl -&gt; boy
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G0_support</span><span class="p">[(</span><span class="n">G0_support</span><span class="p">.</span><span class="n">source_gender</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">G0_support</span><span class="p">.</span><span class="n">target_gender</span><span class="o">==</span><span class="mi">1</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">G0_support</span><span class="p">))</span>
+<span class="c1"># girl -&gt; girl
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G0_support</span><span class="p">[(</span><span class="n">G0_support</span><span class="p">.</span><span class="n">source_gender</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">G0_support</span><span class="p">.</span><span class="n">target_gender</span><span class="o">==</span><span class="mi">0</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">G0_support</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.3220338983050847
+0.2627118644067797
+0.2542372881355932
+0.16101694915254236
+</code></pre></div></div>
+
+<h1 id="6-comparison-between-g1-and-g2">6. Comparison between G1 and G2</h1>
+
+<h2 id="61-persistence-of-edges-supporting-and-gender-types">6.1. Persistence of edges-supporting and gender types</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G1_support</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">G1</span><span class="p">.</span><span class="n">edges</span><span class="p">)</span>
+<span class="n">G2_support</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">G2</span><span class="p">.</span><span class="n">edges</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G1_only</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">G1_support</span> <span class="o">-</span> <span class="n">G2_support</span><span class="p">)</span>
+<span class="n">G1_only</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'source'</span><span class="p">,</span><span class="s">'target'</span><span class="p">]</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">().</span><span class="n">from_dict</span><span class="p">({</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G1</span><span class="p">.</span><span class="n">nodes</span><span class="p">.</span><span class="n">data</span><span class="p">(</span><span class="s">'gender_type'</span><span class="p">)})</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'source'</span><span class="p">,</span><span class="s">'source_gender'</span><span class="p">]</span>
+<span class="n">G1_only</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">G1_only</span><span class="p">,</span><span class="n">tmp</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">)</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'target'</span><span class="p">,</span><span class="s">'target_gender'</span><span class="p">]</span>
+<span class="n">G1_only</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">G1_only</span><span class="p">,</span><span class="n">tmp</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Supporting in november only
+</span><span class="n">G1_only</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>source</th>
+      <th>target</th>
+      <th>source_gender</th>
+      <th>target_gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>winner</td>
+      <td>day6</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mamamoo</td>
+      <td>wannaonego</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>btob</td>
+      <td>mamamoo</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>mmld</td>
+      <td>ohmygirl</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>nuest</td>
+      <td>got7vlive</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>139</th>
+      <td>anyujin</td>
+      <td>wannaonego</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>140</th>
+      <td>buzz</td>
+      <td>mamamoo</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>141</th>
+      <td>redvelvetreveluv</td>
+      <td>wannaonego</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>142</th>
+      <td>idlesong</td>
+      <td>lovelyz</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>143</th>
+      <td>gx9</td>
+      <td>vikon</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>144 rows × 4 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G2_only</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">G2_support</span><span class="o">-</span><span class="n">G1_support</span><span class="p">)</span>
+<span class="n">G2_only</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'source'</span><span class="p">,</span><span class="s">'target'</span><span class="p">]</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">().</span><span class="n">from_dict</span><span class="p">({</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G2</span><span class="p">.</span><span class="n">nodes</span><span class="p">.</span><span class="n">data</span><span class="p">(</span><span class="s">'gender_type'</span><span class="p">)})</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'source'</span><span class="p">,</span><span class="s">'source_gender'</span><span class="p">]</span>
+<span class="n">G2_only</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">G2_only</span><span class="p">,</span><span class="n">tmp</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">)</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'target'</span><span class="p">,</span><span class="s">'target_gender'</span><span class="p">]</span>
+<span class="n">G2_only</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">G2_only</span><span class="p">,</span><span class="n">tmp</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Supporting in december only
+</span><span class="n">G2_only</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>source</th>
+      <th>target</th>
+      <th>source_gender</th>
+      <th>target_gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>wheesung</td>
+      <td>bts</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mkyunghoon</td>
+      <td>lovelyz</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>bts</td>
+      <td>nuest</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>god</td>
+      <td>bts</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>onairpril</td>
+      <td>lovelyz</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>139</th>
+      <td>jjy</td>
+      <td>vikon</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>140</th>
+      <td>sanarang</td>
+      <td>twice</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>141</th>
+      <td>onf</td>
+      <td>lovelyz</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>142</th>
+      <td>got7vlive</td>
+      <td>fromis</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>143</th>
+      <td>idlesong</td>
+      <td>blackpink</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>144 rows × 4 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G1_n_G2</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">G1_support</span> <span class="o">&amp;</span> <span class="n">G2_support</span><span class="p">)</span>
+<span class="n">G1_n_G2</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'source'</span><span class="p">,</span><span class="s">'target'</span><span class="p">]</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">().</span><span class="n">from_dict</span><span class="p">({</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G1</span><span class="p">.</span><span class="n">nodes</span><span class="p">.</span><span class="n">data</span><span class="p">(</span><span class="s">'gender_type'</span><span class="p">)})</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'source'</span><span class="p">,</span><span class="s">'source_gender'</span><span class="p">]</span>
+<span class="n">G1_n_G2</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">G1_n_G2</span><span class="p">,</span><span class="n">tmp</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">)</span>
+<span class="n">tmp</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">'target'</span><span class="p">,</span><span class="s">'target_gender'</span><span class="p">]</span>
+<span class="n">G1_n_G2</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">G1_n_G2</span><span class="p">,</span><span class="n">tmp</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Supporting in both months
+</span><span class="n">G1_n_G2</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>source</th>
+      <th>target</th>
+      <th>source_gender</th>
+      <th>target_gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>twice</td>
+      <td>roykim</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>guckkasten</td>
+      <td>wannaonego</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>bigbang</td>
+      <td>wannaonego</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>btob</td>
+      <td>bts</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ohmygirl</td>
+      <td>fromis</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>87</th>
+      <td>real__izo</td>
+      <td>wannaonego</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>tj3579</td>
+      <td>jsh</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>nuest</td>
+      <td>jsh</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>6kies</td>
+      <td>wannaonego</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>91</th>
+      <td>mamamoo</td>
+      <td>twice</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>92 rows × 4 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># boy -&gt; boy
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G1_n_G2</span><span class="p">[(</span><span class="n">G1_n_G2</span><span class="p">.</span><span class="n">source_gender</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">G1_n_G2</span><span class="p">.</span><span class="n">target_gender</span><span class="o">==</span><span class="mi">1</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">G1_n_G2</span><span class="p">))</span>
+<span class="c1"># boy -&gt; girl
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G1_n_G2</span><span class="p">[(</span><span class="n">G1_n_G2</span><span class="p">.</span><span class="n">source_gender</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">G1_n_G2</span><span class="p">.</span><span class="n">target_gender</span><span class="o">==</span><span class="mi">0</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">G1_n_G2</span><span class="p">))</span>
+<span class="c1"># girl -&gt; boy
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G1_n_G2</span><span class="p">[(</span><span class="n">G1_n_G2</span><span class="p">.</span><span class="n">source_gender</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">G1_n_G2</span><span class="p">.</span><span class="n">target_gender</span><span class="o">==</span><span class="mi">1</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">G1_n_G2</span><span class="p">))</span>
+<span class="c1"># girl -&gt; girl
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G1_n_G2</span><span class="p">[(</span><span class="n">G1_n_G2</span><span class="p">.</span><span class="n">source_gender</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">G1_n_G2</span><span class="p">.</span><span class="n">target_gender</span><span class="o">==</span><span class="mi">0</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">G1_n_G2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.40217391304347827
+0.21739130434782608
+0.25
+0.13043478260869565
+</code></pre></div></div>
+
+<h2 id="62-graph-role-extraction-by-rolx-algorithm">6.2. Graph Role Extraction by RolX algorithm</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">from</span> <span class="nn">graphrole</span> <span class="kn">import</span> <span class="n">RecursiveFeatureExtractor</span><span class="p">,</span> <span class="n">RoleExtractor</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">feature_extractor</span> <span class="o">=</span> <span class="n">RecursiveFeatureExtractor</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">feature_extractor</span><span class="p">.</span><span class="n">extract_features</span><span class="p">()</span>
+<span class="n">role_extractor</span> <span class="o">=</span> <span class="n">RoleExtractor</span><span class="p">(</span><span class="n">n_roles</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">role_extractor</span><span class="p">.</span><span class="n">extract_role_factors</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="n">G1_roles</span> <span class="o">=</span> <span class="n">role_extractor</span><span class="p">.</span><span class="n">roles</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G1_role_groups</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="n">G1_roles</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">G1_role_groups</span><span class="p">:</span>
+        <span class="n">G1_role_groups</span><span class="p">[</span><span class="n">r</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">G1_role_groups</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">r</span><span class="p">,</span><span class="n">g</span> <span class="ow">in</span> <span class="n">G1_role_groups</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>role_2 ['6kies', 'ahnhyungsub', 'anyujin', 'apink', 'boa', 'dmlwlsska', 'girlsgeneration_new', 'girlsofthemonth', 'haonkim', 'highfiveofteenager', 'idlesong', 'jjy', 'jungsewoon', 'jungyeon', 'kgkg', 'kim', 'kimsejeong', 'mkyunghoon', 'mmld', 'nth0510', 'onairpril', 'paka', 'pjb', 'sakura0319', 'samkim', 'shinhwa', 'taeyeon_new1', 'unitb', 'wheesung', 'yuseonho']
+role_4 ['bigbang', 'blackpink', 'ch_freemonth', 'chungha', 'fromis', 'guckkasten', 'iu_tv', 'redvelvetreveluv', 'tj3579', 'vikon']
+role_1 ['btob', 'bts', 'gx9', 'jsh', 'mamamoo', 'nuest', 'real__izo', 'roykim', 'straykids', 'wannaonego', 'winner', 'zico']
+role_3 ['buzz', 'got7vlive', 'kimdonghan', 'madewg', 'twice']
+role_0 ['day6', 'gf', 'lovelyz', 'miyazakimiho', 'ohmygirl']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">feature_extractor</span> <span class="o">=</span> <span class="n">RecursiveFeatureExtractor</span><span class="p">(</span><span class="n">G2</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">feature_extractor</span><span class="p">.</span><span class="n">extract_features</span><span class="p">()</span>
+<span class="n">role_extractor</span> <span class="o">=</span> <span class="n">RoleExtractor</span><span class="p">(</span><span class="n">n_roles</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># set 'n_roles' same as G1`s
+</span><span class="n">role_extractor</span><span class="p">.</span><span class="n">extract_role_factors</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="n">G2_roles</span> <span class="o">=</span> <span class="n">role_extractor</span><span class="p">.</span><span class="n">roles</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G2_role_groups</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="n">G2_roles</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">G2_role_groups</span><span class="p">:</span>
+        <span class="n">G2_role_groups</span><span class="p">[</span><span class="n">r</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">G2_role_groups</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">r</span><span class="p">,</span><span class="n">g</span> <span class="ow">in</span> <span class="n">G2_role_groups</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>role_2 ['6kies', 'ahnhyungsub', 'berrygood', 'blackpink', 'buzz', 'dickpunks', 'fromis', 'highfiveofteenager', 'jjy', 'jungchaeyeon', 'kgkg', 'kimsejeong', 'lovelyz', 'mmld', 'pjb', 'real__izo', 'sanarang', 'wheesung', 'wjsnvlive', 'woojinyoung', 'zico']
+role_4 ['astro', 'b1a4', 'bigbang', 'doakim', 'doitamazing7', 'dongbang_new', 'fortediquattro', 'girllaboum', 'girlsgeneration_new', 'god', 'godgayoung', 'goldenchild', 'guckkasten', 'gx9', 'highlight', 'hotshot', 'in2it', 'infinite', 'ioi', 'iu_tv', 'jsh', 'kanghyewon', 'kim', 'kimchaewon', 'kimdonghan', 'ksy', 'ladiescode', 'mamamoo', 'mino0330', 'mkyunghoon', 'nojisun', 'nth0510', 'nuest', 'ohmygirl', 'onairpril', 'onf', 'paka', 'pentagon', 'pledis', 'pushkang', 'redvelvetreveluv', 'sonamoo', 'taewookim', 'tj3579', 'vikon', 'wekimeki']
+role_1 ['btob', 'bts', 'day6', 'gf', 'got7vlive', 'idlesong', 'madewg', 'roykim', 'straykids', 'twice', 'wannaonego', 'winner']
+role_0 ['dmlwlsska', 'eunjiwon', 'jdh', 'jeonsomi', 'jungsewoon', 'kdani', 'leechaeyeon', 'miyazakimiho', 'yabukinako']
+role_3 ['shitaomiu', 'take_miyu']
+</code></pre></div></div>
+
+<h2 id="63-community-detection-by-girvan-newman-algorithm">6.3. Community Detection by Girvan-Newman algorithm</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">networkx.algorithms</span> <span class="kn">import</span> <span class="n">community</span>
+<span class="n">comp</span> <span class="o">=</span> <span class="n">community</span><span class="p">.</span><span class="n">girvan_newman</span><span class="p">(</span><span class="n">G1</span><span class="p">.</span><span class="n">to_undirected</span><span class="p">())</span>
+<span class="n">communities</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">next</span><span class="p">(</span><span class="n">comp</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">communities</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">communities</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[39, 23]
+['6kies', 'apink', 'bigbang', 'blackpink', 'btob', 'bts', 'ch_freemonth', 'chungha', 'day6', 'fromis', 'gf', 'girlsgeneration_new', 'girlsofthemonth', 'got7vlive', 'guckkasten', 'gx9', 'haonkim', 'idlesong', 'iu_tv', 'jsh', 'jungyeon', 'kimdonghan', 'lovelyz', 'madewg', 'mamamoo', 'mkyunghoon', 'mmld', 'nuest', 'ohmygirl', 'pjb', 'real__izo', 'redvelvetreveluv', 'roykim', 'straykids', 'tj3579', 'twice', 'vikon', 'winner', 'zico']
+['ahnhyungsub', 'anyujin', 'boa', 'buzz', 'dmlwlsska', 'highfiveofteenager', 'jjy', 'jungsewoon', 'kgkg', 'kim', 'kimsejeong', 'miyazakimiho', 'nth0510', 'onairpril', 'paka', 'sakura0319', 'samkim', 'shinhwa', 'taeyeon_new1', 'unitb', 'wannaonego', 'wheesung', 'yuseonho']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">comp</span> <span class="o">=</span> <span class="n">community</span><span class="p">.</span><span class="n">girvan_newman</span><span class="p">(</span><span class="n">G2</span><span class="p">.</span><span class="n">to_undirected</span><span class="p">())</span>
+<span class="n">communities</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">next</span><span class="p">(</span><span class="n">comp</span><span class="p">))</span>
+<span class="k">print</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">communities</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">communities</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[84, 6]
+['6kies', 'ahnhyungsub', 'astro', 'b1a4', 'berrygood', 'bigbang', 'blackpink', 'btob', 'bts', 'buzz', 'day6', 'dickpunks', 'doakim', 'doitamazing7', 'dongbang_new', 'eunjiwon', 'fortediquattro', 'fromis', 'gf', 'girllaboum', 'girlsgeneration_new', 'god', 'godgayoung', 'goldenchild', 'got7vlive', 'guckkasten', 'gx9', 'highfiveofteenager', 'highlight', 'hotshot', 'in2it', 'infinite', 'ioi', 'iu_tv', 'jdh', 'jjy', 'jsh', 'jungchaeyeon', 'jungsewoon', 'kanghyewon', 'kdani', 'kgkg', 'kim', 'kimchaewon', 'kimdonghan', 'kimsejeong', 'ksy', 'ladiescode', 'leechaeyeon', 'lovelyz', 'madewg', 'mamamoo', 'mino0330', 'mkyunghoon', 'mmld', 'nojisun', 'nth0510', 'nuest', 'ohmygirl', 'onairpril', 'onf', 'paka', 'pentagon', 'pjb', 'pledis', 'pushkang', 'real__izo', 'redvelvetreveluv', 'roykim', 'sanarang', 'sonamoo', 'straykids', 'taewookim', 'tj3579', 'twice', 'vikon', 'wannaonego', 'wekimeki', 'wheesung', 'winner', 'wjsnvlive', 'woojinyoung', 'yabukinako', 'zico']
+['dmlwlsska', 'idlesong', 'jeonsomi', 'miyazakimiho', 'shitaomiu', 'take_miyu']
+</code></pre></div></div>
+
+<h2 id="64-page-rank-and-degree-centrality-in-g1-g2">6.4. Page Rank and Degree Centrality in G1, G2</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pagerank</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">pagerank</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span>
+<span class="n">pagerank</span> <span class="o">=</span> <span class="n">viewer</span><span class="p">(</span><span class="n">pagerank</span><span class="p">,</span> <span class="s">'pagerank'</span><span class="p">)</span>
+<span class="n">pagerank</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="n">index</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Index(['wannaonego', 'real__izo', 'jsh', 'nuest', 'winner', 'roykim',
+       'lovelyz', 'ohmygirl', 'gf', 'twice'],
+      dtype='object')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pagerank</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">pagerank</span><span class="p">(</span><span class="n">G2</span><span class="p">)</span>
+<span class="n">pagerank</span> <span class="o">=</span> <span class="n">viewer</span><span class="p">(</span><span class="n">pagerank</span><span class="p">,</span> <span class="s">'pagerank'</span><span class="p">)</span>
+<span class="n">pagerank</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="n">index</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Index(['lovelyz', 'bts', 'jsh', 'wannaonego', 'fromis', 'nuest', 'gf', 'twice',
+       'highfiveofteenager', 'roykim'],
+      dtype='object')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">degree_centrality</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">degree_centrality</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span>
+<span class="n">degree_centrality</span> <span class="o">=</span> <span class="n">viewer</span><span class="p">(</span><span class="n">degree_centrality</span><span class="p">,</span> <span class="s">'degree_centrality'</span><span class="p">)</span>
+<span class="n">degree_centrality</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="n">index</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Index(['wannaonego', 'nuest', 'real__izo', 'winner', 'mamamoo', 'roykim',
+       'jsh', 'bts', 'lovelyz', 'twice'],
+      dtype='object')
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">degree_centrality</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">degree_centrality</span><span class="p">(</span><span class="n">G2</span><span class="p">)</span>
+<span class="n">degree_centrality</span> <span class="o">=</span> <span class="n">viewer</span><span class="p">(</span><span class="n">degree_centrality</span><span class="p">,</span> <span class="s">'degree_centrality'</span><span class="p">)</span>
+<span class="n">degree_centrality</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="n">index</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Index(['lovelyz', 'bts', 'wannaonego', 'winner', 'twice', 'jsh', 'fromis',
+       'gf', 'nuest', 'btob'],
+      dtype='object')
+</code></pre></div></div>
+
+<h1 id="7-effect-of-the-fandom-activities-on-the-monthly-chart">7. Effect of the fandom activities on the monthly chart</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">monthly_chart</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_json</span><span class="p">(</span><span class="s">'./dataset/monthly_chart_2018.json'</span><span class="p">)</span>
+<span class="n">m11</span> <span class="o">=</span> <span class="n">monthly_chart</span><span class="p">[</span><span class="n">monthly_chart</span><span class="p">.</span><span class="n">start</span><span class="o">==</span><span class="mi">201811</span><span class="p">]</span>
+<span class="n">m12</span> <span class="o">=</span> <span class="n">monthly_chart</span><span class="p">[</span><span class="n">monthly_chart</span><span class="p">.</span><span class="n">start</span><span class="o">==</span><span class="mi">201812</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_chart</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="s">'chart_name'</span><span class="p">,</span><span class="s">'total_activity'</span><span class="p">,</span><span class="s">'nov_supported'</span><span class="p">,</span><span class="s">'dec_supported'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">]]</span>
+<span class="n">in_nov</span> <span class="o">=</span> <span class="n">df_chart</span><span class="p">[</span><span class="s">'chart_name'</span><span class="p">].</span><span class="n">isin</span><span class="p">(</span><span class="n">m11</span><span class="p">[</span><span class="s">'artist'</span><span class="p">])</span>
+<span class="n">df_nov</span> <span class="o">=</span> <span class="n">df_chart</span><span class="p">[</span><span class="n">in_nov</span><span class="p">].</span><span class="n">groupby</span><span class="p">([</span><span class="s">'chart_name'</span><span class="p">]).</span><span class="nb">sum</span><span class="p">()</span>
+<span class="n">rank_nov</span> <span class="o">=</span> <span class="n">m11</span><span class="p">[</span><span class="n">m11</span><span class="p">[</span><span class="s">'artist'</span><span class="p">].</span><span class="n">isin</span><span class="p">(</span><span class="n">df_chart</span><span class="p">[</span><span class="s">'chart_name'</span><span class="p">])].</span><span class="n">groupby</span><span class="p">([</span><span class="s">'artist'</span><span class="p">])[</span><span class="s">'rank'</span><span class="p">].</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">chart_nov</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_nov</span><span class="p">,</span><span class="n">rank_nov</span><span class="p">,</span><span class="n">left_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">chart_nov</span><span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'rank'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_activity</th>
+      <th>nov_supported</th>
+      <th>dec_supported</th>
+      <th>total_supported</th>
+      <th>rank</th>
+    </tr>
+    <tr>
+      <th>chart_name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>바이브</th>
+      <td>1088</td>
+      <td>70.0</td>
+      <td>7.0</td>
+      <td>77.0</td>
+      <td>4.000000</td>
+    </tr>
+    <tr>
+      <th>임창정</th>
+      <td>1649</td>
+      <td>6.0</td>
+      <td>1.0</td>
+      <td>7.0</td>
+      <td>7.000000</td>
+    </tr>
+    <tr>
+      <th>벤</th>
+      <td>304</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>16.000000</td>
+    </tr>
+    <tr>
+      <th>TWICE (트와이스)</th>
+      <td>606440</td>
+      <td>8341.0</td>
+      <td>5549.0</td>
+      <td>13890.0</td>
+      <td>17.500000</td>
+    </tr>
+    <tr>
+      <th>아이유</th>
+      <td>130843</td>
+      <td>2467.0</td>
+      <td>1407.0</td>
+      <td>3874.0</td>
+      <td>19.000000</td>
+    </tr>
+    <tr>
+      <th>선미</th>
+      <td>718</td>
+      <td>36.0</td>
+      <td>5.0</td>
+      <td>41.0</td>
+      <td>20.000000</td>
+    </tr>
+    <tr>
+      <th>IZ*ONE (아이즈원)</th>
+      <td>309295</td>
+      <td>37770.0</td>
+      <td>18416.0</td>
+      <td>56186.0</td>
+      <td>22.000000</td>
+    </tr>
+    <tr>
+      <th>로이킴</th>
+      <td>30003</td>
+      <td>10979.0</td>
+      <td>3288.0</td>
+      <td>14267.0</td>
+      <td>29.500000</td>
+    </tr>
+    <tr>
+      <th>iKON</th>
+      <td>33653</td>
+      <td>9430.0</td>
+      <td>5150.0</td>
+      <td>14580.0</td>
+      <td>39.500000</td>
+    </tr>
+    <tr>
+      <th>비투비</th>
+      <td>47090</td>
+      <td>6551.0</td>
+      <td>4942.0</td>
+      <td>11493.0</td>
+      <td>41.250000</td>
+    </tr>
+    <tr>
+      <th>BLACKPINK</th>
+      <td>104426</td>
+      <td>7314.0</td>
+      <td>2318.0</td>
+      <td>9632.0</td>
+      <td>45.500000</td>
+    </tr>
+    <tr>
+      <th>Red Velvet (레드벨벳)</th>
+      <td>194521</td>
+      <td>6117.0</td>
+      <td>3132.0</td>
+      <td>9249.0</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>EXO</th>
+      <td>28649</td>
+      <td>5.0</td>
+      <td>1.0</td>
+      <td>6.0</td>
+      <td>55.272727</td>
+    </tr>
+    <tr>
+      <th>방탄소년단</th>
+      <td>125849</td>
+      <td>14519.0</td>
+      <td>10346.0</td>
+      <td>24865.0</td>
+      <td>63.300000</td>
+    </tr>
+    <tr>
+      <th>Apink (에이핑크)</th>
+      <td>89709</td>
+      <td>507.0</td>
+      <td>492.0</td>
+      <td>999.0</td>
+      <td>71.000000</td>
+    </tr>
+    <tr>
+      <th>하이라이트 (Highlight)</th>
+      <td>29392</td>
+      <td>4317.0</td>
+      <td>3357.0</td>
+      <td>7674.0</td>
+      <td>75.000000</td>
+    </tr>
+    <tr>
+      <th>Wanna One (워너원)</th>
+      <td>427571</td>
+      <td>47720.0</td>
+      <td>25996.0</td>
+      <td>73716.0</td>
+      <td>77.800000</td>
+    </tr>
+    <tr>
+      <th>정승환</th>
+      <td>20872</td>
+      <td>9704.0</td>
+      <td>4733.0</td>
+      <td>14437.0</td>
+      <td>78.000000</td>
+    </tr>
+    <tr>
+      <th>지코 (ZICO)</th>
+      <td>19315</td>
+      <td>2272.0</td>
+      <td>566.0</td>
+      <td>2838.0</td>
+      <td>84.000000</td>
+    </tr>
+    <tr>
+      <th>(여자)아이들</th>
+      <td>22860</td>
+      <td>1500.0</td>
+      <td>830.0</td>
+      <td>2330.0</td>
+      <td>91.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_chart</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s">'fandom_id'</span><span class="p">,</span><span class="s">'chart_name'</span><span class="p">,</span><span class="s">'total_activity'</span><span class="p">,</span><span class="s">'nov_supported'</span><span class="p">,</span><span class="s">'dec_supported'</span><span class="p">,</span><span class="s">'total_supported'</span><span class="p">]]</span>
+<span class="n">in_dec</span> <span class="o">=</span> <span class="n">df_chart</span><span class="p">[</span><span class="s">'chart_name'</span><span class="p">].</span><span class="n">isin</span><span class="p">(</span><span class="n">m12</span><span class="p">[</span><span class="s">'artist'</span><span class="p">])</span>
+<span class="n">df_dec</span> <span class="o">=</span> <span class="n">df_chart</span><span class="p">[</span><span class="n">in_dec</span><span class="p">].</span><span class="n">groupby</span><span class="p">([</span><span class="s">'chart_name'</span><span class="p">]).</span><span class="nb">sum</span><span class="p">()</span>
+<span class="n">rank_dec</span> <span class="o">=</span> <span class="n">m12</span><span class="p">[</span><span class="n">m12</span><span class="p">[</span><span class="s">'artist'</span><span class="p">].</span><span class="n">isin</span><span class="p">(</span><span class="n">df_chart</span><span class="p">[</span><span class="s">'chart_name'</span><span class="p">])].</span><span class="n">groupby</span><span class="p">([</span><span class="s">'artist'</span><span class="p">])[</span><span class="s">'rank'</span><span class="p">].</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">chart_dec</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_dec</span><span class="p">,</span><span class="n">rank_dec</span><span class="p">,</span><span class="n">left_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">chart_dec</span><span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'rank'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_activity</th>
+      <th>nov_supported</th>
+      <th>dec_supported</th>
+      <th>total_supported</th>
+      <th>rank</th>
+    </tr>
+    <tr>
+      <th>chart_name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>바이브</th>
+      <td>1088</td>
+      <td>70.0</td>
+      <td>7.0</td>
+      <td>77.0</td>
+      <td>6.000000</td>
+    </tr>
+    <tr>
+      <th>벤</th>
+      <td>304</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>12.000000</td>
+    </tr>
+    <tr>
+      <th>임창정</th>
+      <td>1649</td>
+      <td>6.0</td>
+      <td>1.0</td>
+      <td>7.0</td>
+      <td>15.000000</td>
+    </tr>
+    <tr>
+      <th>허각</th>
+      <td>336</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>17.000000</td>
+    </tr>
+    <tr>
+      <th>WINNER</th>
+      <td>69689</td>
+      <td>17153.0</td>
+      <td>11363.0</td>
+      <td>28516.0</td>
+      <td>21.000000</td>
+    </tr>
+    <tr>
+      <th>TWICE (트와이스)</th>
+      <td>606440</td>
+      <td>8341.0</td>
+      <td>5549.0</td>
+      <td>13890.0</td>
+      <td>25.500000</td>
+    </tr>
+    <tr>
+      <th>아이유</th>
+      <td>130843</td>
+      <td>2467.0</td>
+      <td>1407.0</td>
+      <td>3874.0</td>
+      <td>33.000000</td>
+    </tr>
+    <tr>
+      <th>IZ*ONE (아이즈원)</th>
+      <td>309295</td>
+      <td>37770.0</td>
+      <td>18416.0</td>
+      <td>56186.0</td>
+      <td>37.000000</td>
+    </tr>
+    <tr>
+      <th>비투비</th>
+      <td>47090</td>
+      <td>6551.0</td>
+      <td>4942.0</td>
+      <td>11493.0</td>
+      <td>38.666667</td>
+    </tr>
+    <tr>
+      <th>BLACKPINK</th>
+      <td>104426</td>
+      <td>7314.0</td>
+      <td>2318.0</td>
+      <td>9632.0</td>
+      <td>39.000000</td>
+    </tr>
+    <tr>
+      <th>선미</th>
+      <td>718</td>
+      <td>36.0</td>
+      <td>5.0</td>
+      <td>41.0</td>
+      <td>40.000000</td>
+    </tr>
+    <tr>
+      <th>로이킴</th>
+      <td>30003</td>
+      <td>10979.0</td>
+      <td>3288.0</td>
+      <td>14267.0</td>
+      <td>45.000000</td>
+    </tr>
+    <tr>
+      <th>EXO</th>
+      <td>28649</td>
+      <td>5.0</td>
+      <td>1.0</td>
+      <td>6.0</td>
+      <td>60.000000</td>
+    </tr>
+    <tr>
+      <th>Red Velvet (레드벨벳)</th>
+      <td>194521</td>
+      <td>6117.0</td>
+      <td>3132.0</td>
+      <td>9249.0</td>
+      <td>66.000000</td>
+    </tr>
+    <tr>
+      <th>EXID</th>
+      <td>28513</td>
+      <td>19.0</td>
+      <td>6.0</td>
+      <td>25.0</td>
+      <td>66.000000</td>
+    </tr>
+    <tr>
+      <th>방탄소년단</th>
+      <td>125849</td>
+      <td>14519.0</td>
+      <td>10346.0</td>
+      <td>24865.0</td>
+      <td>67.875000</td>
+    </tr>
+    <tr>
+      <th>iKON</th>
+      <td>33653</td>
+      <td>9430.0</td>
+      <td>5150.0</td>
+      <td>14580.0</td>
+      <td>71.000000</td>
+    </tr>
+    <tr>
+      <th>Wanna One (워너원)</th>
+      <td>427571</td>
+      <td>47720.0</td>
+      <td>25996.0</td>
+      <td>73716.0</td>
+      <td>73.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">chart_nov</span><span class="p">[</span><span class="s">'nov_supported'</span><span class="p">],</span><span class="n">chart_nov</span><span class="p">[</span><span class="s">'rank'</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">chart_dec</span><span class="p">[</span><span class="s">'dec_supported'</span><span class="p">],</span><span class="n">chart_dec</span><span class="p">[</span><span class="s">'rank'</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SpearmanrResult(correlation=0.2721804511278195, pvalue=0.2456688782803774)
+SpearmanrResult(correlation=0.42480625827858726, pvalue=0.07887457444015573)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">common</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">chart_nov</span><span class="p">[</span><span class="n">chart_nov</span><span class="p">.</span><span class="n">index</span><span class="p">.</span><span class="n">isin</span><span class="p">(</span><span class="n">chart_dec</span><span class="p">.</span><span class="n">index</span><span class="p">)],</span><span class="n">chart_dec</span><span class="p">[</span><span class="s">'rank'</span><span class="p">],</span><span class="n">left_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">right_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">'left'</span><span class="p">)</span>
+<span class="n">common</span><span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s">'rank_x'</span><span class="p">,</span><span class="s">'rank_y'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_activity</th>
+      <th>nov_supported</th>
+      <th>dec_supported</th>
+      <th>total_supported</th>
+      <th>rank_x</th>
+      <th>rank_y</th>
+    </tr>
+    <tr>
+      <th>chart_name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>바이브</th>
+      <td>1088</td>
+      <td>70.0</td>
+      <td>7.0</td>
+      <td>77.0</td>
+      <td>4.000000</td>
+      <td>6.000000</td>
+    </tr>
+    <tr>
+      <th>임창정</th>
+      <td>1649</td>
+      <td>6.0</td>
+      <td>1.0</td>
+      <td>7.0</td>
+      <td>7.000000</td>
+      <td>15.000000</td>
+    </tr>
+    <tr>
+      <th>벤</th>
+      <td>304</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>16.000000</td>
+      <td>12.000000</td>
+    </tr>
+    <tr>
+      <th>TWICE (트와이스)</th>
+      <td>606440</td>
+      <td>8341.0</td>
+      <td>5549.0</td>
+      <td>13890.0</td>
+      <td>17.500000</td>
+      <td>25.500000</td>
+    </tr>
+    <tr>
+      <th>아이유</th>
+      <td>130843</td>
+      <td>2467.0</td>
+      <td>1407.0</td>
+      <td>3874.0</td>
+      <td>19.000000</td>
+      <td>33.000000</td>
+    </tr>
+    <tr>
+      <th>선미</th>
+      <td>718</td>
+      <td>36.0</td>
+      <td>5.0</td>
+      <td>41.0</td>
+      <td>20.000000</td>
+      <td>40.000000</td>
+    </tr>
+    <tr>
+      <th>IZ*ONE (아이즈원)</th>
+      <td>309295</td>
+      <td>37770.0</td>
+      <td>18416.0</td>
+      <td>56186.0</td>
+      <td>22.000000</td>
+      <td>37.000000</td>
+    </tr>
+    <tr>
+      <th>로이킴</th>
+      <td>30003</td>
+      <td>10979.0</td>
+      <td>3288.0</td>
+      <td>14267.0</td>
+      <td>29.500000</td>
+      <td>45.000000</td>
+    </tr>
+    <tr>
+      <th>iKON</th>
+      <td>33653</td>
+      <td>9430.0</td>
+      <td>5150.0</td>
+      <td>14580.0</td>
+      <td>39.500000</td>
+      <td>71.000000</td>
+    </tr>
+    <tr>
+      <th>비투비</th>
+      <td>47090</td>
+      <td>6551.0</td>
+      <td>4942.0</td>
+      <td>11493.0</td>
+      <td>41.250000</td>
+      <td>38.666667</td>
+    </tr>
+    <tr>
+      <th>BLACKPINK</th>
+      <td>104426</td>
+      <td>7314.0</td>
+      <td>2318.0</td>
+      <td>9632.0</td>
+      <td>45.500000</td>
+      <td>39.000000</td>
+    </tr>
+    <tr>
+      <th>Red Velvet (레드벨벳)</th>
+      <td>194521</td>
+      <td>6117.0</td>
+      <td>3132.0</td>
+      <td>9249.0</td>
+      <td>50.000000</td>
+      <td>66.000000</td>
+    </tr>
+    <tr>
+      <th>EXO</th>
+      <td>28649</td>
+      <td>5.0</td>
+      <td>1.0</td>
+      <td>6.0</td>
+      <td>55.272727</td>
+      <td>60.000000</td>
+    </tr>
+    <tr>
+      <th>방탄소년단</th>
+      <td>125849</td>
+      <td>14519.0</td>
+      <td>10346.0</td>
+      <td>24865.0</td>
+      <td>63.300000</td>
+      <td>67.875000</td>
+    </tr>
+    <tr>
+      <th>Wanna One (워너원)</th>
+      <td>427571</td>
+      <td>47720.0</td>
+      <td>25996.0</td>
+      <td>73716.0</td>
+      <td>77.800000</td>
+      <td>73.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">common</span><span class="p">[</span><span class="s">'nov_supported'</span><span class="p">],</span><span class="n">common</span><span class="p">[</span><span class="s">'rank_x'</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">common</span><span class="p">[</span><span class="s">'dec_supported'</span><span class="p">],</span><span class="n">common</span><span class="p">[</span><span class="s">'rank_y'</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SpearmanrResult(correlation=0.4892857142857142, pvalue=0.06416038631454055)
+SpearmanrResult(correlation=0.5004470273579545, pvalue=0.057440003802729525)
+</code></pre></div></div>
+
+
+                </div>
+            </section>
+
+            <!-- Email subscribe form at the bottom of the page -->
+	<!--
+            
+                <section class="subscribe-form">
+                    <h3 class="subscribe-form-title">Subscribe to Darron's Devlog</h3>
+                    <p>Get the latest posts delivered right to your inbox</p>
+                    <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()" 
+               id="searchtext" type="text" name="searchtext"  
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+                </section>
+            
+	-->
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function () {
+                            var this_page_url = 'http://0.0.0.0:4000/DM_final_exam';
+                            var this_page_identifier = '/DM_final_exam';
+                            var this_page_title = 'Data Mining - K-POP Fandom Data Analysis with Graph ML';
+                        };
+                        (function() {
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                </section>
+            
+
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/built/images/blog-cover1.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; Darron's Devlog &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/projects/">Projects</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/fashion_GNN">Fashion Coordinator Chatbot Dataset with GNN</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/DM_final_proj">Data Mining - Stock Market Graph Analysis</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/AppML_Assginment1">Applied ML - Heart Disease Pred</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/projects/">
+                                
+                                    See all 6 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/fashion_GNN">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Projects</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Fashion Coordinator Chatbot Dataset with GNN</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>1. About
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      8 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/DM_final_proj">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Projects</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Data Mining - Stock Market Graph Analysis</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>Final Project
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      12 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="/">
+            
+            <span>Darron's Devlog</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Data Mining - K-POP Fandom Data Analysis with Graph ML</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Data+Mining+-+K-POP+Fandom+Data+Analysis+with+Graph+ML&amp;url=https://12kdh43.github.io/DM_final_exam"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/DM_final_exam"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="/">Darron's Devlog</a> &copy; 2021</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyllt/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+        <div id="subscribe" class="subscribe-overlay">
+            <a class="subscribe-overlay-close" href="#"></a>
+            <div class="subscribe-overlay-content">
+                
+                <h1 class="subscribe-overlay-title">Search Darron's Devlog</h1>
+                <p class="subscribe-overlay-description">
+				lunr.js를 이용한 posts 검색 </p>
+                <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()" 
+               id="searchtext" type="text" name="searchtext"  
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+            </div>
+        </div>
+    
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+	
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>
