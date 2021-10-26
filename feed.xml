@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-21T03:22:27+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-26T15:32:42+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
 
 &lt;h2 id=&quot;11-workspace&quot;&gt;1.1. Workspace&lt;/h2&gt;
 &lt;ul&gt;
@@ -4732,228 +4732,113 @@ weighted avg       0.97      0.97      0.97      1491
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;comment&quot;&gt;comment&lt;/h1&gt;
-&lt;p&gt;데이터사이언스 복수전공 후 첫 강의. 중간고사까지 배웠던 기본적인 전처리와 ML 함수들을 적용했다. 추가적으로 imblanced data case를 SMOTE 패키지를 사용해 간단히 처리해보았다. 당시 수업에서 가장 높은 accuracy를 기록했다.&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">2020-1. NLP</summary></entry><entry><title type="html">Statistical Mining - HW2</title><link href="http://0.0.0.0:4000/stat_HW2" rel="alternate" type="text/html" title="Statistical Mining - HW2" /><published>2020-04-03T00:00:00+09:00</published><updated>2020-04-03T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_HW2</id><content type="html" xml:base="http://0.0.0.0:4000/stat_HW2">&lt;h2 id=&quot;2020-1-statistical-mining&quot;&gt;2020-1. Statistical Mining&lt;/h2&gt;
-
-&lt;h3 id=&quot;2&quot;&gt;#2&lt;/h3&gt;
-
-&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;set.seed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;runif&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rnorm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rnorm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error in eval(predvars, data, env): 길이가 1이 아닌 수치형 'envir' 인자입니다
-Traceback:
-
-
-1. lm(y ~ x1 + x2, data = y)
-
-2. eval(mf, parent.frame())
-
-3. eval(mf, parent.frame())
-
-4. stats::model.frame(formula = y ~ x1 + x2, data = y, drop.unused.levels = TRUE)
-
-5. model.frame.default(formula = y ~ x1 + x2, data = y, drop.unused.levels = TRUE)
-
-6. eval(predvars, data, env)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;cor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;0.835121242463113&lt;/p&gt;
-
-&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/output_4_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Call:
-lm(formula = y ~ x1 + x2)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--2.8311 -0.7273 -0.0537  0.6338  2.3359 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&amp;gt;|t|)    
-(Intercept)   2.1305     0.2319   9.188 7.61e-15 ***
-x1            1.4396     0.7212   1.996   0.0487 *  
-x2            1.0097     1.1337   0.891   0.3754    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 1.056 on 97 degrees of freedom
-Multiple R-squared:  0.2088,	Adjusted R-squared:  0.1925 
-F-statistic:  12.8 on 2 and 97 DF,  p-value: 1.164e-05
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;fit2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Call:
-lm(formula = y ~ x1)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--2.89495 -0.66874 -0.07785  0.59221  2.45560 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&amp;gt;|t|)    
-(Intercept)   2.1124     0.2307   9.155 8.27e-15 ***
-x1            1.9759     0.3963   4.986 2.66e-06 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 1.055 on 98 degrees of freedom
-Multiple R-squared:  0.2024,	Adjusted R-squared:  0.1942 
-F-statistic: 24.86 on 1 and 98 DF,  p-value: 2.661e-06
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;fit3&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Call:
-lm(formula = y ~ x2)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--2.62687 -0.75156 -0.03598  0.72383  2.44890 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&amp;gt;|t|)    
-(Intercept)   2.3899     0.1949   12.26  &amp;lt; 2e-16 ***
-x2            2.8996     0.6330    4.58 1.37e-05 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 1.072 on 98 degrees of freedom
-Multiple R-squared:  0.1763,	Adjusted R-squared:  0.1679 
-F-statistic: 20.98 on 1 and 98 DF,  p-value: 1.366e-05
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="studies" /><summary type="html">2020-1. Statistical Mining</summary></entry><entry><title type="html">Statistical Mining - Chapter 3</title><link href="http://0.0.0.0:4000/stat_ch3" rel="alternate" type="text/html" title="Statistical Mining - Chapter 3" /><published>2020-04-03T00:00:00+09:00</published><updated>2020-04-03T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch3</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch3">&lt;p&gt;2020-04-03 Week 3&lt;/p&gt;
-
-&lt;h1 id=&quot;ch3-linear-regression&quot;&gt;Ch3. Linear Regression&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;Model:
-$ f(X) = \beta_0 + \sum_{j=1}^p \beta_j X_j \quad \Rightarrow $ Prediction of Y from X  (X= p input variables)&lt;br /&gt;
-&lt;em&gt;f&lt;/em&gt; : Regression function E(Y|X)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;input-variable-x&quot;&gt;input variable X:&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;Quantitative or Transformationse of quantitative inputs&lt;/li&gt;
-  &lt;li&gt;Basis expansions leading to polynomial representation&lt;/li&gt;
-  &lt;li&gt;Dummy coding of qualitative variables : G grops -&amp;gt; G-1 dummy variables required&lt;/li&gt;
-  &lt;li&gt;Interactions between inputs ($X_3 = X_1 X_2 $ )&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;how-to-estimate-beta--beta_0-beta_1-ldots--beta_pt-rightarrow-least-squares&quot;&gt;How to estimate $\beta = (\beta_0, \beta_1, \ldots , \beta_p)^T \Rightarrow$ Least Squares&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;$\beta$ minimizing RSS&lt;br /&gt;
-when Y (n by 1) / X ( n by (p + 1) matrics)&lt;br /&gt;
-RSS = $ ( y - X\hat\beta)^T ( y - X\hat\beta) $&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Least square estimator (LSE):
-$ \hat\beta = (X^T X)^{-1} X^T Y $&lt;/p&gt;
+&lt;p&gt;데이터사이언스 복수전공 후 첫 강의. 중간고사까지 배웠던 기본적인 전처리와 ML 함수들을 적용했다. 추가적으로 imblanced data case를 SMOTE 패키지를 사용해 간단히 처리해보았다. 당시 수업에서 가장 높은 accuracy를 기록했다.&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">2020-1. NLP</summary></entry><entry><title type="html">Statistical Mining - Chapter 3</title><link href="http://0.0.0.0:4000/stat_ch3" rel="alternate" type="text/html" title="Statistical Mining - Chapter 3" /><published>2020-04-03T00:00:00+09:00</published><updated>2020-04-03T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch3</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch3">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-3-linear-regression&quot; id=&quot;markdown-toc-chapter-3-linear-regression&quot;&gt;Chapter 3. Linear Regression&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#31-least-squares&quot; id=&quot;markdown-toc-31-least-squares&quot;&gt;3.1. Least Squares&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#32-hypothesis-test-for-beta_j&quot; id=&quot;markdown-toc-32-hypothesis-test-for-beta_j&quot;&gt;3.2. Hypothesis test for $\beta_j$:&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#321-test-for-a-group-of-coefficients&quot; id=&quot;markdown-toc-321-test-for-a-group-of-coefficients&quot;&gt;3.2.1. Test for a group of coefficients:&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#322-test-for-all-coefficients&quot; id=&quot;markdown-toc-322-test-for-all-coefficients&quot;&gt;3.2.2. Test for all coefficients:&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#33-gauss-markov-theorem&quot; id=&quot;markdown-toc-33-gauss-markov-theorem&quot;&gt;3.3. Gauss-Markov Theorem&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#34-properties-of-good-estimators&quot; id=&quot;markdown-toc-34-properties-of-good-estimators&quot;&gt;3.4. &lt;em&gt;Properties of Good estimators&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#35-model-fit&quot; id=&quot;markdown-toc-35-model-fit&quot;&gt;3.5. Model fit&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#36-prediction-errors&quot; id=&quot;markdown-toc-36-prediction-errors&quot;&gt;3.6. Prediction Errors&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#37-in-k-nearest-neighbor-regression&quot; id=&quot;markdown-toc-37-in-k-nearest-neighbor-regression&quot;&gt;3.7. in K-Nearest Neighbor Regression&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#38-curse-of-dimensionality&quot; id=&quot;markdown-toc-38-curse-of-dimensionality&quot;&gt;3.8. Curse of Dimensionality&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;assumption&quot;&gt;Assumption:&lt;/h4&gt;
-&lt;p&gt;1) $Y_i$ ‘s are uncorrelated &amp;amp; Var ($Y_i$ ) = $\sigma^2$&lt;br /&gt;
+&lt;h1 id=&quot;chapter-3-linear-regression&quot;&gt;Chapter 3. Linear Regression&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Model: &lt;strong&gt;$ f(X) = \beta_0 + \sum_{j=1}^p \beta_j X_j $&lt;/strong&gt;&lt;br /&gt;
+$\Rightarrow$ Prediction of Y from X  (X= p input variables)&lt;br /&gt;
+$\quad$ &lt;em&gt;f&lt;/em&gt; : Regression function E(Y|X)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;input variable X:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Quantitative or Transformations of quantitative inputs&lt;/li&gt;
+      &lt;li&gt;Basis expansions leading to polynomial representation&lt;/li&gt;
+      &lt;li&gt;Dummy coding of qualitative variables : G grops -&amp;gt; G-1 dummy variables required&lt;/li&gt;
+      &lt;li&gt;Interactions between inputs ($X_3 = X_1 X_2 $ )&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;31-least-squares&quot;&gt;3.1. Least Squares&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;How to estimate $\beta = (\beta_0, \beta_1, \ldots , \beta_p)^T$&lt;br /&gt;
+Least Squares : $\beta$ minimizing RSS&lt;br /&gt;
+when Y (n by 1) / X ( n by (p + 1) matrix),&lt;br /&gt;
+RSS = $ ( y - X\hat\beta)^T ( y - X\hat\beta) $,&lt;br /&gt;
+Least square estimator (LSE): $ \hat\beta = (X^T X)^{-1} X^T Y $&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;With Assumption:&lt;br /&gt;
+1) $Y_i$ ‘s are uncorrelated &amp;amp; Var ($Y_i$ ) = $\sigma^2$&lt;br /&gt;
 $\quad$($\equiv$ $\epsilon_i$ ‘s are independent &amp;amp; Var ($\epsilon_i$ ) = $\sigma^2$)&lt;br /&gt;
 2) X = $(X_1, \ldots, X_p)^T$ is fixed (not random)&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;By (1) &amp;amp; (2)
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;By (1) &amp;amp; (2), for OLS estimator $\hat\beta$;&lt;br /&gt;
+\(\\ \begin{align*}\hat\beta &amp;amp;= (X^TX)^{-1}X^TY \quad\leftarrow Y=X\beta + \epsilon \\
+                             &amp;amp;= \beta + (X^TX)^{-1}X^T\epsilon \\
+\end{align*} \\\)&lt;br /&gt;
+\(\begin{align*}E(\hat\beta) &amp;amp;= E(\beta) + E(\epsilon) \\
+                            &amp;amp;= \beta
+\end{align*} \\\)&lt;br /&gt;
+\(\begin{align*} Var(\hat\beta) &amp;amp;= E[\hat\beta - E(\hat\beta)]^2 \\
+                                &amp;amp;= E[ (X^TX)^{-1}X^T\epsilon ]^2 \\
+                                &amp;amp;= (X^TX)^{-1}X^TE(\epsilon^2)X(X^TX)^{-1}\\
+                                &amp;amp;= \sigma^2(X^TX)^{-1}X^TX(X^TX)^{-1}\\
+                                &amp;amp;=\sigma^2(X^T X)^{-1}
+\end{align*} \\\)&lt;br /&gt;
+while $\hat\sigma^2$ as Estimator of Variance of $\epsilon$ (= $\sigma^2$):&lt;br /&gt;
+\(\begin{align*} \hat\sigma^2 &amp;amp;= \frac 1 {n-p-1} \sum_{i=1}^n (y_i - \hat y_i)^2 \\
+                              &amp;amp;= \frac1{n-p-1}\sum_{i=1}^n \epsilon_i^2 \\
+  \rightarrow E(\hat\sigma^2) &amp;amp;= \sigma^2
+\end{align*} \\\)&lt;br /&gt;
+$\therefore \text{ unbiased estimator; }\frac{RSS}{n-p-1}$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;With Assumption:&lt;br /&gt;
+3) $\epsilon \sim ^{iid} N(0,\sigma^2)$ : normal distribution assumption of  error&lt;/p&gt;
     &lt;ul&gt;
-      &lt;li&gt;for OLS estimator $\hat\beta$&lt;br /&gt;
-$\begin{matrix}
-\hat\beta &amp;amp;=&amp;amp; (X^TX)^{-1}X^TY \quad\leftarrow Y=X\beta + \epsilon &lt;br /&gt;
-         &amp;amp;=&amp;amp; \beta + (X^TX)^{-1}X^T\epsilon &lt;br /&gt;
-\end{matrix}$&lt;br /&gt;
-$\begin{matrix}
-E(\hat\beta) &amp;amp;=&amp;amp; E(\beta) + E(\epsilon) &lt;br /&gt;
-              &amp;amp;=&amp;amp; \beta
-\end{matrix}$&lt;br /&gt;
-$\begin{matrix}
-Var(\hat\beta)
-&amp;amp;=&amp;amp; E[\hat\beta - E(\hat\beta)]^2 &lt;br /&gt;
-&amp;amp;=&amp;amp; E[ (X^TX)^{-1}X^T\epsilon ]^2 &lt;br /&gt;
-&amp;amp;=&amp;amp; (X^TX)^{-1}X^TE(\epsilon^2)X(X^TX)^{-1}&lt;br /&gt;
-&amp;amp;=&amp;amp; \sigma^2(X^TX)^{-1}X^TX(X^TX)^{-1}&lt;br /&gt;
-&amp;amp;=&amp;amp;\sigma^2(X^T X)^{-1}
-\end{matrix}$&lt;/li&gt;
-      &lt;li&gt;$\hat\sigma^2$ as Estimator of Variance of $\epsilon$ (= $\sigma^2$)&lt;br /&gt;
-$\begin{matrix}
-\hat\sigma^2 &amp;amp;=&amp;amp; \frac 1 {n-p-1} \sum_{i=1}^n (y_i - \hat y_i)^2 &lt;br /&gt;
-&amp;amp;=&amp;amp; \frac1{n-p-1}\sum_{i=1}^n \epsilon_i^2 &lt;br /&gt;
-\Rightarrow E(\hat\sigma^2) &amp;amp;=&amp;amp; \sigma^2
-\end{matrix}$ $\ \triangleright \text{ unbiased estimator; }\frac{RSS}{n-p-1}$&lt;/li&gt;
+      &lt;li&gt;$\hat\beta\sim MVN(\beta,\sigma^2(X^TX)^{-1}), \quad (Y\sim MVN(X\beta,\sigma^2 I)$ &lt;br /&gt;
+$\frac{(n-p-1)\hat\sigma^2}{\sigma^2}\sim\chi^2_{n-p-1}$&lt;br /&gt;
+$\hat\beta \text{ &amp;amp; } \hat\sigma^2$ are independent&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;3) $\epsilon \sim ^{iid} N(0,\sigma^2)$ : normal distribution assumption of  error&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;By (3),
-    &lt;ul&gt;
-      &lt;li&gt;$\hat\beta\sim MVN(\beta,\sigma^2(X^TX)^{-1}); \quad (Y\sim MVN(X\beta,\sigma^2 I)$&lt;/li&gt;
-      &lt;li&gt;$\frac{(n-p-1)\hat\sigma^2}{\sigma^2}\sim\chi^2_{n-p-1}$&lt;/li&gt;
-      &lt;li&gt;$\hat\beta \text{ &amp;amp; } \hat\sigma^2$ are independent&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;2020-04-14&lt;/p&gt;
-
-&lt;h4 id=&quot;hypothesis-test-for-beta_j&quot;&gt;Hypothesis test for $\beta_j$:&lt;/h4&gt;
+&lt;h2 id=&quot;32-hypothesis-test-for-beta_j&quot;&gt;3.2. Hypothesis test for $\beta_j$:&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;$H_0: \beta_j = 0$ vs . $H_1: B_j \not= 0$&lt;/li&gt;
   &lt;li&gt;Test for partial effect of individual $\beta_j$&lt;/li&gt;
   &lt;li&gt;$\hat\beta_j \sim N(\beta_j,\sigma^2 v_j)$, where $v_j$ is the &lt;em&gt;j&lt;/em&gt; th diagonal element of $(X^TX)^{-1}$&lt;br /&gt;
 $\Rightarrow \frac{\hat\beta_j - \beta_j}{\sigma\sqrt{v_j}}\sim N(0,1)$  ($\leftarrow z=\frac{x-\mu}{\sigma}$)&lt;/li&gt;
   &lt;li&gt;under $H_0$, $t_j = \frac{\hat\beta_j}{\hat\sigma\sqrt{v_j}}\sim t_{n-p-1}$&lt;/li&gt;
-  &lt;li&gt;
-    &lt;table&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;
-          &lt;td&gt;if $&lt;/td&gt;
-          &lt;td&gt;t_j&lt;/td&gt;
-          &lt;td&gt;&amp;gt; t_{(1-\alpha/2), n-p-1}$ , we reject $H_0$ with level of significance : $\alpha$&lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-  &lt;/li&gt;
+  &lt;li&gt;if $ \left\vert t_j \right\vert &amp;gt; t_{(1-\alpha/2), n-p-1}$ , we reject $H_0$ with level of significance : $\alpha$&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;test-for-a-group-of-coefficients&quot;&gt;Test for a group of coefficients:&lt;/h4&gt;
+&lt;h3 id=&quot;321-test-for-a-group-of-coefficients&quot;&gt;3.2.1. Test for a group of coefficients:&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;E.g. test for a categorical variable with k levels (k-1 dummy variables)&lt;/li&gt;
   &lt;li&gt;$H_0: \beta_{j+1} = \beta_{j+2} = \cdots = \beta{j+l} = 0$&lt;/li&gt;
   &lt;li&gt;$H_1$: At least one of those is not zero&lt;/li&gt;
   &lt;li&gt;Full model: $Y=\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p + \epsilon$&lt;/li&gt;
   &lt;li&gt;Reduced model: under $H_0: Y= \beta_0  + \beta_1X_1 + \cdots + \beta_jX_j + \beta_{j+l+1}X_{j+l+1} + \cdots + \beta_pX_p + \epsilon$&lt;/li&gt;
-  &lt;li&gt;Test statistic: F = $\frac{(RSS_R - RSS_F)/ l}{RSS_F/(n-p-1)} \sim F_{l,n-p-1}$
+  &lt;li&gt;Test statistic: F = $\frac{(RSS_R - RSS_F)/ l}{RSS_F/(n-p-1)} \sim F_{l,n-p-1}$&lt;br /&gt;
 where $RSS_F$ is from full model and $RSS_R$ is from reduced model&lt;/li&gt;
   &lt;li&gt;if $ F &amp;gt; F_{(1-\alpha),l,n-p-1}$ we reject $H_0$.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;test-for-all-coefficients&quot;&gt;Test for all coefficients:&lt;/h4&gt;
+&lt;h3 id=&quot;322-test-for-all-coefficients&quot;&gt;3.2.2. Test for all coefficients:&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;$H_0$: all $\beta$ coefficients are zero&lt;/li&gt;
   &lt;li&gt;Reduced model: $Y=\beta_0 + \epsilon \Rightarrow$ LSE $\hat\beta_0 =  \bar y$&lt;/li&gt;
@@ -4965,7 +4850,7 @@ where $RSS_F$ is from full model and $RSS_R$ is from reduced model&lt;/li&gt;
 but if F-test is not sig $\Rightarrow$ cant trust t-test result : all coeffs are ZERO&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;gauss-markov-theorem&quot;&gt;Gauss-Markov Theorem&lt;/h3&gt;
+&lt;h2 id=&quot;33-gauss-markov-theorem&quot;&gt;3.3. Gauss-Markov Theorem&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;Assumption: $E(\epsilon_i) = 0, Var(\epsilon_i) = \sigma^2 &amp;lt; \infty\text{,  } \epsilon_i$’s are independent&lt;/li&gt;
   &lt;li&gt;among all linear unbiased estimator $\tilde{\beta} = Cy$ &amp;amp; $E(\tilde{\beta}) = \beta)$&lt;br /&gt;
@@ -4974,7 +4859,7 @@ Then, $Var(\hat\beta) \le Var(\tilde{\beta})$ when  LSE $\hat\beta$ = BLUE&lt;/l
   &lt;li&gt;Conversely, there may exist biased estimators with smaller MSE than LSE.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;em&gt;Properties of Good estimators&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&quot;34-properties-of-good-estimators&quot;&gt;3.4. &lt;em&gt;Properties of Good estimators&lt;/em&gt;&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;unbiaseness&lt;/li&gt;
   &lt;li&gt;efficiency(small variance)&lt;/li&gt;
@@ -4982,44 +4867,43 @@ Then, $Var(\hat\beta) \le Var(\tilde{\beta})$ when  LSE $\hat\beta$ = BLUE&lt;/l
   &lt;li&gt;sufficiency&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;model-fit&quot;&gt;Model fit&lt;/h3&gt;
+&lt;h2 id=&quot;35-model-fit&quot;&gt;3.5. Model fit&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;Model evaluation based on training data&lt;/li&gt;
-  &lt;li&gt;Measure of model fit: $R^2$, Residual Standard Error(RSE)
-\(R^2 = 1 - \frac{RSS}{TSS}\) which means the proportion of total variation that your model explains&lt;br /&gt;
+  &lt;li&gt;Measure of model fit: $R^2$, $\scriptstyle\text{Residual Standard Error(RSE)}$
+\(R^2 = 1 - \frac{RSS}{TSS}\)
+which means the proportion of total variation that your model explains&lt;br /&gt;
 \(RSE = \sqrt{\frac{RSS}{n-p-1}} = \hat\sigma^2\)&lt;/li&gt;
-  &lt;li&gt;As number of predictors increases, $R^2$ increases and always the most complex model selected - is the problem&lt;/li&gt;
+  &lt;li&gt;Problem: As number of predictors increases, $R^2$ increases and always the most complex model selected&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;prediction&quot;&gt;Prediction&lt;/h3&gt;
-&lt;p&gt;1) Uncertainty between $\hat Y$ &amp;amp; $f(X) = X^T\beta$&lt;/p&gt;
+&lt;h2 id=&quot;36-prediction-errors&quot;&gt;3.6. Prediction Errors&lt;/h2&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;Variation due to $\hat\beta$ (Model variance):&lt;br /&gt;
-in ideal situation, we can drive number of training datasets from population and have several f(x) and $\hat\beta$&lt;/li&gt;
-  &lt;li&gt;Confidence interval (C.I.) for Y&lt;/li&gt;
-  &lt;li&gt;$E(\hat Y) = x^T\beta = f(x)$, $Var(\hat Y) = \sigma^2 x^T( X^TX)^{-1}x$&lt;/li&gt;
-  &lt;li&gt;$(1-\alpha)100$% C.I. for Y&lt;br /&gt;
-= $\hat Y \pm t_{(1-\alpha/2, n-p-1)} \hat\sigma\sqrt{x^T(X^TX)^{-1}x}$&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;1) Uncertainty between $\hat Y$ &amp;amp; $f(X) = X^T\beta$&lt;br /&gt;
+  Variation due to $\hat\beta$ (Model variance):&lt;br /&gt;
+  in ideal situation, we can drive number of training datasets from population and have several f(x) and $\hat\beta$&lt;br /&gt;
+  $\scriptstyle\text{Confidence interval}$ C.I. for Y:&lt;br /&gt;
+  $E(\hat Y) = x^T\beta = f(x)$, $Var(\hat Y) = \sigma^2 x^T( X^TX)^{-1}x$&lt;br /&gt;
+  $\therefore (1-\alpha)100$% C.I. for Y = $\hat Y \pm t_{(1-\alpha/2, n-p-1)} \hat\sigma\sqrt{x^T(X^TX)^{-1}x}$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;2) Model bias:&lt;br /&gt;
+caused by assuming a linear model for f(x).&lt;br /&gt;
+$\rightarrow$ (1)(2) are reducible error&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;3) Uncertainty between Y &amp;amp; $\hat Y$:&lt;br /&gt;
+$\scriptstyle\text{Prediction interval}$ P.I. = reducible + irreducible error&lt;br /&gt;
+for (new, unseen) test obs. $x_0 = (1, x_{01}, \ldots, x_{op})^T$,&lt;br /&gt;
+$\hat Y_0 = x_0^T \beta$,&lt;br /&gt;
+$Var(\hat Y_0) =  \sigma^2 + \sigma^2 x_0^T( X^TX)^{-1}x_0$ $\scriptstyle\text{(irreducible + reducible)}$&lt;br /&gt;
+$\therefore (1-\alpha)100$% P.I. for $Y_0$ =  $\hat Y_0 \pm t_{(1-\alpha/2, n-p-1)} \hat\sigma\sqrt{1+x^T(X^TX)^{-1}x}$&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;2) Model bias:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;caused by assuming a linear model for f(x).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;(1)(2) are reducible error&lt;/p&gt;
-
-&lt;p&gt;3) Uncertainty between Y &amp;amp; $\hat Y$:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Prediction interval (P.I.) = reducible + irreducible error&lt;/li&gt;
-  &lt;li&gt;(new unseen obs.) test obs. $x_0 = (1, x_{01}, \ldots, x_{op})^T$&lt;/li&gt;
-  &lt;li&gt;$\hat Y_0 = x_0^T \beta$,&lt;br /&gt;
-$Var(\hat Y_0) =  \sigma^2 + \sigma^2 x_0^T( X^TX)^{-1}x_0$ (irreducible + reducible)&lt;/li&gt;
-  &lt;li&gt;$(1-\alpha)100$% P.I. for $Y_0$&lt;br /&gt;
-=  $\hat Y_0 \pm t_{(1-\alpha/2, n-p-1)} \hat\sigma\sqrt{1+x^T(X^TX)^{-1}x}$&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;k-nearest-neighbor-regression&quot;&gt;K-Nearest Neighbor Regression&lt;/h3&gt;
+&lt;h2 id=&quot;37-in-k-nearest-neighbor-regression&quot;&gt;3.7. in K-Nearest Neighbor Regression&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;Nonparameric method: No assumption of f(x)&lt;br /&gt;
 \(\hat f(x_0) = \frac{1}{K}\sum_{x_i\in\mathcal N_k(x_0)} y_i\)
@@ -5037,7 +4921,7 @@ $Var(\hat Y_0) =  \sigma^2 + \sigma^2 x_0^T( X^TX)^{-1}x_0$ (irreducible + reduc
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;curse-of-dimensionality&quot;&gt;Curse of Dimensionality&lt;/h3&gt;
+&lt;h2 id=&quot;38-curse-of-dimensionality&quot;&gt;3.8. Curse of Dimensionality&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;to capture 10% data for neighbor space from variable X…
     &lt;ul&gt;
@@ -5049,7 +4933,7 @@ $Var(\hat Y_0) =  \sigma^2 + \sigma^2 x_0^T( X^TX)^{-1}x_0$ (irreducible + reduc
   &lt;/li&gt;
   &lt;li&gt;Reduction of r : Average using fewer obs. small K : higher variance of the fit, poor prediction&lt;/li&gt;
   &lt;li&gt;For the smae density, when p=1, n=100 -&amp;gt; when p=10, n = $100^{10}$&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="studies" /><summary type="html">2020-04-03 Week 3</summary></entry><entry><title type="html">Statistical Mining - Chapter 2</title><link href="http://0.0.0.0:4000/stat_ch2" rel="alternate" type="text/html" title="Statistical Mining - Chapter 2" /><published>2020-03-16T00:00:00+09:00</published><updated>2020-03-16T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch2</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch2">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="studies" /><summary type="html"></summary></entry><entry><title type="html">Statistical Mining - Chapter 2</title><link href="http://0.0.0.0:4000/stat_ch2" rel="alternate" type="text/html" title="Statistical Mining - Chapter 2" /><published>2020-03-16T00:00:00+09:00</published><updated>2020-03-16T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch2</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch2">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#chapter-2-supervised-learning&quot; id=&quot;markdown-toc-chapter-2-supervised-learning&quot;&gt;Chapter 2. Supervised Learning&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#21-prediction&quot; id=&quot;markdown-toc-21-prediction&quot;&gt;2.1. Prediction&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#22-inference&quot; id=&quot;markdown-toc-22-inference&quot;&gt;2.2. Inference&lt;/a&gt;&lt;/li&gt;
@@ -5071,8 +4955,6 @@ $Var(\hat Y_0) =  \sigma^2 + \sigma^2 x_0^T( X^TX)^{-1}x_0$ (irreducible + reduc
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;2020-03-16 Week 2 ~ 2020-04-03 Week 3&lt;/p&gt;
 
 &lt;h1 id=&quot;chapter-2-supervised-learning&quot;&gt;Chapter 2. Supervised Learning&lt;/h1&gt;
 
