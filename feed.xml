@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-27T12:14:11+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion Coordinator Chatbot Dataset with GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion Coordinator Chatbot Dataset with GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-27T15:17:08+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion Coordinator Chatbot Dataset with GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion Coordinator Chatbot Dataset with GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
 
 &lt;h2 id=&quot;11-workspace&quot;&gt;1.1. Workspace&lt;/h2&gt;
 &lt;ul&gt;
@@ -6089,7 +6089,210 @@ weighted avg       0.97      0.97      0.97      1491
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;comment&quot;&gt;comment&lt;/h1&gt;
-&lt;p&gt;데이터사이언스 복수전공 후 첫 강의. 중간고사까지 배웠던 기본적인 전처리와 ML 함수들을 적용했다. 추가적으로 imblanced data case를 SMOTE 패키지를 사용해 간단히 처리해보았다. 당시 수업에서 가장 높은 accuracy를 기록했다.&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">2020-1. NLP</summary></entry><entry><title type="html">Statistical Mining - Chapter 3</title><link href="http://0.0.0.0:4000/stat_ch3" rel="alternate" type="text/html" title="Statistical Mining - Chapter 3" /><published>2020-04-03T00:00:00+09:00</published><updated>2020-04-03T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch3</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch3">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;p&gt;데이터사이언스 복수전공 후 첫 강의. 중간고사까지 배웠던 기본적인 전처리와 ML 함수들을 적용했다. 추가적으로 imblanced data case를 SMOTE 패키지를 사용해 간단히 처리해보았다. 당시 수업에서 가장 높은 accuracy를 기록했다.&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">2020-1. NLP</summary></entry><entry><title type="html">Statistical Mining - Chapter 4</title><link href="http://0.0.0.0:4000/stat_ch4" rel="alternate" type="text/html" title="Statistical Mining - Chapter 4" /><published>2020-04-16T00:00:00+09:00</published><updated>2020-04-16T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch4</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch4">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-4-classification&quot; id=&quot;markdown-toc-chapter-4-classification&quot;&gt;Chapter 4. Classification&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#41-problem-of-linear-regression-in-classification&quot; id=&quot;markdown-toc-41-problem-of-linear-regression-in-classification&quot;&gt;4.1. Problem of linear regression in classification:&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#42-logistic-regression&quot; id=&quot;markdown-toc-42-logistic-regression&quot;&gt;4.2. Logistic Regression&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#43-log-likelyhood-function-mle&quot; id=&quot;markdown-toc-43-log-likelyhood-function-mle&quot;&gt;4.3. Log-Likelyhood Function: MLE&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#44-multinomial-logistic-regression-k-classes-k2&quot; id=&quot;markdown-toc-44-multinomial-logistic-regression-k-classes-k2&quot;&gt;4.4. Multinomial Logistic Regression: K classes (K&amp;gt;2)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#45-lda&quot; id=&quot;markdown-toc-45-lda&quot;&gt;4.5. LDA&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#46-qda&quot; id=&quot;markdown-toc-46-qda&quot;&gt;4.6. QDA&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#47-lda-vs-logistic-regression&quot; id=&quot;markdown-toc-47-lda-vs-logistic-regression&quot;&gt;4.7. LDA vs. Logistic Regression&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;2020-04-15&lt;/p&gt;
+
+&lt;h1 id=&quot;chapter-4-classification&quot;&gt;Chapter 4. Classification&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Response Y : Qualitative (categorical) variable.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;41-problem-of-linear-regression-in-classification&quot;&gt;4.1. Problem of linear regression in classification:&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Two group: Y= 0 or 1&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Model prediction: $\hat y_i = x_i^T \hat\beta$; $\quad$ where b is LSE&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Decision rule: if $\hat y_i &amp;gt; 0.5$; $\quad$ i goes to group 1&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;possible value of $\hat Y &amp;gt;1 \text{ or } \hat Y &amp;lt;0$: $\quad$ do not fit for the range of Y&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;42-logistic-regression&quot;&gt;4.2. Logistic Regression&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Supoose that Y has 2 classes:&lt;/p&gt;
+
+    &lt;p&gt;$ log \frac{p(X)}{1-p(X)} = \beta_0 + \beta_1X_1 + \cdots + \beta_pX_p = X^T \beta $&lt;br /&gt;
+where $p(X) = P(Y=1|X)$, $\quad X=(1,X_1, \ldots, X_p)^T$, $\quad$ $\beta = (\beta_0,\beta_1,\ldots, \beta_p)^T $&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;this model has no error term: &lt;strong&gt;GLM&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;$ E(Y | X) = ? = X^T\beta $; $\quad$ a black box - link function&lt;/p&gt;
+
+    &lt;p&gt;as X is fixed, Y is random variable&lt;/p&gt;
+
+    &lt;p&gt;$ Y | X ~ \mathit{Bernoulli} (p(X))$, $\quad$ $0 &amp;lt; E(Y | X)=p(X) &amp;lt; 1$&lt;/p&gt;
+
+    &lt;p&gt;so we use log transformation, “logistic fuction”&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;again, $ log\frac{p(X)}{1-p(X)} = \beta_0 + \beta_1X_1 + \cdots + \beta_pX_p = X^T \beta $&lt;br /&gt;
+we don’t know the left side : we can’t use LSE&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;43-log-likelyhood-function-mle&quot;&gt;4.3. Log-Likelyhood Function: MLE&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;when $log\frac{p(X)}{1-p(X)}$, $\quad$ $p(X)= \frac{exp(x^T\beta)}{1+exp(x^T\beta)}$, $\quad$ $exp(x^T\beta) = \frac{p(X)}{1-p(X)}$&lt;/p&gt;
+
+    &lt;p&gt;$Y_i | X_i \sim \mathit{Bernoulli}_{(p(X_i))}$&lt;/p&gt;
+
+    &lt;p&gt;$\prod_{i=1}^N p(x_i)^{y_i} (1-p(x_i))^{1-y_i}$&lt;/p&gt;
+
+    &lt;p&gt;$\prod_{i:y_i=1}p(x_i) \prod_{i:y_i=0}(1-p(x_i))$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;MLE&lt;/strong&gt;: \(\hat\beta = \text{max}_\beta [\prod_{i:y_i=1} \frac{exp(x^T\beta)}{1+exp(x^T\beta)} \prod_{i:y_i=0} \frac{1}{1+exp(x^T\beta)}]\)&lt;/p&gt;
+
+    &lt;p&gt;when take log, log-like function $l(\beta) = \sum_{i:y=1}log(\frac{exp(x^T\beta}{1+exp(x^T\beta)}) + \sum_{i:y_i=0} (\frac{1}{1+exp(x^T\beta)})$&lt;/p&gt;
+
+    &lt;p&gt;$\Rightarrow \frac{\partial \; l(\beta)}{\partial\beta} = 0 $&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;if $\hat\beta &amp;gt;0$ , p(X) increases&lt;br /&gt;
+if $\hat\beta &amp;lt;0$ , p(X) decreases&lt;br /&gt;
+(not a linear relationship, but just about direction)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;44-multinomial-logistic-regression-k-classes-k2&quot;&gt;4.4. Multinomial Logistic Regression: K classes (K&amp;gt;2)&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;$ log\frac{P(Y=k | X=x)}{P(Y=K | X=x)} = x^T\beta_k $&lt;/p&gt;
+
+    &lt;p&gt;for $ k=1,\cdots, K-1$ with $\sum_{k=1}^K P(Y=k | X=x) = 1 $&lt;/p&gt;
+
+    &lt;p&gt;the choice of denominator the $K_{th}$ class is arbitary&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;we can have K-1 equations&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;By soloving for $P(Y=k | X=x)$,&lt;/p&gt;
+
+    &lt;p&gt;$P(Y=k | X=x) = \frac{exp(x^T\beta_k)}{1+\sum_{j=1}^{K-1} exp(x^T\beta_j)}$&lt;/p&gt;
+
+    &lt;p&gt;$P(Y=K | X=x)= \frac 1{1+\sum_{j=1}^{K-1} exp(x^T\beta_j)}$&lt;/p&gt;
+
+    &lt;p&gt;$\Rightarrow$ ML estimation(by numerical method): we can have K-1 number of $\hat\beta_k$ (MLE)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;2020-04-16&lt;/p&gt;
+
+&lt;h2 id=&quot;45-lda&quot;&gt;4.5. LDA&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Suppose $f_k(x)$ is the density of &lt;strong&gt;X&lt;/strong&gt; in class &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt;,&lt;/p&gt;
+
+    &lt;p&gt;and let $\pi_k$ be the prior probability of class &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt; with $\sum_{k=1}^K \pi_k =1$&lt;/p&gt;
+
+    &lt;p&gt;$f_k(\underline{x}) = P(\underline X=\underline x | Y=k)$&lt;/p&gt;
+
+    &lt;p&gt;($f_k(x)$는 &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt; 그룹 안에 있는 &lt;strong&gt;X&lt;/strong&gt; 의 밀도함수, $\pi_k$는 $P(Y=k)$로 &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt; 그룹일 확률)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Bayes Theorem:&lt;/p&gt;
+
+    &lt;p&gt;$ P(Y=k | X=x) = \frac{f_k(x)\pi_k}{\sum_{j=1}^K f_j(x)\pi_j}$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Assumptions:
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;$f_k(x) = MVN(\mu_k,\Sigma_k)$ $\scriptstyle\text{(p by 1, p by p)}$&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;$\Sigma_k = \Sigma$ for all &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt;, groups have same var-covariance sturcture.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Find &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt; maximizing $logP(Y=k | X=x)$:&lt;br /&gt;
+\(\begin{align*} ln P(Y=k \| X=x) &amp;amp;= ln\frac{f_k(x)\pi_k}{\sum_{j=1}^K f_j(x)\pi_j}\\
+                    			    &amp;amp;= ln(f_k(x)\pi_k) + C_1 \\
+                                  &amp;amp;= \cdots \\
+                                  &amp;amp;= ln\pi_k - \frac{1}{2}\mu_k^T\Sigma^{-1}\mu_k + x^T\Sigma^{-1}\mu_k + C_3\\
+                                  &amp;amp;= \delta_k(x) + C_3 \quad \text{ : Linear discriminant function (linear in X)} \\
+               \Rightarrow \hat Y &amp;amp;= \text{argmax}_k \delta_k(x)
+\end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Decision boundary is also in a linear form.  &lt;br /&gt;
+when solving $ { \underline{x} : \delta_l(\underline{x}) = \delta_m(\underline{x}) }$,&lt;br /&gt;
+we can have linear form of decision boundary.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Estimate model parameter : mu, pi, sigma&lt;br /&gt;
+$\hat\pi_k = n_k/n$&lt;br /&gt;
+$\hat\mu_k = \sum_{y_i=k}x_i / n_k $&lt;br /&gt;
+\(\begin{align*}\hat\Sigma_k = \sum_{k=1}^K\sum_{y_i=k}(x_i-\hat\mu_k)(x_i-\hat\mu_k)^T / (n-K) \end{align*}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;46-qda&quot;&gt;4.6. QDA&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Assumption: Same as LDA except for “$\Sigma_k = \Sigma$”&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Quadratic discriminant function: $\delta_k(x)=  ln\pi_k - \frac{1}{2}ln | \Sigma_k | - \frac{1}{2}(x-\mu_k)^T\Sigma^{-1}(x-\mu_k) $&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Decision boundary is in quadratic line&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Estimation of parameters:&lt;br /&gt;
+$\hat\pi_k = n_k/n$&lt;br /&gt;
+$\hat\mu_k = \sum_{y_i=k}x_i / n_k $&lt;br /&gt;
+\(\begin{align*}\hat\Sigma_k =\sum_{y_i=k}(x_i-\hat\mu_k)(x_i-\hat\mu_k)^T / (n-1) \end{align*}\) (only obs. in $k_{th}$ group)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;which is more complex?&lt;br /&gt;
+$\rightarrow$ quadratic: number of parameters, sigma &amp;amp; decision boundary is more flexible.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;47-lda-vs-logistic-regression&quot;&gt;4.7. LDA vs. Logistic Regression&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;LDA:&lt;br /&gt;
+MVN assumption needed&lt;br /&gt;
+Qualitative(categorical) inputs are not available&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Logistic:&lt;br /&gt;
+No assumption needed and Y ~ Bernoulli is evident; $\rightarrow$ robust model&lt;br /&gt;
+Qualitative are available&lt;br /&gt;
+can run F-test to choose more important features&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="studies" /><summary type="html"></summary></entry><entry><title type="html">Statistical Mining - Chapter 3</title><link href="http://0.0.0.0:4000/stat_ch3" rel="alternate" type="text/html" title="Statistical Mining - Chapter 3" /><published>2020-04-03T00:00:00+09:00</published><updated>2020-04-03T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch3</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch3">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#chapter-3-linear-regression&quot; id=&quot;markdown-toc-chapter-3-linear-regression&quot;&gt;Chapter 3. Linear Regression&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#31-least-squares&quot; id=&quot;markdown-toc-31-least-squares&quot;&gt;3.1. Least Squares&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#32-hypothesis-test-for-beta_j&quot; id=&quot;markdown-toc-32-hypothesis-test-for-beta_j&quot;&gt;3.2. Hypothesis test for $\beta_j$:&lt;/a&gt;        &lt;ul&gt;
