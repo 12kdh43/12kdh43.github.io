@@ -23,7 +23,7 @@
     
       
       <item>
-        <title>Data Mining - K-POP Fandom Data Analysis with Graph ML</title>
+        <title>Data Mining - K-POP Fandom Data Analysis with networkX</title>
         
           <description>
 </description>
@@ -37,31 +37,15 @@
     
       
       <item>
-        <title>Data Mining - Stock Market Graph Analysis</title>
+        <title>Data Mining - Stock Market Network Analysis</title>
         
-          <description>&lt;h1 class=&quot;no_toc&quot; id=&quot;final-project&quot;&gt;Final Project&lt;/h1&gt;
-
+          <description>
 </description>
         
         <pubDate>Fri, 21 May 2021 00:00:00 +0900</pubDate>
         <link>
         http://0.0.0.0:4000/DM_final_proj</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/DM_final_proj</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Applied ML - Heart Disease Pred</title>
-        
-          <description>&lt;h2 id=&quot;2021-1-applied-machine-learning-assignment1&quot;&gt;2021-1. Applied Machine Learning Assignment1&lt;/h2&gt;
-
-</description>
-        
-        <pubDate>Sun, 04 Apr 2021 16:00:00 +0900</pubDate>
-        <link>
-        http://0.0.0.0:4000/AppML_Assginment1</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/AppML_Assginment1</guid>
       </item>
       
     
