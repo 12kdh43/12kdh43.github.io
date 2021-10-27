@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-27T15:17:08+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion Coordinator Chatbot Dataset with GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion Coordinator Chatbot Dataset with GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-27T15:21:31+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion Coordinator Chatbot Dataset with GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion Coordinator Chatbot Dataset with GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
 
 &lt;h2 id=&quot;11-workspace&quot;&gt;1.1. Workspace&lt;/h2&gt;
 &lt;ul&gt;
@@ -6239,7 +6239,7 @@ if $\hat\beta &amp;lt;0$ , p(X) decreases&lt;br /&gt;
                     			    &amp;amp;= ln(f_k(x)\pi_k) + C_1 \\
                                   &amp;amp;= \cdots \\
                                   &amp;amp;= ln\pi_k - \frac{1}{2}\mu_k^T\Sigma^{-1}\mu_k + x^T\Sigma^{-1}\mu_k + C_3\\
-                                  &amp;amp;= \delta_k(x) + C_3 \quad \text{ : Linear discriminant function (linear in X)} \\
+                                  &amp;amp;= \delta_k(x) + C_3 \quad \scriptstyle\text{ : Linear discriminant function (linear in X)} \\
                \Rightarrow \hat Y &amp;amp;= \text{argmax}_k \delta_k(x)
 \end{align*}\)&lt;/p&gt;
   &lt;/li&gt;
