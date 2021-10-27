@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-27T16:21:35+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion Coordinator Chatbot Dataset with GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion Coordinator Chatbot Dataset with GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-10-27T18:05:09+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion Coordinator Chatbot Dataset with GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion Coordinator Chatbot Dataset with GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;h1 id=&quot;1-about&quot;&gt;1. About&lt;/h1&gt;
 
 &lt;h2 id=&quot;11-workspace&quot;&gt;1.1. Workspace&lt;/h2&gt;
 &lt;ul&gt;
@@ -6539,11 +6539,13 @@ $\rightarrow$ Supervised Learning: A set of methods estimating &lt;strong&gt;$f$
 $\text{Accuracy of } \; \hat{Y} \text{ depends on reducible &amp;amp; irreducible errors}$&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
+    &lt;p&gt;as $\hat{f}$ and &lt;strong&gt;X&lt;/strong&gt; is given(fixed),&lt;/p&gt;
+
     &lt;p&gt;&lt;strong&gt;$E[Y-\hat{Y}]^2 = [f(X)-\hat{f}(X)]^2 + Var(\epsilon)$&lt;/strong&gt;&lt;br /&gt;
 $\quad (MSE)\quad\quad (reducible)\quad (irreducible)$&lt;/p&gt;
 
     &lt;p&gt;Reducible error : controlable, can be reduced by selecting a better model
-  Irreducible error: uncontrolable, nature of data&lt;/p&gt;
+Irreducible error: uncontrolable, nature of data&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -6566,8 +6568,9 @@ $\rightarrow$ Depends on your Goal of analysis&lt;/li&gt;
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;Step 1: Assume about the functional form of $f$&lt;br /&gt;
-$\text{e.x) when } X_j = ( x_{1j}, \ldots , x_{nj} ) ^T : n \ast 1$ obs.; $\;$ vector for the $j^{th}$ predictor&lt;br /&gt;
-$\rightarrow linear: f(X)= \beta_0 + \beta_1X_1 + … + \beta_pX_p$&lt;/p&gt;
+$\text{e.x) when } X_j = ( x_{1j}, \ldots , x_{nj} ) ^T : n \ast 1$ obs.; $\;$ vector for the $j_{th}$ predictor&lt;br /&gt;
+simply estimate $ p+1 $ coefficients $\beta_0, \beta_1, \ldots, \beta_p$&lt;br /&gt;
+$\rightarrow linear form: f(X)= \beta_0 + \beta_1X_1 + … + \beta_pX_p$&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Step 2: Estimate Parameters&lt;br /&gt;
@@ -6575,13 +6578,13 @@ $Y \approx \hat{\beta}_0 + \hat{\beta}_1X_1 + … + \hat{\beta}_pX_p = \hat{f}(X
   &lt;/li&gt;
   &lt;li&gt;Disadvantage: Specific form of $f$&lt;br /&gt;
 $\rightarrow\;$ Not match with the true $f$: poor estimation &amp;amp; poor prediction&lt;br /&gt;
-$\rightarrow\;$ Flextible parametric model : model with more parameters
+$\rightarrow\;$ Flexible parametric model : model with more parameters
     &lt;ul&gt;
       &lt;li&gt;Flexible model $\equiv$ Complex model&lt;br /&gt;
-but overfitting problem still remains: model follows errors or noises&lt;/li&gt;
+but overfitting problem still remains: model could follow errors or noises&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;Underfitting vs Overfitting
+  &lt;li&gt;Underfitting vs Overfitting&lt;br /&gt;
 under: estimation has not enough accuracy, miss to capture the true structure&lt;br /&gt;
 over: more complexity than true $f$&lt;/li&gt;
 &lt;/ul&gt;
@@ -6589,10 +6592,10 @@ over: more complexity than true $f$&lt;/li&gt;
 &lt;h2 id=&quot;25-nonparametric-methods-data-driven-approach&quot;&gt;2.5. Nonparametric Methods: Data-driven approach&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;No assumptions about functional form of $f$&lt;br /&gt;
-$\Rightarrow $ wider range of possible shapes of $f$&lt;/li&gt;
+$\Rightarrow $ potential to accurately fit a wider range of possible shapes of $f$&lt;/li&gt;
   &lt;li&gt;Disadvantage:
     &lt;ul&gt;
-      &lt;li&gt;1) A vary large &lt;strong&gt;#&lt;/strong&gt; of obs. is required to get an accurate $f$&lt;br /&gt;
+      &lt;li&gt;1) Large &lt;strong&gt;#&lt;/strong&gt; of obs. are required to get an accurate $f$&lt;br /&gt;
 (relative to a parametric method)&lt;/li&gt;
       &lt;li&gt;2) Overfitting $\Leftrightarrow$ &lt;strong&gt;Level of smoothness&lt;/strong&gt;; $\;$ Model complexity&lt;br /&gt;
 (how to determine it?)&lt;/li&gt;
@@ -6602,7 +6605,7 @@ $\Rightarrow $ wider range of possible shapes of $f$&lt;/li&gt;
 
 &lt;h3 id=&quot;251-example-of-nonparametric-model-knn-reg&quot;&gt;2.5.1. Example of Nonparametric model: KNN Reg.&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;Idea: Similar inputs have Similar output&lt;br /&gt;
+  &lt;li&gt;Idea: Similar inputs have Similar outputs&lt;br /&gt;
 Step: when predicting $\hat{Y}_0$ with input $X_0$
     &lt;ul&gt;
       &lt;li&gt;1) Determine $K$ (level of smoothness)&lt;/li&gt;
@@ -6611,10 +6614,10 @@ Step: when predicting $\hat{Y}_0$ with input $X_0$
 if K==1: Y = perfect fit; no training error&lt;/p&gt;
       &lt;/li&gt;
       &lt;li&gt;
-        &lt;p&gt;2) find $K$ closest training obs. from the target input point($X_0$) using Euclidean distance&lt;br /&gt;
-\(\rightarrow\hat{Y}_0 = \frac{1}{K}\sum_{x_i\in \mathcal N}^K y_i\)&lt;/p&gt;
+        &lt;p&gt;2) find $K$ closest training obs. from the target input point($X_0$) using Euclidean distance&lt;/p&gt;
       &lt;/li&gt;
-      &lt;li&gt;3) average of these #k Y values = $\hat{Y}_0$&lt;/li&gt;
+      &lt;li&gt;3) average of these #k Y values&lt;br /&gt;
+\(\rightarrow\hat{Y}_0 = \frac{1}{K}\sum_{x_i\in \mathcal N}^K y_i\)&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;Effect of $K$ (tuning parameter/ model flexibility parameter)
@@ -6697,10 +6700,10 @@ $\scriptstyle\text{different fit’s from randomness of training sets}$&lt;/li&g
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;$Var(\hat{f(x_0})$ : model variance&lt;/p&gt;
+    &lt;p&gt;$Var(\hat{f}(x_0)$ : model variance&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;$ [Bias(\hat{f(x_0})]$ : Systematic model error ( caused by model assumptions; e.g. true &lt;em&gt;f&lt;/em&gt;: nonlinear)&lt;/p&gt;
+    &lt;p&gt;$ [Bias(\hat{f}(x_0)]$ : Systematic model error ( caused by model assumptions; e.g. true &lt;em&gt;f&lt;/em&gt;: nonlinear)&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;$ Var(\epsilon)$ : Irreducible error&lt;/p&gt;

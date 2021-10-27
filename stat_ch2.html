@@ -252,11 +252,13 @@ $\rightarrow$ Supervised Learning: A set of methods estimating <strong>$f$</stro
 $\text{Accuracy of } \; \hat{Y} \text{ depends on reducible &amp; irreducible errors}$</p>
   </li>
   <li>
+    <p>as $\hat{f}$ and <strong>X</strong> is given(fixed),</p>
+
     <p><strong>$E[Y-\hat{Y}]^2 = [f(X)-\hat{f}(X)]^2 + Var(\epsilon)$</strong><br />
 $\quad (MSE)\quad\quad (reducible)\quad (irreducible)$</p>
 
     <p>Reducible error : controlable, can be reduced by selecting a better model
-  Irreducible error: uncontrolable, nature of data</p>
+Irreducible error: uncontrolable, nature of data</p>
   </li>
 </ul>
 
@@ -279,8 +281,9 @@ $\rightarrow$ Depends on your Goal of analysis</li>
 <ul>
   <li>
     <p>Step 1: Assume about the functional form of $f$<br />
-$\text{e.x) when } X_j = ( x_{1j}, \ldots , x_{nj} ) ^T : n \ast 1$ obs.; $\;$ vector for the $j^{th}$ predictor<br />
-$\rightarrow linear: f(X)= \beta_0 + \beta_1X_1 + … + \beta_pX_p$</p>
+$\text{e.x) when } X_j = ( x_{1j}, \ldots , x_{nj} ) ^T : n \ast 1$ obs.; $\;$ vector for the $j_{th}$ predictor<br />
+simply estimate $ p+1 $ coefficients $\beta_0, \beta_1, \ldots, \beta_p$<br />
+$\rightarrow linear form: f(X)= \beta_0 + \beta_1X_1 + … + \beta_pX_p$</p>
   </li>
   <li>
     <p>Step 2: Estimate Parameters<br />
@@ -288,13 +291,13 @@ $Y \approx \hat{\beta}_0 + \hat{\beta}_1X_1 + … + \hat{\beta}_pX_p = \hat{f}(X
   </li>
   <li>Disadvantage: Specific form of $f$<br />
 $\rightarrow\;$ Not match with the true $f$: poor estimation &amp; poor prediction<br />
-$\rightarrow\;$ Flextible parametric model : model with more parameters
+$\rightarrow\;$ Flexible parametric model : model with more parameters
     <ul>
       <li>Flexible model $\equiv$ Complex model<br />
-but overfitting problem still remains: model follows errors or noises</li>
+but overfitting problem still remains: model could follow errors or noises</li>
     </ul>
   </li>
-  <li>Underfitting vs Overfitting
+  <li>Underfitting vs Overfitting<br />
 under: estimation has not enough accuracy, miss to capture the true structure<br />
 over: more complexity than true $f$</li>
 </ul>
@@ -302,10 +305,10 @@ over: more complexity than true $f$</li>
 <h2 id="25-nonparametric-methods-data-driven-approach">2.5. Nonparametric Methods: Data-driven approach</h2>
 <ul>
   <li>No assumptions about functional form of $f$<br />
-$\Rightarrow $ wider range of possible shapes of $f$</li>
+$\Rightarrow $ potential to accurately fit a wider range of possible shapes of $f$</li>
   <li>Disadvantage:
     <ul>
-      <li>1) A vary large <strong>#</strong> of obs. is required to get an accurate $f$<br />
+      <li>1) Large <strong>#</strong> of obs. are required to get an accurate $f$<br />
 (relative to a parametric method)</li>
       <li>2) Overfitting $\Leftrightarrow$ <strong>Level of smoothness</strong>; $\;$ Model complexity<br />
 (how to determine it?)</li>
@@ -315,7 +318,7 @@ $\Rightarrow $ wider range of possible shapes of $f$</li>
 
 <h3 id="251-example-of-nonparametric-model-knn-reg">2.5.1. Example of Nonparametric model: KNN Reg.</h3>
 <ul>
-  <li>Idea: Similar inputs have Similar output<br />
+  <li>Idea: Similar inputs have Similar outputs<br />
 Step: when predicting $\hat{Y}_0$ with input $X_0$
     <ul>
       <li>1) Determine $K$ (level of smoothness)</li>
@@ -324,10 +327,10 @@ Step: when predicting $\hat{Y}_0$ with input $X_0$
 if K==1: Y = perfect fit; no training error</p>
       </li>
       <li>
-        <p>2) find $K$ closest training obs. from the target input point($X_0$) using Euclidean distance<br />
-\(\rightarrow\hat{Y}_0 = \frac{1}{K}\sum_{x_i\in \mathcal N}^K y_i\)</p>
+        <p>2) find $K$ closest training obs. from the target input point($X_0$) using Euclidean distance</p>
       </li>
-      <li>3) average of these #k Y values = $\hat{Y}_0$</li>
+      <li>3) average of these #k Y values<br />
+\(\rightarrow\hat{Y}_0 = \frac{1}{K}\sum_{x_i\in \mathcal N}^K y_i\)</li>
     </ul>
   </li>
   <li>Effect of $K$ (tuning parameter/ model flexibility parameter)
@@ -410,10 +413,10 @@ $\scriptstyle\text{different fit’s from randomness of training sets}$</li>
 
 <ul>
   <li>
-    <p>$Var(\hat{f(x_0})$ : model variance</p>
+    <p>$Var(\hat{f}(x_0)$ : model variance</p>
   </li>
   <li>
-    <p>$ [Bias(\hat{f(x_0})]$ : Systematic model error ( caused by model assumptions; e.g. true <em>f</em>: nonlinear)</p>
+    <p>$ [Bias(\hat{f}(x_0)]$ : Systematic model error ( caused by model assumptions; e.g. true <em>f</em>: nonlinear)</p>
   </li>
   <li>
     <p>$ Var(\epsilon)$ : Irreducible error</p>
@@ -615,9 +618,7 @@ Overall Bayes error rate; $\quad 1 - E[ max_g P(Y=g | X= x) ]$</li>
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
             
-                
-
-    <article class="post-card post-template no-image">
+                    <article class="post-card post-template no-image">
         
         <div class="post-card-content">
             <a class="post-card-content-link" href="/stat_ch3">
@@ -643,12 +644,6 @@ Overall Bayes error rate; $\quad 1 - E[ max_g P(Y=g | X= x) ]$</li>
                 
                     
                 
-                <span class="reading-time">
-                    
-                    
-                      3 min read
-                    
-                </span>
             </footer>
         </div>
     </article>
