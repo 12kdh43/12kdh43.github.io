@@ -50,7 +50,7 @@
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Fashion Coordinator Chatbot Dataset with GNN" />
-    <meta property="og:description" content="1. About 1.1. Workspace Windows 11 &gt; docker - ubuntu kernel &gt; CUDA on WSL import random random.seed(2021) import numpy as np np.random.seed(2021) import tensorflow as tf tf.random.set_seed(2021) tf.device('/device:GPU:0') import networkx as nx import stellargraph as sg import argparse from graph_model import * import os def str2bool(v): """ function: convert" />
+    <meta property="og:description" content="1. About 1.1. Project Goal 1.2. Model Architecture 2. Load Data and Preprocess 3. Initialize a Graph Model 3.1. Generate graphs and edge data for each item categories 4. Model Training 4.1. Load Evaluation Data 4.2. Train with HinSAGE and Link Prediction Error 1. About 1.1. Project Goal Building a" />
     <meta property="og:url" content="http://0.0.0.0:4000/fashion_GNN" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
@@ -60,7 +60,7 @@
     <meta property="article:tag" content="projects" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Fashion Coordinator Chatbot Dataset with GNN" />
-    <meta name="twitter:description" content="1. About 1.1. Workspace Windows 11 &gt; docker - ubuntu kernel &gt; CUDA on WSL import random random.seed(2021) import numpy as np np.random.seed(2021) import tensorflow as tf tf.random.set_seed(2021) tf.device('/device:GPU:0') import networkx as nx import stellargraph as sg import argparse from graph_model import * import os def str2bool(v): """ function: convert" />
+    <meta name="twitter:description" content="1. About 1.1. Project Goal 1.2. Model Architecture 2. Load Data and Preprocess 3. Initialize a Graph Model 3.1. Generate graphs and edge data for each item categories 4. Model Training 4.1. Load Evaluation Data 4.2. Train with HinSAGE and Link Prediction Error 1. About 1.1. Project Goal Building a" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -92,7 +92,7 @@
         "@type": "WebPage",
         "@id": "http://0.0.0.0:4000/fashion_GNN"
     },
-    "description": "1. About 1.1. Workspace Windows 11 &gt; docker - ubuntu kernel &gt; CUDA on WSL import random random.seed(2021) import numpy as np np.random.seed(2021) import tensorflow as tf tf.random.set_seed(2021) tf.device('/device:GPU:0') import networkx as nx import stellargraph as sg import argparse from graph_model import * import os def str2bool(v): """ function: convert"
+    "description": "1. About 1.1. Project Goal 1.2. Model Architecture 2. Load Data and Preprocess 3. Initialize a Graph Model 3.1. Generate graphs and edge data for each item categories 4. Model Training 4.1. Load Evaluation Data 4.2. Train with HinSAGE and Link Prediction Error 1. About 1.1. Project Goal Building a"
 }
     </script>
 
@@ -180,11 +180,154 @@ into the {body} of the default.hbs template -->
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h1 id="1-about">1. About</h1>
+                    <ul id="markdown-toc">
+  <li><a href="#1-about" id="markdown-toc-1-about">1. About</a>    <ul>
+      <li><a href="#11-project-goal" id="markdown-toc-11-project-goal">1.1. Project Goal</a></li>
+      <li><a href="#12-model-architecture" id="markdown-toc-12-model-architecture">1.2. Model Architecture</a></li>
+    </ul>
+  </li>
+  <li><a href="#2-load-data-and-preprocess" id="markdown-toc-2-load-data-and-preprocess">2. Load Data and Preprocess</a></li>
+  <li><a href="#3-initialize-a-graph-model" id="markdown-toc-3-initialize-a-graph-model">3. Initialize a Graph Model</a>    <ul>
+      <li><a href="#31-generate-graphs-and-edge-data-for-each-item-categories" id="markdown-toc-31-generate-graphs-and-edge-data-for-each-item-categories">3.1. Generate graphs and edge data for each item categories</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-model-training" id="markdown-toc-4-model-training">4. Model Training</a>    <ul>
+      <li><a href="#41-load-evaluation-data" id="markdown-toc-41-load-evaluation-data">4.1. Load Evaluation Data</a></li>
+      <li><a href="#42-train-with-hinsage-and-link-prediction-error" id="markdown-toc-42-train-with-hinsage-and-link-prediction-error">4.2. Train with HinSAGE and Link Prediction Error</a></li>
+    </ul>
+  </li>
+</ul>
 
-<h2 id="11-workspace">1.1. Workspace</h2>
+<h1 id="1-about">1. About</h1>
+
+<h2 id="11-project-goal">1.1. Project Goal</h2>
+
 <ul>
-  <li>Windows 11 &gt; docker - ubuntu kernel &gt; CUDA on WSL</li>
+  <li>
+    <p>Building a <strong>“Heterogeneous GNN model”</strong> using networkx and stellargraph<br />
+as a submission for <em>Fashion-how Challenge, ETRI, 2021.</em></p>
+  </li>
+  <li>
+    <p>Running GNN model on a cuda:GPU environment  <br />
+Windows 11 &gt; docker - ubuntu kernel &gt; CUDA on WSL</p>
+  </li>
+  <li>
+    <p>Data Reference:<br />
+<em>Euisok Chung at al., “Dataset for Interactive Recommendation System”, HCLT-2020</em></p>
+  </li>
+</ul>
+
+<h2 id="12-model-architecture">1.2. Model Architecture</h2>
+
+<p><img src="/assets/images/architecture_gnn.png" alt="png" /></p>
+
+<h1 id="2-load-data-and-preprocess">2. Load Data and Preprocess</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># a sample of raw metadata DB
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">data_item</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">data_item</span><span class="p">[:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># 4 descriptions for each item
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2607 10428
+BL-001  
+['단추 여밈 의 전체 오픈형 스탠드 칼라 와 브이넥 네크라인 의 결합 스타일 손목 까지 내려오 는 일자형 소매 여유로운 핏 어깨 에서 허리 까지 세로 절개 에 풍성 한 러플 장식 와이드 커프스',  
+'면 100% 구김 이 가 기 쉬운 드라이 클리닝 권장',  
+'시원_해 보이 는 소라색 SKY BLUE 단색 의 깔끔_한 느낌',  
+'여성 스러운 페미닌 한 세련 된 사랑 스러운 깔끔_한 오피스 룩 로맨틱 한 데이트 룩 포멀 한 이미지 단정 한 오피스 걸 룩 이미지']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">cat</span><span class="p">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">g_model</span><span class="p">.</span><span class="n">_metadata</span><span class="p">]</span> <span class="c1"># vectorized with pre-trained subword embedding
+# [(1162, 512), (673, 512), (641, 512), (131, 512)]
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">cat</span><span class="p">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">g_model</span><span class="p">.</span><span class="n">_feats</span><span class="p">]</span> <span class="c1"># vecotrized image features
+# [(1162, 4096), (673, 4096), (641, 4096), (131, 4096)]
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># in 4 categories, each items has 2 vectorized data, 512-length metadata &amp; 4096-length imagedata
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">slot_name</span><span class="p">))</span> <span class="c1"># 4
+</span><span class="k">print</span><span class="p">(</span><span class="n">slot_name</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">slot_item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">shape</span><span class="p">,</span> <span class="n">slot_feat</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">shape</span><span class="p">)</span>
+<span class="c1"># CD-001 (512,) (4096,)
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">cat</span><span class="p">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">g_model</span><span class="p">.</span><span class="n">_meta_similarities</span><span class="p">]</span>
+<span class="c1"># [(1162, 1162), (673, 673), (641, 641), (131, 131)]
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">file_io_edit</span> <span class="kn">import</span> <span class="n">_load_trn_dialog</span>
+<span class="n">dialog</span><span class="p">,</span> <span class="n">coordi</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">delim_dlg</span><span class="p">,</span> <span class="n">delim_crd</span><span class="p">,</span> <span class="n">delim_rwd</span> <span class="o">=</span> \
+                                             <span class="n">_load_trn_dialog</span><span class="p">(</span><span class="n">in_file_dialog</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dialog</span><span class="p">))</span> <span class="c1"># all sentences in full dialogs
+</span><span class="k">print</span><span class="p">(</span><span class="n">dialog</span><span class="p">[:</span><span class="mi">21</span><span class="p">])</span> <span class="c1"># example of the first dialog
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>92444
+['어서 오 세 요 코디 봇 입 니다 무엇 을 도와 드릴_까 요',  
+'처음 대학교 들어가 는데 입 을 옷 코디 해 주 세 요',  
+'신입생 코디 에 어울리 게 화사 한 스웨터 를 추천_해 드릴_게 요',  
+'이 옷 에 어울리 는 치마 로 추천_해 주 세 요',  
+'고객 님 의 키 사이즈 에 맞추 면 이런 옷 도 잘 어울리 실 것 같_은데 어떠 신가 요',  
+'제 가 키 가 작_아서 짧 은 치마 로 추천_해 주 세 요',  
+'상의 색상 과 도 매칭 이 잘 어울리 는 짧 은 치마 입 니다',  
+'어두운 계열 은 없 나 요',  
+'언밸런스 한 컷팅 으로 세련미 를 돋보이 게_하 는 치마 인데 마음 에 드 시_나 요',  
+'나쁘 지_않 네 요 외투 도 추천_해 주 시 겠_어 요',  
+'요즘 계절 에는 가디건 이나 자켓 을 걸치기 에 좋_은데 특정 종류 로 원하 는 게 있 으신가 요',  
+'트렌치 코트 종류 로 추천_해 주 세 요',  
+'이너 색상 과 무난_하 게 잘 어울릴 트렌치 코트 입 니다',  
+'신발 도 추천_해 주 세 요',  
+'운동화 나 구두 중 어떤 걸 선호_하 시_나 요',  
+'운동화 로 추천_해 주 세 요',  
+'어떤 스타일 과 도 무난_하 게 잘 어울리 는 기본 아이템 입 니다',  
+'맘 에 드_네 요 전체 코디샷 볼_수 있 나 요',  
+'네 지금 까지 제안 해 드린 아이템 으로 전체 코디샷 을 제안 해 드립 니다 마음 에 드 시_나 요',  
+'네 마음 에 드_네 요 감사_합 니다',  
+'마음 에 드 신_다 니 다행 입 니다 이용_해 주 셔 서 감사_합 니다']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">file_io_edit</span> <span class="kn">import</span> <span class="n">_episode_slice</span>
+<span class="n">dialog</span> <span class="o">=</span> <span class="n">_episode_slice</span><span class="p">(</span><span class="n">dialog</span><span class="p">,</span> <span class="n">delim_dlg</span><span class="p">)</span>
+<span class="n">coordi</span> <span class="o">=</span> <span class="n">_episode_slice</span><span class="p">(</span><span class="n">coordi</span><span class="p">,</span> <span class="n">delim_crd</span><span class="p">)</span>
+<span class="n">reward</span> <span class="o">=</span> <span class="n">_episode_slice</span><span class="p">(</span><span class="n">reward</span><span class="p">,</span> <span class="n">delim_rwd</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dialog</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dialog</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># cut for each dialogs
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>7236
+['어서 오 세 요 코디 봇 입 니다 무엇 을 도와 드릴_까 요',  
+'처음 대학교 들어가 는데 입 을 옷 코디 해 주 세 요',  
+'신입생 코디 에 어울리 게 화사 한 스웨터 를 추천_해 드릴_게 요',  
+'이 옷 에 어울리 는 치마 로 추천_해 주 세 요',  
+'고객 님 의 키 사이즈 에 맞추 면 이런 옷 도 잘 어울리 실 것 같_은데 어떠 신가 요',  
+'제 가 키 가 작_아서 짧 은 치마 로 추천_해 주 세 요',  
+'상의 색상 과 도 매칭 이 잘 어울리 는 짧 은 치마 입 니다',  
+'어두운 계열 은 없 나 요',  
+'언밸런스 한 컷팅 으로 세련미 를 돋보이 게_하 는 치마 인데 마음 에 드 시_나 요',  
+'나쁘 지_않 네 요 외투 도 추천_해 주 시 겠_어 요',  
+'요즘 계절 에는 가디건 이나 자켓 을 걸치기 에 좋_은데 특정 종류 로 원하 는 게 있 으신가 요',  
+'트렌치 코트 종류 로 추천_해 주 세 요',  
+'이너 색상 과 무난_하 게 잘 어울릴 트렌치 코트 입 니다',  
+'신발 도 추천_해 주 세 요',  
+'운동화 나 구두 중 어떤 걸 선호_하 시_나 요',  
+'운동화 로 추천_해 주 세 요',  
+'어떤 스타일 과 도 무난_하 게 잘 어울리 는 기본 아이템 입 니다',  
+'맘 에 드_네 요 전체 코디샷 볼_수 있 나 요',  
+'네 지금 까지 제안 해 드린 아이템 으로 전체 코디샷 을 제안 해 드립 니다 마음 에 드 시_나 요',  
+'네 마음 에 드_네 요 감사_합 니다',  
+'마음 에 드 신_다 니 다행 입 니다 이용_해 주 셔 서 감사_합 니다']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># vectorized dialog data
+</span><span class="n">g_model</span><span class="p">.</span><span class="n">_mem_trn_dlg</span><span class="p">.</span><span class="n">shape</span> <span class="c1"># (7236, 2048)
+</span></code></pre></div></div>
+
+<h1 id="3-initialize-a-graph-model">3. Initialize a Graph Model</h1>
+<ul>
+  <li>Procedure of loading and preprocessing data included</li>
 </ul>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
@@ -198,118 +341,10 @@ into the {body} of the default.hbs template -->
 <span class="n">tf</span><span class="p">.</span><span class="n">device</span><span class="p">(</span><span class="s">'/device:GPU:0'</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="n">nx</span>
 <span class="kn">import</span> <span class="nn">stellargraph</span> <span class="k">as</span> <span class="n">sg</span>
-</code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">from</span> <span class="nn">graph_model</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">os</span>
-
-<span class="k">def</span> <span class="nf">str2bool</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
-    <span class="s">"""
-    function: convert into bool type(True or False)
-    """</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span> 
-        <span class="k">return</span> <span class="n">v</span> 
-    <span class="k">if</span> <span class="n">v</span><span class="p">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'yes'</span><span class="p">,</span> <span class="s">'true'</span><span class="p">,</span> <span class="s">'t'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">):</span> 
-        <span class="k">return</span> <span class="bp">True</span> 
-    <span class="k">elif</span> <span class="n">v</span><span class="p">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'no'</span><span class="p">,</span> <span class="s">'false'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">,</span> <span class="s">'n'</span><span class="p">,</span> <span class="s">'0'</span><span class="p">):</span> 
-        <span class="k">return</span> <span class="bp">False</span> 
-    <span class="k">else</span><span class="p">:</span> 
-        <span class="k">raise</span> <span class="n">argparse</span><span class="p">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span><span class="s">'Boolean value expected.'</span><span class="p">)</span>
-
-
-<span class="c1"># input options
-</span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="p">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">'AI Fashion Coordinator.'</span><span class="p">)</span>
-
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--mode'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-                    <span class="n">default</span><span class="o">=</span><span class="s">'train'</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'training or eval or test mode'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--in_file_trn_dialog'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-                    <span class="n">default</span><span class="o">=</span><span class="s">'./data/ddata.wst.txt'</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'training dialog DB'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--in_file_tst_dialog'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-                    <span class="n">default</span><span class="o">=</span><span class="s">'./data/ac_eval_t1.wst.dev'</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'test dialog DB'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--in_file_fashion'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-                    <span class="n">default</span><span class="o">=</span><span class="s">'./data/mdata.wst.txt'</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'fashion item metadata'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--in_file_img_feats'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-                    <span class="n">default</span><span class="o">=</span><span class="s">'./data/extracted_feat.json'</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'fashion item image features'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--model_path'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-                    <span class="n">default</span><span class="o">=</span><span class="s">'./gAIa_model'</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'path to save/read model'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--model_file'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-                    <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'model file name'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--eval_node'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-                    <span class="n">default</span><span class="o">=</span><span class="s">'[6000,6000,6000,200][2000,2000]'</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'nodes of evaluation network'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--subWordEmb_path'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-                    <span class="n">default</span><span class="o">=</span><span class="s">'./sstm_v0p5_deploy/sstm_v4p49_np_final_n36134_d128_r_eng_upper.dat'</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'path of subword embedding'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--learning_rate'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'learning rate'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--max_grad_norm'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mf">40.0</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'clip gradients to this norm'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--zero_prob'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'dropout prob.'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--corr_thres'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'correlation threshold'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--batch_size'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>   
-                    <span class="n">help</span><span class="o">=</span><span class="s">'batch size for training'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--epochs'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>   
-                    <span class="n">help</span><span class="o">=</span><span class="s">'epochs to training'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--save_freq'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>   
-                    <span class="n">help</span><span class="o">=</span><span class="s">'evaluate and save results per # epochs'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--hops'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>   
-                    <span class="n">help</span><span class="o">=</span><span class="s">'number of hops in the MemN2N'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--mem_size'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>   
-                    <span class="n">help</span><span class="o">=</span><span class="s">'memory size for the MemN2N'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--key_size'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>   
-                    <span class="n">help</span><span class="o">=</span><span class="s">'memory size for the MemN2N'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--permutation_iteration'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>   
-                    <span class="n">help</span><span class="o">=</span><span class="s">'# of permutation iteration'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--evaluation_iteration'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>   
-                    <span class="n">help</span><span class="o">=</span><span class="s">'# of test iteration'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--num_augmentation'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>   
-                    <span class="n">help</span><span class="o">=</span><span class="s">'# of data augmentation'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--use_batch_norm'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">str2bool</span><span class="p">,</span> 
-                    <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'use batch normalization'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--use_dropout'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">str2bool</span><span class="p">,</span> 
-                    <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'use dropout'</span><span class="p">)</span>
-<span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--use_multimodal'</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">str2bool</span><span class="p">,</span>
-                    <span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
-                    <span class="n">help</span><span class="o">=</span><span class="s">'use multimodal input'</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_StoreAction(option_strings=['--use_multimodal'], dest='use_multimodal', nargs=None, const=None, default=True, type=&lt;function str2bool at 0x7f85a894e378&gt;, choices=None, help='use multimodal input', metavar=None)
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[])</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__predict__'</span><span class="p">:</span>
-    
-    <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'-'</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\t\t</span><span class="s">AI Fashion Coordinator'</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'-'</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g_model</span> <span class="o">=</span> <span class="n">graph_model</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
@@ -333,6 +368,490 @@ loading dialog DB
 # of dialog: 200 sets
 vectorizing data
 memorizing data
+</code></pre></div></div>
+
+<h2 id="31-generate-graphs-and-edge-data-for-each-item-categories">3.1. Generate graphs and edge data for each item categories</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g_model</span><span class="p">.</span><span class="n">_graph_cats</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(&lt;stellargraph.core.graph.StellarGraph at 0x7f58a4f11bb0&gt;,
+ &lt;stellargraph.core.graph.StellarGraph at 0x7f58a4f11f10&gt;,
+ &lt;stellargraph.core.graph.StellarGraph at 0x7f58a4f11c40&gt;,
+ &lt;stellargraph.core.graph.StellarGraph at 0x7f58a4758af0&gt;)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">g_model</span><span class="p">.</span><span class="n">_graph_cats</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">.</span><span class="n">info</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>StellarGraph: Undirected multigraph
+ Nodes: 8398, Edges: 9222
+
+ Node types:
+  dialog: [7236]
+    Features: float32 vector, length 2048
+    Edge types: dialog-default-&gt;item
+  item: [1162]
+    Features: float32 vector, length 4608
+    Edge types: item-default-&gt;dialog
+
+ Edge types:
+    dialog-default-&gt;item: [9222]
+        Weights: range=[0.5, 1], mean=0.607623, std=0.205508
+        Features: none
+StellarGraph: Undirected multigraph
+ Nodes: 7909, Edges: 9022
+
+ Node types:
+  dialog: [7236]
+    Features: float32 vector, length 2048
+    Edge types: dialog-default-&gt;item
+  item: [673]
+    Features: float32 vector, length 4608
+    Edge types: item-default-&gt;dialog
+
+ Edge types:
+    dialog-default-&gt;item: [9022]
+        Weights: range=[0.5, 1], mean=0.607515, std=0.205433
+        Features: none
+StellarGraph: Undirected multigraph
+ Nodes: 7877, Edges: 11549
+
+ Node types:
+  dialog: [7236]
+    Features: float32 vector, length 2048
+    Edge types: dialog-default-&gt;item
+  item: [641]
+    Features: float32 vector, length 4608
+    Edge types: item-default-&gt;dialog
+
+ Edge types:
+    dialog-default-&gt;item: [11549]
+        Weights: range=[0.5, 1], mean=0.613733, std=0.209607
+        Features: none
+StellarGraph: Undirected multigraph
+ Nodes: 7367, Edges: 9757
+
+ Node types:
+  dialog: [7236]
+    Features: float32 vector, length 2048
+    Edge types: dialog-default-&gt;item
+  item: [131]
+    Features: float32 vector, length 4608
+    Edge types: item-default-&gt;dialog
+
+ Edge types:
+    dialog-default-&gt;item: [9757]
+        Weights: range=[0.5, 1], mean=0.618479, std=0.212619
+        Features: none
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g_model</span><span class="p">.</span><span class="n">_graph_datas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dialog</th>
+      <th>item</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>d_2</td>
+      <td>o_0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>d_53</td>
+      <td>o_0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>d_133</td>
+      <td>o_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>d_337</td>
+      <td>o_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>d_437</td>
+      <td>o_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>9217</th>
+      <td>d_5649</td>
+      <td>o_1160</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>9218</th>
+      <td>d_5938</td>
+      <td>o_1160</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>9219</th>
+      <td>d_5972</td>
+      <td>o_1160</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>9220</th>
+      <td>d_6439</td>
+      <td>o_1160</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>9221</th>
+      <td>d_6788</td>
+      <td>o_1160</td>
+      <td>0.5</td>
+    </tr>
+  </tbody>
+</table>
+<p>9222 rows × 3 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g_model</span><span class="p">.</span><span class="n">_graph_datas</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dialog</th>
+      <th>item</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>d_514</td>
+      <td>t_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>d_560</td>
+      <td>t_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>d_815</td>
+      <td>t_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>d_839</td>
+      <td>t_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>d_884</td>
+      <td>t_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>9017</th>
+      <td>d_5905</td>
+      <td>t_672</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>9018</th>
+      <td>d_5919</td>
+      <td>t_672</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>9019</th>
+      <td>d_5999</td>
+      <td>t_672</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>9020</th>
+      <td>d_6745</td>
+      <td>t_672</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>9021</th>
+      <td>d_6746</td>
+      <td>t_672</td>
+      <td>0.5</td>
+    </tr>
+  </tbody>
+</table>
+<p>9022 rows × 3 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g_model</span><span class="p">.</span><span class="n">_graph_datas</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dialog</th>
+      <th>item</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>d_34</td>
+      <td>b_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>d_225</td>
+      <td>b_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>d_272</td>
+      <td>b_0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>d_302</td>
+      <td>b_0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>d_380</td>
+      <td>b_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>11544</th>
+      <td>d_6239</td>
+      <td>b_637</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>11545</th>
+      <td>d_6379</td>
+      <td>b_637</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>11546</th>
+      <td>d_5506</td>
+      <td>b_638</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>11547</th>
+      <td>d_5576</td>
+      <td>b_638</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>11548</th>
+      <td>d_5097</td>
+      <td>b_639</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>11549 rows × 3 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g_model</span><span class="p">.</span><span class="n">_graph_datas</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge">
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dialog</th>
+      <th>item</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>d_47</td>
+      <td>s_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>d_52</td>
+      <td>s_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>d_74</td>
+      <td>s_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>d_124</td>
+      <td>s_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>d_175</td>
+      <td>s_0</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>9752</th>
+      <td>d_6643</td>
+      <td>s_129</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>9753</th>
+      <td>d_6684</td>
+      <td>s_129</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>9754</th>
+      <td>d_7050</td>
+      <td>s_129</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>9755</th>
+      <td>d_7082</td>
+      <td>s_129</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>9756</th>
+      <td>d_7124</td>
+      <td>s_129</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>9757 rows × 3 columns</p>
+</div>
+
+<h1 id="4-model-training">4. Model Training</h1>
+
+<h2 id="41-load-evaluation-data">4.1. Load Evaluation Data</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">g_model</span><span class="p">.</span><span class="n">_mem_tst_dlg</span><span class="p">).</span><span class="n">shape</span> <span class="c1"># (200, 2048)
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">g_model</span><span class="p">.</span><span class="n">_tst_crd</span><span class="p">).</span><span class="n">shape</span> <span class="c1"># (200, 3, 4)
+</span></code></pre></div></div>
+
+<h2 id="42-train-with-hinsage-and-link-prediction-error">4.2. Train with HinSAGE and Link Prediction Error</h2>
+
+<ul>
+  <li>work on building a base model, not fully optimized</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="c1"># training function
+</span><span class="k">def</span> <span class="nf">_graph_train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">data_graph</span><span class="p">):</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">train_size</span> <span class="o">=</span> <span class="mf">0.7</span>
+    <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.3</span>
+    <span class="n">num_samples</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="n">num_workers</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">edges_train</span><span class="p">,</span> <span class="n">edges_test</span> <span class="o">=</span> <span class="n">model_selection</span><span class="p">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="n">train_size</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">)</span>
+    <span class="n">edgelist_train</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">edges_train</span><span class="p">[[</span><span class="s">"dialog"</span><span class="p">,</span> <span class="s">"item"</span><span class="p">]].</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+    <span class="n">edgelist_test</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">edges_test</span><span class="p">[[</span><span class="s">"dialog"</span><span class="p">,</span> <span class="s">"item"</span><span class="p">]].</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+    <span class="n">labels_train</span> <span class="o">=</span> <span class="n">edges_train</span><span class="p">[</span><span class="s">"label"</span><span class="p">]</span>
+    <span class="n">labels_test</span> <span class="o">=</span> <span class="n">edges_test</span><span class="p">[</span><span class="s">"label"</span><span class="p">]</span>
+    <span class="n">generator</span> <span class="o">=</span> <span class="n">HinSAGELinkGenerator</span><span class="p">(</span>
+        <span class="n">data_graph</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">,</span> <span class="n">head_node_types</span><span class="o">=</span><span class="p">[</span><span class="s">"dialog"</span><span class="p">,</span> <span class="s">"item"</span><span class="p">])</span>
+    <span class="n">train_gen</span> <span class="o">=</span> <span class="n">generator</span><span class="p">.</span><span class="n">flow</span><span class="p">(</span><span class="n">edgelist_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">test_gen</span> <span class="o">=</span> <span class="n">generator</span><span class="p">.</span><span class="n">flow</span><span class="p">(</span><span class="n">edgelist_test</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">)</span>
+    <span class="n">hinsage_layer_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">hinsage_layer_sizes</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span>
+    <span class="n">hinsage</span> <span class="o">=</span> <span class="n">HinSAGE</span><span class="p">(</span>
+        <span class="n">layer_sizes</span><span class="o">=</span><span class="n">hinsage_layer_sizes</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="n">generator</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">x_inp</span><span class="p">,</span> <span class="n">x_out</span> <span class="o">=</span> <span class="n">hinsage</span><span class="p">.</span><span class="n">in_out_tensors</span><span class="p">()</span>
+    <span class="n">score_prediction</span> <span class="o">=</span> <span class="n">link_regression</span><span class="p">(</span><span class="n">edge_embedding_method</span><span class="o">=</span><span class="s">"concat"</span><span class="p">)(</span><span class="n">x_out</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">x_inp</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">score_prediction</span><span class="p">)</span>
+    <span class="n">model</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span>
+        <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizers</span><span class="p">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">),</span>
+        <span class="n">loss</span><span class="o">=</span><span class="n">losses</span><span class="p">.</span><span class="n">mean_squared_error</span><span class="p">,</span>
+        <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">root_mean_square_error</span><span class="p">,</span> <span class="n">metrics</span><span class="p">.</span><span class="n">mae</span><span class="p">],)</span>
+    <span class="n">test_metrics</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span>
+        <span class="n">test_gen</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">use_multiprocessing</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="n">num_workers</span>
+    <span class="p">)</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">train_gen</span><span class="p">,</span>
+        <span class="n">validation_data</span><span class="o">=</span><span class="n">test_gen</span><span class="p">,</span>
+        <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">use_multiprocessing</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">,)</span>
+    <span class="n">test_metrics</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span>
+        <span class="n">test_gen</span><span class="p">,</span> <span class="n">use_multiprocessing</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Test Evaluation:"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">metrics_names</span><span class="p">,</span> <span class="n">test_metrics</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">{}: {:0.4f}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+    <span class="n">y_true</span> <span class="o">=</span> <span class="n">labels_test</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_gen</span><span class="p">)</span>
+    <span class="n">y_pred_baseline</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_true</span><span class="p">))</span>
+<span class="p">...</span>
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g_model</span><span class="p">.</span><span class="n">train</span><span class="p">()</span>
@@ -376,139 +895,13 @@ Mean Baseline Test set metrics:
 Model Test set metrics:
 	root_mean_square_error =  0.20211308444911932
 	mean_absolute_error =  0.15357324988306925
-link_regression: using 'concat' method to combine node embeddings into edge embeddings
-14/14 [==============================] - 3s 126ms/step - loss: 0.0841 - root_mean_square_error: 0.2878 - mean_absolute_error: 0.1999
-Untrained model's Test Evaluation:
-	loss: 0.0841
-	root_mean_square_error: 0.2878
-	mean_absolute_error: 0.1999
-Epoch 1/10
-32/32 [==============================] - 9s 238ms/step - loss: 0.0750 - root_mean_square_error: 0.2574 - mean_absolute_error: 0.2070 - val_loss: 0.0436 - val_root_mean_square_error: 0.2081 - val_mean_absolute_error: 0.1893
-Epoch 2/10
-32/32 [==============================] - 7s 225ms/step - loss: 0.0430 - root_mean_square_error: 0.2071 - mean_absolute_error: 0.1727 - val_loss: 0.0418 - val_root_mean_square_error: 0.2035 - val_mean_absolute_error: 0.1678
-Epoch 3/10
-32/32 [==============================] - 7s 224ms/step - loss: 0.0426 - root_mean_square_error: 0.2061 - mean_absolute_error: 0.1698 - val_loss: 0.0417 - val_root_mean_square_error: 0.2033 - val_mean_absolute_error: 0.1609
-Epoch 4/10
-32/32 [==============================] - 8s 233ms/step - loss: 0.0424 - root_mean_square_error: 0.2059 - mean_absolute_error: 0.1690 - val_loss: 0.0421 - val_root_mean_square_error: 0.2046 - val_mean_absolute_error: 0.1809
-Epoch 5/10
-32/32 [==============================] - 8s 233ms/step - loss: 0.0426 - root_mean_square_error: 0.2063 - mean_absolute_error: 0.1698 - val_loss: 0.0413 - val_root_mean_square_error: 0.2023 - val_mean_absolute_error: 0.1663
-Epoch 6/10
-32/32 [==============================] - 7s 223ms/step - loss: 0.0423 - root_mean_square_error: 0.2053 - mean_absolute_error: 0.1686 - val_loss: 0.0412 - val_root_mean_square_error: 0.2023 - val_mean_absolute_error: 0.1734
-Epoch 7/10
-32/32 [==============================] - 8s 227ms/step - loss: 0.0419 - root_mean_square_error: 0.2042 - mean_absolute_error: 0.1682 - val_loss: 0.0412 - val_root_mean_square_error: 0.2022 - val_mean_absolute_error: 0.1757
-Epoch 8/10
-32/32 [==============================] - 7s 224ms/step - loss: 0.0416 - root_mean_square_error: 0.2036 - mean_absolute_error: 0.1680 - val_loss: 0.0405 - val_root_mean_square_error: 0.2003 - val_mean_absolute_error: 0.1557
-Epoch 9/10
-32/32 [==============================] - 7s 225ms/step - loss: 0.0410 - root_mean_square_error: 0.2025 - mean_absolute_error: 0.1644 - val_loss: 0.0398 - val_root_mean_square_error: 0.1988 - val_mean_absolute_error: 0.1653
-Epoch 10/10
-32/32 [==============================] - 8s 238ms/step - loss: 0.0396 - root_mean_square_error: 0.1985 - mean_absolute_error: 0.1610 - val_loss: 0.0388 - val_root_mean_square_error: 0.1964 - val_mean_absolute_error: 0.1610
-14/14 [==============================] - 2s 128ms/step - loss: 0.0387 - root_mean_square_error: 0.1962 - mean_absolute_error: 0.1607
-Test Evaluation:
-	loss: 0.0387
-	root_mean_square_error: 0.1962
-	mean_absolute_error: 0.1607
-Mean Baseline Test set metrics:
-	root_mean_square_error =  0.2037237830436417
-	mean_absolute_error =  0.16601351653248084
-
-Model Test set metrics:
-	root_mean_square_error =  0.19741210353956345
-	mean_absolute_error =  0.1613392177040303
-link_regression: using 'concat' method to combine node embeddings into edge embeddings
-18/18 [==============================] - 3s 139ms/step - loss: 0.5363 - root_mean_square_error: 0.7332 - mean_absolute_error: 0.6958
-Untrained model's Test Evaluation:
-	loss: 0.5363
-	root_mean_square_error: 0.7332
-	mean_absolute_error: 0.6958
-Epoch 1/10
-41/41 [==============================] - 11s 241ms/step - loss: 0.0752 - root_mean_square_error: 0.2546 - mean_absolute_error: 0.2105 - val_loss: 0.0452 - val_root_mean_square_error: 0.2128 - val_mean_absolute_error: 0.1887
-Epoch 2/10
-41/41 [==============================] - 9s 221ms/step - loss: 0.0441 - root_mean_square_error: 0.2101 - mean_absolute_error: 0.1735 - val_loss: 0.0448 - val_root_mean_square_error: 0.2118 - val_mean_absolute_error: 0.1801
-Epoch 3/10
-41/41 [==============================] - 10s 233ms/step - loss: 0.0440 - root_mean_square_error: 0.2094 - mean_absolute_error: 0.1756 - val_loss: 0.0447 - val_root_mean_square_error: 0.2117 - val_mean_absolute_error: 0.1763
-Epoch 4/10
-41/41 [==============================] - 9s 221ms/step - loss: 0.0438 - root_mean_square_error: 0.2093 - mean_absolute_error: 0.1745 - val_loss: 0.0448 - val_root_mean_square_error: 0.2117 - val_mean_absolute_error: 0.1754
-Epoch 5/10
-41/41 [==============================] - 9s 225ms/step - loss: 0.0439 - root_mean_square_error: 0.2096 - mean_absolute_error: 0.1754 - val_loss: 0.0447 - val_root_mean_square_error: 0.2115 - val_mean_absolute_error: 0.1823
-Epoch 6/10
-41/41 [==============================] - 10s 231ms/step - loss: 0.0437 - root_mean_square_error: 0.2091 - mean_absolute_error: 0.1748 - val_loss: 0.0446 - val_root_mean_square_error: 0.2114 - val_mean_absolute_error: 0.1794
-Epoch 7/10
-41/41 [==============================] - 10s 233ms/step - loss: 0.0437 - root_mean_square_error: 0.2086 - mean_absolute_error: 0.1746 - val_loss: 0.0446 - val_root_mean_square_error: 0.2113 - val_mean_absolute_error: 0.1751
-Epoch 8/10
-41/41 [==============================] - 10s 228ms/step - loss: 0.0438 - root_mean_square_error: 0.2086 - mean_absolute_error: 0.1751 - val_loss: 0.0452 - val_root_mean_square_error: 0.2128 - val_mean_absolute_error: 0.1634
-Epoch 9/10
-41/41 [==============================] - 10s 226ms/step - loss: 0.0442 - root_mean_square_error: 0.2099 - mean_absolute_error: 0.1727 - val_loss: 0.0445 - val_root_mean_square_error: 0.2112 - val_mean_absolute_error: 0.1838
-Epoch 10/10
-41/41 [==============================] - 9s 226ms/step - loss: 0.0436 - root_mean_square_error: 0.2088 - mean_absolute_error: 0.1749 - val_loss: 0.0446 - val_root_mean_square_error: 0.2113 - val_mean_absolute_error: 0.1696
-18/18 [==============================] - 3s 132ms/step - loss: 0.0446 - root_mean_square_error: 0.2114 - mean_absolute_error: 0.1697
-Test Evaluation:
-	loss: 0.0446
-	root_mean_square_error: 0.2114
-	mean_absolute_error: 0.1697
-Mean Baseline Test set metrics:
-	root_mean_square_error =  0.21115701980168747
-	mean_absolute_error =  0.1783491631950995
-
-Model Test set metrics:
-	root_mean_square_error =  0.21133401478765093
-	mean_absolute_error =  0.16970877193269276
-link_regression: using 'concat' method to combine node embeddings into edge embeddings
-15/15 [==============================] - 3s 143ms/step - loss: 1.1537 - root_mean_square_error: 1.0739 - mean_absolute_error: 1.0498
-Untrained model's Test Evaluation:
-	loss: 1.1537
-	root_mean_square_error: 1.0739
-	mean_absolute_error: 1.0498
-Epoch 1/10
-35/35 [==============================] - 9s 234ms/step - loss: 0.0790 - root_mean_square_error: 0.2416 - mean_absolute_error: 0.2106 - val_loss: 0.0444 - val_root_mean_square_error: 0.2104 - val_mean_absolute_error: 0.1774
-Epoch 2/10
-35/35 [==============================] - 8s 227ms/step - loss: 0.0459 - root_mean_square_error: 0.2138 - mean_absolute_error: 0.1824 - val_loss: 0.0445 - val_root_mean_square_error: 0.2107 - val_mean_absolute_error: 0.1839
-Epoch 3/10
-35/35 [==============================] - 8s 231ms/step - loss: 0.0457 - root_mean_square_error: 0.2141 - mean_absolute_error: 0.1821 - val_loss: 0.0449 - val_root_mean_square_error: 0.2117 - val_mean_absolute_error: 0.1913
-Epoch 4/10
-35/35 [==============================] - 8s 230ms/step - loss: 0.0456 - root_mean_square_error: 0.2143 - mean_absolute_error: 0.1824 - val_loss: 0.0449 - val_root_mean_square_error: 0.2118 - val_mean_absolute_error: 0.1932
-Epoch 5/10
-35/35 [==============================] - 8s 229ms/step - loss: 0.0459 - root_mean_square_error: 0.2133 - mean_absolute_error: 0.1822 - val_loss: 0.0435 - val_root_mean_square_error: 0.2084 - val_mean_absolute_error: 0.1746
-Epoch 6/10
-35/35 [==============================] - 8s 232ms/step - loss: 0.0445 - root_mean_square_error: 0.2095 - mean_absolute_error: 0.1774 - val_loss: 0.0427 - val_root_mean_square_error: 0.2064 - val_mean_absolute_error: 0.1650
-Epoch 7/10
-35/35 [==============================] - 8s 220ms/step - loss: 0.0429 - root_mean_square_error: 0.2073 - mean_absolute_error: 0.1712 - val_loss: 0.0445 - val_root_mean_square_error: 0.2108 - val_mean_absolute_error: 0.1963
-Epoch 8/10
-35/35 [==============================] - 9s 238ms/step - loss: 0.0417 - root_mean_square_error: 0.2053 - mean_absolute_error: 0.1672 - val_loss: 0.0455 - val_root_mean_square_error: 0.2132 - val_mean_absolute_error: 0.2007
-Epoch 9/10
-35/35 [==============================] - 8s 234ms/step - loss: 0.0410 - root_mean_square_error: 0.2026 - mean_absolute_error: 0.1665 - val_loss: 0.0414 - val_root_mean_square_error: 0.2033 - val_mean_absolute_error: 0.1802
-Epoch 10/10
-35/35 [==============================] - 8s 229ms/step - loss: 0.0389 - root_mean_square_error: 0.1973 - mean_absolute_error: 0.1607 - val_loss: 0.0410 - val_root_mean_square_error: 0.2023 - val_mean_absolute_error: 0.1765
-15/15 [==============================] - 2s 129ms/step - loss: 0.0411 - root_mean_square_error: 0.2025 - mean_absolute_error: 0.1768
-Test Evaluation:
-	loss: 0.0411
-	root_mean_square_error: 0.2025
-	mean_absolute_error: 0.1768
-Mean Baseline Test set metrics:
-	root_mean_square_error =  0.21047757725548227
-	mean_absolute_error =  0.17720323507903052
-
-Model Test set metrics:
-	root_mean_square_error =  0.20244772001149536
-	mean_absolute_error =  0.17655691348749106
+...
+...
+...
 Done training
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g_model</span><span class="p">.</span><span class="n">test</span><span class="p">()</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Evaluate&gt;
-WARNING:tensorflow:5 out of the last 19 calls to &lt;function Model.make_predict_function.&lt;locals&gt;.predict_function at 0x7f8539bf9d08&gt; triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has experimental_relax_shapes=True option that relaxes argument shapes that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
---------------------------------------------------
-Prediction Time: 379.64sec
-# of Test Examples: 200
-Average Weighted Kendalll Tau Corrleation over iterations: 0.0575
-Best Weighted Kendalll Tau Corrleation: 0.0914
---------------------------------------------------
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
-<span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">backend</span><span class="p">.</span><span class="n">clear_session</span><span class="p">()</span> <span class="c1"># not working
-</span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">cuda</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">cuda</span>
 <span class="n">device</span> <span class="o">=</span> <span class="n">cuda</span><span class="p">.</span><span class="n">get_current_device</span><span class="p">()</span>
 <span class="n">device</span><span class="p">.</span><span class="n">reset</span><span class="p">()</span>
 </code></pre></div></div>
@@ -758,10 +1151,12 @@ Best Weighted Kendalll Tau Corrleation: 0.0914
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
                 <section class="copyright"><a href="/">Darron's Devlog</a> &copy; 2021</section>
-                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                <!-- 
+				<section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
                     <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
                     <a href="https://github.com/jekyllt/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
-                <nav class="site-footer-nav">
+                -->
+				<nav class="site-footer-nav">
                     <a href="/">Latest Posts</a>
                     
                     
