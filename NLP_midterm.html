@@ -50,7 +50,7 @@
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="NLP - Text Analysis with ML algorithms" />
-    <meta property="og:description" content="2020-1. NLP 1. Data Info 2. Preprocessing 2.1 duplicated data found in train_data 3. Comparing classification models 3.1 With Tf-idf vectorizer 3.1.1 MultinomialNB 3.1.2 LogisticRegression 3.2 With CountVectorizer 3.2.1 MultinomialNB 4. Balanced sampling approach - imblearn 5. Result: Best Model comment import sys import pandas as pd import os import" />
+    <meta property="og:description" content="2020-1. NLP 1. Data Info 2. Preprocessing 2.1. duplicated data found in train_data 3. Comparing between classification models 3.1 With Tf-idf vectorizer 3.1.1 MultinomialNB 3.1.2 LogisticRegression 3.2 With CountVectorizer 3.2.1 MultinomialNB 4. Balanced sampling approach - imblearn 5. Result: Best Model import sys import pandas as pd import os import" />
     <meta property="og:url" content="http://0.0.0.0:4000/NLP_midterm" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
@@ -60,7 +60,7 @@
     <meta property="article:tag" content="projects" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="NLP - Text Analysis with ML algorithms" />
-    <meta name="twitter:description" content="2020-1. NLP 1. Data Info 2. Preprocessing 2.1 duplicated data found in train_data 3. Comparing classification models 3.1 With Tf-idf vectorizer 3.1.1 MultinomialNB 3.1.2 LogisticRegression 3.2 With CountVectorizer 3.2.1 MultinomialNB 4. Balanced sampling approach - imblearn 5. Result: Best Model comment import sys import pandas as pd import os import" />
+    <meta name="twitter:description" content="2020-1. NLP 1. Data Info 2. Preprocessing 2.1. duplicated data found in train_data 3. Comparing between classification models 3.1 With Tf-idf vectorizer 3.1.1 MultinomialNB 3.1.2 LogisticRegression 3.2 With CountVectorizer 3.2.1 MultinomialNB 4. Balanced sampling approach - imblearn 5. Result: Best Model import sys import pandas as pd import os import" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -92,7 +92,7 @@
         "@type": "WebPage",
         "@id": "http://0.0.0.0:4000/NLP_midterm"
     },
-    "description": "2020-1. NLP 1. Data Info 2. Preprocessing 2.1 duplicated data found in train_data 3. Comparing classification models 3.1 With Tf-idf vectorizer 3.1.1 MultinomialNB 3.1.2 LogisticRegression 3.2 With CountVectorizer 3.2.1 MultinomialNB 4. Balanced sampling approach - imblearn 5. Result: Best Model comment import sys import pandas as pd import os import"
+    "description": "2020-1. NLP 1. Data Info 2. Preprocessing 2.1. duplicated data found in train_data 3. Comparing between classification models 3.1 With Tf-idf vectorizer 3.1.1 MultinomialNB 3.1.2 LogisticRegression 3.2 With CountVectorizer 3.2.1 MultinomialNB 4. Balanced sampling approach - imblearn 5. Result: Best Model import sys import pandas as pd import os import"
 }
     </script>
 
@@ -185,10 +185,10 @@ into the {body} of the default.hbs template -->
 <ul id="markdown-toc">
   <li><a href="#1-data-info" id="markdown-toc-1-data-info">1. Data Info</a></li>
   <li><a href="#2-preprocessing" id="markdown-toc-2-preprocessing">2. Preprocessing</a>    <ul>
-      <li><a href="#21-duplicated-data-found-in-train_data" id="markdown-toc-21-duplicated-data-found-in-train_data">2.1 duplicated data found in train_data</a></li>
+      <li><a href="#21-duplicated-data-found-in-train_data" id="markdown-toc-21-duplicated-data-found-in-train_data">2.1. duplicated data found in train_data</a></li>
     </ul>
   </li>
-  <li><a href="#3-comparing-classification-models" id="markdown-toc-3-comparing-classification-models">3. Comparing classification models</a>    <ul>
+  <li><a href="#3-comparing-between-classification-models" id="markdown-toc-3-comparing-between-classification-models">3. Comparing between classification models</a>    <ul>
       <li><a href="#31-with-tf-idf-vectorizer" id="markdown-toc-31-with-tf-idf-vectorizer">3.1 With Tf-idf vectorizer</a>        <ul>
           <li><a href="#311-multinomialnb" id="markdown-toc-311-multinomialnb">3.1.1 MultinomialNB</a></li>
           <li><a href="#312-logisticregression" id="markdown-toc-312-logisticregression">3.1.2 LogisticRegression</a></li>
@@ -202,7 +202,6 @@ into the {body} of the default.hbs template -->
   </li>
   <li><a href="#4-balanced-sampling-approach---imblearn" id="markdown-toc-4-balanced-sampling-approach---imblearn">4. Balanced sampling approach - imblearn</a></li>
   <li><a href="#5-result-best-model" id="markdown-toc-5-result-best-model">5. Result: Best Model</a></li>
-  <li><a href="#comment" id="markdown-toc-comment">comment</a></li>
 </ul>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
@@ -290,7 +289,7 @@ freq                                                    1  1260
 </code></pre></div></div>
 
 <h1 id="2-preprocessing">2. Preprocessing</h1>
-<h2 id="21-duplicated-data-found-in-train_data">2.1 duplicated data found in train_data</h2>
+<h2 id="21-duplicated-data-found-in-train_data">2.1. duplicated data found in train_data</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># remove duplicated data
 </span><span class="k">print</span><span class="p">(</span><span class="n">train_data</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">duplicated</span><span class="p">().</span><span class="nb">sum</span><span class="p">())</span>
@@ -337,7 +336,7 @@ freq                                                    1  11276
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'J brand is by far the best premium denim line retailer sells  the fit on these jeans is amazing  worth every penny  also  considering it is a crop jean   warm weather wear   the denim weight is light and not too thick   the color is different from ordinary regular denim blue  lighter wash for spring summer '
 </code></pre></div></div>
 
-<h1 id="3-comparing-classification-models">3. Comparing classification models</h1>
+<h1 id="3-comparing-between-classification-models">3. Comparing between classification models</h1>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># tuning parameter sets
 </span><span class="n">ngram_range</span><span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span>
@@ -529,8 +528,6 @@ f1-score macro avg: 0.85</p>
 weighted avg       0.97      0.97      0.97      1491
 </code></pre></div></div>
 
-<h1 id="comment">comment</h1>
-<p>데이터사이언스 복수전공 후 첫 강의. 중간고사까지 배웠던 기본적인 전처리와 ML 함수들을 적용했다. 추가적으로 imblanced data case를 SMOTE 패키지를 사용해 간단히 처리해보았다. 당시 수업에서 가장 높은 accuracy를 기록했다.</p>
 
                 </div>
             </section>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-11-02T00:04:14+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion Coordinator Chatbot Dataset with GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion Coordinator Chatbot Dataset with GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-11-02T15:17:14+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion Coordinator Chatbot Dataset with GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion Coordinator Chatbot Dataset with GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-about&quot; id=&quot;markdown-toc-1-about&quot;&gt;1. About&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#11-project-goal&quot; id=&quot;markdown-toc-11-project-goal&quot;&gt;1.1. Project Goal&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#12-model-architecture&quot; id=&quot;markdown-toc-12-model-architecture&quot;&gt;1.2. Model Architecture&lt;/a&gt;&lt;/li&gt;
@@ -5788,7 +5788,19 @@ n_big_communities:  5
 &lt;p&gt;&lt;img src=&quot;/assets/images/output_25_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;4-summary&quot;&gt;4. Summary&lt;/h1&gt;
-&lt;p&gt;대기오염도는 대체적으로 여름보다 겨울에 높았고, 2019년이 특히 심했다는 것을 알 수 있다. 2020년을 기준으로 비교했을 때, 코로나의 영향은 거의 없었던 것으로 추정된다.&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">NLP - Korean Language Text Analysis with RNN</title><link href="http://0.0.0.0:4000/NLP_final" rel="alternate" type="text/html" title="NLP - Korean Language Text Analysis with RNN" /><published>2020-06-19T00:00:00+09:00</published><updated>2020-06-19T00:00:00+09:00</updated><id>http://0.0.0.0:4000/NLP_final</id><content type="html" xml:base="http://0.0.0.0:4000/NLP_final">&lt;h2 id=&quot;2020-1-nlp&quot;&gt;2020-1. NLP&lt;/h2&gt;
+&lt;p&gt;대기오염도는 대체적으로 여름보다 겨울에 높았고, 2019년이 특히 심했다는 것을 알 수 있다. 2020년을 기준으로 비교했을 때, 코로나의 영향은 거의 없었던 것으로 추정된다.&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">NLP - Korean Language Text Analysis with RNN</title><link href="http://0.0.0.0:4000/NLP_final" rel="alternate" type="text/html" title="NLP - Korean Language Text Analysis with RNN" /><published>2020-06-19T00:00:00+09:00</published><updated>2020-06-19T00:00:00+09:00</updated><id>http://0.0.0.0:4000/NLP_final</id><content type="html" xml:base="http://0.0.0.0:4000/NLP_final">&lt;h2 class=&quot;no_toc&quot; id=&quot;2020-1-nlp&quot;&gt;2020-1. NLP&lt;/h2&gt;
+
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#1-data-load&quot; id=&quot;markdown-toc-1-data-load&quot;&gt;1. Data Load&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2-preprocessing&quot; id=&quot;markdown-toc-2-preprocessing&quot;&gt;2. Preprocessing&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#21-remove-duplicates&quot; id=&quot;markdown-toc-21-remove-duplicates&quot;&gt;2.1. Remove duplicates&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#22-regexp-on-korean-language&quot; id=&quot;markdown-toc-22-regexp-on-korean-language&quot;&gt;2.2. Regexp on Korean Language&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#3-tokenizing-with-konlpy-okt&quot; id=&quot;markdown-toc-3-tokenizing-with-konlpy-okt&quot;&gt;3. Tokenizing with konlpy-Okt&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#4-train-test-data&quot; id=&quot;markdown-toc-4-train-test-data&quot;&gt;4. Train-test Data&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#5-keras-model&quot; id=&quot;markdown-toc-5-keras-model&quot;&gt;5. Keras Model&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# 한국어 자료
 &lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
@@ -5806,8 +5818,9 @@ n_big_communities:  5
 &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# 데이터 로드
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'final_train_data.csv'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;h1 id=&quot;1-data-load&quot;&gt;1. Data Load&lt;/h1&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'final_train_data.csv'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;test_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'final_test_data.csv'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -5822,15 +5835,15 @@ top        정치개혁  개인회생 36개월 단축소급 전국 적용을 위
 freq       3094                                                 16     21
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# preprocess: duplicate
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;drop_duplicates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'content'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'first'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;2-preprocessing&quot;&gt;2. Preprocessing&lt;/h1&gt;
+&lt;h2 id=&quot;21-remove-duplicates&quot;&gt;2.1. Remove duplicates&lt;/h2&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# all duplicates removed
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;duplicated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;drop_duplicates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'content'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'first'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;duplicated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0
+all duplicates removed
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'document'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
@@ -5838,11 +5851,14 @@ freq       3094                                                 16     21
 &lt;span class=&quot;n&quot;&gt;test_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'document'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'document'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'document'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;[^ㄱ-ㅎㅏ-ㅣ가-힣 ]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 정규 표현식 수행
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'document'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'document'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;[^ㄱ-ㅎㅏ-ㅣ가-힣 ]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 정규 표현식 수행
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;22-regexp-on-korean-language&quot;&gt;2.2. Regexp on Korean Language&lt;/h2&gt;
 
-&lt;h3 id=&quot;tokenizing-process-with-konlpy-okt&quot;&gt;tokenizing process with konlpy-Okt&lt;/h3&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'document'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'document'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;[^ㄱ-ㅎㅏ-ㅣ가-힣 ]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;test_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'document'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'document'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;[^ㄱ-ㅎㅏ-ㅣ가-힣 ]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;3-tokenizing-with-konlpy-okt&quot;&gt;3. Tokenizing with konlpy-Okt&lt;/h1&gt;
+
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# tokenize
 &lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;konlpy.tag&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Okt&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;okt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Okt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#형태소 분석기
@@ -5865,7 +5881,10 @@ freq       3094                                                 16     21
 &lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tokenized_data&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;for-this-tokenizing-process-takes-a-long-time-save-and-import-preprocessed-data&quot;&gt;for this tokenizing process takes a long time, save and import preprocessed data.&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;save and re-import processed data&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pickle&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'nlp_final_x_tr.data'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'wb'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;pickle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dump&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -5998,6 +6017,8 @@ freq       3094                                                 16     21
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;10301 1158
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
+&lt;h1 id=&quot;4-train-test-data&quot;&gt;4. Train-test Data&lt;/h1&gt;
+
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'경제민주화'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'교통/건축/국토'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'보건복지'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'육아/교육'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'인권/성평등'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'일자리'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'정치개혁'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'보건복지'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;index1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10301&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
@@ -6035,6 +6056,8 @@ freq       3094                                                 16     21
 19055
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
+&lt;h1 id=&quot;5-keras-model&quot;&gt;5. Keras Model&lt;/h1&gt;
+
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow.keras.layers&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LSTM&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow.keras.models&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sequential&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow.keras.models&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;load_model&lt;/span&gt;
@@ -6047,10 +6070,8 @@ freq       3094                                                 16     21
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__version__&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'2.6.0'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;span class=&quot;c1&quot;&gt;# '2.6.0'
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sequential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Embedding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
@@ -6137,10 +6158,10 @@ Epoch 00012: early stopping
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-data-info&quot; id=&quot;markdown-toc-1-data-info&quot;&gt;1. Data Info&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#2-preprocessing&quot; id=&quot;markdown-toc-2-preprocessing&quot;&gt;2. Preprocessing&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#21-duplicated-data-found-in-train_data&quot; id=&quot;markdown-toc-21-duplicated-data-found-in-train_data&quot;&gt;2.1 duplicated data found in train_data&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#21-duplicated-data-found-in-train_data&quot; id=&quot;markdown-toc-21-duplicated-data-found-in-train_data&quot;&gt;2.1. duplicated data found in train_data&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#3-comparing-classification-models&quot; id=&quot;markdown-toc-3-comparing-classification-models&quot;&gt;3. Comparing classification models&lt;/a&gt;    &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#3-comparing-between-classification-models&quot; id=&quot;markdown-toc-3-comparing-between-classification-models&quot;&gt;3. Comparing between classification models&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#31-with-tf-idf-vectorizer&quot; id=&quot;markdown-toc-31-with-tf-idf-vectorizer&quot;&gt;3.1 With Tf-idf vectorizer&lt;/a&gt;        &lt;ul&gt;
           &lt;li&gt;&lt;a href=&quot;#311-multinomialnb&quot; id=&quot;markdown-toc-311-multinomialnb&quot;&gt;3.1.1 MultinomialNB&lt;/a&gt;&lt;/li&gt;
           &lt;li&gt;&lt;a href=&quot;#312-logisticregression&quot; id=&quot;markdown-toc-312-logisticregression&quot;&gt;3.1.2 LogisticRegression&lt;/a&gt;&lt;/li&gt;
@@ -6154,7 +6175,6 @@ Epoch 00012: early stopping
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#4-balanced-sampling-approach---imblearn&quot; id=&quot;markdown-toc-4-balanced-sampling-approach---imblearn&quot;&gt;4. Balanced sampling approach - imblearn&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#5-result-best-model&quot; id=&quot;markdown-toc-5-result-best-model&quot;&gt;5. Result: Best Model&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#comment&quot; id=&quot;markdown-toc-comment&quot;&gt;comment&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
@@ -6242,7 +6262,7 @@ freq                                                    1  1260
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;2-preprocessing&quot;&gt;2. Preprocessing&lt;/h1&gt;
-&lt;h2 id=&quot;21-duplicated-data-found-in-train_data&quot;&gt;2.1 duplicated data found in train_data&lt;/h2&gt;
+&lt;h2 id=&quot;21-duplicated-data-found-in-train_data&quot;&gt;2.1. duplicated data found in train_data&lt;/h2&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# remove duplicated data
 &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;duplicated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
@@ -6289,7 +6309,7 @@ freq                                                    1  11276
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'J brand is by far the best premium denim line retailer sells  the fit on these jeans is amazing  worth every penny  also  considering it is a crop jean   warm weather wear   the denim weight is light and not too thick   the color is different from ordinary regular denim blue  lighter wash for spring summer '
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h1 id=&quot;3-comparing-classification-models&quot;&gt;3. Comparing classification models&lt;/h1&gt;
+&lt;h1 id=&quot;3-comparing-between-classification-models&quot;&gt;3. Comparing between classification models&lt;/h1&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# tuning parameter sets
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ngram_range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
@@ -6479,10 +6499,7 @@ f1-score macro avg: 0.85&lt;/p&gt;
     accuracy                           0.97      1491
    macro avg       0.94      0.93      0.94      1491
 weighted avg       0.97      0.97      0.97      1491
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;comment&quot;&gt;comment&lt;/h1&gt;
-&lt;p&gt;데이터사이언스 복수전공 후 첫 강의. 중간고사까지 배웠던 기본적인 전처리와 ML 함수들을 적용했다. 추가적으로 imblanced data case를 SMOTE 패키지를 사용해 간단히 처리해보았다. 당시 수업에서 가장 높은 accuracy를 기록했다.&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">2020-1. NLP</summary></entry><entry><title type="html">Statistical Mining - Chapter 4</title><link href="http://0.0.0.0:4000/stat_ch4" rel="alternate" type="text/html" title="Statistical Mining - Chapter 4" /><published>2020-04-16T00:00:00+09:00</published><updated>2020-04-16T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch4</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch4">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">2020-1. NLP</summary></entry><entry><title type="html">Statistical Mining - Chapter 4</title><link href="http://0.0.0.0:4000/stat_ch4" rel="alternate" type="text/html" title="Statistical Mining - Chapter 4" /><published>2020-04-16T00:00:00+09:00</published><updated>2020-04-16T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch4</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch4">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#chapter-4-classification&quot; id=&quot;markdown-toc-chapter-4-classification&quot;&gt;Chapter 4. Classification&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#41-problem-of-linear-regression-in-classification&quot; id=&quot;markdown-toc-41-problem-of-linear-regression-in-classification&quot;&gt;4.1. Problem of linear regression in classification:&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#42-logistic-regression&quot; id=&quot;markdown-toc-42-logistic-regression&quot;&gt;4.2. Logistic Regression&lt;/a&gt;&lt;/li&gt;
@@ -6885,7 +6902,7 @@ $\therefore (1-\alpha)100$% P.I. for $Y_0$ =  $\hat Y_0 \pm t_{(1-\alpha/2, n-p-
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;Reduction of r : Average using fewer obs. small K : higher variance of the fit, poor prediction&lt;/li&gt;
-  &lt;li&gt;For the smae density, when p=1, n=100 -&amp;gt; when p=10, n = $100^{10}$&lt;/li&gt;
+  &lt;li&gt;For the same density, when p=1, n=100 -&amp;gt; when p=10, n = $100^{10}$&lt;/li&gt;
 &lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="studies" /><summary type="html"></summary></entry><entry><title type="html">Statistical Mining - Chapter 2</title><link href="http://0.0.0.0:4000/stat_ch2" rel="alternate" type="text/html" title="Statistical Mining - Chapter 2" /><published>2020-03-16T00:00:00+09:00</published><updated>2020-03-16T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch2</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch2">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#chapter-2-supervised-learning&quot; id=&quot;markdown-toc-chapter-2-supervised-learning&quot;&gt;Chapter 2. Supervised Learning&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#21-prediction&quot; id=&quot;markdown-toc-21-prediction&quot;&gt;2.1. Prediction&lt;/a&gt;&lt;/li&gt;

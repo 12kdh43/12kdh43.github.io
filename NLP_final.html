@@ -50,7 +50,7 @@
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="NLP - Korean Language Text Analysis with RNN" />
-    <meta property="og:description" content="2020-1. NLP # 한국어 자료 import sys import os import numpy as np import nltk import konlpy import pandas as pd import re import random import itertools import warnings warnings.filterwarnings(action='ignore') from sklearn.metrics import classification_report,f1_score,precision_score,recall_score random.seed(1) # 데이터 로드 train_data=pd.read_csv('final_train_data.csv') test_data=pd.read_csv('final_test_data.csv') # 384 duplicates in content, 240 in title print(train_data.describe()) category" />
+    <meta property="og:description" content="2020-1. NLP 1. Data Load 2. Preprocessing 2.1. Remove duplicates 2.2. Regexp on Korean Language 3. Tokenizing with konlpy-Okt 4. Train-test Data 5. Keras Model # 한국어 자료 import sys import os import numpy as np import nltk import konlpy import pandas as pd import re import random import itertools" />
     <meta property="og:url" content="http://0.0.0.0:4000/NLP_final" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
@@ -60,7 +60,7 @@
     <meta property="article:tag" content="projects" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="NLP - Korean Language Text Analysis with RNN" />
-    <meta name="twitter:description" content="2020-1. NLP # 한국어 자료 import sys import os import numpy as np import nltk import konlpy import pandas as pd import re import random import itertools import warnings warnings.filterwarnings(action='ignore') from sklearn.metrics import classification_report,f1_score,precision_score,recall_score random.seed(1) # 데이터 로드 train_data=pd.read_csv('final_train_data.csv') test_data=pd.read_csv('final_test_data.csv') # 384 duplicates in content, 240 in title print(train_data.describe()) category" />
+    <meta name="twitter:description" content="2020-1. NLP 1. Data Load 2. Preprocessing 2.1. Remove duplicates 2.2. Regexp on Korean Language 3. Tokenizing with konlpy-Okt 4. Train-test Data 5. Keras Model # 한국어 자료 import sys import os import numpy as np import nltk import konlpy import pandas as pd import re import random import itertools" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -92,7 +92,7 @@
         "@type": "WebPage",
         "@id": "http://0.0.0.0:4000/NLP_final"
     },
-    "description": "2020-1. NLP # 한국어 자료 import sys import os import numpy as np import nltk import konlpy import pandas as pd import re import random import itertools import warnings warnings.filterwarnings(action='ignore') from sklearn.metrics import classification_report,f1_score,precision_score,recall_score random.seed(1) # 데이터 로드 train_data=pd.read_csv('final_train_data.csv') test_data=pd.read_csv('final_test_data.csv') # 384 duplicates in content, 240 in title print(train_data.describe()) category"
+    "description": "2020-1. NLP 1. Data Load 2. Preprocessing 2.1. Remove duplicates 2.2. Regexp on Korean Language 3. Tokenizing with konlpy-Okt 4. Train-test Data 5. Keras Model # 한국어 자료 import sys import os import numpy as np import nltk import konlpy import pandas as pd import re import random import itertools"
 }
     </script>
 
@@ -180,7 +180,19 @@ into the {body} of the default.hbs template -->
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h2 id="2020-1-nlp">2020-1. NLP</h2>
+                    <h2 class="no_toc" id="2020-1-nlp">2020-1. NLP</h2>
+
+<ul id="markdown-toc">
+  <li><a href="#1-data-load" id="markdown-toc-1-data-load">1. Data Load</a></li>
+  <li><a href="#2-preprocessing" id="markdown-toc-2-preprocessing">2. Preprocessing</a>    <ul>
+      <li><a href="#21-remove-duplicates" id="markdown-toc-21-remove-duplicates">2.1. Remove duplicates</a></li>
+      <li><a href="#22-regexp-on-korean-language" id="markdown-toc-22-regexp-on-korean-language">2.2. Regexp on Korean Language</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-tokenizing-with-konlpy-okt" id="markdown-toc-3-tokenizing-with-konlpy-okt">3. Tokenizing with konlpy-Okt</a></li>
+  <li><a href="#4-train-test-data" id="markdown-toc-4-train-test-data">4. Train-test Data</a></li>
+  <li><a href="#5-keras-model" id="markdown-toc-5-keras-model">5. Keras Model</a></li>
+</ul>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 한국어 자료
 </span><span class="kn">import</span> <span class="nn">sys</span>
@@ -198,8 +210,9 @@ into the {body} of the default.hbs template -->
 <span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 데이터 로드
-</span><span class="n">train_data</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'final_train_data.csv'</span><span class="p">)</span>
+<h1 id="1-data-load">1. Data Load</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_data</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'final_train_data.csv'</span><span class="p">)</span>
 <span class="n">test_data</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'final_test_data.csv'</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -214,15 +227,15 @@ top        정치개혁  개인회생 36개월 단축소급 전국 적용을 위
 freq       3094                                                 16     21
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># preprocess: duplicate
-</span><span class="n">train_data</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s">'content'</span><span class="p">],</span><span class="n">keep</span><span class="o">=</span><span class="s">'first'</span><span class="p">)</span>
-</code></pre></div></div>
+<h1 id="2-preprocessing">2. Preprocessing</h1>
+<h2 id="21-remove-duplicates">2.1. Remove duplicates</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># all duplicates removed
-</span><span class="n">train_data</span><span class="p">.</span><span class="n">duplicated</span><span class="p">().</span><span class="nb">sum</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_data</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s">'content'</span><span class="p">],</span><span class="n">keep</span><span class="o">=</span><span class="s">'first'</span><span class="p">)</span>
+<span class="n">train_data</span><span class="p">.</span><span class="n">duplicated</span><span class="p">().</span><span class="nb">sum</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+all duplicates removed
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_data</span><span class="p">[</span><span class="s">'document'</span><span class="p">]</span><span class="o">=</span><span class="n">train_data</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">train_data</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
@@ -230,11 +243,14 @@ freq       3094                                                 16     21
 <span class="n">test_data</span><span class="p">[</span><span class="s">'document'</span><span class="p">]</span><span class="o">=</span><span class="n">test_data</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">test_data</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_data</span><span class="p">[</span><span class="s">'document'</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s">'document'</span><span class="p">].</span><span class="nb">str</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"[^ㄱ-ㅎㅏ-ㅣ가-힣 ]"</span><span class="p">,</span><span class="s">""</span><span class="p">)</span> <span class="c1"># 정규 표현식 수행
-</span><span class="n">test_data</span><span class="p">[</span><span class="s">'document'</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[</span><span class="s">'document'</span><span class="p">].</span><span class="nb">str</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"[^ㄱ-ㅎㅏ-ㅣ가-힣 ]"</span><span class="p">,</span><span class="s">""</span><span class="p">)</span> <span class="c1"># 정규 표현식 수행
-</span></code></pre></div></div>
+<h2 id="22-regexp-on-korean-language">2.2. Regexp on Korean Language</h2>
 
-<h3 id="tokenizing-process-with-konlpy-okt">tokenizing process with konlpy-Okt</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_data</span><span class="p">[</span><span class="s">'document'</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">[</span><span class="s">'document'</span><span class="p">].</span><span class="nb">str</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"[^ㄱ-ㅎㅏ-ㅣ가-힣 ]"</span><span class="p">,</span><span class="s">""</span><span class="p">)</span>
+<span class="n">test_data</span><span class="p">[</span><span class="s">'document'</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[</span><span class="s">'document'</span><span class="p">].</span><span class="nb">str</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"[^ㄱ-ㅎㅏ-ㅣ가-힣 ]"</span><span class="p">,</span><span class="s">""</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="3-tokenizing-with-konlpy-okt">3. Tokenizing with konlpy-Okt</h1>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># tokenize
 </span><span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Okt</span>
 <span class="n">okt</span> <span class="o">=</span> <span class="n">Okt</span><span class="p">()</span> <span class="c1">#형태소 분석기
@@ -257,7 +273,10 @@ freq       3094                                                 16     21
 <span class="n">x_test</span><span class="o">=</span><span class="n">tokenized_data</span>
 </code></pre></div></div>
 
-<h3 id="for-this-tokenizing-process-takes-a-long-time-save-and-import-preprocessed-data">for this tokenizing process takes a long time, save and import preprocessed data.</h3>
+<ul>
+  <li>save and re-import processed data</li>
+</ul>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pickle</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'nlp_final_x_tr.data'</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">pickle</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
@@ -390,6 +409,8 @@ freq       3094                                                 16     21
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10301 1158
 </code></pre></div></div>
 
+<h1 id="4-train-test-data">4. Train-test Data</h1>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span><span class="o">=</span><span class="p">{</span><span class="s">'경제민주화'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'교통/건축/국토'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'보건복지'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'육아/교육'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s">'인권/성평등'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s">'일자리'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s">'정치개혁'</span><span class="p">:</span> <span class="mi">7</span><span class="p">}</span>
 <span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s">'보건복지'</span><span class="p">])</span>
 <span class="n">index1</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">10301</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
@@ -427,6 +448,8 @@ freq       3094                                                 16     21
 19055
 </code></pre></div></div>
 
+<h1 id="5-keras-model">5. Keras Model</h1>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Embedding</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">LSTM</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
@@ -439,10 +462,8 @@ freq       3094                                                 16     21
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
 <span class="n">keras</span><span class="p">.</span><span class="n">__version__</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'2.6.0'
-</code></pre></div></div>
+<span class="c1"># '2.6.0'
+</span></code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
 <span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="mi">128</span><span class="p">))</span>
