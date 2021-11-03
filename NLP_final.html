@@ -50,7 +50,7 @@
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="NLP - Korean Language Text Analysis with RNN" />
-    <meta property="og:description" content="2020-1. NLP 1. Data Load 2. Preprocessing 2.1. Remove duplicates 2.2. Regexp on Korean Language 3. Tokenizing with konlpy-Okt 4. Train-test Data 5. Keras Model # 한국어 자료 import sys import os import numpy as np import nltk import konlpy import pandas as pd import re import random import itertools" />
+    <meta property="og:description" content="1. Data Load 2. Preprocessing 2.1. Remove duplicates 2.2. Regexp on Korean Language 3. Tokenizing with konlpy-Okt 4. Train-test Data 5. LSTM Model # 한국어 자료 import sys import os import numpy as np import nltk import konlpy import pandas as pd import re import random import itertools import warnings" />
     <meta property="og:url" content="http://0.0.0.0:4000/NLP_final" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
@@ -60,7 +60,7 @@
     <meta property="article:tag" content="projects" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="NLP - Korean Language Text Analysis with RNN" />
-    <meta name="twitter:description" content="2020-1. NLP 1. Data Load 2. Preprocessing 2.1. Remove duplicates 2.2. Regexp on Korean Language 3. Tokenizing with konlpy-Okt 4. Train-test Data 5. Keras Model # 한국어 자료 import sys import os import numpy as np import nltk import konlpy import pandas as pd import re import random import itertools" />
+    <meta name="twitter:description" content="1. Data Load 2. Preprocessing 2.1. Remove duplicates 2.2. Regexp on Korean Language 3. Tokenizing with konlpy-Okt 4. Train-test Data 5. LSTM Model # 한국어 자료 import sys import os import numpy as np import nltk import konlpy import pandas as pd import re import random import itertools import warnings" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -92,7 +92,7 @@
         "@type": "WebPage",
         "@id": "http://0.0.0.0:4000/NLP_final"
     },
-    "description": "2020-1. NLP 1. Data Load 2. Preprocessing 2.1. Remove duplicates 2.2. Regexp on Korean Language 3. Tokenizing with konlpy-Okt 4. Train-test Data 5. Keras Model # 한국어 자료 import sys import os import numpy as np import nltk import konlpy import pandas as pd import re import random import itertools"
+    "description": "1. Data Load 2. Preprocessing 2.1. Remove duplicates 2.2. Regexp on Korean Language 3. Tokenizing with konlpy-Okt 4. Train-test Data 5. LSTM Model # 한국어 자료 import sys import os import numpy as np import nltk import konlpy import pandas as pd import re import random import itertools import warnings"
 }
     </script>
 
@@ -180,9 +180,7 @@ into the {body} of the default.hbs template -->
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h2 class="no_toc" id="2020-1-nlp">2020-1. NLP</h2>
-
-<ul id="markdown-toc">
+                    <ul id="markdown-toc">
   <li><a href="#1-data-load" id="markdown-toc-1-data-load">1. Data Load</a></li>
   <li><a href="#2-preprocessing" id="markdown-toc-2-preprocessing">2. Preprocessing</a>    <ul>
       <li><a href="#21-remove-duplicates" id="markdown-toc-21-remove-duplicates">2.1. Remove duplicates</a></li>
@@ -191,7 +189,7 @@ into the {body} of the default.hbs template -->
   </li>
   <li><a href="#3-tokenizing-with-konlpy-okt" id="markdown-toc-3-tokenizing-with-konlpy-okt">3. Tokenizing with konlpy-Okt</a></li>
   <li><a href="#4-train-test-data" id="markdown-toc-4-train-test-data">4. Train-test Data</a></li>
-  <li><a href="#5-keras-model" id="markdown-toc-5-keras-model">5. Keras Model</a></li>
+  <li><a href="#5-lstm-model" id="markdown-toc-5-lstm-model">5. LSTM Model</a></li>
 </ul>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 한국어 자료
@@ -448,7 +446,7 @@ all duplicates removed
 19055
 </code></pre></div></div>
 
-<h1 id="5-keras-model">5. Keras Model</h1>
+<h1 id="5-lstm-model">5. LSTM Model</h1>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Embedding</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">LSTM</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
@@ -645,7 +643,16 @@ Epoch 00012: early stopping
                                     
                                         
                                         
-                                            <li><a href="/fashion_GNN">Fashion Coordinator Chatbot Dataset with GNN</a></li>
+                                            <li><a href="/fashion_GNN">GNN - Fashion Coordinator Chatbot Dataset</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/fintel_R_final">R - Stock Market Portfolio Analysis</a></li>
                                         
                                     
                                   
@@ -662,8 +669,6 @@ Epoch 00012: early stopping
                                   
                                     
                                         
-                                        
-                                            <li><a href="/DM_final_proj">Data Mining - Stock Market Network Analysis</a></li>
                                         
                                     
                                   
@@ -697,7 +702,7 @@ Epoch 00012: early stopping
                         <footer class="read-next-card-footer">
                             <a href="/tag/projects/">
                                 
-                                    See all 5 posts  →
+                                    See all 6 posts  →
                                 
                             </a>
                         </footer>
@@ -720,7 +725,7 @@ Epoch 00012: early stopping
                         
                     
 
-                    <h2 class="post-card-title">Data Science and R - Air Pollution Data Analysis</h2>
+                    <h2 class="post-card-title">R - Air Pollution Data Analysis</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -758,8 +763,7 @@ Epoch 00012: early stopping
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>2020-1. NLP
-
+                        <p>
 </p>
                     
                 </section>

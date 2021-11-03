@@ -8,39 +8,13 @@
 	
 	<!-- On Post front-matter YAML, set "use_math: true" to use LaTex -->
 	
-	  
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    TeX: {
-        equationNumbers: {
-        autoNumber: "AMS"
-        }
-    },
-    tex2jax: {
-    inlineMath: [ ['$', '$'], ["\\(","\\)"]  ],
-    displayMath: [ ['$$', '$$'], ["\\[","\\]"]  ],
-    processEscapes: true,
-    }
-});
-MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
-        alert("Math Processing Error: "+message[1]);
-    });
-MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
-        alert("Math Processing Error: "+message[1]);
-    });
-</script>
-
-<script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-	
 
     <!-- Base Meta -->
     <!-- dynamically fixing the title for tag/author pages -->
 
 
 
-    <title>Statistical Mining - Chapter 3</title>
+    <title>R - Stock Market Portfolio Analysis</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -69,30 +43,86 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="" />
     <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
-    <link rel="canonical" href="http://0.0.0.0:4000/stat_ch3" />
+    <link rel="canonical" href="http://0.0.0.0:4000/fintel_R_final" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Statistical Mining - Chapter 3" />
-    <meta property="og:description" content="Chapter 3. Linear Regression 3.1. Least Squares 3.2. Hypothesis test for $\beta_j$: 3.2.1. Test for a group of coefficients: 3.2.2. Test for all coefficients: 3.3. Gauss-Markov Theorem 3.4. Properties of Good estimators 3.5. Model fit 3.6. Prediction Errors 3.7. in K-Nearest Neighbor Regression 3.8. Curse of Dimensionality Chapter 3. Linear" />
-    <meta property="og:url" content="http://0.0.0.0:4000/stat_ch3" />
+    <meta property="og:title" content="R - Stock Market Portfolio Analysis" />
+    <meta property="og:description" content="
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+" />
+    <meta property="og:url" content="http://0.0.0.0:4000/fintel_R_final" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta property="article:author" content="https://www.facebook.com/" />
-    <meta property="article:published_time" content="2020-04-03T00:00:00+09:00" />
-    <meta property="article:modified_time" content="2020-04-03T00:00:00+09:00" />
-    <meta property="article:tag" content="studies" />
+    <meta property="article:published_time" content="2021-06-18T00:00:00+09:00" />
+    <meta property="article:modified_time" content="2021-06-18T00:00:00+09:00" />
+    <meta property="article:tag" content="projects" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Statistical Mining - Chapter 3" />
-    <meta name="twitter:description" content="Chapter 3. Linear Regression 3.1. Least Squares 3.2. Hypothesis test for $\beta_j$: 3.2.1. Test for a group of coefficients: 3.2.2. Test for all coefficients: 3.3. Gauss-Markov Theorem 3.4. Properties of Good estimators 3.5. Model fit 3.6. Prediction Errors 3.7. in K-Nearest Neighbor Regression 3.8. Curse of Dimensionality Chapter 3. Linear" />
+    <meta name="twitter:title" content="R - Stock Market Portfolio Analysis" />
+    <meta name="twitter:description" content="
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Darron's Devlog" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="studies" />
+    <meta name="twitter:data2" content="projects" />
     <meta name="twitter:site" content="@" />
     <meta name="twitter:creator" content="@" />
     <meta property="og:image:width" content="1400" />
@@ -107,7 +137,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "name": "Darron's Devlog",
         "logo": "http://0.0.0.0:4000/"
     },
-    "url": "http://0.0.0.0:4000/stat_ch3",
+    "url": "http://0.0.0.0:4000/fintel_R_final",
     "image": {
         "@type": "ImageObject",
         "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
@@ -116,9 +146,37 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://0.0.0.0:4000/stat_ch3"
+        "@id": "http://0.0.0.0:4000/fintel_R_final"
     },
-    "description": "Chapter 3. Linear Regression 3.1. Least Squares 3.2. Hypothesis test for $\beta_j$: 3.2.1. Test for a group of coefficients: 3.2.2. Test for all coefficients: 3.3. Gauss-Markov Theorem 3.4. Properties of Good estimators 3.5. Model fit 3.6. Prediction Errors 3.7. in K-Nearest Neighbor Regression 3.8. Curse of Dimensionality Chapter 3. Linear"
+    "description": "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"
 }
     </script>
 
@@ -131,7 +189,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="Statistical Mining - Chapter 3" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="R - Stock Market Portfolio Analysis" href="/feed.xml" />
 
 
 </head>
@@ -185,229 +243,55 @@ into the {body} of the default.hbs template -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
-        <article class="post-full  tag-studies  no-image">
+        <article class="post-full  tag-projects  no-image">
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime=" 3 April 2020"> 3 April 2020</time>
+                    <time class="post-full-meta-date" datetime="18 June 2021">18 June 2021</time>
                     
                         <span class="date-divider">/</span>
                         
                             
-                               <a href='/tag/studies/'>STUDIES</a>
+                               <a href='/tag/projects/'>PROJECTS</a>
                             
                         
                     
                 </section>
-                <h1 class="post-full-title">Statistical Mining - Chapter 3</h1>
+                <h1 class="post-full-title">R - Stock Market Portfolio Analysis</h1>
             </header>
 	<!--
             
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <ul id="markdown-toc">
-  <li><a href="#chapter-3-linear-regression" id="markdown-toc-chapter-3-linear-regression">Chapter 3. Linear Regression</a>    <ul>
-      <li><a href="#31-least-squares" id="markdown-toc-31-least-squares">3.1. Least Squares</a></li>
-      <li><a href="#32-hypothesis-test-for-beta_j" id="markdown-toc-32-hypothesis-test-for-beta_j">3.2. Hypothesis test for $\beta_j$:</a>        <ul>
-          <li><a href="#321-test-for-a-group-of-coefficients" id="markdown-toc-321-test-for-a-group-of-coefficients">3.2.1. Test for a group of coefficients:</a></li>
-          <li><a href="#322-test-for-all-coefficients" id="markdown-toc-322-test-for-all-coefficients">3.2.2. Test for all coefficients:</a></li>
-        </ul>
-      </li>
-      <li><a href="#33-gauss-markov-theorem" id="markdown-toc-33-gauss-markov-theorem">3.3. Gauss-Markov Theorem</a></li>
-      <li><a href="#34-properties-of-good-estimators" id="markdown-toc-34-properties-of-good-estimators">3.4. <em>Properties of Good estimators</em></a></li>
-      <li><a href="#35-model-fit" id="markdown-toc-35-model-fit">3.5. Model fit</a></li>
-      <li><a href="#36-prediction-errors" id="markdown-toc-36-prediction-errors">3.6. Prediction Errors</a></li>
-      <li><a href="#37-in-k-nearest-neighbor-regression" id="markdown-toc-37-in-k-nearest-neighbor-regression">3.7. in K-Nearest Neighbor Regression</a></li>
-      <li><a href="#38-curse-of-dimensionality" id="markdown-toc-38-curse-of-dimensionality">3.8. Curse of Dimensionality</a></li>
-    </ul>
-  </li>
-</ul>
-
-<h1 id="chapter-3-linear-regression">Chapter 3. Linear Regression</h1>
-
-<ul>
-  <li>
-    <p>Model: <strong>$ f(X) = \beta_0 + \sum_{j=1}^p \beta_j X_j $</strong><br />
-$\Rightarrow$ Prediction of Y from X  (X= p input variables)<br />
-$\quad$ <em>f</em> : Regression function E(Y|X)</p>
-  </li>
-  <li>
-    <p>input variable X:</p>
-    <ul>
-      <li>Quantitative or Transformations of quantitative inputs</li>
-      <li>Basis expansions leading to polynomial representation</li>
-      <li>Dummy coding of qualitative variables : G grops -&gt; G-1 dummy variables required</li>
-      <li>Interactions between inputs ($X_3 = X_1 X_2 $ )</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="31-least-squares">3.1. Least Squares</h2>
-<ul>
-  <li>
-    <p>How to estimate $\beta = (\beta_0, \beta_1, \ldots , \beta_p)^T$<br />
-Least Squares : $\beta$ minimizing RSS<br />
-when Y (n by 1) / X ( n by (p + 1) matrix),<br />
-RSS = $ ( y - X\hat\beta)^T ( y - X\hat\beta) $,<br />
-Least square estimator (LSE): $ \hat\beta = (X^T X)^{-1} X^T Y $</p>
-  </li>
-  <li>
-    <p>With Assumption:<br />
-1) $Y_i$ ‘s are uncorrelated &amp; Var ($Y_i$ ) = $\sigma^2$<br />
-$\quad$($\equiv$ $\epsilon_i$ ‘s are independent &amp; Var ($\epsilon_i$ ) = $\sigma^2$)<br />
-2) X = $(X_1, \ldots, X_p)^T$ is fixed (not random)</p>
-  </li>
-  <li>
-    <p>By (1) &amp; (2), for OLS estimator $\hat\beta$;<br />
-\(\\ \begin{align*}\hat\beta &amp;= (X^TX)^{-1}X^TY \quad\leftarrow Y=X\beta + \epsilon \\
-                             &amp;= \beta + (X^TX)^{-1}X^T\epsilon \\
-\end{align*} \\\)<br />
-\(\begin{align*}E(\hat\beta) &amp;= E(\beta) + E(\epsilon) \\
-                            &amp;= \beta
-\end{align*} \\\)<br />
-\(\begin{align*} Var(\hat\beta) &amp;= E[\hat\beta - E(\hat\beta)]^2 \\
-                                &amp;= E[ (X^TX)^{-1}X^T\epsilon ]^2 \\
-                                &amp;= (X^TX)^{-1}X^TE(\epsilon^2)X(X^TX)^{-1}\\
-                                &amp;= \sigma^2(X^TX)^{-1}X^TX(X^TX)^{-1}\\
-                                &amp;=\sigma^2(X^T X)^{-1}
-\end{align*} \\\)<br />
-while $\hat\sigma^2$ as Estimator of Variance of $\epsilon$ (= $\sigma^2$):<br />
-\(\begin{align*} \hat\sigma^2 &amp;= \frac 1 {n-p-1} \sum_{i=1}^n (y_i - \hat y_i)^2 \\
-                              &amp;= \frac1{n-p-1}\sum_{i=1}^n \epsilon_i^2 \\
-  \rightarrow E(\hat\sigma^2) &amp;= \sigma^2
-\end{align*} \\\)<br />
-$\therefore \text{ unbiased estimator; }\frac{RSS}{n-p-1}$</p>
-  </li>
-  <li>
-    <p>With Assumption:<br />
-3) $\epsilon \sim ^{iid} N(0,\sigma^2)$ : normal distribution assumption of  error</p>
-    <ul>
-      <li>$\hat\beta\sim MVN(\beta,\sigma^2(X^TX)^{-1}), \quad (Y\sim MVN(X\beta,\sigma^2 I)$ <br />
-$\frac{(n-p-1)\hat\sigma^2}{\sigma^2}\sim\chi^2_{n-p-1}$<br />
-$\hat\beta \text{ &amp; } \hat\sigma^2$ are independent</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="32-hypothesis-test-for-beta_j">3.2. Hypothesis test for $\beta_j$:</h2>
-<ul>
-  <li>$H_0: \beta_j = 0$ vs . $H_1: B_j \not= 0$</li>
-  <li>Test for partial effect of individual $\beta_j$</li>
-  <li>$\hat\beta_j \sim N(\beta_j,\sigma^2 v_j)$, where $v_j$ is the <em>j</em> th diagonal element of $(X^TX)^{-1}$<br />
-$\Rightarrow \frac{\hat\beta_j - \beta_j}{\sigma\sqrt{v_j}}\sim N(0,1)$  ($\leftarrow z=\frac{x-\mu}{\sigma}$)</li>
-  <li>under $H_0$, $t_j = \frac{\hat\beta_j}{\hat\sigma\sqrt{v_j}}\sim t_{n-p-1}$</li>
-  <li>if $ \left\vert t_j \right\vert &gt; t_{(1-\alpha/2), n-p-1}$ , we reject $H_0$ with level of significance : $\alpha$</li>
-</ul>
-
-<h3 id="321-test-for-a-group-of-coefficients">3.2.1. Test for a group of coefficients:</h3>
-<ul>
-  <li>E.g. test for a categorical variable with k levels (k-1 dummy variables)</li>
-  <li>$H_0: \beta_{j+1} = \beta_{j+2} = \cdots = \beta{j+l} = 0$</li>
-  <li>$H_1$: At least one of those is not zero</li>
-  <li>Full model: $Y=\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p + \epsilon$</li>
-  <li>Reduced model: under $H_0: Y= \beta_0  + \beta_1X_1 + \cdots + \beta_jX_j + \beta_{j+l+1}X_{j+l+1} + \cdots + \beta_pX_p + \epsilon$</li>
-  <li>Test statistic: F = $\frac{(RSS_R - RSS_F)/ l}{RSS_F/(n-p-1)} \sim F_{l,n-p-1}$<br />
-where $RSS_F$ is from full model and $RSS_R$ is from reduced model</li>
-  <li>if $ F &gt; F_{(1-\alpha),l,n-p-1}$ we reject $H_0$.</li>
-</ul>
-
-<h3 id="322-test-for-all-coefficients">3.2.2. Test for all coefficients:</h3>
-<ul>
-  <li>$H_0$: all $\beta$ coefficients are zero</li>
-  <li>Reduced model: $Y=\beta_0 + \epsilon \Rightarrow$ LSE $\hat\beta_0 =  \bar y$</li>
-  <li>Test statistic: $ F = \frac{(TSS-RSS)/p}{RSS/(n-p-1)}$ where TSS = $\sum_{i=1}^n(y_i-\bar y)^2$ = $RSS_R$</li>
-  <li>if $ F &gt; F_{(1-\alpha),p,n-p-1}$ we reject $H_0$ : at least 1 coefficient is not zero</li>
-  <li><strong>Check F-test first before t-tests for each $\beta_j$</strong></li>
-  <li>F-test : test for all coef, T-test: test for indiv. coeff</li>
-  <li>when F-test is significant ($H_1$ for all coeff is true) $\Rightarrow$ perform t-test but still need to control $\alpha$<br />
-but if F-test is not sig $\Rightarrow$ cant trust t-test result : all coeffs are ZERO</li>
-</ul>
-
-<h2 id="33-gauss-markov-theorem">3.3. Gauss-Markov Theorem</h2>
-<ul>
-  <li>Assumption: $E(\epsilon_i) = 0, Var(\epsilon_i) = \sigma^2 &lt; \infty\text{,  } \epsilon_i$’s are independent</li>
-  <li>among all linear unbiased estimator $\tilde{\beta} = Cy$ &amp; $E(\tilde{\beta}) = \beta)$<br />
-Then, $Var(\hat\beta) \le Var(\tilde{\beta})$ when  LSE $\hat\beta$ = BLUE</li>
-  <li>G-M theorem says that LSE  $\hat\beta$ is the best linear unbiased estimator (BLUE)</li>
-  <li>Conversely, there may exist biased estimators with smaller MSE than LSE.</li>
-</ul>
-
-<h2 id="34-properties-of-good-estimators">3.4. <em>Properties of Good estimators</em></h2>
-<ul>
-  <li>unbiaseness</li>
-  <li>efficiency(small variance)</li>
-  <li>consistancy(as n goes infinity, estimator goes true parameter)</li>
-  <li>sufficiency</li>
-</ul>
-
-<h2 id="35-model-fit">3.5. Model fit</h2>
-<ul>
-  <li>Model evaluation based on training data</li>
-  <li>Measure of model fit: $R^2$, $\scriptstyle\text{Residual Standard Error(RSE)}$
-\(R^2 = 1 - \frac{RSS}{TSS}\)
-which means the proportion of total variation that your model explains<br />
-\(RSE = \sqrt{\frac{RSS}{n-p-1}} = \hat\sigma^2\)</li>
-  <li>Problem: As number of predictors increases, $R^2$ increases and always the most complex model selected</li>
-</ul>
-
-<h2 id="36-prediction-errors">3.6. Prediction Errors</h2>
-
-<ul>
-  <li>
-    <p>1) Uncertainty between $\hat Y$ &amp; $f(X) = X^T\beta$<br />
-  Variation due to $\hat\beta$ (Model variance):<br />
-  in ideal situation, we can drive number of training datasets from population and have several f(x) and $\hat\beta$<br />
-  $\scriptstyle\text{Confidence interval}$ C.I. for Y:<br />
-  $E(\hat Y) = x^T\beta = f(x)$, $Var(\hat Y) = \sigma^2 x^T( X^TX)^{-1}x$<br />
-  $\therefore (1-\alpha)100$% C.I. for Y = $\hat Y \pm t_{(1-\alpha/2, n-p-1)} \hat\sigma\sqrt{x^T(X^TX)^{-1}x}$</p>
-  </li>
-  <li>
-    <p>2) Model bias:<br />
-caused by assuming a linear model for f(x).<br />
-$\rightarrow$ (1)(2) are reducible error</p>
-  </li>
-  <li>
-    <p>3) Uncertainty between Y &amp; $\hat Y$:<br />
-$\scriptstyle\text{Prediction interval}$ P.I. = reducible + irreducible error<br />
-for (new, unseen) test obs. $x_0 = (1, x_{01}, \ldots, x_{op})^T$,<br />
-$\hat Y_0 = x_0^T \beta$,<br />
-$Var(\hat Y_0) =  \sigma^2 + \sigma^2 x_0^T( X^TX)^{-1}x_0$ $\scriptstyle\text{(irreducible + reducible)}$<br />
-$\therefore (1-\alpha)100$% P.I. for $Y_0$ =  $\hat Y_0 \pm t_{(1-\alpha/2, n-p-1)} \hat\sigma\sqrt{1+x^T(X^TX)^{-1}x}$</p>
-  </li>
-</ul>
-
-<h2 id="37-in-k-nearest-neighbor-regression">3.7. in K-Nearest Neighbor Regression</h2>
-<ul>
-  <li>Nonparameric method: No assumption of f(x)<br />
-\(\hat f(x_0) = \frac{1}{K}\sum_{x_i\in\mathcal N_k(x_0)} y_i\)
-    <ul>
-      <li>($x_i,y_i$): training data</li>
-      <li>$\mathcal N_k(x_0)$ : neighborhood of $x_0$</li>
-    </ul>
-  </li>
-  <li>Preferable situations to linear regression:
-    <ul>
-      <li>True f(x) is nonlinear</li>
-      <li>Goal: Prediction &gt; Inference (interpretation)</li>
-      <li><strong>Low dimensions (small p)</strong>(curse of demensionality)</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="38-curse-of-dimensionality">3.8. Curse of Dimensionality</h2>
-<ul>
-  <li>to capture 10% data for neighbor space from variable X…
-    <ul>
-      <li>p=1 : X range (0,1), edge rank $e_1(0.1) = 0.1$</li>
-      <li>p=2 : $X_1, X_2$ range (0,1), edge rank $e_2(0.1) = \sqrt{0.1} = 0.1^{1/2} \approx 0.316 $</li>
-      <li>p=3 : $e_3(0.1) = 0.1^{1/3} \approx 0.464 $</li>
-      <li>p=10 : $e_{10}(0.1) = 0.1^{1/10} \approx 0.794 $</li>
-    </ul>
-  </li>
-  <li>Reduction of r : Average using fewer obs. small K : higher variance of the fit, poor prediction</li>
-  <li>For the same density, when p=1, n=100 -&gt; when p=10, n = $100^{10}$</li>
-</ul>
+                    <p><img src="/assets/images/2021-06-18-fintel_R_final/slide1.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide2.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide3.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide4.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide5.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide6.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide7.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide8.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide9.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide10.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide11.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide12.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide13.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide14.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide15.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide16.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide17.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide18.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide19.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide20.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide21.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide22.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide23.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide24.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide25.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide26.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide27.png" alt="png" />
+<img src="/assets/images/2021-06-18-fintel_R_final/slide28.png" alt="png" /></p>
 
                 </div>
             </section>
@@ -457,9 +341,9 @@ $\therefore (1-\alpha)100$% P.I. for $Y_0$ =  $\hat Y_0 \pm t_{(1-\alpha/2, n-p-
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function () {
-                            var this_page_url = 'http://0.0.0.0:4000/stat_ch3';
-                            var this_page_identifier = '/stat_ch3';
-                            var this_page_title = 'Statistical Mining - Chapter 3';
+                            var this_page_url = 'http://0.0.0.0:4000/fintel_R_final';
+                            var this_page_identifier = '/fintel_R_final';
+                            var this_page_title = 'R - Stock Market Portfolio Analysis';
                         };
                         (function() {
                             var d = document, s = d.createElement('script');
@@ -494,7 +378,7 @@ $\therefore (1-\alpha)100$% P.I. for $Y_0$ =  $\hat Y_0 \pm t_{(1-\alpha/2, n-p-
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; Darron's Devlog &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/studies/">Studies</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/projects/">Projects</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -504,24 +388,10 @@ $\therefore (1-\alpha)100$% P.I. for $Y_0$ =  $\hat Y_0 \pm t_{(1-\alpha/2, n-p-
                                 
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
-                                            <li><a href="/stat_ch4">Statistical Mining - Chapter 4</a></li>
+                                            <li><a href="/fashion_GNN">GNN - Fashion Coordinator Chatbot Dataset</a></li>
                                         
                                     
                                   
@@ -534,17 +404,53 @@ $\therefore (1-\alpha)100$% P.I. for $Y_0$ =  $\hat Y_0 \pm t_{(1-\alpha/2, n-p-
                                     
                                         
                                         
-                                            <li><a href="/stat_ch2">Statistical Mining - Chapter 2</a></li>
+                                            <li><a href="/DM_final_exam">Data Mining - K-POP Fandom Data Analysis with networkX</a></li>
                                         
                                     
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/DM_final_proj">Data Mining - Stock Market Network Analysis</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
                                   
                                 
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/studies/">
+                            <a href="/tag/projects/">
                                 
-                                    See all 2 posts  →
+                                    See all 6 posts  →
                                 
                             </a>
                         </footer>
@@ -557,17 +463,17 @@ $\therefore (1-\alpha)100$% P.I. for $Y_0$ =  $\hat Y_0 \pm t_{(1-\alpha/2, n-p-
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/stat_ch4">
+            <a class="post-card-content-link" href="/fashion_GNN">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Studies</span>
+                                <span class="post-card-tags">Projects</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">Statistical Mining - Chapter 4</h2>
+                    <h2 class="post-card-title">GNN - Fashion Coordinator Chatbot Dataset</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -591,17 +497,17 @@ $\therefore (1-\alpha)100$% P.I. for $Y_0$ =  $\hat Y_0 \pm t_{(1-\alpha/2, n-p-
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/stat_ch2">
+            <a class="post-card-content-link" href="/DM_final_exam">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Studies</span>
+                                <span class="post-card-tags">Projects</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">Statistical Mining - Chapter 2</h2>
+                    <h2 class="post-card-title">Data Mining - K-POP Fandom Data Analysis with networkX</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -633,18 +539,18 @@ $\therefore (1-\alpha)100$% P.I. for $Y_0$ =  $\hat Y_0 \pm t_{(1-\alpha/2, n-p-
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">Statistical Mining - Chapter 3</div>
+    <div class="floating-header-title">R - Stock Market Portfolio Analysis</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Statistical+Mining+-+Chapter+3&amp;url=https://12kdh43.github.io/stat_ch3"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=R+-+Stock+Market+Portfolio+Analysis&amp;url=https://12kdh43.github.io/fintel_R_final"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/stat_ch3"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/fintel_R_final"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 

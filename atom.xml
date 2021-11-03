@@ -8,7 +8,7 @@
     
       
       <item>
-        <title>Fashion Coordinator Chatbot Dataset with GNN</title>
+        <title>GNN - Fashion Coordinator Chatbot Dataset</title>
         
           <description>
 </description>
@@ -17,6 +17,47 @@
         <link>
         http://0.0.0.0:4000/fashion_GNN</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/fashion_GNN</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>R - Stock Market Portfolio Analysis</title>
+        
+          <description>&lt;p&gt;&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide1.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide2.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide3.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide4.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide5.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide6.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide7.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide8.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide9.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide10.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide11.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide12.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide13.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide14.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide15.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide16.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide17.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide18.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide19.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide20.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide21.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide22.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide23.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide24.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide25.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide26.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide27.png&quot; alt=&quot;png&quot; /&gt;
+&lt;img src=&quot;/assets/images/2021-06-18-fintel_R_final/slide28.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+</description>
+        
+        <pubDate>Fri, 18 Jun 2021 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/fintel_R_final</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/fintel_R_final</guid>
       </item>
       
     
@@ -50,7 +91,7 @@
     
       
       <item>
-        <title>Data Science and R - Air Pollution Data Analysis</title>
+        <title>R - Air Pollution Data Analysis</title>
         
           <description>
 </description>
@@ -66,8 +107,7 @@
       <item>
         <title>NLP - Korean Language Text Analysis with RNN</title>
         
-          <description>&lt;h2 class=&quot;no_toc&quot; id=&quot;2020-1-nlp&quot;&gt;2020-1. NLP&lt;/h2&gt;
-
+          <description>
 </description>
         
         <pubDate>Fri, 19 Jun 2020 00:00:00 +0900</pubDate>
@@ -81,8 +121,7 @@
       <item>
         <title>NLP - Text Analysis with ML algorithms</title>
         
-          <description>&lt;h2 class=&quot;no_toc&quot; id=&quot;2020-1-nlp&quot;&gt;2020-1. NLP&lt;/h2&gt;
-
+          <description>
 </description>
         
         <pubDate>Sun, 10 May 2020 16:00:00 +0900</pubDate>
