@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-11-04T01:27:31+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">GNN - Fashion Coordinator Chatbot Dataset</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="GNN - Fashion Coordinator Chatbot Dataset" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-11-24T11:12:02+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">GNN - Fashion Coordinator Chatbot Dataset</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="GNN - Fashion Coordinator Chatbot Dataset" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-about&quot; id=&quot;markdown-toc-1-about&quot;&gt;1. About&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#11-project-goal&quot; id=&quot;markdown-toc-11-project-goal&quot;&gt;1.1. Project Goal&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#12-model-architecture&quot; id=&quot;markdown-toc-12-model-architecture&quot;&gt;1.2. Model Architecture&lt;/a&gt;&lt;/li&gt;
@@ -3094,7 +3094,7 @@ SpearmanrResult(correlation=0.42480625827858726, pvalue=0.07887457444015573)
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SpearmanrResult(correlation=0.4892857142857142, pvalue=0.06416038631454055)
 SpearmanrResult(correlation=0.5004470273579545, pvalue=0.057440003802729525)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">Data Mining - Stock Market Network Analysis</title><link href="http://0.0.0.0:4000/DM_final_proj" rel="alternate" type="text/html" title="Data Mining - Stock Market Network Analysis" /><published>2021-05-21T00:00:00+09:00</published><updated>2021-05-21T00:00:00+09:00</updated><id>http://0.0.0.0:4000/DM_final_proj</id><content type="html" xml:base="http://0.0.0.0:4000/DM_final_proj">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">Data Mining - Stock Market Analysis with networkX</title><link href="http://0.0.0.0:4000/DM_final_proj" rel="alternate" type="text/html" title="Data Mining - Stock Market Analysis with networkX" /><published>2021-05-21T00:00:00+09:00</published><updated>2021-05-21T00:00:00+09:00</updated><id>http://0.0.0.0:4000/DM_final_proj</id><content type="html" xml:base="http://0.0.0.0:4000/DM_final_proj">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-data-load-and-preprocessing&quot; id=&quot;markdown-toc-1-data-load-and-preprocessing&quot;&gt;1. Data Load and Preprocessing&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#2-data-visualization&quot; id=&quot;markdown-toc-2-data-visualization&quot;&gt;2. Data Visualization&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#21-stock-price-volatility&quot; id=&quot;markdown-toc-21-stock-price-volatility&quot;&gt;2.1. Stock Price Volatility&lt;/a&gt;&lt;/li&gt;
@@ -6495,182 +6495,560 @@ f1-score macro avg: 0.85&lt;/p&gt;
     accuracy                           0.97      1491
    macro avg       0.94      0.93      0.94      1491
 weighted avg       0.97      0.97      0.97      1491
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">Statistical Mining - Chapter 4</title><link href="http://0.0.0.0:4000/stat_ch4" rel="alternate" type="text/html" title="Statistical Mining - Chapter 4" /><published>2020-04-16T00:00:00+09:00</published><updated>2020-04-16T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch4</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch4">&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#chapter-4-classification&quot; id=&quot;markdown-toc-chapter-4-classification&quot;&gt;Chapter 4. Classification&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#41-problem-of-linear-regression-in-classification&quot; id=&quot;markdown-toc-41-problem-of-linear-regression-in-classification&quot;&gt;4.1. Problem of linear regression in classification:&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#42-logistic-regression&quot; id=&quot;markdown-toc-42-logistic-regression&quot;&gt;4.2. Logistic Regression&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#43-log-likelyhood-function-mle&quot; id=&quot;markdown-toc-43-log-likelyhood-function-mle&quot;&gt;4.3. Log-Likelyhood Function: MLE&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#44-multinomial-logistic-regression-k-classes-k2&quot; id=&quot;markdown-toc-44-multinomial-logistic-regression-k-classes-k2&quot;&gt;4.4. Multinomial Logistic Regression: K classes (K&amp;gt;2)&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#45-lda&quot; id=&quot;markdown-toc-45-lda&quot;&gt;4.5. LDA&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#46-qda&quot; id=&quot;markdown-toc-46-qda&quot;&gt;4.6. QDA&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#47-lda-vs-logistic-regression&quot; id=&quot;markdown-toc-47-lda-vs-logistic-regression&quot;&gt;4.7. LDA vs. Logistic Regression&lt;/a&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">ISLR - Chapter 6. Linear Model Selection and Regularization</title><link href="http://0.0.0.0:4000/islr_ch6" rel="alternate" type="text/html" title="ISLR - Chapter 6. Linear Model Selection and Regularization" /><published>2020-04-30T00:00:00+09:00</published><updated>2020-04-30T00:00:00+09:00</updated><id>http://0.0.0.0:4000/islr_ch6</id><content type="html" xml:base="http://0.0.0.0:4000/islr_ch6">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-6-linear-model-selection-and-regularization&quot; id=&quot;markdown-toc-chapter-6-linear-model-selection-and-regularization&quot;&gt;Chapter 6. Linear Model Selection and Regularization&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#61-subset-selection&quot; id=&quot;markdown-toc-61-subset-selection&quot;&gt;6.1. Subset Selection&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#611-best-subset-selection&quot; id=&quot;markdown-toc-611-best-subset-selection&quot;&gt;6.1.1. Best Subset Selection&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#612-stepwise-selection&quot; id=&quot;markdown-toc-612-stepwise-selection&quot;&gt;6.1.2. Stepwise Selection&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#forward-stepwise-selection&quot; id=&quot;markdown-toc-forward-stepwise-selection&quot;&gt;Forward Stepwise Selection&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#backward-stepwise-selection&quot; id=&quot;markdown-toc-backward-stepwise-selection&quot;&gt;Backward Stepwise Selection&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#hybrid-approaches&quot; id=&quot;markdown-toc-hybrid-approaches&quot;&gt;Hybrid Approaches&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#613-choosing-the-optimal-model&quot; id=&quot;markdown-toc-613-choosing-the-optimal-model&quot;&gt;6.1.3. Choosing the Optimal Model&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#validation-and-cross-validation&quot; id=&quot;markdown-toc-validation-and-cross-validation&quot;&gt;Validation and Cross-Validation&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#62-shrinkage-methods&quot; id=&quot;markdown-toc-62-shrinkage-methods&quot;&gt;6.2. Shrinkage Methods&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#621-ridge-regression&quot; id=&quot;markdown-toc-621-ridge-regression&quot;&gt;6.2.1. Ridge Regression&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-6-linear-model-selection-and-regularization&quot;&gt;Chapter 6. Linear Model Selection and Regularization&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Limitations of LSE
+    &lt;ol&gt;
+      &lt;li&gt;Prediction Accuracy:
+        &lt;ul&gt;
+          &lt;li&gt;if &lt;em&gt;n&lt;/em&gt; is not much larger than &lt;em&gt;p&lt;/em&gt;, the least squares fit can hvae a lot 
+ of variability, results in overfitting and poor predictions to test data.&lt;/li&gt;
+          &lt;li&gt;if &lt;em&gt;p&lt;/em&gt; &amp;gt; &lt;em&gt;n&lt;/em&gt;, there is no unique solution for the least squares coefficient 
+ estimate; as $ Var(\hat\beta)=\infty$.&lt;/li&gt;
+          &lt;li&gt;if &lt;em&gt;p&lt;/em&gt; is large, there can be correlations between &lt;em&gt;X&lt;/em&gt; variables. A model 
+ having multicollinearity can have high variance.&lt;br /&gt;
+&lt;em&gt;Constraining&lt;/em&gt; or &lt;em&gt;Shrinking&lt;/em&gt; the estimated coefficients can reduce the variance 
+with negligible increase in bias, and improve in the accuracy to the test data.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Model Interpretability:
+        &lt;ul&gt;
+          &lt;li&gt;There are irrelevant variables $X_j$. Removing by setting coefficient estimates 
+ $\beta_j = 0$, we can have more interpretability.&lt;br /&gt;
+&lt;em&gt;Feature selection&lt;/em&gt; or &lt;em&gt;Variable selection&lt;/em&gt; can exclude irrelevant variables from a 
+multiple regression model.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;61-subset-selection&quot;&gt;6.1. Subset Selection&lt;/h2&gt;
+
+&lt;h3 id=&quot;611-best-subset-selection&quot;&gt;6.1.1. Best Subset Selection&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;fit a separate least squares regression for all $2^p$ possible models with combinations 
+of the &lt;em&gt;p&lt;/em&gt; predictors.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm
+    &lt;ol&gt;
+      &lt;li&gt;$\mathcal{M}_0$ as &lt;em&gt;null model&lt;/em&gt; (i.e. $ Y = \beta_0 + \epsilon $)&lt;/li&gt;
+      &lt;li&gt;For $ k = 1, 2, \ldots, p $:&lt;br /&gt;
+  (a) Fit all \({p \choose k}\) models with &lt;em&gt;k&lt;/em&gt; predictors&lt;br /&gt;
+  (b) Pick the smallest RSS, (or largest $R^2$) = $ \mathcal{M}_k $&lt;/li&gt;
+      &lt;li&gt;Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ using cross-validated 
+  prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Guarantees the best selection, while it suffers from computational limitations. Also, it 
+only works for least squares linear regression.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;in the case of logistic regression, we use &lt;em&gt;deviance&lt;/em&gt;, $-2\log$MLE, instead of RSS in 
+the 2nd step of algorithm upon.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;612-stepwise-selection&quot;&gt;6.1.2. Stepwise Selection&lt;/h3&gt;
+
+&lt;h4 id=&quot;forward-stepwise-selection&quot;&gt;Forward Stepwise Selection&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Algorithm
+    &lt;ol&gt;
+      &lt;li&gt;$\mathcal{M}_0$ as &lt;em&gt;null model&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;For $ k = 1, 2, \ldots, p $:&lt;br /&gt;
+  (a) Fit all &lt;em&gt;p - k&lt;/em&gt; models in \(\mathcal{M}_k\) with one additional predictor&lt;br /&gt;
+  (b) Pick the smallest RSS among &lt;em&gt;p - k&lt;/em&gt; models, $\mathcal{M}_{k+1}$&lt;/li&gt;
+      &lt;li&gt;Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ with CV scores&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee but available for the case of 
+high dimensional data($n&amp;lt;p$).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;backward-stepwise-selection&quot;&gt;Backward Stepwise Selection&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Algorithm
+    &lt;ol&gt;
+      &lt;li&gt;$\mathcal{M}_p$ as &lt;em&gt;full model&lt;/em&gt;, contains all &lt;em&gt;p&lt;/em&gt; predictors&lt;/li&gt;
+      &lt;li&gt;For $ k = p, p-1, \ldots, 1 $:&lt;br /&gt;
+  (a) Fit all &lt;em&gt;k - 1&lt;/em&gt; models contain all but one of the predictors in \(\mathcal{M}_k\)&lt;br /&gt;
+  (b) Pick the smallest RSS among &lt;em&gt;k - 1&lt;/em&gt; models, $\mathcal{M}_{k-1}$&lt;/li&gt;
+      &lt;li&gt;Select best model among $\mathcal{M}_0, ldots,\mathcal{M}_p$ with CV scores&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee and not for &lt;em&gt;n &amp;lt; p&lt;/em&gt; case.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;hybrid-approaches&quot;&gt;Hybrid Approaches&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;add then remove one predictors in each step.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;613-choosing-the-optimal-model&quot;&gt;6.1.3. Choosing the Optimal Model&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;A model containing all of the predictors will always have the smallest RSS and the largest 
+$R^2$, since these quantities are related to the training error. Instead, we need a model with a 
+low test error.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;$C_p = \frac{1}{n}(RSS + 2 d \hat\sigma^2)$&lt;br /&gt;
+ For a fitted least squares model, with &lt;em&gt;d&lt;/em&gt; as the number of predictors and $\hat\sigma^2$ as 
+ an estimate of the variance of the error. Typically $\hat\sigma^2$ is estimated using the full 
+ model containing all predictors. Adding a penalty to the training RSS is to adjust its 
+ underestimation to the test error. As the number of predictors increase, the penalty increase. 
+ If there is a proof of $\hat\sigma^2$ is an unbiased estimate of $\sigma^2$, $C_p$ is an unbiased 
+ estimate of test MSE. Then, a model with the lowest $C_p$ is the best model.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;AIC $= \frac{1}{n}(RSS + 2 d \hat\sigma^2)$&lt;br /&gt;
+ For a models fit by maximum likelihood(MLE), given by omitted irrelevant constants. $C_p$ and 
+ AIC are proportional to each other.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;BIC $= \frac{1}{n}(RSS + \log(n)d\hat\sigma^2)$&lt;br /&gt;
+ From a Bayesian point of view, for a fitted least squares model. Also given by omitted 
+ irrelevant constants. BIC has heavier penalty then $C_p$ or AIC, results in selecting smaller 
+ models.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Adjusted $R^2 = 1 - \frac{RSS/(n-d-1)}{TSS/(n-1)}$&lt;br /&gt;
+ Since the usual $R^2$ is defined as $1 - RSS/TSS$, it always increases as more variables added. 
+ Adjusted $R^2$ gives penalty of &lt;em&gt;d&lt;/em&gt;, the number of predictors in the denominator. Unlike other 
+ statistics, a large value of adjusted $R^2$ indicates a small test error.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;validation-and-cross-validation&quot;&gt;Validation and Cross-Validation&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;one-standard-error rule&lt;/em&gt;&lt;br /&gt;
+First calculate the standard error of the estimated test MSE for each model size, then select the 
+smallest model for which the estimated test error is within one standard error of the lowest point 
+on the curve.&lt;br /&gt;
+If a set of models appear to be more or less equally good, then we might as well choose the simplest 
+model; the model with the smallest number of predictors.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;62-shrinkage-methods&quot;&gt;6.2. Shrinkage Methods&lt;/h2&gt;
+
+&lt;h3 id=&quot;621-ridge-regression&quot;&gt;6.2.1. Ridge Regression&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ridge regression coefficient estimates&lt;br /&gt;
+\(\hat\beta^R = \text{min}_{\beta}\left[
+                  \underbrace{\sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p \beta_j x_{ij})}_{RSS}
+                  + \lambda\sum_{j=1}^p \beta_j^2 \right]\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;$\lambda \ge 0 $ is a &lt;em&gt;tuning parameter&lt;/em&gt;, $\lambda\sum_{j=1}^p \beta_j^2$ is a &lt;em&gt;shrinkage penalty&lt;/em&gt;. 
+The penalty is small when the coefficients are close to zero, and so it has the effect of &lt;em&gt;shrinking&lt;/em&gt; 
+the estimates of $\beta_j$ towards zero. Ridge regression will produce a different set of coefficient 
+estimates $\beta_{\lambda}^R$, for each value of $\lambda$.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We do not want to shrink the intercept $\beta_0$, which is simply a measure of the mean value of 
+the response when $x_{i1}=x_{i2}=\ldots=x_{ip}=0$. If the variables, the columns of the data matrix
+&lt;strong&gt;$X$&lt;/strong&gt;, have been centered to have mean zero before ridge regression is performed, then the estiamted 
+intercept will take the form $\hat\beta_0 = \bar{y} = \sum_{i=1}^n y_i/n$.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html">Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation 6.2. Shrinkage Methods 6.2.1. Ridge Regression Chapter 6. Linear Model Selection and Regularization Limitations of LSE Prediction Accuracy: if n is not much larger than p, the least squares fit can hvae a lot of variability, results in overfitting and poor predictions to test data. if p &amp;gt; n, there is no unique solution for the least squares coefficient estimate; as $ Var(\hat\beta)=\infty$. if p is large, there can be correlations between X variables. A model having multicollinearity can have high variance. Constraining or Shrinking the estimated coefficients can reduce the variance with negligible increase in bias, and improve in the accuracy to the test data. Model Interpretability: There are irrelevant variables $X_j$. Removing by setting coefficient estimates $\beta_j = 0$, we can have more interpretability. Feature selection or Variable selection can exclude irrelevant variables from a multiple regression model. 6.1. Subset Selection 6.1.1. Best Subset Selection fit a separate least squares regression for all $2^p$ possible models with combinations of the p predictors. Algorithm $\mathcal{M}_0$ as null model (i.e. $ Y = \beta_0 + \epsilon $) For $ k = 1, 2, \ldots, p $: (a) Fit all \({p \choose k}\) models with k predictors (b) Pick the smallest RSS, (or largest $R^2$) = $ \mathcal{M}_k $ Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$ Guarantees the best selection, while it suffers from computational limitations. Also, it only works for least squares linear regression. in the case of logistic regression, we use deviance, $-2\log$MLE, instead of RSS in the 2nd step of algorithm upon. 6.1.2. Stepwise Selection Forward Stepwise Selection Algorithm $\mathcal{M}_0$ as null model For $ k = 1, 2, \ldots, p $: (a) Fit all p - k models in \(\mathcal{M}_k\) with one additional predictor (b) Pick the smallest RSS among p - k models, $\mathcal{M}_{k+1}$ Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ with CV scores Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee but available for the case of high dimensional data($n&amp;lt;p$). Backward Stepwise Selection Algorithm $\mathcal{M}_p$ as full model, contains all p predictors For $ k = p, p-1, \ldots, 1 $: (a) Fit all k - 1 models contain all but one of the predictors in \(\mathcal{M}_k\) (b) Pick the smallest RSS among k - 1 models, $\mathcal{M}_{k-1}$ Select best model among $\mathcal{M}_0, ldots,\mathcal{M}_p$ with CV scores Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee and not for n &amp;lt; p case. Hybrid Approaches add then remove one predictors in each step. 6.1.3. Choosing the Optimal Model A model containing all of the predictors will always have the smallest RSS and the largest $R^2$, since these quantities are related to the training error. Instead, we need a model with a low test error. $C_p = \frac{1}{n}(RSS + 2 d \hat\sigma^2)$ For a fitted least squares model, with d as the number of predictors and $\hat\sigma^2$ as an estimate of the variance of the error. Typically $\hat\sigma^2$ is estimated using the full model containing all predictors. Adding a penalty to the training RSS is to adjust its underestimation to the test error. As the number of predictors increase, the penalty increase. If there is a proof of $\hat\sigma^2$ is an unbiased estimate of $\sigma^2$, $C_p$ is an unbiased estimate of test MSE. Then, a model with the lowest $C_p$ is the best model. AIC $= \frac{1}{n}(RSS + 2 d \hat\sigma^2)$ For a models fit by maximum likelihood(MLE), given by omitted irrelevant constants. $C_p$ and AIC are proportional to each other. BIC $= \frac{1}{n}(RSS + \log(n)d\hat\sigma^2)$ From a Bayesian point of view, for a fitted least squares model. Also given by omitted irrelevant constants. BIC has heavier penalty then $C_p$ or AIC, results in selecting smaller models. Adjusted $R^2 = 1 - \frac{RSS/(n-d-1)}{TSS/(n-1)}$ Since the usual $R^2$ is defined as $1 - RSS/TSS$, it always increases as more variables added. Adjusted $R^2$ gives penalty of d, the number of predictors in the denominator. Unlike other statistics, a large value of adjusted $R^2$ indicates a small test error. Validation and Cross-Validation one-standard-error rule First calculate the standard error of the estimated test MSE for each model size, then select the smallest model for which the estimated test error is within one standard error of the lowest point on the curve. If a set of models appear to be more or less equally good, then we might as well choose the simplest model; the model with the smallest number of predictors. 6.2. Shrinkage Methods 6.2.1. Ridge Regression Ridge regression coefficient estimates \(\hat\beta^R = \text{min}_{\beta}\left[ \underbrace{\sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p \beta_j x_{ij})}_{RSS} + \lambda\sum_{j=1}^p \beta_j^2 \right]\) $\lambda \ge 0 $ is a tuning parameter, $\lambda\sum_{j=1}^p \beta_j^2$ is a shrinkage penalty. The penalty is small when the coefficients are close to zero, and so it has the effect of shrinking the estimates of $\beta_j$ towards zero. Ridge regression will produce a different set of coefficient estimates $\beta_{\lambda}^R$, for each value of $\lambda$. We do not want to shrink the intercept $\beta_0$, which is simply a measure of the mean value of the response when $x_{i1}=x_{i2}=\ldots=x_{ip}=0$. If the variables, the columns of the data matrix $X$, have been centered to have mean zero before ridge regression is performed, then the estiamted intercept will take the form $\hat\beta_0 = \bar{y} = \sum_{i=1}^n y_i/n$.</summary></entry><entry><title type="html">ISLR - Chapter 5. Resampling Methods</title><link href="http://0.0.0.0:4000/islr_ch5" rel="alternate" type="text/html" title="ISLR - Chapter 5. Resampling Methods" /><published>2020-04-23T00:00:00+09:00</published><updated>2020-04-23T00:00:00+09:00</updated><id>http://0.0.0.0:4000/islr_ch5</id><content type="html" xml:base="http://0.0.0.0:4000/islr_ch5">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-5-resampling-methods&quot; id=&quot;markdown-toc-chapter-5-resampling-methods&quot;&gt;Chapter 5. Resampling Methods&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#51--cross-validation&quot; id=&quot;markdown-toc-51--cross-validation&quot;&gt;5.1.  Cross-Validation&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#511-the-validation-set-approach&quot; id=&quot;markdown-toc-511-the-validation-set-approach&quot;&gt;5.1.1. The Validation Set Approach&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#512-leave-one-out-cross-validation&quot; id=&quot;markdown-toc-512-leave-one-out-cross-validation&quot;&gt;5.1.2. Leave-One-Out Cross-Validation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#513-k-fold-cross-validation&quot; id=&quot;markdown-toc-513-k-fold-cross-validation&quot;&gt;5.1.3. k-Fold Cross-Validation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#514-bias-variance-trade-off-for-k-fold-cross-validation&quot; id=&quot;markdown-toc-514-bias-variance-trade-off-for-k-fold-cross-validation&quot;&gt;5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#515-cross-validation-on-classification-problems&quot; id=&quot;markdown-toc-515-cross-validation-on-classification-problems&quot;&gt;5.1.5. Cross-Validation on Classification Problems&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#52-the-bootstrap&quot; id=&quot;markdown-toc-52-the-bootstrap&quot;&gt;5.2. The Bootstrap&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-5-resampling-methods&quot;&gt;Chapter 5. Resampling Methods&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;repeatedly drawing samples from a training set and refitting a model of interest on 
+each sample in order to obtain additional information about the fitted model.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To optain information that would not be available from fitting the model only once 
+using the original training sample.&lt;br /&gt;
+e.g. to estimate the variability of a model fit, draw different samples and fit it to 
+each new sample, then examine the extent to which the resulting fits differ.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;51--cross-validation&quot;&gt;5.1.  Cross-Validation&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;In the absence of a very large designated test set that can be used to directly estimate 
+the test error rate, a class of methods that estimate the test error rate by &lt;em&gt;holding out&lt;/em&gt; 
+a subset of the training observations from the fitting process, then applying the statistical 
+learning method to those held out observations.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;511-the-validation-set-approach&quot;&gt;5.1.1. The Validation Set Approach&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;randomly dividing the available set of observations into two parts;&lt;br /&gt;
+a &lt;em&gt;training set&lt;/em&gt; and a &lt;em&gt;validation set&lt;/em&gt; (or hold-out set)&lt;br /&gt;
+model is fit on the training set, and the fitted model is used to predict the responses for the 
+observations in the validation set. The validation set error rate estimates the test error rate.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Repeating this predecure, we have different estimate for the test MSE over random splits of the 
+observations and there are two issues:&lt;/p&gt;
+    &lt;ol&gt;
+      &lt;li&gt;The validation estimate of the test error rate can be highly variable, depending on which observations 
+ are included in the training set or the validation test.&lt;/li&gt;
+      &lt;li&gt;Only a subset of the observations are used to fit the model. Trained on fewer observations, the 
+ validation set error rate may &lt;em&gt;overestimate&lt;/em&gt; the test error rate for the model fit on the entire 
+ data set.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;512-leave-one-out-cross-validation&quot;&gt;5.1.2. Leave-One-Out Cross-Validation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;each single observation is used for the validation set, and the remaining observations are for the 
+training set. The statistical learning method is fit on the &lt;em&gt;n-1&lt;/em&gt; training obs. The prediction is made 
+for the excluded observation.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;LOOCV estiamte for the test MSE:&lt;br /&gt;
+\(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n MSE_i\)&lt;br /&gt;
+No overestimation on the test error, No variance of test MSE, but Expansive.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;a shortcut of LOOCV on Least Squares(regression):&lt;br /&gt;
+\(\begin{align*}
+CV_{(n)} = \frac{1}{n} \sum_{i=1}^n \left(\frac{y_i - \hat y_i}{1-h_i}\right)^2
+\end{align*}\)&lt;br /&gt;
+where $\hat y_i$ is the fitted value from the original least squares fit, one-time build of a full 
+model and set a leverage $h_i = \frac{1}{n}+\frac{(x_i-\bar{x})^2}{\sum_{i^\prime=1}^n(x_{i^\prime}-\bar{x})^2}$. 
+The levearge lies between &lt;em&gt;1/n&lt;/em&gt; and &lt;em&gt;1&lt;/em&gt;, reflects the amount that an observation influences its own fit.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;513-k-fold-cross-validation&quot;&gt;5.1.3. k-Fold Cross-Validation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;random division into &lt;em&gt;k&lt;/em&gt; groups, or &lt;em&gt;folds&lt;/em&gt;, of approximately equal size. A fold is used for the 
+validation set, and the method is fit on the remaining &lt;em&gt;k-1&lt;/em&gt; folds. The MSE is computed on the 
+observations in the held-out fold and the procedure is repeated &lt;em&gt;k&lt;/em&gt; times.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;k-Fold CV estimate for the test MSE:&lt;br /&gt;
+\(CV_{(k)} = \frac{1}{n}\sum_{i=1}^k MSE_i\)&lt;br /&gt;
+when &lt;em&gt;k=n&lt;/em&gt;, LOOCV is a special case of k-Fold. Using smaller &lt;em&gt;k&lt;/em&gt;, k-fold CV has a computational 
+advantage to LOOCV.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We perform CV to:&lt;br /&gt;
+To determine how well a given model can be expected to perform on independent data.&lt;br /&gt;
+To identify a model results in the lowest test error, over different models or different levels of 
+flexibility.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;514-bias-variance-trade-off-for-k-fold-cross-validation&quot;&gt;5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Besides the computational advantage, k-fold CV often gives more accurate estimates of the test error 
+rate than does LOOCV.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;LOOCV will give approximately unbiased estiamtes of the test error, containing &lt;em&gt;n-1&lt;/em&gt;, almost as many as 
+the number of observations in the full data set. By contrast, k-fold CV will lead to an intermediate 
+level of bias, containing &lt;em&gt;(k-1)n/k&lt;/em&gt; observations. Clearly, LOOCV is to be preferred in the perspective 
+of bias reduction.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;But, in LOOCV, averaging the outputs of &lt;em&gt;n&lt;/em&gt; fitted models, which are trained on an almost identical set 
+of observations, these outputs are highly correlated with each other. This high correlation results in 
+higher variance of test error estimate from LOOCV than from k-fold CV.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;515-cross-validation-on-classification-problems&quot;&gt;5.1.5. Cross-Validation on Classification Problems&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;LOOCV on the classification:&lt;br /&gt;
+\(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n Err_i\),  where \(Err_i = I(y_i \ne \hat{y}_i)\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;k-fold CV on the classification:&lt;br /&gt;
+\(\frac{1}{n}\sum_{i=1}^k MCR_i\).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;52-the-bootstrap&quot;&gt;5.2. The Bootstrap&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sampling with &lt;em&gt;replacement&lt;/em&gt; on:&lt;br /&gt;
+Dataset $Z = (z_1, \ldots, z_n)$, $ z_i = (x_i,y_i)$&lt;br /&gt;
+Sample $Z^{*b}$, where $ b = 1, \ldots, B$ samples&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;for Any statistic term $S(Z)$ computed from full dataset &lt;em&gt;Z&lt;/em&gt;,&lt;br /&gt;
+and $S(Z^{*b})$ from bootstrap samples,&lt;br /&gt;
+\(\begin{align*}
+Var(\hat{S(Z)}) = \frac{1}{B-1}\sum_{b=1}^B(S(Z^{*b})-\bar{S}^*)^2
+\end{align*}\)&lt;br /&gt;
+$\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html">Chapter 5. Resampling Methods 5.1. Cross-Validation 5.1.1. The Validation Set Approach 5.1.2. Leave-One-Out Cross-Validation 5.1.3. k-Fold Cross-Validation 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation 5.1.5. Cross-Validation on Classification Problems 5.2. The Bootstrap Chapter 5. Resampling Methods repeatedly drawing samples from a training set and refitting a model of interest on each sample in order to obtain additional information about the fitted model. To optain information that would not be available from fitting the model only once using the original training sample. e.g. to estimate the variability of a model fit, draw different samples and fit it to each new sample, then examine the extent to which the resulting fits differ. 5.1. Cross-Validation In the absence of a very large designated test set that can be used to directly estimate the test error rate, a class of methods that estimate the test error rate by holding out a subset of the training observations from the fitting process, then applying the statistical learning method to those held out observations. 5.1.1. The Validation Set Approach randomly dividing the available set of observations into two parts; a training set and a validation set (or hold-out set) model is fit on the training set, and the fitted model is used to predict the responses for the observations in the validation set. The validation set error rate estimates the test error rate. Repeating this predecure, we have different estimate for the test MSE over random splits of the observations and there are two issues: The validation estimate of the test error rate can be highly variable, depending on which observations are included in the training set or the validation test. Only a subset of the observations are used to fit the model. Trained on fewer observations, the validation set error rate may overestimate the test error rate for the model fit on the entire data set. 5.1.2. Leave-One-Out Cross-Validation each single observation is used for the validation set, and the remaining observations are for the training set. The statistical learning method is fit on the n-1 training obs. The prediction is made for the excluded observation. LOOCV estiamte for the test MSE: \(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n MSE_i\) No overestimation on the test error, No variance of test MSE, but Expansive. a shortcut of LOOCV on Least Squares(regression): \(\begin{align*} CV_{(n)} = \frac{1}{n} \sum_{i=1}^n \left(\frac{y_i - \hat y_i}{1-h_i}\right)^2 \end{align*}\) where $\hat y_i$ is the fitted value from the original least squares fit, one-time build of a full model and set a leverage $h_i = \frac{1}{n}+\frac{(x_i-\bar{x})^2}{\sum_{i^\prime=1}^n(x_{i^\prime}-\bar{x})^2}$. The levearge lies between 1/n and 1, reflects the amount that an observation influences its own fit. 5.1.3. k-Fold Cross-Validation random division into k groups, or folds, of approximately equal size. A fold is used for the validation set, and the method is fit on the remaining k-1 folds. The MSE is computed on the observations in the held-out fold and the procedure is repeated k times. k-Fold CV estimate for the test MSE: \(CV_{(k)} = \frac{1}{n}\sum_{i=1}^k MSE_i\) when k=n, LOOCV is a special case of k-Fold. Using smaller k, k-fold CV has a computational advantage to LOOCV. We perform CV to: To determine how well a given model can be expected to perform on independent data. To identify a model results in the lowest test error, over different models or different levels of flexibility. 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation Besides the computational advantage, k-fold CV often gives more accurate estimates of the test error rate than does LOOCV. LOOCV will give approximately unbiased estiamtes of the test error, containing n-1, almost as many as the number of observations in the full data set. By contrast, k-fold CV will lead to an intermediate level of bias, containing (k-1)n/k observations. Clearly, LOOCV is to be preferred in the perspective of bias reduction. But, in LOOCV, averaging the outputs of n fitted models, which are trained on an almost identical set of observations, these outputs are highly correlated with each other. This high correlation results in higher variance of test error estimate from LOOCV than from k-fold CV. 5.1.5. Cross-Validation on Classification Problems LOOCV on the classification: \(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n Err_i\), where \(Err_i = I(y_i \ne \hat{y}_i)\). k-fold CV on the classification: \(\frac{1}{n}\sum_{i=1}^k MCR_i\). 5.2. The Bootstrap Sampling with replacement on: Dataset $Z = (z_1, \ldots, z_n)$, $ z_i = (x_i,y_i)$ Sample $Z^{*b}$, where $ b = 1, \ldots, B$ samples for Any statistic term $S(Z)$ computed from full dataset Z, and $S(Z^{*b})$ from bootstrap samples, \(\begin{align*} Var(\hat{S(Z)}) = \frac{1}{B-1}\sum_{b=1}^B(S(Z^{*b})-\bar{S}^*)^2 \end{align*}\) $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</summary></entry><entry><title type="html">ISLR - Chapter 4. Classification</title><link href="http://0.0.0.0:4000/islr_ch4" rel="alternate" type="text/html" title="ISLR - Chapter 4. Classification" /><published>2020-04-16T00:00:00+09:00</published><updated>2020-04-16T00:00:00+09:00</updated><id>http://0.0.0.0:4000/islr_ch4</id><content type="html" xml:base="http://0.0.0.0:4000/islr_ch4">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-4-classification&quot; id=&quot;markdown-toc-chapter-4-classification&quot;&gt;Chapter 4. Classification&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#41-overview-of-classification&quot; id=&quot;markdown-toc-41-overview-of-classification&quot;&gt;4.1. Overview of Classification&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#42-why-not-linear-regression&quot; id=&quot;markdown-toc-42-why-not-linear-regression&quot;&gt;4.2. Why Not Linear Regression?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#43-logistic-regression&quot; id=&quot;markdown-toc-43-logistic-regression&quot;&gt;4.3. Logistic Regression&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#431-the-logistic-model&quot; id=&quot;markdown-toc-431-the-logistic-model&quot;&gt;4.3.1. The Logistic Model&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#432-estimating-the-regression-coefficients-mle&quot; id=&quot;markdown-toc-432-estimating-the-regression-coefficients-mle&quot;&gt;4.3.2. Estimating the Regression Coefficients: MLE&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#433-multinomial-logistic-regression&quot; id=&quot;markdown-toc-433-multinomial-logistic-regression&quot;&gt;4.3.3. Multinomial Logistic Regression&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#44-generative-models-for-classification&quot; id=&quot;markdown-toc-44-generative-models-for-classification&quot;&gt;4.4. Generative Models for Classification&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#441-lda-linear-discriminant-analysis-for-p--1&quot; id=&quot;markdown-toc-441-lda-linear-discriminant-analysis-for-p--1&quot;&gt;4.4.1. LDA: Linear Discriminant Analysis for $p = 1$&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#442-lda-linear-discriminant-analysis-for-p--1&quot; id=&quot;markdown-toc-442-lda-linear-discriminant-analysis-for-p--1&quot;&gt;4.4.2. LDA: Linear Discriminant Analysis for $p &amp;gt; 1$&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#443-qda-quadratic-discriminant-analysis&quot; id=&quot;markdown-toc-443-qda-quadratic-discriminant-analysis&quot;&gt;4.4.3. QDA: Quadratic Discriminant Analysis&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#444-naive-bayes&quot; id=&quot;markdown-toc-444-naive-bayes&quot;&gt;4.4.4. &lt;em&gt;Naive Bayes&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#45-a-comparison-of-classification-methods&quot; id=&quot;markdown-toc-45-a-comparison-of-classification-methods&quot;&gt;4.5. A Comparison of Classification Methods&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#451-an-analytical-comparison&quot; id=&quot;markdown-toc-451-an-analytical-comparison&quot;&gt;4.5.1. An Analytical Comparison&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#452-an-empirical-comparison&quot; id=&quot;markdown-toc-452-an-empirical-comparison&quot;&gt;4.5.2. An Empirical Comparison&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#46-generalized-linear-models&quot; id=&quot;markdown-toc-46-generalized-linear-models&quot;&gt;4.6. Generalized Linear Models&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#461-linear-regression-problems&quot; id=&quot;markdown-toc-461-linear-regression-problems&quot;&gt;4.6.1. Linear Regression Problems&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#462-poisson-regression&quot; id=&quot;markdown-toc-462-poisson-regression&quot;&gt;4.6.2. Poisson Regression&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#463-generalized-linear-models-in-greater-generality&quot; id=&quot;markdown-toc-463-generalized-linear-models-in-greater-generality&quot;&gt;4.6.3. Generalized Linear Models in Greater Generality&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;2020-04-15&lt;/p&gt;
 
-&lt;h1 id=&quot;chapter-4-classification&quot;&gt;Chapter 4. Classification&lt;/h1&gt;
+&lt;h2 id=&quot;chapter-4-classification&quot;&gt;Chapter 4. Classification&lt;/h2&gt;
 
+&lt;h2 id=&quot;41-overview-of-classification&quot;&gt;4.1. Overview of Classification&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;Response Y : Qualitative (categorical) variable.&lt;/li&gt;
+  &lt;li&gt;Response &lt;em&gt;Y&lt;/em&gt; is &lt;em&gt;qualitative(categorical)&lt;/em&gt; variable.&lt;br /&gt;
+Predicting a qualitative response, &lt;em&gt;classification&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;41-problem-of-linear-regression-in-classification&quot;&gt;4.1. Problem of linear regression in classification:&lt;/h2&gt;
-
+&lt;h2 id=&quot;42-why-not-linear-regression&quot;&gt;4.2. Why Not Linear Regression?&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Two group: Y= 0 or 1&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Model prediction: $\hat y_i = x_i^T \hat\beta$; $\quad$ where b is LSE&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Decision rule: if $\hat y_i &amp;gt; 0.5$; $\quad$ i goes to group 1&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;possible value of $\hat Y &amp;gt;1 \text{ or } \hat Y &amp;lt;0$: $\quad$ do not fit for the range of Y&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;Problem of linear regression in classification&lt;br /&gt;
+e.g. in binary response group: &lt;em&gt;Y&lt;/em&gt; = 0 or 1&lt;br /&gt;
+Model prediction: $\hat y_i = x_i^T \hat\beta$; $\quad$ where $\beta$ is LSE&lt;br /&gt;
+Decision rule: if $ \hat y_i &amp;gt; 0.5 $, classify &lt;em&gt;i&lt;/em&gt;th obs. to group 1&lt;br /&gt;
+BUT, possible value of estimates outside the interval,&lt;br /&gt;
+$ \hat Y &amp;gt;1 \text{ or } \hat Y &amp;lt;0 $: do not fit for the range of &lt;em&gt;Y&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;42-logistic-regression&quot;&gt;4.2. Logistic Regression&lt;/h2&gt;
+&lt;h2 id=&quot;43-logistic-regression&quot;&gt;4.3. Logistic Regression&lt;/h2&gt;
 
+&lt;h3 id=&quot;431-the-logistic-model&quot;&gt;4.3.1. The Logistic Model&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;Supoose that Y has 2 classes:&lt;/p&gt;
-
-    &lt;p&gt;$ log \frac{p(X)}{1-p(X)} = \beta_0 + \beta_1X_1 + \cdots + \beta_pX_p = X^T \beta $&lt;br /&gt;
-where $p(X) = P(Y=1|X)$, $\quad X=(1,X_1, \ldots, X_p)^T$, $\quad$ $\beta = (\beta_0,\beta_1,\ldots, \beta_p)^T $&lt;/p&gt;
+    &lt;p&gt;Supoose that &lt;em&gt;Y&lt;/em&gt; has 2 classes where&lt;br /&gt;
+$p(X)=P(Y=1|X)$, $X=(1,X_1, \ldots, X_p)^T$, $\beta=(\beta_0,\beta_1,\ldots, \beta_p)^T$&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;this model has no error term: &lt;strong&gt;GLM&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;$ E(Y | X) = ? = X^T\beta $; $\quad$ a black box - link function&lt;/p&gt;
-
-    &lt;p&gt;as X is fixed, Y is random variable&lt;/p&gt;
-
-    &lt;p&gt;$ Y | X ~ \mathit{Bernoulli} (p(X))$, $\quad$ $0 &amp;lt; E(Y | X)=p(X) &amp;lt; 1$&lt;/p&gt;
-
-    &lt;p&gt;so we use log transformation, “logistic fuction”&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;again, $ log\frac{p(X)}{1-p(X)} = \beta_0 + \beta_1X_1 + \cdots + \beta_pX_p = X^T \beta $&lt;br /&gt;
-we don’t know the left side : we can’t use LSE&lt;/p&gt;
+    &lt;p&gt;\(p(X)= \frac{e^{x^T\beta}}{1+e^{x^T\beta}}\): &lt;em&gt;logistic function&lt;/em&gt;&lt;br /&gt;
+\(0 &amp;lt; \frac{p(X)}{1-p(X)} = e^{x^T\beta} &amp;lt; \infty\): &lt;em&gt;odds&lt;/em&gt; relative to range of $p(X)= [0,1]$&lt;br /&gt;
+\(\log\frac{p(X)}{1-p(X)} = X^T \beta\): &lt;em&gt;log odds&lt;/em&gt; or &lt;em&gt;logit&lt;/em&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;43-log-likelyhood-function-mle&quot;&gt;4.3. Log-Likelyhood Function: MLE&lt;/h2&gt;
-
+&lt;h3 id=&quot;432-estimating-the-regression-coefficients-mle&quot;&gt;4.3.2. Estimating the Regression Coefficients: MLE&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;when $log\frac{p(X)}{1-p(X)}$, $\quad$ $p(X)= \frac{exp(x^T\beta)}{1+exp(x^T\beta)}$, $\quad$ $exp(x^T\beta) = \frac{p(X)}{1-p(X)}$&lt;/p&gt;
-
-    &lt;p&gt;$Y_i | X_i \sim \mathit{Bernoulli}_{(p(X_i))}$&lt;/p&gt;
-
-    &lt;p&gt;$\prod_{i=1}^N p(x_i)^{y_i} (1-p(x_i))^{1-y_i}$&lt;/p&gt;
-
-    &lt;p&gt;$\prod_{i:y_i=1}p(x_i) \prod_{i:y_i=0}(1-p(x_i))$&lt;/p&gt;
+    &lt;p&gt;as $\log\frac{p(X)}{1-p(X)} = X^T \beta $, $ p(X) = \frac{e^{x^T\beta}}{1+e^{x^T\beta}} $, $ e^{x^T\beta} = \frac{p(X)}{1-p(X)}$&lt;br /&gt;
+where $Y_i | X_i \sim$ Bernoulli($p(X_i)$),&lt;br /&gt;
+$\rightarrow \prod_{i=1}^N p(x_i)^{y_i} (1-p(x_i))^{1-y_i}$&lt;br /&gt;
+&lt;em&gt;likelihood function&lt;/em&gt; L = $\prod_{i:y_i=1}p(x_i) \prod_{i:y_i=0}(1-p(x_i))$&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;MLE&lt;/strong&gt;: \(\hat\beta = \text{max}_\beta [\prod_{i:y_i=1} \frac{exp(x^T\beta)}{1+exp(x^T\beta)} \prod_{i:y_i=0} \frac{1}{1+exp(x^T\beta)}]\)&lt;/p&gt;
-
-    &lt;p&gt;when take log, log-like function $l(\beta) = \sum_{i:y=1}log(\frac{exp(x^T\beta}{1+exp(x^T\beta)}) + \sum_{i:y_i=0} (\frac{1}{1+exp(x^T\beta)})$&lt;/p&gt;
-
-    &lt;p&gt;$\Rightarrow \frac{\partial \; l(\beta)}{\partial\beta} = 0 $&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;Maximum Likelihood Estimation&lt;/em&gt; &lt;strong&gt;MLE&lt;/strong&gt;:&lt;br /&gt;
+\(\hat\beta = \text{max}_\beta [\prod_{i:y_i=1} \frac{e^{x^T\beta}}{1+e^{x^T\beta}} \prod_{i:y_i=0} \frac{1}{1+e^{x^T\beta}}]\)&lt;br /&gt;
+take log and get &lt;em&gt;log-likelihood function&lt;/em&gt; $l(\beta)$ and least squares $\hat\beta$&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;if $\hat\beta &amp;gt;0$ , p(X) increases&lt;br /&gt;
-if $\hat\beta &amp;lt;0$ , p(X) decreases&lt;br /&gt;
-(not a linear relationship, but just about direction)&lt;/p&gt;
+    &lt;p&gt;But we cannot find analytic solution for $\frac{\partial l(\beta)}{\partial\beta} = 0$,&lt;br /&gt;
+use &lt;em&gt;Newton-Raphson method&lt;/em&gt;, a numerical method to find $\hat\beta$.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;if $\hat\beta &amp;gt;0$ , &lt;em&gt;p(X)&lt;/em&gt; increases by a unit change in &lt;em&gt;X&lt;/em&gt;&lt;br /&gt;
+if $\hat\beta &amp;lt;0$ , &lt;em&gt;p(X)&lt;/em&gt; decreases by a unit change in &lt;em&gt;X&lt;/em&gt;&lt;br /&gt;
+(not a linear relationship, but a direction)&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;44-multinomial-logistic-regression-k-classes-k2&quot;&gt;4.4. Multinomial Logistic Regression: K classes (K&amp;gt;2)&lt;/h2&gt;
-
+&lt;h3 id=&quot;433-multinomial-logistic-regression&quot;&gt;4.3.3. Multinomial Logistic Regression&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;$ log\frac{P(Y=k | X=x)}{P(Y=K | X=x)} = x^T\beta_k $&lt;/p&gt;
-
-    &lt;p&gt;for $ k=1,\cdots, K-1$ with $\sum_{k=1}^K P(Y=k | X=x) = 1 $&lt;/p&gt;
-
-    &lt;p&gt;the choice of denominator the $K_{th}$ class is arbitary&lt;/p&gt;
+    &lt;p&gt;$P(Y=k | X=x) = \frac{e^{x^T\beta_k}}{1+\sum_{j=1}^{K-1} e^{x^T\beta_j}}$&lt;br /&gt;
+$P(Y=K | X=x)= \frac 1{1+\sum_{j=1}^{K-1} e^{x^T\beta_j}}$&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;we can have K-1 equations&lt;/p&gt;
+    &lt;p&gt;$\log\frac{P(Y=k | X=x)}{P(Y=K | X=x)} = x^T\beta_k $&lt;br /&gt;
+for $ k=1,\cdots, K-1$ with $\sum_{k=1}^K P(Y=k | X=x) = 1 $&lt;br /&gt;
+the choice of denominator the $K_{th}$ class is arbitary&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;By soloving for $P(Y=k | X=x)$,&lt;/p&gt;
-
-    &lt;p&gt;$P(Y=k | X=x) = \frac{exp(x^T\beta_k)}{1+\sum_{j=1}^{K-1} exp(x^T\beta_j)}$&lt;/p&gt;
-
-    &lt;p&gt;$P(Y=K | X=x)= \frac 1{1+\sum_{j=1}^{K-1} exp(x^T\beta_j)}$&lt;/p&gt;
-
-    &lt;p&gt;$\Rightarrow$ ML estimation(by numerical method): we can have K-1 number of $\hat\beta_k$ (MLE)&lt;/p&gt;
+    &lt;p&gt;ML estimation (by numerical method):&lt;br /&gt;
+we can have &lt;em&gt;K-1&lt;/em&gt; equations and &lt;em&gt;K-1&lt;/em&gt; number of $\hat\beta_k$ (MLE)&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;2020-04-16&lt;/p&gt;
-
-&lt;h2 id=&quot;45-lda&quot;&gt;4.5. LDA&lt;/h2&gt;
-
+&lt;h2 id=&quot;44-generative-models-for-classification&quot;&gt;4.4. Generative Models for Classification&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;Suppose $f_k(x)$ is the density of &lt;strong&gt;X&lt;/strong&gt; in class &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt;,&lt;/p&gt;
-
-    &lt;p&gt;and let $\pi_k$ be the prior probability of class &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt; with $\sum_{k=1}^K \pi_k =1$&lt;/p&gt;
-
-    &lt;p&gt;$f_k(\underline{x}) = P(\underline X=\underline x | Y=k)$&lt;/p&gt;
-
-    &lt;p&gt;($f_k(x)$는 &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt; 그룹 안에 있는 &lt;strong&gt;X&lt;/strong&gt; 의 밀도함수, $\pi_k$는 $P(Y=k)$로 &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt; 그룹일 확률)&lt;/p&gt;
+    &lt;p&gt;By logistic regression directly modeling $Pr(Y=K | X=x)$,&lt;br /&gt;
+in statistical jargon, we model the conditional distribution&lt;br /&gt;
+of the response &lt;em&gt;Y&lt;/em&gt;, given the predictor(s) &lt;em&gt;X&lt;/em&gt;.&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Bayes Theorem:&lt;/p&gt;
-
-    &lt;p&gt;$ P(Y=k | X=x) = \frac{f_k(x)\pi_k}{\sum_{j=1}^K f_j(x)\pi_j}$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Assumptions:
+  &lt;li&gt;then Why do we need another method?
     &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;$f_k(x) = MVN(\mu_k,\Sigma_k)$ $\scriptstyle\text{(p by 1, p by p)}$&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;$\Sigma_k = \Sigma$ for all &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt;, groups have same var-covariance sturcture.&lt;/p&gt;
-      &lt;/li&gt;
+      &lt;li&gt;when there is substantial separation between 2 classes and logistic model’s parameter estimates are unstable&lt;/li&gt;
+      &lt;li&gt;when &lt;em&gt;X&lt;/em&gt; approximately follow normal distribution and the sample size is small&lt;/li&gt;
+      &lt;li&gt;in the case of more than two response classes&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Find &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt; maximizing $logP(Y=k | X=x)$:&lt;br /&gt;
-\(\begin{align*} ln P(Y=k \| X=x) &amp;amp;= ln\frac{f_k(x)\pi_k}{\sum_{j=1}^K f_j(x)\pi_j}\\
-                    			    &amp;amp;= ln(f_k(x)\pi_k) + C_1 \\
-                                  &amp;amp;= \cdots \\
-                                  &amp;amp;= ln\pi_k - \frac{1}{2}\mu_k^T\Sigma^{-1}\mu_k + x^T\Sigma^{-1}\mu_k + C_3\\
-                                  &amp;amp;= \delta_k(x) + C_3 \quad \scriptstyle\text{ : Linear discriminant function (linear in X)} \\
-               \Rightarrow \hat Y &amp;amp;= \text{argmax}_k \delta_k(x)
+    &lt;p&gt;In Generative approach, we model the distribution of the predictors &lt;em&gt;X&lt;/em&gt; separately 
+to the response class then use Bayes’ theorem to get $Pr(Y=K | X=x)$.&lt;br /&gt;
+if &lt;em&gt;X&lt;/em&gt; for each &lt;em&gt;Y&lt;/em&gt;s assumed to follow the normal distribution,&lt;br /&gt;
+model has very similar form to logistic regression.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Suppose that we classify an obs. into one of &lt;em&gt;K&lt;/em&gt;$\ge 2 $ classes&lt;br /&gt;
+$f_k(x)$; is the density funtion of &lt;em&gt;X&lt;/em&gt; in class &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt;,&lt;br /&gt;
+$\pi_k$; is the prior probability of class &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt; with $\sum_{k=1}^K \pi_k =1$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Bayes’ Theorem&lt;br /&gt;
+$ Pr(Y=k | X=x) = \frac{\pi_k f_k(x)}{\sum_{l=1}^K \pi_l f_l(x)}$&lt;br /&gt;
+$ Pr(Y=k | X=x) $ is the &lt;em&gt;posterior&lt;/em&gt; probability of obs. at &lt;em&gt;x&lt;/em&gt; belongs to &lt;em&gt;k&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;441-lda-linear-discriminant-analysis-for-p--1&quot;&gt;4.4.1. LDA: Linear Discriminant Analysis for $p = 1$&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Assumptions:&lt;br /&gt;
+a &lt;em&gt;Gaussian&lt;/em&gt; or &lt;em&gt;normal&lt;/em&gt; distribution $f_k(x)$
+    &lt;ul&gt;
+      &lt;li&gt;$f_k(x) = \frac{1}{\sqrt{2\pi}\sigma_k}exp\left(-\frac{1}{2\sigma_k^2}(x-\mu_k)^2\right)$&lt;/li&gt;
+      &lt;li&gt;$\mu_k$ is the mean for the &lt;em&gt;k&lt;/em&gt;th class&lt;/li&gt;
+      &lt;li&gt;$\sigma_k^2$ is the shared variance across for all &lt;em&gt;K&lt;/em&gt; classes(=$\sigma^2$)&lt;/li&gt;
+      &lt;li&gt;$p_k(x) = \frac{\pi_k \frac{1}{\sqrt{2\pi}\sigma}exp\left(-\frac{1}{2\sigma^2}(x-\mu_k)^2\right)}
+              {\sum_{l=1}^K \pi_l \frac{1}{\sqrt{2\pi}\sigma}exp\left(-\frac{1}{2\sigma^2}(x-\mu_l)^2\right)}$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Bayes Classifier assigns an observation &lt;em&gt;X = x&lt;/em&gt; to the class&lt;br /&gt;
+having lagest value of: \(\delta_k(x) = x\cdot\frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log(\pi_k)\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;But in real-life situation,&lt;br /&gt;
+such assumptions are not enough to apply the Bayes classifier.&lt;br /&gt;
+have to estimate the parameters $\mu_1,\ldots,\mu_K,\ \pi_1,\ldots,\pi_K$ and $\sigma^2$&lt;br /&gt;
+$\rightarrow$ LDA method used to approximate the Bayes classifier.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;LDA estimates model parameters:&lt;br /&gt;
+$\hat\pi_k = n_k/n$&lt;br /&gt;
+$\hat\mu_k = \sum_{i:y_i=k}x_i / n_k $&lt;br /&gt;
+\(\begin{align*}\hat\sigma_k^2 = \sum_{k=1}^K\sum_{i:y_i=k}(x_i-\hat\mu_k) / (n-K) \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;LDA classifier assigns an observation &lt;em&gt;X = x&lt;/em&gt; to the class&lt;br /&gt;
+having lagest value of &lt;em&gt;discriminant function&lt;/em&gt;: \(\hat\delta_k(x) = x\cdot\frac{\hat\mu_k}{\hat\sigma^2} - \frac{\hat\mu_k^2}{2\hat\sigma^2} + \log(\hat\pi_k)\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;442-lda-linear-discriminant-analysis-for-p--1&quot;&gt;4.4.2. LDA: Linear Discriminant Analysis for $p &amp;gt; 1$&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Assumptions:&lt;br /&gt;
+&lt;em&gt;X&lt;/em&gt; from a &lt;em&gt;multivariate Gaussian&lt;/em&gt;(or &lt;em&gt;multivariate normal&lt;/em&gt;) distribution,&lt;br /&gt;
+where each individual predictor follows a one-dimensional normal distribution,&lt;br /&gt;
+with a class-specific mean vector and a common covariance matrix
+    &lt;ul&gt;
+      &lt;li&gt;$f_k(x) ~ \text{MVN}(\mu_k,\Sigma_k)$&lt;/li&gt;
+      &lt;li&gt;$\mu_k$ is a $p \times 1$ vector, the mean for the &lt;em&gt;k&lt;/em&gt;th class&lt;/li&gt;
+      &lt;li&gt;$\Sigma_k = \Sigma$ is a $p \times p$ covariance matrix for all &lt;em&gt;K&lt;/em&gt; classes&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Find &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt; maximizing \(\log P(Y=k|X=x)\):&lt;br /&gt;
+\(\begin{align*} \log P(Y=k|X=x) &amp;amp;= \log\frac{f_k(x)\pi_k}{\sum_{j=1}^K f_j(x)\pi_j}\\
+                    			   &amp;amp;= \log(f_k(x)\pi_k) + C_1 \\
+                                 &amp;amp;= \cdots \\
+                                 &amp;amp;= \log\pi_k - \frac{1}{2}\mu_k^T\Sigma^{-1}\mu_k + x^T\Sigma^{-1}\mu_k + C_3\\
+                                 &amp;amp;= \delta_k(x) + C_3 \cdots \scriptstyle\text{ : Linear discriminant function (linear in X)} \\
+              \Rightarrow \hat Y &amp;amp;= \text{argmax}_k \delta_k(x)
 \end{align*}\)&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Decision boundary is also in a linear form.  &lt;br /&gt;
-when solving $ { \underline{x} : \delta_l(\underline{x}) = \delta_m(\underline{x}) }$,&lt;br /&gt;
-we can have linear form of decision boundary.&lt;/p&gt;
+    &lt;p&gt;Decision boundary is also in a linear form.&lt;br /&gt;
+when solving &lt;em&gt;x&lt;/em&gt;: $\delta_k(x) = \delta_l(x)$, we can have linear form of decision boundary.&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;Estimate model parameter : mu, pi, sigma&lt;br /&gt;
+  &lt;li&gt;
+    &lt;p&gt;LDA estimates model parameters:&lt;br /&gt;
 $\hat\pi_k = n_k/n$&lt;br /&gt;
-$\hat\mu_k = \sum_{y_i=k}x_i / n_k $&lt;br /&gt;
-\(\begin{align*}\hat\Sigma_k = \sum_{k=1}^K\sum_{y_i=k}(x_i-\hat\mu_k)(x_i-\hat\mu_k)^T / (n-K) \end{align*}\)&lt;/li&gt;
+$\hat\mu_k = \sum_{i:y_i=k}x_i / n_k $&lt;br /&gt;
+\(\begin{align*}\hat\Sigma_k = \sum_{k=1}^K\sum_{y_i=k}(x_i-\hat\mu_k)(x_i-\hat\mu_k)^T / (n-K) \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ROC &lt;em&gt;curve&lt;/em&gt;, &lt;em&gt;receiver operating characteristics&lt;/em&gt;&lt;br /&gt;
+to display two types of errors for all possible thresholds&lt;br /&gt;
+useful for comparing different classifiers&lt;br /&gt;
+&lt;img src=&quot;/assets/images/ch4_roc_curve_0.png&quot; alt=&quot;image.png&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;AUC, &lt;em&gt;area under the (ROC) curve&lt;/em&gt;&lt;br /&gt;
+overall performance of a classifier summarized over all possible thresholds&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;sensitivity&lt;/em&gt; and &lt;em&gt;specificity&lt;/em&gt;, from &lt;em&gt;confusion matrix&lt;/em&gt;&lt;br /&gt;
+changes of true positive and false positive rate by varying the classifier threshold&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;46-qda&quot;&gt;4.6. QDA&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/ch4_confusion_matrix_0.png&quot; alt=&quot;image.png&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/ch4_confusion_matrix_1.png&quot; alt=&quot;image.png&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;/p&gt;
 
+&lt;h3 id=&quot;443-qda-quadratic-discriminant-analysis&quot;&gt;4.4.3. QDA: Quadratic Discriminant Analysis&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;Assumption: Same as LDA except for “$\Sigma_k = \Sigma$”&lt;/p&gt;
+    &lt;p&gt;Assumption: Same as LDA, but “$\Sigma_k \ne \Sigma$” for all &lt;em&gt;K&lt;/em&gt; classes&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Quadratic discriminant function: $\delta_k(x)=  ln\pi_k - \frac{1}{2}ln | \Sigma_k | - \frac{1}{2}(x-\mu_k)^T\Sigma^{-1}(x-\mu_k) $&lt;/p&gt;
+    &lt;p&gt;Quadratic discriminant function:&lt;br /&gt;
+$\delta_k(x)=  \log\pi_k - \frac{1}{2}\log| \Sigma_k | - \frac{1}{2}(x-\mu_k)^T\Sigma^{-1}(x-\mu_k) $&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Decision boundary is in quadratic line&lt;/p&gt;
+    &lt;p&gt;Decision boundary is in quadratic line.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Estimation of parameters:&lt;br /&gt;
@@ -6678,491 +7056,254 @@ $\hat\pi_k = n_k/n$&lt;br /&gt;
 $\hat\mu_k = \sum_{y_i=k}x_i / n_k $&lt;br /&gt;
 \(\begin{align*}\hat\Sigma_k =\sum_{y_i=k}(x_i-\hat\mu_k)(x_i-\hat\mu_k)^T / (n-1) \end{align*}\) (only obs. in $k_{th}$ group)&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;which is more complex?&lt;br /&gt;
-$\rightarrow$ quadratic: number of parameters, sigma &amp;amp; decision boundary is more flexible.&lt;/p&gt;
+  &lt;li&gt;LDA vs. QDA: the bias-variance trade-off
+    &lt;ul&gt;
+      &lt;li&gt;LDA&lt;br /&gt;
+for &lt;em&gt;p&lt;/em&gt; predictors, covariance matrix requires estimating $p(p+1)/2$ parameters.&lt;br /&gt;
+linear model in &lt;em&gt;x&lt;/em&gt;, which means there are $Kp$ linear coefficients&lt;br /&gt;
+less flexible classifier having lower variance and potential of improved prediction performance&lt;br /&gt;
+but with assumption of shared variance, LDA can suffer from high bias&lt;br /&gt;
+when there are relatively few training observations and reducing variance is crucial&lt;/li&gt;
+      &lt;li&gt;QDA&lt;br /&gt;
+for &lt;em&gt;p&lt;/em&gt; predictors, estimating seperate covariance matrix requires estimating $Kp(p+1)/2$ parameters.&lt;br /&gt;
+when there are very large training set, the variance of the classifier is not a major concern&lt;br /&gt;
+or there is no common covariance matrix for the K classes&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;47-lda-vs-logistic-regression&quot;&gt;4.7. LDA vs. Logistic Regression&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;LDA:&lt;br /&gt;
+  &lt;li&gt;LDA vs. Logistic Regression
+    &lt;ul&gt;
+      &lt;li&gt;LDA:&lt;br /&gt;
 MVN assumption needed&lt;br /&gt;
-Qualitative(categorical) inputs are not available&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Logistic:&lt;br /&gt;
-No assumption needed and Y ~ Bernoulli is evident; $\rightarrow$ robust model&lt;br /&gt;
+Qualitative(categorical) inputs are not available&lt;/li&gt;
+      &lt;li&gt;Logistic:&lt;br /&gt;
+No assumption needed and &lt;em&gt;Y ~ Bernoulli&lt;/em&gt; is evident; $\rightarrow$ robust model&lt;br /&gt;
 Qualitative are available&lt;br /&gt;
-can run F-test to choose more important features&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="studies" /><summary type="html"></summary></entry><entry><title type="html">Statistical Mining - Chapter 3</title><link href="http://0.0.0.0:4000/stat_ch3" rel="alternate" type="text/html" title="Statistical Mining - Chapter 3" /><published>2020-04-03T00:00:00+09:00</published><updated>2020-04-03T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch3</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch3">&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#chapter-3-linear-regression&quot; id=&quot;markdown-toc-chapter-3-linear-regression&quot;&gt;Chapter 3. Linear Regression&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#31-least-squares&quot; id=&quot;markdown-toc-31-least-squares&quot;&gt;3.1. Least Squares&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#32-hypothesis-test-for-beta_j&quot; id=&quot;markdown-toc-32-hypothesis-test-for-beta_j&quot;&gt;3.2. Hypothesis test for $\beta_j$:&lt;/a&gt;        &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;#321-test-for-a-group-of-coefficients&quot; id=&quot;markdown-toc-321-test-for-a-group-of-coefficients&quot;&gt;3.2.1. Test for a group of coefficients:&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;#322-test-for-all-coefficients&quot; id=&quot;markdown-toc-322-test-for-all-coefficients&quot;&gt;3.2.2. Test for all coefficients:&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#33-gauss-markov-theorem&quot; id=&quot;markdown-toc-33-gauss-markov-theorem&quot;&gt;3.3. Gauss-Markov Theorem&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#34-properties-of-good-estimators&quot; id=&quot;markdown-toc-34-properties-of-good-estimators&quot;&gt;3.4. &lt;em&gt;Properties of Good estimators&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#35-model-fit&quot; id=&quot;markdown-toc-35-model-fit&quot;&gt;3.5. Model fit&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#36-prediction-errors&quot; id=&quot;markdown-toc-36-prediction-errors&quot;&gt;3.6. Prediction Errors&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#37-in-k-nearest-neighbor-regression&quot; id=&quot;markdown-toc-37-in-k-nearest-neighbor-regression&quot;&gt;3.7. in K-Nearest Neighbor Regression&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#38-curse-of-dimensionality&quot; id=&quot;markdown-toc-38-curse-of-dimensionality&quot;&gt;3.8. Curse of Dimensionality&lt;/a&gt;&lt;/li&gt;
+can run F-test to choose more important features&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;chapter-3-linear-regression&quot;&gt;Chapter 3. Linear Regression&lt;/h1&gt;
-
+&lt;h3 id=&quot;444-naive-bayes&quot;&gt;4.4.4. &lt;em&gt;Naive Bayes&lt;/em&gt;&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;Model: &lt;strong&gt;$ f(X) = \beta_0 + \sum_{j=1}^p \beta_j X_j $&lt;/strong&gt;&lt;br /&gt;
-$\Rightarrow$ Prediction of Y from X  (X= p input variables)&lt;br /&gt;
-$\quad$ &lt;em&gt;f&lt;/em&gt; : Regression function E(Y|X)&lt;/p&gt;
+    &lt;p&gt;Bayes’ theorem expands posterior prob. $p_k(x) = Pr(Y=k|X=x)$ with two terms:&lt;br /&gt;
+$\pi_k$ is a prior prob. that an observation belongs to &lt;em&gt;k&lt;/em&gt;th class&lt;br /&gt;
+$f_k(x)$ is a &lt;em&gt;p&lt;/em&gt;-dim. density function for an observation in the &lt;em&gt;k&lt;/em&gt;th class&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;input variable X:&lt;/p&gt;
+    &lt;p&gt;Estimations:&lt;br /&gt;
+$\hat\pi_k$ as the proportion of training observations belonging to the &lt;em&gt;k&lt;/em&gt;th class.&lt;br /&gt;
+$\hat{f}_k(x)$ is more challenging, as we must consider both &lt;em&gt;marginal&lt;/em&gt; and &lt;em&gt;joint
+distribution&lt;/em&gt; of predictors, in a multivariate normal distribution, the joint distribution
+is summarized by the off-diagonal elements of the covariance matrix, but this association
+is still hard to be characterized.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;to simplifies task:
     &lt;ul&gt;
-      &lt;li&gt;Quantitative or Transformations of quantitative inputs&lt;/li&gt;
-      &lt;li&gt;Basis expansions leading to polynomial representation&lt;/li&gt;
-      &lt;li&gt;Dummy coding of qualitative variables : G grops -&amp;gt; G-1 dummy variables required&lt;/li&gt;
-      &lt;li&gt;Interactions between inputs ($X_3 = X_1 X_2 $ )&lt;/li&gt;
+      &lt;li&gt;LDA assumes,&lt;br /&gt;
+MVN distribution $f_k(x)$ with class-specific mean and shared variance&lt;/li&gt;
+      &lt;li&gt;QDA assumes,&lt;br /&gt;
+MVN distribution $f_k(x)$ with class-specific mean and class-specific variance&lt;/li&gt;
+      &lt;li&gt;naive Bayes assumes,&lt;br /&gt;
+&lt;em&gt;Within the $k$th class, the $p$ predictors are independent&lt;/em&gt;, or,&lt;br /&gt;
+$f_k(x) = f_{k1}(x_1) \times f_{k2}(x_2) \times \cdots \times f_{kp}(x_p)$ where&lt;br /&gt;
+$f_{kj}$ is the density function of the &lt;em&gt;j&lt;/em&gt;th predictor among observations in the &lt;em&gt;k&lt;/em&gt;th class.&lt;br /&gt;
+a simple assumption that there is &lt;em&gt;NO&lt;/em&gt; association between the predictors&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;31-least-squares&quot;&gt;3.1. Least Squares&lt;/h2&gt;
-&lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;How to estimate $\beta = (\beta_0, \beta_1, \ldots , \beta_p)^T$&lt;br /&gt;
-Least Squares : $\beta$ minimizing RSS&lt;br /&gt;
-when Y (n by 1) / X ( n by (p + 1) matrix),&lt;br /&gt;
-RSS = $ ( y - X\hat\beta)^T ( y - X\hat\beta) $,&lt;br /&gt;
-Least square estimator (LSE): $ \hat\beta = (X^T X)^{-1} X^T Y $&lt;/p&gt;
+    &lt;p&gt;the posterior probability $p_k(x)$&lt;br /&gt;
+$Pr(Y=k|X=x) = \frac{\pi_k\times f_{k1}(x_1)\times f_{k2}(x_2)\times\cdots\times f_{kp}(x_p)}
+                    {\sum_{l=1}^K\pi_l}\times f_{l1}(x_1)\times f_{l2}(x_2)\times\cdots\times f_{lp}(x_p)$&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;With Assumption:&lt;br /&gt;
-1) $Y_i$ ‘s are uncorrelated &amp;amp; Var ($Y_i$ ) = $\sigma^2$&lt;br /&gt;
-$\quad$($\equiv$ $\epsilon_i$ ‘s are independent &amp;amp; Var ($\epsilon_i$ ) = $\sigma^2$)&lt;br /&gt;
-2) X = $(X_1, \ldots, X_p)^T$ is fixed (not random)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;By (1) &amp;amp; (2), for OLS estimator $\hat\beta$;&lt;br /&gt;
-\(\\ \begin{align*}\hat\beta &amp;amp;= (X^TX)^{-1}X^TY \quad\leftarrow Y=X\beta + \epsilon \\
-                             &amp;amp;= \beta + (X^TX)^{-1}X^T\epsilon \\
-\end{align*} \\\)&lt;br /&gt;
-\(\begin{align*}E(\hat\beta) &amp;amp;= E(\beta) + E(\epsilon) \\
-                            &amp;amp;= \beta
-\end{align*} \\\)&lt;br /&gt;
-\(\begin{align*} Var(\hat\beta) &amp;amp;= E[\hat\beta - E(\hat\beta)]^2 \\
-                                &amp;amp;= E[ (X^TX)^{-1}X^T\epsilon ]^2 \\
-                                &amp;amp;= (X^TX)^{-1}X^TE(\epsilon^2)X(X^TX)^{-1}\\
-                                &amp;amp;= \sigma^2(X^TX)^{-1}X^TX(X^TX)^{-1}\\
-                                &amp;amp;=\sigma^2(X^T X)^{-1}
-\end{align*} \\\)&lt;br /&gt;
-while $\hat\sigma^2$ as Estimator of Variance of $\epsilon$ (= $\sigma^2$):&lt;br /&gt;
-\(\begin{align*} \hat\sigma^2 &amp;amp;= \frac 1 {n-p-1} \sum_{i=1}^n (y_i - \hat y_i)^2 \\
-                              &amp;amp;= \frac1{n-p-1}\sum_{i=1}^n \epsilon_i^2 \\
-  \rightarrow E(\hat\sigma^2) &amp;amp;= \sigma^2
-\end{align*} \\\)&lt;br /&gt;
-$\therefore \text{ unbiased estimator; }\frac{RSS}{n-p-1}$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;With Assumption:&lt;br /&gt;
-3) $\epsilon \sim ^{iid} N(0,\sigma^2)$ : normal distribution assumption of  error&lt;/p&gt;
+  &lt;li&gt;To estimate the one-dimensional density function $f_{kj}$:
     &lt;ul&gt;
-      &lt;li&gt;$\hat\beta\sim MVN(\beta,\sigma^2(X^TX)^{-1}), \quad (Y\sim MVN(X\beta,\sigma^2 I)$ &lt;br /&gt;
-$\frac{(n-p-1)\hat\sigma^2}{\sigma^2}\sim\chi^2_{n-p-1}$&lt;br /&gt;
-$\hat\beta \text{ &amp;amp; } \hat\sigma^2$ are independent&lt;/li&gt;
+      &lt;li&gt;for quantitative $X_j$, we can assume that $X_j|Y = k \sim N(\mu_{jk}, \sigma_{jk}^2)$
+within each class, the &lt;em&gt;j&lt;/em&gt;th predictor $X_j$ is drawn from a normal distribution&lt;/li&gt;
+      &lt;li&gt;for quantitative $X_j$, or, we use a non-parametric estimate for $f_{kj}$
+estimate $f_{kj}(x_j)$ as the fraction of the training observations in the &lt;em&gt;k&lt;/em&gt;th class
+that belong to the same histogram bin as $x_j$,
+or we can use a &lt;em&gt;kernel density estimator&lt;/em&gt; instead of histogram&lt;/li&gt;
+      &lt;li&gt;for qualitative $X_j$, we can simply count the proportion of training observations
+for the &lt;em&gt;j&lt;/em&gt;th predictor corresponding to each class.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;32-hypothesis-test-for-beta_j&quot;&gt;3.2. Hypothesis test for $\beta_j$:&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;$H_0: \beta_j = 0$ vs . $H_1: B_j \not= 0$&lt;/li&gt;
-  &lt;li&gt;Test for partial effect of individual $\beta_j$&lt;/li&gt;
-  &lt;li&gt;$\hat\beta_j \sim N(\beta_j,\sigma^2 v_j)$, where $v_j$ is the &lt;em&gt;j&lt;/em&gt; th diagonal element of $(X^TX)^{-1}$&lt;br /&gt;
-$\Rightarrow \frac{\hat\beta_j - \beta_j}{\sigma\sqrt{v_j}}\sim N(0,1)$  ($\leftarrow z=\frac{x-\mu}{\sigma}$)&lt;/li&gt;
-  &lt;li&gt;under $H_0$, $t_j = \frac{\hat\beta_j}{\hat\sigma\sqrt{v_j}}\sim t_{n-p-1}$&lt;/li&gt;
-  &lt;li&gt;if $ \left\vert t_j \right\vert &amp;gt; t_{(1-\alpha/2), n-p-1}$ , we reject $H_0$ with level of significance : $\alpha$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h2 id=&quot;45-a-comparison-of-classification-methods&quot;&gt;4.5. A Comparison of Classification Methods&lt;/h2&gt;
 
-&lt;h3 id=&quot;321-test-for-a-group-of-coefficients&quot;&gt;3.2.1. Test for a group of coefficients:&lt;/h3&gt;
+&lt;h3 id=&quot;451-an-analytical-comparison&quot;&gt;4.5.1. An Analytical Comparison&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;E.g. test for a categorical variable with k levels (k-1 dummy variables)&lt;/li&gt;
-  &lt;li&gt;$H_0: \beta_{j+1} = \beta_{j+2} = \cdots = \beta{j+l} = 0$&lt;/li&gt;
-  &lt;li&gt;$H_1$: At least one of those is not zero&lt;/li&gt;
-  &lt;li&gt;Full model: $Y=\beta_0 + \beta_1X_1 + \cdots + \beta_pX_p + \epsilon$&lt;/li&gt;
-  &lt;li&gt;Reduced model: under $H_0: Y= \beta_0  + \beta_1X_1 + \cdots + \beta_jX_j + \beta_{j+l+1}X_{j+l+1} + \cdots + \beta_pX_p + \epsilon$&lt;/li&gt;
-  &lt;li&gt;Test statistic: F = $\frac{(RSS_R - RSS_F)/ l}{RSS_F/(n-p-1)} \sim F_{l,n-p-1}$&lt;br /&gt;
-where $RSS_F$ is from full model and $RSS_R$ is from reduced model&lt;/li&gt;
-  &lt;li&gt;if $ F &amp;gt; F_{(1-\alpha),l,n-p-1}$ we reject $H_0$.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;322-test-for-all-coefficients&quot;&gt;3.2.2. Test for all coefficients:&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;$H_0$: all $\beta$ coefficients are zero&lt;/li&gt;
-  &lt;li&gt;Reduced model: $Y=\beta_0 + \epsilon \Rightarrow$ LSE $\hat\beta_0 =  \bar y$&lt;/li&gt;
-  &lt;li&gt;Test statistic: $ F = \frac{(TSS-RSS)/p}{RSS/(n-p-1)}$ where TSS = $\sum_{i=1}^n(y_i-\bar y)^2$ = $RSS_R$&lt;/li&gt;
-  &lt;li&gt;if $ F &amp;gt; F_{(1-\alpha),p,n-p-1}$ we reject $H_0$ : at least 1 coefficient is not zero&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Check F-test first before t-tests for each $\beta_j$&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;F-test : test for all coef, T-test: test for indiv. coeff&lt;/li&gt;
-  &lt;li&gt;when F-test is significant ($H_1$ for all coeff is true) $\Rightarrow$ perform t-test but still need to control $\alpha$&lt;br /&gt;
-but if F-test is not sig $\Rightarrow$ cant trust t-test result : all coeffs are ZERO&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;33-gauss-markov-theorem&quot;&gt;3.3. Gauss-Markov Theorem&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Assumption: $E(\epsilon_i) = 0, Var(\epsilon_i) = \sigma^2 &amp;lt; \infty\text{,  } \epsilon_i$’s are independent&lt;/li&gt;
-  &lt;li&gt;among all linear unbiased estimator $\tilde{\beta} = Cy$ &amp;amp; $E(\tilde{\beta}) = \beta)$&lt;br /&gt;
-Then, $Var(\hat\beta) \le Var(\tilde{\beta})$ when  LSE $\hat\beta$ = BLUE&lt;/li&gt;
-  &lt;li&gt;G-M theorem says that LSE  $\hat\beta$ is the best linear unbiased estimator (BLUE)&lt;/li&gt;
-  &lt;li&gt;Conversely, there may exist biased estimators with smaller MSE than LSE.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;34-properties-of-good-estimators&quot;&gt;3.4. &lt;em&gt;Properties of Good estimators&lt;/em&gt;&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;unbiaseness&lt;/li&gt;
-  &lt;li&gt;efficiency(small variance)&lt;/li&gt;
-  &lt;li&gt;consistancy(as n goes infinity, estimator goes true parameter)&lt;/li&gt;
-  &lt;li&gt;sufficiency&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;35-model-fit&quot;&gt;3.5. Model fit&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Model evaluation based on training data&lt;/li&gt;
-  &lt;li&gt;Measure of model fit: $R^2$, $\scriptstyle\text{Residual Standard Error(RSE)}$
-\(R^2 = 1 - \frac{RSS}{TSS}\)
-which means the proportion of total variation that your model explains&lt;br /&gt;
-\(RSE = \sqrt{\frac{RSS}{n-p-1}} = \hat\sigma^2\)&lt;/li&gt;
-  &lt;li&gt;Problem: As number of predictors increases, $R^2$ increases and always the most complex model selected&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;36-prediction-errors&quot;&gt;3.6. Prediction Errors&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;1) Uncertainty between $\hat Y$ &amp;amp; $f(X) = X^T\beta$&lt;br /&gt;
-  Variation due to $\hat\beta$ (Model variance):&lt;br /&gt;
-  in ideal situation, we can drive number of training datasets from population and have several f(x) and $\hat\beta$&lt;br /&gt;
-  $\scriptstyle\text{Confidence interval}$ C.I. for Y:&lt;br /&gt;
-  $E(\hat Y) = x^T\beta = f(x)$, $Var(\hat Y) = \sigma^2 x^T( X^TX)^{-1}x$&lt;br /&gt;
-  $\therefore (1-\alpha)100$% C.I. for Y = $\hat Y \pm t_{(1-\alpha/2, n-p-1)} \hat\sigma\sqrt{x^T(X^TX)^{-1}x}$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;2) Model bias:&lt;br /&gt;
-caused by assuming a linear model for f(x).&lt;br /&gt;
-$\rightarrow$ (1)(2) are reducible error&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;3) Uncertainty between Y &amp;amp; $\hat Y$:&lt;br /&gt;
-$\scriptstyle\text{Prediction interval}$ P.I. = reducible + irreducible error&lt;br /&gt;
-for (new, unseen) test obs. $x_0 = (1, x_{01}, \ldots, x_{op})^T$,&lt;br /&gt;
-$\hat Y_0 = x_0^T \beta$,&lt;br /&gt;
-$Var(\hat Y_0) =  \sigma^2 + \sigma^2 x_0^T( X^TX)^{-1}x_0$ $\scriptstyle\text{(irreducible + reducible)}$&lt;br /&gt;
-$\therefore (1-\alpha)100$% P.I. for $Y_0$ =  $\hat Y_0 \pm t_{(1-\alpha/2, n-p-1)} \hat\sigma\sqrt{1+x^T(X^TX)^{-1}x}$&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;37-in-k-nearest-neighbor-regression&quot;&gt;3.7. in K-Nearest Neighbor Regression&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Nonparameric method: No assumption of f(x)&lt;br /&gt;
-\(\hat f(x_0) = \frac{1}{K}\sum_{x_i\in\mathcal N_k(x_0)} y_i\)
+  &lt;li&gt;&lt;em&gt;analytical&lt;/em&gt; (or mathematical) comparison of LDA, QDA, naive Bayes, and logistic regression&lt;br /&gt;
+in a setting &lt;em&gt;K&lt;/em&gt; as the &lt;em&gt;baseline&lt;/em&gt; class and classify to the class that maximizes&lt;br /&gt;
+\(log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right)\)
     &lt;ul&gt;
-      &lt;li&gt;($x_i,y_i$): training data&lt;/li&gt;
-      &lt;li&gt;$\mathcal N_k(x_0)$ : neighborhood of $x_0$&lt;/li&gt;
+      &lt;li&gt;LDA:&lt;br /&gt;
+\(\begin{align*}
+\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right)
+&amp;amp;= \log\left(\frac{\pi_k f_k(x)}{\pi_K f_K(x)}\right) \\
+&amp;amp;= \log\left(\frac{\pi_k exp(-\frac{1}{2}(x-\mu_k)^T\Sigma^{-1}(x-\mu_k))}
+                 {\pi_K exp(-\frac{1}{2}(x-\mu_K)^T\Sigma^{-1}(x-\mu_K))}\right) \\
+&amp;amp;= \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2}(\mu_k+\mu_K)^T\Sigma^{-1}(\mu_k-\mu_K) \\
+&amp;amp;\quad + x^T\Sigma^(\mu_k-\mu_K)\\
+&amp;amp;= a_k + \sum_{j=1}^p b_{kj}x_j,
+\end{align*}\)&lt;br /&gt;
+where $b_jk$ is the &lt;em&gt;j&lt;/em&gt;th component of $\Sigma^{-1}(\mu_k-\mu_K)$&lt;/li&gt;
+      &lt;li&gt;QDA:&lt;br /&gt;
+\(\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right)
+= a_k + \sum_{j=1}^p b_{kj}x_j + \sum_{j=1}^p\sum_{l=1}^p c_{kjl}x_j x_l\)&lt;/li&gt;
+      &lt;li&gt;naive Bayes:&lt;br /&gt;
+\(\begin{align*}
+\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right)
+&amp;amp;= \log\left(\frac{\pi_k f_k(x)}{\pi_K f_K(x)}\right) \\
+&amp;amp;= \log\left(\frac{\pi_k\prod_{j=1}^p f_{kj}(x_j)}
+                 {\pi_K\prod_{j=1}^p f_{Kj}(x_j)}\right) \\
+&amp;amp;= \log\left(\frac{\pi_k}{\pi_K}\right)
+    + \sum_{j=1}^p\log\left(\frac{f_{kj}(x_j)}{f_{Kj}(x_j)}\right) \\
+&amp;amp;= a_k + \sum_{j=1}^p g_{kj}(x_j)
+\end{align*}\)&lt;br /&gt;
+which takes the form of a &lt;em&gt;generalized additive model&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Logistic Regression:&lt;br /&gt;
+\(\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right)
+= \beta_{k0} + \sum_{j=1}^p\beta_{kj}x_j\)&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;Preferable situations to linear regression:
-    &lt;ul&gt;
-      &lt;li&gt;True f(x) is nonlinear&lt;/li&gt;
-      &lt;li&gt;Goal: Prediction &amp;gt; Inference (interpretation)&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Low dimensions (small p)&lt;/strong&gt;(curse of demensionality)&lt;/li&gt;
-    &lt;/ul&gt;
+  &lt;li&gt;LDA is a special case of QDA with $c_{kjl}=0$ and including any classifier 
+with linear decision boundary, is also a special case of naive Bayes with 
+$g_{kj}(x_j) = b_{kj}(x_j)$,&lt;br /&gt;
+if in the naive Bayes classifier, we model $f_{kj}(x_j)$ using a one-dimensional 
+Gaussian distribution $N(\mu_{kj},\sigma_j^2)$, we get $g_{kj}(x_j) = b_{kj}(x_j)$ 
+where $b_{kj} = (\mu_{kj}-\mu_{Kj})/{\sigma_j^2}$. Then naive Bayes is a 
+special case of LDA with variance restriced to be a diagonal matrix with 
+&lt;em&gt;j&lt;/em&gt;th diagonal element equal to $\sigma_j^2$.&lt;/li&gt;
+  &lt;li&gt;Neither QDA nor naive Bayes is a special case of the other.&lt;br /&gt;
+Navie Bayes is in a additive fit, a function of $x_j$ can be added but 
+never multipied. By contrast, QDA takes terms of $c_{kjl}x_j x_l$.&lt;/li&gt;
+  &lt;li&gt;both LDA and Logistic are linear function of the predictors. Predictors 
+in LDA follow a normal distribution, while the coefficients in Logistic 
+are chosen to maximize the likelihood function. LDA outperforms when the 
+normality assumption holds and vice versa for Logistic.&lt;/li&gt;
+  &lt;li&gt;KNN outperforms LDA and Logistic when the decision boundary is highly non-linear 
+provided with large &lt;em&gt;n&lt;/em&gt; obs. to small &lt;em&gt;p&lt;/em&gt;. KNN tends to reduce bias while 
+incurring a lot of variance.&lt;/li&gt;
+  &lt;li&gt;QDA may be preferrend to KNN when decision boundary is non-linear but &lt;em&gt;n&lt;/em&gt; 
+is only modest, or &lt;em&gt;p&lt;/em&gt; is not very small. Taking a parametric form, it 
+requires a smaller sample size for accurate classification relative to KNN.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;452-an-empirical-comparison&quot;&gt;4.5.2. An Empirical Comparison&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;empirical&lt;/em&gt; (practical) comparison of classification performances,&lt;br /&gt;
+we can draw boxplots of test error rates.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;shortly, no one method will dominate the others in every situation.&lt;br /&gt;
+LDA and Logistic will tend to perform well when decision boundaries are 
+linear. QDA or naive Bayes may be better in non-linear decision boundaries. 
+KNN, non-parametric one is good for much more complicated decision boundaries.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Like in regression using transformations of the predictors, including powers 
+of predictors, we could create a more flexible logistic regression or LDA 
+model. Adding quadratic terms and cross-products to LDA, we can have a model 
+at somewhere between an LDA and a QDA.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;38-curse-of-dimensionality&quot;&gt;3.8. Curse of Dimensionality&lt;/h2&gt;
+&lt;h2 id=&quot;46-generalized-linear-models&quot;&gt;4.6. Generalized Linear Models&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;to capture 10% data for neighbor space from variable X…
-    &lt;ul&gt;
-      &lt;li&gt;p=1 : X range (0,1), edge rank $e_1(0.1) = 0.1$&lt;/li&gt;
-      &lt;li&gt;p=2 : $X_1, X_2$ range (0,1), edge rank $e_2(0.1) = \sqrt{0.1} = 0.1^{1/2} \approx 0.316 $&lt;/li&gt;
-      &lt;li&gt;p=3 : $e_3(0.1) = 0.1^{1/3} \approx 0.464 $&lt;/li&gt;
-      &lt;li&gt;p=10 : $e_{10}(0.1) = 0.1^{1/10} \approx 0.794 $&lt;/li&gt;
-    &lt;/ul&gt;
+  &lt;li&gt;when &lt;em&gt;Y&lt;/em&gt; is neither qualitative nor quantitative;&lt;br /&gt;
+a &lt;em&gt;discrete&lt;/em&gt; variable &lt;em&gt;Y&lt;/em&gt; takes on non-negative integer values, or &lt;em&gt;counts&lt;/em&gt;&lt;br /&gt;
+and treat predictors &lt;em&gt;X&lt;/em&gt; as qualitative variables.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;461-linear-regression-problems&quot;&gt;4.6.1. Linear Regression Problems&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;a linear regression model seems to provide reasonable and intuitive results on 
+those &lt;em&gt;Y&lt;/em&gt;, for example, compared to the clear weather as baseline, there should be 
+negative coefficients to predict bike users on cloudy days and some lower values 
+on rainy days.&lt;br /&gt;
+but there are some problems left in a linear model.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Negative fitted values relative to non-negative response &lt;em&gt;Y&lt;/em&gt;. It raise concerns about 
+ the accuracy of model; coefficient estimates, confidence intervals, and other outputs&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;Reduction of r : Average using fewer obs. small K : higher variance of the fit, poor prediction&lt;/li&gt;
-  &lt;li&gt;For the same density, when p=1, n=100 -&amp;gt; when p=10, n = $100^{10}$&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="studies" /><summary type="html"></summary></entry><entry><title type="html">Statistical Mining - Chapter 2</title><link href="http://0.0.0.0:4000/stat_ch2" rel="alternate" type="text/html" title="Statistical Mining - Chapter 2" /><published>2020-03-16T00:00:00+09:00</published><updated>2020-03-16T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stat_ch2</id><content type="html" xml:base="http://0.0.0.0:4000/stat_ch2">&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#chapter-2-supervised-learning&quot; id=&quot;markdown-toc-chapter-2-supervised-learning&quot;&gt;Chapter 2. Supervised Learning&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#21-prediction&quot; id=&quot;markdown-toc-21-prediction&quot;&gt;2.1. Prediction&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#22-inference&quot; id=&quot;markdown-toc-22-inference&quot;&gt;2.2. Inference&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#23-estimation-f-by-using-training-data&quot; id=&quot;markdown-toc-23-estimation-f-by-using-training-data&quot;&gt;2.3. Estimation F: By Using Training Data&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#24-parametric-methods-model-based-approach&quot; id=&quot;markdown-toc-24-parametric-methods-model-based-approach&quot;&gt;2.4. Parametric Methods: Model-based approach&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#25-nonparametric-methods-data-driven-approach&quot; id=&quot;markdown-toc-25-nonparametric-methods-data-driven-approach&quot;&gt;2.5. Nonparametric Methods: Data-driven approach&lt;/a&gt;        &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;#251-example-of-nonparametric-model-knn-reg&quot; id=&quot;markdown-toc-251-example-of-nonparametric-model-knn-reg&quot;&gt;2.5.1. Example of Nonparametric model: KNN Reg.&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#26-trade-off-between-prediction-accuray--interpretability&quot; id=&quot;markdown-toc-26-trade-off-between-prediction-accuray--interpretability&quot;&gt;2.6. Trade-off between Prediction Accuray &amp;amp; Interpretability&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#27-model-assessment--selection&quot; id=&quot;markdown-toc-27-model-assessment--selection&quot;&gt;2.7. Model Assessment &amp;amp; Selection&lt;/a&gt;        &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;#271-mean-squared-error-mse&quot; id=&quot;markdown-toc-271-mean-squared-error-mse&quot;&gt;2.7.1. Mean squared error (MSE)&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#28-bias-variance-trade-off-편향분산-교차&quot; id=&quot;markdown-toc-28-bias-variance-trade-off-편향분산-교차&quot;&gt;2.8. Bias-Variance Trade-off 편향분산 교차&lt;/a&gt;        &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;#281-ex-trade-off-in-knn-reg&quot; id=&quot;markdown-toc-281-ex-trade-off-in-knn-reg&quot;&gt;2.8.1. Ex) Trade-off in KNN Reg.&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Mean-variance violates the assumptions of linear model. We assumed error term $\epsilon$ to 
+ have zero mean and constant value of variance $\sigma^2$, but in practice, the variance of 
+ $Y_i$ has some definite relationship to the expectation of $Y_i$. This problem is from the 
+ heteroscedasticity of the data.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A solution: transformed response $\log(Y) = \sum_{j=1}^p X_j\beta_j + \epsilon $&lt;br /&gt;
+It can avoids the possibility of negative predictions and overcomes much of the heteroscedasticity. 
+But there may be a challenge in interpretation and in the fact that log transformation cannot 
+be applied to the responses with the value of zero.&lt;br /&gt;
+Thus, we introduce a &lt;em&gt;Poisson Regression&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;462-poisson-regression&quot;&gt;4.6.2. Poisson Regression&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;For a random variable &lt;em&gt;Y&lt;/em&gt; takes on nonnegative integer values,&lt;br /&gt;
+introduces $\lambda&amp;gt;0, \lambda = E(Y) = Var(Y)$;&lt;br /&gt;
+Poisson distribution $Pr(Y=k) = \frac{e^{-\lambda}\lambda^k}{k!}$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;a function of $ E(Y) = \lambda $ of the covariates $X_j$:&lt;br /&gt;
+$\log(\lambda(X_1,\ldots,X_p)) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p$ or&lt;br /&gt;
+$\lambda(X_1,\ldots,X_p) = e^{\beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p}$&lt;br /&gt;
+predicting &lt;em&gt;mean value of Y&lt;/em&gt; in &lt;em&gt;particular conditions(values)&lt;/em&gt; of predictor $X_j$s&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;likelihood $l(\beta_0,\beta_1,\ldots,\beta_p)
+  = \prod_{i=1}^n\frac{e^{-\lambda(x_i)}\lambda(x_i)^{y_i}}{y_i !}$&lt;br /&gt;
+where $\lambda(x_i) = e^{\beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip}}$&lt;br /&gt;
+By solving MLE in this likelihood function, we can have similar fit to the response,&lt;br /&gt;
+while we have more statistical significance of coefficients.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Some important distinctions from the linear regression model.&lt;/p&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Interpretation: a one-unit change in $X_j$ is associated with the change by a factor of 
+  $ exp(\beta_j) $, or $ e^{\beta_j} $ in E(Y) = $\lambda$.&lt;/li&gt;
+      &lt;li&gt;Mean-variance relationship: under the introduced term $\lambda = E(Y) = Var(Y)$, the 
+  Poisson model is more adequate to the data with heteroscedasticity.&lt;/li&gt;
+      &lt;li&gt;No nonnegative fitted values&lt;/li&gt;
+    &lt;/ol&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;chapter-2-supervised-learning&quot;&gt;Chapter 2. Supervised Learning&lt;/h1&gt;
-
+&lt;h3 id=&quot;463-generalized-linear-models-in-greater-generality&quot;&gt;4.6.3. Generalized Linear Models in Greater Generality&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Format of Supervised Learning:&lt;br /&gt;
-&lt;strong&gt;$ Y=f(X)+\epsilon $&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;$f$&lt;/strong&gt; : Fixed but UNKNOWN function of predictors &lt;strong&gt;X&lt;/strong&gt;&lt;br /&gt;
-$\rightarrow$ Supervised Learning: A set of methods estimating &lt;strong&gt;$f$&lt;/strong&gt;.&lt;/p&gt;
+  &lt;li&gt;Common characteristics of Linear, Logistic, Poisson Regressions:
+    &lt;ol&gt;
+      &lt;li&gt;Use &lt;em&gt;p&lt;/em&gt; predictors $X_j$ to predict a response &lt;em&gt;Y&lt;/em&gt; and assume that conditional $P(Y|X)$ 
+  belongs to a certain family of distributions(&lt;em&gt;Gaussian, Bernoulli, Poisson&lt;/em&gt; distribution).&lt;br /&gt;
+  $*$which are in exponential family(with &lt;em&gt;exponential, Gamma, negative binomial distributions&lt;/em&gt;)&lt;/li&gt;
+      &lt;li&gt;Modeling the mean of &lt;em&gt;Y&lt;/em&gt;, or expected, $E(Y)$ as a function of predictors &lt;em&gt;X&lt;/em&gt;.&lt;br /&gt;
+  $\text{in Linear: } E(Y|X_1,\ldots,X_p) = \beta_0 + \beta_1 X_1, + \cdots + \beta_p X_p$&lt;br /&gt;
+  \(\begin{align*} 
+  \text{in Logistic: } E(Y|X_1,\ldots,X_p) &amp;amp;= Pr(Y=1|X_1,\ldots,X_p) \\
+                                        &amp;amp;= \frac{e^{\beta_0 + \beta_1 X_1, + \cdots + \beta_p X_p}}
+                                           {1+e^{\beta_0 + \beta_1 X_1, + \cdots + \beta_p X_p}}
+  \end{align*}\)&lt;br /&gt;
+  \(\begin{align*}
+  \text{in Poisson: } E(Y|X_1,\ldots,X_p) &amp;amp;= \lambda(X_1,\ldots,X_p) \\
+                                       &amp;amp;= e^{\beta_0 + \beta_1 X_1, + \cdots + \beta_p X_p}
+  \end{align*}\)&lt;br /&gt;
+  which can be expressed using a &lt;em&gt;link function&lt;/em&gt;, $\eta$, applying a transformation that 
+  $\eta(E(Y|X_1,\ldots,X_p)) = \beta_0 + \beta_1 X_1, + \cdots + \beta_p X_p$&lt;br /&gt;
+  and each $\eta(\mu)$ is $\mu, \log(\mu/(1-\mu)), \log(\mu)$; respectively to models.&lt;/li&gt;
+    &lt;/ol&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Why do we estimate &lt;strong&gt;$f$&lt;/strong&gt; ?&lt;br /&gt;
-1) Prediction: &lt;strong&gt;Y&lt;/strong&gt;&lt;br /&gt;
-2) Inference: Relationship between &lt;strong&gt;X&lt;/strong&gt; &amp;amp; &lt;strong&gt;Y&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;21-prediction&quot;&gt;2.1. Prediction&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;$\text{Prediction of } \; Y : \hat{Y} = \hat{f}(X)\quad (\hat{f} : \text{Estimate of }f) $&lt;br /&gt;
-$\text{Accuracy of } \; \hat{Y} \text{ depends on reducible &amp;amp; irreducible errors}$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;as $\hat{f}$ and &lt;strong&gt;X&lt;/strong&gt; is given(fixed),&lt;/p&gt;
-
-    &lt;p&gt;&lt;strong&gt;$E[Y-\hat{Y}]^2 = [f(X)-\hat{f}(X)]^2 + Var(\epsilon)$&lt;/strong&gt;&lt;br /&gt;
-$\quad (MSE)\quad\quad (reducible)\quad (irreducible)$&lt;/p&gt;
-
-    &lt;p&gt;Reducible error : controlable, can be reduced by selecting a better model
-Irreducible error: uncontrolable, nature of data&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;22-inference&quot;&gt;2.2. Inference&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Characteristics of linear &amp;amp; nonlinear models:&lt;br /&gt;
-1) Linear : Relatively Simple &amp;amp; interpretable inference but poor prediction (when true function $f$ is nonlinear)&lt;br /&gt;
-2) Nonlinear : More accurate but difficult to interpret&lt;br /&gt;
-$\rightarrow$ Depends on your Goal of analysis&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;23-estimation-f-by-using-training-data&quot;&gt;2.3. Estimation F: By Using Training Data&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Estimation Methods:&lt;br /&gt;
-1) Parametric: Assume specific function $f$ (linear&amp;amp;non- both)&lt;br /&gt;
-2) Nonparametric: No Assumption; Data-driven method (nonlinear)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;24-parametric-methods-model-based-approach&quot;&gt;2.4. Parametric Methods: Model-based approach&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Step 1: Assume about the functional form of $f$&lt;br /&gt;
-$\text{e.x) when } X_j = ( x_{1j}, \ldots , x_{nj} ) ^T : n \ast 1$ obs.; $\;$ vector for the $j_{th}$ predictor&lt;br /&gt;
-simply estimate $ p+1 $ coefficients $\beta_0, \beta_1, \ldots, \beta_p$&lt;br /&gt;
-$\rightarrow linear form: f(X)= \beta_0 + \beta_1X_1 + … + \beta_pX_p$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Step 2: Estimate Parameters&lt;br /&gt;
-$Y \approx \hat{\beta}_0 + \hat{\beta}_1X_1 + … + \hat{\beta}_pX_p = \hat{f}(X)$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Disadvantage: Specific form of $f$&lt;br /&gt;
-$\rightarrow\;$ Not match with the true $f$: poor estimation &amp;amp; poor prediction&lt;br /&gt;
-$\rightarrow\;$ Flexible parametric model : model with more parameters
-    &lt;ul&gt;
-      &lt;li&gt;Flexible model $\equiv$ Complex model&lt;br /&gt;
-but overfitting problem still remains: model could follow errors or noises&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Underfitting vs Overfitting&lt;br /&gt;
-under: estimation has not enough accuracy, miss to capture the true structure&lt;br /&gt;
-over: more complexity than true $f$&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;25-nonparametric-methods-data-driven-approach&quot;&gt;2.5. Nonparametric Methods: Data-driven approach&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;No assumptions about functional form of $f$&lt;br /&gt;
-$\Rightarrow $ potential to accurately fit a wider range of possible shapes of $f$&lt;/li&gt;
-  &lt;li&gt;Disadvantage:
-    &lt;ul&gt;
-      &lt;li&gt;1) Large &lt;strong&gt;#&lt;/strong&gt; of obs. are required to get an accurate $f$&lt;br /&gt;
-(relative to a parametric method)&lt;/li&gt;
-      &lt;li&gt;2) Overfitting $\Leftrightarrow$ &lt;strong&gt;Level of smoothness&lt;/strong&gt;; $\;$ Model complexity&lt;br /&gt;
-(how to determine it?)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;251-example-of-nonparametric-model-knn-reg&quot;&gt;2.5.1. Example of Nonparametric model: KNN Reg.&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Idea: Similar inputs have Similar outputs&lt;br /&gt;
-Step: when predicting $\hat{Y}_0$ with input $X_0$
-    &lt;ul&gt;
-      &lt;li&gt;1) Determine $K$ (level of smoothness)&lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;if K==N: Y = Var(Y)&lt;br /&gt;
-if K==1: Y = perfect fit; no training error&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;2) find $K$ closest training obs. from the target input point($X_0$) using Euclidean distance&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;3) average of these #k Y values&lt;br /&gt;
-\(\rightarrow\hat{Y}_0 = \frac{1}{K}\sum_{x_i\in \mathcal N}^K y_i\)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Effect of $K$ (tuning parameter/ model flexibility parameter)
-    &lt;ul&gt;
-      &lt;li&gt;decides the level of smoothness (under or overfitting)&lt;/li&gt;
-      &lt;li&gt;As $K \uparrow \; \Rightarrow \text{flexibility} \downarrow$ : the fitted line is simple&lt;/li&gt;
-      &lt;li&gt;As $K \downarrow \; \Rightarrow \text{flexibility} \uparrow$ : the fitted line is wiggly&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;26-trade-off-between-prediction-accuray--interpretability&quot;&gt;2.6. Trade-off between Prediction Accuray &amp;amp; Interpretability&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Restrictive model(Simple model) vs. Flexible model&lt;/li&gt;
-  &lt;li&gt;our goal:&lt;br /&gt;
-inference ($\rightarrow$ restrictive model)&lt;br /&gt;
-prediction ($\rightarrow$ flexible model)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;27-model-assessment--selection&quot;&gt;2.7. Model Assessment &amp;amp; Selection&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Evaluate the performance of models on a given dataset  and Select the best model&lt;/li&gt;
-  &lt;li&gt;Criterion: Better prediction of $Y$&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;271-mean-squared-error-mse&quot;&gt;2.7.1. Mean squared error (MSE)&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;training MSE(used for building model) is not our interest; cannot be a measure for model selection
-    &lt;ul&gt;
-      &lt;li&gt;e.g.)&lt;br /&gt;
-\(\\ R^2 = 1 - \frac{RSS}{TSS}\)&lt;br /&gt;
-training RSS = \(\sum(y_i - \hat{y_i})^2  \quad \text{&amp;amp;} \quad \text{MSE} =\frac{RSS}{N}\\\)&lt;br /&gt;
-when more X variables added, $\;$ RSS &amp;amp; MSE $\downarrow$ , $R^2 \uparrow$&lt;br /&gt;
-even X are not important variables&lt;br /&gt;
-complex model has smaller training error regardless of existence of test data&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Test MSE \(= \frac{1}{m}\sum_{i=1}^m(y_i^0 - \hat{f}(x_i^0))^2\)&lt;br /&gt;
-Models with low test MSE are better.&lt;br /&gt;
-$\rightarrow$ How to find optimal Flexibility?&lt;br /&gt;
-$\rightarrow$ Test MSE(error rate) is always larger than Training MSE; We estimated model function $f$ to minimize its training error&lt;br /&gt;
-$\rightarrow$ No test data: Sample re-use methods (e.g., bootstrap, cross-validation)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Classification problem: Misclassification rate&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;28-bias-variance-trade-off-편향분산-교차&quot;&gt;2.8. Bias-Variance Trade-off 편향분산 교차&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Expected test MSE(ideal measure): $E[y_0-\hat{f}(x_0)]^2$ when $((x_0,y_0)$ is a test obs.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;in population: #K training sets &amp;amp; #K function $f_k$&lt;br /&gt;
-Estimation of expected test MSE:  \(\\ \hat{E}[y_0 - \hat{f}(x_0)]^2 = \frac{1}{K} \sum_{k=1}^K[y_0-\hat{f}_k(x_0)]^2\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;For given $x_0$,  (when $\epsilon$ is irreducible error) \(\\ \begin{align*}
-\hat{E}[y_0 - \hat{f}(x_0)]^2 &amp;amp;= Var(\hat{f}(x_0)) + [Bias(\hat{f}(x_0))]^2 + Var(\epsilon) \\
-                      &amp;amp;= E [ \{ y_0 -E(\hat{f}(x_0)) \} - \{ \hat{f}(x_0) - E(\hat{f}(x_0)) \} ]^2 \\
-          (1) \cdots	&amp;amp;= E [  y_0 -E(\hat{f}(x_0)) ] ^2 \\
-          (2) \cdots	&amp;amp; \; + E [\hat{f}(x_0) - E(\hat{f}(x_0)) ] ^2 \\
-          (3) \cdots	&amp;amp; \; - 2E[ \{ y_0 -E(\hat{f}(x_0)) \} \{ \hat{f}(x_0) - E(\hat{f}(x_0)) \} ]
-\end{align*}\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;(1) \(\\ \begin{align*} 
-  &amp;amp;= E [(f(x_0) + \epsilon - E(\hat{f}(x_0)) ] ^2 \\
-  &amp;amp;= E[ f(x_0)^2 +\epsilon^2 + [E(\hat{f}(x_0)) ]^2 + 2f(x_0)\epsilon -2f(x_0)E(\hat{f}(x_0)) - 2\epsilon E(\hat{f}(x_0)) ] \\
-  &amp;amp; \quad \scriptstyle\text{when } E(\epsilon) \text{ goes to } 0 \\
-  &amp;amp;= E[E(\hat{f}(x_0)) - f(x_0)] ^2 + E(\epsilon^2)  \\
-  &amp;amp; \quad \scriptstyle{E(\hat{f}(x_0)) - f(x_0) \text{is a Bias}} \\
-  &amp;amp;= [Bias(\hat{f}(x_0))]^2 + Var(\epsilon^2)
-\end{align*}\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;$(2) = Var(\hat{f}(x_0)) \leftarrow $ model variance&lt;br /&gt;
-$\scriptstyle\text{different fit’s from randomness of training sets}$&lt;/li&gt;
-  &lt;li&gt;$(3) = 0$&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;$\therefore$ Expected test MSE is consisted of Reducible Error(Var+ Bias$^2$) and Irreducible Error(Var($\epsilon$))&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;$Var(\hat{f}(x_0)$ : model variance&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;$ [Bias(\hat{f}(x_0)]$ : Systematic model error ( caused by model assumptions; e.g. true &lt;em&gt;f&lt;/em&gt;: nonlinear)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;$ Var(\epsilon)$ : Irreducible error&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Model Flextibility $\uparrow$ $\Rightarrow$ model variance $\uparrow$ &amp;amp; model bias $\downarrow$&lt;br /&gt;
-Model Flextibility $\downarrow$ $\Rightarrow$ model variance $\downarrow$ &amp;amp; model bias $\uparrow$&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/tradeoff_0.png&quot; alt=&quot;image.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;$\rightarrow$ optimal model flextibility is different for &lt;strong&gt;each datasets&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;281-ex-trade-off-in-knn-reg&quot;&gt;2.8.1. Ex) Trade-off in KNN Reg.&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;given) Y = f (X) + $\epsilon$ with E($\epsilon$) = 0 and Var ($\epsilon$) = $\sigma^2$&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Expected test MSE at $x_0$: \(\\
-E[ (Y- \hat{f_k}(x_0) )^2 | X = x_0 ] \\
-= \sigma^2 + Bias^2(\hat{f_k} (x_0)) + Var (\hat{f_k} (x_0)) \\
-\rightarrow Bias(\hat{f_k} (x_0)) =  f(x_0) - E(\hat{f}(x_0))   \text{ : given &quot;f&quot; is KNN func.}\\ 
-\quad= { f(x_0) - E[\frac1 K \sum_{i \in \mathcal N (x_0)} ^ K Y_i ] }  \\
-\quad= { f(x_0)- \frac 1 K \sum E (f(x_i)+\epsilon_i)}  \\
-\quad= f(x_0) - \frac 1 K \sum E (f(x_i)  \\
-\rightarrow Var(\hat{f_k} (x_0)) = Var(\frac 1 K \sum_{i \in \mathcal N (x_0)} Yi )\\
-\quad= \frac 1 {K^2} \sum  Var( Yi ) \\
-\quad=  \frac 1 {K^2} \sum Var( f( x_i) + \epsilon_i ) \\
-\quad=  \frac 1 {K^2} \sum \sigma^2 = \frac 1 {K^2} * K * \sigma^2 = \frac {\sigma^2} K\)&lt;br /&gt;
-\(\therefore\) Expected test MSE at \(x_0 = \sigma ^2 + [f(x_0) - \frac 1 K \sum_{x_i \in \mathcal N (x_0)}^k f(x_i) ]^2 + \frac {\sigma^2} K\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;when we use large number of K :&lt;br /&gt;
-as K increases, model complexity and model variance decreases, then bias increases&lt;br /&gt;
-;which is a simpler model&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Using Misclassification rate \(= \frac 1 N \sum_{i=1}^n I(y_i \not = \hat y_i )\)&lt;br /&gt;
-(in Bayes Classifier &amp;amp; KNN Classifier)&lt;br /&gt;
-\(min_\hat Y E( I(Y \not = \hat Y) \\
-= min_\hat Y E[ E(I(Y \not = \hat Y | X) ] \\
-= min_{\hat f (x)} E[ \sum_{g=1}^G I( Y= g\not= \hat f (x) ) P ( Y= g| X) ] \\
-\equiv min_{\hat f (x)} \sum_{g=1}^G I ( Y=g \not= \hat f (x) ) P ( Y= g| X) \\
-\Rightarrow \hat f (x) = min_g \sum_{g=1}^G I ( Y=g \not= \hat f (x) ) P ( Y= g| X) \\
-\quad \equiv min_g ( 1- P ( Y= g| X) )\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;E.g)&lt;br /&gt;
-in 3 groups -&amp;gt; Y = 1, 2, 3&lt;br /&gt;
-P(Y=1 | X) = 0.3 , P(Y=2 | X) = 0.5, P(Y=3 | X) =0.2&lt;br /&gt;
-$\hat f(x) = 1 \Rightarrow$ EPE(expected prediction error; miss classification rate) = 0 * 0.3 + 1 * 0.5 + 1 * 0.2 = 0.7&lt;br /&gt;
-$\hat f(x) = 2 \Rightarrow$ EPE = 0.5 : min value&lt;br /&gt;
-$\hat f(x) = 3 \Rightarrow$ EPE = 0.8&lt;br /&gt;
-\(\therefore min_g ( 1- P ( Y= g| X) ) \\
-\quad  \equiv max_g P(Y = g | X)\)&lt;br /&gt;
-Bayes error rate at X = $x_0$; $\quad 1 - max_g P(Y=g|X=x_0)$&lt;br /&gt;
-Overall Bayes error rate; $\quad 1 - E[ max_g P(Y=g | X= x) ]$&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="studies" /><summary type="html"></summary></entry></feed>
+  &lt;li&gt;GLM, a general recipe of regression approach:&lt;br /&gt;
+with the response &lt;em&gt;Y&lt;/em&gt; from one of the exponential family, transform expected &lt;em&gt;Y&lt;/em&gt;(or mean) as 
+a linear function of the predictors, we can have a regression model.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html"></summary></entry></feed>

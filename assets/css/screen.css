@@ -626,7 +626,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
     padding: 70px 100px 0;
     min-height: 230px;
     font-family: Georgia, serif;
-    font-size: 2.2rem;
+    font-size: 2.0rem;
     line-height: 1.6em;
     background: #fff;
 }
@@ -905,12 +905,12 @@ Usage (In Ghost editor):
 
 .post-full-content h4 {
     margin: 0.5em 0 0.2em 0;
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     font-weight: 700;
 }
 @media (max-width: 500px) {
     .post-full-content h4 {
-        font-size: 2.2rem;
+        font-size: 2.0rem;
     }
 }
 

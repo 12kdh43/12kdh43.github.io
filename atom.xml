@@ -50,7 +50,7 @@
     
       
       <item>
-        <title>Data Mining - Stock Market Network Analysis</title>
+        <title>Data Mining - Stock Market Analysis with networkX</title>
         
           <description>
 </description>
@@ -106,43 +106,398 @@
     
       
       <item>
-        <title>Statistical Mining - Chapter 4</title>
+        <title>ISLR - Chapter 6. Linear Model Selection and Regularization</title>
+        
+          <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-6-linear-model-selection-and-regularization&quot; id=&quot;markdown-toc-chapter-6-linear-model-selection-and-regularization&quot;&gt;Chapter 6. Linear Model Selection and Regularization&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#61-subset-selection&quot; id=&quot;markdown-toc-61-subset-selection&quot;&gt;6.1. Subset Selection&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#611-best-subset-selection&quot; id=&quot;markdown-toc-611-best-subset-selection&quot;&gt;6.1.1. Best Subset Selection&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#612-stepwise-selection&quot; id=&quot;markdown-toc-612-stepwise-selection&quot;&gt;6.1.2. Stepwise Selection&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#forward-stepwise-selection&quot; id=&quot;markdown-toc-forward-stepwise-selection&quot;&gt;Forward Stepwise Selection&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#backward-stepwise-selection&quot; id=&quot;markdown-toc-backward-stepwise-selection&quot;&gt;Backward Stepwise Selection&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#hybrid-approaches&quot; id=&quot;markdown-toc-hybrid-approaches&quot;&gt;Hybrid Approaches&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#613-choosing-the-optimal-model&quot; id=&quot;markdown-toc-613-choosing-the-optimal-model&quot;&gt;6.1.3. Choosing the Optimal Model&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#validation-and-cross-validation&quot; id=&quot;markdown-toc-validation-and-cross-validation&quot;&gt;Validation and Cross-Validation&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#62-shrinkage-methods&quot; id=&quot;markdown-toc-62-shrinkage-methods&quot;&gt;6.2. Shrinkage Methods&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#621-ridge-regression&quot; id=&quot;markdown-toc-621-ridge-regression&quot;&gt;6.2.1. Ridge Regression&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-6-linear-model-selection-and-regularization&quot;&gt;Chapter 6. Linear Model Selection and Regularization&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Limitations of LSE
+    &lt;ol&gt;
+      &lt;li&gt;Prediction Accuracy:
+        &lt;ul&gt;
+          &lt;li&gt;if &lt;em&gt;n&lt;/em&gt; is not much larger than &lt;em&gt;p&lt;/em&gt;, the least squares fit can hvae a lot 
+ of variability, results in overfitting and poor predictions to test data.&lt;/li&gt;
+          &lt;li&gt;if &lt;em&gt;p&lt;/em&gt; &amp;gt; &lt;em&gt;n&lt;/em&gt;, there is no unique solution for the least squares coefficient 
+ estimate; as $ Var(\hat\beta)=\infty$.&lt;/li&gt;
+          &lt;li&gt;if &lt;em&gt;p&lt;/em&gt; is large, there can be correlations between &lt;em&gt;X&lt;/em&gt; variables. A model 
+ having multicollinearity can have high variance.&lt;br /&gt;
+&lt;em&gt;Constraining&lt;/em&gt; or &lt;em&gt;Shrinking&lt;/em&gt; the estimated coefficients can reduce the variance 
+with negligible increase in bias, and improve in the accuracy to the test data.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Model Interpretability:
+        &lt;ul&gt;
+          &lt;li&gt;There are irrelevant variables $X_j$. Removing by setting coefficient estimates 
+ $\beta_j = 0$, we can have more interpretability.&lt;br /&gt;
+&lt;em&gt;Feature selection&lt;/em&gt; or &lt;em&gt;Variable selection&lt;/em&gt; can exclude irrelevant variables from a 
+multiple regression model.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;61-subset-selection&quot;&gt;6.1. Subset Selection&lt;/h2&gt;
+
+&lt;h3 id=&quot;611-best-subset-selection&quot;&gt;6.1.1. Best Subset Selection&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;fit a separate least squares regression for all $2^p$ possible models with combinations 
+of the &lt;em&gt;p&lt;/em&gt; predictors.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm
+    &lt;ol&gt;
+      &lt;li&gt;$\mathcal{M}_0$ as &lt;em&gt;null model&lt;/em&gt; (i.e. $ Y = \beta_0 + \epsilon $)&lt;/li&gt;
+      &lt;li&gt;For $ k = 1, 2, \ldots, p $:&lt;br /&gt;
+  (a) Fit all \({p \choose k}\) models with &lt;em&gt;k&lt;/em&gt; predictors&lt;br /&gt;
+  (b) Pick the smallest RSS, (or largest $R^2$) = $ \mathcal{M}_k $&lt;/li&gt;
+      &lt;li&gt;Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ using cross-validated 
+  prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Guarantees the best selection, while it suffers from computational limitations. Also, it 
+only works for least squares linear regression.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;in the case of logistic regression, we use &lt;em&gt;deviance&lt;/em&gt;, $-2\log$MLE, instead of RSS in 
+the 2nd step of algorithm upon.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;612-stepwise-selection&quot;&gt;6.1.2. Stepwise Selection&lt;/h3&gt;
+
+&lt;h4 id=&quot;forward-stepwise-selection&quot;&gt;Forward Stepwise Selection&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Algorithm
+    &lt;ol&gt;
+      &lt;li&gt;$\mathcal{M}_0$ as &lt;em&gt;null model&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;For $ k = 1, 2, \ldots, p $:&lt;br /&gt;
+  (a) Fit all &lt;em&gt;p - k&lt;/em&gt; models in \(\mathcal{M}_k\) with one additional predictor&lt;br /&gt;
+  (b) Pick the smallest RSS among &lt;em&gt;p - k&lt;/em&gt; models, $\mathcal{M}_{k+1}$&lt;/li&gt;
+      &lt;li&gt;Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ with CV scores&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee but available for the case of 
+high dimensional data($n&amp;lt;p$).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;backward-stepwise-selection&quot;&gt;Backward Stepwise Selection&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Algorithm
+    &lt;ol&gt;
+      &lt;li&gt;$\mathcal{M}_p$ as &lt;em&gt;full model&lt;/em&gt;, contains all &lt;em&gt;p&lt;/em&gt; predictors&lt;/li&gt;
+      &lt;li&gt;For $ k = p, p-1, \ldots, 1 $:&lt;br /&gt;
+  (a) Fit all &lt;em&gt;k - 1&lt;/em&gt; models contain all but one of the predictors in \(\mathcal{M}_k\)&lt;br /&gt;
+  (b) Pick the smallest RSS among &lt;em&gt;k - 1&lt;/em&gt; models, $\mathcal{M}_{k-1}$&lt;/li&gt;
+      &lt;li&gt;Select best model among $\mathcal{M}_0, ldots,\mathcal{M}_p$ with CV scores&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee and not for &lt;em&gt;n &amp;lt; p&lt;/em&gt; case.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;hybrid-approaches&quot;&gt;Hybrid Approaches&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;add then remove one predictors in each step.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;613-choosing-the-optimal-model&quot;&gt;6.1.3. Choosing the Optimal Model&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;A model containing all of the predictors will always have the smallest RSS and the largest 
+$R^2$, since these quantities are related to the training error. Instead, we need a model with a 
+low test error.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;$C_p = \frac{1}{n}(RSS + 2 d \hat\sigma^2)$&lt;br /&gt;
+ For a fitted least squares model, with &lt;em&gt;d&lt;/em&gt; as the number of predictors and $\hat\sigma^2$ as 
+ an estimate of the variance of the error. Typically $\hat\sigma^2$ is estimated using the full 
+ model containing all predictors. Adding a penalty to the training RSS is to adjust its 
+ underestimation to the test error. As the number of predictors increase, the penalty increase. 
+ If there is a proof of $\hat\sigma^2$ is an unbiased estimate of $\sigma^2$, $C_p$ is an unbiased 
+ estimate of test MSE. Then, a model with the lowest $C_p$ is the best model.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;AIC $= \frac{1}{n}(RSS + 2 d \hat\sigma^2)$&lt;br /&gt;
+ For a models fit by maximum likelihood(MLE), given by omitted irrelevant constants. $C_p$ and 
+ AIC are proportional to each other.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;BIC $= \frac{1}{n}(RSS + \log(n)d\hat\sigma^2)$&lt;br /&gt;
+ From a Bayesian point of view, for a fitted least squares model. Also given by omitted 
+ irrelevant constants. BIC has heavier penalty then $C_p$ or AIC, results in selecting smaller 
+ models.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Adjusted $R^2 = 1 - \frac{RSS/(n-d-1)}{TSS/(n-1)}$&lt;br /&gt;
+ Since the usual $R^2$ is defined as $1 - RSS/TSS$, it always increases as more variables added. 
+ Adjusted $R^2$ gives penalty of &lt;em&gt;d&lt;/em&gt;, the number of predictors in the denominator. Unlike other 
+ statistics, a large value of adjusted $R^2$ indicates a small test error.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;validation-and-cross-validation&quot;&gt;Validation and Cross-Validation&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;one-standard-error rule&lt;/em&gt;&lt;br /&gt;
+First calculate the standard error of the estimated test MSE for each model size, then select the 
+smallest model for which the estimated test error is within one standard error of the lowest point 
+on the curve.&lt;br /&gt;
+If a set of models appear to be more or less equally good, then we might as well choose the simplest 
+model; the model with the smallest number of predictors.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;62-shrinkage-methods&quot;&gt;6.2. Shrinkage Methods&lt;/h2&gt;
+
+&lt;h3 id=&quot;621-ridge-regression&quot;&gt;6.2.1. Ridge Regression&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ridge regression coefficient estimates&lt;br /&gt;
+\(\hat\beta^R = \text{min}_{\beta}\left[
+                  \underbrace{\sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p \beta_j x_{ij})}_{RSS}
+                  + \lambda\sum_{j=1}^p \beta_j^2 \right]\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;$\lambda \ge 0 $ is a &lt;em&gt;tuning parameter&lt;/em&gt;, $\lambda\sum_{j=1}^p \beta_j^2$ is a &lt;em&gt;shrinkage penalty&lt;/em&gt;. 
+The penalty is small when the coefficients are close to zero, and so it has the effect of &lt;em&gt;shrinking&lt;/em&gt; 
+the estimates of $\beta_j$ towards zero. Ridge regression will produce a different set of coefficient 
+estimates $\beta_{\lambda}^R$, for each value of $\lambda$.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We do not want to shrink the intercept $\beta_0$, which is simply a measure of the mean value of 
+the response when $x_{i1}=x_{i2}=\ldots=x_{ip}=0$. If the variables, the columns of the data matrix
+&lt;strong&gt;$X$&lt;/strong&gt;, have been centered to have mean zero before ridge regression is performed, then the estiamted 
+intercept will take the form $\hat\beta_0 = \bar{y} = \sum_{i=1}^n y_i/n$.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        
+        <pubDate>Thu, 30 Apr 2020 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/islr_ch6</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch6</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>ISLR - Chapter 5. Resampling Methods</title>
+        
+          <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-5-resampling-methods&quot; id=&quot;markdown-toc-chapter-5-resampling-methods&quot;&gt;Chapter 5. Resampling Methods&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#51--cross-validation&quot; id=&quot;markdown-toc-51--cross-validation&quot;&gt;5.1.  Cross-Validation&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#511-the-validation-set-approach&quot; id=&quot;markdown-toc-511-the-validation-set-approach&quot;&gt;5.1.1. The Validation Set Approach&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#512-leave-one-out-cross-validation&quot; id=&quot;markdown-toc-512-leave-one-out-cross-validation&quot;&gt;5.1.2. Leave-One-Out Cross-Validation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#513-k-fold-cross-validation&quot; id=&quot;markdown-toc-513-k-fold-cross-validation&quot;&gt;5.1.3. k-Fold Cross-Validation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#514-bias-variance-trade-off-for-k-fold-cross-validation&quot; id=&quot;markdown-toc-514-bias-variance-trade-off-for-k-fold-cross-validation&quot;&gt;5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#515-cross-validation-on-classification-problems&quot; id=&quot;markdown-toc-515-cross-validation-on-classification-problems&quot;&gt;5.1.5. Cross-Validation on Classification Problems&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#52-the-bootstrap&quot; id=&quot;markdown-toc-52-the-bootstrap&quot;&gt;5.2. The Bootstrap&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-5-resampling-methods&quot;&gt;Chapter 5. Resampling Methods&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;repeatedly drawing samples from a training set and refitting a model of interest on 
+each sample in order to obtain additional information about the fitted model.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To optain information that would not be available from fitting the model only once 
+using the original training sample.&lt;br /&gt;
+e.g. to estimate the variability of a model fit, draw different samples and fit it to 
+each new sample, then examine the extent to which the resulting fits differ.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;51--cross-validation&quot;&gt;5.1.  Cross-Validation&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;In the absence of a very large designated test set that can be used to directly estimate 
+the test error rate, a class of methods that estimate the test error rate by &lt;em&gt;holding out&lt;/em&gt; 
+a subset of the training observations from the fitting process, then applying the statistical 
+learning method to those held out observations.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;511-the-validation-set-approach&quot;&gt;5.1.1. The Validation Set Approach&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;randomly dividing the available set of observations into two parts;&lt;br /&gt;
+a &lt;em&gt;training set&lt;/em&gt; and a &lt;em&gt;validation set&lt;/em&gt; (or hold-out set)&lt;br /&gt;
+model is fit on the training set, and the fitted model is used to predict the responses for the 
+observations in the validation set. The validation set error rate estimates the test error rate.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Repeating this predecure, we have different estimate for the test MSE over random splits of the 
+observations and there are two issues:&lt;/p&gt;
+    &lt;ol&gt;
+      &lt;li&gt;The validation estimate of the test error rate can be highly variable, depending on which observations 
+ are included in the training set or the validation test.&lt;/li&gt;
+      &lt;li&gt;Only a subset of the observations are used to fit the model. Trained on fewer observations, the 
+ validation set error rate may &lt;em&gt;overestimate&lt;/em&gt; the test error rate for the model fit on the entire 
+ data set.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;512-leave-one-out-cross-validation&quot;&gt;5.1.2. Leave-One-Out Cross-Validation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;each single observation is used for the validation set, and the remaining observations are for the 
+training set. The statistical learning method is fit on the &lt;em&gt;n-1&lt;/em&gt; training obs. The prediction is made 
+for the excluded observation.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;LOOCV estiamte for the test MSE:&lt;br /&gt;
+\(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n MSE_i\)&lt;br /&gt;
+No overestimation on the test error, No variance of test MSE, but Expansive.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;a shortcut of LOOCV on Least Squares(regression):&lt;br /&gt;
+\(\begin{align*}
+CV_{(n)} = \frac{1}{n} \sum_{i=1}^n \left(\frac{y_i - \hat y_i}{1-h_i}\right)^2
+\end{align*}\)&lt;br /&gt;
+where $\hat y_i$ is the fitted value from the original least squares fit, one-time build of a full 
+model and set a leverage $h_i = \frac{1}{n}+\frac{(x_i-\bar{x})^2}{\sum_{i^\prime=1}^n(x_{i^\prime}-\bar{x})^2}$. 
+The levearge lies between &lt;em&gt;1/n&lt;/em&gt; and &lt;em&gt;1&lt;/em&gt;, reflects the amount that an observation influences its own fit.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;513-k-fold-cross-validation&quot;&gt;5.1.3. k-Fold Cross-Validation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;random division into &lt;em&gt;k&lt;/em&gt; groups, or &lt;em&gt;folds&lt;/em&gt;, of approximately equal size. A fold is used for the 
+validation set, and the method is fit on the remaining &lt;em&gt;k-1&lt;/em&gt; folds. The MSE is computed on the 
+observations in the held-out fold and the procedure is repeated &lt;em&gt;k&lt;/em&gt; times.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;k-Fold CV estimate for the test MSE:&lt;br /&gt;
+\(CV_{(k)} = \frac{1}{n}\sum_{i=1}^k MSE_i\)&lt;br /&gt;
+when &lt;em&gt;k=n&lt;/em&gt;, LOOCV is a special case of k-Fold. Using smaller &lt;em&gt;k&lt;/em&gt;, k-fold CV has a computational 
+advantage to LOOCV.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We perform CV to:&lt;br /&gt;
+To determine how well a given model can be expected to perform on independent data.&lt;br /&gt;
+To identify a model results in the lowest test error, over different models or different levels of 
+flexibility.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;514-bias-variance-trade-off-for-k-fold-cross-validation&quot;&gt;5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Besides the computational advantage, k-fold CV often gives more accurate estimates of the test error 
+rate than does LOOCV.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;LOOCV will give approximately unbiased estiamtes of the test error, containing &lt;em&gt;n-1&lt;/em&gt;, almost as many as 
+the number of observations in the full data set. By contrast, k-fold CV will lead to an intermediate 
+level of bias, containing &lt;em&gt;(k-1)n/k&lt;/em&gt; observations. Clearly, LOOCV is to be preferred in the perspective 
+of bias reduction.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;But, in LOOCV, averaging the outputs of &lt;em&gt;n&lt;/em&gt; fitted models, which are trained on an almost identical set 
+of observations, these outputs are highly correlated with each other. This high correlation results in 
+higher variance of test error estimate from LOOCV than from k-fold CV.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;515-cross-validation-on-classification-problems&quot;&gt;5.1.5. Cross-Validation on Classification Problems&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;LOOCV on the classification:&lt;br /&gt;
+\(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n Err_i\),  where \(Err_i = I(y_i \ne \hat{y}_i)\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;k-fold CV on the classification:&lt;br /&gt;
+\(\frac{1}{n}\sum_{i=1}^k MCR_i\).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;52-the-bootstrap&quot;&gt;5.2. The Bootstrap&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sampling with &lt;em&gt;replacement&lt;/em&gt; on:&lt;br /&gt;
+Dataset $Z = (z_1, \ldots, z_n)$, $ z_i = (x_i,y_i)$&lt;br /&gt;
+Sample $Z^{*b}$, where $ b = 1, \ldots, B$ samples&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;for Any statistic term $S(Z)$ computed from full dataset &lt;em&gt;Z&lt;/em&gt;,&lt;br /&gt;
+and $S(Z^{*b})$ from bootstrap samples,&lt;br /&gt;
+\(\begin{align*}
+Var(\hat{S(Z)}) = \frac{1}{B-1}\sum_{b=1}^B(S(Z^{*b})-\bar{S}^*)^2
+\end{align*}\)&lt;br /&gt;
+$\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Thu, 23 Apr 2020 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/islr_ch5</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch5</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>ISLR - Chapter 4. Classification</title>
         
           <description>
 </description>
         
         <pubDate>Thu, 16 Apr 2020 00:00:00 +0900</pubDate>
         <link>
-        http://0.0.0.0:4000/stat_ch4</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/stat_ch4</guid>
+        http://0.0.0.0:4000/islr_ch4</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch4</guid>
       </item>
       
     
       
       <item>
-        <title>Statistical Mining - Chapter 3</title>
+        <title>ISLR - Chapter 3. Linear Regression</title>
         
           <description>
 </description>
         
         <pubDate>Fri, 03 Apr 2020 00:00:00 +0900</pubDate>
         <link>
-        http://0.0.0.0:4000/stat_ch3</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/stat_ch3</guid>
+        http://0.0.0.0:4000/islr_ch3</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch3</guid>
       </item>
       
     
       
       <item>
-        <title>Statistical Mining - Chapter 2</title>
+        <title>ISLR - Chapter 2. Statistical Learning</title>
         
           <description>
 </description>
         
         <pubDate>Mon, 16 Mar 2020 00:00:00 +0900</pubDate>
         <link>
-        http://0.0.0.0:4000/stat_ch2</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/stat_ch2</guid>
+        http://0.0.0.0:4000/islr_ch2</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch2</guid>
       </item>
       
     
