@@ -76,7 +76,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="ISLR - Chapter 6. Linear Model Selection and Regularization" />
-    <meta property="og:description" content="Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation 6.2. Shrinkage Methods 6.2.1. Ridge Regression Chapter 6. Linear Model Selection and Regularization Limitations of LSE Prediction" />
+    <meta property="og:description" content="Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation 6.2. Shrinkage Methods 6.2.1. Ridge Regression in Singular Value Decomposition 6.2.2. The Lasso Another Formulation for Ridge" />
     <meta property="og:url" content="http://0.0.0.0:4000/islr_ch6" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
@@ -86,7 +86,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <meta property="article:tag" content="ISLR" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ISLR - Chapter 6. Linear Model Selection and Regularization" />
-    <meta name="twitter:description" content="Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation 6.2. Shrinkage Methods 6.2.1. Ridge Regression Chapter 6. Linear Model Selection and Regularization Limitations of LSE Prediction" />
+    <meta name="twitter:description" content="Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation 6.2. Shrinkage Methods 6.2.1. Ridge Regression in Singular Value Decomposition 6.2.2. The Lasso Another Formulation for Ridge" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -118,7 +118,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "@type": "WebPage",
         "@id": "http://0.0.0.0:4000/islr_ch6"
     },
-    "description": "Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation 6.2. Shrinkage Methods 6.2.1. Ridge Regression Chapter 6. Linear Model Selection and Regularization Limitations of LSE Prediction"
+    "description": "Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation 6.2. Shrinkage Methods 6.2.1. Ridge Regression in Singular Value Decomposition 6.2.2. The Lasso Another Formulation for Ridge"
 }
     </script>
 
@@ -223,7 +223,32 @@ into the {body} of the default.hbs template -->
     </ul>
   </li>
   <li><a href="#62-shrinkage-methods" id="markdown-toc-62-shrinkage-methods">6.2. Shrinkage Methods</a>    <ul>
-      <li><a href="#621-ridge-regression" id="markdown-toc-621-ridge-regression">6.2.1. Ridge Regression</a></li>
+      <li><a href="#621-ridge-regression" id="markdown-toc-621-ridge-regression">6.2.1. Ridge Regression</a>        <ul>
+          <li><a href="#in-singular-value-decomposition" id="markdown-toc-in-singular-value-decomposition">in Singular Value Decomposition</a></li>
+        </ul>
+      </li>
+      <li><a href="#622-the-lasso" id="markdown-toc-622-the-lasso">6.2.2. The Lasso</a>        <ul>
+          <li><a href="#another-formulation-for-ridge-regression-and-the-lasso" id="markdown-toc-another-formulation-for-ridge-regression-and-the-lasso">Another Formulation for Ridge Regression and the Lasso</a></li>
+          <li><a href="#a-simple-special-case" id="markdown-toc-a-simple-special-case">A Simple Special Case</a></li>
+          <li><a href="#bayesian-interpretation" id="markdown-toc-bayesian-interpretation">Bayesian Interpretation</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#63-dimension-reduction-methods" id="markdown-toc-63-dimension-reduction-methods">6.3. Dimension Reduction Methods</a>    <ul>
+      <li><a href="#631--principal-components-regression" id="markdown-toc-631--principal-components-regression">6.3.1.  Principal Components Regression</a>        <ul>
+          <li><a href="#principal-components-analysis" id="markdown-toc-principal-components-analysis">Principal Components Analysis</a></li>
+          <li><a href="#the-principal-components-regression-approach" id="markdown-toc-the-principal-components-regression-approach">The Principal Components Regression Approach</a></li>
+        </ul>
+      </li>
+      <li><a href="#632-partial-least-squares" id="markdown-toc-632-partial-least-squares">6.3.2. Partial Least Squares</a></li>
+    </ul>
+  </li>
+  <li><a href="#64-considerations-in-high-dimensions" id="markdown-toc-64-considerations-in-high-dimensions">6.4. Considerations in High Dimensions</a>    <ul>
+      <li><a href="#641-high-dimensional-data" id="markdown-toc-641-high-dimensional-data">6.4.1. High-Dimensional Data</a></li>
+      <li><a href="#642-what-goes-wrong-in-high-dimensions" id="markdown-toc-642-what-goes-wrong-in-high-dimensions">6.4.2. What Goes Wrong in High Dimensions?</a></li>
+      <li><a href="#643-regression-in-high-dimensions" id="markdown-toc-643-regression-in-high-dimensions">6.4.3. Regression in High Dimensions</a></li>
+      <li><a href="#644-interpreting-results-in-high-dimensions" id="markdown-toc-644-interpreting-results-in-high-dimensions">6.4.4. Interpreting Results in High Dimensions</a></li>
     </ul>
   </li>
 </ul>
@@ -266,7 +291,7 @@ of the <em>p</em> predictors.</p>
   </li>
   <li>Algorithm
     <ol>
-      <li>$\mathcal{M}_0$ as <em>null model</em> (i.e. $ Y = \beta_0 + \epsilon $)</li>
+      <li>$\mathcal{M}_0$ as <em>null model</em> (i.e., $ Y = \beta_0 + \epsilon $)</li>
       <li>For $ k = 1, 2, \ldots, p $:<br />
   (a) Fit all \({p \choose k}\) models with <em>k</em> predictors<br />
   (b) Pick the smallest RSS, (or largest $R^2$) = $ \mathcal{M}_k $</li>
@@ -370,9 +395,12 @@ model; the model with the smallest number of predictors.</li>
 <ul>
   <li>
     <p>Ridge regression coefficient estimates<br />
-\(\hat\beta^R = \text{min}_{\beta}\left[
+\(\begin{align*}
+\hat\beta^R &amp;= \text{min}_{\beta}\left[
                   \underbrace{\sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p \beta_j x_{ij})}_{RSS}
-                  + \lambda\sum_{j=1}^p \beta_j^2 \right]\)</p>
+                  + \lambda\sum_{j=1}^p \beta_j^2 \right] \\
+            &amp;= (X^TX + \lambda I)^{-1} X^T\underline{y}	
+\end{align*}\)</p>
   </li>
   <li>
     <p>$\lambda \ge 0 $ is a <em>tuning parameter</em>, $\lambda\sum_{j=1}^p \beta_j^2$ is a <em>shrinkage penalty</em>. 
@@ -385,6 +413,339 @@ estimates $\beta_{\lambda}^R$, for each value of $\lambda$.</p>
 the response when $x_{i1}=x_{i2}=\ldots=x_{ip}=0$. If the variables, the columns of the data matrix
 <strong>$X$</strong>, have been centered to have mean zero before ridge regression is performed, then the estiamted 
 intercept will take the form $\hat\beta_0 = \bar{y} = \sum_{i=1}^n y_i/n$.</p>
+  </li>
+  <li>
+    <p>The standard least squares coefficient estimates are <em>scale equivariant</em>; multiplying $X_j$ by a constant 
+<em>c</em> leads to a scaling of the least squares coefficient estimates by a factor of 1/<em>c</em>. I.e., regardless 
+of how the <em>j</em>th predictor is scaled, $X_j\hat\beta_j$ will remain the same.<br />
+In contrast, the ridge regression coefficient estimates can change substantially when multiplying a 
+given predictor by a constant. The value of $X_j\hat\beta_{j,\lambda}^R$ may depend on the scaling of 
+the other predictors. Thus, before applying ridge regression, the variables need to be standardized to 
+have a standard deviation of one.<br />
+The formula: \(\tilde{x}_{ij}=\frac{x_{ij}}{\sqrt{\frac{1}{n}\sum_{i=1}^n(x_{ij}-\bar{x}_j)^2}}\)</p>
+  </li>
+  <li>
+    <p>Ridge regression overperforms the standard least squares when the number of variables <em>p</em> is almost 
+as large as the number of observations <em>n</em>, or even when $p &gt; n$. Also it has computational advantages 
+over best subset selection, which requires searching through $2^p$ models. Ridge regression only fits a 
+single model for any fixed value of $\lambda$.</p>
+  </li>
+</ul>
+
+<h4 id="in-singular-value-decomposition">in Singular Value Decomposition</h4>
+<ul>
+  <li>where $ X = \mathbb{UDV}^T$,<br />
+\(\begin{align*} X\hat\beta^{\text{LSE}} &amp;= X(X^TX)^{-1}X^T\underline{y} \\
+                                         &amp;= \mathbb{UU}^T\underline{y} \\
+                            X\hat\beta^R &amp;= UD(D^2 + \lambda I)^{-1}DU^T\underline{y} \\
+                                         &amp;= \sum_{j=1}^p\underline{u}_j\frac{d_{ij}^2}{d_{ij}^2+\lambda}\underline{u}_j^T\underline{y}
+\end{align*}\)<br />
+\(\begin{align*}
+\rightarrow \partial f(\lambda) &amp;= tr[X(X^TX + \lambda I)^{-1} X^T] \\
+                                &amp;= tr(\mathbb{H}_{\lambda})  \\
+                                &amp;= \sum_{j=1}^p\frac{d_{ij}^2}{d_{ij}^2+\lambda}
+\end{align*}\)</li>
+</ul>
+
+<h3 id="622-the-lasso">6.2.2. The Lasso</h3>
+<ul>
+  <li>
+    <p>Ridge regression estimates shrink towards zero but will not set nay of them exactly to zero(unless 
+$\lambda = \infty$). This may not be a problem for prediction accuracy, but it can be a challenge in 
+model interpretation when <em>p</em> is quite large.</p>
+  </li>
+  <li>
+    <p>The <em>lasso</em><br />
+\(\hat\beta^L_{\lambda} = \text{min}_{\beta}\left[RSS+\lambda\sum_{j=1}^p|\beta_j|\right]\)<br />
+Instead of $\mathcal{l}_2$ penalty in Ridge, the lasso uses an $\mathcal{l}_1$ penalty. 
+The $\mathcal{l}_1$ norm of a coefficient vector $\beta$ is given by $\lVert \beta \rVert_1 = 
+\sum |\beta_j|$. This penalty has the effect of forcing some of the coefficient estimates to be 
+exactly equal to zero when the tuning parameter is sufficiently large. Hence, the lasso performs 
+<em>variable selection</em>, these <em>sparse</em> models with the lasso are much easier to interpret than those 
+with ridge.</p>
+  </li>
+</ul>
+
+<h4 id="another-formulation-for-ridge-regression-and-the-lasso">Another Formulation for Ridge Regression and the Lasso</h4>
+<ul>
+  <li>
+    <p>Ridge:
+\(\text{min}_{\beta}\left\{ \sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p\beta_j x_{ij})^2 
+                      \right\}\) subject to $\sum_{j=1}^p\beta_j^2 \le s $<br />
+Lasso:
+\(\text{min}_{\beta}\left\{ \sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p\beta_j x_{ij})^2 
+                      \right\}\) subject to $\sum_{j=1}^p|\beta_j| \le s $<br />
+where the <em>budget s</em> as the regularization parameter ($\lambda\uparrow \equiv s\downarrow$).</p>
+  </li>
+  <li>
+    <p>when $p = 2$, then the ridge regression estimates have the smallest RSS out of all points that lie 
+within the circle defined by $\beta_1^2 + \beta_2^2 \le s$, while the lasso estimates have within 
+the diamond defined by $|\beta_1|+|\beta_2| \le s$. when $p = 3$, he constraint region for ridge 
+becomes a sphere, for lasso becomes a polyhedron. For larger <em>p</em>, it becomes a hypersphere and a 
+polytope each. The lasso leads to feature selection due to the sharp corners of its constraint region.</p>
+  </li>
+  <li>
+    <p>the number of predictors that is related to the response is never known a <em>priori</em> for real data sets. 
+A technique such as cross-validation can be used in order to determine which approach is better on a 
+particular data set.</p>
+  </li>
+</ul>
+
+<h4 id="a-simple-special-case">A Simple Special Case</h4>
+<ul>
+  <li>
+    <p>An analytical method(solution) for the case when $n = p$, and <strong><em>X</em></strong> a diagonal matrix with 1’s on 
+the diagonal and 0’s in all off-diagonal elements. I.e., the columns of <strong><em>X</em></strong> are orthogonal. Also, 
+assume that we are performing regression without an intercept(or standardized).<br />
+(c.f. in real world cases, we need to use numerical methods.)</p>
+  </li>
+  <li>
+    <p>The usual least squares, $\hat\beta$ is that minimizes; $\sum_{j=1}^p(y_j-\beta_j)^2$.<br />
+and for the ridge, minimizing $\sum_{j=1}^p(y_j-\beta_j)^2+\lambda\sum_{j=1}^p\beta_j^2$.<br />
+and for the lasso, minimizing $\sum_{j=1}^p(y_j-\beta_j)^2+\lambda\sum_{j=1}^p|\beta_j|$.</p>
+  </li>
+  <li>
+    <p>The ridge regression estiamtes $\hat\beta_j^R = y_j/(1+\lambda)$ and<br />
+\(\text{the lasso estimates} \begin{align*}
+\hat\beta_j^L &amp;= \text{sign}(\hat\beta_j)(|\hat\beta_j|-\lambda)_{+}, \\
+    \text{or} &amp;= \begin{cases}
+                  y_j - \lambda/2, &amp; \mbox{if }y_j &gt; \lambda/2; \\
+                  y_j + \lambda/2, &amp; \mbox{if }y_j &lt; -\lambda/2; \\
+                  0				 &amp; \mbox{if }|y_j| \le \lambda/2.
+                  \end{cases}
+\end{align*}\)<br />
+<img src="/assets/images/ch6_ridge_lasso_effect_0.png" alt="png" width="70%" height="70%" /><br />
+Ridge shrinks all coefficients towards zero by the same <em>“proportion”</em>,<br />
+Lasso shrinks all coefficients towards zero by the same <em>“amount”</em>.</p>
+  </li>
+</ul>
+
+<h4 id="bayesian-interpretation">Bayesian Interpretation</h4>
+<ul>
+  <li>$p(\beta|X,Y)\propto f(Y|X,\beta)p(\beta|X) = f(Y|X,\beta)p(\beta)$<br />
+with assumption of $p(\beta)=\prod_{j=1}^p g(\beta_j)$ for some density function <em>g</em>.<br />
+Two special cases of <em>g</em>:
+    <ul>
+      <li>If <em>g</em> is a Gaussian distribution with mean zero and standard deviation a function of $\lambda$, 
+it follows that the <em>posterior mode</em> for $\beta$, is given by the ridge regression solution. Also, 
+the solution is equal to posterior mean.</li>
+      <li>If <em>g</em> is a double-exponential(Laplace) distribution with mean zero and scale parameter a function 
+of $\lambda$, it follows that the posterior mode for $\beta$ is the lasso soultion(which is not the 
+posteriror mean in this case).</li>
+    </ul>
+  </li>
+  <li>Hence, the lasso expects a priori that many of the coefficients are (exactly) zero, while ridge 
+assumes the coefficients are randomly distributed about zero.</li>
+</ul>
+
+<h2 id="63-dimension-reduction-methods">6.3. Dimension Reduction Methods</h2>
+<ul>
+  <li>
+    <p><em>p</em> predictors to <em>M</em> new transformed variables.<br />
+Let $Z_m = \sum_{j=1}^p\phi_{jm}X_j$ represent <em>M &lt; p linear combinations</em> of original <em>p</em> predictors. 
+Then fit the linear regression model $y_i = \theta_0 + \sum_{m=1}^M\theta_m z_{im} + \epsilon_i, \quad i = 1, \ldots, n$, 
+using least squares. If the constants $\phi_{1m}, \ldots, \phi_{pm}$ are chosen wisely, dimension 
+reduction approaches can outperform least squares regression. I.e., using least squares, fitting 
+reduced model can lead to better results than fitting the standard linear model.</p>
+  </li>
+  <li>
+    <p>\(\sum_{m=1}^M\theta_m z_{im} = \sum_{m=1}^M\theta_m\sum_{j=1}^p\phi_{jm}x_{ij} = 
+  \sum_{j=1}^p\sum_{m=1}^M\theta_m\phi_{jm}x_{ij} = \sum_{j=1}^p\beta_j x_{ij},\)<br />
+  where \(\beta_j = \sum_{m=1}^M\theta_m\phi_{jm}\).<br />
+  Hence, this model can be a special case of the standard linear regression model. In situations where 
+  <em>p</em> is large relative to <em>n</em>, demension reduction methods can significantly reduce the variance of the 
+  fitted coefficients. If $M = p$, and all the $Z_m$ are linearly independent, then there are no constraints 
+  and the model is equivalent to the standard linear model.</p>
+  </li>
+  <li>
+    <p>All dimension reduction methods work in two steps. First, the transformed predictors $Z_m$ are obtained. 
+  Second, the model is fit using these <em>M</em> predictors. The choice of $Z_m$, which is, the selection of the 
+  $\phi_{jm}$’s can be achieved in different ways.</p>
+  </li>
+</ul>
+
+<h3 id="631--principal-components-regression">6.3.1.  Principal Components Regression</h3>
+
+<h4 id="principal-components-analysis">Principal Components Analysis</h4>
+<ul>
+  <li>
+    <p>Goal of PCA:<br />
+  PCA is a technique for reducing the dimension of an <em>n by p</em> data matrix <strong><em>X</em></strong>, finding small number 
+  of dimensions <em>M</em>, which have simillar amount of information to original <em>p</em> predictors.</p>
+  </li>
+  <li>
+    <p>The <em>principal component</em> direction of the data is that along which the observations <em>vary the most</em>; 
+  with the largest variance of the observations projected onto. The principal component vector $Z_m$ 
+  defines the line that is <em>as close as possible</em> to the data, minimizing the sum of the squared 
+  perpendicular distances between each point and the line. In other word, the principal component appears 
+  to capture most of the information contained in two variables.</p>
+  </li>
+  <li>
+    <p>e.g. in the first principal component,<br />
+  <img src="/assets/images/ch6_pca_0.png" alt="png" width="70%" height="70%" /><br />
+  total variance keeped: $Var(X_1)+Var(X_2) = Var(PC_1)+Var(PC_2)$</p>
+  </li>
+  <li>
+    <p>where $X_s$ is $n \times p$ standardized matrix,<em>j</em>th Principal Component Vector of $X_s$: $z_j = X_s v_j$, 
+  $\quad j=1,\ldots,p$ is that satisfying \(\text{max}_{\alpha}Var(X_s\alpha)\) subject to \(\lVert\alpha\rVert=1\). 
+  Here, the values of $z_{1j}, \ldots, z_{nj}$ are known as the <em>principal component scores</em>.<br />
+  $v_j$ is $p \times 1$ size eigenvector of $X_s^T X_s$ corresponding to the <em>j</em>th largest eigenvalue, 
+  and $\alpha$ is $v_j$’s orthogonality to $v_1,\ldots,v_{j-1}$ ($\alpha^T S v_k = 0$, where S is the 
+  sample covariance matrix of $X_s$, or $X_s^T X_s$, and $k = 1, \cdots, j-1$).<br />
+  Then $z_1 = X_s v_1$, $z_2\bot z_1$, $z_3\bot z_1,z_2$, $\cdots$, $z_p\bot z_1,\ldots,z_{p-1}$.</p>
+  </li>
+  <li>
+    <p><em>derivation</em><br />
+  Since $X_s$ is standardized matrix,<br />
+  \(Var(X_s\alpha) = \alpha^T X_s^T X_s\alpha\)<br />
+  <em>by Lagrangian form</em>,<br />
+  \(\begin{align*}
+  \text{max}_{\alpha}Q(X_s,\lambda) &amp;= \text{max}_{alpha}\left[\alpha^T X_s^T X_s\alpha
+                                                              -\lambda\alpha^T\alpha \right] \\
+  \rightarrow \frac{\partial Q}{\partial\alpha} &amp;= 2X_s^T X\alpha - 2\lambda\alpha \\
+  \text{for } \hat\alpha, X_s^T X\alpha &amp;= \lambda\alpha
+  \end{align*}\)<br />
+  <em>note that</em> $\mathbb{A}_v = ev$, the combination of eigenvalue and eigenvector of $\mathbb{A}$.<br />
+  Thus, $\alpha = v_j$, the <em>j</em>th eigenvector of $X_s^T X_s$, that is, the constraint of orthogonality 
+  is satisfied.</p>
+  </li>
+  <li>
+    <p>Since PCA has no single solution <em>M</em>;<br />
+  the proportion of variance explained by <em>m</em>th PC($Z_m$) used:<br />
+  \(PVE_m = \frac{Var(Z_m)}{\sum_{j=1}^p(Var(Z_j))}\)<br />
+  (\(\sum_{j=1}^p(Var(Z_j)) = \sum Var(X_j) =\) total variance)</p>
+  </li>
+  <li>
+    <p>in <em>SVD</em> of covariance matrix $X^T X$,<br />
+  \(\begin{align*}
+  X^T X &amp;= \mathbb{VDU}^T\mathbb{UDV}^T \\
+        &amp;= \mathbb{VD^2 V}^T
+  \end{align*}\)<br />
+  in this eigen decomposition,<br />
+  \(\mathbb{V} = (v_1,\ldots,v_p)\) the eigen vectors of $X^T X$<br />
+  \(\mathbb{D}^2 = \begin{bmatrix}
+                      d_1^2 &amp; \cdots &amp; 0 \\
+                      \vdots &amp; \ddots &amp; \vdots \\
+                      0 &amp; \cdots &amp; d_p^2
+                      \end{bmatrix}\)
+                      $d_j^2 = e_j$, <em>j</em>th eigenvalue of $X^T X$<br />
+  thus,<br />
+  \(\begin{align*}
+  Var(Z_m) &amp;= \frac{1}{n}(Z_m^T Z_m) \\
+           &amp;= \frac{1}{n}(v_m^T X_s^T X_s v_m) \\
+           &amp;= \frac{1}{n}(v_m^T\mathbb{VD}^2\mathbb{V}^T v_m) \\
+           &amp;= \frac{1}{n}d_m^2 = \frac{1}{n}e_m
+  \end{align*}\)</p>
+  </li>
+  <li>
+    <p>Therefore,<br />
+  \(PVE_m = \frac{Var(Z_m)}{\sum_{j=1}^p(Var(Z_j))} = \frac{e_m}{\sum_{j=1}^p e_j}\)<br />
+  we can draw a <em>scree plot</em> on the value of $PVE_m$ over the value of <em>m</em> to find optimal “M”.</p>
+  </li>
+</ul>
+
+<h4 id="the-principal-components-regression-approach">The Principal Components Regression Approach</h4>
+<ul>
+  <li>
+    <p>The key idea is that a small number of principal components can explain most of the variability in the 
+  data, as well as the relationship with the response. Under this assumption, fitting a least squares model 
+  to $Z_1, \ldots, Z_M$ will lead to better results than fitting a least squares model to $X_1, \ldots, X_p$, 
+  since most or all of the information in the data is contained in $Z_m$ and there are smaller number of 
+  coefficients, we can mitigate overfitting.</p>
+  </li>
+  <li>
+    <p>Note that PCR is not a feature selection method; is a linear combination of all <em>p</em> of the original features. 
+  In this sense, PCR is more closely related to ridge regression than to the lasso.</p>
+  </li>
+  <li>
+    <p>Deciding “M”:<br />
+  full model is \(\hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 + \cdots + \hat{\theta}_p Z_p\)<br />
+  when $Z_1,\ldots,Z_m$ is from standardized $X_s$ and \(\hat{y}_0 = \bar{y}\),<br />
+  as $Z_j$’s are orthogonal, adding variable $Z_{j+1}$ does not affect the coefficients. Thus, $\theta_j$’s are 
+  not changed by feature selection; that is,<br />
+  \(\hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 \\
+  \hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 + \hat{\theta}_2 Z_2 \\
+  \vdots \\
+  \hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 +\cdots + \hat{\theta}_p Z_p\) the value of $\theta_k$ is the same.<br />
+  Then we can use CV methods over these models to get optimal <em>M</em>.</p>
+  </li>
+</ul>
+
+<h3 id="632-partial-least-squares">6.3.2. Partial Least Squares</h3>
+<ul>
+  <li>
+    <p>The PCR approach identifies linear combinations, or <em>directions</em>, that best represent the predictors. 
+  These directions are identified in an <em>unsupervised</em> way, since the response <em>Y</em> is not used to help 
+  determine the principal component directions. There, PCR suffers from a drawback: there is no guarantee 
+  that the directions that best explain the predictors will also be the best directions to use for 
+  predicting the response.</p>
+  </li>
+  <li>
+    <p>PLS is a <em>supervised</em> alternative to PCR; finding PLS directions $Z_1,\ldots,Z_m$ that 
+  $Cov(Y,Z_1)\ge Cov(Y,Z_2)\ge\cdots\ge Cov(Y,Z_M)$ instead of $Var(Z_1)\ge\cdots\ge Var(Z_M)$.</p>
+  </li>
+  <li>
+    <p>First PLS direction is computed, after standardizing predictors, by setting each $\phi_{j1}$ equal to 
+  the coefficient from the simple linear regression $Y$ onto $X_j$. As $Z_1 = \sum_{j=1}^p\phi_{j1}X_j$, 
+  PLS places the highest weight on the variables that are most strongly related to the response.<br />
+  To find second PLS direction, we adjust each of the variables for $Z_1$, by regressing each variable 
+  on $Z_1$ and taking <em>residuals</em>. The residuals can be interpreted as the remaining information that has 
+  not been explained by the first PLS direction. Then we compute $Z_2$ using this orthogonalized data by 
+  the same way of computing $Z_1$. This predecure repeated <em>M</em> times.</p>
+  </li>
+  <li>
+    <p>in Simple Regression case,<br />
+  $\hat X_j^s$ is a projection of original data $X_j^s$ to a vector $Z_1$; $X_j^s = \alpha Z_1$.<br />
+  the residual vector $r_j = \hat X_j^s - X_j^s$ and $r_j\bot Z_1$.<br />
+  Then, $r_j = X_j^{(2)}$ is the orthogonalized data for computing the next $Z_2$.</p>
+  </li>
+  <li>
+    <p>The <em>m</em>th PLS direction:<br />
+  \(\text{max}_{\phi} Cov(y,X_s\phi)\) subject to $\lVert\phi\rVert = 1$, $\phi^T S v_l = 0$<br />
+  for $\phi$ as orthogonal directions, sample covariance matrix <em>S</em>, and $v_l$ as <em>l</em> th PLS direction.<br />
+  \(\text{max}_{\phi}[E(\phi^T X_s^T y)-E(y)E(\phi^T X_s)]\), as standardized, $E(X_s) = 0$,<br />
+  \(\equiv \text{max}_{\phi}\phi^T \dot X_s^T y\) is maximization of dot product of 2 vectors.<br />
+  note that, when two vectors are in the same direction, dot product is maximized.<br />
+  $\therefore \phi=X_s^T y$.</p>
+  </li>
+</ul>
+
+<h2 id="64-considerations-in-high-dimensions">6.4. Considerations in High Dimensions</h2>
+
+<h3 id="641-high-dimensional-data">6.4.1. High-Dimensional Data</h3>
+<ul>
+  <li>Data sets that containing more features than observations, $p &gt; n$.</li>
+</ul>
+
+<h3 id="642-what-goes-wrong-in-high-dimensions">6.4.2. What Goes Wrong in High Dimensions?</h3>
+<ul>
+  <li>Standard least squares cannot be performed. Regardless of the true relationship between features and response, 
+  least squares will result in a perfect fit to the data, lead to overfitting of the data and poor 
+  predictions.</li>
+</ul>
+
+<h3 id="643-regression-in-high-dimensions">6.4.3. Regression in High Dimensions</h3>
+<ul>
+  <li>new technologies that allow for the collection of measurements for thousands or millions of features 
+  are a double-edged sword: they can lead to improved predictive models if these features are in fact 
+  relevant to the problem at hand, but will lead to worse results if the features are not relevant. 
+  Even if they are relevant, the variance incurred in fitting their coefficients may outweigh the 
+  reduction in bias that they bring.</li>
+</ul>
+
+<h3 id="644-interpreting-results-in-high-dimensions">6.4.4. Interpreting Results in High Dimensions</h3>
+<ul>
+  <li>
+    <p>In high-dimensional setting, the multicollinearity problem is extreme:<br />
+  any variable in the model is a linear combination of all of the other variables in the model. This means 
+  we can never know exactly which variables truly are predictive of the outcome, and we can never identify 
+  the best coefficients for use in the regression.</p>
+  </li>
+  <li>
+    <p>When $p &gt; n$, it is easy to obtain a a useless model that has zero residuals. Therefore, we should never 
+  use sum of squared errors, p-values, $R^2$ statistics, or other traditional measures of model fit on the 
+  training data as evidence of a good model fit. Instead we report results on an independent test set, or 
+  cross-validation errors.</p>
   </li>
 </ul>
 
