@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-11-26T17:30:41+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">GNN - Fashion Coordinator Chatbot Dataset</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="GNN - Fashion Coordinator Chatbot Dataset" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-11-29T16:02:37+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">GNN - Fashion Coordinator Chatbot Dataset</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="GNN - Fashion Coordinator Chatbot Dataset" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-about&quot; id=&quot;markdown-toc-1-about&quot;&gt;1. About&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#11-project-goal&quot; id=&quot;markdown-toc-11-project-goal&quot;&gt;1.1. Project Goal&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#12-model-architecture&quot; id=&quot;markdown-toc-12-model-architecture&quot;&gt;1.2. Model Architecture&lt;/a&gt;&lt;/li&gt;
@@ -6495,7 +6495,218 @@ f1-score macro avg: 0.85&lt;/p&gt;
     accuracy                           0.97      1491
    macro avg       0.94      0.93      0.94      1491
 weighted avg       0.97      0.97      0.97      1491
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">ISLR - Chapter 6. Linear Model Selection and Regularization</title><link href="http://0.0.0.0:4000/islr_ch6" rel="alternate" type="text/html" title="ISLR - Chapter 6. Linear Model Selection and Regularization" /><published>2020-04-30T00:00:00+09:00</published><updated>2020-04-30T00:00:00+09:00</updated><id>http://0.0.0.0:4000/islr_ch6</id><content type="html" xml:base="http://0.0.0.0:4000/islr_ch6">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">ISLR - Chapter 7. Moving Beyond Linearity</title><link href="http://0.0.0.0:4000/islr_ch7" rel="alternate" type="text/html" title="ISLR - Chapter 7. Moving Beyond Linearity" /><published>2020-05-07T00:00:00+09:00</published><updated>2020-05-07T00:00:00+09:00</updated><id>http://0.0.0.0:4000/islr_ch7</id><content type="html" xml:base="http://0.0.0.0:4000/islr_ch7">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-7-moving-beyond-linearity&quot; id=&quot;markdown-toc-chapter-7-moving-beyond-linearity&quot;&gt;Chapter 7. Moving Beyond Linearity&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#71-polynomial-regression&quot; id=&quot;markdown-toc-71-polynomial-regression&quot;&gt;7.1. Polynomial Regression&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#72-step-functions&quot; id=&quot;markdown-toc-72-step-functions&quot;&gt;7.2. Step Functions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#73-basis-functions&quot; id=&quot;markdown-toc-73-basis-functions&quot;&gt;7.3. Basis Functions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#74-regression-splines&quot; id=&quot;markdown-toc-74-regression-splines&quot;&gt;7.4. Regression Splines&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#741-piecewise-polynomials&quot; id=&quot;markdown-toc-741-piecewise-polynomials&quot;&gt;7.4.1. Piecewise Polynomials&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#742-constraints-and-splines&quot; id=&quot;markdown-toc-742-constraints-and-splines&quot;&gt;7.4.2. Constraints and Splines&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#743-the-spline-basis-representation&quot; id=&quot;markdown-toc-743-the-spline-basis-representation&quot;&gt;7.4.3. The Spline Basis Representation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#744-choosing-the-number-and-locations-of-the-knots&quot; id=&quot;markdown-toc-744-choosing-the-number-and-locations-of-the-knots&quot;&gt;7.4.4. Choosing the Number and Locations of the Knots&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#745-comparison-to-polynomial-regression&quot; id=&quot;markdown-toc-745-comparison-to-polynomial-regression&quot;&gt;7.4.5. Comparison to Polynomial Regression&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#75-smoothing-splines&quot; id=&quot;markdown-toc-75-smoothing-splines&quot;&gt;7.5. Smoothing Splines&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#751-an-overview-of-smoothing-splines&quot; id=&quot;markdown-toc-751-an-overview-of-smoothing-splines&quot;&gt;7.5.1. An Overview of Smoothing Splines&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-7-moving-beyond-linearity&quot;&gt;Chapter 7. Moving Beyond Linearity&lt;/h2&gt;
+
+&lt;h2 id=&quot;71-polynomial-regression&quot;&gt;7.1. Polynomial Regression&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;standard linear model $y_i = \beta_0 + \beta_1 x_i + \epsilon_i$&lt;br /&gt;
+  to a polynomial function $y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \cdots + \beta_d x_i^d + \epsilon_i$&lt;br /&gt;
+  For large enough degree &lt;em&gt;d&lt;/em&gt;, a polynomial regression produces an extremely non-
+  linear curve. The coefficients $\beta_d$’s can be easily estimated using least 
+  squares linear regression.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;72-step-functions&quot;&gt;7.2. Step Functions&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Break the range of &lt;em&gt;X&lt;/em&gt; into &lt;em&gt;bins&lt;/em&gt;, and fit a different constant in each bin; 
+  converting a continuous variables into an &lt;em&gt;ordered categorical variable&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;By cutpoints $c_1, c_2, \ldots, c_K$ in the range of &lt;em&gt;X&lt;/em&gt;, construct &lt;em&gt;K+1&lt;/em&gt; new variables&lt;br /&gt;
+  \(\begin{align*}
+  C_0(X) &amp;amp;= I(X &amp;lt; c_1), \\
+  C_1(X) &amp;amp;= I(c_1 \le X &amp;lt; c_2), \\
+  C_2(X) &amp;amp;= I(c_2 \le X &amp;lt; c_3), \\
+         &amp;amp;\vdots \\
+  C_{K-1}(X) &amp;amp;= I(c_{K-1} \le X &amp;lt; c_K), \\
+  C_{K}(X) &amp;amp;= I(c_K \le X), \\
+  \end{align*}\)&lt;br /&gt;
+  where I($\cdot$) is an &lt;em&gt;indicator function&lt;/em&gt; returning value of 1 or 0. These are 
+  sometimes called &lt;em&gt;dummy variables&lt;/em&gt;. For any value of &lt;em&gt;X&lt;/em&gt;, $\sum_{i=0}^K C_i(X) = 1$.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The least squares model: $y_i = \beta_0 + \beta_1 C_1(x_i) + \cdots + \beta_K C_K(x_i) + \epsilon_i$&lt;br /&gt;
+  When $X&amp;lt;c_1$, all of the predictors $C_1(X), C_2(X), \ldots, C_K(X)$ are zero, so 
+  $\beta_0$ is the mean value of &lt;em&gt;Y&lt;/em&gt; or $X&amp;lt;c_1$. By comparison, the model predicts 
+  a response of $\beta_0 + \beta_j$ for $c_j \le X &amp;lt; c_{j+1}$, so $\beta_j$ represents the 
+  average increase in the response for &lt;em&gt;X&lt;/em&gt; in such range.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Unless there are natural breakpoints in the predictors, piecewise-constant functions 
+  can miss the action.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;73-basis-functions&quot;&gt;7.3. Basis Functions&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Polynomial and piecewise-constant regression models are in fact special cases of a 
+  &lt;em&gt;basis function&lt;/em&gt; approach; with a family of functions or transformations applied 
+  to a variable &lt;em&gt;X&lt;/em&gt;: $b_1(X), b_2(X), \ldots, b_K(X)$, fit a linear model&lt;br /&gt;
+  $y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + \cdots + \beta_K b_K(x_i) + \epsilon_i$.&lt;br /&gt;
+  as a standard linear model with predictors $b_i(x_i), b_2(x_i), \ldots, b_K(x_i)$. 
+  Hence, we can use least squares and all of the inference tools, such as std.err 
+  for coefficient estimates and F-statistics for the model’s overall significance.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Note that the basis functions $b_k(\cdot)$ are fixed and known(or, we choose the 
+  functions before). E.g., for polynomial regression, the basis functions are $b_j(x_i)=x_i^j$.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;74-regression-splines&quot;&gt;7.4. Regression Splines&lt;/h2&gt;
+
+&lt;h3 id=&quot;741-piecewise-polynomials&quot;&gt;7.4.1. Piecewise Polynomials&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instead of fitting a high-degree polynomial over the entire range of &lt;em&gt;X&lt;/em&gt;, piecewise 
+  polynomial regression fits separate low-degree polynomials over different regions. 
+  Divide demension &lt;em&gt;X&lt;/em&gt; by &lt;em&gt;knots&lt;/em&gt; and apply different polynomial model to each 
+  region. If we place &lt;em&gt;K&lt;/em&gt; knots throughout the range of &lt;em&gt;X&lt;/em&gt;, then we fit &lt;em&gt;K+1&lt;/em&gt; different 
+  models.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;a cubic regression model; $y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 + \epsilon_i$&lt;br /&gt;
+  is a piecewise cubic with no knots with &lt;em&gt;d&lt;/em&gt; = 3.&lt;br /&gt;
+  On the other hand,&lt;br /&gt;
+  \(y_i = \begin{cases}
+          \beta_{01}+\beta_{11}x_i + \beta_{21}x_i^2 + \beta_{31}x_i^3 + \epsilon_i &amp;amp; \mbox{if }x_i &amp;lt; c \\
+          \beta_{02}+\beta_{12}x_i + \beta_{22}x_i^2 + \beta_{32}x_i^3 + \epsilon_i &amp;amp; \mbox{if }x_i \ge c. \\
+          \end{cases}\)&lt;br /&gt;
+  is with a single knot at a point c.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For other degrees &lt;em&gt;d&lt;/em&gt;:&lt;br /&gt;
+  a piecewise-constant functions are piecewise polynomials of degree &lt;em&gt;0&lt;/em&gt;, a piecewise 
+  linear functions are of degree &lt;em&gt;1&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;742-constraints-and-splines&quot;&gt;7.4.2. Constraints and Splines&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;To fix the discontinuity and overcomplexity, we add some additional constraints:&lt;br /&gt;
+  in a degree-&lt;em&gt;d&lt;/em&gt; spline, or a piecewise degree-&lt;em&gt;d&lt;/em&gt; polynomial, it requires the 
+  continuity in derivatives up to degree &lt;em&gt;d-1&lt;/em&gt; at each knot.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;743-the-spline-basis-representation&quot;&gt;7.4.3. The Spline Basis Representation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;$y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + \cdots + \beta_{K+3} b_{K+3}(x_i) + \epsilon_i$&lt;br /&gt;
+  is a cubic spline model with &lt;em&gt;K&lt;/em&gt; knots.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;with a &lt;em&gt;truncated power basis&lt;/em&gt; function per knot $\xi$, which is defined as 	
+  \(h(x,\xi) = (x-\xi)_{+}^3 = \begin{cases} (x-\xi)^3 &amp;amp; \mbox{if }x&amp;gt;\xi \\
+                                                  0	 &amp;amp; \mbox{otherwise,}
+                               \end{cases}\)&lt;br /&gt;
+  so, in fitting a cubic spline with &lt;em&gt;K&lt;/em&gt; knots, we perform least squares regression 
+  with an intercept and &lt;em&gt;3+K&lt;/em&gt; predictors, of the form $X, X^2, X^3, h(X,\xi_1), h(X,\xi_2), \ldots, h(X,\xi_K)$.&lt;br /&gt;
+  This amounts to estimating a total of &lt;em&gt;K+4&lt;/em&gt; regression coefficients; for this 
+  regression, fitting a cubic spline with K knots uses &lt;em&gt;K+4&lt;/em&gt; degrees of freedom.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;However, splines can have high variance at the outer range of the predictors; 
+  $X&amp;lt;c_1$ or $X\ge c_K$, when &lt;em&gt;X&lt;/em&gt; takes on either a very small or very large value. 
+  We see that the confidence bands in the boundary region appear fairly wild.&lt;br /&gt;
+  A &lt;em&gt;natural spline&lt;/em&gt; with additional &lt;em&gt;boundary constraints&lt;/em&gt; that the function is 
+  required to be linear at the boundary, generally produce more stable estimates. In 
+  this case, the corresponding confidence intervals are narrower.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;744-choosing-the-number-and-locations-of-the-knots&quot;&gt;7.4.4. Choosing the Number and Locations of the Knots&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The regression spline is most flexible in regions that contain a lot of knots, because 
+  in those regions the polynomial coefficients can change rapidly. Hence, one option 
+  is to place more knots in places where the function might vary most rapidly, and 
+  to place fewer knots where it seems more stable. In practice, it is common to place 
+  knots in a uniform fashion.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To determine the number of knots, or equivalently the degrees of freedom of the spline 
+  contain, we use cross-validation method.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;745-comparison-to-polynomial-regression&quot;&gt;7.4.5. Comparison to Polynomial Regression&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Regression splines often give superior results to polynomial regression. This is 
+  because unlike polynomials, which must use a high degree to produce flexible fits, 
+  splines introduce flexibility by increasing the number of knots but keeping the 
+  degree fixed. Generally, this approach produces more stable estimates.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Splines can produce a reasonable fit at the boundaries and also allow us to place 
+  more knots, or flexibility, over regions where the function &lt;em&gt;f&lt;/em&gt; seems to be changing 
+  rapidly, and fewer knots where &lt;em&gt;f&lt;/em&gt; appears more stable.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;75-smoothing-splines&quot;&gt;7.5. Smoothing Splines&lt;/h2&gt;
+
+&lt;h3 id=&quot;751-an-overview-of-smoothing-splines&quot;&gt;7.5.1. An Overview of Smoothing Splines&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;In fitting a smooth curve to a set of data, some function $g(x)$, that fits the 
+  observed data well: Minimizing $RSS = \sum_{i=1}^n(y_i-g(x_i))^2$. But if we don’t 
+  put any constraints on &lt;em&gt;g&lt;/em&gt;, then we can always make &lt;em&gt;RSS&lt;/em&gt; zero simply by choosing 
+  &lt;em&gt;g&lt;/em&gt; such that it &lt;em&gt;interpolates&lt;/em&gt; all of the $y_i$. Such a function would woefully 
+  overfit the data, would be too flexible.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Smoothing spline is the function &lt;em&gt;g&lt;/em&gt; that minimizes&lt;br /&gt;
+  \(\sum_{i=1}^n(y_i - g(x_i))^2 + \lambda\int g''(t)^2, dt\)&lt;br /&gt;
+  with a nonnegative tuning parameter $\lambda$, takes the “Loss+Penalty” formulation 
+  like the ridge and lasso. The term $\sum_{i=1}^n(y_i - g(x_i))^2$ is a &lt;em&gt;loss function&lt;/em&gt; 
+  that makes &lt;em&gt;g&lt;/em&gt; to fit the data well, and the term \(\lambda\int g''(t)^2, dt\) is a 
+  &lt;em&gt;penalty term&lt;/em&gt; that reduces the variability in &lt;em&gt;g&lt;/em&gt;. \(g''(t)\) indicates the second 
+  derivative of the function &lt;em&gt;g&lt;/em&gt;, corresponds to the amount by which the slope(the first 
+  derivative) is changing. Broadly speaking, the second derivative is a measure of 
+  its &lt;em&gt;roughness&lt;/em&gt;: large in absolute value if &lt;em&gt;g(t)&lt;/em&gt; is very wiggly near &lt;em&gt;t&lt;/em&gt;, close 
+  to zero otherwise. It is zero as the derivative of a straight line, the function is 
+  perfectly smooth. The integral is a summation over the range of &lt;em&gt;t&lt;/em&gt;, so \(\int g''(t)^2, dt\) 
+  is a measure of the total change in the function $g’(t)$ over its entire range. If 
+  &lt;em&gt;g&lt;/em&gt; is very smooth, then $g’(t)$ will be close to constant and \(\int g''(t)^2, dt\) will 
+  take on a small value. Therefore, the penalty term encourages &lt;em&gt;g&lt;/em&gt; to be smooth. 
+  The larger the $\lambda$, the smoother the &lt;em&gt;g&lt;/em&gt; will be.&lt;br /&gt;
+  When $\lambda=0$, then there’s no penalty and the function &lt;em&gt;g&lt;/em&gt; will be very jumpy 
+  and have perfect fit. When $\lambda\rightarrow\infty$, &lt;em&gt;g&lt;/em&gt; will be perfectly smooth; 
+  a linear least squares line $g(x)=ax+b$. The $\lambda$ controls the bias-variance 
+  trade-off of the smoothing spline.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Smoothing spline &lt;em&gt;g(x)&lt;/em&gt; have some special properties: it is a piecewise polynomial 
+  with knots at the unique values of $x_1,\ldots,x_n$, and continuous first and second 
+  derivatives at each knot. Furthermore, it is linear in the region outside of the 
+  extreme knots.&lt;br /&gt;
+  In other words, the Smoothing spline function is a nautral spline with knots at 
+  $x_1,\ldots,x_n$; it is a shrunken version of such a natural spline, where the value 
+  of the tuning parameter $\lambda$ controls the level of shrinkage.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html">Chapter 7. Moving Beyond Linearity 7.1. Polynomial Regression 7.2. Step Functions 7.3. Basis Functions 7.4. Regression Splines 7.4.1. Piecewise Polynomials 7.4.2. Constraints and Splines 7.4.3. The Spline Basis Representation 7.4.4. Choosing the Number and Locations of the Knots 7.4.5. Comparison to Polynomial Regression 7.5. Smoothing Splines 7.5.1. An Overview of Smoothing Splines Chapter 7. Moving Beyond Linearity 7.1. Polynomial Regression standard linear model $y_i = \beta_0 + \beta_1 x_i + \epsilon_i$ to a polynomial function $y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \cdots + \beta_d x_i^d + \epsilon_i$ For large enough degree d, a polynomial regression produces an extremely non- linear curve. The coefficients $\beta_d$’s can be easily estimated using least squares linear regression. 7.2. Step Functions Break the range of X into bins, and fit a different constant in each bin; converting a continuous variables into an ordered categorical variable. By cutpoints $c_1, c_2, \ldots, c_K$ in the range of X, construct K+1 new variables \(\begin{align*} C_0(X) &amp;amp;= I(X &amp;lt; c_1), \\ C_1(X) &amp;amp;= I(c_1 \le X &amp;lt; c_2), \\ C_2(X) &amp;amp;= I(c_2 \le X &amp;lt; c_3), \\ &amp;amp;\vdots \\ C_{K-1}(X) &amp;amp;= I(c_{K-1} \le X &amp;lt; c_K), \\ C_{K}(X) &amp;amp;= I(c_K \le X), \\ \end{align*}\) where I($\cdot$) is an indicator function returning value of 1 or 0. These are sometimes called dummy variables. For any value of X, $\sum_{i=0}^K C_i(X) = 1$. The least squares model: $y_i = \beta_0 + \beta_1 C_1(x_i) + \cdots + \beta_K C_K(x_i) + \epsilon_i$ When $X&amp;lt;c_1$, all of the predictors $C_1(X), C_2(X), \ldots, C_K(X)$ are zero, so $\beta_0$ is the mean value of Y or $X&amp;lt;c_1$. By comparison, the model predicts a response of $\beta_0 + \beta_j$ for $c_j \le X &amp;lt; c_{j+1}$, so $\beta_j$ represents the average increase in the response for X in such range. Unless there are natural breakpoints in the predictors, piecewise-constant functions can miss the action. 7.3. Basis Functions Polynomial and piecewise-constant regression models are in fact special cases of a basis function approach; with a family of functions or transformations applied to a variable X: $b_1(X), b_2(X), \ldots, b_K(X)$, fit a linear model $y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + \cdots + \beta_K b_K(x_i) + \epsilon_i$. as a standard linear model with predictors $b_i(x_i), b_2(x_i), \ldots, b_K(x_i)$. Hence, we can use least squares and all of the inference tools, such as std.err for coefficient estimates and F-statistics for the model’s overall significance. Note that the basis functions $b_k(\cdot)$ are fixed and known(or, we choose the functions before). E.g., for polynomial regression, the basis functions are $b_j(x_i)=x_i^j$. 7.4. Regression Splines 7.4.1. Piecewise Polynomials Instead of fitting a high-degree polynomial over the entire range of X, piecewise polynomial regression fits separate low-degree polynomials over different regions. Divide demension X by knots and apply different polynomial model to each region. If we place K knots throughout the range of X, then we fit K+1 different models. a cubic regression model; $y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 + \epsilon_i$ is a piecewise cubic with no knots with d = 3. On the other hand, \(y_i = \begin{cases} \beta_{01}+\beta_{11}x_i + \beta_{21}x_i^2 + \beta_{31}x_i^3 + \epsilon_i &amp;amp; \mbox{if }x_i &amp;lt; c \\ \beta_{02}+\beta_{12}x_i + \beta_{22}x_i^2 + \beta_{32}x_i^3 + \epsilon_i &amp;amp; \mbox{if }x_i \ge c. \\ \end{cases}\) is with a single knot at a point c. For other degrees d: a piecewise-constant functions are piecewise polynomials of degree 0, a piecewise linear functions are of degree 1. 7.4.2. Constraints and Splines To fix the discontinuity and overcomplexity, we add some additional constraints: in a degree-d spline, or a piecewise degree-d polynomial, it requires the continuity in derivatives up to degree d-1 at each knot. 7.4.3. The Spline Basis Representation $y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + \cdots + \beta_{K+3} b_{K+3}(x_i) + \epsilon_i$ is a cubic spline model with K knots. with a truncated power basis function per knot $\xi$, which is defined as \(h(x,\xi) = (x-\xi)_{+}^3 = \begin{cases} (x-\xi)^3 &amp;amp; \mbox{if }x&amp;gt;\xi \\ 0 &amp;amp; \mbox{otherwise,} \end{cases}\) so, in fitting a cubic spline with K knots, we perform least squares regression with an intercept and 3+K predictors, of the form $X, X^2, X^3, h(X,\xi_1), h(X,\xi_2), \ldots, h(X,\xi_K)$. This amounts to estimating a total of K+4 regression coefficients; for this regression, fitting a cubic spline with K knots uses K+4 degrees of freedom. However, splines can have high variance at the outer range of the predictors; $X&amp;lt;c_1$ or $X\ge c_K$, when X takes on either a very small or very large value. We see that the confidence bands in the boundary region appear fairly wild. A natural spline with additional boundary constraints that the function is required to be linear at the boundary, generally produce more stable estimates. In this case, the corresponding confidence intervals are narrower. 7.4.4. Choosing the Number and Locations of the Knots The regression spline is most flexible in regions that contain a lot of knots, because in those regions the polynomial coefficients can change rapidly. Hence, one option is to place more knots in places where the function might vary most rapidly, and to place fewer knots where it seems more stable. In practice, it is common to place knots in a uniform fashion. To determine the number of knots, or equivalently the degrees of freedom of the spline contain, we use cross-validation method. 7.4.5. Comparison to Polynomial Regression Regression splines often give superior results to polynomial regression. This is because unlike polynomials, which must use a high degree to produce flexible fits, splines introduce flexibility by increasing the number of knots but keeping the degree fixed. Generally, this approach produces more stable estimates. Splines can produce a reasonable fit at the boundaries and also allow us to place more knots, or flexibility, over regions where the function f seems to be changing rapidly, and fewer knots where f appears more stable. 7.5. Smoothing Splines 7.5.1. An Overview of Smoothing Splines In fitting a smooth curve to a set of data, some function $g(x)$, that fits the observed data well: Minimizing $RSS = \sum_{i=1}^n(y_i-g(x_i))^2$. But if we don’t put any constraints on g, then we can always make RSS zero simply by choosing g such that it interpolates all of the $y_i$. Such a function would woefully overfit the data, would be too flexible. Smoothing spline is the function g that minimizes \(\sum_{i=1}^n(y_i - g(x_i))^2 + \lambda\int g''(t)^2, dt\) with a nonnegative tuning parameter $\lambda$, takes the “Loss+Penalty” formulation like the ridge and lasso. The term $\sum_{i=1}^n(y_i - g(x_i))^2$ is a loss function that makes g to fit the data well, and the term \(\lambda\int g''(t)^2, dt\) is a penalty term that reduces the variability in g. \(g''(t)\) indicates the second derivative of the function g, corresponds to the amount by which the slope(the first derivative) is changing. Broadly speaking, the second derivative is a measure of its roughness: large in absolute value if g(t) is very wiggly near t, close to zero otherwise. It is zero as the derivative of a straight line, the function is perfectly smooth. The integral is a summation over the range of t, so \(\int g''(t)^2, dt\) is a measure of the total change in the function $g’(t)$ over its entire range. If g is very smooth, then $g’(t)$ will be close to constant and \(\int g''(t)^2, dt\) will take on a small value. Therefore, the penalty term encourages g to be smooth. The larger the $\lambda$, the smoother the g will be. When $\lambda=0$, then there’s no penalty and the function g will be very jumpy and have perfect fit. When $\lambda\rightarrow\infty$, g will be perfectly smooth; a linear least squares line $g(x)=ax+b$. The $\lambda$ controls the bias-variance trade-off of the smoothing spline. Smoothing spline g(x) have some special properties: it is a piecewise polynomial with knots at the unique values of $x_1,\ldots,x_n$, and continuous first and second derivatives at each knot. Furthermore, it is linear in the region outside of the extreme knots. In other words, the Smoothing spline function is a nautral spline with knots at $x_1,\ldots,x_n$; it is a shrunken version of such a natural spline, where the value of the tuning parameter $\lambda$ controls the level of shrinkage.</summary></entry><entry><title type="html">ISLR - Chapter 6. Linear Model Selection and Regularization</title><link href="http://0.0.0.0:4000/islr_ch6" rel="alternate" type="text/html" title="ISLR - Chapter 6. Linear Model Selection and Regularization" /><published>2020-04-30T00:00:00+09:00</published><updated>2020-04-30T00:00:00+09:00</updated><id>http://0.0.0.0:4000/islr_ch6</id><content type="html" xml:base="http://0.0.0.0:4000/islr_ch6">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#chapter-6-linear-model-selection-and-regularization&quot; id=&quot;markdown-toc-chapter-6-linear-model-selection-and-regularization&quot;&gt;Chapter 6. Linear Model Selection and Regularization&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#61-subset-selection&quot; id=&quot;markdown-toc-61-subset-selection&quot;&gt;6.1. Subset Selection&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#611-best-subset-selection&quot; id=&quot;markdown-toc-611-best-subset-selection&quot;&gt;6.1.1. Best Subset Selection&lt;/a&gt;&lt;/li&gt;
@@ -6548,7 +6759,7 @@ weighted avg       0.97      0.97      0.97      1491
     &lt;ol&gt;
       &lt;li&gt;Prediction Accuracy:
         &lt;ul&gt;
-          &lt;li&gt;if &lt;em&gt;n&lt;/em&gt; is not much larger than &lt;em&gt;p&lt;/em&gt;, the least squares fit can hvae a lot 
+          &lt;li&gt;if &lt;em&gt;n&lt;/em&gt; is not much larger than &lt;em&gt;p&lt;/em&gt;, the least squares fit can have a lot 
  of variability, results in overfitting and poor predictions to test data.&lt;/li&gt;
           &lt;li&gt;if &lt;em&gt;p&lt;/em&gt; &amp;gt; &lt;em&gt;n&lt;/em&gt;, there is no unique solution for the least squares coefficient 
  estimate; as $ Var(\hat\beta)=\infty$.&lt;/li&gt;
@@ -6999,6 +7210,8 @@ reduced model can lead to better results than fitting the standard linear model.
   &lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p&gt;&lt;img src=&quot;/assets/images/ch6_pls_algorithm_0.png&quot; alt=&quot;png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+
 &lt;h2 id=&quot;64-considerations-in-high-dimensions&quot;&gt;6.4. Considerations in High Dimensions&lt;/h2&gt;
 
 &lt;h3 id=&quot;641-high-dimensional-data&quot;&gt;6.4.1. High-Dimensional Data&lt;/h3&gt;
@@ -7036,7 +7249,7 @@ reduced model can lead to better results than fitting the standard linear model.
   training data as evidence of a good model fit. Instead we report results on an independent test set, or 
   cross-validation errors.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html">Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation 6.2. Shrinkage Methods 6.2.1. Ridge Regression in Singular Value Decomposition 6.2.2. The Lasso Another Formulation for Ridge Regression and the Lasso A Simple Special Case Bayesian Interpretation 6.3. Dimension Reduction Methods 6.3.1. Principal Components Regression Principal Components Analysis The Principal Components Regression Approach 6.3.2. Partial Least Squares 6.4. Considerations in High Dimensions 6.4.1. High-Dimensional Data 6.4.2. What Goes Wrong in High Dimensions? 6.4.3. Regression in High Dimensions 6.4.4. Interpreting Results in High Dimensions Chapter 6. Linear Model Selection and Regularization Limitations of LSE Prediction Accuracy: if n is not much larger than p, the least squares fit can hvae a lot of variability, results in overfitting and poor predictions to test data. if p &amp;gt; n, there is no unique solution for the least squares coefficient estimate; as $ Var(\hat\beta)=\infty$. if p is large, there can be correlations between X variables. A model having multicollinearity can have high variance. Constraining or Shrinking the estimated coefficients can reduce the variance with negligible increase in bias, and improve in the accuracy to the test data. Model Interpretability: There are irrelevant variables $X_j$. Removing by setting coefficient estimates $\beta_j = 0$, we can have more interpretability. Feature selection or Variable selection can exclude irrelevant variables from a multiple regression model. 6.1. Subset Selection 6.1.1. Best Subset Selection fit a separate least squares regression for all $2^p$ possible models with combinations of the p predictors. Algorithm $\mathcal{M}_0$ as null model (i.e., $ Y = \beta_0 + \epsilon $) For $ k = 1, 2, \ldots, p $: (a) Fit all \({p \choose k}\) models with k predictors (b) Pick the smallest RSS, (or largest $R^2$) = $ \mathcal{M}_k $ Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$ Guarantees the best selection, while it suffers from computational limitations. Also, it only works for least squares linear regression. in the case of logistic regression, we use deviance, $-2\log$MLE, instead of RSS in the 2nd step of algorithm upon. 6.1.2. Stepwise Selection Forward Stepwise Selection Algorithm $\mathcal{M}_0$ as null model For $ k = 1, 2, \ldots, p $: (a) Fit all p - k models in \(\mathcal{M}_k\) with one additional predictor (b) Pick the smallest RSS among p - k models, $\mathcal{M}_{k+1}$ Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ with CV scores Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee but available for the case of high dimensional data($n&amp;lt;p$). Backward Stepwise Selection Algorithm $\mathcal{M}_p$ as full model, contains all p predictors For $ k = p, p-1, \ldots, 1 $: (a) Fit all k - 1 models contain all but one of the predictors in \(\mathcal{M}_k\) (b) Pick the smallest RSS among k - 1 models, $\mathcal{M}_{k-1}$ Select best model among $\mathcal{M}_0, ldots,\mathcal{M}_p$ with CV scores Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee and not for n &amp;lt; p case. Hybrid Approaches add then remove one predictors in each step. 6.1.3. Choosing the Optimal Model A model containing all of the predictors will always have the smallest RSS and the largest $R^2$, since these quantities are related to the training error. Instead, we need a model with a low test error. $C_p = \frac{1}{n}(RSS + 2 d \hat\sigma^2)$ For a fitted least squares model, with d as the number of predictors and $\hat\sigma^2$ as an estimate of the variance of the error. Typically $\hat\sigma^2$ is estimated using the full model containing all predictors. Adding a penalty to the training RSS is to adjust its underestimation to the test error. As the number of predictors increase, the penalty increase. If there is a proof of $\hat\sigma^2$ is an unbiased estimate of $\sigma^2$, $C_p$ is an unbiased estimate of test MSE. Then, a model with the lowest $C_p$ is the best model. AIC $= \frac{1}{n}(RSS + 2 d \hat\sigma^2)$ For a models fit by maximum likelihood(MLE), given by omitted irrelevant constants. $C_p$ and AIC are proportional to each other. BIC $= \frac{1}{n}(RSS + \log(n)d\hat\sigma^2)$ From a Bayesian point of view, for a fitted least squares model. Also given by omitted irrelevant constants. BIC has heavier penalty then $C_p$ or AIC, results in selecting smaller models. Adjusted $R^2 = 1 - \frac{RSS/(n-d-1)}{TSS/(n-1)}$ Since the usual $R^2$ is defined as $1 - RSS/TSS$, it always increases as more variables added. Adjusted $R^2$ gives penalty of d, the number of predictors in the denominator. Unlike other statistics, a large value of adjusted $R^2$ indicates a small test error. Validation and Cross-Validation one-standard-error rule First calculate the standard error of the estimated test MSE for each model size, then select the smallest model for which the estimated test error is within one standard error of the lowest point on the curve. If a set of models appear to be more or less equally good, then we might as well choose the simplest model; the model with the smallest number of predictors. 6.2. Shrinkage Methods 6.2.1. Ridge Regression Ridge regression coefficient estimates \(\begin{align*} \hat\beta^R &amp;amp;= \text{min}_{\beta}\left[ \underbrace{\sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p \beta_j x_{ij})}_{RSS} + \lambda\sum_{j=1}^p \beta_j^2 \right] \\ &amp;amp;= (X^TX + \lambda I)^{-1} X^T\underline{y} \end{align*}\) $\lambda \ge 0 $ is a tuning parameter, $\lambda\sum_{j=1}^p \beta_j^2$ is a shrinkage penalty. The penalty is small when the coefficients are close to zero, and so it has the effect of shrinking the estimates of $\beta_j$ towards zero. Ridge regression will produce a different set of coefficient estimates $\beta_{\lambda}^R$, for each value of $\lambda$. We do not want to shrink the intercept $\beta_0$, which is simply a measure of the mean value of the response when $x_{i1}=x_{i2}=\ldots=x_{ip}=0$. If the variables, the columns of the data matrix $X$, have been centered to have mean zero before ridge regression is performed, then the estiamted intercept will take the form $\hat\beta_0 = \bar{y} = \sum_{i=1}^n y_i/n$. The standard least squares coefficient estimates are scale equivariant; multiplying $X_j$ by a constant c leads to a scaling of the least squares coefficient estimates by a factor of 1/c. I.e., regardless of how the jth predictor is scaled, $X_j\hat\beta_j$ will remain the same. In contrast, the ridge regression coefficient estimates can change substantially when multiplying a given predictor by a constant. The value of $X_j\hat\beta_{j,\lambda}^R$ may depend on the scaling of the other predictors. Thus, before applying ridge regression, the variables need to be standardized to have a standard deviation of one. The formula: \(\tilde{x}_{ij}=\frac{x_{ij}}{\sqrt{\frac{1}{n}\sum_{i=1}^n(x_{ij}-\bar{x}_j)^2}}\) Ridge regression overperforms the standard least squares when the number of variables p is almost as large as the number of observations n, or even when $p &amp;gt; n$. Also it has computational advantages over best subset selection, which requires searching through $2^p$ models. Ridge regression only fits a single model for any fixed value of $\lambda$. in Singular Value Decomposition where $ X = \mathbb{UDV}^T$, \(\begin{align*} X\hat\beta^{\text{LSE}} &amp;amp;= X(X^TX)^{-1}X^T\underline{y} \\ &amp;amp;= \mathbb{UU}^T\underline{y} \\ X\hat\beta^R &amp;amp;= UD(D^2 + \lambda I)^{-1}DU^T\underline{y} \\ &amp;amp;= \sum_{j=1}^p\underline{u}_j\frac{d_{ij}^2}{d_{ij}^2+\lambda}\underline{u}_j^T\underline{y} \end{align*}\) \(\begin{align*} \rightarrow \partial f(\lambda) &amp;amp;= tr[X(X^TX + \lambda I)^{-1} X^T] \\ &amp;amp;= tr(\mathbb{H}_{\lambda}) \\ &amp;amp;= \sum_{j=1}^p\frac{d_{ij}^2}{d_{ij}^2+\lambda} \end{align*}\) 6.2.2. The Lasso Ridge regression estimates shrink towards zero but will not set nay of them exactly to zero(unless $\lambda = \infty$). This may not be a problem for prediction accuracy, but it can be a challenge in model interpretation when p is quite large. The lasso \(\hat\beta^L_{\lambda} = \text{min}_{\beta}\left[RSS+\lambda\sum_{j=1}^p|\beta_j|\right]\) Instead of $\mathcal{l}_2$ penalty in Ridge, the lasso uses an $\mathcal{l}_1$ penalty. The $\mathcal{l}_1$ norm of a coefficient vector $\beta$ is given by $\lVert \beta \rVert_1 = \sum |\beta_j|$. This penalty has the effect of forcing some of the coefficient estimates to be exactly equal to zero when the tuning parameter is sufficiently large. Hence, the lasso performs variable selection, these sparse models with the lasso are much easier to interpret than those with ridge. Another Formulation for Ridge Regression and the Lasso Ridge: \(\text{min}_{\beta}\left\{ \sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p\beta_j x_{ij})^2 \right\}\) subject to $\sum_{j=1}^p\beta_j^2 \le s $ Lasso: \(\text{min}_{\beta}\left\{ \sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p\beta_j x_{ij})^2 \right\}\) subject to $\sum_{j=1}^p|\beta_j| \le s $ where the budget s as the regularization parameter ($\lambda\uparrow \equiv s\downarrow$). when $p = 2$, then the ridge regression estimates have the smallest RSS out of all points that lie within the circle defined by $\beta_1^2 + \beta_2^2 \le s$, while the lasso estimates have within the diamond defined by $|\beta_1|+|\beta_2| \le s$. when $p = 3$, he constraint region for ridge becomes a sphere, for lasso becomes a polyhedron. For larger p, it becomes a hypersphere and a polytope each. The lasso leads to feature selection due to the sharp corners of its constraint region. the number of predictors that is related to the response is never known a priori for real data sets. A technique such as cross-validation can be used in order to determine which approach is better on a particular data set. A Simple Special Case An analytical method(solution) for the case when $n = p$, and X a diagonal matrix with 1’s on the diagonal and 0’s in all off-diagonal elements. I.e., the columns of X are orthogonal. Also, assume that we are performing regression without an intercept(or standardized). (c.f. in real world cases, we need to use numerical methods.) The usual least squares, $\hat\beta$ is that minimizes; $\sum_{j=1}^p(y_j-\beta_j)^2$. and for the ridge, minimizing $\sum_{j=1}^p(y_j-\beta_j)^2+\lambda\sum_{j=1}^p\beta_j^2$. and for the lasso, minimizing $\sum_{j=1}^p(y_j-\beta_j)^2+\lambda\sum_{j=1}^p|\beta_j|$. The ridge regression estiamtes $\hat\beta_j^R = y_j/(1+\lambda)$ and \(\text{the lasso estimates} \begin{align*} \hat\beta_j^L &amp;amp;= \text{sign}(\hat\beta_j)(|\hat\beta_j|-\lambda)_{+}, \\ \text{or} &amp;amp;= \begin{cases} y_j - \lambda/2, &amp;amp; \mbox{if }y_j &amp;gt; \lambda/2; \\ y_j + \lambda/2, &amp;amp; \mbox{if }y_j &amp;lt; -\lambda/2; \\ 0 &amp;amp; \mbox{if }|y_j| \le \lambda/2. \end{cases} \end{align*}\) Ridge shrinks all coefficients towards zero by the same “proportion”, Lasso shrinks all coefficients towards zero by the same “amount”. Bayesian Interpretation $p(\beta|X,Y)\propto f(Y|X,\beta)p(\beta|X) = f(Y|X,\beta)p(\beta)$ with assumption of $p(\beta)=\prod_{j=1}^p g(\beta_j)$ for some density function g. Two special cases of g: If g is a Gaussian distribution with mean zero and standard deviation a function of $\lambda$, it follows that the posterior mode for $\beta$, is given by the ridge regression solution. Also, the solution is equal to posterior mean. If g is a double-exponential(Laplace) distribution with mean zero and scale parameter a function of $\lambda$, it follows that the posterior mode for $\beta$ is the lasso soultion(which is not the posteriror mean in this case). Hence, the lasso expects a priori that many of the coefficients are (exactly) zero, while ridge assumes the coefficients are randomly distributed about zero. 6.3. Dimension Reduction Methods p predictors to M new transformed variables. Let $Z_m = \sum_{j=1}^p\phi_{jm}X_j$ represent M &amp;lt; p linear combinations of original p predictors. Then fit the linear regression model $y_i = \theta_0 + \sum_{m=1}^M\theta_m z_{im} + \epsilon_i, \quad i = 1, \ldots, n$, using least squares. If the constants $\phi_{1m}, \ldots, \phi_{pm}$ are chosen wisely, dimension reduction approaches can outperform least squares regression. I.e., using least squares, fitting reduced model can lead to better results than fitting the standard linear model. \(\sum_{m=1}^M\theta_m z_{im} = \sum_{m=1}^M\theta_m\sum_{j=1}^p\phi_{jm}x_{ij} = \sum_{j=1}^p\sum_{m=1}^M\theta_m\phi_{jm}x_{ij} = \sum_{j=1}^p\beta_j x_{ij},\) where \(\beta_j = \sum_{m=1}^M\theta_m\phi_{jm}\). Hence, this model can be a special case of the standard linear regression model. In situations where p is large relative to n, demension reduction methods can significantly reduce the variance of the fitted coefficients. If $M = p$, and all the $Z_m$ are linearly independent, then there are no constraints and the model is equivalent to the standard linear model. All dimension reduction methods work in two steps. First, the transformed predictors $Z_m$ are obtained. Second, the model is fit using these M predictors. The choice of $Z_m$, which is, the selection of the $\phi_{jm}$’s can be achieved in different ways. 6.3.1. Principal Components Regression Principal Components Analysis Goal of PCA: PCA is a technique for reducing the dimension of an n by p data matrix X, finding small number of dimensions M, which have simillar amount of information to original p predictors. The principal component direction of the data is that along which the observations vary the most; with the largest variance of the observations projected onto. The principal component vector $Z_m$ defines the line that is as close as possible to the data, minimizing the sum of the squared perpendicular distances between each point and the line. In other word, the principal component appears to capture most of the information contained in two variables. e.g. in the first principal component, total variance keeped: $Var(X_1)+Var(X_2) = Var(PC_1)+Var(PC_2)$ where $X_s$ is $n \times p$ standardized matrix,jth Principal Component Vector of $X_s$: $z_j = X_s v_j$, $\quad j=1,\ldots,p$ is that satisfying \(\text{max}_{\alpha}Var(X_s\alpha)\) subject to \(\lVert\alpha\rVert=1\). Here, the values of $z_{1j}, \ldots, z_{nj}$ are known as the principal component scores. $v_j$ is $p \times 1$ size eigenvector of $X_s^T X_s$ corresponding to the jth largest eigenvalue, and $\alpha$ is $v_j$’s orthogonality to $v_1,\ldots,v_{j-1}$ ($\alpha^T S v_k = 0$, where S is the sample covariance matrix of $X_s$, or $X_s^T X_s$, and $k = 1, \cdots, j-1$). Then $z_1 = X_s v_1$, $z_2\bot z_1$, $z_3\bot z_1,z_2$, $\cdots$, $z_p\bot z_1,\ldots,z_{p-1}$. derivation Since $X_s$ is standardized matrix, \(Var(X_s\alpha) = \alpha^T X_s^T X_s\alpha\) by Lagrangian form, \(\begin{align*} \text{max}_{\alpha}Q(X_s,\lambda) &amp;amp;= \text{max}_{alpha}\left[\alpha^T X_s^T X_s\alpha -\lambda\alpha^T\alpha \right] \\ \rightarrow \frac{\partial Q}{\partial\alpha} &amp;amp;= 2X_s^T X\alpha - 2\lambda\alpha \\ \text{for } \hat\alpha, X_s^T X\alpha &amp;amp;= \lambda\alpha \end{align*}\) note that $\mathbb{A}_v = ev$, the combination of eigenvalue and eigenvector of $\mathbb{A}$. Thus, $\alpha = v_j$, the jth eigenvector of $X_s^T X_s$, that is, the constraint of orthogonality is satisfied. Since PCA has no single solution M; the proportion of variance explained by mth PC($Z_m$) used: \(PVE_m = \frac{Var(Z_m)}{\sum_{j=1}^p(Var(Z_j))}\) (\(\sum_{j=1}^p(Var(Z_j)) = \sum Var(X_j) =\) total variance) in SVD of covariance matrix $X^T X$, \(\begin{align*} X^T X &amp;amp;= \mathbb{VDU}^T\mathbb{UDV}^T \\ &amp;amp;= \mathbb{VD^2 V}^T \end{align*}\) in this eigen decomposition, \(\mathbb{V} = (v_1,\ldots,v_p)\) the eigen vectors of $X^T X$ \(\mathbb{D}^2 = \begin{bmatrix} d_1^2 &amp;amp; \cdots &amp;amp; 0 \\ \vdots &amp;amp; \ddots &amp;amp; \vdots \\ 0 &amp;amp; \cdots &amp;amp; d_p^2 \end{bmatrix}\) $d_j^2 = e_j$, jth eigenvalue of $X^T X$ thus, \(\begin{align*} Var(Z_m) &amp;amp;= \frac{1}{n}(Z_m^T Z_m) \\ &amp;amp;= \frac{1}{n}(v_m^T X_s^T X_s v_m) \\ &amp;amp;= \frac{1}{n}(v_m^T\mathbb{VD}^2\mathbb{V}^T v_m) \\ &amp;amp;= \frac{1}{n}d_m^2 = \frac{1}{n}e_m \end{align*}\) Therefore, \(PVE_m = \frac{Var(Z_m)}{\sum_{j=1}^p(Var(Z_j))} = \frac{e_m}{\sum_{j=1}^p e_j}\) we can draw a scree plot on the value of $PVE_m$ over the value of m to find optimal “M”. The Principal Components Regression Approach The key idea is that a small number of principal components can explain most of the variability in the data, as well as the relationship with the response. Under this assumption, fitting a least squares model to $Z_1, \ldots, Z_M$ will lead to better results than fitting a least squares model to $X_1, \ldots, X_p$, since most or all of the information in the data is contained in $Z_m$ and there are smaller number of coefficients, we can mitigate overfitting. Note that PCR is not a feature selection method; is a linear combination of all p of the original features. In this sense, PCR is more closely related to ridge regression than to the lasso. Deciding “M”: full model is \(\hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 + \cdots + \hat{\theta}_p Z_p\) when $Z_1,\ldots,Z_m$ is from standardized $X_s$ and \(\hat{y}_0 = \bar{y}\), as $Z_j$’s are orthogonal, adding variable $Z_{j+1}$ does not affect the coefficients. Thus, $\theta_j$’s are not changed by feature selection; that is, \(\hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 \\ \hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 + \hat{\theta}_2 Z_2 \\ \vdots \\ \hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 +\cdots + \hat{\theta}_p Z_p\) the value of $\theta_k$ is the same. Then we can use CV methods over these models to get optimal M. 6.3.2. Partial Least Squares The PCR approach identifies linear combinations, or directions, that best represent the predictors. These directions are identified in an unsupervised way, since the response Y is not used to help determine the principal component directions. There, PCR suffers from a drawback: there is no guarantee that the directions that best explain the predictors will also be the best directions to use for predicting the response. PLS is a supervised alternative to PCR; finding PLS directions $Z_1,\ldots,Z_m$ that $Cov(Y,Z_1)\ge Cov(Y,Z_2)\ge\cdots\ge Cov(Y,Z_M)$ instead of $Var(Z_1)\ge\cdots\ge Var(Z_M)$. First PLS direction is computed, after standardizing predictors, by setting each $\phi_{j1}$ equal to the coefficient from the simple linear regression $Y$ onto $X_j$. As $Z_1 = \sum_{j=1}^p\phi_{j1}X_j$, PLS places the highest weight on the variables that are most strongly related to the response. To find second PLS direction, we adjust each of the variables for $Z_1$, by regressing each variable on $Z_1$ and taking residuals. The residuals can be interpreted as the remaining information that has not been explained by the first PLS direction. Then we compute $Z_2$ using this orthogonalized data by the same way of computing $Z_1$. This predecure repeated M times. in Simple Regression case, $\hat X_j^s$ is a projection of original data $X_j^s$ to a vector $Z_1$; $X_j^s = \alpha Z_1$. the residual vector $r_j = \hat X_j^s - X_j^s$ and $r_j\bot Z_1$. Then, $r_j = X_j^{(2)}$ is the orthogonalized data for computing the next $Z_2$. The mth PLS direction: \(\text{max}_{\phi} Cov(y,X_s\phi)\) subject to $\lVert\phi\rVert = 1$, $\phi^T S v_l = 0$ for $\phi$ as orthogonal directions, sample covariance matrix S, and $v_l$ as l th PLS direction. \(\text{max}_{\phi}[E(\phi^T X_s^T y)-E(y)E(\phi^T X_s)]\), as standardized, $E(X_s) = 0$, \(\equiv \text{max}_{\phi}\phi^T \dot X_s^T y\) is maximization of dot product of 2 vectors. note that, when two vectors are in the same direction, dot product is maximized. $\therefore \phi=X_s^T y$. 6.4. Considerations in High Dimensions 6.4.1. High-Dimensional Data Data sets that containing more features than observations, $p &amp;gt; n$. 6.4.2. What Goes Wrong in High Dimensions? Standard least squares cannot be performed. Regardless of the true relationship between features and response, least squares will result in a perfect fit to the data, lead to overfitting of the data and poor predictions. 6.4.3. Regression in High Dimensions new technologies that allow for the collection of measurements for thousands or millions of features are a double-edged sword: they can lead to improved predictive models if these features are in fact relevant to the problem at hand, but will lead to worse results if the features are not relevant. Even if they are relevant, the variance incurred in fitting their coefficients may outweigh the reduction in bias that they bring. 6.4.4. Interpreting Results in High Dimensions In high-dimensional setting, the multicollinearity problem is extreme: any variable in the model is a linear combination of all of the other variables in the model. This means we can never know exactly which variables truly are predictive of the outcome, and we can never identify the best coefficients for use in the regression. When $p &amp;gt; n$, it is easy to obtain a a useless model that has zero residuals. Therefore, we should never use sum of squared errors, p-values, $R^2$ statistics, or other traditional measures of model fit on the training data as evidence of a good model fit. Instead we report results on an independent test set, or cross-validation errors.</summary></entry><entry><title type="html">ISLR - Chapter 5. Resampling Methods</title><link href="http://0.0.0.0:4000/islr_ch5" rel="alternate" type="text/html" title="ISLR - Chapter 5. Resampling Methods" /><published>2020-04-23T00:00:00+09:00</published><updated>2020-04-23T00:00:00+09:00</updated><id>http://0.0.0.0:4000/islr_ch5</id><content type="html" xml:base="http://0.0.0.0:4000/islr_ch5">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html">Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation 6.2. Shrinkage Methods 6.2.1. Ridge Regression in Singular Value Decomposition 6.2.2. The Lasso Another Formulation for Ridge Regression and the Lasso A Simple Special Case Bayesian Interpretation 6.3. Dimension Reduction Methods 6.3.1. Principal Components Regression Principal Components Analysis The Principal Components Regression Approach 6.3.2. Partial Least Squares 6.4. Considerations in High Dimensions 6.4.1. High-Dimensional Data 6.4.2. What Goes Wrong in High Dimensions? 6.4.3. Regression in High Dimensions 6.4.4. Interpreting Results in High Dimensions Chapter 6. Linear Model Selection and Regularization Limitations of LSE Prediction Accuracy: if n is not much larger than p, the least squares fit can have a lot of variability, results in overfitting and poor predictions to test data. if p &amp;gt; n, there is no unique solution for the least squares coefficient estimate; as $ Var(\hat\beta)=\infty$. if p is large, there can be correlations between X variables. A model having multicollinearity can have high variance. Constraining or Shrinking the estimated coefficients can reduce the variance with negligible increase in bias, and improve in the accuracy to the test data. Model Interpretability: There are irrelevant variables $X_j$. Removing by setting coefficient estimates $\beta_j = 0$, we can have more interpretability. Feature selection or Variable selection can exclude irrelevant variables from a multiple regression model. 6.1. Subset Selection 6.1.1. Best Subset Selection fit a separate least squares regression for all $2^p$ possible models with combinations of the p predictors. Algorithm $\mathcal{M}_0$ as null model (i.e., $ Y = \beta_0 + \epsilon $) For $ k = 1, 2, \ldots, p $: (a) Fit all \({p \choose k}\) models with k predictors (b) Pick the smallest RSS, (or largest $R^2$) = $ \mathcal{M}_k $ Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$ Guarantees the best selection, while it suffers from computational limitations. Also, it only works for least squares linear regression. in the case of logistic regression, we use deviance, $-2\log$MLE, instead of RSS in the 2nd step of algorithm upon. 6.1.2. Stepwise Selection Forward Stepwise Selection Algorithm $\mathcal{M}_0$ as null model For $ k = 1, 2, \ldots, p $: (a) Fit all p - k models in \(\mathcal{M}_k\) with one additional predictor (b) Pick the smallest RSS among p - k models, $\mathcal{M}_{k+1}$ Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ with CV scores Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee but available for the case of high dimensional data($n&amp;lt;p$). Backward Stepwise Selection Algorithm $\mathcal{M}_p$ as full model, contains all p predictors For $ k = p, p-1, \ldots, 1 $: (a) Fit all k - 1 models contain all but one of the predictors in \(\mathcal{M}_k\) (b) Pick the smallest RSS among k - 1 models, $\mathcal{M}_{k-1}$ Select best model among $\mathcal{M}_0, ldots,\mathcal{M}_p$ with CV scores Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee and not for n &amp;lt; p case. Hybrid Approaches add then remove one predictors in each step. 6.1.3. Choosing the Optimal Model A model containing all of the predictors will always have the smallest RSS and the largest $R^2$, since these quantities are related to the training error. Instead, we need a model with a low test error. $C_p = \frac{1}{n}(RSS + 2 d \hat\sigma^2)$ For a fitted least squares model, with d as the number of predictors and $\hat\sigma^2$ as an estimate of the variance of the error. Typically $\hat\sigma^2$ is estimated using the full model containing all predictors. Adding a penalty to the training RSS is to adjust its underestimation to the test error. As the number of predictors increase, the penalty increase. If there is a proof of $\hat\sigma^2$ is an unbiased estimate of $\sigma^2$, $C_p$ is an unbiased estimate of test MSE. Then, a model with the lowest $C_p$ is the best model. AIC $= \frac{1}{n}(RSS + 2 d \hat\sigma^2)$ For a models fit by maximum likelihood(MLE), given by omitted irrelevant constants. $C_p$ and AIC are proportional to each other. BIC $= \frac{1}{n}(RSS + \log(n)d\hat\sigma^2)$ From a Bayesian point of view, for a fitted least squares model. Also given by omitted irrelevant constants. BIC has heavier penalty then $C_p$ or AIC, results in selecting smaller models. Adjusted $R^2 = 1 - \frac{RSS/(n-d-1)}{TSS/(n-1)}$ Since the usual $R^2$ is defined as $1 - RSS/TSS$, it always increases as more variables added. Adjusted $R^2$ gives penalty of d, the number of predictors in the denominator. Unlike other statistics, a large value of adjusted $R^2$ indicates a small test error. Validation and Cross-Validation one-standard-error rule First calculate the standard error of the estimated test MSE for each model size, then select the smallest model for which the estimated test error is within one standard error of the lowest point on the curve. If a set of models appear to be more or less equally good, then we might as well choose the simplest model; the model with the smallest number of predictors. 6.2. Shrinkage Methods 6.2.1. Ridge Regression Ridge regression coefficient estimates \(\begin{align*} \hat\beta^R &amp;amp;= \text{min}_{\beta}\left[ \underbrace{\sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p \beta_j x_{ij})}_{RSS} + \lambda\sum_{j=1}^p \beta_j^2 \right] \\ &amp;amp;= (X^TX + \lambda I)^{-1} X^T\underline{y} \end{align*}\) $\lambda \ge 0 $ is a tuning parameter, $\lambda\sum_{j=1}^p \beta_j^2$ is a shrinkage penalty. The penalty is small when the coefficients are close to zero, and so it has the effect of shrinking the estimates of $\beta_j$ towards zero. Ridge regression will produce a different set of coefficient estimates $\beta_{\lambda}^R$, for each value of $\lambda$. We do not want to shrink the intercept $\beta_0$, which is simply a measure of the mean value of the response when $x_{i1}=x_{i2}=\ldots=x_{ip}=0$. If the variables, the columns of the data matrix $X$, have been centered to have mean zero before ridge regression is performed, then the estiamted intercept will take the form $\hat\beta_0 = \bar{y} = \sum_{i=1}^n y_i/n$. The standard least squares coefficient estimates are scale equivariant; multiplying $X_j$ by a constant c leads to a scaling of the least squares coefficient estimates by a factor of 1/c. I.e., regardless of how the jth predictor is scaled, $X_j\hat\beta_j$ will remain the same. In contrast, the ridge regression coefficient estimates can change substantially when multiplying a given predictor by a constant. The value of $X_j\hat\beta_{j,\lambda}^R$ may depend on the scaling of the other predictors. Thus, before applying ridge regression, the variables need to be standardized to have a standard deviation of one. The formula: \(\tilde{x}_{ij}=\frac{x_{ij}}{\sqrt{\frac{1}{n}\sum_{i=1}^n(x_{ij}-\bar{x}_j)^2}}\) Ridge regression overperforms the standard least squares when the number of variables p is almost as large as the number of observations n, or even when $p &amp;gt; n$. Also it has computational advantages over best subset selection, which requires searching through $2^p$ models. Ridge regression only fits a single model for any fixed value of $\lambda$. in Singular Value Decomposition where $ X = \mathbb{UDV}^T$, \(\begin{align*} X\hat\beta^{\text{LSE}} &amp;amp;= X(X^TX)^{-1}X^T\underline{y} \\ &amp;amp;= \mathbb{UU}^T\underline{y} \\ X\hat\beta^R &amp;amp;= UD(D^2 + \lambda I)^{-1}DU^T\underline{y} \\ &amp;amp;= \sum_{j=1}^p\underline{u}_j\frac{d_{ij}^2}{d_{ij}^2+\lambda}\underline{u}_j^T\underline{y} \end{align*}\) \(\begin{align*} \rightarrow \partial f(\lambda) &amp;amp;= tr[X(X^TX + \lambda I)^{-1} X^T] \\ &amp;amp;= tr(\mathbb{H}_{\lambda}) \\ &amp;amp;= \sum_{j=1}^p\frac{d_{ij}^2}{d_{ij}^2+\lambda} \end{align*}\) 6.2.2. The Lasso Ridge regression estimates shrink towards zero but will not set nay of them exactly to zero(unless $\lambda = \infty$). This may not be a problem for prediction accuracy, but it can be a challenge in model interpretation when p is quite large. The lasso \(\hat\beta^L_{\lambda} = \text{min}_{\beta}\left[RSS+\lambda\sum_{j=1}^p|\beta_j|\right]\) Instead of $\mathcal{l}_2$ penalty in Ridge, the lasso uses an $\mathcal{l}_1$ penalty. The $\mathcal{l}_1$ norm of a coefficient vector $\beta$ is given by $\lVert \beta \rVert_1 = \sum |\beta_j|$. This penalty has the effect of forcing some of the coefficient estimates to be exactly equal to zero when the tuning parameter is sufficiently large. Hence, the lasso performs variable selection, these sparse models with the lasso are much easier to interpret than those with ridge. Another Formulation for Ridge Regression and the Lasso Ridge: \(\text{min}_{\beta}\left\{ \sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p\beta_j x_{ij})^2 \right\}\) subject to $\sum_{j=1}^p\beta_j^2 \le s $ Lasso: \(\text{min}_{\beta}\left\{ \sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p\beta_j x_{ij})^2 \right\}\) subject to $\sum_{j=1}^p|\beta_j| \le s $ where the budget s as the regularization parameter ($\lambda\uparrow \equiv s\downarrow$). when $p = 2$, then the ridge regression estimates have the smallest RSS out of all points that lie within the circle defined by $\beta_1^2 + \beta_2^2 \le s$, while the lasso estimates have within the diamond defined by $|\beta_1|+|\beta_2| \le s$. when $p = 3$, he constraint region for ridge becomes a sphere, for lasso becomes a polyhedron. For larger p, it becomes a hypersphere and a polytope each. The lasso leads to feature selection due to the sharp corners of its constraint region. the number of predictors that is related to the response is never known a priori for real data sets. A technique such as cross-validation can be used in order to determine which approach is better on a particular data set. A Simple Special Case An analytical method(solution) for the case when $n = p$, and X a diagonal matrix with 1’s on the diagonal and 0’s in all off-diagonal elements. I.e., the columns of X are orthogonal. Also, assume that we are performing regression without an intercept(or standardized). (c.f. in real world cases, we need to use numerical methods.) The usual least squares, $\hat\beta$ is that minimizes; $\sum_{j=1}^p(y_j-\beta_j)^2$. and for the ridge, minimizing $\sum_{j=1}^p(y_j-\beta_j)^2+\lambda\sum_{j=1}^p\beta_j^2$. and for the lasso, minimizing $\sum_{j=1}^p(y_j-\beta_j)^2+\lambda\sum_{j=1}^p|\beta_j|$. The ridge regression estiamtes $\hat\beta_j^R = y_j/(1+\lambda)$ and \(\text{the lasso estimates} \begin{align*} \hat\beta_j^L &amp;amp;= \text{sign}(\hat\beta_j)(|\hat\beta_j|-\lambda)_{+}, \\ \text{or} &amp;amp;= \begin{cases} y_j - \lambda/2, &amp;amp; \mbox{if }y_j &amp;gt; \lambda/2; \\ y_j + \lambda/2, &amp;amp; \mbox{if }y_j &amp;lt; -\lambda/2; \\ 0 &amp;amp; \mbox{if }|y_j| \le \lambda/2. \end{cases} \end{align*}\) Ridge shrinks all coefficients towards zero by the same “proportion”, Lasso shrinks all coefficients towards zero by the same “amount”. Bayesian Interpretation $p(\beta|X,Y)\propto f(Y|X,\beta)p(\beta|X) = f(Y|X,\beta)p(\beta)$ with assumption of $p(\beta)=\prod_{j=1}^p g(\beta_j)$ for some density function g. Two special cases of g: If g is a Gaussian distribution with mean zero and standard deviation a function of $\lambda$, it follows that the posterior mode for $\beta$, is given by the ridge regression solution. Also, the solution is equal to posterior mean. If g is a double-exponential(Laplace) distribution with mean zero and scale parameter a function of $\lambda$, it follows that the posterior mode for $\beta$ is the lasso soultion(which is not the posteriror mean in this case). Hence, the lasso expects a priori that many of the coefficients are (exactly) zero, while ridge assumes the coefficients are randomly distributed about zero. 6.3. Dimension Reduction Methods p predictors to M new transformed variables. Let $Z_m = \sum_{j=1}^p\phi_{jm}X_j$ represent M &amp;lt; p linear combinations of original p predictors. Then fit the linear regression model $y_i = \theta_0 + \sum_{m=1}^M\theta_m z_{im} + \epsilon_i, \quad i = 1, \ldots, n$, using least squares. If the constants $\phi_{1m}, \ldots, \phi_{pm}$ are chosen wisely, dimension reduction approaches can outperform least squares regression. I.e., using least squares, fitting reduced model can lead to better results than fitting the standard linear model. \(\sum_{m=1}^M\theta_m z_{im} = \sum_{m=1}^M\theta_m\sum_{j=1}^p\phi_{jm}x_{ij} = \sum_{j=1}^p\sum_{m=1}^M\theta_m\phi_{jm}x_{ij} = \sum_{j=1}^p\beta_j x_{ij},\) where \(\beta_j = \sum_{m=1}^M\theta_m\phi_{jm}\). Hence, this model can be a special case of the standard linear regression model. In situations where p is large relative to n, demension reduction methods can significantly reduce the variance of the fitted coefficients. If $M = p$, and all the $Z_m$ are linearly independent, then there are no constraints and the model is equivalent to the standard linear model. All dimension reduction methods work in two steps. First, the transformed predictors $Z_m$ are obtained. Second, the model is fit using these M predictors. The choice of $Z_m$, which is, the selection of the $\phi_{jm}$’s can be achieved in different ways. 6.3.1. Principal Components Regression Principal Components Analysis Goal of PCA: PCA is a technique for reducing the dimension of an n by p data matrix X, finding small number of dimensions M, which have simillar amount of information to original p predictors. The principal component direction of the data is that along which the observations vary the most; with the largest variance of the observations projected onto. The principal component vector $Z_m$ defines the line that is as close as possible to the data, minimizing the sum of the squared perpendicular distances between each point and the line. In other word, the principal component appears to capture most of the information contained in two variables. e.g. in the first principal component, total variance keeped: $Var(X_1)+Var(X_2) = Var(PC_1)+Var(PC_2)$ where $X_s$ is $n \times p$ standardized matrix,jth Principal Component Vector of $X_s$: $z_j = X_s v_j$, $\quad j=1,\ldots,p$ is that satisfying \(\text{max}_{\alpha}Var(X_s\alpha)\) subject to \(\lVert\alpha\rVert=1\). Here, the values of $z_{1j}, \ldots, z_{nj}$ are known as the principal component scores. $v_j$ is $p \times 1$ size eigenvector of $X_s^T X_s$ corresponding to the jth largest eigenvalue, and $\alpha$ is $v_j$’s orthogonality to $v_1,\ldots,v_{j-1}$ ($\alpha^T S v_k = 0$, where S is the sample covariance matrix of $X_s$, or $X_s^T X_s$, and $k = 1, \cdots, j-1$). Then $z_1 = X_s v_1$, $z_2\bot z_1$, $z_3\bot z_1,z_2$, $\cdots$, $z_p\bot z_1,\ldots,z_{p-1}$. derivation Since $X_s$ is standardized matrix, \(Var(X_s\alpha) = \alpha^T X_s^T X_s\alpha\) by Lagrangian form, \(\begin{align*} \text{max}_{\alpha}Q(X_s,\lambda) &amp;amp;= \text{max}_{alpha}\left[\alpha^T X_s^T X_s\alpha -\lambda\alpha^T\alpha \right] \\ \rightarrow \frac{\partial Q}{\partial\alpha} &amp;amp;= 2X_s^T X\alpha - 2\lambda\alpha \\ \text{for } \hat\alpha, X_s^T X\alpha &amp;amp;= \lambda\alpha \end{align*}\) note that $\mathbb{A}_v = ev$, the combination of eigenvalue and eigenvector of $\mathbb{A}$. Thus, $\alpha = v_j$, the jth eigenvector of $X_s^T X_s$, that is, the constraint of orthogonality is satisfied. Since PCA has no single solution M; the proportion of variance explained by mth PC($Z_m$) used: \(PVE_m = \frac{Var(Z_m)}{\sum_{j=1}^p(Var(Z_j))}\) (\(\sum_{j=1}^p(Var(Z_j)) = \sum Var(X_j) =\) total variance) in SVD of covariance matrix $X^T X$, \(\begin{align*} X^T X &amp;amp;= \mathbb{VDU}^T\mathbb{UDV}^T \\ &amp;amp;= \mathbb{VD^2 V}^T \end{align*}\) in this eigen decomposition, \(\mathbb{V} = (v_1,\ldots,v_p)\) the eigen vectors of $X^T X$ \(\mathbb{D}^2 = \begin{bmatrix} d_1^2 &amp;amp; \cdots &amp;amp; 0 \\ \vdots &amp;amp; \ddots &amp;amp; \vdots \\ 0 &amp;amp; \cdots &amp;amp; d_p^2 \end{bmatrix}\) $d_j^2 = e_j$, jth eigenvalue of $X^T X$ thus, \(\begin{align*} Var(Z_m) &amp;amp;= \frac{1}{n}(Z_m^T Z_m) \\ &amp;amp;= \frac{1}{n}(v_m^T X_s^T X_s v_m) \\ &amp;amp;= \frac{1}{n}(v_m^T\mathbb{VD}^2\mathbb{V}^T v_m) \\ &amp;amp;= \frac{1}{n}d_m^2 = \frac{1}{n}e_m \end{align*}\) Therefore, \(PVE_m = \frac{Var(Z_m)}{\sum_{j=1}^p(Var(Z_j))} = \frac{e_m}{\sum_{j=1}^p e_j}\) we can draw a scree plot on the value of $PVE_m$ over the value of m to find optimal “M”. The Principal Components Regression Approach The key idea is that a small number of principal components can explain most of the variability in the data, as well as the relationship with the response. Under this assumption, fitting a least squares model to $Z_1, \ldots, Z_M$ will lead to better results than fitting a least squares model to $X_1, \ldots, X_p$, since most or all of the information in the data is contained in $Z_m$ and there are smaller number of coefficients, we can mitigate overfitting. Note that PCR is not a feature selection method; is a linear combination of all p of the original features. In this sense, PCR is more closely related to ridge regression than to the lasso. Deciding “M”: full model is \(\hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 + \cdots + \hat{\theta}_p Z_p\) when $Z_1,\ldots,Z_m$ is from standardized $X_s$ and \(\hat{y}_0 = \bar{y}\), as $Z_j$’s are orthogonal, adding variable $Z_{j+1}$ does not affect the coefficients. Thus, $\theta_j$’s are not changed by feature selection; that is, \(\hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 \\ \hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 + \hat{\theta}_2 Z_2 \\ \vdots \\ \hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 +\cdots + \hat{\theta}_p Z_p\) the value of $\theta_k$ is the same. Then we can use CV methods over these models to get optimal M. 6.3.2. Partial Least Squares The PCR approach identifies linear combinations, or directions, that best represent the predictors. These directions are identified in an unsupervised way, since the response Y is not used to help determine the principal component directions. There, PCR suffers from a drawback: there is no guarantee that the directions that best explain the predictors will also be the best directions to use for predicting the response. PLS is a supervised alternative to PCR; finding PLS directions $Z_1,\ldots,Z_m$ that $Cov(Y,Z_1)\ge Cov(Y,Z_2)\ge\cdots\ge Cov(Y,Z_M)$ instead of $Var(Z_1)\ge\cdots\ge Var(Z_M)$. First PLS direction is computed, after standardizing predictors, by setting each $\phi_{j1}$ equal to the coefficient from the simple linear regression $Y$ onto $X_j$. As $Z_1 = \sum_{j=1}^p\phi_{j1}X_j$, PLS places the highest weight on the variables that are most strongly related to the response. To find second PLS direction, we adjust each of the variables for $Z_1$, by regressing each variable on $Z_1$ and taking residuals. The residuals can be interpreted as the remaining information that has not been explained by the first PLS direction. Then we compute $Z_2$ using this orthogonalized data by the same way of computing $Z_1$. This predecure repeated M times. in Simple Regression case, $\hat X_j^s$ is a projection of original data $X_j^s$ to a vector $Z_1$; $X_j^s = \alpha Z_1$. the residual vector $r_j = \hat X_j^s - X_j^s$ and $r_j\bot Z_1$. Then, $r_j = X_j^{(2)}$ is the orthogonalized data for computing the next $Z_2$. The mth PLS direction: \(\text{max}_{\phi} Cov(y,X_s\phi)\) subject to $\lVert\phi\rVert = 1$, $\phi^T S v_l = 0$ for $\phi$ as orthogonal directions, sample covariance matrix S, and $v_l$ as l th PLS direction. \(\text{max}_{\phi}[E(\phi^T X_s^T y)-E(y)E(\phi^T X_s)]\), as standardized, $E(X_s) = 0$, \(\equiv \text{max}_{\phi}\phi^T \dot X_s^T y\) is maximization of dot product of 2 vectors. note that, when two vectors are in the same direction, dot product is maximized. $\therefore \phi=X_s^T y$. 6.4. Considerations in High Dimensions 6.4.1. High-Dimensional Data Data sets that containing more features than observations, $p &amp;gt; n$. 6.4.2. What Goes Wrong in High Dimensions? Standard least squares cannot be performed. Regardless of the true relationship between features and response, least squares will result in a perfect fit to the data, lead to overfitting of the data and poor predictions. 6.4.3. Regression in High Dimensions new technologies that allow for the collection of measurements for thousands or millions of features are a double-edged sword: they can lead to improved predictive models if these features are in fact relevant to the problem at hand, but will lead to worse results if the features are not relevant. Even if they are relevant, the variance incurred in fitting their coefficients may outweigh the reduction in bias that they bring. 6.4.4. Interpreting Results in High Dimensions In high-dimensional setting, the multicollinearity problem is extreme: any variable in the model is a linear combination of all of the other variables in the model. This means we can never know exactly which variables truly are predictive of the outcome, and we can never identify the best coefficients for use in the regression. When $p &amp;gt; n$, it is easy to obtain a a useless model that has zero residuals. Therefore, we should never use sum of squared errors, p-values, $R^2$ statistics, or other traditional measures of model fit on the training data as evidence of a good model fit. Instead we report results on an independent test set, or cross-validation errors.</summary></entry><entry><title type="html">ISLR - Chapter 5. Resampling Methods</title><link href="http://0.0.0.0:4000/islr_ch5" rel="alternate" type="text/html" title="ISLR - Chapter 5. Resampling Methods" /><published>2020-04-23T00:00:00+09:00</published><updated>2020-04-23T00:00:00+09:00</updated><id>http://0.0.0.0:4000/islr_ch5</id><content type="html" xml:base="http://0.0.0.0:4000/islr_ch5">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#chapter-5-resampling-methods&quot; id=&quot;markdown-toc-chapter-5-resampling-methods&quot;&gt;Chapter 5. Resampling Methods&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#51--cross-validation&quot; id=&quot;markdown-toc-51--cross-validation&quot;&gt;5.1.  Cross-Validation&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#511-the-validation-set-approach&quot; id=&quot;markdown-toc-511-the-validation-set-approach&quot;&gt;5.1.1. The Validation Set Approach&lt;/a&gt;&lt;/li&gt;
@@ -7182,489 +7395,4 @@ Var(\hat{S(Z)}) = \frac{1}{B-1}\sum_{b=1}^B(S(Z^{*b})-\bar{S}^*)^2
 \end{align*}\)&lt;br /&gt;
 $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html">Chapter 5. Resampling Methods 5.1. Cross-Validation 5.1.1. The Validation Set Approach 5.1.2. Leave-One-Out Cross-Validation 5.1.3. k-Fold Cross-Validation 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation 5.1.5. Cross-Validation on Classification Problems 5.2. The Bootstrap Chapter 5. Resampling Methods repeatedly drawing samples from a training set and refitting a model of interest on each sample in order to obtain additional information about the fitted model. To optain information that would not be available from fitting the model only once using the original training sample. e.g. to estimate the variability of a model fit, draw different samples and fit it to each new sample, then examine the extent to which the resulting fits differ. 5.1. Cross-Validation In the absence of a very large designated test set that can be used to directly estimate the test error rate, a class of methods that estimate the test error rate by holding out a subset of the training observations from the fitting process, then applying the statistical learning method to those held out observations. 5.1.1. The Validation Set Approach randomly dividing the available set of observations into two parts; a training set and a validation set (or hold-out set) model is fit on the training set, and the fitted model is used to predict the responses for the observations in the validation set. The validation set error rate estimates the test error rate. Repeating this predecure, we have different estimate for the test MSE over random splits of the observations and there are two issues: The validation estimate of the test error rate can be highly variable, depending on which observations are included in the training set or the validation test. Only a subset of the observations are used to fit the model. Trained on fewer observations, the validation set error rate may overestimate the test error rate for the model fit on the entire data set. 5.1.2. Leave-One-Out Cross-Validation each single observation is used for the validation set, and the remaining observations are for the training set. The statistical learning method is fit on the n-1 training obs. The prediction is made for the excluded observation. LOOCV estiamte for the test MSE: \(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n MSE_i\) No overestimation on the test error, No variance of test MSE, but Expansive. a shortcut of LOOCV on Least Squares(regression): \(\begin{align*} CV_{(n)} = \frac{1}{n} \sum_{i=1}^n \left(\frac{y_i - \hat y_i}{1-h_i}\right)^2 \end{align*}\) where $\hat y_i$ is the fitted value from the original least squares fit, one-time build of a full model and set a leverage $h_i = \frac{1}{n}+\frac{(x_i-\bar{x})^2}{\sum_{i^\prime=1}^n(x_{i^\prime}-\bar{x})^2}$. The levearge lies between 1/n and 1, reflects the amount that an observation influences its own fit. 5.1.3. k-Fold Cross-Validation random division into k groups, or folds, of approximately equal size. A fold is used for the validation set, and the method is fit on the remaining k-1 folds. The MSE is computed on the observations in the held-out fold and the procedure is repeated k times. k-Fold CV estimate for the test MSE: \(CV_{(k)} = \frac{1}{n}\sum_{i=1}^k MSE_i\) when k=n, LOOCV is a special case of k-Fold. Using smaller k, k-fold CV has a computational advantage to LOOCV. We perform CV to: To determine how well a given model can be expected to perform on independent data. To identify a model results in the lowest test error, over different models or different levels of flexibility. 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation Besides the computational advantage, k-fold CV often gives more accurate estimates of the test error rate than does LOOCV. LOOCV will give approximately unbiased estiamtes of the test error, containing n-1, almost as many as the number of observations in the full data set. By contrast, k-fold CV will lead to an intermediate level of bias, containing (k-1)n/k observations. Clearly, LOOCV is to be preferred in the perspective of bias reduction. But, in LOOCV, averaging the outputs of n fitted models, which are trained on an almost identical set of observations, these outputs are highly correlated with each other. This high correlation results in higher variance of test error estimate from LOOCV than from k-fold CV. 5.1.5. Cross-Validation on Classification Problems LOOCV on the classification: \(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n Err_i\), where \(Err_i = I(y_i \ne \hat{y}_i)\). k-fold CV on the classification: \(\frac{1}{n}\sum_{i=1}^k MCR_i\). 5.2. The Bootstrap Sampling with replacement on: Dataset $Z = (z_1, \ldots, z_n)$, $ z_i = (x_i,y_i)$ Sample $Z^{*b}$, where $ b = 1, \ldots, B$ samples for Any statistic term $S(Z)$ computed from full dataset Z, and $S(Z^{*b})$ from bootstrap samples, \(\begin{align*} Var(\hat{S(Z)}) = \frac{1}{B-1}\sum_{b=1}^B(S(Z^{*b})-\bar{S}^*)^2 \end{align*}\) $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</summary></entry><entry><title type="html">ISLR - Chapter 4. Classification</title><link href="http://0.0.0.0:4000/islr_ch4" rel="alternate" type="text/html" title="ISLR - Chapter 4. Classification" /><published>2020-04-16T00:00:00+09:00</published><updated>2020-04-16T00:00:00+09:00</updated><id>http://0.0.0.0:4000/islr_ch4</id><content type="html" xml:base="http://0.0.0.0:4000/islr_ch4">&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#chapter-4-classification&quot; id=&quot;markdown-toc-chapter-4-classification&quot;&gt;Chapter 4. Classification&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#41-overview-of-classification&quot; id=&quot;markdown-toc-41-overview-of-classification&quot;&gt;4.1. Overview of Classification&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#42-why-not-linear-regression&quot; id=&quot;markdown-toc-42-why-not-linear-regression&quot;&gt;4.2. Why Not Linear Regression?&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#43-logistic-regression&quot; id=&quot;markdown-toc-43-logistic-regression&quot;&gt;4.3. Logistic Regression&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#431-the-logistic-model&quot; id=&quot;markdown-toc-431-the-logistic-model&quot;&gt;4.3.1. The Logistic Model&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#432-estimating-the-regression-coefficients-mle&quot; id=&quot;markdown-toc-432-estimating-the-regression-coefficients-mle&quot;&gt;4.3.2. Estimating the Regression Coefficients: MLE&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#433-multinomial-logistic-regression&quot; id=&quot;markdown-toc-433-multinomial-logistic-regression&quot;&gt;4.3.3. Multinomial Logistic Regression&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#44-generative-models-for-classification&quot; id=&quot;markdown-toc-44-generative-models-for-classification&quot;&gt;4.4. Generative Models for Classification&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#441-lda-linear-discriminant-analysis-for-p--1&quot; id=&quot;markdown-toc-441-lda-linear-discriminant-analysis-for-p--1&quot;&gt;4.4.1. LDA: Linear Discriminant Analysis for $p = 1$&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#442-lda-linear-discriminant-analysis-for-p--1&quot; id=&quot;markdown-toc-442-lda-linear-discriminant-analysis-for-p--1&quot;&gt;4.4.2. LDA: Linear Discriminant Analysis for $p &amp;gt; 1$&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#443-qda-quadratic-discriminant-analysis&quot; id=&quot;markdown-toc-443-qda-quadratic-discriminant-analysis&quot;&gt;4.4.3. QDA: Quadratic Discriminant Analysis&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#444-naive-bayes&quot; id=&quot;markdown-toc-444-naive-bayes&quot;&gt;4.4.4. &lt;em&gt;Naive Bayes&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#45-a-comparison-of-classification-methods&quot; id=&quot;markdown-toc-45-a-comparison-of-classification-methods&quot;&gt;4.5. A Comparison of Classification Methods&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#451-an-analytical-comparison&quot; id=&quot;markdown-toc-451-an-analytical-comparison&quot;&gt;4.5.1. An Analytical Comparison&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#452-an-empirical-comparison&quot; id=&quot;markdown-toc-452-an-empirical-comparison&quot;&gt;4.5.2. An Empirical Comparison&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#46-generalized-linear-models&quot; id=&quot;markdown-toc-46-generalized-linear-models&quot;&gt;4.6. Generalized Linear Models&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#461-linear-regression-problems&quot; id=&quot;markdown-toc-461-linear-regression-problems&quot;&gt;4.6.1. Linear Regression Problems&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#462-poisson-regression&quot; id=&quot;markdown-toc-462-poisson-regression&quot;&gt;4.6.2. Poisson Regression&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#463-generalized-linear-models-in-greater-generality&quot; id=&quot;markdown-toc-463-generalized-linear-models-in-greater-generality&quot;&gt;4.6.3. Generalized Linear Models in Greater Generality&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;2020-04-15&lt;/p&gt;
-
-&lt;h2 id=&quot;chapter-4-classification&quot;&gt;Chapter 4. Classification&lt;/h2&gt;
-
-&lt;h2 id=&quot;41-overview-of-classification&quot;&gt;4.1. Overview of Classification&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Response &lt;em&gt;Y&lt;/em&gt; is &lt;em&gt;qualitative(categorical)&lt;/em&gt; variable.&lt;br /&gt;
-Predicting a qualitative response, &lt;em&gt;classification&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;42-why-not-linear-regression&quot;&gt;4.2. Why Not Linear Regression?&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Problem of linear regression in classification&lt;br /&gt;
-e.g. in binary response group: &lt;em&gt;Y&lt;/em&gt; = 0 or 1&lt;br /&gt;
-Model prediction: $\hat y_i = x_i^T \hat\beta$; $\quad$ where $\beta$ is LSE&lt;br /&gt;
-Decision rule: if $ \hat y_i &amp;gt; 0.5 $, classify &lt;em&gt;i&lt;/em&gt;th obs. to group 1&lt;br /&gt;
-BUT, possible value of estimates outside the interval,&lt;br /&gt;
-$ \hat Y &amp;gt;1 \text{ or } \hat Y &amp;lt;0 $: do not fit for the range of &lt;em&gt;Y&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;43-logistic-regression&quot;&gt;4.3. Logistic Regression&lt;/h2&gt;
-
-&lt;h3 id=&quot;431-the-logistic-model&quot;&gt;4.3.1. The Logistic Model&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Supoose that &lt;em&gt;Y&lt;/em&gt; has 2 classes where&lt;br /&gt;
-$p(X)=P(Y=1|X)$, $X=(1,X_1, \ldots, X_p)^T$, $\beta=(\beta_0,\beta_1,\ldots, \beta_p)^T$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;\(p(X)= \frac{e^{x^T\beta}}{1+e^{x^T\beta}}\): &lt;em&gt;logistic function&lt;/em&gt;&lt;br /&gt;
-\(0 &amp;lt; \frac{p(X)}{1-p(X)} = e^{x^T\beta} &amp;lt; \infty\): &lt;em&gt;odds&lt;/em&gt; relative to range of $p(X)= [0,1]$&lt;br /&gt;
-\(\log\frac{p(X)}{1-p(X)} = X^T \beta\): &lt;em&gt;log odds&lt;/em&gt; or &lt;em&gt;logit&lt;/em&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;432-estimating-the-regression-coefficients-mle&quot;&gt;4.3.2. Estimating the Regression Coefficients: MLE&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;as $\log\frac{p(X)}{1-p(X)} = X^T \beta $, $ p(X) = \frac{e^{x^T\beta}}{1+e^{x^T\beta}} $, $ e^{x^T\beta} = \frac{p(X)}{1-p(X)}$&lt;br /&gt;
-where $Y_i | X_i \sim$ Bernoulli($p(X_i)$),&lt;br /&gt;
-$\rightarrow \prod_{i=1}^N p(x_i)^{y_i} (1-p(x_i))^{1-y_i}$&lt;br /&gt;
-&lt;em&gt;likelihood function&lt;/em&gt; L = $\prod_{i:y_i=1}p(x_i) \prod_{i:y_i=0}(1-p(x_i))$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;Maximum Likelihood Estimation&lt;/em&gt; &lt;strong&gt;MLE&lt;/strong&gt;:&lt;br /&gt;
-\(\hat\beta = \text{max}_\beta [\prod_{i:y_i=1} \frac{e^{x^T\beta}}{1+e^{x^T\beta}} \prod_{i:y_i=0} \frac{1}{1+e^{x^T\beta}}]\)&lt;br /&gt;
-take log and get &lt;em&gt;log-likelihood function&lt;/em&gt; $l(\beta)$ and least squares $\hat\beta$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;But we cannot find analytic solution for $\frac{\partial l(\beta)}{\partial\beta} = 0$,&lt;br /&gt;
-use &lt;em&gt;Newton-Raphson method&lt;/em&gt;, a numerical method to find $\hat\beta$.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;if $\hat\beta &amp;gt;0$ , &lt;em&gt;p(X)&lt;/em&gt; increases by a unit change in &lt;em&gt;X&lt;/em&gt;&lt;br /&gt;
-if $\hat\beta &amp;lt;0$ , &lt;em&gt;p(X)&lt;/em&gt; decreases by a unit change in &lt;em&gt;X&lt;/em&gt;&lt;br /&gt;
-(not a linear relationship, but a direction)&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;433-multinomial-logistic-regression&quot;&gt;4.3.3. Multinomial Logistic Regression&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;$P(Y=k | X=x) = \frac{e^{x^T\beta_k}}{1+\sum_{j=1}^{K-1} e^{x^T\beta_j}}$&lt;br /&gt;
-$P(Y=K | X=x)= \frac 1{1+\sum_{j=1}^{K-1} e^{x^T\beta_j}}$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;$\log\frac{P(Y=k | X=x)}{P(Y=K | X=x)} = x^T\beta_k $&lt;br /&gt;
-for $ k=1,\cdots, K-1$ with $\sum_{k=1}^K P(Y=k | X=x) = 1 $&lt;br /&gt;
-the choice of denominator the $K_{th}$ class is arbitary&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;ML estimation (by numerical method):&lt;br /&gt;
-we can have &lt;em&gt;K-1&lt;/em&gt; equations and &lt;em&gt;K-1&lt;/em&gt; number of $\hat\beta_k$ (MLE)&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;44-generative-models-for-classification&quot;&gt;4.4. Generative Models for Classification&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;By logistic regression directly modeling $Pr(Y=K | X=x)$,&lt;br /&gt;
-in statistical jargon, we model the conditional distribution&lt;br /&gt;
-of the response &lt;em&gt;Y&lt;/em&gt;, given the predictor(s) &lt;em&gt;X&lt;/em&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;then Why do we need another method?
-    &lt;ul&gt;
-      &lt;li&gt;when there is substantial separation between 2 classes and logistic model’s parameter estimates are unstable&lt;/li&gt;
-      &lt;li&gt;when &lt;em&gt;X&lt;/em&gt; approximately follow normal distribution and the sample size is small&lt;/li&gt;
-      &lt;li&gt;in the case of more than two response classes&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;In Generative approach, we model the distribution of the predictors &lt;em&gt;X&lt;/em&gt; separately 
-to the response class then use Bayes’ theorem to get $Pr(Y=K | X=x)$.&lt;br /&gt;
-if &lt;em&gt;X&lt;/em&gt; for each &lt;em&gt;Y&lt;/em&gt;s assumed to follow the normal distribution,&lt;br /&gt;
-model has very similar form to logistic regression.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Suppose that we classify an obs. into one of &lt;em&gt;K&lt;/em&gt;$\ge 2 $ classes&lt;br /&gt;
-$f_k(x)$; is the density funtion of &lt;em&gt;X&lt;/em&gt; in class &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt;,&lt;br /&gt;
-$\pi_k$; is the prior probability of class &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt; with $\sum_{k=1}^K \pi_k =1$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Bayes’ Theorem&lt;br /&gt;
-$ Pr(Y=k | X=x) = \frac{\pi_k f_k(x)}{\sum_{l=1}^K \pi_l f_l(x)}$&lt;br /&gt;
-$ Pr(Y=k | X=x) $ is the &lt;em&gt;posterior&lt;/em&gt; probability of obs. at &lt;em&gt;x&lt;/em&gt; belongs to &lt;em&gt;k&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;441-lda-linear-discriminant-analysis-for-p--1&quot;&gt;4.4.1. LDA: Linear Discriminant Analysis for $p = 1$&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Assumptions:&lt;br /&gt;
-a &lt;em&gt;Gaussian&lt;/em&gt; or &lt;em&gt;normal&lt;/em&gt; distribution $f_k(x)$
-    &lt;ul&gt;
-      &lt;li&gt;$f_k(x) = \frac{1}{\sqrt{2\pi}\sigma_k}exp\left(-\frac{1}{2\sigma_k^2}(x-\mu_k)^2\right)$&lt;/li&gt;
-      &lt;li&gt;$\mu_k$ is the mean for the &lt;em&gt;k&lt;/em&gt;th class&lt;/li&gt;
-      &lt;li&gt;$\sigma_k^2$ is the shared variance across for all &lt;em&gt;K&lt;/em&gt; classes(=$\sigma^2$)&lt;/li&gt;
-      &lt;li&gt;$p_k(x) = \frac{\pi_k \frac{1}{\sqrt{2\pi}\sigma}exp\left(-\frac{1}{2\sigma^2}(x-\mu_k)^2\right)}
-              {\sum_{l=1}^K \pi_l \frac{1}{\sqrt{2\pi}\sigma}exp\left(-\frac{1}{2\sigma^2}(x-\mu_l)^2\right)}$&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Bayes Classifier assigns an observation &lt;em&gt;X = x&lt;/em&gt; to the class&lt;br /&gt;
-having lagest value of: \(\delta_k(x) = x\cdot\frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log(\pi_k)\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;But in real-life situation,&lt;br /&gt;
-such assumptions are not enough to apply the Bayes classifier.&lt;br /&gt;
-have to estimate the parameters $\mu_1,\ldots,\mu_K,\ \pi_1,\ldots,\pi_K$ and $\sigma^2$&lt;br /&gt;
-$\rightarrow$ LDA method used to approximate the Bayes classifier.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;LDA estimates model parameters:&lt;br /&gt;
-$\hat\pi_k = n_k/n$&lt;br /&gt;
-$\hat\mu_k = \sum_{i:y_i=k}x_i / n_k $&lt;br /&gt;
-\(\begin{align*}\hat\sigma_k^2 = \sum_{k=1}^K\sum_{i:y_i=k}(x_i-\hat\mu_k) / (n-K) \end{align*}\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;LDA classifier assigns an observation &lt;em&gt;X = x&lt;/em&gt; to the class&lt;br /&gt;
-having lagest value of &lt;em&gt;discriminant function&lt;/em&gt;: \(\hat\delta_k(x) = x\cdot\frac{\hat\mu_k}{\hat\sigma^2} - \frac{\hat\mu_k^2}{2\hat\sigma^2} + \log(\hat\pi_k)\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;442-lda-linear-discriminant-analysis-for-p--1&quot;&gt;4.4.2. LDA: Linear Discriminant Analysis for $p &amp;gt; 1$&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Assumptions:&lt;br /&gt;
-&lt;em&gt;X&lt;/em&gt; from a &lt;em&gt;multivariate Gaussian&lt;/em&gt;(or &lt;em&gt;multivariate normal&lt;/em&gt;) distribution,&lt;br /&gt;
-where each individual predictor follows a one-dimensional normal distribution,&lt;br /&gt;
-with a class-specific mean vector and a common covariance matrix
-    &lt;ul&gt;
-      &lt;li&gt;$f_k(x) ~ \text{MVN}(\mu_k,\Sigma_k)$&lt;/li&gt;
-      &lt;li&gt;$\mu_k$ is a $p \times 1$ vector, the mean for the &lt;em&gt;k&lt;/em&gt;th class&lt;/li&gt;
-      &lt;li&gt;$\Sigma_k = \Sigma$ is a $p \times p$ covariance matrix for all &lt;em&gt;K&lt;/em&gt; classes&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Find &lt;strong&gt;&lt;em&gt;k&lt;/em&gt;&lt;/strong&gt; maximizing \(\log P(Y=k|X=x)\):&lt;br /&gt;
-\(\begin{align*} \log P(Y=k|X=x) &amp;amp;= \log\frac{f_k(x)\pi_k}{\sum_{j=1}^K f_j(x)\pi_j}\\
-                    			   &amp;amp;= \log(f_k(x)\pi_k) + C_1 \\
-                                 &amp;amp;= \cdots \\
-                                 &amp;amp;= \log\pi_k - \frac{1}{2}\mu_k^T\Sigma^{-1}\mu_k + x^T\Sigma^{-1}\mu_k + C_3\\
-                                 &amp;amp;= \delta_k(x) + C_3 \cdots \scriptstyle\text{ : Linear discriminant function (linear in X)} \\
-              \Rightarrow \hat Y &amp;amp;= \text{argmax}_k \delta_k(x)
-\end{align*}\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Decision boundary is also in a linear form.&lt;br /&gt;
-when solving &lt;em&gt;x&lt;/em&gt;: $\delta_k(x) = \delta_l(x)$, we can have linear form of decision boundary.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;LDA estimates model parameters:&lt;br /&gt;
-$\hat\pi_k = n_k/n$&lt;br /&gt;
-$\hat\mu_k = \sum_{i:y_i=k}x_i / n_k $&lt;br /&gt;
-\(\begin{align*}\hat\Sigma_k = \sum_{k=1}^K\sum_{y_i=k}(x_i-\hat\mu_k)(x_i-\hat\mu_k)^T / (n-K) \end{align*}\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;ROC &lt;em&gt;curve&lt;/em&gt;, &lt;em&gt;receiver operating characteristics&lt;/em&gt;&lt;br /&gt;
-to display two types of errors for all possible thresholds&lt;br /&gt;
-useful for comparing different classifiers&lt;br /&gt;
-&lt;img src=&quot;/assets/images/ch4_roc_curve_0.png&quot; alt=&quot;image.png&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;AUC, &lt;em&gt;area under the (ROC) curve&lt;/em&gt;&lt;br /&gt;
-overall performance of a classifier summarized over all possible thresholds&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;sensitivity&lt;/em&gt; and &lt;em&gt;specificity&lt;/em&gt;, from &lt;em&gt;confusion matrix&lt;/em&gt;&lt;br /&gt;
-changes of true positive and false positive rate by varying the classifier threshold&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/ch4_confusion_matrix_0.png&quot; alt=&quot;image.png&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/images/ch4_confusion_matrix_1.png&quot; alt=&quot;image.png&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;443-qda-quadratic-discriminant-analysis&quot;&gt;4.4.3. QDA: Quadratic Discriminant Analysis&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Assumption: Same as LDA, but “$\Sigma_k \ne \Sigma$” for all &lt;em&gt;K&lt;/em&gt; classes&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Quadratic discriminant function:&lt;br /&gt;
-$\delta_k(x)=  \log\pi_k - \frac{1}{2}\log| \Sigma_k | - \frac{1}{2}(x-\mu_k)^T\Sigma^{-1}(x-\mu_k) $&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Decision boundary is in quadratic line.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Estimation of parameters:&lt;br /&gt;
-$\hat\pi_k = n_k/n$&lt;br /&gt;
-$\hat\mu_k = \sum_{y_i=k}x_i / n_k $&lt;br /&gt;
-\(\begin{align*}\hat\Sigma_k =\sum_{y_i=k}(x_i-\hat\mu_k)(x_i-\hat\mu_k)^T / (n-1) \end{align*}\) (only obs. in $k_{th}$ group)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;LDA vs. QDA: the bias-variance trade-off
-    &lt;ul&gt;
-      &lt;li&gt;LDA&lt;br /&gt;
-for &lt;em&gt;p&lt;/em&gt; predictors, covariance matrix requires estimating $p(p+1)/2$ parameters.&lt;br /&gt;
-linear model in &lt;em&gt;x&lt;/em&gt;, which means there are $Kp$ linear coefficients&lt;br /&gt;
-less flexible classifier having lower variance and potential of improved prediction performance&lt;br /&gt;
-but with assumption of shared variance, LDA can suffer from high bias&lt;br /&gt;
-when there are relatively few training observations and reducing variance is crucial&lt;/li&gt;
-      &lt;li&gt;QDA&lt;br /&gt;
-for &lt;em&gt;p&lt;/em&gt; predictors, estimating seperate covariance matrix requires estimating $Kp(p+1)/2$ parameters.&lt;br /&gt;
-when there are very large training set, the variance of the classifier is not a major concern&lt;br /&gt;
-or there is no common covariance matrix for the K classes&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;LDA vs. Logistic Regression
-    &lt;ul&gt;
-      &lt;li&gt;LDA:&lt;br /&gt;
-MVN assumption needed&lt;br /&gt;
-Qualitative(categorical) inputs are not available&lt;/li&gt;
-      &lt;li&gt;Logistic:&lt;br /&gt;
-No assumption needed and &lt;em&gt;Y ~ Bernoulli&lt;/em&gt; is evident; $\rightarrow$ robust model&lt;br /&gt;
-Qualitative are available&lt;br /&gt;
-can run F-test to choose more important features&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;444-naive-bayes&quot;&gt;4.4.4. &lt;em&gt;Naive Bayes&lt;/em&gt;&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Bayes’ theorem expands posterior prob. $p_k(x) = Pr(Y=k|X=x)$ with two terms:&lt;br /&gt;
-$\pi_k$ is a prior prob. that an observation belongs to &lt;em&gt;k&lt;/em&gt;th class&lt;br /&gt;
-$f_k(x)$ is a &lt;em&gt;p&lt;/em&gt;-dim. density function for an observation in the &lt;em&gt;k&lt;/em&gt;th class&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Estimations:&lt;br /&gt;
-$\hat\pi_k$ as the proportion of training observations belonging to the &lt;em&gt;k&lt;/em&gt;th class.&lt;br /&gt;
-$\hat{f}_k(x)$ is more challenging, as we must consider both &lt;em&gt;marginal&lt;/em&gt; and &lt;em&gt;joint
-distribution&lt;/em&gt; of predictors, in a multivariate normal distribution, the joint distribution
-is summarized by the off-diagonal elements of the covariance matrix, but this association
-is still hard to be characterized.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;to simplifies task:
-    &lt;ul&gt;
-      &lt;li&gt;LDA assumes,&lt;br /&gt;
-MVN distribution $f_k(x)$ with class-specific mean and shared variance&lt;/li&gt;
-      &lt;li&gt;QDA assumes,&lt;br /&gt;
-MVN distribution $f_k(x)$ with class-specific mean and class-specific variance&lt;/li&gt;
-      &lt;li&gt;naive Bayes assumes,&lt;br /&gt;
-&lt;em&gt;Within the $k$th class, the $p$ predictors are independent&lt;/em&gt;, or,&lt;br /&gt;
-$f_k(x) = f_{k1}(x_1) \times f_{k2}(x_2) \times \cdots \times f_{kp}(x_p)$ where&lt;br /&gt;
-$f_{kj}$ is the density function of the &lt;em&gt;j&lt;/em&gt;th predictor among observations in the &lt;em&gt;k&lt;/em&gt;th class.&lt;br /&gt;
-a simple assumption that there is &lt;em&gt;NO&lt;/em&gt; association between the predictors&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;the posterior probability $p_k(x)$&lt;br /&gt;
-$Pr(Y=k|X=x) = \frac{\pi_k\times f_{k1}(x_1)\times f_{k2}(x_2)\times\cdots\times f_{kp}(x_p)}
-                    {\sum_{l=1}^K\pi_l}\times f_{l1}(x_1)\times f_{l2}(x_2)\times\cdots\times f_{lp}(x_p)$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;To estimate the one-dimensional density function $f_{kj}$:
-    &lt;ul&gt;
-      &lt;li&gt;for quantitative $X_j$, we can assume that $X_j|Y = k \sim N(\mu_{jk}, \sigma_{jk}^2)$
-within each class, the &lt;em&gt;j&lt;/em&gt;th predictor $X_j$ is drawn from a normal distribution&lt;/li&gt;
-      &lt;li&gt;for quantitative $X_j$, or, we use a non-parametric estimate for $f_{kj}$
-estimate $f_{kj}(x_j)$ as the fraction of the training observations in the &lt;em&gt;k&lt;/em&gt;th class
-that belong to the same histogram bin as $x_j$,
-or we can use a &lt;em&gt;kernel density estimator&lt;/em&gt; instead of histogram&lt;/li&gt;
-      &lt;li&gt;for qualitative $X_j$, we can simply count the proportion of training observations
-for the &lt;em&gt;j&lt;/em&gt;th predictor corresponding to each class.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;45-a-comparison-of-classification-methods&quot;&gt;4.5. A Comparison of Classification Methods&lt;/h2&gt;
-
-&lt;h3 id=&quot;451-an-analytical-comparison&quot;&gt;4.5.1. An Analytical Comparison&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;analytical&lt;/em&gt; (or mathematical) comparison of LDA, QDA, naive Bayes, and logistic regression&lt;br /&gt;
-in a setting &lt;em&gt;K&lt;/em&gt; as the &lt;em&gt;baseline&lt;/em&gt; class and classify to the class that maximizes&lt;br /&gt;
-\(log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right)\)
-    &lt;ul&gt;
-      &lt;li&gt;LDA:&lt;br /&gt;
-\(\begin{align*}
-\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right)
-&amp;amp;= \log\left(\frac{\pi_k f_k(x)}{\pi_K f_K(x)}\right) \\
-&amp;amp;= \log\left(\frac{\pi_k exp(-\frac{1}{2}(x-\mu_k)^T\Sigma^{-1}(x-\mu_k))}
-                 {\pi_K exp(-\frac{1}{2}(x-\mu_K)^T\Sigma^{-1}(x-\mu_K))}\right) \\
-&amp;amp;= \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2}(\mu_k+\mu_K)^T\Sigma^{-1}(\mu_k-\mu_K) \\
-&amp;amp;\quad + x^T\Sigma^(\mu_k-\mu_K)\\
-&amp;amp;= a_k + \sum_{j=1}^p b_{kj}x_j,
-\end{align*}\)&lt;br /&gt;
-where $b_jk$ is the &lt;em&gt;j&lt;/em&gt;th component of $\Sigma^{-1}(\mu_k-\mu_K)$&lt;/li&gt;
-      &lt;li&gt;QDA:&lt;br /&gt;
-\(\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right)
-= a_k + \sum_{j=1}^p b_{kj}x_j + \sum_{j=1}^p\sum_{l=1}^p c_{kjl}x_j x_l\)&lt;/li&gt;
-      &lt;li&gt;naive Bayes:&lt;br /&gt;
-\(\begin{align*}
-\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right)
-&amp;amp;= \log\left(\frac{\pi_k f_k(x)}{\pi_K f_K(x)}\right) \\
-&amp;amp;= \log\left(\frac{\pi_k\prod_{j=1}^p f_{kj}(x_j)}
-                 {\pi_K\prod_{j=1}^p f_{Kj}(x_j)}\right) \\
-&amp;amp;= \log\left(\frac{\pi_k}{\pi_K}\right)
-    + \sum_{j=1}^p\log\left(\frac{f_{kj}(x_j)}{f_{Kj}(x_j)}\right) \\
-&amp;amp;= a_k + \sum_{j=1}^p g_{kj}(x_j)
-\end{align*}\)&lt;br /&gt;
-which takes the form of a &lt;em&gt;generalized additive model&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;Logistic Regression:&lt;br /&gt;
-\(\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right)
-= \beta_{k0} + \sum_{j=1}^p\beta_{kj}x_j\)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;LDA is a special case of QDA with $c_{kjl}=0$ and including any classifier 
-with linear decision boundary, is also a special case of naive Bayes with 
-$g_{kj}(x_j) = b_{kj}(x_j)$,&lt;br /&gt;
-if in the naive Bayes classifier, we model $f_{kj}(x_j)$ using a one-dimensional 
-Gaussian distribution $N(\mu_{kj},\sigma_j^2)$, we get $g_{kj}(x_j) = b_{kj}(x_j)$ 
-where $b_{kj} = (\mu_{kj}-\mu_{Kj})/{\sigma_j^2}$. Then naive Bayes is a 
-special case of LDA with variance restriced to be a diagonal matrix with 
-&lt;em&gt;j&lt;/em&gt;th diagonal element equal to $\sigma_j^2$.&lt;/li&gt;
-  &lt;li&gt;Neither QDA nor naive Bayes is a special case of the other.&lt;br /&gt;
-Navie Bayes is in a additive fit, a function of $x_j$ can be added but 
-never multipied. By contrast, QDA takes terms of $c_{kjl}x_j x_l$.&lt;/li&gt;
-  &lt;li&gt;both LDA and Logistic are linear function of the predictors. Predictors 
-in LDA follow a normal distribution, while the coefficients in Logistic 
-are chosen to maximize the likelihood function. LDA outperforms when the 
-normality assumption holds and vice versa for Logistic.&lt;/li&gt;
-  &lt;li&gt;KNN outperforms LDA and Logistic when the decision boundary is highly non-linear 
-provided with large &lt;em&gt;n&lt;/em&gt; obs. to small &lt;em&gt;p&lt;/em&gt;. KNN tends to reduce bias while 
-incurring a lot of variance.&lt;/li&gt;
-  &lt;li&gt;QDA may be preferrend to KNN when decision boundary is non-linear but &lt;em&gt;n&lt;/em&gt; 
-is only modest, or &lt;em&gt;p&lt;/em&gt; is not very small. Taking a parametric form, it 
-requires a smaller sample size for accurate classification relative to KNN.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;452-an-empirical-comparison&quot;&gt;4.5.2. An Empirical Comparison&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;empirical&lt;/em&gt; (practical) comparison of classification performances,&lt;br /&gt;
-we can draw boxplots of test error rates.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;shortly, no one method will dominate the others in every situation.&lt;br /&gt;
-LDA and Logistic will tend to perform well when decision boundaries are 
-linear. QDA or naive Bayes may be better in non-linear decision boundaries. 
-KNN, non-parametric one is good for much more complicated decision boundaries.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Like in regression using transformations of the predictors, including powers 
-of predictors, we could create a more flexible logistic regression or LDA 
-model. Adding quadratic terms and cross-products to LDA, we can have a model 
-at somewhere between an LDA and a QDA.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;46-generalized-linear-models&quot;&gt;4.6. Generalized Linear Models&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;when &lt;em&gt;Y&lt;/em&gt; is neither qualitative nor quantitative;&lt;br /&gt;
-a &lt;em&gt;discrete&lt;/em&gt; variable &lt;em&gt;Y&lt;/em&gt; takes on non-negative integer values, or &lt;em&gt;counts&lt;/em&gt;&lt;br /&gt;
-and treat predictors &lt;em&gt;X&lt;/em&gt; as qualitative variables.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;461-linear-regression-problems&quot;&gt;4.6.1. Linear Regression Problems&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;a linear regression model seems to provide reasonable and intuitive results on 
-those &lt;em&gt;Y&lt;/em&gt;, for example, compared to the clear weather as baseline, there should be 
-negative coefficients to predict bike users on cloudy days and some lower values 
-on rainy days.&lt;br /&gt;
-but there are some problems left in a linear model.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Negative fitted values relative to non-negative response &lt;em&gt;Y&lt;/em&gt;. It raise concerns about 
- the accuracy of model; coefficient estimates, confidence intervals, and other outputs&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Mean-variance violates the assumptions of linear model. We assumed error term $\epsilon$ to 
- have zero mean and constant value of variance $\sigma^2$, but in practice, the variance of 
- $Y_i$ has some definite relationship to the expectation of $Y_i$. This problem is from the 
- heteroscedasticity of the data.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;A solution: transformed response $\log(Y) = \sum_{j=1}^p X_j\beta_j + \epsilon $&lt;br /&gt;
-It can avoids the possibility of negative predictions and overcomes much of the heteroscedasticity. 
-But there may be a challenge in interpretation and in the fact that log transformation cannot 
-be applied to the responses with the value of zero.&lt;br /&gt;
-Thus, we introduce a &lt;em&gt;Poisson Regression&lt;/em&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;462-poisson-regression&quot;&gt;4.6.2. Poisson Regression&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;For a random variable &lt;em&gt;Y&lt;/em&gt; takes on nonnegative integer values,&lt;br /&gt;
-introduces $\lambda&amp;gt;0, \lambda = E(Y) = Var(Y)$;&lt;br /&gt;
-Poisson distribution $Pr(Y=k) = \frac{e^{-\lambda}\lambda^k}{k!}$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;a function of $ E(Y) = \lambda $ of the covariates $X_j$:&lt;br /&gt;
-$\log(\lambda(X_1,\ldots,X_p)) = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p$ or&lt;br /&gt;
-$\lambda(X_1,\ldots,X_p) = e^{\beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p}$&lt;br /&gt;
-predicting &lt;em&gt;mean value of Y&lt;/em&gt; in &lt;em&gt;particular conditions(values)&lt;/em&gt; of predictor $X_j$s&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;likelihood $l(\beta_0,\beta_1,\ldots,\beta_p)
-  = \prod_{i=1}^n\frac{e^{-\lambda(x_i)}\lambda(x_i)^{y_i}}{y_i !}$&lt;br /&gt;
-where $\lambda(x_i) = e^{\beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip}}$&lt;br /&gt;
-By solving MLE in this likelihood function, we can have similar fit to the response,&lt;br /&gt;
-while we have more statistical significance of coefficients.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Some important distinctions from the linear regression model.&lt;/p&gt;
-    &lt;ol&gt;
-      &lt;li&gt;Interpretation: a one-unit change in $X_j$ is associated with the change by a factor of 
-  $ exp(\beta_j) $, or $ e^{\beta_j} $ in E(Y) = $\lambda$.&lt;/li&gt;
-      &lt;li&gt;Mean-variance relationship: under the introduced term $\lambda = E(Y) = Var(Y)$, the 
-  Poisson model is more adequate to the data with heteroscedasticity.&lt;/li&gt;
-      &lt;li&gt;No nonnegative fitted values&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;463-generalized-linear-models-in-greater-generality&quot;&gt;4.6.3. Generalized Linear Models in Greater Generality&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Common characteristics of Linear, Logistic, Poisson Regressions:
-    &lt;ol&gt;
-      &lt;li&gt;Use &lt;em&gt;p&lt;/em&gt; predictors $X_j$ to predict a response &lt;em&gt;Y&lt;/em&gt; and assume that conditional $P(Y|X)$ 
-  belongs to a certain family of distributions(&lt;em&gt;Gaussian, Bernoulli, Poisson&lt;/em&gt; distribution).&lt;br /&gt;
-  $*$which are in exponential family(with &lt;em&gt;exponential, Gamma, negative binomial distributions&lt;/em&gt;)&lt;/li&gt;
-      &lt;li&gt;Modeling the mean of &lt;em&gt;Y&lt;/em&gt;, or expected, $E(Y)$ as a function of predictors &lt;em&gt;X&lt;/em&gt;.&lt;br /&gt;
-  $\text{in Linear: } E(Y|X_1,\ldots,X_p) = \beta_0 + \beta_1 X_1, + \cdots + \beta_p X_p$&lt;br /&gt;
-  \(\begin{align*} 
-  \text{in Logistic: } E(Y|X_1,\ldots,X_p) &amp;amp;= Pr(Y=1|X_1,\ldots,X_p) \\
-                                        &amp;amp;= \frac{e^{\beta_0 + \beta_1 X_1, + \cdots + \beta_p X_p}}
-                                           {1+e^{\beta_0 + \beta_1 X_1, + \cdots + \beta_p X_p}}
-  \end{align*}\)&lt;br /&gt;
-  \(\begin{align*}
-  \text{in Poisson: } E(Y|X_1,\ldots,X_p) &amp;amp;= \lambda(X_1,\ldots,X_p) \\
-                                       &amp;amp;= e^{\beta_0 + \beta_1 X_1, + \cdots + \beta_p X_p}
-  \end{align*}\)&lt;br /&gt;
-  which can be expressed using a &lt;em&gt;link function&lt;/em&gt;, $\eta$, applying a transformation that 
-  $\eta(E(Y|X_1,\ldots,X_p)) = \beta_0 + \beta_1 X_1, + \cdots + \beta_p X_p$&lt;br /&gt;
-  and each $\eta(\mu)$ is $\mu, \log(\mu/(1-\mu)), \log(\mu)$; respectively to models.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;GLM, a general recipe of regression approach:&lt;br /&gt;
-with the response &lt;em&gt;Y&lt;/em&gt; from one of the exponential family, transform expected &lt;em&gt;Y&lt;/em&gt;(or mean) as 
-a linear function of the predictors, we can have a regression model.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html"></summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html">Chapter 5. Resampling Methods 5.1. Cross-Validation 5.1.1. The Validation Set Approach 5.1.2. Leave-One-Out Cross-Validation 5.1.3. k-Fold Cross-Validation 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation 5.1.5. Cross-Validation on Classification Problems 5.2. The Bootstrap Chapter 5. Resampling Methods repeatedly drawing samples from a training set and refitting a model of interest on each sample in order to obtain additional information about the fitted model. To optain information that would not be available from fitting the model only once using the original training sample. e.g. to estimate the variability of a model fit, draw different samples and fit it to each new sample, then examine the extent to which the resulting fits differ. 5.1. Cross-Validation In the absence of a very large designated test set that can be used to directly estimate the test error rate, a class of methods that estimate the test error rate by holding out a subset of the training observations from the fitting process, then applying the statistical learning method to those held out observations. 5.1.1. The Validation Set Approach randomly dividing the available set of observations into two parts; a training set and a validation set (or hold-out set) model is fit on the training set, and the fitted model is used to predict the responses for the observations in the validation set. The validation set error rate estimates the test error rate. Repeating this predecure, we have different estimate for the test MSE over random splits of the observations and there are two issues: The validation estimate of the test error rate can be highly variable, depending on which observations are included in the training set or the validation test. Only a subset of the observations are used to fit the model. Trained on fewer observations, the validation set error rate may overestimate the test error rate for the model fit on the entire data set. 5.1.2. Leave-One-Out Cross-Validation each single observation is used for the validation set, and the remaining observations are for the training set. The statistical learning method is fit on the n-1 training obs. The prediction is made for the excluded observation. LOOCV estiamte for the test MSE: \(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n MSE_i\) No overestimation on the test error, No variance of test MSE, but Expansive. a shortcut of LOOCV on Least Squares(regression): \(\begin{align*} CV_{(n)} = \frac{1}{n} \sum_{i=1}^n \left(\frac{y_i - \hat y_i}{1-h_i}\right)^2 \end{align*}\) where $\hat y_i$ is the fitted value from the original least squares fit, one-time build of a full model and set a leverage $h_i = \frac{1}{n}+\frac{(x_i-\bar{x})^2}{\sum_{i^\prime=1}^n(x_{i^\prime}-\bar{x})^2}$. The levearge lies between 1/n and 1, reflects the amount that an observation influences its own fit. 5.1.3. k-Fold Cross-Validation random division into k groups, or folds, of approximately equal size. A fold is used for the validation set, and the method is fit on the remaining k-1 folds. The MSE is computed on the observations in the held-out fold and the procedure is repeated k times. k-Fold CV estimate for the test MSE: \(CV_{(k)} = \frac{1}{n}\sum_{i=1}^k MSE_i\) when k=n, LOOCV is a special case of k-Fold. Using smaller k, k-fold CV has a computational advantage to LOOCV. We perform CV to: To determine how well a given model can be expected to perform on independent data. To identify a model results in the lowest test error, over different models or different levels of flexibility. 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation Besides the computational advantage, k-fold CV often gives more accurate estimates of the test error rate than does LOOCV. LOOCV will give approximately unbiased estiamtes of the test error, containing n-1, almost as many as the number of observations in the full data set. By contrast, k-fold CV will lead to an intermediate level of bias, containing (k-1)n/k observations. Clearly, LOOCV is to be preferred in the perspective of bias reduction. But, in LOOCV, averaging the outputs of n fitted models, which are trained on an almost identical set of observations, these outputs are highly correlated with each other. This high correlation results in higher variance of test error estimate from LOOCV than from k-fold CV. 5.1.5. Cross-Validation on Classification Problems LOOCV on the classification: \(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n Err_i\), where \(Err_i = I(y_i \ne \hat{y}_i)\). k-fold CV on the classification: \(\frac{1}{n}\sum_{i=1}^k MCR_i\). 5.2. The Bootstrap Sampling with replacement on: Dataset $Z = (z_1, \ldots, z_n)$, $ z_i = (x_i,y_i)$ Sample $Z^{*b}$, where $ b = 1, \ldots, B$ samples for Any statistic term $S(Z)$ computed from full dataset Z, and $S(Z^{*b})$ from bootstrap samples, \(\begin{align*} Var(\hat{S(Z)}) = \frac{1}{B-1}\sum_{b=1}^B(S(Z^{*b})-\bar{S}^*)^2 \end{align*}\) $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</summary></entry></feed>

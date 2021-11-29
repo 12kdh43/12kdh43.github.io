@@ -106,6 +106,232 @@
     
       
       <item>
+        <title>ISLR - Chapter 7. Moving Beyond Linearity</title>
+        
+          <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-7-moving-beyond-linearity&quot; id=&quot;markdown-toc-chapter-7-moving-beyond-linearity&quot;&gt;Chapter 7. Moving Beyond Linearity&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#71-polynomial-regression&quot; id=&quot;markdown-toc-71-polynomial-regression&quot;&gt;7.1. Polynomial Regression&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#72-step-functions&quot; id=&quot;markdown-toc-72-step-functions&quot;&gt;7.2. Step Functions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#73-basis-functions&quot; id=&quot;markdown-toc-73-basis-functions&quot;&gt;7.3. Basis Functions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#74-regression-splines&quot; id=&quot;markdown-toc-74-regression-splines&quot;&gt;7.4. Regression Splines&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#741-piecewise-polynomials&quot; id=&quot;markdown-toc-741-piecewise-polynomials&quot;&gt;7.4.1. Piecewise Polynomials&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#742-constraints-and-splines&quot; id=&quot;markdown-toc-742-constraints-and-splines&quot;&gt;7.4.2. Constraints and Splines&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#743-the-spline-basis-representation&quot; id=&quot;markdown-toc-743-the-spline-basis-representation&quot;&gt;7.4.3. The Spline Basis Representation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#744-choosing-the-number-and-locations-of-the-knots&quot; id=&quot;markdown-toc-744-choosing-the-number-and-locations-of-the-knots&quot;&gt;7.4.4. Choosing the Number and Locations of the Knots&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#745-comparison-to-polynomial-regression&quot; id=&quot;markdown-toc-745-comparison-to-polynomial-regression&quot;&gt;7.4.5. Comparison to Polynomial Regression&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#75-smoothing-splines&quot; id=&quot;markdown-toc-75-smoothing-splines&quot;&gt;7.5. Smoothing Splines&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#751-an-overview-of-smoothing-splines&quot; id=&quot;markdown-toc-751-an-overview-of-smoothing-splines&quot;&gt;7.5.1. An Overview of Smoothing Splines&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-7-moving-beyond-linearity&quot;&gt;Chapter 7. Moving Beyond Linearity&lt;/h2&gt;
+
+&lt;h2 id=&quot;71-polynomial-regression&quot;&gt;7.1. Polynomial Regression&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;standard linear model $y_i = \beta_0 + \beta_1 x_i + \epsilon_i$&lt;br /&gt;
+  to a polynomial function $y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \cdots + \beta_d x_i^d + \epsilon_i$&lt;br /&gt;
+  For large enough degree &lt;em&gt;d&lt;/em&gt;, a polynomial regression produces an extremely non-
+  linear curve. The coefficients $\beta_d$’s can be easily estimated using least 
+  squares linear regression.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;72-step-functions&quot;&gt;7.2. Step Functions&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Break the range of &lt;em&gt;X&lt;/em&gt; into &lt;em&gt;bins&lt;/em&gt;, and fit a different constant in each bin; 
+  converting a continuous variables into an &lt;em&gt;ordered categorical variable&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;By cutpoints $c_1, c_2, \ldots, c_K$ in the range of &lt;em&gt;X&lt;/em&gt;, construct &lt;em&gt;K+1&lt;/em&gt; new variables&lt;br /&gt;
+  \(\begin{align*}
+  C_0(X) &amp;amp;= I(X &amp;lt; c_1), \\
+  C_1(X) &amp;amp;= I(c_1 \le X &amp;lt; c_2), \\
+  C_2(X) &amp;amp;= I(c_2 \le X &amp;lt; c_3), \\
+         &amp;amp;\vdots \\
+  C_{K-1}(X) &amp;amp;= I(c_{K-1} \le X &amp;lt; c_K), \\
+  C_{K}(X) &amp;amp;= I(c_K \le X), \\
+  \end{align*}\)&lt;br /&gt;
+  where I($\cdot$) is an &lt;em&gt;indicator function&lt;/em&gt; returning value of 1 or 0. These are 
+  sometimes called &lt;em&gt;dummy variables&lt;/em&gt;. For any value of &lt;em&gt;X&lt;/em&gt;, $\sum_{i=0}^K C_i(X) = 1$.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The least squares model: $y_i = \beta_0 + \beta_1 C_1(x_i) + \cdots + \beta_K C_K(x_i) + \epsilon_i$&lt;br /&gt;
+  When $X&amp;lt;c_1$, all of the predictors $C_1(X), C_2(X), \ldots, C_K(X)$ are zero, so 
+  $\beta_0$ is the mean value of &lt;em&gt;Y&lt;/em&gt; or $X&amp;lt;c_1$. By comparison, the model predicts 
+  a response of $\beta_0 + \beta_j$ for $c_j \le X &amp;lt; c_{j+1}$, so $\beta_j$ represents the 
+  average increase in the response for &lt;em&gt;X&lt;/em&gt; in such range.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Unless there are natural breakpoints in the predictors, piecewise-constant functions 
+  can miss the action.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;73-basis-functions&quot;&gt;7.3. Basis Functions&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Polynomial and piecewise-constant regression models are in fact special cases of a 
+  &lt;em&gt;basis function&lt;/em&gt; approach; with a family of functions or transformations applied 
+  to a variable &lt;em&gt;X&lt;/em&gt;: $b_1(X), b_2(X), \ldots, b_K(X)$, fit a linear model&lt;br /&gt;
+  $y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + \cdots + \beta_K b_K(x_i) + \epsilon_i$.&lt;br /&gt;
+  as a standard linear model with predictors $b_i(x_i), b_2(x_i), \ldots, b_K(x_i)$. 
+  Hence, we can use least squares and all of the inference tools, such as std.err 
+  for coefficient estimates and F-statistics for the model’s overall significance.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Note that the basis functions $b_k(\cdot)$ are fixed and known(or, we choose the 
+  functions before). E.g., for polynomial regression, the basis functions are $b_j(x_i)=x_i^j$.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;74-regression-splines&quot;&gt;7.4. Regression Splines&lt;/h2&gt;
+
+&lt;h3 id=&quot;741-piecewise-polynomials&quot;&gt;7.4.1. Piecewise Polynomials&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instead of fitting a high-degree polynomial over the entire range of &lt;em&gt;X&lt;/em&gt;, piecewise 
+  polynomial regression fits separate low-degree polynomials over different regions. 
+  Divide demension &lt;em&gt;X&lt;/em&gt; by &lt;em&gt;knots&lt;/em&gt; and apply different polynomial model to each 
+  region. If we place &lt;em&gt;K&lt;/em&gt; knots throughout the range of &lt;em&gt;X&lt;/em&gt;, then we fit &lt;em&gt;K+1&lt;/em&gt; different 
+  models.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;a cubic regression model; $y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 + \epsilon_i$&lt;br /&gt;
+  is a piecewise cubic with no knots with &lt;em&gt;d&lt;/em&gt; = 3.&lt;br /&gt;
+  On the other hand,&lt;br /&gt;
+  \(y_i = \begin{cases}
+          \beta_{01}+\beta_{11}x_i + \beta_{21}x_i^2 + \beta_{31}x_i^3 + \epsilon_i &amp;amp; \mbox{if }x_i &amp;lt; c \\
+          \beta_{02}+\beta_{12}x_i + \beta_{22}x_i^2 + \beta_{32}x_i^3 + \epsilon_i &amp;amp; \mbox{if }x_i \ge c. \\
+          \end{cases}\)&lt;br /&gt;
+  is with a single knot at a point c.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For other degrees &lt;em&gt;d&lt;/em&gt;:&lt;br /&gt;
+  a piecewise-constant functions are piecewise polynomials of degree &lt;em&gt;0&lt;/em&gt;, a piecewise 
+  linear functions are of degree &lt;em&gt;1&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;742-constraints-and-splines&quot;&gt;7.4.2. Constraints and Splines&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;To fix the discontinuity and overcomplexity, we add some additional constraints:&lt;br /&gt;
+  in a degree-&lt;em&gt;d&lt;/em&gt; spline, or a piecewise degree-&lt;em&gt;d&lt;/em&gt; polynomial, it requires the 
+  continuity in derivatives up to degree &lt;em&gt;d-1&lt;/em&gt; at each knot.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;743-the-spline-basis-representation&quot;&gt;7.4.3. The Spline Basis Representation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;$y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + \cdots + \beta_{K+3} b_{K+3}(x_i) + \epsilon_i$&lt;br /&gt;
+  is a cubic spline model with &lt;em&gt;K&lt;/em&gt; knots.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;with a &lt;em&gt;truncated power basis&lt;/em&gt; function per knot $\xi$, which is defined as 	
+  \(h(x,\xi) = (x-\xi)_{+}^3 = \begin{cases} (x-\xi)^3 &amp;amp; \mbox{if }x&amp;gt;\xi \\
+                                                  0	 &amp;amp; \mbox{otherwise,}
+                               \end{cases}\)&lt;br /&gt;
+  so, in fitting a cubic spline with &lt;em&gt;K&lt;/em&gt; knots, we perform least squares regression 
+  with an intercept and &lt;em&gt;3+K&lt;/em&gt; predictors, of the form $X, X^2, X^3, h(X,\xi_1), h(X,\xi_2), \ldots, h(X,\xi_K)$.&lt;br /&gt;
+  This amounts to estimating a total of &lt;em&gt;K+4&lt;/em&gt; regression coefficients; for this 
+  regression, fitting a cubic spline with K knots uses &lt;em&gt;K+4&lt;/em&gt; degrees of freedom.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;However, splines can have high variance at the outer range of the predictors; 
+  $X&amp;lt;c_1$ or $X\ge c_K$, when &lt;em&gt;X&lt;/em&gt; takes on either a very small or very large value. 
+  We see that the confidence bands in the boundary region appear fairly wild.&lt;br /&gt;
+  A &lt;em&gt;natural spline&lt;/em&gt; with additional &lt;em&gt;boundary constraints&lt;/em&gt; that the function is 
+  required to be linear at the boundary, generally produce more stable estimates. In 
+  this case, the corresponding confidence intervals are narrower.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;744-choosing-the-number-and-locations-of-the-knots&quot;&gt;7.4.4. Choosing the Number and Locations of the Knots&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The regression spline is most flexible in regions that contain a lot of knots, because 
+  in those regions the polynomial coefficients can change rapidly. Hence, one option 
+  is to place more knots in places where the function might vary most rapidly, and 
+  to place fewer knots where it seems more stable. In practice, it is common to place 
+  knots in a uniform fashion.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To determine the number of knots, or equivalently the degrees of freedom of the spline 
+  contain, we use cross-validation method.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;745-comparison-to-polynomial-regression&quot;&gt;7.4.5. Comparison to Polynomial Regression&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Regression splines often give superior results to polynomial regression. This is 
+  because unlike polynomials, which must use a high degree to produce flexible fits, 
+  splines introduce flexibility by increasing the number of knots but keeping the 
+  degree fixed. Generally, this approach produces more stable estimates.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Splines can produce a reasonable fit at the boundaries and also allow us to place 
+  more knots, or flexibility, over regions where the function &lt;em&gt;f&lt;/em&gt; seems to be changing 
+  rapidly, and fewer knots where &lt;em&gt;f&lt;/em&gt; appears more stable.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;75-smoothing-splines&quot;&gt;7.5. Smoothing Splines&lt;/h2&gt;
+
+&lt;h3 id=&quot;751-an-overview-of-smoothing-splines&quot;&gt;7.5.1. An Overview of Smoothing Splines&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;In fitting a smooth curve to a set of data, some function $g(x)$, that fits the 
+  observed data well: Minimizing $RSS = \sum_{i=1}^n(y_i-g(x_i))^2$. But if we don’t 
+  put any constraints on &lt;em&gt;g&lt;/em&gt;, then we can always make &lt;em&gt;RSS&lt;/em&gt; zero simply by choosing 
+  &lt;em&gt;g&lt;/em&gt; such that it &lt;em&gt;interpolates&lt;/em&gt; all of the $y_i$. Such a function would woefully 
+  overfit the data, would be too flexible.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Smoothing spline is the function &lt;em&gt;g&lt;/em&gt; that minimizes&lt;br /&gt;
+  \(\sum_{i=1}^n(y_i - g(x_i))^2 + \lambda\int g''(t)^2, dt\)&lt;br /&gt;
+  with a nonnegative tuning parameter $\lambda$, takes the “Loss+Penalty” formulation 
+  like the ridge and lasso. The term $\sum_{i=1}^n(y_i - g(x_i))^2$ is a &lt;em&gt;loss function&lt;/em&gt; 
+  that makes &lt;em&gt;g&lt;/em&gt; to fit the data well, and the term \(\lambda\int g''(t)^2, dt\) is a 
+  &lt;em&gt;penalty term&lt;/em&gt; that reduces the variability in &lt;em&gt;g&lt;/em&gt;. \(g''(t)\) indicates the second 
+  derivative of the function &lt;em&gt;g&lt;/em&gt;, corresponds to the amount by which the slope(the first 
+  derivative) is changing. Broadly speaking, the second derivative is a measure of 
+  its &lt;em&gt;roughness&lt;/em&gt;: large in absolute value if &lt;em&gt;g(t)&lt;/em&gt; is very wiggly near &lt;em&gt;t&lt;/em&gt;, close 
+  to zero otherwise. It is zero as the derivative of a straight line, the function is 
+  perfectly smooth. The integral is a summation over the range of &lt;em&gt;t&lt;/em&gt;, so \(\int g''(t)^2, dt\) 
+  is a measure of the total change in the function $g’(t)$ over its entire range. If 
+  &lt;em&gt;g&lt;/em&gt; is very smooth, then $g’(t)$ will be close to constant and \(\int g''(t)^2, dt\) will 
+  take on a small value. Therefore, the penalty term encourages &lt;em&gt;g&lt;/em&gt; to be smooth. 
+  The larger the $\lambda$, the smoother the &lt;em&gt;g&lt;/em&gt; will be.&lt;br /&gt;
+  When $\lambda=0$, then there’s no penalty and the function &lt;em&gt;g&lt;/em&gt; will be very jumpy 
+  and have perfect fit. When $\lambda\rightarrow\infty$, &lt;em&gt;g&lt;/em&gt; will be perfectly smooth; 
+  a linear least squares line $g(x)=ax+b$. The $\lambda$ controls the bias-variance 
+  trade-off of the smoothing spline.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Smoothing spline &lt;em&gt;g(x)&lt;/em&gt; have some special properties: it is a piecewise polynomial 
+  with knots at the unique values of $x_1,\ldots,x_n$, and continuous first and second 
+  derivatives at each knot. Furthermore, it is linear in the region outside of the 
+  extreme knots.&lt;br /&gt;
+  In other words, the Smoothing spline function is a nautral spline with knots at 
+  $x_1,\ldots,x_n$; it is a shrunken version of such a natural spline, where the value 
+  of the tuning parameter $\lambda$ controls the level of shrinkage.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Thu, 07 May 2020 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/islr_ch7</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch7</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>ISLR - Chapter 6. Linear Model Selection and Regularization</title>
         
           <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
@@ -161,7 +387,7 @@
     &lt;ol&gt;
       &lt;li&gt;Prediction Accuracy:
         &lt;ul&gt;
-          &lt;li&gt;if &lt;em&gt;n&lt;/em&gt; is not much larger than &lt;em&gt;p&lt;/em&gt;, the least squares fit can hvae a lot 
+          &lt;li&gt;if &lt;em&gt;n&lt;/em&gt; is not much larger than &lt;em&gt;p&lt;/em&gt;, the least squares fit can have a lot 
  of variability, results in overfitting and poor predictions to test data.&lt;/li&gt;
           &lt;li&gt;if &lt;em&gt;p&lt;/em&gt; &amp;gt; &lt;em&gt;n&lt;/em&gt;, there is no unique solution for the least squares coefficient 
  estimate; as $ Var(\hat\beta)=\infty$.&lt;/li&gt;
@@ -611,6 +837,8 @@ reduced model can lead to better results than fitting the standard linear model.
   $\therefore \phi=X_s^T y$.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ch6_pls_algorithm_0.png&quot; alt=&quot;png&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;64-considerations-in-high-dimensions&quot;&gt;6.4. Considerations in High Dimensions&lt;/h2&gt;
 
