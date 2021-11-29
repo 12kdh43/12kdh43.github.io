@@ -123,6 +123,16 @@
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#75-smoothing-splines&quot; id=&quot;markdown-toc-75-smoothing-splines&quot;&gt;7.5. Smoothing Splines&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#751-an-overview-of-smoothing-splines&quot; id=&quot;markdown-toc-751-an-overview-of-smoothing-splines&quot;&gt;7.5.1. An Overview of Smoothing Splines&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#752-choosing-the-smoothing-parameter-lambda&quot; id=&quot;markdown-toc-752-choosing-the-smoothing-parameter-lambda&quot;&gt;7.5.2. Choosing the Smoothing Parameter $\lambda$&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#76-local-regression&quot; id=&quot;markdown-toc-76-local-regression&quot;&gt;7.6. Local Regression&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#77-generalized-additive-models&quot; id=&quot;markdown-toc-77-generalized-additive-models&quot;&gt;7.7. Generalized Additive Models&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#771-gams-for-regression-problems&quot; id=&quot;markdown-toc-771-gams-for-regression-problems&quot;&gt;7.7.1. GAMs for Regression Problems&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#772-gams-for-classification-problems&quot; id=&quot;markdown-toc-772-gams-for-classification-problems&quot;&gt;7.7.2. GAMs for Classification Problems&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#pros-and-cons-of-gams&quot; id=&quot;markdown-toc-pros-and-cons-of-gams&quot;&gt;Pros and Cons of GAMs&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -194,7 +204,7 @@
   &lt;li&gt;
     &lt;p&gt;Instead of fitting a high-degree polynomial over the entire range of &lt;em&gt;X&lt;/em&gt;, piecewise 
   polynomial regression fits separate low-degree polynomials over different regions. 
-  Divide demension &lt;em&gt;X&lt;/em&gt; by &lt;em&gt;knots&lt;/em&gt; and apply different polynomial model to each 
+  Divide dimension &lt;em&gt;X&lt;/em&gt; by &lt;em&gt;knots&lt;/em&gt; and apply different polynomial model to each 
   region. If we place &lt;em&gt;K&lt;/em&gt; knots throughout the range of &lt;em&gt;X&lt;/em&gt;, then we fit &lt;em&gt;K+1&lt;/em&gt; different 
   models.&lt;/p&gt;
   &lt;/li&gt;
@@ -318,6 +328,163 @@
   In other words, the Smoothing spline function is a nautral spline with knots at 
   $x_1,\ldots,x_n$; it is a shrunken version of such a natural spline, where the value 
   of the tuning parameter $\lambda$ controls the level of shrinkage.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;752-choosing-the-smoothing-parameter-lambda&quot;&gt;7.5.2. Choosing the Smoothing Parameter $\lambda$&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Have seen that a smoothing spline is simply a natural spline with knots at every unique 
+  value of $x_i$, it might seem that a smoothing spline will have far too many degrees 
+  of freedom, since a knot at each data point allows a great deal of flexibility. 
+  But $\lambda$ controls the roughness of the smoothing spline, and hence the &lt;em&gt;effective&lt;/em&gt; 
+  &lt;em&gt;degrees of freedom&lt;/em&gt;. We can show that as $\lambda$ increase from &lt;em&gt;0&lt;/em&gt; to $\infty$, 
+  the effective degrees of freedom $df_\lambda$ decrease from &lt;em&gt;n&lt;/em&gt; to 2.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Usually degrees of freedom refer to the number of free parameters, such as the number 
+  of coefficients fit in a polynomial or cubic spline. Though a smoothing spline has 
+  &lt;em&gt;n&lt;/em&gt; parameters and &lt;em&gt;n&lt;/em&gt; nominal degrees of freedom, these &lt;em&gt;n&lt;/em&gt; parameters are heavily 
+  constrainted or shrunk down. Thus $df_\lambda$ is a measure of the flexibility of 
+  the smoothing spline, the higher it is, the more flexible the smoothing spline.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The definition of effective degrees of freedom, the measure of model complexity:&lt;br /&gt;
+  \(\hat{\mathbf{g}}_\lambda = \mathbf{S}_\lambda\mathbf{y}\),&lt;br /&gt;
+  where \(\hat{\mathbf{g}}_\lambda\) is the solution to the smoothing spline function 
+  &lt;em&gt;g&lt;/em&gt; for a particular choice of $\lambda$, it is an &lt;em&gt;n&lt;/em&gt;-vector containing the fitted 
+  values of the model at the training points $x_1,\ldots,x_n$.&lt;br /&gt;
+  Then the effective degrees of freedom is defined to be&lt;br /&gt;
+  \(df_\lambda = \text{trace}(\mathbf{S}_\lambda) = \sum_{i=1}^n\{ \mathbf{S}_\lambda \}_{ii}\),&lt;br /&gt;
+  the sum of the diagonal elements of the matrix $\mathbf{S}_\lambda$.&lt;br /&gt;
+  e.g.) for a linear regression model:&lt;br /&gt;
+  \(\mathbb{H} = \mathbb{X}(\mathbb{X}^T\mathbb{X})^{-1}\mathbb{X}^T\),&lt;br /&gt;
+  \(\text{trace}(\mathbb{H}) = p+1\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In fitting a smoothing spline, we do not need to select the number or location of the 
+  knots; there will be a knot at each training observation. Instead, we need to choose 
+  the value of $\lambda$. For this case, LOOCV can be computed very efficiently with 
+  essentially the same cost as computing a single fit, using the following formula:&lt;br /&gt;
+  \(RSS_{cv}(\lambda) = \sum_{i=1}^n(y_i - \hat{g}_\lambda^{(-i)}(x_i))^2 
+  = \sum_{i=1}^n\left[\frac{y_i-\hat{g}_\lambda(x_i)}{1-\{\mathbf{S}_\lambda\}_{ii}}\right]^2\)&lt;br /&gt;
+  where \(\hat{g}_\lambda^{(-i)}(x_i)\) indicates the fitted value for this smoothing 
+  spline evaluated at $x_i$, where the fit uses all the training observations except 
+  for the &lt;em&gt;i&lt;/em&gt;th observation. In contrast, \(\hat{g}_\lambda(x_i)\) indicates the smoothing 
+  spline evaluated at $x_i$, where the function is fit to the full data. Thus, we can compute 
+  each of LOOCV fits, by one-time computing of the original fit to all of the data.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;By effective d.f, we can directly compare the model complexities of models discussed so 
+  far, such as linear regression, ridge regression, smoothing splines, cubic splines, etc.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;76-local-regression&quot;&gt;7.6. Local Regression&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A different approach for fitting flexible non-linear functions, with the idea of KNN 
+  but closer observations have more weights. This is sometimes referred to as a &lt;em&gt;memory-based&lt;/em&gt; 
+  procedure, because we need all the training data each time we compute a prediction.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm: Local Regression At $X = x_0$
+    &lt;ol&gt;
+      &lt;li&gt;Gather the faction $s = k/n$ of training points whose $x_i$ are closest to $x_0$.&lt;/li&gt;
+      &lt;li&gt;Assign a weight $K_{i0} = K(x_i,x_0)$ to each point in this neighborhood, so that 
+  the point furthest from $x_0$ has weight zero, and the closest has the highest weight. 
+  All other points get weight zero.&lt;/li&gt;
+      &lt;li&gt;Fit a &lt;em&gt;weighted least squares regression&lt;/em&gt; using the aforementioned weights;&lt;br /&gt;
+  Objective function: \(\text{min}_{\beta_0,\beta_1}
+                 \left[\sum_{i=1}^n K_{i0}(y_i - \beta_0 - \beta_1 x_i)^2 \right]\)&lt;/li&gt;
+      &lt;li&gt;The fitted value at $x_0$ is given by $\hat{f}(x_0) = \hat\beta_0 + \hat\beta_1 x_0$.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In performing local regression, there are choices to be made, such as how to define 
+  the weighting function &lt;em&gt;K&lt;/em&gt;, and which regression model to fit. The most important 
+  choice is the &lt;em&gt;span s&lt;/em&gt;, which is the proportion of points used to compute the local 
+  regression at $x_0$; “How many neighbors?”. It plays a role of the tuning parameter 
+  $\lambda$, controls the flexibility of the fit. The smaller &lt;em&gt;s&lt;/em&gt;, the more &lt;em&gt;local&lt;/em&gt; and 
+  wiggly the fit. We can use CV methods to choose &lt;em&gt;s&lt;/em&gt;, or we can specify it directly.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The idea of local regression can be generalized in many different ways. In multivariate 
+  settings, one very useful generalization involves fitting a multiple linear regression 
+  model that is global in some variables, but local in another, such as time. Such 
+  &lt;em&gt;varying coefficient models&lt;/em&gt; are a useful way of adapting a model to the most recently 
+  gathered data.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Local regression can perform poorly if the dimension &lt;em&gt;p&lt;/em&gt; is much larger, suffers the 
+  dimensionality problem. Also, it has a boundary problem because there are less data 
+  points for neighbors.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;77-generalized-additive-models&quot;&gt;7.7. Generalized Additive Models&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Approaches presented in sections above can be seen as extensions of simple linear 
+  regression, flexibly predicting a response &lt;em&gt;Y&lt;/em&gt; on the basis of a single predictor &lt;em&gt;X&lt;/em&gt;. 
+  GAMs provide a general framework for extending a standard linear model by allowing 
+  non-linear functions of each of the variables, while maintaining &lt;em&gt;additivity&lt;/em&gt;. They 
+  can be applied with both quantitative and qualitative responses.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;771-gams-for-regression-problems&quot;&gt;7.7.1. GAMs for Regression Problems&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;standard multiple linear regression model is&lt;br /&gt;
+  \(y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_p x_{ip} + \epsilon_i\).&lt;br /&gt;
+  for non-linear relationships, replace each linear component \(\beta_j x_{ij}\) with an 
+  unspecified (smoothing) non-linear function \(f_j(x_{ij})\), now the model is&lt;br /&gt;
+  \(\begin{align*}
+  y_i &amp;amp;= \beta_0 + \sum_{j=1}^p f_j(x_{ij}) + \epsilon_i \\
+      &amp;amp;= \beta_0 + f_1(x_{i1}) + f_2(x_{i2}) + \cdots + f_p(x_{ip}) + \epsilon_i.
+  \end{align*}\)&lt;br /&gt;
+  It is called an additive model because we calculate a separate &lt;em&gt;f&lt;/em&gt; for each &lt;em&gt;X&lt;/em&gt;, 
+  then add together all of their contributions.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In case of using a smoothing spline to fit a GAM, it is not quite as simple as a 
+  natural spline case, since the least squares cannot be used. However, Standard 
+  softwares have some functions for GAMs using smoothing splines, via an approach 
+  known as &lt;em&gt;backfitting&lt;/em&gt;; a method to fit a multivariate model by repeatedly updating 
+  the fit for each predictor in turn, holding the others fixed. Each time we update 
+  a function, we simply apply the fitting method for that variable to a partial residual.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;772-gams-for-classification-problems&quot;&gt;7.7.2. GAMs for Classification Problems&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;For qualitative response &lt;em&gt;Y&lt;/em&gt;, standard logistic regression model is&lt;br /&gt;
+  \(\log\left(\frac{p(X)}{1-p(X)}\right) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p.\)&lt;br /&gt;
+  An extension allowing non-linear relationships; a logistic regression GAM is&lt;br /&gt;
+  \(\log\left(\frac{p(X)}{1-p(X)}\right) = \beta_0 + f_1(X_1) + f_2(X_2) + \cdots + f_p(X_p).\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;pros-and-cons-of-gams&quot;&gt;Pros and Cons of GAMs&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Pros
+    &lt;ol&gt;
+      &lt;li&gt;GAMs allow us to fit a non-linear function to each variable, so that we can 
+ automatically model non-linear relationships. This means we do not need to 
+ manually try out many different transformations on each variable individually.&lt;/li&gt;
+      &lt;li&gt;Potentially make more accurate predictions with non-linear fits.&lt;/li&gt;
+      &lt;li&gt;Because the model is additive, we can examine the effect of each variable on the 
+ response individually while holding all of the other variables fixed.&lt;/li&gt;
+      &lt;li&gt;The smoothness of the function for the variable can be summarized via degrees 
+ of freedom.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Cons
+    &lt;ol&gt;
+      &lt;li&gt;The model is restricted to be additive; with many variables, important interactions 
+ can be missed. However, we can manually add interaction terms to the model by 
+ including additional predictors of the form like $X_j \times X_k$.&lt;/li&gt;
+      &lt;li&gt;The solution of the optimization is not unique; $\beta_0$ is not identifiable 
+ because each $f_j$ model has its intercept term; a GAM has &lt;em&gt;p+1&lt;/em&gt; total intercepts 
+ and they are not distinguishable. For this problem, we make a restriction that 
+ every &lt;em&gt;j&lt;/em&gt;th &lt;em&gt;X&lt;/em&gt; variable to be centered; \(\sum_{i=1}^n f_j(x_{ij}) = 0\) and 
+ $\hat\beta_0 = \bar{y}$.&lt;/li&gt;
+    &lt;/ol&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
