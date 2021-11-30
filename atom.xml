@@ -8,7 +8,7 @@
     
       
       <item>
-        <title>GNN - Fashion Coordinator Chatbot Dataset</title>
+        <title>Fashion Coordinator with GNN</title>
         
           <description>
 </description>
@@ -29,36 +29,36 @@
         
         <pubDate>Fri, 18 Jun 2021 00:00:00 +0900</pubDate>
         <link>
-        http://0.0.0.0:4000/fintel_R_final</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/fintel_R_final</guid>
+        http://0.0.0.0:4000/stock_portfolio</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/stock_portfolio</guid>
       </item>
       
     
       
       <item>
-        <title>Data Mining - K-POP Fandom Data Analysis with networkX</title>
+        <title>K-POP Fandom Data Analysis with networkX</title>
         
           <description>
 </description>
         
         <pubDate>Wed, 02 Jun 2021 00:00:00 +0900</pubDate>
         <link>
-        http://0.0.0.0:4000/DM_final_exam</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/DM_final_exam</guid>
+        http://0.0.0.0:4000/kpop_fandom</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/kpop_fandom</guid>
       </item>
       
     
       
       <item>
-        <title>Data Mining - Stock Market Analysis with networkX</title>
+        <title>Stock Market Cluster Analysis with NetworkX</title>
         
           <description>
 </description>
         
         <pubDate>Fri, 21 May 2021 00:00:00 +0900</pubDate>
         <link>
-        http://0.0.0.0:4000/DM_final_proj</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/DM_final_proj</guid>
+        http://0.0.0.0:4000/stock_cluster</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/stock_cluster</guid>
       </item>
       
     
@@ -71,8 +71,8 @@
         
         <pubDate>Wed, 16 Dec 2020 00:00:00 +0900</pubDate>
         <link>
-        http://0.0.0.0:4000/ds_R_final</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/ds_R_final</guid>
+        http://0.0.0.0:4000/R_air_polution</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/R_air_polution</guid>
       </item>
       
     
@@ -85,8 +85,8 @@
         
         <pubDate>Fri, 19 Jun 2020 00:00:00 +0900</pubDate>
         <link>
-        http://0.0.0.0:4000/NLP_final</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/NLP_final</guid>
+        http://0.0.0.0:4000/NLP_korean_RNN</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/NLP_korean_RNN</guid>
       </item>
       
     
@@ -99,8 +99,8 @@
         
         <pubDate>Sun, 10 May 2020 16:00:00 +0900</pubDate>
         <link>
-        http://0.0.0.0:4000/NLP_midterm</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/NLP_midterm</guid>
+        http://0.0.0.0:4000/NLP_eng_ml</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/NLP_eng_ml</guid>
       </item>
       
     
