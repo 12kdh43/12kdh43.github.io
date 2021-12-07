@@ -8,7 +8,7 @@
     
       
       <item>
-        <title>Fashion Coordinator with GNN</title>
+        <title>GNN-based Fashion Coordinator</title>
         
           <description>
 </description>
@@ -22,7 +22,7 @@
     
       
       <item>
-        <title>R - Stock Market Portfolio Analysis</title>
+        <title>Stock Market Portfolio Modeling with R</title>
         
           <description>&lt;p&gt;&lt;img src=&quot;/assets/images/m_slide_full.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
 </description>
@@ -87,6 +87,463 @@
         <link>
         http://0.0.0.0:4000/NLP_korean_RNN</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/NLP_korean_RNN</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>ISLR - Chapter 8. Tree-Based Methods</title>
+        
+          <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-8-tree-based-methods&quot; id=&quot;markdown-toc-chapter-8-tree-based-methods&quot;&gt;Chapter 8. Tree-Based Methods&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#81-the-basics-of-decision-trees&quot; id=&quot;markdown-toc-81-the-basics-of-decision-trees&quot;&gt;8.1. The Basics of Decision Trees&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#811-regression-trees&quot; id=&quot;markdown-toc-811-regression-trees&quot;&gt;8.1.1. Regression Trees&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#prediction-via-stratification-of-the-feature-space&quot; id=&quot;markdown-toc-prediction-via-stratification-of-the-feature-space&quot;&gt;Prediction via Stratification of the Feature Space&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#tree-pruning&quot; id=&quot;markdown-toc-tree-pruning&quot;&gt;Tree Pruning&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#812-classification-trees&quot; id=&quot;markdown-toc-812-classification-trees&quot;&gt;8.1.2. Classification Trees&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#813-trees-versus-linear-models&quot; id=&quot;markdown-toc-813-trees-versus-linear-models&quot;&gt;8.1.3. Trees Versus Linear Models&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#814-advantages-and-disadvantages-of-trees&quot; id=&quot;markdown-toc-814-advantages-and-disadvantages-of-trees&quot;&gt;8.1.4. Advantages and Disadvantages of Trees&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#82-bagging-random-forests-boosting-and-bayesian-additive-regression-trees&quot; id=&quot;markdown-toc-82-bagging-random-forests-boosting-and-bayesian-additive-regression-trees&quot;&gt;8.2. Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#821-bagging&quot; id=&quot;markdown-toc-821-bagging&quot;&gt;8.2.1. Bagging&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#out-of-bag-error-estimation&quot; id=&quot;markdown-toc-out-of-bag-error-estimation&quot;&gt;Out-of-Bag Error Estimation&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#variable-importance-measures&quot; id=&quot;markdown-toc-variable-importance-measures&quot;&gt;Variable Importance Measures&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#822-random-forests&quot; id=&quot;markdown-toc-822-random-forests&quot;&gt;8.2.2. Random Forests&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#permutation-importance&quot; id=&quot;markdown-toc-permutation-importance&quot;&gt;Permutation Importance&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#823-boosting&quot; id=&quot;markdown-toc-823-boosting&quot;&gt;8.2.3. Boosting&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#824-bayesian-additive-regression-trees&quot; id=&quot;markdown-toc-824-bayesian-additive-regression-trees&quot;&gt;8.2.4. Bayesian Additive Regression Trees&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#825-summary-of-tree-ensemble-methods&quot; id=&quot;markdown-toc-825-summary-of-tree-ensemble-methods&quot;&gt;8.2.5. Summary of Tree Ensemble Methods&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-8-tree-based-methods&quot;&gt;Chapter 8. Tree-Based Methods&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Background&lt;br /&gt;
+  Tree by binary question, splitting variables with split points.&lt;br /&gt;
+  Partitions of input space &amp;amp; fit a constant to each one.&lt;br /&gt;
+  $X = (X_1,\ldots,X_p)$ to $R_1,\ldots,R_M$ regions, &lt;em&gt;p&lt;/em&gt;-dimension rectangles.&lt;br /&gt;
+  where \(R_m\cap R_{m'}, m\ne m', \bigcup_{m=1}^M R_m = \mathbb{X}.\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Model:&lt;br /&gt;
+  \(f(X)=\sum_{m=1}^M C_m I(X\in R_m)\)&lt;br /&gt;
+  where $C_m$ is a constant for each region &lt;em&gt;m&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;81-the-basics-of-decision-trees&quot;&gt;8.1. The Basics of Decision Trees&lt;/h2&gt;
+
+&lt;h3 id=&quot;811-regression-trees&quot;&gt;8.1.1. Regression Trees&lt;/h3&gt;
+
+&lt;h4 id=&quot;prediction-via-stratification-of-the-feature-space&quot;&gt;Prediction via Stratification of the Feature Space&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Two steps of building a regression tree:
+    &lt;ol&gt;
+      &lt;li&gt;Divide the predictor space; the set of possible values for $X_1, \ldots, X_p$ 
+ into &lt;em&gt;J&lt;/em&gt; distinct and non-overlapping regions; $R_1, \ldots, R_J$.&lt;/li&gt;
+      &lt;li&gt;For every observations that falls into the region $R_j$, we make the same 
+ prediction, which is simply the mean of the response values for the training 
+ observations in $R_j$.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To divide the predictor space into high-dimensional rectangles, or &lt;em&gt;boxes&lt;/em&gt;, our goal 
+  is to find the boxes that minimize the RSS, given by:&lt;br /&gt;
+  \(\sum_{j=1}^J\sum_{i\in R_j}(y_i-\hat{y}_{R_j})^2\)&lt;br /&gt;
+  where $\hat{y}_{R_j}$ is the mean response for the training observations within 
+  the &lt;em&gt;j&lt;/em&gt;th box.&lt;br /&gt;
+  I.e., the Least Squares Criterion in given regions:&lt;br /&gt;
+  \(\begin{align*}
+  \text{min}_{C_m}\sum_{i=1}^N RSS &amp;amp;= \text{min}_{C_m}\sum_{i=1}^N(y_i-f(x_i))^2 \\
+      &amp;amp;= \text{min}_{C_m}\sum_{i=1}^N\left[y_i - \sum_{m=1}^M C_m I(x_i\in R_m) \right]^2 \\
+  \rightarrow \hat{C}_m &amp;amp;= \text{ave}(y_i|x_i\in R_m) = \bar{y}_m
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How to split into spaces?&lt;br /&gt;
+  For its computational infeasibility, we take a &lt;em&gt;top-down&lt;/em&gt;, &lt;em&gt;greedy&lt;/em&gt; approach that 
+  it known as &lt;em&gt;recursive binary splitting&lt;/em&gt;. To perform recursive binary splitting, 
+  we first select the predictor $X_j$ and the cutpoint &lt;em&gt;s&lt;/em&gt; such that splitting the 
+  predictor spaace in to the regions \(\{X|X_j&amp;lt;s\}\) and \(\{X|X_j\ge s\}\) leads to 
+  the greatest possible reduction in RSS.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For splitting variable $X_j$ and split point &lt;em&gt;s&lt;/em&gt;,&lt;br /&gt;
+  In two binary partitions \(R_1(j,s) = \{X|X_j&amp;lt;s\}\) and \(R_2(j,s) = \{X|X_j\ge s\}\),&lt;br /&gt;
+  \(\text{min} \left[ \sum_{i:x_i\in R_1(j,s)}(y_i-\hat{y}_{R_1})^2 + \sum_{i:x_i\in R_2(j,s)}(y_i-\hat{y}_{R_2})^2 \right]\), or&lt;br /&gt;
+  \(\text{min}_{C_1}\sum_{i:x_i\in R_1(j,s)}(y_i-C_1)^2 + \min_{C_2}\sum_{i:x_i\in R_2(j,s)}(y_i-C_2)^2\).&lt;br /&gt;
+  \(\begin{align*}
+  \rightarrow &amp;amp; \text{ave}(y_i|x_i\in R_1(j,s)) = \hat{C}_1 = \hat{y}_{R_1} \\
+              &amp;amp; \text{ave}(y_i|x_i\in R_2(j,s)) = \hat{C}_2 = \hat{y}_{R_2}
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;We repeat this process over the two previously identified regions, looking for the 
+  best predictor and best cutpoint in order to split the data further so as the minimize 
+  the RSS within each of the resulting regions. The process continues until a stopping 
+  criterion is reached; for instance, until no region contains more than five observations.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;tree-pruning&quot;&gt;Tree Pruning&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Tree size is based on the number of regions(&lt;em&gt;M&lt;/em&gt;) and the model complexity is on the
+  number of parameters($C_m$). Since there is an extremely large number of possible 
+  subtrees, estimating the CV error for every possible subtree would be too cumbersome. 
+  Instead, to find the optimal &lt;em&gt;M&lt;/em&gt;, we use &lt;em&gt;Cost-Complexity Pruning&lt;/em&gt;, reducing from a 
+  very large tree $T_0$ to a subtree that has the lowest test error rate.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For each value of a nonnegative tuning parameter $\alpha$ there corresponds a subtree 
+  $T\in T_0$, such that minimizing&lt;br /&gt;
+  \(\sum_{m=1}^{|T|}\sum_{i:x_i\in R_m}(y_i-\hat{y}_{R_m})^2 + \alpha|T|\).&lt;br /&gt;
+  Here |&lt;em&gt;T&lt;/em&gt;| indicates the number of terminal nodes of the tree &lt;em&gt;T&lt;/em&gt;, $R_m$ is the 
+  rectangle, or the subset of predictor space corresponding to the &lt;em&gt;m&lt;/em&gt;th terminal node, 
+  and $\hat{y}_{R_m} = \hat{C}_m$ is the predicted response, the mean of the training 
+  observations in $R_m$. When $\alpha=0$, then the subtree &lt;em&gt;T&lt;/em&gt; will simply equal $T_0$. 
+  As $\alpha$ increases, there is a price to pay for having a tree with many terminal 
+  nodes, and so the quantity will tend to be minimized for a smaller subtree.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Algorithm&lt;/p&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Use recursive binary splitting to grow a large tree, stopping only when each 
+ terminal node has fewer than some minimum number of observations, threshold.&lt;/li&gt;
+      &lt;li&gt;Apply cost complexity pruning to obtain a sequence of best subtrees, as a function 
+ of $\alpha$.&lt;/li&gt;
+      &lt;li&gt;Use K-fold CV to choose $\alpha$:&lt;br /&gt;
+ (a) Repeat Steps 1 and 2 on all but &lt;em&gt;k&lt;/em&gt;th fold of the training data.&lt;br /&gt;
+ (b) Evaluate the mean squared prediction error on the data in the left-out &lt;em&gt;k&lt;/em&gt;th 
+ fold, as a function of $\alpha$.&lt;br /&gt;
+ Average the results for each value of $\alpha$, and pick a $\alpha$ to minimize 
+ the average error.&lt;/li&gt;
+      &lt;li&gt;Return the subtree from Step 2 that corresponds to the chosen value of $\alpha$.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;812-classification-trees&quot;&gt;8.1.2. Classification Trees&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instead of the mean response of the training observations that belong to the same 
+  terminal node, a classification tree predict that each observation in the region 
+  to the most commonly occurring class of training observations in the region to 
+  which it belongs. In interpreting the result, we are often interested not only in 
+  the class prediction, but also in the class proportions among the training observations 
+  that fall into that region.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A natural alternative to RSS, the classification error rate; the fraction of the 
+  training observations in that region that do not belong to the most common class:&lt;br /&gt;
+  \(E=1-\text{max}_k(\hat{p}_{mk})\), where \(\hat{p}_{mk} = \frac{1}{N_m}\sum_{x_i\in R_m}I(y_i=k)\),&lt;br /&gt;
+  represents the proportion of training observations in the &lt;em&gt;m&lt;/em&gt;th region that are from 
+  the &lt;em&gt;k&lt;/em&gt;th class. By majority vote rule, \(k(m) = \text{argmax}_k \hat{p}_mk\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;However, the classification error is not sufficiently sensitive for tree-growing, 
+  in practice we use two other measures preferable.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;Gini index&lt;/em&gt;:&lt;br /&gt;
+  \(G=\sum_{k=1}^K\hat{p}_{mk}(1-\hat{p}_{mk})\),&lt;br /&gt;
+  a measure of total variance across the &lt;em&gt;K&lt;/em&gt; classes. It is often referred to as 
+  a measure of node &lt;em&gt;purity&lt;/em&gt;; a small value indicates that a node contains predominantly 
+  observations from a single class.&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;Cross-entropy&lt;/em&gt; or deviance:&lt;br /&gt;
+  \(D=-\sum_{k=1}^K\hat{p}_{mk}\log\hat{p}_{mk}\),&lt;br /&gt;
+  a nonnegative value that take on a small value if the &lt;em&gt;m&lt;/em&gt;th node is pure.&lt;br /&gt;
+  these measures are typically used to evaluate the quality of a particular split, 
+  since they are more sensitive to node purity than is the classification error rate. 
+  The classification error rate is preferable if prediction accuracy of the final 
+  pruned tree is the goal.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Being performed to increase node purity, some of the splits yield two terminal nodes 
+  that have the same predicted value. Even though such splits do not reduce the classification 
+  error, it improves the Gini index and the entropy.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;813-trees-versus-linear-models&quot;&gt;8.1.3. Trees Versus Linear Models&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Linear regression model is:&lt;br /&gt;
+  \(f(X) = \beta_0 + \sum_{j=1}^p X_j\beta_j\),&lt;br /&gt;
+  whereas Regression tree model is:&lt;br /&gt;
+  \(f(X) = \sum_{m=1}^M c_m\cdot 1_{(X\in R_m)}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If there is a highly non-linear and complex relationship between the features and 
+  the response, then decision trees may outperform classical approaches. Also, trees 
+  may be preffered for the sake of interpretability and visualization.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;814-advantages-and-disadvantages-of-trees&quot;&gt;8.1.4. Advantages and Disadvantages of Trees&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Pros
+    &lt;ul&gt;
+      &lt;li&gt;Good interpretability and easy to explain.&lt;/li&gt;
+      &lt;li&gt;Closely mirror human decision-making than do some of the regression and classification 
+  approaches.&lt;/li&gt;
+      &lt;li&gt;Can be displayed graphically, and are easily interpreted even by a non-expert.&lt;/li&gt;
+      &lt;li&gt;Can easily handle qualitative predictors without the need to create dummy variables.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Cons
+    &lt;ul&gt;
+      &lt;li&gt;Do not have the same level of predictive accuracy as the regression and classification 
+  approaches.&lt;/li&gt;
+      &lt;li&gt;Non-robust, a small change in the data can cause a large change in the final 
+  estimated tree(High variance).&lt;/li&gt;
+      &lt;li&gt;Lack of smoothness, can be far from the true function.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;By aggregating many decision trees, the predictive performance of trees can be 
+	substantially improved.&lt;/p&gt;
+
+&lt;h2 id=&quot;82-bagging-random-forests-boosting-and-bayesian-additive-regression-trees&quot;&gt;8.2. Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;An &lt;em&gt;ensemble&lt;/em&gt; method is an approach that combines many simple “building ensemble block” 
+  models in order to obtain a single and potentially very powerful model. These simple 
+  building block models are sometimes known as &lt;em&gt;weak learners&lt;/em&gt;, since they may lead 
+  to mediocre predictions on their own.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;821-bagging&quot;&gt;8.2.1. Bagging&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Bootstrap aggregation&lt;/em&gt;, or &lt;em&gt;bagging&lt;/em&gt;, is a general-purpose procedure for reducing 
+  the variance of a statistical learning method. Given a set of &lt;em&gt;n&lt;/em&gt; independent 
+  observations $Z_1,\ldots,Z_n$, each with variance $\sigma^2$, the variance of the 
+  mean $\bar{Z}$ of the observations is given by $\sigma^2/n$. In other words, 
+  &lt;em&gt;averaging a set of observations reduces variance&lt;/em&gt;.&lt;br /&gt;
+  Hence it is a natural way to reduce the variance and increase the test set accuracy 
+  of a statistical learning method. We could calculate \(\hat{f}^1(x), \ldots, \hat{f}^B(x)\) 
+  using &lt;em&gt;B&lt;/em&gt; seperate training sets, and average them in order to obtain a single 
+  low-variance model, \(\hat{f}_{\text{avg}}(x) = \frac{1}{B}\sum_{b=1}^B\hat{f}^b(x)\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In practice, we do not have access to multiple training sets. Instaed, we can bootstrap, 
+  by taking repeated samples from the (single) training data set. The bagging model,&lt;br /&gt;
+  \(\hat{f}_{\text{bag}}(x) = \frac{1}{B}\sum_{b=1}^B\hat{f}^{*b}(x)\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It is particularly useful for decision trees. To apply begging to regression trees, 
+  we simply construct &lt;em&gt;B&lt;/em&gt; regression trees using &lt;em&gt;B&lt;/em&gt; bootstrapped training sets, and 
+  average the resulting predictions. These trees are grown deep but not pruned. Each 
+  individual tree has high variance but low bias. Averaging these trees reduces the 
+  variance. Bagging improves the accuracy by combining hundreds or even thousands of 
+  trees into a single procedure.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To a classification problem where &lt;em&gt;Y&lt;/em&gt; is qualitative, the simplest approach is the
+  &lt;em&gt;majority vote&lt;/em&gt;; For a given test observation, record the class predicted by each 
+  of the &lt;em&gt;B&lt;/em&gt; trees and the overall prediction is the most commonly occurring class 
+  among those predictions.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;out-of-bag-error-estimation&quot;&gt;Out-of-Bag Error Estimation&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Without cross-validation or the validation set approach, there is a very straightforward 
+  way to estimate the test error of a bagged model. The reamining observations not 
+  used to fit a given bagged tree are referred to as the &lt;em&gt;out-of-bag&lt;/em&gt;(OOB) observations. 
+  We can predict the response for the &lt;em&gt;i&lt;/em&gt;th observation using each of the trees in 
+  which that observation was OOB. To obtain a single prediction for the &lt;em&gt;i&lt;/em&gt;th observation, 
+  we average these predicted responses to a regression set, or take a majority vote 
+  to a classification set. An OOB prediction can be obtained in this way for every 
+  &lt;em&gt;n&lt;/em&gt; observations, from which the overall OOB MSE or classification error can be computed.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sinse the response for each observation is predicted using only the trees that were 
+  not fit using that observation, the resulting OOB error is a valid estimate of the 
+  test error for the bagged model.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;variable-importance-measures&quot;&gt;Variable Importance Measures&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Bagging improves prediction accuracy at the expense of interpretability. One can obtain 
+  an overall summary of the importance of each predictor using the RSS or the Gini 
+  index. In the case of bagging regression trees, we can record the total amount that 
+  the RSS is decreased due to splits over a given predictor, averaged over all &lt;em&gt;B&lt;/em&gt; 
+  trees. A large value indicates an important predictor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;822-random-forests&quot;&gt;8.2.2. Random Forests&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;If there is one very strong predictor along with a number of other moderately strong 
+  predictors, in bagging method, most trees will use this strong predictor in the top 
+  split. Consequently, all of the bagged trees will look quite similar and the predictions 
+  from the bagged trees will be highly correlated. Averaging highly correlated quantities 
+  does not lead to a substantial reduction in variance over a single tree in this setting.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Random forests overcome this problem by forcing each split to consider only a subset 
+  of the predictors. As in bagging, we build a number of decision trees on bootstrapped 
+  training samples. But when building these decision trees, each time a split in a 
+  tree is considered, &lt;em&gt;a random sample of m predictors&lt;/em&gt; is chosen as split candidates 
+  from the full set of &lt;em&gt;p&lt;/em&gt; predictors. Typically, the number of predictors considered 
+  at each split &lt;em&gt;m&lt;/em&gt; is approximately equal to the square root of the total number of 
+  predictors &lt;em&gt;p&lt;/em&gt;; $m\approx\sqrt{p}$.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;On average $(p-m)/p$ of the splits will not even consider the strong predictor, and 
+  so other predictors will have more of a chance. This process is &lt;em&gt;decorrelating&lt;/em&gt; 
+  the trees, thereby making the average of the resulting trees less variable and more 
+  reliable.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;permutation-importance&quot;&gt;Permutation Importance&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Calculate the estimated test error with the original OOB samples as validation data, 
+  then randomly suffle; or &lt;em&gt;permute&lt;/em&gt; the order of the &lt;em&gt;j&lt;/em&gt;th variable on OOB sample 
+  to break the relationship between $X_j$ and &lt;em&gt;Y&lt;/em&gt;. With this permuted OOB samples, 
+  calculate the Permuation Measure. If the result of permuation measure is worse than 
+  that of reference measure, we can consider $X_j$ is an important variable. For all 
+  variables &lt;em&gt;X&lt;/em&gt;, we can make the rank of variable importance. However, permuation 
+  importance can overestimates the importance of correlated predictors.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;823-boosting&quot;&gt;8.2.3. Boosting&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Bagging creates multiple copies of the original training data set using the bootstrap, 
+  fits a separate decision tree to each copy and then combines all of the trees in 
+  order to create a single predictive model. Each tree is built on a bootstrap data 
+  set, independent of the other trees.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Boosting works in a similar way, except that the trees are grown &lt;em&gt;sequentially&lt;/em&gt;: each 
+  each tree is grown using information from previously grown trees. This approach 
+  does not involve bootstrap sampling; instead each tree is fit on a modified version 
+  of the original data set.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm
+    &lt;ol&gt;
+      &lt;li&gt;Set $\hat{f}(x)=0$ and $r_i=y_i$ for all &lt;em&gt;i&lt;/em&gt; in the training set.&lt;/li&gt;
+      &lt;li&gt;For $b=1,2,\ldots,B$, repeat:&lt;br /&gt;
+ (a) Fit a tree $\hat{f}^b$ with &lt;em&gt;d&lt;/em&gt; splits ($d+1$ terminal nodes) to the 
+ training data (&lt;em&gt;X,r&lt;/em&gt;).&lt;br /&gt;
+ (b) Update $\hat{f}$ by adding in a shrunken version of the new tree:&lt;br /&gt;
+ \(\hat{f}(x)\leftarrow\hat{f}(x)+\lambda\hat{f}^b(x)\).&lt;br /&gt;
+ (c) Update the residuals, removing the effect of &lt;em&gt;b&lt;/em&gt;th tree,&lt;br /&gt;
+ Unexplained residuals \(r_i\leftarrow r_i - \lambda\hat{f}^b(x_i)\).&lt;/li&gt;
+      &lt;li&gt;Output the boosted model,&lt;br /&gt;
+ \(\hat{f}(x)=\sum_{i=1}^B\lambda\hat{f}^b(x)\).&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Boosting combines multiple weak learners(poor prediction models) and make better 
+  prediction. In procedure, data(the weights of observations) are repeatedly modified 
+  and the model &lt;em&gt;learns slowly&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Boosting tuning parameters
+    &lt;ol&gt;
+      &lt;li&gt;&lt;em&gt;B&lt;/em&gt; the number of trees. Unlike bagging and random forests, boosting can overfit 
+ if &lt;em&gt;B&lt;/em&gt; is too large, although this overfitting tends to occur slowly if at all. 
+ We use cross-validation to select &lt;em&gt;B&lt;/em&gt;.&lt;/li&gt;
+      &lt;li&gt;$\lambda$ the shrinkage parameter, a small positive number. This controls the 
+ rate at which boosting learns. Typical values are 0.01 or 0.001. Very small 
+ $\lambda$ can require using a very large value of &lt;em&gt;B&lt;/em&gt; to achieve good performance.&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;d&lt;/em&gt; the number of splits in each tree, which controls the complexity of the boosted 
+ ensemble. $d=1$ works well, in which case each tree is a &lt;em&gt;stump&lt;/em&gt;, consisting 
+ of a single split. In this case, the boosted ensemble is fitting an additive 
+ model, each term involves only a single variable. Generally &lt;em&gt;d&lt;/em&gt; is the 
+ &lt;em&gt;interaction depth&lt;/em&gt;, and controls the interaction order of the boosted model.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;824-bayesian-additive-regression-trees&quot;&gt;8.2.4. Bayesian Additive Regression Trees&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Bagging and random forests make predictions from an average of independent trees, 
+  while boosting uses a weighted sum of trees. BART is related to both approaches: 
+  each tree is constructed in a random manner and each tree tries to caputre signal 
+  not yet accounted for by the current model.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;let &lt;em&gt;K&lt;/em&gt; denote the number of regression trees, and &lt;em&gt;B&lt;/em&gt; the number of iterations for 
+  which the BART will be run. The notation $\hat{f}_k^b(x)$ represents the prediction 
+  at &lt;em&gt;x&lt;/em&gt; for the &lt;em&gt;k&lt;/em&gt;th regression tree used in the &lt;em&gt;b&lt;/em&gt;th iteration. At the end of 
+  each iteration, the &lt;em&gt;K&lt;/em&gt; trees from that iteration will be summed; 
+  \(\hat{f}^b(x)=\sum_{k=1}^K\hat{f}_k^b(x)\) for $b=1,\ldots,B$.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;First iteration, all trees are initialized to have a single root node, with 
+ \(\hat{f}_k^1(x) = \frac{1}{nK}\sum_{i=1}^n y_i\), the mean of the response values 
+ divided by the total number of trees. Thus, 
+ \(\hat{f}^1(x)=\sum_{k=1}^K\hat{f}_k^1(x)=\frac{1}{n}\sum_{i=1}^n y_i = \bar{y}\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Next, updates each of the &lt;em&gt;K&lt;/em&gt; trees, one at a time.&lt;br /&gt;
+ In the &lt;em&gt;b&lt;/em&gt;th iteration, we subtract from each response value the predictions from 
+ all but the &lt;em&gt;k&lt;/em&gt;th tree to obtain a &lt;em&gt;partial residual&lt;/em&gt;&lt;br /&gt;
+ \(r_i = y_i - \sum_{k'&amp;lt;k}\hat{f}_{k'}^b(x_i) - \sum_{k'&amp;gt;k}\hat{f}_{k'}^{b-1}(x_i)\)&lt;br /&gt;
+ Rather than fitting a fresh tree to this partial residual, BART randomly chooses 
+ a perturbation to the tree from the previous iteration from a set of possible 
+ perturbations, favoring ones that improve the fit to the partial residual.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Two components to the perturbation:&lt;br /&gt;
+  We may change the structure of the tree by adding or pruning branches.&lt;br /&gt;
+  We may change the prediction in each terminal node of the tree.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Output of BART is a collection of prediction models,&lt;br /&gt;
+ \(\hat{f}^b(x) = \sum_{k=1}^K\hat{f}_k^b(x)\)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Typically, the first few of these prediction models in earlier iterations, known 
+  as the &lt;em&gt;burn-in&lt;/em&gt; period, tend not to provide very good results. For the number of 
+  burn-in iterations &lt;em&gt;L&lt;/em&gt;, for instance we might take &lt;em&gt;L&lt;/em&gt;=200, we simply remove and 
+  take the average after &lt;em&gt;L&lt;/em&gt; iterations; \(\hat{f}(x)=\frac{1}{B-L}\sum_{b=L+1}^B\hat{f}^b(x)\). 
+  Or we can compute quantities other than the average.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;825-summary-of-tree-ensemble-methods&quot;&gt;8.2.5. Summary of Tree Ensemble Methods&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Bagging: The trees are grown independently on random samples of the observations and 
+  tend to be quite similar to each other. Thus, bagging can get caught in local optima 
+  and fail to thoroughly explore the model space.&lt;/li&gt;
+  &lt;li&gt;Random Forests: The trees are grown independently on random samples but each split 
+  on each tree is performed using a random subset of the features, decorrelating the 
+  trees and leading to a more thorough exploration of the model space.&lt;/li&gt;
+  &lt;li&gt;Boosting: We only use the original data and do not draw any random samples. Trees 
+  are grown successively, usiang slow learning approach: each new tree is fit to the 
+  signal that is left over from the earlier trees, and shrunken down before it is 
+  used.&lt;/li&gt;
+  &lt;li&gt;BART: WE only use the original data and trees are grown successively. However, each 
+  tree is perturbed in order to avoid local minima and achieve a more thorough exploration 
+  of the model space.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        
+        <pubDate>Thu, 14 May 2020 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/islr_ch8</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch8</guid>
       </item>
       
     

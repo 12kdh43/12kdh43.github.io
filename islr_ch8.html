@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	
+	<!-- On Post front-matter YAML, set "use_math: true" to use LaTex -->
+	
+	  
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+        autoNumber: "AMS"
+        }
+    },
+    tex2jax: {
+    inlineMath: [ ['$', '$'], ["\\(","\\)"]  ],
+    displayMath: [ ['$$', '$$'], ["\\[","\\]"]  ],
+    processEscapes: true,
+    }
+});
+MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+        alert("Math Processing Error: "+message[1]);
+    });
+MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+        alert("Math Processing Error: "+message[1]);
+    });
+</script>
+
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+	
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>ISLR - Chapter 8. Tree-Based Methods</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <!-- syntax.css -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+	
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="" />
+    <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
+    <link rel="canonical" href="http://0.0.0.0:4000/islr_ch8" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="Darron's Devlog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ISLR - Chapter 8. Tree-Based Methods" />
+    <meta property="og:description" content="Chapter 8. Tree-Based Methods 8.1. The Basics of Decision Trees 8.1.1. Regression Trees Prediction via Stratification of the Feature Space Tree Pruning 8.1.2. Classification Trees 8.1.3. Trees Versus Linear Models 8.1.4. Advantages and Disadvantages of Trees 8.2. Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees 8.2.1. Bagging Out-of-Bag Error" />
+    <meta property="og:url" content="http://0.0.0.0:4000/islr_ch8" />
+    <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2020-05-14T00:00:00+09:00" />
+    <meta property="article:modified_time" content="2020-05-14T00:00:00+09:00" />
+    <meta property="article:tag" content="ISLR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ISLR - Chapter 8. Tree-Based Methods" />
+    <meta name="twitter:description" content="Chapter 8. Tree-Based Methods 8.1. The Basics of Decision Trees 8.1.1. Regression Trees Prediction via Stratification of the Feature Space Tree Pruning 8.1.2. Classification Trees 8.1.3. Trees Versus Linear Models 8.1.4. Advantages and Disadvantages of Trees 8.2. Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees 8.2.1. Bagging Out-of-Bag Error" />
+    <meta name="twitter:url" content="http://0.0.0.0:4000/" />
+    <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Darron's Devlog" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="ISLR" />
+    <meta name="twitter:site" content="@" />
+    <meta name="twitter:creator" content="@" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Darron's Devlog",
+        "logo": "http://0.0.0.0:4000/"
+    },
+    "url": "http://0.0.0.0:4000/islr_ch8",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://0.0.0.0:4000/islr_ch8"
+    },
+    "description": "Chapter 8. Tree-Based Methods 8.1. The Basics of Decision Trees 8.1.1. Regression Trees Prediction via Stratification of the Feature Space Tree Pruning 8.1.2. Classification Trees 8.1.3. Trees Versus Linear Models 8.1.4. Advantages and Disadvantages of Trees 8.2. Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees 8.2.1. Bagging Out-of-Bag Error"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="ISLR - Chapter 8. Tree-Based Methods" href="/feed.xml" />
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="/">Darron's Devlog</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
+    <li class="nav-projects" role="menuitem"><a href="/tag/projects/">Projects</a></li>
+    <li class="nav-studies" role="menuitem"><a href="/tag/studies/">Studies</a></li>
+    <li class="nav-archive" role="menuitem">
+        <a href="/archive.html">All Posts</a>
+    </li>
+</ul>
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+            
+        </div>
+        
+            <a class="subscribe-button" href="#subscribe">Search</a>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full  tag-islr  no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="14 May 2020">14 May 2020</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+                            
+                               <a href='/tag/islr/'>ISLR</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">ISLR - Chapter 8. Tree-Based Methods</h1>
+            </header>
+	<!--
+            
+	-->
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <ul id="markdown-toc">
+  <li><a href="#chapter-8-tree-based-methods" id="markdown-toc-chapter-8-tree-based-methods">Chapter 8. Tree-Based Methods</a></li>
+  <li><a href="#81-the-basics-of-decision-trees" id="markdown-toc-81-the-basics-of-decision-trees">8.1. The Basics of Decision Trees</a>    <ul>
+      <li><a href="#811-regression-trees" id="markdown-toc-811-regression-trees">8.1.1. Regression Trees</a>        <ul>
+          <li><a href="#prediction-via-stratification-of-the-feature-space" id="markdown-toc-prediction-via-stratification-of-the-feature-space">Prediction via Stratification of the Feature Space</a></li>
+          <li><a href="#tree-pruning" id="markdown-toc-tree-pruning">Tree Pruning</a></li>
+        </ul>
+      </li>
+      <li><a href="#812-classification-trees" id="markdown-toc-812-classification-trees">8.1.2. Classification Trees</a></li>
+      <li><a href="#813-trees-versus-linear-models" id="markdown-toc-813-trees-versus-linear-models">8.1.3. Trees Versus Linear Models</a>        <ul>
+          <li><a href="#814-advantages-and-disadvantages-of-trees" id="markdown-toc-814-advantages-and-disadvantages-of-trees">8.1.4. Advantages and Disadvantages of Trees</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#82-bagging-random-forests-boosting-and-bayesian-additive-regression-trees" id="markdown-toc-82-bagging-random-forests-boosting-and-bayesian-additive-regression-trees">8.2. Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees</a>    <ul>
+      <li><a href="#821-bagging" id="markdown-toc-821-bagging">8.2.1. Bagging</a>        <ul>
+          <li><a href="#out-of-bag-error-estimation" id="markdown-toc-out-of-bag-error-estimation">Out-of-Bag Error Estimation</a></li>
+          <li><a href="#variable-importance-measures" id="markdown-toc-variable-importance-measures">Variable Importance Measures</a></li>
+        </ul>
+      </li>
+      <li><a href="#822-random-forests" id="markdown-toc-822-random-forests">8.2.2. Random Forests</a>        <ul>
+          <li><a href="#permutation-importance" id="markdown-toc-permutation-importance">Permutation Importance</a></li>
+        </ul>
+      </li>
+      <li><a href="#823-boosting" id="markdown-toc-823-boosting">8.2.3. Boosting</a></li>
+      <li><a href="#824-bayesian-additive-regression-trees" id="markdown-toc-824-bayesian-additive-regression-trees">8.2.4. Bayesian Additive Regression Trees</a></li>
+      <li><a href="#825-summary-of-tree-ensemble-methods" id="markdown-toc-825-summary-of-tree-ensemble-methods">8.2.5. Summary of Tree Ensemble Methods</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="chapter-8-tree-based-methods">Chapter 8. Tree-Based Methods</h2>
+<ul>
+  <li>
+    <p>Background<br />
+  Tree by binary question, splitting variables with split points.<br />
+  Partitions of input space &amp; fit a constant to each one.<br />
+  $X = (X_1,\ldots,X_p)$ to $R_1,\ldots,R_M$ regions, <em>p</em>-dimension rectangles.<br />
+  where \(R_m\cap R_{m'}, m\ne m', \bigcup_{m=1}^M R_m = \mathbb{X}.\)</p>
+  </li>
+  <li>
+    <p>Model:<br />
+  \(f(X)=\sum_{m=1}^M C_m I(X\in R_m)\)<br />
+  where $C_m$ is a constant for each region <em>m</em>.</p>
+  </li>
+</ul>
+
+<h2 id="81-the-basics-of-decision-trees">8.1. The Basics of Decision Trees</h2>
+
+<h3 id="811-regression-trees">8.1.1. Regression Trees</h3>
+
+<h4 id="prediction-via-stratification-of-the-feature-space">Prediction via Stratification of the Feature Space</h4>
+<ul>
+  <li>Two steps of building a regression tree:
+    <ol>
+      <li>Divide the predictor space; the set of possible values for $X_1, \ldots, X_p$ 
+ into <em>J</em> distinct and non-overlapping regions; $R_1, \ldots, R_J$.</li>
+      <li>For every observations that falls into the region $R_j$, we make the same 
+ prediction, which is simply the mean of the response values for the training 
+ observations in $R_j$.</li>
+    </ol>
+  </li>
+  <li>
+    <p>To divide the predictor space into high-dimensional rectangles, or <em>boxes</em>, our goal 
+  is to find the boxes that minimize the RSS, given by:<br />
+  \(\sum_{j=1}^J\sum_{i\in R_j}(y_i-\hat{y}_{R_j})^2\)<br />
+  where $\hat{y}_{R_j}$ is the mean response for the training observations within 
+  the <em>j</em>th box.<br />
+  I.e., the Least Squares Criterion in given regions:<br />
+  \(\begin{align*}
+  \text{min}_{C_m}\sum_{i=1}^N RSS &amp;= \text{min}_{C_m}\sum_{i=1}^N(y_i-f(x_i))^2 \\
+      &amp;= \text{min}_{C_m}\sum_{i=1}^N\left[y_i - \sum_{m=1}^M C_m I(x_i\in R_m) \right]^2 \\
+  \rightarrow \hat{C}_m &amp;= \text{ave}(y_i|x_i\in R_m) = \bar{y}_m
+  \end{align*}\)</p>
+  </li>
+  <li>
+    <p>How to split into spaces?<br />
+  For its computational infeasibility, we take a <em>top-down</em>, <em>greedy</em> approach that 
+  it known as <em>recursive binary splitting</em>. To perform recursive binary splitting, 
+  we first select the predictor $X_j$ and the cutpoint <em>s</em> such that splitting the 
+  predictor spaace in to the regions \(\{X|X_j&lt;s\}\) and \(\{X|X_j\ge s\}\) leads to 
+  the greatest possible reduction in RSS.</p>
+  </li>
+  <li>
+    <p>For splitting variable $X_j$ and split point <em>s</em>,<br />
+  In two binary partitions \(R_1(j,s) = \{X|X_j&lt;s\}\) and \(R_2(j,s) = \{X|X_j\ge s\}\),<br />
+  \(\text{min} \left[ \sum_{i:x_i\in R_1(j,s)}(y_i-\hat{y}_{R_1})^2 + \sum_{i:x_i\in R_2(j,s)}(y_i-\hat{y}_{R_2})^2 \right]\), or<br />
+  \(\text{min}_{C_1}\sum_{i:x_i\in R_1(j,s)}(y_i-C_1)^2 + \min_{C_2}\sum_{i:x_i\in R_2(j,s)}(y_i-C_2)^2\).<br />
+  \(\begin{align*}
+  \rightarrow &amp; \text{ave}(y_i|x_i\in R_1(j,s)) = \hat{C}_1 = \hat{y}_{R_1} \\
+              &amp; \text{ave}(y_i|x_i\in R_2(j,s)) = \hat{C}_2 = \hat{y}_{R_2}
+  \end{align*}\)</p>
+  </li>
+  <li>We repeat this process over the two previously identified regions, looking for the 
+  best predictor and best cutpoint in order to split the data further so as the minimize 
+  the RSS within each of the resulting regions. The process continues until a stopping 
+  criterion is reached; for instance, until no region contains more than five observations.</li>
+</ul>
+
+<h4 id="tree-pruning">Tree Pruning</h4>
+<ul>
+  <li>
+    <p>Tree size is based on the number of regions(<em>M</em>) and the model complexity is on the
+  number of parameters($C_m$). Since there is an extremely large number of possible 
+  subtrees, estimating the CV error for every possible subtree would be too cumbersome. 
+  Instead, to find the optimal <em>M</em>, we use <em>Cost-Complexity Pruning</em>, reducing from a 
+  very large tree $T_0$ to a subtree that has the lowest test error rate.</p>
+  </li>
+  <li>
+    <p>For each value of a nonnegative tuning parameter $\alpha$ there corresponds a subtree 
+  $T\in T_0$, such that minimizing<br />
+  \(\sum_{m=1}^{|T|}\sum_{i:x_i\in R_m}(y_i-\hat{y}_{R_m})^2 + \alpha|T|\).<br />
+  Here |<em>T</em>| indicates the number of terminal nodes of the tree <em>T</em>, $R_m$ is the 
+  rectangle, or the subset of predictor space corresponding to the <em>m</em>th terminal node, 
+  and $\hat{y}_{R_m} = \hat{C}_m$ is the predicted response, the mean of the training 
+  observations in $R_m$. When $\alpha=0$, then the subtree <em>T</em> will simply equal $T_0$. 
+  As $\alpha$ increases, there is a price to pay for having a tree with many terminal 
+  nodes, and so the quantity will tend to be minimized for a smaller subtree.</p>
+  </li>
+  <li>
+    <p>Algorithm</p>
+    <ol>
+      <li>Use recursive binary splitting to grow a large tree, stopping only when each 
+ terminal node has fewer than some minimum number of observations, threshold.</li>
+      <li>Apply cost complexity pruning to obtain a sequence of best subtrees, as a function 
+ of $\alpha$.</li>
+      <li>Use K-fold CV to choose $\alpha$:<br />
+ (a) Repeat Steps 1 and 2 on all but <em>k</em>th fold of the training data.<br />
+ (b) Evaluate the mean squared prediction error on the data in the left-out <em>k</em>th 
+ fold, as a function of $\alpha$.<br />
+ Average the results for each value of $\alpha$, and pick a $\alpha$ to minimize 
+ the average error.</li>
+      <li>Return the subtree from Step 2 that corresponds to the chosen value of $\alpha$.</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="812-classification-trees">8.1.2. Classification Trees</h3>
+<ul>
+  <li>
+    <p>Instead of the mean response of the training observations that belong to the same 
+  terminal node, a classification tree predict that each observation in the region 
+  to the most commonly occurring class of training observations in the region to 
+  which it belongs. In interpreting the result, we are often interested not only in 
+  the class prediction, but also in the class proportions among the training observations 
+  that fall into that region.</p>
+  </li>
+  <li>
+    <p>A natural alternative to RSS, the classification error rate; the fraction of the 
+  training observations in that region that do not belong to the most common class:<br />
+  \(E=1-\text{max}_k(\hat{p}_{mk})\), where \(\hat{p}_{mk} = \frac{1}{N_m}\sum_{x_i\in R_m}I(y_i=k)\),<br />
+  represents the proportion of training observations in the <em>m</em>th region that are from 
+  the <em>k</em>th class. By majority vote rule, \(k(m) = \text{argmax}_k \hat{p}_mk\).</p>
+  </li>
+  <li>However, the classification error is not sufficiently sensitive for tree-growing, 
+  in practice we use two other measures preferable.
+    <ul>
+      <li><em>Gini index</em>:<br />
+  \(G=\sum_{k=1}^K\hat{p}_{mk}(1-\hat{p}_{mk})\),<br />
+  a measure of total variance across the <em>K</em> classes. It is often referred to as 
+  a measure of node <em>purity</em>; a small value indicates that a node contains predominantly 
+  observations from a single class.</li>
+      <li><em>Cross-entropy</em> or deviance:<br />
+  \(D=-\sum_{k=1}^K\hat{p}_{mk}\log\hat{p}_{mk}\),<br />
+  a nonnegative value that take on a small value if the <em>m</em>th node is pure.<br />
+  these measures are typically used to evaluate the quality of a particular split, 
+  since they are more sensitive to node purity than is the classification error rate. 
+  The classification error rate is preferable if prediction accuracy of the final 
+  pruned tree is the goal.</li>
+    </ul>
+  </li>
+  <li>Being performed to increase node purity, some of the splits yield two terminal nodes 
+  that have the same predicted value. Even though such splits do not reduce the classification 
+  error, it improves the Gini index and the entropy.</li>
+</ul>
+
+<h3 id="813-trees-versus-linear-models">8.1.3. Trees Versus Linear Models</h3>
+<ul>
+  <li>
+    <p>Linear regression model is:<br />
+  \(f(X) = \beta_0 + \sum_{j=1}^p X_j\beta_j\),<br />
+  whereas Regression tree model is:<br />
+  \(f(X) = \sum_{m=1}^M c_m\cdot 1_{(X\in R_m)}\)</p>
+  </li>
+  <li>
+    <p>If there is a highly non-linear and complex relationship between the features and 
+  the response, then decision trees may outperform classical approaches. Also, trees 
+  may be preffered for the sake of interpretability and visualization.</p>
+  </li>
+</ul>
+
+<h4 id="814-advantages-and-disadvantages-of-trees">8.1.4. Advantages and Disadvantages of Trees</h4>
+<ul>
+  <li>Pros
+    <ul>
+      <li>Good interpretability and easy to explain.</li>
+      <li>Closely mirror human decision-making than do some of the regression and classification 
+  approaches.</li>
+      <li>Can be displayed graphically, and are easily interpreted even by a non-expert.</li>
+      <li>Can easily handle qualitative predictors without the need to create dummy variables.</li>
+    </ul>
+  </li>
+  <li>Cons
+    <ul>
+      <li>Do not have the same level of predictive accuracy as the regression and classification 
+  approaches.</li>
+      <li>Non-robust, a small change in the data can cause a large change in the final 
+  estimated tree(High variance).</li>
+      <li>Lack of smoothness, can be far from the true function.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>By aggregating many decision trees, the predictive performance of trees can be 
+	substantially improved.</p>
+
+<h2 id="82-bagging-random-forests-boosting-and-bayesian-additive-regression-trees">8.2. Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees</h2>
+<ul>
+  <li>An <em>ensemble</em> method is an approach that combines many simple “building ensemble block” 
+  models in order to obtain a single and potentially very powerful model. These simple 
+  building block models are sometimes known as <em>weak learners</em>, since they may lead 
+  to mediocre predictions on their own.</li>
+</ul>
+
+<h3 id="821-bagging">8.2.1. Bagging</h3>
+<ul>
+  <li>
+    <p><em>Bootstrap aggregation</em>, or <em>bagging</em>, is a general-purpose procedure for reducing 
+  the variance of a statistical learning method. Given a set of <em>n</em> independent 
+  observations $Z_1,\ldots,Z_n$, each with variance $\sigma^2$, the variance of the 
+  mean $\bar{Z}$ of the observations is given by $\sigma^2/n$. In other words, 
+  <em>averaging a set of observations reduces variance</em>.<br />
+  Hence it is a natural way to reduce the variance and increase the test set accuracy 
+  of a statistical learning method. We could calculate \(\hat{f}^1(x), \ldots, \hat{f}^B(x)\) 
+  using <em>B</em> seperate training sets, and average them in order to obtain a single 
+  low-variance model, \(\hat{f}_{\text{avg}}(x) = \frac{1}{B}\sum_{b=1}^B\hat{f}^b(x)\).</p>
+  </li>
+  <li>
+    <p>In practice, we do not have access to multiple training sets. Instaed, we can bootstrap, 
+  by taking repeated samples from the (single) training data set. The bagging model,<br />
+  \(\hat{f}_{\text{bag}}(x) = \frac{1}{B}\sum_{b=1}^B\hat{f}^{*b}(x)\).</p>
+  </li>
+  <li>
+    <p>It is particularly useful for decision trees. To apply begging to regression trees, 
+  we simply construct <em>B</em> regression trees using <em>B</em> bootstrapped training sets, and 
+  average the resulting predictions. These trees are grown deep but not pruned. Each 
+  individual tree has high variance but low bias. Averaging these trees reduces the 
+  variance. Bagging improves the accuracy by combining hundreds or even thousands of 
+  trees into a single procedure.</p>
+  </li>
+  <li>
+    <p>To a classification problem where <em>Y</em> is qualitative, the simplest approach is the
+  <em>majority vote</em>; For a given test observation, record the class predicted by each 
+  of the <em>B</em> trees and the overall prediction is the most commonly occurring class 
+  among those predictions.</p>
+  </li>
+</ul>
+
+<h4 id="out-of-bag-error-estimation">Out-of-Bag Error Estimation</h4>
+<ul>
+  <li>
+    <p>Without cross-validation or the validation set approach, there is a very straightforward 
+  way to estimate the test error of a bagged model. The reamining observations not 
+  used to fit a given bagged tree are referred to as the <em>out-of-bag</em>(OOB) observations. 
+  We can predict the response for the <em>i</em>th observation using each of the trees in 
+  which that observation was OOB. To obtain a single prediction for the <em>i</em>th observation, 
+  we average these predicted responses to a regression set, or take a majority vote 
+  to a classification set. An OOB prediction can be obtained in this way for every 
+  <em>n</em> observations, from which the overall OOB MSE or classification error can be computed.</p>
+  </li>
+  <li>
+    <p>Sinse the response for each observation is predicted using only the trees that were 
+  not fit using that observation, the resulting OOB error is a valid estimate of the 
+  test error for the bagged model.</p>
+  </li>
+</ul>
+
+<h4 id="variable-importance-measures">Variable Importance Measures</h4>
+<ul>
+  <li>Bagging improves prediction accuracy at the expense of interpretability. One can obtain 
+  an overall summary of the importance of each predictor using the RSS or the Gini 
+  index. In the case of bagging regression trees, we can record the total amount that 
+  the RSS is decreased due to splits over a given predictor, averaged over all <em>B</em> 
+  trees. A large value indicates an important predictor.</li>
+</ul>
+
+<h3 id="822-random-forests">8.2.2. Random Forests</h3>
+<ul>
+  <li>
+    <p>If there is one very strong predictor along with a number of other moderately strong 
+  predictors, in bagging method, most trees will use this strong predictor in the top 
+  split. Consequently, all of the bagged trees will look quite similar and the predictions 
+  from the bagged trees will be highly correlated. Averaging highly correlated quantities 
+  does not lead to a substantial reduction in variance over a single tree in this setting.</p>
+  </li>
+  <li>
+    <p>Random forests overcome this problem by forcing each split to consider only a subset 
+  of the predictors. As in bagging, we build a number of decision trees on bootstrapped 
+  training samples. But when building these decision trees, each time a split in a 
+  tree is considered, <em>a random sample of m predictors</em> is chosen as split candidates 
+  from the full set of <em>p</em> predictors. Typically, the number of predictors considered 
+  at each split <em>m</em> is approximately equal to the square root of the total number of 
+  predictors <em>p</em>; $m\approx\sqrt{p}$.</p>
+  </li>
+  <li>
+    <p>On average $(p-m)/p$ of the splits will not even consider the strong predictor, and 
+  so other predictors will have more of a chance. This process is <em>decorrelating</em> 
+  the trees, thereby making the average of the resulting trees less variable and more 
+  reliable.</p>
+  </li>
+</ul>
+
+<h4 id="permutation-importance">Permutation Importance</h4>
+<ul>
+  <li>Calculate the estimated test error with the original OOB samples as validation data, 
+  then randomly suffle; or <em>permute</em> the order of the <em>j</em>th variable on OOB sample 
+  to break the relationship between $X_j$ and <em>Y</em>. With this permuted OOB samples, 
+  calculate the Permuation Measure. If the result of permuation measure is worse than 
+  that of reference measure, we can consider $X_j$ is an important variable. For all 
+  variables <em>X</em>, we can make the rank of variable importance. However, permuation 
+  importance can overestimates the importance of correlated predictors.</li>
+</ul>
+
+<h3 id="823-boosting">8.2.3. Boosting</h3>
+<ul>
+  <li>
+    <p>Bagging creates multiple copies of the original training data set using the bootstrap, 
+  fits a separate decision tree to each copy and then combines all of the trees in 
+  order to create a single predictive model. Each tree is built on a bootstrap data 
+  set, independent of the other trees.</p>
+  </li>
+  <li>
+    <p>Boosting works in a similar way, except that the trees are grown <em>sequentially</em>: each 
+  each tree is grown using information from previously grown trees. This approach 
+  does not involve bootstrap sampling; instead each tree is fit on a modified version 
+  of the original data set.</p>
+  </li>
+  <li>Algorithm
+    <ol>
+      <li>Set $\hat{f}(x)=0$ and $r_i=y_i$ for all <em>i</em> in the training set.</li>
+      <li>For $b=1,2,\ldots,B$, repeat:<br />
+ (a) Fit a tree $\hat{f}^b$ with <em>d</em> splits ($d+1$ terminal nodes) to the 
+ training data (<em>X,r</em>).<br />
+ (b) Update $\hat{f}$ by adding in a shrunken version of the new tree:<br />
+ \(\hat{f}(x)\leftarrow\hat{f}(x)+\lambda\hat{f}^b(x)\).<br />
+ (c) Update the residuals, removing the effect of <em>b</em>th tree,<br />
+ Unexplained residuals \(r_i\leftarrow r_i - \lambda\hat{f}^b(x_i)\).</li>
+      <li>Output the boosted model,<br />
+ \(\hat{f}(x)=\sum_{i=1}^B\lambda\hat{f}^b(x)\).</li>
+    </ol>
+  </li>
+  <li>
+    <p>Boosting combines multiple weak learners(poor prediction models) and make better 
+  prediction. In procedure, data(the weights of observations) are repeatedly modified 
+  and the model <em>learns slowly</em>.</p>
+  </li>
+  <li>Boosting tuning parameters
+    <ol>
+      <li><em>B</em> the number of trees. Unlike bagging and random forests, boosting can overfit 
+ if <em>B</em> is too large, although this overfitting tends to occur slowly if at all. 
+ We use cross-validation to select <em>B</em>.</li>
+      <li>$\lambda$ the shrinkage parameter, a small positive number. This controls the 
+ rate at which boosting learns. Typical values are 0.01 or 0.001. Very small 
+ $\lambda$ can require using a very large value of <em>B</em> to achieve good performance.</li>
+      <li><em>d</em> the number of splits in each tree, which controls the complexity of the boosted 
+ ensemble. $d=1$ works well, in which case each tree is a <em>stump</em>, consisting 
+ of a single split. In this case, the boosted ensemble is fitting an additive 
+ model, each term involves only a single variable. Generally <em>d</em> is the 
+ <em>interaction depth</em>, and controls the interaction order of the boosted model.</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="824-bayesian-additive-regression-trees">8.2.4. Bayesian Additive Regression Trees</h3>
+<ul>
+  <li>
+    <p>Bagging and random forests make predictions from an average of independent trees, 
+  while boosting uses a weighted sum of trees. BART is related to both approaches: 
+  each tree is constructed in a random manner and each tree tries to caputre signal 
+  not yet accounted for by the current model.</p>
+  </li>
+  <li>
+    <p>let <em>K</em> denote the number of regression trees, and <em>B</em> the number of iterations for 
+  which the BART will be run. The notation $\hat{f}_k^b(x)$ represents the prediction 
+  at <em>x</em> for the <em>k</em>th regression tree used in the <em>b</em>th iteration. At the end of 
+  each iteration, the <em>K</em> trees from that iteration will be summed; 
+  \(\hat{f}^b(x)=\sum_{k=1}^K\hat{f}_k^b(x)\) for $b=1,\ldots,B$.</p>
+  </li>
+</ul>
+
+<ol>
+  <li>
+    <p>First iteration, all trees are initialized to have a single root node, with 
+ \(\hat{f}_k^1(x) = \frac{1}{nK}\sum_{i=1}^n y_i\), the mean of the response values 
+ divided by the total number of trees. Thus, 
+ \(\hat{f}^1(x)=\sum_{k=1}^K\hat{f}_k^1(x)=\frac{1}{n}\sum_{i=1}^n y_i = \bar{y}\).</p>
+  </li>
+  <li>
+    <p>Next, updates each of the <em>K</em> trees, one at a time.<br />
+ In the <em>b</em>th iteration, we subtract from each response value the predictions from 
+ all but the <em>k</em>th tree to obtain a <em>partial residual</em><br />
+ \(r_i = y_i - \sum_{k'&lt;k}\hat{f}_{k'}^b(x_i) - \sum_{k'&gt;k}\hat{f}_{k'}^{b-1}(x_i)\)<br />
+ Rather than fitting a fresh tree to this partial residual, BART randomly chooses 
+ a perturbation to the tree from the previous iteration from a set of possible 
+ perturbations, favoring ones that improve the fit to the partial residual.</p>
+  </li>
+</ol>
+
+<ul>
+  <li>Two components to the perturbation:<br />
+  We may change the structure of the tree by adding or pruning branches.<br />
+  We may change the prediction in each terminal node of the tree.</li>
+</ul>
+
+<ol>
+  <li>Output of BART is a collection of prediction models,<br />
+ \(\hat{f}^b(x) = \sum_{k=1}^K\hat{f}_k^b(x)\)</li>
+</ol>
+
+<ul>
+  <li>Typically, the first few of these prediction models in earlier iterations, known 
+  as the <em>burn-in</em> period, tend not to provide very good results. For the number of 
+  burn-in iterations <em>L</em>, for instance we might take <em>L</em>=200, we simply remove and 
+  take the average after <em>L</em> iterations; \(\hat{f}(x)=\frac{1}{B-L}\sum_{b=L+1}^B\hat{f}^b(x)\). 
+  Or we can compute quantities other than the average.</li>
+</ul>
+
+<h3 id="825-summary-of-tree-ensemble-methods">8.2.5. Summary of Tree Ensemble Methods</h3>
+<ul>
+  <li>Bagging: The trees are grown independently on random samples of the observations and 
+  tend to be quite similar to each other. Thus, bagging can get caught in local optima 
+  and fail to thoroughly explore the model space.</li>
+  <li>Random Forests: The trees are grown independently on random samples but each split 
+  on each tree is performed using a random subset of the features, decorrelating the 
+  trees and leading to a more thorough exploration of the model space.</li>
+  <li>Boosting: We only use the original data and do not draw any random samples. Trees 
+  are grown successively, usiang slow learning approach: each new tree is fit to the 
+  signal that is left over from the earlier trees, and shrunken down before it is 
+  used.</li>
+  <li>BART: WE only use the original data and trees are grown successively. However, each 
+  tree is perturbed in order to avoid local minima and achieve a more thorough exploration 
+  of the model space.</li>
+</ul>
+
+                </div>
+            </section>
+
+            <!-- Email subscribe form at the bottom of the page -->
+	<!--
+            
+                <section class="subscribe-form">
+                    <h3 class="subscribe-form-title">Subscribe to Darron's Devlog</h3>
+                    <p>Get the latest posts delivered right to your inbox</p>
+                    <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()" 
+               id="searchtext" type="text" name="searchtext"  
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+                </section>
+            
+	-->
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function () {
+                            var this_page_url = 'http://0.0.0.0:4000/islr_ch8';
+                            var this_page_identifier = '/islr_ch8';
+                            var this_page_title = 'ISLR - Chapter 8. Tree-Based Methods';
+                        };
+                        (function() {
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                </section>
+            
+
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/built/images/blog-cover1.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; Darron's Devlog &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/islr/">Islr</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/islr_ch7">ISLR - Chapter 7. Moving Beyond Linearity</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/islr_ch6">ISLR - Chapter 6. Linear Model Selection and Regularization</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/islr_ch5">ISLR - Chapter 5. Resampling Methods</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/islr/">
+                                
+                                    See all 6 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                    <article class="post-card post-template no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/NLP_korean_RNN">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Projects</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">NLP - Korean Language Text Analysis with RNN</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                    <article class="post-card post-template no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/NLP_eng_ml">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Projects</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">NLP - Text Analysis with ML algorithms</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="/">
+            
+            <span>Darron's Devlog</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">ISLR - Chapter 8. Tree-Based Methods</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=ISLR+-+Chapter+8.+Tree-Based+Methods&amp;url=https://12kdh43.github.io/islr_ch8"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/islr_ch8"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="/">Darron's Devlog</a> &copy; 2021</section>
+                <!-- 
+				<section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyllt/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                -->
+				<nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+        <div id="subscribe" class="subscribe-overlay">
+            <a class="subscribe-overlay-close" href="#"></a>
+            <div class="subscribe-overlay-content">
+                
+                <h1 class="subscribe-overlay-title">Search Darron's Devlog</h1>
+                <p class="subscribe-overlay-description">
+				</p>
+                <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()" 
+               id="searchtext" type="text" name="searchtext"  
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+            </div>
+        </div>
+    
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+	
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-12-01T17:00:16+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Fashion Coordinator with GNN</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="Fashion Coordinator with GNN" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2021-12-07T18:41:50+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">GNN-based Fashion Coordinator</title><link href="http://0.0.0.0:4000/fashion_GNN" rel="alternate" type="text/html" title="GNN-based Fashion Coordinator" /><published>2021-09-15T00:00:00+09:00</published><updated>2021-09-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/fashion_GNN</id><content type="html" xml:base="http://0.0.0.0:4000/fashion_GNN">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-about&quot; id=&quot;markdown-toc-1-about&quot;&gt;1. About&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#11-project-goal&quot; id=&quot;markdown-toc-11-project-goal&quot;&gt;1.1. Project Goal&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#12-model-architecture&quot; id=&quot;markdown-toc-12-model-architecture&quot;&gt;1.2. Model Architecture&lt;/a&gt;&lt;/li&gt;
@@ -722,7 +722,7 @@ Done training
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numba&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cuda&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cuda&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_current_device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">R - Stock Market Portfolio Analysis</title><link href="http://0.0.0.0:4000/stock_portfolio" rel="alternate" type="text/html" title="R - Stock Market Portfolio Analysis" /><published>2021-06-18T00:00:00+09:00</published><updated>2021-06-18T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stock_portfolio</id><content type="html" xml:base="http://0.0.0.0:4000/stock_portfolio">&lt;p&gt;&lt;img src=&quot;/assets/images/m_slide_full.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">K-POP Fandom Data Analysis with networkX</title><link href="http://0.0.0.0:4000/kpop_fandom" rel="alternate" type="text/html" title="K-POP Fandom Data Analysis with networkX" /><published>2021-06-02T00:00:00+09:00</published><updated>2021-06-02T00:00:00+09:00</updated><id>http://0.0.0.0:4000/kpop_fandom</id><content type="html" xml:base="http://0.0.0.0:4000/kpop_fandom">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">Stock Market Portfolio Modeling with R</title><link href="http://0.0.0.0:4000/stock_portfolio" rel="alternate" type="text/html" title="Stock Market Portfolio Modeling with R" /><published>2021-06-18T00:00:00+09:00</published><updated>2021-06-18T00:00:00+09:00</updated><id>http://0.0.0.0:4000/stock_portfolio</id><content type="html" xml:base="http://0.0.0.0:4000/stock_portfolio">&lt;p&gt;&lt;img src=&quot;/assets/images/m_slide_full.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">K-POP Fandom Data Analysis with networkX</title><link href="http://0.0.0.0:4000/kpop_fandom" rel="alternate" type="text/html" title="K-POP Fandom Data Analysis with networkX" /><published>2021-06-02T00:00:00+09:00</published><updated>2021-06-02T00:00:00+09:00</updated><id>http://0.0.0.0:4000/kpop_fandom</id><content type="html" xml:base="http://0.0.0.0:4000/kpop_fandom">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-introduction&quot; id=&quot;markdown-toc-1-introduction&quot;&gt;1. Introduction&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#2-supporting-activities&quot; id=&quot;markdown-toc-2-supporting-activities&quot;&gt;2. Supporting Activities&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#21-fandom-supporting-ratio-total-supporting-activities-in-total-activities&quot; id=&quot;markdown-toc-21-fandom-supporting-ratio-total-supporting-activities-in-total-activities&quot;&gt;2.1. Fandom Supporting Ratio (Total Supporting activities in Total activities)&lt;/a&gt;&lt;/li&gt;
@@ -6151,7 +6151,450 @@ Epoch 00012: early stopping
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# from saved best model
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loaded_model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;load_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'best_model.h5'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;loaded_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;evaluate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">NLP - Text Analysis with ML algorithms</title><link href="http://0.0.0.0:4000/NLP_eng_ml" rel="alternate" type="text/html" title="NLP - Text Analysis with ML algorithms" /><published>2020-05-10T16:00:00+09:00</published><updated>2020-05-10T16:00:00+09:00</updated><id>http://0.0.0.0:4000/NLP_eng_ml</id><content type="html" xml:base="http://0.0.0.0:4000/NLP_eng_ml">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html"></summary></entry><entry><title type="html">ISLR - Chapter 8. Tree-Based Methods</title><link href="http://0.0.0.0:4000/islr_ch8" rel="alternate" type="text/html" title="ISLR - Chapter 8. Tree-Based Methods" /><published>2020-05-14T00:00:00+09:00</published><updated>2020-05-14T00:00:00+09:00</updated><id>http://0.0.0.0:4000/islr_ch8</id><content type="html" xml:base="http://0.0.0.0:4000/islr_ch8">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-8-tree-based-methods&quot; id=&quot;markdown-toc-chapter-8-tree-based-methods&quot;&gt;Chapter 8. Tree-Based Methods&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#81-the-basics-of-decision-trees&quot; id=&quot;markdown-toc-81-the-basics-of-decision-trees&quot;&gt;8.1. The Basics of Decision Trees&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#811-regression-trees&quot; id=&quot;markdown-toc-811-regression-trees&quot;&gt;8.1.1. Regression Trees&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#prediction-via-stratification-of-the-feature-space&quot; id=&quot;markdown-toc-prediction-via-stratification-of-the-feature-space&quot;&gt;Prediction via Stratification of the Feature Space&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#tree-pruning&quot; id=&quot;markdown-toc-tree-pruning&quot;&gt;Tree Pruning&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#812-classification-trees&quot; id=&quot;markdown-toc-812-classification-trees&quot;&gt;8.1.2. Classification Trees&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#813-trees-versus-linear-models&quot; id=&quot;markdown-toc-813-trees-versus-linear-models&quot;&gt;8.1.3. Trees Versus Linear Models&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#814-advantages-and-disadvantages-of-trees&quot; id=&quot;markdown-toc-814-advantages-and-disadvantages-of-trees&quot;&gt;8.1.4. Advantages and Disadvantages of Trees&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#82-bagging-random-forests-boosting-and-bayesian-additive-regression-trees&quot; id=&quot;markdown-toc-82-bagging-random-forests-boosting-and-bayesian-additive-regression-trees&quot;&gt;8.2. Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#821-bagging&quot; id=&quot;markdown-toc-821-bagging&quot;&gt;8.2.1. Bagging&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#out-of-bag-error-estimation&quot; id=&quot;markdown-toc-out-of-bag-error-estimation&quot;&gt;Out-of-Bag Error Estimation&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#variable-importance-measures&quot; id=&quot;markdown-toc-variable-importance-measures&quot;&gt;Variable Importance Measures&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#822-random-forests&quot; id=&quot;markdown-toc-822-random-forests&quot;&gt;8.2.2. Random Forests&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#permutation-importance&quot; id=&quot;markdown-toc-permutation-importance&quot;&gt;Permutation Importance&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#823-boosting&quot; id=&quot;markdown-toc-823-boosting&quot;&gt;8.2.3. Boosting&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#824-bayesian-additive-regression-trees&quot; id=&quot;markdown-toc-824-bayesian-additive-regression-trees&quot;&gt;8.2.4. Bayesian Additive Regression Trees&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#825-summary-of-tree-ensemble-methods&quot; id=&quot;markdown-toc-825-summary-of-tree-ensemble-methods&quot;&gt;8.2.5. Summary of Tree Ensemble Methods&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-8-tree-based-methods&quot;&gt;Chapter 8. Tree-Based Methods&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Background&lt;br /&gt;
+  Tree by binary question, splitting variables with split points.&lt;br /&gt;
+  Partitions of input space &amp;amp; fit a constant to each one.&lt;br /&gt;
+  $X = (X_1,\ldots,X_p)$ to $R_1,\ldots,R_M$ regions, &lt;em&gt;p&lt;/em&gt;-dimension rectangles.&lt;br /&gt;
+  where \(R_m\cap R_{m'}, m\ne m', \bigcup_{m=1}^M R_m = \mathbb{X}.\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Model:&lt;br /&gt;
+  \(f(X)=\sum_{m=1}^M C_m I(X\in R_m)\)&lt;br /&gt;
+  where $C_m$ is a constant for each region &lt;em&gt;m&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;81-the-basics-of-decision-trees&quot;&gt;8.1. The Basics of Decision Trees&lt;/h2&gt;
+
+&lt;h3 id=&quot;811-regression-trees&quot;&gt;8.1.1. Regression Trees&lt;/h3&gt;
+
+&lt;h4 id=&quot;prediction-via-stratification-of-the-feature-space&quot;&gt;Prediction via Stratification of the Feature Space&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Two steps of building a regression tree:
+    &lt;ol&gt;
+      &lt;li&gt;Divide the predictor space; the set of possible values for $X_1, \ldots, X_p$ 
+ into &lt;em&gt;J&lt;/em&gt; distinct and non-overlapping regions; $R_1, \ldots, R_J$.&lt;/li&gt;
+      &lt;li&gt;For every observations that falls into the region $R_j$, we make the same 
+ prediction, which is simply the mean of the response values for the training 
+ observations in $R_j$.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To divide the predictor space into high-dimensional rectangles, or &lt;em&gt;boxes&lt;/em&gt;, our goal 
+  is to find the boxes that minimize the RSS, given by:&lt;br /&gt;
+  \(\sum_{j=1}^J\sum_{i\in R_j}(y_i-\hat{y}_{R_j})^2\)&lt;br /&gt;
+  where $\hat{y}_{R_j}$ is the mean response for the training observations within 
+  the &lt;em&gt;j&lt;/em&gt;th box.&lt;br /&gt;
+  I.e., the Least Squares Criterion in given regions:&lt;br /&gt;
+  \(\begin{align*}
+  \text{min}_{C_m}\sum_{i=1}^N RSS &amp;amp;= \text{min}_{C_m}\sum_{i=1}^N(y_i-f(x_i))^2 \\
+      &amp;amp;= \text{min}_{C_m}\sum_{i=1}^N\left[y_i - \sum_{m=1}^M C_m I(x_i\in R_m) \right]^2 \\
+  \rightarrow \hat{C}_m &amp;amp;= \text{ave}(y_i|x_i\in R_m) = \bar{y}_m
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How to split into spaces?&lt;br /&gt;
+  For its computational infeasibility, we take a &lt;em&gt;top-down&lt;/em&gt;, &lt;em&gt;greedy&lt;/em&gt; approach that 
+  it known as &lt;em&gt;recursive binary splitting&lt;/em&gt;. To perform recursive binary splitting, 
+  we first select the predictor $X_j$ and the cutpoint &lt;em&gt;s&lt;/em&gt; such that splitting the 
+  predictor spaace in to the regions \(\{X|X_j&amp;lt;s\}\) and \(\{X|X_j\ge s\}\) leads to 
+  the greatest possible reduction in RSS.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For splitting variable $X_j$ and split point &lt;em&gt;s&lt;/em&gt;,&lt;br /&gt;
+  In two binary partitions \(R_1(j,s) = \{X|X_j&amp;lt;s\}\) and \(R_2(j,s) = \{X|X_j\ge s\}\),&lt;br /&gt;
+  \(\text{min} \left[ \sum_{i:x_i\in R_1(j,s)}(y_i-\hat{y}_{R_1})^2 + \sum_{i:x_i\in R_2(j,s)}(y_i-\hat{y}_{R_2})^2 \right]\), or&lt;br /&gt;
+  \(\text{min}_{C_1}\sum_{i:x_i\in R_1(j,s)}(y_i-C_1)^2 + \min_{C_2}\sum_{i:x_i\in R_2(j,s)}(y_i-C_2)^2\).&lt;br /&gt;
+  \(\begin{align*}
+  \rightarrow &amp;amp; \text{ave}(y_i|x_i\in R_1(j,s)) = \hat{C}_1 = \hat{y}_{R_1} \\
+              &amp;amp; \text{ave}(y_i|x_i\in R_2(j,s)) = \hat{C}_2 = \hat{y}_{R_2}
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;We repeat this process over the two previously identified regions, looking for the 
+  best predictor and best cutpoint in order to split the data further so as the minimize 
+  the RSS within each of the resulting regions. The process continues until a stopping 
+  criterion is reached; for instance, until no region contains more than five observations.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;tree-pruning&quot;&gt;Tree Pruning&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Tree size is based on the number of regions(&lt;em&gt;M&lt;/em&gt;) and the model complexity is on the
+  number of parameters($C_m$). Since there is an extremely large number of possible 
+  subtrees, estimating the CV error for every possible subtree would be too cumbersome. 
+  Instead, to find the optimal &lt;em&gt;M&lt;/em&gt;, we use &lt;em&gt;Cost-Complexity Pruning&lt;/em&gt;, reducing from a 
+  very large tree $T_0$ to a subtree that has the lowest test error rate.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For each value of a nonnegative tuning parameter $\alpha$ there corresponds a subtree 
+  $T\in T_0$, such that minimizing&lt;br /&gt;
+  \(\sum_{m=1}^{|T|}\sum_{i:x_i\in R_m}(y_i-\hat{y}_{R_m})^2 + \alpha|T|\).&lt;br /&gt;
+  Here |&lt;em&gt;T&lt;/em&gt;| indicates the number of terminal nodes of the tree &lt;em&gt;T&lt;/em&gt;, $R_m$ is the 
+  rectangle, or the subset of predictor space corresponding to the &lt;em&gt;m&lt;/em&gt;th terminal node, 
+  and $\hat{y}_{R_m} = \hat{C}_m$ is the predicted response, the mean of the training 
+  observations in $R_m$. When $\alpha=0$, then the subtree &lt;em&gt;T&lt;/em&gt; will simply equal $T_0$. 
+  As $\alpha$ increases, there is a price to pay for having a tree with many terminal 
+  nodes, and so the quantity will tend to be minimized for a smaller subtree.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Algorithm&lt;/p&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Use recursive binary splitting to grow a large tree, stopping only when each 
+ terminal node has fewer than some minimum number of observations, threshold.&lt;/li&gt;
+      &lt;li&gt;Apply cost complexity pruning to obtain a sequence of best subtrees, as a function 
+ of $\alpha$.&lt;/li&gt;
+      &lt;li&gt;Use K-fold CV to choose $\alpha$:&lt;br /&gt;
+ (a) Repeat Steps 1 and 2 on all but &lt;em&gt;k&lt;/em&gt;th fold of the training data.&lt;br /&gt;
+ (b) Evaluate the mean squared prediction error on the data in the left-out &lt;em&gt;k&lt;/em&gt;th 
+ fold, as a function of $\alpha$.&lt;br /&gt;
+ Average the results for each value of $\alpha$, and pick a $\alpha$ to minimize 
+ the average error.&lt;/li&gt;
+      &lt;li&gt;Return the subtree from Step 2 that corresponds to the chosen value of $\alpha$.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;812-classification-trees&quot;&gt;8.1.2. Classification Trees&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instead of the mean response of the training observations that belong to the same 
+  terminal node, a classification tree predict that each observation in the region 
+  to the most commonly occurring class of training observations in the region to 
+  which it belongs. In interpreting the result, we are often interested not only in 
+  the class prediction, but also in the class proportions among the training observations 
+  that fall into that region.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A natural alternative to RSS, the classification error rate; the fraction of the 
+  training observations in that region that do not belong to the most common class:&lt;br /&gt;
+  \(E=1-\text{max}_k(\hat{p}_{mk})\), where \(\hat{p}_{mk} = \frac{1}{N_m}\sum_{x_i\in R_m}I(y_i=k)\),&lt;br /&gt;
+  represents the proportion of training observations in the &lt;em&gt;m&lt;/em&gt;th region that are from 
+  the &lt;em&gt;k&lt;/em&gt;th class. By majority vote rule, \(k(m) = \text{argmax}_k \hat{p}_mk\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;However, the classification error is not sufficiently sensitive for tree-growing, 
+  in practice we use two other measures preferable.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;Gini index&lt;/em&gt;:&lt;br /&gt;
+  \(G=\sum_{k=1}^K\hat{p}_{mk}(1-\hat{p}_{mk})\),&lt;br /&gt;
+  a measure of total variance across the &lt;em&gt;K&lt;/em&gt; classes. It is often referred to as 
+  a measure of node &lt;em&gt;purity&lt;/em&gt;; a small value indicates that a node contains predominantly 
+  observations from a single class.&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;Cross-entropy&lt;/em&gt; or deviance:&lt;br /&gt;
+  \(D=-\sum_{k=1}^K\hat{p}_{mk}\log\hat{p}_{mk}\),&lt;br /&gt;
+  a nonnegative value that take on a small value if the &lt;em&gt;m&lt;/em&gt;th node is pure.&lt;br /&gt;
+  these measures are typically used to evaluate the quality of a particular split, 
+  since they are more sensitive to node purity than is the classification error rate. 
+  The classification error rate is preferable if prediction accuracy of the final 
+  pruned tree is the goal.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Being performed to increase node purity, some of the splits yield two terminal nodes 
+  that have the same predicted value. Even though such splits do not reduce the classification 
+  error, it improves the Gini index and the entropy.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;813-trees-versus-linear-models&quot;&gt;8.1.3. Trees Versus Linear Models&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Linear regression model is:&lt;br /&gt;
+  \(f(X) = \beta_0 + \sum_{j=1}^p X_j\beta_j\),&lt;br /&gt;
+  whereas Regression tree model is:&lt;br /&gt;
+  \(f(X) = \sum_{m=1}^M c_m\cdot 1_{(X\in R_m)}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If there is a highly non-linear and complex relationship between the features and 
+  the response, then decision trees may outperform classical approaches. Also, trees 
+  may be preffered for the sake of interpretability and visualization.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;814-advantages-and-disadvantages-of-trees&quot;&gt;8.1.4. Advantages and Disadvantages of Trees&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Pros
+    &lt;ul&gt;
+      &lt;li&gt;Good interpretability and easy to explain.&lt;/li&gt;
+      &lt;li&gt;Closely mirror human decision-making than do some of the regression and classification 
+  approaches.&lt;/li&gt;
+      &lt;li&gt;Can be displayed graphically, and are easily interpreted even by a non-expert.&lt;/li&gt;
+      &lt;li&gt;Can easily handle qualitative predictors without the need to create dummy variables.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Cons
+    &lt;ul&gt;
+      &lt;li&gt;Do not have the same level of predictive accuracy as the regression and classification 
+  approaches.&lt;/li&gt;
+      &lt;li&gt;Non-robust, a small change in the data can cause a large change in the final 
+  estimated tree(High variance).&lt;/li&gt;
+      &lt;li&gt;Lack of smoothness, can be far from the true function.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;By aggregating many decision trees, the predictive performance of trees can be 
+	substantially improved.&lt;/p&gt;
+
+&lt;h2 id=&quot;82-bagging-random-forests-boosting-and-bayesian-additive-regression-trees&quot;&gt;8.2. Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;An &lt;em&gt;ensemble&lt;/em&gt; method is an approach that combines many simple “building ensemble block” 
+  models in order to obtain a single and potentially very powerful model. These simple 
+  building block models are sometimes known as &lt;em&gt;weak learners&lt;/em&gt;, since they may lead 
+  to mediocre predictions on their own.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;821-bagging&quot;&gt;8.2.1. Bagging&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Bootstrap aggregation&lt;/em&gt;, or &lt;em&gt;bagging&lt;/em&gt;, is a general-purpose procedure for reducing 
+  the variance of a statistical learning method. Given a set of &lt;em&gt;n&lt;/em&gt; independent 
+  observations $Z_1,\ldots,Z_n$, each with variance $\sigma^2$, the variance of the 
+  mean $\bar{Z}$ of the observations is given by $\sigma^2/n$. In other words, 
+  &lt;em&gt;averaging a set of observations reduces variance&lt;/em&gt;.&lt;br /&gt;
+  Hence it is a natural way to reduce the variance and increase the test set accuracy 
+  of a statistical learning method. We could calculate \(\hat{f}^1(x), \ldots, \hat{f}^B(x)\) 
+  using &lt;em&gt;B&lt;/em&gt; seperate training sets, and average them in order to obtain a single 
+  low-variance model, \(\hat{f}_{\text{avg}}(x) = \frac{1}{B}\sum_{b=1}^B\hat{f}^b(x)\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In practice, we do not have access to multiple training sets. Instaed, we can bootstrap, 
+  by taking repeated samples from the (single) training data set. The bagging model,&lt;br /&gt;
+  \(\hat{f}_{\text{bag}}(x) = \frac{1}{B}\sum_{b=1}^B\hat{f}^{*b}(x)\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It is particularly useful for decision trees. To apply begging to regression trees, 
+  we simply construct &lt;em&gt;B&lt;/em&gt; regression trees using &lt;em&gt;B&lt;/em&gt; bootstrapped training sets, and 
+  average the resulting predictions. These trees are grown deep but not pruned. Each 
+  individual tree has high variance but low bias. Averaging these trees reduces the 
+  variance. Bagging improves the accuracy by combining hundreds or even thousands of 
+  trees into a single procedure.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To a classification problem where &lt;em&gt;Y&lt;/em&gt; is qualitative, the simplest approach is the
+  &lt;em&gt;majority vote&lt;/em&gt;; For a given test observation, record the class predicted by each 
+  of the &lt;em&gt;B&lt;/em&gt; trees and the overall prediction is the most commonly occurring class 
+  among those predictions.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;out-of-bag-error-estimation&quot;&gt;Out-of-Bag Error Estimation&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Without cross-validation or the validation set approach, there is a very straightforward 
+  way to estimate the test error of a bagged model. The reamining observations not 
+  used to fit a given bagged tree are referred to as the &lt;em&gt;out-of-bag&lt;/em&gt;(OOB) observations. 
+  We can predict the response for the &lt;em&gt;i&lt;/em&gt;th observation using each of the trees in 
+  which that observation was OOB. To obtain a single prediction for the &lt;em&gt;i&lt;/em&gt;th observation, 
+  we average these predicted responses to a regression set, or take a majority vote 
+  to a classification set. An OOB prediction can be obtained in this way for every 
+  &lt;em&gt;n&lt;/em&gt; observations, from which the overall OOB MSE or classification error can be computed.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sinse the response for each observation is predicted using only the trees that were 
+  not fit using that observation, the resulting OOB error is a valid estimate of the 
+  test error for the bagged model.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;variable-importance-measures&quot;&gt;Variable Importance Measures&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Bagging improves prediction accuracy at the expense of interpretability. One can obtain 
+  an overall summary of the importance of each predictor using the RSS or the Gini 
+  index. In the case of bagging regression trees, we can record the total amount that 
+  the RSS is decreased due to splits over a given predictor, averaged over all &lt;em&gt;B&lt;/em&gt; 
+  trees. A large value indicates an important predictor.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;822-random-forests&quot;&gt;8.2.2. Random Forests&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;If there is one very strong predictor along with a number of other moderately strong 
+  predictors, in bagging method, most trees will use this strong predictor in the top 
+  split. Consequently, all of the bagged trees will look quite similar and the predictions 
+  from the bagged trees will be highly correlated. Averaging highly correlated quantities 
+  does not lead to a substantial reduction in variance over a single tree in this setting.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Random forests overcome this problem by forcing each split to consider only a subset 
+  of the predictors. As in bagging, we build a number of decision trees on bootstrapped 
+  training samples. But when building these decision trees, each time a split in a 
+  tree is considered, &lt;em&gt;a random sample of m predictors&lt;/em&gt; is chosen as split candidates 
+  from the full set of &lt;em&gt;p&lt;/em&gt; predictors. Typically, the number of predictors considered 
+  at each split &lt;em&gt;m&lt;/em&gt; is approximately equal to the square root of the total number of 
+  predictors &lt;em&gt;p&lt;/em&gt;; $m\approx\sqrt{p}$.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;On average $(p-m)/p$ of the splits will not even consider the strong predictor, and 
+  so other predictors will have more of a chance. This process is &lt;em&gt;decorrelating&lt;/em&gt; 
+  the trees, thereby making the average of the resulting trees less variable and more 
+  reliable.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;permutation-importance&quot;&gt;Permutation Importance&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Calculate the estimated test error with the original OOB samples as validation data, 
+  then randomly suffle; or &lt;em&gt;permute&lt;/em&gt; the order of the &lt;em&gt;j&lt;/em&gt;th variable on OOB sample 
+  to break the relationship between $X_j$ and &lt;em&gt;Y&lt;/em&gt;. With this permuted OOB samples, 
+  calculate the Permuation Measure. If the result of permuation measure is worse than 
+  that of reference measure, we can consider $X_j$ is an important variable. For all 
+  variables &lt;em&gt;X&lt;/em&gt;, we can make the rank of variable importance. However, permuation 
+  importance can overestimates the importance of correlated predictors.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;823-boosting&quot;&gt;8.2.3. Boosting&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Bagging creates multiple copies of the original training data set using the bootstrap, 
+  fits a separate decision tree to each copy and then combines all of the trees in 
+  order to create a single predictive model. Each tree is built on a bootstrap data 
+  set, independent of the other trees.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Boosting works in a similar way, except that the trees are grown &lt;em&gt;sequentially&lt;/em&gt;: each 
+  each tree is grown using information from previously grown trees. This approach 
+  does not involve bootstrap sampling; instead each tree is fit on a modified version 
+  of the original data set.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm
+    &lt;ol&gt;
+      &lt;li&gt;Set $\hat{f}(x)=0$ and $r_i=y_i$ for all &lt;em&gt;i&lt;/em&gt; in the training set.&lt;/li&gt;
+      &lt;li&gt;For $b=1,2,\ldots,B$, repeat:&lt;br /&gt;
+ (a) Fit a tree $\hat{f}^b$ with &lt;em&gt;d&lt;/em&gt; splits ($d+1$ terminal nodes) to the 
+ training data (&lt;em&gt;X,r&lt;/em&gt;).&lt;br /&gt;
+ (b) Update $\hat{f}$ by adding in a shrunken version of the new tree:&lt;br /&gt;
+ \(\hat{f}(x)\leftarrow\hat{f}(x)+\lambda\hat{f}^b(x)\).&lt;br /&gt;
+ (c) Update the residuals, removing the effect of &lt;em&gt;b&lt;/em&gt;th tree,&lt;br /&gt;
+ Unexplained residuals \(r_i\leftarrow r_i - \lambda\hat{f}^b(x_i)\).&lt;/li&gt;
+      &lt;li&gt;Output the boosted model,&lt;br /&gt;
+ \(\hat{f}(x)=\sum_{i=1}^B\lambda\hat{f}^b(x)\).&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Boosting combines multiple weak learners(poor prediction models) and make better 
+  prediction. In procedure, data(the weights of observations) are repeatedly modified 
+  and the model &lt;em&gt;learns slowly&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Boosting tuning parameters
+    &lt;ol&gt;
+      &lt;li&gt;&lt;em&gt;B&lt;/em&gt; the number of trees. Unlike bagging and random forests, boosting can overfit 
+ if &lt;em&gt;B&lt;/em&gt; is too large, although this overfitting tends to occur slowly if at all. 
+ We use cross-validation to select &lt;em&gt;B&lt;/em&gt;.&lt;/li&gt;
+      &lt;li&gt;$\lambda$ the shrinkage parameter, a small positive number. This controls the 
+ rate at which boosting learns. Typical values are 0.01 or 0.001. Very small 
+ $\lambda$ can require using a very large value of &lt;em&gt;B&lt;/em&gt; to achieve good performance.&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;d&lt;/em&gt; the number of splits in each tree, which controls the complexity of the boosted 
+ ensemble. $d=1$ works well, in which case each tree is a &lt;em&gt;stump&lt;/em&gt;, consisting 
+ of a single split. In this case, the boosted ensemble is fitting an additive 
+ model, each term involves only a single variable. Generally &lt;em&gt;d&lt;/em&gt; is the 
+ &lt;em&gt;interaction depth&lt;/em&gt;, and controls the interaction order of the boosted model.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;824-bayesian-additive-regression-trees&quot;&gt;8.2.4. Bayesian Additive Regression Trees&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Bagging and random forests make predictions from an average of independent trees, 
+  while boosting uses a weighted sum of trees. BART is related to both approaches: 
+  each tree is constructed in a random manner and each tree tries to caputre signal 
+  not yet accounted for by the current model.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;let &lt;em&gt;K&lt;/em&gt; denote the number of regression trees, and &lt;em&gt;B&lt;/em&gt; the number of iterations for 
+  which the BART will be run. The notation $\hat{f}_k^b(x)$ represents the prediction 
+  at &lt;em&gt;x&lt;/em&gt; for the &lt;em&gt;k&lt;/em&gt;th regression tree used in the &lt;em&gt;b&lt;/em&gt;th iteration. At the end of 
+  each iteration, the &lt;em&gt;K&lt;/em&gt; trees from that iteration will be summed; 
+  \(\hat{f}^b(x)=\sum_{k=1}^K\hat{f}_k^b(x)\) for $b=1,\ldots,B$.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;First iteration, all trees are initialized to have a single root node, with 
+ \(\hat{f}_k^1(x) = \frac{1}{nK}\sum_{i=1}^n y_i\), the mean of the response values 
+ divided by the total number of trees. Thus, 
+ \(\hat{f}^1(x)=\sum_{k=1}^K\hat{f}_k^1(x)=\frac{1}{n}\sum_{i=1}^n y_i = \bar{y}\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Next, updates each of the &lt;em&gt;K&lt;/em&gt; trees, one at a time.&lt;br /&gt;
+ In the &lt;em&gt;b&lt;/em&gt;th iteration, we subtract from each response value the predictions from 
+ all but the &lt;em&gt;k&lt;/em&gt;th tree to obtain a &lt;em&gt;partial residual&lt;/em&gt;&lt;br /&gt;
+ \(r_i = y_i - \sum_{k'&amp;lt;k}\hat{f}_{k'}^b(x_i) - \sum_{k'&amp;gt;k}\hat{f}_{k'}^{b-1}(x_i)\)&lt;br /&gt;
+ Rather than fitting a fresh tree to this partial residual, BART randomly chooses 
+ a perturbation to the tree from the previous iteration from a set of possible 
+ perturbations, favoring ones that improve the fit to the partial residual.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Two components to the perturbation:&lt;br /&gt;
+  We may change the structure of the tree by adding or pruning branches.&lt;br /&gt;
+  We may change the prediction in each terminal node of the tree.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Output of BART is a collection of prediction models,&lt;br /&gt;
+ \(\hat{f}^b(x) = \sum_{k=1}^K\hat{f}_k^b(x)\)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Typically, the first few of these prediction models in earlier iterations, known 
+  as the &lt;em&gt;burn-in&lt;/em&gt; period, tend not to provide very good results. For the number of 
+  burn-in iterations &lt;em&gt;L&lt;/em&gt;, for instance we might take &lt;em&gt;L&lt;/em&gt;=200, we simply remove and 
+  take the average after &lt;em&gt;L&lt;/em&gt; iterations; \(\hat{f}(x)=\frac{1}{B-L}\sum_{b=L+1}^B\hat{f}^b(x)\). 
+  Or we can compute quantities other than the average.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;825-summary-of-tree-ensemble-methods&quot;&gt;8.2.5. Summary of Tree Ensemble Methods&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Bagging: The trees are grown independently on random samples of the observations and 
+  tend to be quite similar to each other. Thus, bagging can get caught in local optima 
+  and fail to thoroughly explore the model space.&lt;/li&gt;
+  &lt;li&gt;Random Forests: The trees are grown independently on random samples but each split 
+  on each tree is performed using a random subset of the features, decorrelating the 
+  trees and leading to a more thorough exploration of the model space.&lt;/li&gt;
+  &lt;li&gt;Boosting: We only use the original data and do not draw any random samples. Trees 
+  are grown successively, usiang slow learning approach: each new tree is fit to the 
+  signal that is left over from the earlier trees, and shrunken down before it is 
+  used.&lt;/li&gt;
+  &lt;li&gt;BART: WE only use the original data and trees are grown successively. However, each 
+  tree is perturbed in order to avoid local minima and achieve a more thorough exploration 
+  of the model space.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html">Chapter 8. Tree-Based Methods 8.1. The Basics of Decision Trees 8.1.1. Regression Trees Prediction via Stratification of the Feature Space Tree Pruning 8.1.2. Classification Trees 8.1.3. Trees Versus Linear Models 8.1.4. Advantages and Disadvantages of Trees 8.2. Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees 8.2.1. Bagging Out-of-Bag Error Estimation Variable Importance Measures 8.2.2. Random Forests Permutation Importance 8.2.3. Boosting 8.2.4. Bayesian Additive Regression Trees 8.2.5. Summary of Tree Ensemble Methods Chapter 8. Tree-Based Methods Background Tree by binary question, splitting variables with split points. Partitions of input space &amp;amp; fit a constant to each one. $X = (X_1,\ldots,X_p)$ to $R_1,\ldots,R_M$ regions, p-dimension rectangles. where \(R_m\cap R_{m'}, m\ne m', \bigcup_{m=1}^M R_m = \mathbb{X}.\) Model: \(f(X)=\sum_{m=1}^M C_m I(X\in R_m)\) where $C_m$ is a constant for each region m. 8.1. The Basics of Decision Trees 8.1.1. Regression Trees Prediction via Stratification of the Feature Space Two steps of building a regression tree: Divide the predictor space; the set of possible values for $X_1, \ldots, X_p$ into J distinct and non-overlapping regions; $R_1, \ldots, R_J$. For every observations that falls into the region $R_j$, we make the same prediction, which is simply the mean of the response values for the training observations in $R_j$. To divide the predictor space into high-dimensional rectangles, or boxes, our goal is to find the boxes that minimize the RSS, given by: \(\sum_{j=1}^J\sum_{i\in R_j}(y_i-\hat{y}_{R_j})^2\) where $\hat{y}_{R_j}$ is the mean response for the training observations within the jth box. I.e., the Least Squares Criterion in given regions: \(\begin{align*} \text{min}_{C_m}\sum_{i=1}^N RSS &amp;amp;= \text{min}_{C_m}\sum_{i=1}^N(y_i-f(x_i))^2 \\ &amp;amp;= \text{min}_{C_m}\sum_{i=1}^N\left[y_i - \sum_{m=1}^M C_m I(x_i\in R_m) \right]^2 \\ \rightarrow \hat{C}_m &amp;amp;= \text{ave}(y_i|x_i\in R_m) = \bar{y}_m \end{align*}\) How to split into spaces? For its computational infeasibility, we take a top-down, greedy approach that it known as recursive binary splitting. To perform recursive binary splitting, we first select the predictor $X_j$ and the cutpoint s such that splitting the predictor spaace in to the regions \(\{X|X_j&amp;lt;s\}\) and \(\{X|X_j\ge s\}\) leads to the greatest possible reduction in RSS. For splitting variable $X_j$ and split point s, In two binary partitions \(R_1(j,s) = \{X|X_j&amp;lt;s\}\) and \(R_2(j,s) = \{X|X_j\ge s\}\), \(\text{min} \left[ \sum_{i:x_i\in R_1(j,s)}(y_i-\hat{y}_{R_1})^2 + \sum_{i:x_i\in R_2(j,s)}(y_i-\hat{y}_{R_2})^2 \right]\), or \(\text{min}_{C_1}\sum_{i:x_i\in R_1(j,s)}(y_i-C_1)^2 + \min_{C_2}\sum_{i:x_i\in R_2(j,s)}(y_i-C_2)^2\). \(\begin{align*} \rightarrow &amp;amp; \text{ave}(y_i|x_i\in R_1(j,s)) = \hat{C}_1 = \hat{y}_{R_1} \\ &amp;amp; \text{ave}(y_i|x_i\in R_2(j,s)) = \hat{C}_2 = \hat{y}_{R_2} \end{align*}\) We repeat this process over the two previously identified regions, looking for the best predictor and best cutpoint in order to split the data further so as the minimize the RSS within each of the resulting regions. The process continues until a stopping criterion is reached; for instance, until no region contains more than five observations. Tree Pruning Tree size is based on the number of regions(M) and the model complexity is on the number of parameters($C_m$). Since there is an extremely large number of possible subtrees, estimating the CV error for every possible subtree would be too cumbersome. Instead, to find the optimal M, we use Cost-Complexity Pruning, reducing from a very large tree $T_0$ to a subtree that has the lowest test error rate. For each value of a nonnegative tuning parameter $\alpha$ there corresponds a subtree $T\in T_0$, such that minimizing \(\sum_{m=1}^{|T|}\sum_{i:x_i\in R_m}(y_i-\hat{y}_{R_m})^2 + \alpha|T|\). Here |T| indicates the number of terminal nodes of the tree T, $R_m$ is the rectangle, or the subset of predictor space corresponding to the mth terminal node, and $\hat{y}_{R_m} = \hat{C}_m$ is the predicted response, the mean of the training observations in $R_m$. When $\alpha=0$, then the subtree T will simply equal $T_0$. As $\alpha$ increases, there is a price to pay for having a tree with many terminal nodes, and so the quantity will tend to be minimized for a smaller subtree. Algorithm Use recursive binary splitting to grow a large tree, stopping only when each terminal node has fewer than some minimum number of observations, threshold. Apply cost complexity pruning to obtain a sequence of best subtrees, as a function of $\alpha$. Use K-fold CV to choose $\alpha$: (a) Repeat Steps 1 and 2 on all but kth fold of the training data. (b) Evaluate the mean squared prediction error on the data in the left-out kth fold, as a function of $\alpha$. Average the results for each value of $\alpha$, and pick a $\alpha$ to minimize the average error. Return the subtree from Step 2 that corresponds to the chosen value of $\alpha$. 8.1.2. Classification Trees Instead of the mean response of the training observations that belong to the same terminal node, a classification tree predict that each observation in the region to the most commonly occurring class of training observations in the region to which it belongs. In interpreting the result, we are often interested not only in the class prediction, but also in the class proportions among the training observations that fall into that region. A natural alternative to RSS, the classification error rate; the fraction of the training observations in that region that do not belong to the most common class: \(E=1-\text{max}_k(\hat{p}_{mk})\), where \(\hat{p}_{mk} = \frac{1}{N_m}\sum_{x_i\in R_m}I(y_i=k)\), represents the proportion of training observations in the mth region that are from the kth class. By majority vote rule, \(k(m) = \text{argmax}_k \hat{p}_mk\). However, the classification error is not sufficiently sensitive for tree-growing, in practice we use two other measures preferable. Gini index: \(G=\sum_{k=1}^K\hat{p}_{mk}(1-\hat{p}_{mk})\), a measure of total variance across the K classes. It is often referred to as a measure of node purity; a small value indicates that a node contains predominantly observations from a single class. Cross-entropy or deviance: \(D=-\sum_{k=1}^K\hat{p}_{mk}\log\hat{p}_{mk}\), a nonnegative value that take on a small value if the mth node is pure. these measures are typically used to evaluate the quality of a particular split, since they are more sensitive to node purity than is the classification error rate. The classification error rate is preferable if prediction accuracy of the final pruned tree is the goal. Being performed to increase node purity, some of the splits yield two terminal nodes that have the same predicted value. Even though such splits do not reduce the classification error, it improves the Gini index and the entropy. 8.1.3. Trees Versus Linear Models Linear regression model is: \(f(X) = \beta_0 + \sum_{j=1}^p X_j\beta_j\), whereas Regression tree model is: \(f(X) = \sum_{m=1}^M c_m\cdot 1_{(X\in R_m)}\) If there is a highly non-linear and complex relationship between the features and the response, then decision trees may outperform classical approaches. Also, trees may be preffered for the sake of interpretability and visualization. 8.1.4. Advantages and Disadvantages of Trees Pros Good interpretability and easy to explain. Closely mirror human decision-making than do some of the regression and classification approaches. Can be displayed graphically, and are easily interpreted even by a non-expert. Can easily handle qualitative predictors without the need to create dummy variables. Cons Do not have the same level of predictive accuracy as the regression and classification approaches. Non-robust, a small change in the data can cause a large change in the final estimated tree(High variance). Lack of smoothness, can be far from the true function. By aggregating many decision trees, the predictive performance of trees can be substantially improved. 8.2. Bagging, Random Forests, Boosting, and Bayesian Additive Regression Trees An ensemble method is an approach that combines many simple “building ensemble block” models in order to obtain a single and potentially very powerful model. These simple building block models are sometimes known as weak learners, since they may lead to mediocre predictions on their own. 8.2.1. Bagging Bootstrap aggregation, or bagging, is a general-purpose procedure for reducing the variance of a statistical learning method. Given a set of n independent observations $Z_1,\ldots,Z_n$, each with variance $\sigma^2$, the variance of the mean $\bar{Z}$ of the observations is given by $\sigma^2/n$. In other words, averaging a set of observations reduces variance. Hence it is a natural way to reduce the variance and increase the test set accuracy of a statistical learning method. We could calculate \(\hat{f}^1(x), \ldots, \hat{f}^B(x)\) using B seperate training sets, and average them in order to obtain a single low-variance model, \(\hat{f}_{\text{avg}}(x) = \frac{1}{B}\sum_{b=1}^B\hat{f}^b(x)\). In practice, we do not have access to multiple training sets. Instaed, we can bootstrap, by taking repeated samples from the (single) training data set. The bagging model, \(\hat{f}_{\text{bag}}(x) = \frac{1}{B}\sum_{b=1}^B\hat{f}^{*b}(x)\). It is particularly useful for decision trees. To apply begging to regression trees, we simply construct B regression trees using B bootstrapped training sets, and average the resulting predictions. These trees are grown deep but not pruned. Each individual tree has high variance but low bias. Averaging these trees reduces the variance. Bagging improves the accuracy by combining hundreds or even thousands of trees into a single procedure. To a classification problem where Y is qualitative, the simplest approach is the majority vote; For a given test observation, record the class predicted by each of the B trees and the overall prediction is the most commonly occurring class among those predictions. Out-of-Bag Error Estimation Without cross-validation or the validation set approach, there is a very straightforward way to estimate the test error of a bagged model. The reamining observations not used to fit a given bagged tree are referred to as the out-of-bag(OOB) observations. We can predict the response for the ith observation using each of the trees in which that observation was OOB. To obtain a single prediction for the ith observation, we average these predicted responses to a regression set, or take a majority vote to a classification set. An OOB prediction can be obtained in this way for every n observations, from which the overall OOB MSE or classification error can be computed. Sinse the response for each observation is predicted using only the trees that were not fit using that observation, the resulting OOB error is a valid estimate of the test error for the bagged model. Variable Importance Measures Bagging improves prediction accuracy at the expense of interpretability. One can obtain an overall summary of the importance of each predictor using the RSS or the Gini index. In the case of bagging regression trees, we can record the total amount that the RSS is decreased due to splits over a given predictor, averaged over all B trees. A large value indicates an important predictor. 8.2.2. Random Forests If there is one very strong predictor along with a number of other moderately strong predictors, in bagging method, most trees will use this strong predictor in the top split. Consequently, all of the bagged trees will look quite similar and the predictions from the bagged trees will be highly correlated. Averaging highly correlated quantities does not lead to a substantial reduction in variance over a single tree in this setting. Random forests overcome this problem by forcing each split to consider only a subset of the predictors. As in bagging, we build a number of decision trees on bootstrapped training samples. But when building these decision trees, each time a split in a tree is considered, a random sample of m predictors is chosen as split candidates from the full set of p predictors. Typically, the number of predictors considered at each split m is approximately equal to the square root of the total number of predictors p; $m\approx\sqrt{p}$. On average $(p-m)/p$ of the splits will not even consider the strong predictor, and so other predictors will have more of a chance. This process is decorrelating the trees, thereby making the average of the resulting trees less variable and more reliable. Permutation Importance Calculate the estimated test error with the original OOB samples as validation data, then randomly suffle; or permute the order of the jth variable on OOB sample to break the relationship between $X_j$ and Y. With this permuted OOB samples, calculate the Permuation Measure. If the result of permuation measure is worse than that of reference measure, we can consider $X_j$ is an important variable. For all variables X, we can make the rank of variable importance. However, permuation importance can overestimates the importance of correlated predictors. 8.2.3. Boosting Bagging creates multiple copies of the original training data set using the bootstrap, fits a separate decision tree to each copy and then combines all of the trees in order to create a single predictive model. Each tree is built on a bootstrap data set, independent of the other trees. Boosting works in a similar way, except that the trees are grown sequentially: each each tree is grown using information from previously grown trees. This approach does not involve bootstrap sampling; instead each tree is fit on a modified version of the original data set. Algorithm Set $\hat{f}(x)=0$ and $r_i=y_i$ for all i in the training set. For $b=1,2,\ldots,B$, repeat: (a) Fit a tree $\hat{f}^b$ with d splits ($d+1$ terminal nodes) to the training data (X,r). (b) Update $\hat{f}$ by adding in a shrunken version of the new tree: \(\hat{f}(x)\leftarrow\hat{f}(x)+\lambda\hat{f}^b(x)\). (c) Update the residuals, removing the effect of bth tree, Unexplained residuals \(r_i\leftarrow r_i - \lambda\hat{f}^b(x_i)\). Output the boosted model, \(\hat{f}(x)=\sum_{i=1}^B\lambda\hat{f}^b(x)\). Boosting combines multiple weak learners(poor prediction models) and make better prediction. In procedure, data(the weights of observations) are repeatedly modified and the model learns slowly. Boosting tuning parameters B the number of trees. Unlike bagging and random forests, boosting can overfit if B is too large, although this overfitting tends to occur slowly if at all. We use cross-validation to select B. $\lambda$ the shrinkage parameter, a small positive number. This controls the rate at which boosting learns. Typical values are 0.01 or 0.001. Very small $\lambda$ can require using a very large value of B to achieve good performance. d the number of splits in each tree, which controls the complexity of the boosted ensemble. $d=1$ works well, in which case each tree is a stump, consisting of a single split. In this case, the boosted ensemble is fitting an additive model, each term involves only a single variable. Generally d is the interaction depth, and controls the interaction order of the boosted model. 8.2.4. Bayesian Additive Regression Trees Bagging and random forests make predictions from an average of independent trees, while boosting uses a weighted sum of trees. BART is related to both approaches: each tree is constructed in a random manner and each tree tries to caputre signal not yet accounted for by the current model. let K denote the number of regression trees, and B the number of iterations for which the BART will be run. The notation $\hat{f}_k^b(x)$ represents the prediction at x for the kth regression tree used in the bth iteration. At the end of each iteration, the K trees from that iteration will be summed; \(\hat{f}^b(x)=\sum_{k=1}^K\hat{f}_k^b(x)\) for $b=1,\ldots,B$. First iteration, all trees are initialized to have a single root node, with \(\hat{f}_k^1(x) = \frac{1}{nK}\sum_{i=1}^n y_i\), the mean of the response values divided by the total number of trees. Thus, \(\hat{f}^1(x)=\sum_{k=1}^K\hat{f}_k^1(x)=\frac{1}{n}\sum_{i=1}^n y_i = \bar{y}\). Next, updates each of the K trees, one at a time. In the bth iteration, we subtract from each response value the predictions from all but the kth tree to obtain a partial residual \(r_i = y_i - \sum_{k'&amp;lt;k}\hat{f}_{k'}^b(x_i) - \sum_{k'&amp;gt;k}\hat{f}_{k'}^{b-1}(x_i)\) Rather than fitting a fresh tree to this partial residual, BART randomly chooses a perturbation to the tree from the previous iteration from a set of possible perturbations, favoring ones that improve the fit to the partial residual. Two components to the perturbation: We may change the structure of the tree by adding or pruning branches. We may change the prediction in each terminal node of the tree. Output of BART is a collection of prediction models, \(\hat{f}^b(x) = \sum_{k=1}^K\hat{f}_k^b(x)\) Typically, the first few of these prediction models in earlier iterations, known as the burn-in period, tend not to provide very good results. For the number of burn-in iterations L, for instance we might take L=200, we simply remove and take the average after L iterations; \(\hat{f}(x)=\frac{1}{B-L}\sum_{b=L+1}^B\hat{f}^b(x)\). Or we can compute quantities other than the average. 8.2.5. Summary of Tree Ensemble Methods Bagging: The trees are grown independently on random samples of the observations and tend to be quite similar to each other. Thus, bagging can get caught in local optima and fail to thoroughly explore the model space. Random Forests: The trees are grown independently on random samples but each split on each tree is performed using a random subset of the features, decorrelating the trees and leading to a more thorough exploration of the model space. Boosting: We only use the original data and do not draw any random samples. Trees are grown successively, usiang slow learning approach: each new tree is fit to the signal that is left over from the earlier trees, and shrunken down before it is used. BART: WE only use the original data and trees are grown successively. However, each tree is perturbed in order to avoid local minima and achieve a more thorough exploration of the model space.</summary></entry><entry><title type="html">NLP - Text Analysis with ML algorithms</title><link href="http://0.0.0.0:4000/NLP_eng_ml" rel="alternate" type="text/html" title="NLP - Text Analysis with ML algorithms" /><published>2020-05-10T16:00:00+09:00</published><updated>2020-05-10T16:00:00+09:00</updated><id>http://0.0.0.0:4000/NLP_eng_ml</id><content type="html" xml:base="http://0.0.0.0:4000/NLP_eng_ml">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-data-info&quot; id=&quot;markdown-toc-1-data-info&quot;&gt;1. Data Info&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#2-preprocessing&quot; id=&quot;markdown-toc-2-preprocessing&quot;&gt;2. Preprocessing&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#21-duplicated-data-found-in-train_data&quot; id=&quot;markdown-toc-21-duplicated-data-found-in-train_data&quot;&gt;2.1. duplicated data found in train_data&lt;/a&gt;&lt;/li&gt;
@@ -7416,150 +7859,4 @@ reduced model can lead to better results than fitting the standard linear model.
   training data as evidence of a good model fit. Instead we report results on an independent test set, or 
   cross-validation errors.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html">Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation 6.2. Shrinkage Methods 6.2.1. Ridge Regression in Singular Value Decomposition 6.2.2. The Lasso Another Formulation for Ridge Regression and the Lasso A Simple Special Case Bayesian Interpretation 6.3. Dimension Reduction Methods 6.3.1. Principal Components Regression Principal Components Analysis The Principal Components Regression Approach 6.3.2. Partial Least Squares 6.4. Considerations in High Dimensions 6.4.1. High-Dimensional Data 6.4.2. What Goes Wrong in High Dimensions? 6.4.3. Regression in High Dimensions 6.4.4. Interpreting Results in High Dimensions Chapter 6. Linear Model Selection and Regularization Limitations of LSE Prediction Accuracy: if n is not much larger than p, the least squares fit can have a lot of variability, results in overfitting and poor predictions to test data. if p &amp;gt; n, there is no unique solution for the least squares coefficient estimate; as $ Var(\hat\beta)=\infty$. if p is large, there can be correlations between X variables. A model having multicollinearity can have high variance. Constraining or Shrinking the estimated coefficients can reduce the variance with negligible increase in bias, and improve in the accuracy to the test data. Model Interpretability: There are irrelevant variables $X_j$. Removing by setting coefficient estimates $\beta_j = 0$, we can have more interpretability. Feature selection or Variable selection can exclude irrelevant variables from a multiple regression model. 6.1. Subset Selection 6.1.1. Best Subset Selection fit a separate least squares regression for all $2^p$ possible models with combinations of the p predictors. Algorithm $\mathcal{M}_0$ as null model (i.e., $ Y = \beta_0 + \epsilon $) For $ k = 1, 2, \ldots, p $: (a) Fit all \({p \choose k}\) models with k predictors (b) Pick the smallest RSS, (or largest $R^2$) = $ \mathcal{M}_k $ Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$ Guarantees the best selection, while it suffers from computational limitations. Also, it only works for least squares linear regression. in the case of logistic regression, we use deviance, $-2\log$MLE, instead of RSS in the 2nd step of algorithm upon. 6.1.2. Stepwise Selection Forward Stepwise Selection Algorithm $\mathcal{M}_0$ as null model For $ k = 1, 2, \ldots, p $: (a) Fit all p - k models in \(\mathcal{M}_k\) with one additional predictor (b) Pick the smallest RSS among p - k models, $\mathcal{M}_{k+1}$ Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ with CV scores Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee but available for the case of high dimensional data($n&amp;lt;p$). Backward Stepwise Selection Algorithm $\mathcal{M}_p$ as full model, contains all p predictors For $ k = p, p-1, \ldots, 1 $: (a) Fit all k - 1 models contain all but one of the predictors in \(\mathcal{M}_k\) (b) Pick the smallest RSS among k - 1 models, $\mathcal{M}_{k-1}$ Select best model among $\mathcal{M}_0, ldots,\mathcal{M}_p$ with CV scores Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee and not for n &amp;lt; p case. Hybrid Approaches add then remove one predictors in each step. 6.1.3. Choosing the Optimal Model A model containing all of the predictors will always have the smallest RSS and the largest $R^2$, since these quantities are related to the training error. Instead, we need a model with a low test error. $C_p = \frac{1}{n}(RSS + 2 d \hat\sigma^2)$ For a fitted least squares model, with d as the number of predictors and $\hat\sigma^2$ as an estimate of the variance of the error. Typically $\hat\sigma^2$ is estimated using the full model containing all predictors. Adding a penalty to the training RSS is to adjust its underestimation to the test error. As the number of predictors increase, the penalty increase. If there is a proof of $\hat\sigma^2$ is an unbiased estimate of $\sigma^2$, $C_p$ is an unbiased estimate of test MSE. Then, a model with the lowest $C_p$ is the best model. AIC $= \frac{1}{n}(RSS + 2 d \hat\sigma^2)$ For a models fit by maximum likelihood(MLE), given by omitted irrelevant constants. $C_p$ and AIC are proportional to each other. BIC $= \frac{1}{n}(RSS + \log(n)d\hat\sigma^2)$ From a Bayesian point of view, for a fitted least squares model. Also given by omitted irrelevant constants. BIC has heavier penalty then $C_p$ or AIC, results in selecting smaller models. Adjusted $R^2 = 1 - \frac{RSS/(n-d-1)}{TSS/(n-1)}$ Since the usual $R^2$ is defined as $1 - RSS/TSS$, it always increases as more variables added. Adjusted $R^2$ gives penalty of d, the number of predictors in the denominator. Unlike other statistics, a large value of adjusted $R^2$ indicates a small test error. Validation and Cross-Validation one-standard-error rule First calculate the standard error of the estimated test MSE for each model size, then select the smallest model for which the estimated test error is within one standard error of the lowest point on the curve. If a set of models appear to be more or less equally good, then we might as well choose the simplest model; the model with the smallest number of predictors. 6.2. Shrinkage Methods 6.2.1. Ridge Regression Ridge regression coefficient estimates \(\begin{align*} \hat\beta^R &amp;amp;= \text{min}_{\beta}\left[ \underbrace{\sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p \beta_j x_{ij})}_{RSS} + \lambda\sum_{j=1}^p \beta_j^2 \right] \\ &amp;amp;= (X^TX + \lambda I)^{-1} X^T\underline{y} \end{align*}\) $\lambda \ge 0 $ is a tuning parameter, $\lambda\sum_{j=1}^p \beta_j^2$ is a shrinkage penalty. The penalty is small when the coefficients are close to zero, and so it has the effect of shrinking the estimates of $\beta_j$ towards zero. Ridge regression will produce a different set of coefficient estimates $\beta_{\lambda}^R$, for each value of $\lambda$. We do not want to shrink the intercept $\beta_0$, which is simply a measure of the mean value of the response when $x_{i1}=x_{i2}=\ldots=x_{ip}=0$. If the variables, the columns of the data matrix $X$, have been centered to have mean zero before ridge regression is performed, then the estiamted intercept will take the form $\hat\beta_0 = \bar{y} = \sum_{i=1}^n y_i/n$. The standard least squares coefficient estimates are scale equivariant; multiplying $X_j$ by a constant c leads to a scaling of the least squares coefficient estimates by a factor of 1/c. I.e., regardless of how the jth predictor is scaled, $X_j\hat\beta_j$ will remain the same. In contrast, the ridge regression coefficient estimates can change substantially when multiplying a given predictor by a constant. The value of $X_j\hat\beta_{j,\lambda}^R$ may depend on the scaling of the other predictors. Thus, before applying ridge regression, the variables need to be standardized to have a standard deviation of one. The formula: \(\tilde{x}_{ij}=\frac{x_{ij}}{\sqrt{\frac{1}{n}\sum_{i=1}^n(x_{ij}-\bar{x}_j)^2}}\) Ridge regression overperforms the standard least squares when the number of variables p is almost as large as the number of observations n, or even when $p &amp;gt; n$. Also it has computational advantages over best subset selection, which requires searching through $2^p$ models. Ridge regression only fits a single model for any fixed value of $\lambda$. in Singular Value Decomposition where $ X = \mathbb{UDV}^T$, \(\begin{align*} X\hat\beta^{\text{LSE}} &amp;amp;= X(X^TX)^{-1}X^T\underline{y} \\ &amp;amp;= \mathbb{UU}^T\underline{y} \\ X\hat\beta^R &amp;amp;= UD(D^2 + \lambda I)^{-1}DU^T\underline{y} \\ &amp;amp;= \sum_{j=1}^p\underline{u}_j\frac{d_{ij}^2}{d_{ij}^2+\lambda}\underline{u}_j^T\underline{y} \end{align*}\) \(\begin{align*} \rightarrow \partial f(\lambda) &amp;amp;= tr[X(X^TX + \lambda I)^{-1} X^T] \\ &amp;amp;= tr(\mathbb{H}_{\lambda}) \\ &amp;amp;= \sum_{j=1}^p\frac{d_{ij}^2}{d_{ij}^2+\lambda} \end{align*}\) 6.2.2. The Lasso Ridge regression estimates shrink towards zero but will not set nay of them exactly to zero(unless $\lambda = \infty$). This may not be a problem for prediction accuracy, but it can be a challenge in model interpretation when p is quite large. The lasso \(\hat\beta^L_{\lambda} = \text{min}_{\beta}\left[RSS+\lambda\sum_{j=1}^p|\beta_j|\right]\) Instead of $\mathcal{l}_2$ penalty in Ridge, the lasso uses an $\mathcal{l}_1$ penalty. The $\mathcal{l}_1$ norm of a coefficient vector $\beta$ is given by $\lVert \beta \rVert_1 = \sum |\beta_j|$. This penalty has the effect of forcing some of the coefficient estimates to be exactly equal to zero when the tuning parameter is sufficiently large. Hence, the lasso performs variable selection, these sparse models with the lasso are much easier to interpret than those with ridge. Another Formulation for Ridge Regression and the Lasso Ridge: \(\text{min}_{\beta}\left\{ \sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p\beta_j x_{ij})^2 \right\}\) subject to $\sum_{j=1}^p\beta_j^2 \le s $ Lasso: \(\text{min}_{\beta}\left\{ \sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p\beta_j x_{ij})^2 \right\}\) subject to $\sum_{j=1}^p|\beta_j| \le s $ where the budget s as the regularization parameter ($\lambda\uparrow \equiv s\downarrow$). when $p = 2$, then the ridge regression estimates have the smallest RSS out of all points that lie within the circle defined by $\beta_1^2 + \beta_2^2 \le s$, while the lasso estimates have within the diamond defined by $|\beta_1|+|\beta_2| \le s$. when $p = 3$, he constraint region for ridge becomes a sphere, for lasso becomes a polyhedron. For larger p, it becomes a hypersphere and a polytope each. The lasso leads to feature selection due to the sharp corners of its constraint region. the number of predictors that is related to the response is never known a priori for real data sets. A technique such as cross-validation can be used in order to determine which approach is better on a particular data set. A Simple Special Case An analytical method(solution) for the case when $n = p$, and X a diagonal matrix with 1’s on the diagonal and 0’s in all off-diagonal elements. I.e., the columns of X are orthogonal. Also, assume that we are performing regression without an intercept(or standardized). (c.f. in real world cases, we need to use numerical methods.) The usual least squares, $\hat\beta$ is that minimizes; $\sum_{j=1}^p(y_j-\beta_j)^2$. and for the ridge, minimizing $\sum_{j=1}^p(y_j-\beta_j)^2+\lambda\sum_{j=1}^p\beta_j^2$. and for the lasso, minimizing $\sum_{j=1}^p(y_j-\beta_j)^2+\lambda\sum_{j=1}^p|\beta_j|$. The ridge regression estiamtes $\hat\beta_j^R = y_j/(1+\lambda)$ and \(\text{the lasso estimates} \begin{align*} \hat\beta_j^L &amp;amp;= \text{sign}(\hat\beta_j)(|\hat\beta_j|-\lambda)_{+}, \\ \text{or} &amp;amp;= \begin{cases} y_j - \lambda/2, &amp;amp; \mbox{if }y_j &amp;gt; \lambda/2; \\ y_j + \lambda/2, &amp;amp; \mbox{if }y_j &amp;lt; -\lambda/2; \\ 0 &amp;amp; \mbox{if }|y_j| \le \lambda/2. \end{cases} \end{align*}\) Ridge shrinks all coefficients towards zero by the same “proportion”, Lasso shrinks all coefficients towards zero by the same “amount”. Bayesian Interpretation $p(\beta|X,Y)\propto f(Y|X,\beta)p(\beta|X) = f(Y|X,\beta)p(\beta)$ with assumption of $p(\beta)=\prod_{j=1}^p g(\beta_j)$ for some density function g. Two special cases of g: If g is a Gaussian distribution with mean zero and standard deviation a function of $\lambda$, it follows that the posterior mode for $\beta$, is given by the ridge regression solution. Also, the solution is equal to posterior mean. If g is a double-exponential(Laplace) distribution with mean zero and scale parameter a function of $\lambda$, it follows that the posterior mode for $\beta$ is the lasso soultion(which is not the posteriror mean in this case). Hence, the lasso expects a priori that many of the coefficients are (exactly) zero, while ridge assumes the coefficients are randomly distributed about zero. 6.3. Dimension Reduction Methods p predictors to M new transformed variables. Let $Z_m = \sum_{j=1}^p\phi_{jm}X_j$ represent M &amp;lt; p linear combinations of original p predictors. Then fit the linear regression model $y_i = \theta_0 + \sum_{m=1}^M\theta_m z_{im} + \epsilon_i, \quad i = 1, \ldots, n$, using least squares. If the constants $\phi_{1m}, \ldots, \phi_{pm}$ are chosen wisely, dimension reduction approaches can outperform least squares regression. I.e., using least squares, fitting reduced model can lead to better results than fitting the standard linear model. \(\sum_{m=1}^M\theta_m z_{im} = \sum_{m=1}^M\theta_m\sum_{j=1}^p\phi_{jm}x_{ij} = \sum_{j=1}^p\sum_{m=1}^M\theta_m\phi_{jm}x_{ij} = \sum_{j=1}^p\beta_j x_{ij},\) where \(\beta_j = \sum_{m=1}^M\theta_m\phi_{jm}\). Hence, this model can be a special case of the standard linear regression model. In situations where p is large relative to n, demension reduction methods can significantly reduce the variance of the fitted coefficients. If $M = p$, and all the $Z_m$ are linearly independent, then there are no constraints and the model is equivalent to the standard linear model. All dimension reduction methods work in two steps. First, the transformed predictors $Z_m$ are obtained. Second, the model is fit using these M predictors. The choice of $Z_m$, which is, the selection of the $\phi_{jm}$’s can be achieved in different ways. 6.3.1. Principal Components Regression Principal Components Analysis Goal of PCA: PCA is a technique for reducing the dimension of an n by p data matrix X, finding small number of dimensions M, which have simillar amount of information to original p predictors. The principal component direction of the data is that along which the observations vary the most; with the largest variance of the observations projected onto. The principal component vector $Z_m$ defines the line that is as close as possible to the data, minimizing the sum of the squared perpendicular distances between each point and the line. In other word, the principal component appears to capture most of the information contained in two variables. e.g. in the first principal component, total variance keeped: $Var(X_1)+Var(X_2) = Var(PC_1)+Var(PC_2)$ where $X_s$ is $n \times p$ standardized matrix,jth Principal Component Vector of $X_s$: $z_j = X_s v_j$, $\quad j=1,\ldots,p$ is that satisfying \(\text{max}_{\alpha}Var(X_s\alpha)\) subject to \(\lVert\alpha\rVert=1\). Here, the values of $z_{1j}, \ldots, z_{nj}$ are known as the principal component scores. $v_j$ is $p \times 1$ size eigenvector of $X_s^T X_s$ corresponding to the jth largest eigenvalue, and $\alpha$ is $v_j$’s orthogonality to $v_1,\ldots,v_{j-1}$ ($\alpha^T S v_k = 0$, where S is the sample covariance matrix of $X_s$, or $X_s^T X_s$, and $k = 1, \cdots, j-1$). Then $z_1 = X_s v_1$, $z_2\bot z_1$, $z_3\bot z_1,z_2$, $\cdots$, $z_p\bot z_1,\ldots,z_{p-1}$. derivation Since $X_s$ is standardized matrix, \(Var(X_s\alpha) = \alpha^T X_s^T X_s\alpha\) by Lagrangian form, \(\begin{align*} \text{max}_{\alpha}Q(X_s,\lambda) &amp;amp;= \text{max}_{alpha}\left[\alpha^T X_s^T X_s\alpha -\lambda\alpha^T\alpha \right] \\ \rightarrow \frac{\partial Q}{\partial\alpha} &amp;amp;= 2X_s^T X\alpha - 2\lambda\alpha \\ \text{for } \hat\alpha, X_s^T X\alpha &amp;amp;= \lambda\alpha \end{align*}\) note that $\mathbb{A}_v = ev$, the combination of eigenvalue and eigenvector of $\mathbb{A}$. Thus, $\alpha = v_j$, the jth eigenvector of $X_s^T X_s$, that is, the constraint of orthogonality is satisfied. Since PCA has no single solution M; the proportion of variance explained by mth PC($Z_m$) used: \(PVE_m = \frac{Var(Z_m)}{\sum_{j=1}^p(Var(Z_j))}\) (\(\sum_{j=1}^p(Var(Z_j)) = \sum Var(X_j) =\) total variance) in SVD of covariance matrix $X^T X$, \(\begin{align*} X^T X &amp;amp;= \mathbb{VDU}^T\mathbb{UDV}^T \\ &amp;amp;= \mathbb{VD^2 V}^T \end{align*}\) in this eigen decomposition, \(\mathbb{V} = (v_1,\ldots,v_p)\) the eigen vectors of $X^T X$ \(\mathbb{D}^2 = \begin{bmatrix} d_1^2 &amp;amp; \cdots &amp;amp; 0 \\ \vdots &amp;amp; \ddots &amp;amp; \vdots \\ 0 &amp;amp; \cdots &amp;amp; d_p^2 \end{bmatrix}\) $d_j^2 = e_j$, jth eigenvalue of $X^T X$ thus, \(\begin{align*} Var(Z_m) &amp;amp;= \frac{1}{n}(Z_m^T Z_m) \\ &amp;amp;= \frac{1}{n}(v_m^T X_s^T X_s v_m) \\ &amp;amp;= \frac{1}{n}(v_m^T\mathbb{VD}^2\mathbb{V}^T v_m) \\ &amp;amp;= \frac{1}{n}d_m^2 = \frac{1}{n}e_m \end{align*}\) Therefore, \(PVE_m = \frac{Var(Z_m)}{\sum_{j=1}^p(Var(Z_j))} = \frac{e_m}{\sum_{j=1}^p e_j}\) we can draw a scree plot on the value of $PVE_m$ over the value of m to find optimal “M”. The Principal Components Regression Approach The key idea is that a small number of principal components can explain most of the variability in the data, as well as the relationship with the response. Under this assumption, fitting a least squares model to $Z_1, \ldots, Z_M$ will lead to better results than fitting a least squares model to $X_1, \ldots, X_p$, since most or all of the information in the data is contained in $Z_m$ and there are smaller number of coefficients, we can mitigate overfitting. Note that PCR is not a feature selection method; is a linear combination of all p of the original features. In this sense, PCR is more closely related to ridge regression than to the lasso. Deciding “M”: full model is \(\hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 + \cdots + \hat{\theta}_p Z_p\) when $Z_1,\ldots,Z_m$ is from standardized $X_s$ and \(\hat{y}_0 = \bar{y}\), as $Z_j$’s are orthogonal, adding variable $Z_{j+1}$ does not affect the coefficients. Thus, $\theta_j$’s are not changed by feature selection; that is, \(\hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 \\ \hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 + \hat{\theta}_2 Z_2 \\ \vdots \\ \hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 +\cdots + \hat{\theta}_p Z_p\) the value of $\theta_k$ is the same. Then we can use CV methods over these models to get optimal M. 6.3.2. Partial Least Squares The PCR approach identifies linear combinations, or directions, that best represent the predictors. These directions are identified in an unsupervised way, since the response Y is not used to help determine the principal component directions. There, PCR suffers from a drawback: there is no guarantee that the directions that best explain the predictors will also be the best directions to use for predicting the response. PLS is a supervised alternative to PCR; finding PLS directions $Z_1,\ldots,Z_m$ that $Cov(Y,Z_1)\ge Cov(Y,Z_2)\ge\cdots\ge Cov(Y,Z_M)$ instead of $Var(Z_1)\ge\cdots\ge Var(Z_M)$. First PLS direction is computed, after standardizing predictors, by setting each $\phi_{j1}$ equal to the coefficient from the simple linear regression $Y$ onto $X_j$. As $Z_1 = \sum_{j=1}^p\phi_{j1}X_j$, PLS places the highest weight on the variables that are most strongly related to the response. To find second PLS direction, we adjust each of the variables for $Z_1$, by regressing each variable on $Z_1$ and taking residuals. The residuals can be interpreted as the remaining information that has not been explained by the first PLS direction. Then we compute $Z_2$ using this orthogonalized data by the same way of computing $Z_1$. This predecure repeated M times. in Simple Regression case, $\hat X_j^s$ is a projection of original data $X_j^s$ to a vector $Z_1$; $X_j^s = \alpha Z_1$. the residual vector $r_j = \hat X_j^s - X_j^s$ and $r_j\bot Z_1$. Then, $r_j = X_j^{(2)}$ is the orthogonalized data for computing the next $Z_2$. The mth PLS direction: \(\text{max}_{\phi} Cov(y,X_s\phi)\) subject to $\lVert\phi\rVert = 1$, $\phi^T S v_l = 0$ for $\phi$ as orthogonal directions, sample covariance matrix S, and $v_l$ as l th PLS direction. \(\text{max}_{\phi}[E(\phi^T X_s^T y)-E(y)E(\phi^T X_s)]\), as standardized, $E(X_s) = 0$, \(\equiv \text{max}_{\phi}\phi^T \dot X_s^T y\) is maximization of dot product of 2 vectors. note that, when two vectors are in the same direction, dot product is maximized. $\therefore \phi=X_s^T y$. 6.4. Considerations in High Dimensions 6.4.1. High-Dimensional Data Data sets that containing more features than observations, $p &amp;gt; n$. 6.4.2. What Goes Wrong in High Dimensions? Standard least squares cannot be performed. Regardless of the true relationship between features and response, least squares will result in a perfect fit to the data, lead to overfitting of the data and poor predictions. 6.4.3. Regression in High Dimensions new technologies that allow for the collection of measurements for thousands or millions of features are a double-edged sword: they can lead to improved predictive models if these features are in fact relevant to the problem at hand, but will lead to worse results if the features are not relevant. Even if they are relevant, the variance incurred in fitting their coefficients may outweigh the reduction in bias that they bring. 6.4.4. Interpreting Results in High Dimensions In high-dimensional setting, the multicollinearity problem is extreme: any variable in the model is a linear combination of all of the other variables in the model. This means we can never know exactly which variables truly are predictive of the outcome, and we can never identify the best coefficients for use in the regression. When $p &amp;gt; n$, it is easy to obtain a a useless model that has zero residuals. Therefore, we should never use sum of squared errors, p-values, $R^2$ statistics, or other traditional measures of model fit on the training data as evidence of a good model fit. Instead we report results on an independent test set, or cross-validation errors.</summary></entry><entry><title type="html">ISLR - Chapter 5. Resampling Methods</title><link href="http://0.0.0.0:4000/islr_ch5" rel="alternate" type="text/html" title="ISLR - Chapter 5. Resampling Methods" /><published>2020-04-23T00:00:00+09:00</published><updated>2020-04-23T00:00:00+09:00</updated><id>http://0.0.0.0:4000/islr_ch5</id><content type="html" xml:base="http://0.0.0.0:4000/islr_ch5">&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#chapter-5-resampling-methods&quot; id=&quot;markdown-toc-chapter-5-resampling-methods&quot;&gt;Chapter 5. Resampling Methods&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#51--cross-validation&quot; id=&quot;markdown-toc-51--cross-validation&quot;&gt;5.1.  Cross-Validation&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#511-the-validation-set-approach&quot; id=&quot;markdown-toc-511-the-validation-set-approach&quot;&gt;5.1.1. The Validation Set Approach&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#512-leave-one-out-cross-validation&quot; id=&quot;markdown-toc-512-leave-one-out-cross-validation&quot;&gt;5.1.2. Leave-One-Out Cross-Validation&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#513-k-fold-cross-validation&quot; id=&quot;markdown-toc-513-k-fold-cross-validation&quot;&gt;5.1.3. k-Fold Cross-Validation&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#514-bias-variance-trade-off-for-k-fold-cross-validation&quot; id=&quot;markdown-toc-514-bias-variance-trade-off-for-k-fold-cross-validation&quot;&gt;5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#515-cross-validation-on-classification-problems&quot; id=&quot;markdown-toc-515-cross-validation-on-classification-problems&quot;&gt;5.1.5. Cross-Validation on Classification Problems&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#52-the-bootstrap&quot; id=&quot;markdown-toc-52-the-bootstrap&quot;&gt;5.2. The Bootstrap&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;chapter-5-resampling-methods&quot;&gt;Chapter 5. Resampling Methods&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;repeatedly drawing samples from a training set and refitting a model of interest on 
-each sample in order to obtain additional information about the fitted model.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;To optain information that would not be available from fitting the model only once 
-using the original training sample.&lt;br /&gt;
-e.g. to estimate the variability of a model fit, draw different samples and fit it to 
-each new sample, then examine the extent to which the resulting fits differ.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;51--cross-validation&quot;&gt;5.1.  Cross-Validation&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;In the absence of a very large designated test set that can be used to directly estimate 
-the test error rate, a class of methods that estimate the test error rate by &lt;em&gt;holding out&lt;/em&gt; 
-a subset of the training observations from the fitting process, then applying the statistical 
-learning method to those held out observations.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;511-the-validation-set-approach&quot;&gt;5.1.1. The Validation Set Approach&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;randomly dividing the available set of observations into two parts;&lt;br /&gt;
-a &lt;em&gt;training set&lt;/em&gt; and a &lt;em&gt;validation set&lt;/em&gt; (or hold-out set)&lt;br /&gt;
-model is fit on the training set, and the fitted model is used to predict the responses for the 
-observations in the validation set. The validation set error rate estimates the test error rate.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Repeating this predecure, we have different estimate for the test MSE over random splits of the 
-observations and there are two issues:&lt;/p&gt;
-    &lt;ol&gt;
-      &lt;li&gt;The validation estimate of the test error rate can be highly variable, depending on which observations 
- are included in the training set or the validation test.&lt;/li&gt;
-      &lt;li&gt;Only a subset of the observations are used to fit the model. Trained on fewer observations, the 
- validation set error rate may &lt;em&gt;overestimate&lt;/em&gt; the test error rate for the model fit on the entire 
- data set.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;512-leave-one-out-cross-validation&quot;&gt;5.1.2. Leave-One-Out Cross-Validation&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;each single observation is used for the validation set, and the remaining observations are for the 
-training set. The statistical learning method is fit on the &lt;em&gt;n-1&lt;/em&gt; training obs. The prediction is made 
-for the excluded observation.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;LOOCV estiamte for the test MSE:&lt;br /&gt;
-\(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n MSE_i\)&lt;br /&gt;
-No overestimation on the test error, No variance of test MSE, but Expansive.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;a shortcut of LOOCV on Least Squares(regression):&lt;br /&gt;
-\(\begin{align*}
-CV_{(n)} = \frac{1}{n} \sum_{i=1}^n \left(\frac{y_i - \hat y_i}{1-h_i}\right)^2
-\end{align*}\)&lt;br /&gt;
-where $\hat y_i$ is the fitted value from the original least squares fit, one-time build of a full 
-model and set a leverage $h_i = \frac{1}{n}+\frac{(x_i-\bar{x})^2}{\sum_{i^\prime=1}^n(x_{i^\prime}-\bar{x})^2}$. 
-The levearge lies between &lt;em&gt;1/n&lt;/em&gt; and &lt;em&gt;1&lt;/em&gt;, reflects the amount that an observation influences its own fit.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;513-k-fold-cross-validation&quot;&gt;5.1.3. k-Fold Cross-Validation&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;random division into &lt;em&gt;k&lt;/em&gt; groups, or &lt;em&gt;folds&lt;/em&gt;, of approximately equal size. A fold is used for the 
-validation set, and the method is fit on the remaining &lt;em&gt;k-1&lt;/em&gt; folds. The MSE is computed on the 
-observations in the held-out fold and the procedure is repeated &lt;em&gt;k&lt;/em&gt; times.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;k-Fold CV estimate for the test MSE:&lt;br /&gt;
-\(CV_{(k)} = \frac{1}{n}\sum_{i=1}^k MSE_i\)&lt;br /&gt;
-when &lt;em&gt;k=n&lt;/em&gt;, LOOCV is a special case of k-Fold. Using smaller &lt;em&gt;k&lt;/em&gt;, k-fold CV has a computational 
-advantage to LOOCV.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;We perform CV to:&lt;br /&gt;
-To determine how well a given model can be expected to perform on independent data.&lt;br /&gt;
-To identify a model results in the lowest test error, over different models or different levels of 
-flexibility.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;514-bias-variance-trade-off-for-k-fold-cross-validation&quot;&gt;5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Besides the computational advantage, k-fold CV often gives more accurate estimates of the test error 
-rate than does LOOCV.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;LOOCV will give approximately unbiased estiamtes of the test error, containing &lt;em&gt;n-1&lt;/em&gt;, almost as many as 
-the number of observations in the full data set. By contrast, k-fold CV will lead to an intermediate 
-level of bias, containing &lt;em&gt;(k-1)n/k&lt;/em&gt; observations. Clearly, LOOCV is to be preferred in the perspective 
-of bias reduction.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;But, in LOOCV, averaging the outputs of &lt;em&gt;n&lt;/em&gt; fitted models, which are trained on an almost identical set 
-of observations, these outputs are highly correlated with each other. This high correlation results in 
-higher variance of test error estimate from LOOCV than from k-fold CV.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;515-cross-validation-on-classification-problems&quot;&gt;5.1.5. Cross-Validation on Classification Problems&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;LOOCV on the classification:&lt;br /&gt;
-\(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n Err_i\),  where \(Err_i = I(y_i \ne \hat{y}_i)\).&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;k-fold CV on the classification:&lt;br /&gt;
-\(\frac{1}{n}\sum_{i=1}^k MCR_i\).&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;52-the-bootstrap&quot;&gt;5.2. The Bootstrap&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Sampling with &lt;em&gt;replacement&lt;/em&gt; on:&lt;br /&gt;
-Dataset $Z = (z_1, \ldots, z_n)$, $ z_i = (x_i,y_i)$&lt;br /&gt;
-Sample $Z^{*b}$, where $ b = 1, \ldots, B$ samples&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;for Any statistic term $S(Z)$ computed from full dataset &lt;em&gt;Z&lt;/em&gt;,&lt;br /&gt;
-and $S(Z^{*b})$ from bootstrap samples,&lt;br /&gt;
-\(\begin{align*}
-Var(\hat{S(Z)}) = \frac{1}{B-1}\sum_{b=1}^B(S(Z^{*b})-\bar{S}^*)^2
-\end{align*}\)&lt;br /&gt;
-$\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html">Chapter 5. Resampling Methods 5.1. Cross-Validation 5.1.1. The Validation Set Approach 5.1.2. Leave-One-Out Cross-Validation 5.1.3. k-Fold Cross-Validation 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation 5.1.5. Cross-Validation on Classification Problems 5.2. The Bootstrap Chapter 5. Resampling Methods repeatedly drawing samples from a training set and refitting a model of interest on each sample in order to obtain additional information about the fitted model. To optain information that would not be available from fitting the model only once using the original training sample. e.g. to estimate the variability of a model fit, draw different samples and fit it to each new sample, then examine the extent to which the resulting fits differ. 5.1. Cross-Validation In the absence of a very large designated test set that can be used to directly estimate the test error rate, a class of methods that estimate the test error rate by holding out a subset of the training observations from the fitting process, then applying the statistical learning method to those held out observations. 5.1.1. The Validation Set Approach randomly dividing the available set of observations into two parts; a training set and a validation set (or hold-out set) model is fit on the training set, and the fitted model is used to predict the responses for the observations in the validation set. The validation set error rate estimates the test error rate. Repeating this predecure, we have different estimate for the test MSE over random splits of the observations and there are two issues: The validation estimate of the test error rate can be highly variable, depending on which observations are included in the training set or the validation test. Only a subset of the observations are used to fit the model. Trained on fewer observations, the validation set error rate may overestimate the test error rate for the model fit on the entire data set. 5.1.2. Leave-One-Out Cross-Validation each single observation is used for the validation set, and the remaining observations are for the training set. The statistical learning method is fit on the n-1 training obs. The prediction is made for the excluded observation. LOOCV estiamte for the test MSE: \(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n MSE_i\) No overestimation on the test error, No variance of test MSE, but Expansive. a shortcut of LOOCV on Least Squares(regression): \(\begin{align*} CV_{(n)} = \frac{1}{n} \sum_{i=1}^n \left(\frac{y_i - \hat y_i}{1-h_i}\right)^2 \end{align*}\) where $\hat y_i$ is the fitted value from the original least squares fit, one-time build of a full model and set a leverage $h_i = \frac{1}{n}+\frac{(x_i-\bar{x})^2}{\sum_{i^\prime=1}^n(x_{i^\prime}-\bar{x})^2}$. The levearge lies between 1/n and 1, reflects the amount that an observation influences its own fit. 5.1.3. k-Fold Cross-Validation random division into k groups, or folds, of approximately equal size. A fold is used for the validation set, and the method is fit on the remaining k-1 folds. The MSE is computed on the observations in the held-out fold and the procedure is repeated k times. k-Fold CV estimate for the test MSE: \(CV_{(k)} = \frac{1}{n}\sum_{i=1}^k MSE_i\) when k=n, LOOCV is a special case of k-Fold. Using smaller k, k-fold CV has a computational advantage to LOOCV. We perform CV to: To determine how well a given model can be expected to perform on independent data. To identify a model results in the lowest test error, over different models or different levels of flexibility. 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation Besides the computational advantage, k-fold CV often gives more accurate estimates of the test error rate than does LOOCV. LOOCV will give approximately unbiased estiamtes of the test error, containing n-1, almost as many as the number of observations in the full data set. By contrast, k-fold CV will lead to an intermediate level of bias, containing (k-1)n/k observations. Clearly, LOOCV is to be preferred in the perspective of bias reduction. But, in LOOCV, averaging the outputs of n fitted models, which are trained on an almost identical set of observations, these outputs are highly correlated with each other. This high correlation results in higher variance of test error estimate from LOOCV than from k-fold CV. 5.1.5. Cross-Validation on Classification Problems LOOCV on the classification: \(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n Err_i\), where \(Err_i = I(y_i \ne \hat{y}_i)\). k-fold CV on the classification: \(\frac{1}{n}\sum_{i=1}^k MCR_i\). 5.2. The Bootstrap Sampling with replacement on: Dataset $Z = (z_1, \ldots, z_n)$, $ z_i = (x_i,y_i)$ Sample $Z^{*b}$, where $ b = 1, \ldots, B$ samples for Any statistic term $S(Z)$ computed from full dataset Z, and $S(Z^{*b})$ from bootstrap samples, \(\begin{align*} Var(\hat{S(Z)}) = \frac{1}{B-1}\sum_{b=1}^B(S(Z^{*b})-\bar{S}^*)^2 \end{align*}\) $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="ISLR" /><summary type="html">Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation 6.2. Shrinkage Methods 6.2.1. Ridge Regression in Singular Value Decomposition 6.2.2. The Lasso Another Formulation for Ridge Regression and the Lasso A Simple Special Case Bayesian Interpretation 6.3. Dimension Reduction Methods 6.3.1. Principal Components Regression Principal Components Analysis The Principal Components Regression Approach 6.3.2. Partial Least Squares 6.4. Considerations in High Dimensions 6.4.1. High-Dimensional Data 6.4.2. What Goes Wrong in High Dimensions? 6.4.3. Regression in High Dimensions 6.4.4. Interpreting Results in High Dimensions Chapter 6. Linear Model Selection and Regularization Limitations of LSE Prediction Accuracy: if n is not much larger than p, the least squares fit can have a lot of variability, results in overfitting and poor predictions to test data. if p &amp;gt; n, there is no unique solution for the least squares coefficient estimate; as $ Var(\hat\beta)=\infty$. if p is large, there can be correlations between X variables. A model having multicollinearity can have high variance. Constraining or Shrinking the estimated coefficients can reduce the variance with negligible increase in bias, and improve in the accuracy to the test data. Model Interpretability: There are irrelevant variables $X_j$. Removing by setting coefficient estimates $\beta_j = 0$, we can have more interpretability. Feature selection or Variable selection can exclude irrelevant variables from a multiple regression model. 6.1. Subset Selection 6.1.1. Best Subset Selection fit a separate least squares regression for all $2^p$ possible models with combinations of the p predictors. Algorithm $\mathcal{M}_0$ as null model (i.e., $ Y = \beta_0 + \epsilon $) For $ k = 1, 2, \ldots, p $: (a) Fit all \({p \choose k}\) models with k predictors (b) Pick the smallest RSS, (or largest $R^2$) = $ \mathcal{M}_k $ Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ using cross-validated prediction error, $C_p$ (AIC), BIC, or adjusted $R^2$ Guarantees the best selection, while it suffers from computational limitations. Also, it only works for least squares linear regression. in the case of logistic regression, we use deviance, $-2\log$MLE, instead of RSS in the 2nd step of algorithm upon. 6.1.2. Stepwise Selection Forward Stepwise Selection Algorithm $\mathcal{M}_0$ as null model For $ k = 1, 2, \ldots, p $: (a) Fit all p - k models in \(\mathcal{M}_k\) with one additional predictor (b) Pick the smallest RSS among p - k models, $\mathcal{M}_{k+1}$ Select best model among $\mathcal{M}_0, \ldots,\mathcal{M}_p$ with CV scores Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee but available for the case of high dimensional data($n&amp;lt;p$). Backward Stepwise Selection Algorithm $\mathcal{M}_p$ as full model, contains all p predictors For $ k = p, p-1, \ldots, 1 $: (a) Fit all k - 1 models contain all but one of the predictors in \(\mathcal{M}_k\) (b) Pick the smallest RSS among k - 1 models, $\mathcal{M}_{k-1}$ Select best model among $\mathcal{M}_0, ldots,\mathcal{M}_p$ with CV scores Total $\frac{p(p+1)}{2}+1$ possible models. No guarantee and not for n &amp;lt; p case. Hybrid Approaches add then remove one predictors in each step. 6.1.3. Choosing the Optimal Model A model containing all of the predictors will always have the smallest RSS and the largest $R^2$, since these quantities are related to the training error. Instead, we need a model with a low test error. $C_p = \frac{1}{n}(RSS + 2 d \hat\sigma^2)$ For a fitted least squares model, with d as the number of predictors and $\hat\sigma^2$ as an estimate of the variance of the error. Typically $\hat\sigma^2$ is estimated using the full model containing all predictors. Adding a penalty to the training RSS is to adjust its underestimation to the test error. As the number of predictors increase, the penalty increase. If there is a proof of $\hat\sigma^2$ is an unbiased estimate of $\sigma^2$, $C_p$ is an unbiased estimate of test MSE. Then, a model with the lowest $C_p$ is the best model. AIC $= \frac{1}{n}(RSS + 2 d \hat\sigma^2)$ For a models fit by maximum likelihood(MLE), given by omitted irrelevant constants. $C_p$ and AIC are proportional to each other. BIC $= \frac{1}{n}(RSS + \log(n)d\hat\sigma^2)$ From a Bayesian point of view, for a fitted least squares model. Also given by omitted irrelevant constants. BIC has heavier penalty then $C_p$ or AIC, results in selecting smaller models. Adjusted $R^2 = 1 - \frac{RSS/(n-d-1)}{TSS/(n-1)}$ Since the usual $R^2$ is defined as $1 - RSS/TSS$, it always increases as more variables added. Adjusted $R^2$ gives penalty of d, the number of predictors in the denominator. Unlike other statistics, a large value of adjusted $R^2$ indicates a small test error. Validation and Cross-Validation one-standard-error rule First calculate the standard error of the estimated test MSE for each model size, then select the smallest model for which the estimated test error is within one standard error of the lowest point on the curve. If a set of models appear to be more or less equally good, then we might as well choose the simplest model; the model with the smallest number of predictors. 6.2. Shrinkage Methods 6.2.1. Ridge Regression Ridge regression coefficient estimates \(\begin{align*} \hat\beta^R &amp;amp;= \text{min}_{\beta}\left[ \underbrace{\sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p \beta_j x_{ij})}_{RSS} + \lambda\sum_{j=1}^p \beta_j^2 \right] \\ &amp;amp;= (X^TX + \lambda I)^{-1} X^T\underline{y} \end{align*}\) $\lambda \ge 0 $ is a tuning parameter, $\lambda\sum_{j=1}^p \beta_j^2$ is a shrinkage penalty. The penalty is small when the coefficients are close to zero, and so it has the effect of shrinking the estimates of $\beta_j$ towards zero. Ridge regression will produce a different set of coefficient estimates $\beta_{\lambda}^R$, for each value of $\lambda$. We do not want to shrink the intercept $\beta_0$, which is simply a measure of the mean value of the response when $x_{i1}=x_{i2}=\ldots=x_{ip}=0$. If the variables, the columns of the data matrix $X$, have been centered to have mean zero before ridge regression is performed, then the estiamted intercept will take the form $\hat\beta_0 = \bar{y} = \sum_{i=1}^n y_i/n$. The standard least squares coefficient estimates are scale equivariant; multiplying $X_j$ by a constant c leads to a scaling of the least squares coefficient estimates by a factor of 1/c. I.e., regardless of how the jth predictor is scaled, $X_j\hat\beta_j$ will remain the same. In contrast, the ridge regression coefficient estimates can change substantially when multiplying a given predictor by a constant. The value of $X_j\hat\beta_{j,\lambda}^R$ may depend on the scaling of the other predictors. Thus, before applying ridge regression, the variables need to be standardized to have a standard deviation of one. The formula: \(\tilde{x}_{ij}=\frac{x_{ij}}{\sqrt{\frac{1}{n}\sum_{i=1}^n(x_{ij}-\bar{x}_j)^2}}\) Ridge regression overperforms the standard least squares when the number of variables p is almost as large as the number of observations n, or even when $p &amp;gt; n$. Also it has computational advantages over best subset selection, which requires searching through $2^p$ models. Ridge regression only fits a single model for any fixed value of $\lambda$. in Singular Value Decomposition where $ X = \mathbb{UDV}^T$, \(\begin{align*} X\hat\beta^{\text{LSE}} &amp;amp;= X(X^TX)^{-1}X^T\underline{y} \\ &amp;amp;= \mathbb{UU}^T\underline{y} \\ X\hat\beta^R &amp;amp;= UD(D^2 + \lambda I)^{-1}DU^T\underline{y} \\ &amp;amp;= \sum_{j=1}^p\underline{u}_j\frac{d_{ij}^2}{d_{ij}^2+\lambda}\underline{u}_j^T\underline{y} \end{align*}\) \(\begin{align*} \rightarrow \partial f(\lambda) &amp;amp;= tr[X(X^TX + \lambda I)^{-1} X^T] \\ &amp;amp;= tr(\mathbb{H}_{\lambda}) \\ &amp;amp;= \sum_{j=1}^p\frac{d_{ij}^2}{d_{ij}^2+\lambda} \end{align*}\) 6.2.2. The Lasso Ridge regression estimates shrink towards zero but will not set nay of them exactly to zero(unless $\lambda = \infty$). This may not be a problem for prediction accuracy, but it can be a challenge in model interpretation when p is quite large. The lasso \(\hat\beta^L_{\lambda} = \text{min}_{\beta}\left[RSS+\lambda\sum_{j=1}^p|\beta_j|\right]\) Instead of $\mathcal{l}_2$ penalty in Ridge, the lasso uses an $\mathcal{l}_1$ penalty. The $\mathcal{l}_1$ norm of a coefficient vector $\beta$ is given by $\lVert \beta \rVert_1 = \sum |\beta_j|$. This penalty has the effect of forcing some of the coefficient estimates to be exactly equal to zero when the tuning parameter is sufficiently large. Hence, the lasso performs variable selection, these sparse models with the lasso are much easier to interpret than those with ridge. Another Formulation for Ridge Regression and the Lasso Ridge: \(\text{min}_{\beta}\left\{ \sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p\beta_j x_{ij})^2 \right\}\) subject to $\sum_{j=1}^p\beta_j^2 \le s $ Lasso: \(\text{min}_{\beta}\left\{ \sum_{i=1}^n(y_i-\beta_0-\sum_{j=1}^p\beta_j x_{ij})^2 \right\}\) subject to $\sum_{j=1}^p|\beta_j| \le s $ where the budget s as the regularization parameter ($\lambda\uparrow \equiv s\downarrow$). when $p = 2$, then the ridge regression estimates have the smallest RSS out of all points that lie within the circle defined by $\beta_1^2 + \beta_2^2 \le s$, while the lasso estimates have within the diamond defined by $|\beta_1|+|\beta_2| \le s$. when $p = 3$, he constraint region for ridge becomes a sphere, for lasso becomes a polyhedron. For larger p, it becomes a hypersphere and a polytope each. The lasso leads to feature selection due to the sharp corners of its constraint region. the number of predictors that is related to the response is never known a priori for real data sets. A technique such as cross-validation can be used in order to determine which approach is better on a particular data set. A Simple Special Case An analytical method(solution) for the case when $n = p$, and X a diagonal matrix with 1’s on the diagonal and 0’s in all off-diagonal elements. I.e., the columns of X are orthogonal. Also, assume that we are performing regression without an intercept(or standardized). (c.f. in real world cases, we need to use numerical methods.) The usual least squares, $\hat\beta$ is that minimizes; $\sum_{j=1}^p(y_j-\beta_j)^2$. and for the ridge, minimizing $\sum_{j=1}^p(y_j-\beta_j)^2+\lambda\sum_{j=1}^p\beta_j^2$. and for the lasso, minimizing $\sum_{j=1}^p(y_j-\beta_j)^2+\lambda\sum_{j=1}^p|\beta_j|$. The ridge regression estiamtes $\hat\beta_j^R = y_j/(1+\lambda)$ and \(\text{the lasso estimates} \begin{align*} \hat\beta_j^L &amp;amp;= \text{sign}(\hat\beta_j)(|\hat\beta_j|-\lambda)_{+}, \\ \text{or} &amp;amp;= \begin{cases} y_j - \lambda/2, &amp;amp; \mbox{if }y_j &amp;gt; \lambda/2; \\ y_j + \lambda/2, &amp;amp; \mbox{if }y_j &amp;lt; -\lambda/2; \\ 0 &amp;amp; \mbox{if }|y_j| \le \lambda/2. \end{cases} \end{align*}\) Ridge shrinks all coefficients towards zero by the same “proportion”, Lasso shrinks all coefficients towards zero by the same “amount”. Bayesian Interpretation $p(\beta|X,Y)\propto f(Y|X,\beta)p(\beta|X) = f(Y|X,\beta)p(\beta)$ with assumption of $p(\beta)=\prod_{j=1}^p g(\beta_j)$ for some density function g. Two special cases of g: If g is a Gaussian distribution with mean zero and standard deviation a function of $\lambda$, it follows that the posterior mode for $\beta$, is given by the ridge regression solution. Also, the solution is equal to posterior mean. If g is a double-exponential(Laplace) distribution with mean zero and scale parameter a function of $\lambda$, it follows that the posterior mode for $\beta$ is the lasso soultion(which is not the posteriror mean in this case). Hence, the lasso expects a priori that many of the coefficients are (exactly) zero, while ridge assumes the coefficients are randomly distributed about zero. 6.3. Dimension Reduction Methods p predictors to M new transformed variables. Let $Z_m = \sum_{j=1}^p\phi_{jm}X_j$ represent M &amp;lt; p linear combinations of original p predictors. Then fit the linear regression model $y_i = \theta_0 + \sum_{m=1}^M\theta_m z_{im} + \epsilon_i, \quad i = 1, \ldots, n$, using least squares. If the constants $\phi_{1m}, \ldots, \phi_{pm}$ are chosen wisely, dimension reduction approaches can outperform least squares regression. I.e., using least squares, fitting reduced model can lead to better results than fitting the standard linear model. \(\sum_{m=1}^M\theta_m z_{im} = \sum_{m=1}^M\theta_m\sum_{j=1}^p\phi_{jm}x_{ij} = \sum_{j=1}^p\sum_{m=1}^M\theta_m\phi_{jm}x_{ij} = \sum_{j=1}^p\beta_j x_{ij},\) where \(\beta_j = \sum_{m=1}^M\theta_m\phi_{jm}\). Hence, this model can be a special case of the standard linear regression model. In situations where p is large relative to n, demension reduction methods can significantly reduce the variance of the fitted coefficients. If $M = p$, and all the $Z_m$ are linearly independent, then there are no constraints and the model is equivalent to the standard linear model. All dimension reduction methods work in two steps. First, the transformed predictors $Z_m$ are obtained. Second, the model is fit using these M predictors. The choice of $Z_m$, which is, the selection of the $\phi_{jm}$’s can be achieved in different ways. 6.3.1. Principal Components Regression Principal Components Analysis Goal of PCA: PCA is a technique for reducing the dimension of an n by p data matrix X, finding small number of dimensions M, which have simillar amount of information to original p predictors. The principal component direction of the data is that along which the observations vary the most; with the largest variance of the observations projected onto. The principal component vector $Z_m$ defines the line that is as close as possible to the data, minimizing the sum of the squared perpendicular distances between each point and the line. In other word, the principal component appears to capture most of the information contained in two variables. e.g. in the first principal component, total variance keeped: $Var(X_1)+Var(X_2) = Var(PC_1)+Var(PC_2)$ where $X_s$ is $n \times p$ standardized matrix,jth Principal Component Vector of $X_s$: $z_j = X_s v_j$, $\quad j=1,\ldots,p$ is that satisfying \(\text{max}_{\alpha}Var(X_s\alpha)\) subject to \(\lVert\alpha\rVert=1\). Here, the values of $z_{1j}, \ldots, z_{nj}$ are known as the principal component scores. $v_j$ is $p \times 1$ size eigenvector of $X_s^T X_s$ corresponding to the jth largest eigenvalue, and $\alpha$ is $v_j$’s orthogonality to $v_1,\ldots,v_{j-1}$ ($\alpha^T S v_k = 0$, where S is the sample covariance matrix of $X_s$, or $X_s^T X_s$, and $k = 1, \cdots, j-1$). Then $z_1 = X_s v_1$, $z_2\bot z_1$, $z_3\bot z_1,z_2$, $\cdots$, $z_p\bot z_1,\ldots,z_{p-1}$. derivation Since $X_s$ is standardized matrix, \(Var(X_s\alpha) = \alpha^T X_s^T X_s\alpha\) by Lagrangian form, \(\begin{align*} \text{max}_{\alpha}Q(X_s,\lambda) &amp;amp;= \text{max}_{alpha}\left[\alpha^T X_s^T X_s\alpha -\lambda\alpha^T\alpha \right] \\ \rightarrow \frac{\partial Q}{\partial\alpha} &amp;amp;= 2X_s^T X\alpha - 2\lambda\alpha \\ \text{for } \hat\alpha, X_s^T X\alpha &amp;amp;= \lambda\alpha \end{align*}\) note that $\mathbb{A}_v = ev$, the combination of eigenvalue and eigenvector of $\mathbb{A}$. Thus, $\alpha = v_j$, the jth eigenvector of $X_s^T X_s$, that is, the constraint of orthogonality is satisfied. Since PCA has no single solution M; the proportion of variance explained by mth PC($Z_m$) used: \(PVE_m = \frac{Var(Z_m)}{\sum_{j=1}^p(Var(Z_j))}\) (\(\sum_{j=1}^p(Var(Z_j)) = \sum Var(X_j) =\) total variance) in SVD of covariance matrix $X^T X$, \(\begin{align*} X^T X &amp;amp;= \mathbb{VDU}^T\mathbb{UDV}^T \\ &amp;amp;= \mathbb{VD^2 V}^T \end{align*}\) in this eigen decomposition, \(\mathbb{V} = (v_1,\ldots,v_p)\) the eigen vectors of $X^T X$ \(\mathbb{D}^2 = \begin{bmatrix} d_1^2 &amp;amp; \cdots &amp;amp; 0 \\ \vdots &amp;amp; \ddots &amp;amp; \vdots \\ 0 &amp;amp; \cdots &amp;amp; d_p^2 \end{bmatrix}\) $d_j^2 = e_j$, jth eigenvalue of $X^T X$ thus, \(\begin{align*} Var(Z_m) &amp;amp;= \frac{1}{n}(Z_m^T Z_m) \\ &amp;amp;= \frac{1}{n}(v_m^T X_s^T X_s v_m) \\ &amp;amp;= \frac{1}{n}(v_m^T\mathbb{VD}^2\mathbb{V}^T v_m) \\ &amp;amp;= \frac{1}{n}d_m^2 = \frac{1}{n}e_m \end{align*}\) Therefore, \(PVE_m = \frac{Var(Z_m)}{\sum_{j=1}^p(Var(Z_j))} = \frac{e_m}{\sum_{j=1}^p e_j}\) we can draw a scree plot on the value of $PVE_m$ over the value of m to find optimal “M”. The Principal Components Regression Approach The key idea is that a small number of principal components can explain most of the variability in the data, as well as the relationship with the response. Under this assumption, fitting a least squares model to $Z_1, \ldots, Z_M$ will lead to better results than fitting a least squares model to $X_1, \ldots, X_p$, since most or all of the information in the data is contained in $Z_m$ and there are smaller number of coefficients, we can mitigate overfitting. Note that PCR is not a feature selection method; is a linear combination of all p of the original features. In this sense, PCR is more closely related to ridge regression than to the lasso. Deciding “M”: full model is \(\hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 + \cdots + \hat{\theta}_p Z_p\) when $Z_1,\ldots,Z_m$ is from standardized $X_s$ and \(\hat{y}_0 = \bar{y}\), as $Z_j$’s are orthogonal, adding variable $Z_{j+1}$ does not affect the coefficients. Thus, $\theta_j$’s are not changed by feature selection; that is, \(\hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 \\ \hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 + \hat{\theta}_2 Z_2 \\ \vdots \\ \hat{Y} = \hat{\theta}_0 + \hat{\theta}_1 Z_1 +\cdots + \hat{\theta}_p Z_p\) the value of $\theta_k$ is the same. Then we can use CV methods over these models to get optimal M. 6.3.2. Partial Least Squares The PCR approach identifies linear combinations, or directions, that best represent the predictors. These directions are identified in an unsupervised way, since the response Y is not used to help determine the principal component directions. There, PCR suffers from a drawback: there is no guarantee that the directions that best explain the predictors will also be the best directions to use for predicting the response. PLS is a supervised alternative to PCR; finding PLS directions $Z_1,\ldots,Z_m$ that $Cov(Y,Z_1)\ge Cov(Y,Z_2)\ge\cdots\ge Cov(Y,Z_M)$ instead of $Var(Z_1)\ge\cdots\ge Var(Z_M)$. First PLS direction is computed, after standardizing predictors, by setting each $\phi_{j1}$ equal to the coefficient from the simple linear regression $Y$ onto $X_j$. As $Z_1 = \sum_{j=1}^p\phi_{j1}X_j$, PLS places the highest weight on the variables that are most strongly related to the response. To find second PLS direction, we adjust each of the variables for $Z_1$, by regressing each variable on $Z_1$ and taking residuals. The residuals can be interpreted as the remaining information that has not been explained by the first PLS direction. Then we compute $Z_2$ using this orthogonalized data by the same way of computing $Z_1$. This predecure repeated M times. in Simple Regression case, $\hat X_j^s$ is a projection of original data $X_j^s$ to a vector $Z_1$; $X_j^s = \alpha Z_1$. the residual vector $r_j = \hat X_j^s - X_j^s$ and $r_j\bot Z_1$. Then, $r_j = X_j^{(2)}$ is the orthogonalized data for computing the next $Z_2$. The mth PLS direction: \(\text{max}_{\phi} Cov(y,X_s\phi)\) subject to $\lVert\phi\rVert = 1$, $\phi^T S v_l = 0$ for $\phi$ as orthogonal directions, sample covariance matrix S, and $v_l$ as l th PLS direction. \(\text{max}_{\phi}[E(\phi^T X_s^T y)-E(y)E(\phi^T X_s)]\), as standardized, $E(X_s) = 0$, \(\equiv \text{max}_{\phi}\phi^T \dot X_s^T y\) is maximization of dot product of 2 vectors. note that, when two vectors are in the same direction, dot product is maximized. $\therefore \phi=X_s^T y$. 6.4. Considerations in High Dimensions 6.4.1. High-Dimensional Data Data sets that containing more features than observations, $p &amp;gt; n$. 6.4.2. What Goes Wrong in High Dimensions? Standard least squares cannot be performed. Regardless of the true relationship between features and response, least squares will result in a perfect fit to the data, lead to overfitting of the data and poor predictions. 6.4.3. Regression in High Dimensions new technologies that allow for the collection of measurements for thousands or millions of features are a double-edged sword: they can lead to improved predictive models if these features are in fact relevant to the problem at hand, but will lead to worse results if the features are not relevant. Even if they are relevant, the variance incurred in fitting their coefficients may outweigh the reduction in bias that they bring. 6.4.4. Interpreting Results in High Dimensions In high-dimensional setting, the multicollinearity problem is extreme: any variable in the model is a linear combination of all of the other variables in the model. This means we can never know exactly which variables truly are predictive of the outcome, and we can never identify the best coefficients for use in the regression. When $p &amp;gt; n$, it is easy to obtain a a useless model that has zero residuals. Therefore, we should never use sum of squared errors, p-values, $R^2$ statistics, or other traditional measures of model fit on the training data as evidence of a good model fit. Instead we report results on an independent test set, or cross-validation errors.</summary></entry></feed>
