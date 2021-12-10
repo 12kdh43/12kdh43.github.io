@@ -92,6 +92,554 @@
     
       
       <item>
+        <title>ISLR - Chapter 10. Deep Learning</title>
+        
+          <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-10-deep-learning&quot; id=&quot;markdown-toc-chapter-10-deep-learning&quot;&gt;Chapter 10. Deep Learning&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#101-single-layer-neural-networks&quot; id=&quot;markdown-toc-101-single-layer-neural-networks&quot;&gt;10.1. Single Layer Neural Networks&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#102-multilayer-neural-networks&quot; id=&quot;markdown-toc-102-multilayer-neural-networks&quot;&gt;10.2. Multilayer Neural Networks&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#103-convolutional-neural-networks&quot; id=&quot;markdown-toc-103-convolutional-neural-networks&quot;&gt;10.3. Convolutional Neural Networks&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#1031-convolution-layers&quot; id=&quot;markdown-toc-1031-convolution-layers&quot;&gt;10.3.1. Convolution Layers&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#1032-pooling-layers&quot; id=&quot;markdown-toc-1032-pooling-layers&quot;&gt;10.3.2. Pooling Layers&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#1033-architecture-of-a-convolutional-neural-network&quot; id=&quot;markdown-toc-1033-architecture-of-a-convolutional-neural-network&quot;&gt;10.3.3. Architecture of a Convolutional Neural Network&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#1034-data-augmentation&quot; id=&quot;markdown-toc-1034-data-augmentation&quot;&gt;10.3.4. Data Augmentation&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#104-document-classification&quot; id=&quot;markdown-toc-104-document-classification&quot;&gt;10.4. Document Classification&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#105-recurrent-neural-networks&quot; id=&quot;markdown-toc-105-recurrent-neural-networks&quot;&gt;10.5. Recurrent Neural Networks&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#1051-sequential-models-for-document-classification&quot; id=&quot;markdown-toc-1051-sequential-models-for-document-classification&quot;&gt;10.5.1. Sequential Models for Document Classification&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#1052-time-series-forecasting&quot; id=&quot;markdown-toc-1052-time-series-forecasting&quot;&gt;10.5.2. Time Series Forecasting&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#rnn-forecaster&quot; id=&quot;markdown-toc-rnn-forecaster&quot;&gt;RNN forecaster&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#autoregression&quot; id=&quot;markdown-toc-autoregression&quot;&gt;Autoregression&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#1053-summary-of-rnns&quot; id=&quot;markdown-toc-1053-summary-of-rnns&quot;&gt;10.5.3. Summary of RNNs&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#106-when-to-use-deep-learning&quot; id=&quot;markdown-toc-106-when-to-use-deep-learning&quot;&gt;10.6. When to Use Deep Learning&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#107-fitting-a-neural-network&quot; id=&quot;markdown-toc-107-fitting-a-neural-network&quot;&gt;10.7. Fitting a Neural Network&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#1071-backpropagation&quot; id=&quot;markdown-toc-1071-backpropagation&quot;&gt;10.7.1. Backpropagation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#1072-regularization-and-stochastic-gradient-descent&quot; id=&quot;markdown-toc-1072-regularization-and-stochastic-gradient-descent&quot;&gt;10.7.2. Regularization and Stochastic Gradient Descent&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#1073-dropout-learning&quot; id=&quot;markdown-toc-1073-dropout-learning&quot;&gt;10.7.3. Dropout Learning&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#1074-network-tuning&quot; id=&quot;markdown-toc-1074-network-tuning&quot;&gt;10.7.4. Network Tuning&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#108-interpolation-and-double-descent&quot; id=&quot;markdown-toc-108-interpolation-and-double-descent&quot;&gt;10.8. Interpolation and Double Descent&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-10-deep-learning&quot;&gt;Chapter 10. Deep Learning&lt;/h2&gt;
+
+&lt;h2 id=&quot;101-single-layer-neural-networks&quot;&gt;10.1. Single Layer Neural Networks&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A neural network takes input vector of &lt;em&gt;p&lt;/em&gt; variables \(X=(X_1,X_2,\ldots,X_p)\) and builds a nonlinear function $f(X)$ to predict the response &lt;em&gt;Y&lt;/em&gt;. What distinguishes neural networks from these methods is the particular &lt;em&gt;structure&lt;/em&gt; of the model.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;E.g. a simple &lt;em&gt;feed-forward neural network&lt;/em&gt;:&lt;br /&gt;
+\(\begin{align*}
+f(X)&amp;amp;= \beta_0 + \sum_{k=1}^K\beta_k h_k(X) \\
+  &amp;amp;= \beta_0 + \sum_{k=1}^K\beta_k g(w_{k0}+\sum_{j=1}^p w_{kj}X_j).
+\end{align*}\)&lt;br /&gt;
+In the terminology, the features \(X_1,\ldots,X_4\) make up the units in the &lt;em&gt;input layer&lt;/em&gt;. Each of the inputs from the input lyaer feed into each of the &lt;em&gt;K hidden units&lt;/em&gt;. In two steps; First the &lt;em&gt;K activations&lt;/em&gt; $A_k$ in the hidden layer are computed as functions of the input features $X_1,\ldots,X_p$,&lt;br /&gt;
+\(A_k = h_k(X) = g(w_{k0}+\sum_{j=1}^p w_{kj}X_j)\),&lt;br /&gt;
+where \(g(z)\) is a nonlinear &lt;em&gt;activation function&lt;/em&gt; that is specified in advance. We can think of each \(A_k\) as a different transformation \(h_k(X)\) of the original features, like basis functions of Chapter 7. These &lt;em&gt;K&lt;/em&gt; activations then feed into the output layer, resulting in&lt;br /&gt;
+\(f(X) = \beta_0 + \sum_{k=1}^K \beta_k A_k\),&lt;br /&gt;
+a linear regression model. All the parameters $\beta_0,\ldots,\beta_K$ and $w_{10},\ldots,w_{Kp}$ need to be estimated from data.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;With deriving &lt;em&gt;K&lt;/em&gt; new features by computing &lt;em&gt;K&lt;/em&gt; different linear combinations of &lt;em&gt;X&lt;/em&gt;, the model squashes each through an activation function $g(\cdot)$ to transform it. The final model is linear in these derived variables.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Activation functions
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;sigmoid&lt;/em&gt; activation function:&lt;br /&gt;
+  \(g(z)=\frac{e^z}{1+e^z}=\frac{1}{1+e^{-z}}\)&lt;br /&gt;
+  which is the same function used in logistic regression to convert a linear function into probabilities between zero and one.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;&lt;em&gt;ReLU&lt;/em&gt;&lt;/strong&gt;(&lt;em&gt;rectified linear unit&lt;/em&gt;) activation function:&lt;br /&gt;
+  \(g(z) = (z)_{+} = \begin{cases}0, &amp;amp; \mbox{if }z&amp;lt;0 \\
+                              z, &amp;amp; \mbox{othersize}.\end{cases}\)&lt;br /&gt;
+  can be computed and stored more efficiently than a sigmoid function. Although it thresholds at zero, because we apply it to a linear function the constant term \(w_{k0}\) will shift this inflection point.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The nonlinearity in the activation function \(g(\cdot)\) is essential, since without it the model would collapse into a simple linear model. Moreoever, having a nonlinear activation function allows the model to capture complex nonlinearities and interaction effects.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Fitting a neural network requires estimating the unknown parameters. For a quantitative response, typically squared-error loss is used, so that the parameters are chosen to minimize \(\sum_{i=1}^n(y_i-f(x_i))^2\).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;102-multilayer-neural-networks&quot;&gt;10.2. Multilayer Neural Networks&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;With &lt;em&gt;H&lt;/em&gt; multiple hidden layers,&lt;br /&gt;
+the first hidden layer is&lt;br /&gt;
+\(\begin{align*}
+A_k^{(1)} &amp;amp;= h_k^{(1)}(X) \\
+        &amp;amp;= g(w_{k0}^{(1)}+\sum_{j=1}^p w_{kj}^{(1)}X_j)
+\end{align*}\)&lt;br /&gt;
+for \(k=1,\ldots,K_1\).&lt;br /&gt;
+The &lt;em&gt;h&lt;/em&gt;th hidden layer treats the activations \(A_k^{(h-1)}\) as inputs and computes new activations&lt;br /&gt;
+\(\begin{align*}
+A_{k'}^{(h)} &amp;amp;= h_{k'}^{(h)}(X) \\
+        &amp;amp;= g(w_{k'0}^{(h)}+\sum_{k'=1}^{K_1} w_{hk'}^{(h)}A_k^{(h-1)})
+\end{align*}\)&lt;br /&gt;
+for \(k'=1,\ldots,K_h\). Each \(A_{k'}^{(h)} = h_{k'}^{(h)}(X)\) is a function of input vector &lt;em&gt;X&lt;/em&gt;. Thus, through a chain of transformations, the network is able to build up fairly complex transformations of &lt;em&gt;X&lt;/em&gt; that ultimately feed into the output layer as features.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The notation \(\mathbf{W}_h\) represents the entire matrix of weights that feed from the hidden layer $L_{h-1}$ to $L_h$. Each element $A_k^{(h-1)}$ feeds to the hidden layer $L_h$ via the matrix of weights \(\mathbf{W}_h\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;On the output layer in the classification case, compute &lt;em&gt;M&lt;/em&gt; different linear models similar to our single model to get separate quantitative responses for each classes. To represent class probabilities \(f_m(X)=Pr(Y=m|X)\), we use the &lt;em&gt;softmax&lt;/em&gt; activation function&lt;br /&gt;
+\(f_m(X)=Pr(Y=m|X)=\frac{e^{Z_m}}{\sum_{l=0}^{M-1} e^{Z_l}}\).&lt;br /&gt;
+The classifier assigns the image to the class with the highest probability.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To train this network, since the response is qualitative, we look for coefficient estimates that minimize the negative multinomial log-likelihood&lt;br /&gt;
+\(-\sum_{i=1}^n\sum_{m=0}^{M-1}y_{im}\log(f_m(x_i))\),&lt;br /&gt;
+known as the &lt;em&gt;cross-entropy&lt;/em&gt;, a generalization of the criterion for two-class logistic regression. If the response were quantitative, we would instead minimize squared-error loss as before.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;103-convolutional-neural-networks&quot;&gt;10.3. Convolutional Neural Networks&lt;/h2&gt;
+
+&lt;h3 id=&quot;1031-convolution-layers&quot;&gt;10.3.1. Convolution Layers&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A &lt;em&gt;convolution layer&lt;/em&gt; is made up of a large number of &lt;em&gt;convolution filters&lt;/em&gt;, each of which is a template that determines whether a particular local feature is present in an image. A very simple operation, called a &lt;em&gt;convolution&lt;/em&gt; amounts to repeatedly multiplying matrix elements and then adding the results. Resulting &lt;em&gt;convolved image highlights regions of the original image that resemble the convolution filter&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In a convolution layer, we use a whole bank of filters to pick out a variety of differently-oriented edges and shapes in the image. Using predefined filters in this way is standard practice in image processing. By contrast, we can think of the filter weights as the parameters going from an input layer to a hidden layer. Thus, with CNNs the filters are learned for the specific classification task.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1032-pooling-layers&quot;&gt;10.3.2. Pooling Layers&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;A &lt;em&gt;pooling&lt;/em&gt; layer provides a way to condense a large image into a smaller summary image. The &lt;em&gt;max pooling&lt;/em&gt; operation summarizes each non-overlapping block of pixels in an image using the maximum value in the block. This reduces the size of the image and also provides some &lt;em&gt;location invariance&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1033-architecture-of-a-convolutional-neural-network&quot;&gt;10.3.3. Architecture of a Convolutional Neural Network&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Convolve-then-pool sequence:&lt;br /&gt;
+Start with the three-dimensional feature map of a color image, consist of three $n\times n$ two-dimensional feature map of pixels.&lt;br /&gt;
+Each convolve layer takes as input the three-dimensional feature map from the previous layer and treats it like a single multi-channel image. Each convolution filter learned has as many channels as this feature map.&lt;br /&gt;
+Since the channel feature maps are reduced in size after each pool layer, we usually increase the number of filters in the next convolve layer to compensate.&lt;br /&gt;
+Sometimes we repeat several convolve layers before a pool layer. This effectively increases the dimension of the filter.&lt;br /&gt;
+These operations are repeated until the pooling has reduced each channel feature map down to just a few pixels in each dimension.&lt;br /&gt;
+Then the three-dimensional feature maps are flattened; the pixels are treated as separate units, and fed into one or more fully-connected layers before reaching the output layer, which is a &lt;em&gt;softmax activation&lt;/em&gt; for the classification.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1034-data-augmentation&quot;&gt;10.3.4. Data Augmentation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Each training image is replicated many times, with each replicate randomly distorted in a natural way such that human recognition is unaffected. Typical distortions are zoom, horizontal and vertical shift, shear, small rotations, and horizontal flips. This is a way of increasing the training set considerably with somewhat different examples, and thus protects against overfitting.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We can see this as a form of regularization: we build a cloud of images around each original image, all with the same label. This kind of fattening of the data is similar in spirit to ridge regularization.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;104-document-classification&quot;&gt;10.4. Document Classification&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;For the two-class response of the sentiment of the text data, which will be positive or negative. Each document can be a different length, include slang or non-words, have spelling errors, etc. We need to find a way to featurize such a document.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The simplest featurization is BOW, &lt;em&gt;bog-of-words&lt;/em&gt; model. With dictionary containing &lt;em&gt;M&lt;/em&gt; words, we create a binary feature vector of length &lt;em&gt;M&lt;/em&gt; for each document, scoring 1 for presence, and 0 otherwise. The resulting training feature matrix &lt;strong&gt;X&lt;/strong&gt; is a &lt;em&gt;sparse matrix&lt;/em&gt;, most of the values are the same(to zero); it can be stored efficiently in &lt;em&gt;sparse matrix format&lt;/em&gt;. Then we can build a neural network model with the feature matrix as input layers.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The bag-of-words model summarizes a document by the words present, and ignores their context. There are at least two popular ways to take the context into account:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;The &lt;em&gt;bag-of-n-grams&lt;/em&gt; model recording the consecutive co-occurrence of every distinct set of words.&lt;/li&gt;
+      &lt;li&gt;Treat the document as a sequence, taking account of all the words in the context of those that preceded and those that follow.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;105-recurrent-neural-networks&quot;&gt;10.5. Recurrent Neural Networks&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;In a &lt;em&gt;recurrent neural network&lt;/em&gt; (RNN), the input object &lt;em&gt;X&lt;/em&gt; is a &lt;em&gt;sequence&lt;/em&gt;. Considering a corpus of documents, each document can be represented as a sequence of &lt;em&gt;L&lt;/em&gt; words, so \(X=\left\{ X_1,X_2,\ldots,X_L\right\}\). RNNs are designed to capture the sequential nature of such(text) input objects like CNNs for the spatial structure of image inputs. The output &lt;em&gt;Y&lt;/em&gt; can also be a sequence (such as in language translation), but often is a scalar, like the binary sentiment label of a movie review document.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The structure of a very basic RNN; with a sequence \(X=\left\{ X_1,X_2,\ldots,X_L\right\}\), a simple output &lt;em&gt;Y&lt;/em&gt;, and a hidden-layer sequence \(\left\{ A_l \right\}_1^L =\left\{ A_1,A_2,\ldots,A_L\right\}\). Each \(X_l\) is a vector representation for the $l$th word.&lt;br /&gt;
+Suppose it has &lt;em&gt;p&lt;/em&gt; components \(X_l^T = (X_{l1},X_{l2},\ldots,X_{lp})\), and hidden layer consists of &lt;em&gt;K&lt;/em&gt; units \(A_l^T = (A_{l1},\ldots,A_{lK})\). We represent the collection of \(K \times (p+1)\) shared weights $w_{kj}$ for the input layer by a matrix &lt;strong&gt;W&lt;/strong&gt;, and similarly &lt;strong&gt;U&lt;/strong&gt; is a \(K \times K\) matrix of the weights $u_{ks}$ for the hidden-to hideen layers, and &lt;strong&gt;B&lt;/strong&gt; is a &lt;em&gt;K+1&lt;/em&gt; vector of weights $\beta_k$ for the output layer.&lt;br /&gt;
+Then \(A_{lk}=g(w_{k0}+\sum_{j=1}^p w_{kj}X_{lj} + \sum_{s=1}^K u_{ks} A_{l-1,s})\), and the output \(O_l = \beta_0 + \sum_{k=1}^K\beta_k A_{lk}\) for a quantitative response, for example. Here $g(\cdot)$ is an activation function such as ReLU. Note that the same weights &lt;strong&gt;W&lt;/strong&gt;, &lt;strong&gt;U&lt;/strong&gt;, and &lt;strong&gt;B&lt;/strong&gt; are not functions of $l$. This is a form of &lt;em&gt;weights sharing&lt;/em&gt; used by RNNs, similar to the use of filters in CNNs.&lt;br /&gt;
+Proceeded from beginning to end, the activations $A_l$ accumulate a history of what has been seen before, so that the learned context can be used for prediction.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/ch10_simpleRNN.png&quot; alt=&quot;png&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For regression problems the loss function is $(Y-O_L)^2$, which only references the final output \(O_L = \beta_0 + \sum_{k=1}^K\beta_k A_{Lk}\) and others before are not used. With &lt;em&gt;n&lt;/em&gt; input sequence/response pairs, the parameters are found by minimizing the sum of squares \(\sum_{i=1}^n(y_i-o_{iL})^2\).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1051-sequential-models-for-document-classification&quot;&gt;10.5.1. Sequential Models for Document Classification&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Beacuse of the dimensionality problem of bag-of-words model(one-hot-encoded vector), we use lower-dimensional &lt;em&gt;embedding&lt;/em&gt; space instead. Rather than representing each word by a binary vector with zeros and a single one in some position, we will represent it by a set of &lt;em&gt;m&lt;/em&gt; real numbers, none of which are typically zero.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;em&gt;embedding layer&lt;/em&gt; &lt;strong&gt;E&lt;/strong&gt; comes from the optimization part of a neural network, or we can use a &lt;em&gt;weight freezing&lt;/em&gt;, inserting a precomputed matrix &lt;strong&gt;E&lt;/strong&gt; in the embedding layer. The idea is that the positions of words in the embedding space preserve semantic meaning: synonyms should appear near each other.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The next step is to limit each document to the last &lt;em&gt;L&lt;/em&gt; words. Documents that are shorter get padded with zeros upfront. So now each document is represented by a series consisting of &lt;em&gt;L&lt;/em&gt; vectors, and each $X_l$ in the sequence has &lt;em&gt;m&lt;/em&gt; components.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Then we run the process of simple RNN as presented before, with &lt;strong&gt;B&lt;/strong&gt; has &lt;em&gt;2(K+1)&lt;/em&gt; for two-class logistic regression. If the embedding layer &lt;strong&gt;E&lt;/strong&gt; is learned, that adds an additional $m \times D$ parameters, and is by far the biggest cost.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;More elaborate versions use long term and short term memory (LSTM). However, LSTM models take a long time to train, which makes exploring many architectures and parameter optimization tedious.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1052-time-series-forecasting&quot;&gt;10.5.2. Time Series Forecasting&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;In an example of Stock price predition, one feature of stock market data is that the day-to-day observations are not independent of each other. The series exhibit &lt;em&gt;auto-correlation&lt;/em&gt;; values nearby in time tend to be similar to each other.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Consider pairs of observations $(v_t,v_{t-l})$, a &lt;em&gt;lag&lt;/em&gt; of $l$ days apart. If we take all such pairs in the $v_t$ series and compute their correlation coefficient, this gives the autocorrelation at lag $l$.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Another interesting characteristic of this forecasting problem is that the response variable $v_t$; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;log_volume&lt;/code&gt; is also a predictor. We will use the past values of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;log_volume&lt;/code&gt; to predict values in the future.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;rnn-forecaster&quot;&gt;RNN forecaster&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;We wish to predict a value $v_t$ from past values $v_{t-1},v_{t-2},\ldots$ and also to make use of past values of the other series $r_{t-1},r_{t-2},\ldots$ and $z_{t-1},z_{t-2},\ldots$.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Idea: to extract many short mini-series of input sequences with a predefined length &lt;em&gt;L&lt;/em&gt;(lag), and a corresponding target &lt;em&gt;Y&lt;/em&gt;.&lt;br /&gt;
+\(X_1= \begin{pmatrix} v_{t-L}\\ r_{t-L}\\ z_{t-L} \end{pmatrix}, X_2= \begin{pmatrix} v_{t-L+1}\\ r_{t-L+1}\\ z_{t-L+1} \end{pmatrix}, \cdots, X_L= \begin{pmatrix} v_{t-1}\\ r_{t-1}\\ z_{t-1} \end{pmatrix}\), and \(Y=v_t\).&lt;br /&gt;
+Here the target &lt;em&gt;Y&lt;/em&gt; is the value of response at a single timepoint &lt;em&gt;t&lt;/em&gt;, and the input sequence &lt;em&gt;X&lt;/em&gt; is the series of 3-vectors \(\left\{X_l\right\}_1^L\) consisting of measurements from day &lt;em&gt;t-L, t-L+1,&lt;/em&gt; up to &lt;em&gt;t-1&lt;/em&gt;. Each value of &lt;em&gt;t&lt;/em&gt; makes a separate pair (&lt;em&gt;X,Y&lt;/em&gt;). Then we run RNN model for prediction.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;autoregression&quot;&gt;Autoregression&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The RNN we just fit has much in common with a traditional &lt;em&gt;autoregression&lt;/em&gt;(AR) linear model. Constructed a response vector &lt;strong&gt;y&lt;/strong&gt; and a matrix &lt;strong&gt;M&lt;/strong&gt; of predictors for least squares regression:&lt;br /&gt;
+\(\mathbf{y}=\begin{bmatrix} v_{L+1}\\ v_{L+2}\\ \vdots\\ v_T \end{bmatrix}\), 
+\(\mathbf{M}=\begin{bmatrix} 1 &amp;amp; v_L &amp;amp; v_{L-1} &amp;amp; \cdots &amp;amp; v_1 \\
+                           1 &amp;amp; v_{L+1} &amp;amp; v_{L} &amp;amp; \cdots &amp;amp; v_2 \\
+                           \vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \\
+                           1 &amp;amp; v_{T-1} &amp;amp; v_{T-2} &amp;amp; \cdots &amp;amp; v_{T-L}
+           \end{bmatrix}\)&lt;br /&gt;
+each have &lt;em&gt;T-L&lt;/em&gt; rows, one per observation. The predictors for any given reponse $v_t$ on day &lt;em&gt;t&lt;/em&gt; are the previous &lt;em&gt;L&lt;/em&gt; values of the same series. Fitting a regression of &lt;strong&gt;y&lt;/strong&gt; on &lt;strong&gt;M&lt;/strong&gt; amounts to fitting the model&lt;br /&gt;
+\(\hat{y}_t = \hat\beta_0 + \hat\beta_1 v_{t-1} + \hat\beta_2 v_{t-2} + \cdots + 
+              \hat\beta_L v_{t-L}\),&lt;br /&gt;
+and is called an order-&lt;em&gt;L&lt;/em&gt; autoregressive model, or simplay AR(&lt;em&gt;L&lt;/em&gt;).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The RNN processes data sequence from left to right with the same weights &lt;strong&gt;W&lt;/strong&gt;, while the AR model simply treats all &lt;em&gt;L&lt;/em&gt; elements of the sequence equally as a vector of $L \times p$ predictors; a process called &lt;em&gt;flattening&lt;/em&gt; in the neural network. Of course the RNN also includes the hidden layer activations which transfer information along the sequence, and introduces additional nonlinearity with much more parameters.
+    &lt;h3 id=&quot;1053-summary-of-rnns&quot;&gt;10.5.3. Summary of RNNs&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;There are many variations and enhancements of the simple RNN for sequence modeling. One approach uses a onedimensional convolutional neural network, treating the sequence of vectors as an image. One can also have additional hidden layers; multi-layer RNN. Alternative &lt;em&gt;bidirectional&lt;/em&gt; RNNs scan the sequences in both directions. In language translation the target is also a sequence of words, in a language different from that of the input sequence. Both the input sequence and the target sequence share the hidden units, so-called &lt;em&gt;Seq2Seq&lt;/em&gt; learning.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;106-when-to-use-deep-learning&quot;&gt;10.6. When to Use Deep Learning&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Should we discard all our older tools, and use deep learning on every problem with data? We follow Occam’s razor principle: when faced with several methods that give roughly equivalent performance, pick the simplest.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Typically we expect deep learning to be an attractive choice when the sample size of the training set is extremely large, and when interpretability of the model is not a high priority.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;107-fitting-a-neural-network&quot;&gt;10.7. Fitting a Neural Network&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;In simple network, the parameters are \(\beta = (\beta_0,\beta_1,\ldots,\beta_K)\), each of the \(w_k=(w_{k0},w_{k1},\ldots,w_{kp})\) for &lt;em&gt;k&lt;/em&gt; in &lt;em&gt;K&lt;/em&gt;. Given observations ($x_i,y_i$) for &lt;em&gt;i&lt;/em&gt; in &lt;em&gt;n&lt;/em&gt;, we fit the model by solving a nonlinear least squares problem&lt;br /&gt;
+\(\begin{align*}\text{min}_{\left\{ w_k \right\}_1^K, \beta }\frac{1}{2}\sum_{i=1}^n(y_i-f(x_i))^2,\end{align*}\)&lt;br /&gt;
+where \(f(x_i)=\beta_0+\sum_{k=1}^K\beta_k g(w_{k0}+\sum_{j=1}^p w_{kj}x_{ij})\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The minimization objective is quite simple, but because of the nested arrangement of the parameters and the symmetry of the hidden units, it is not straightforward to minimize. The problem is nonconvex in the parameters, and hence there are multiple solutions. To overcome some of these issues and to protect from overfitting, two general strategies are employed when fitting neural networks: &lt;em&gt;Slow learning&lt;/em&gt; and &lt;em&gt;Regularization&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Suppose we represent all the parameters in one long vecter \(\theta\). Then we can rewrite the objective as&lt;br /&gt;
+\(R(\theta)=\frac{1}{2}\sum_{i=1}^n(y_i-f_{\theta}(x_i))^2\), where we make explicit the dependence of &lt;em&gt;f&lt;/em&gt; on the parameters. The idea of gradient descent is&lt;/p&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Start with a guess \(\theta^0\) for all the parameters in \(\theta\), and set \(t=0\).&lt;/li&gt;
+      &lt;li&gt;Iterate until the objective fails to decrease:&lt;br /&gt;
+  (a) Find a vector \(\delta\) reflects a small change in \(\theta\), such that \(\theta^{t+1} = \theta^t + \delta\) reduces the objective; i.e. such that \(R(\theta^{t+1})&amp;lt;R(\theta^t)\).&lt;br /&gt;
+  (b) Set \(t \leftarrow t+1\).&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1071-backpropagation&quot;&gt;10.7.1. Backpropagation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;How do we find the directions to move \(\theta\) so as to decrease the objective? The &lt;em&gt;gradient&lt;/em&gt; of $R(\theta)$, evaluated at some current value \(\theta=\theta^m\), is the vector of partial derivatives at that point:&lt;br /&gt;
+\(\begin{align*}\triangledown R(\theta^m) = \frac{\partial R(\theta)}{\partial\theta}|_{\theta=\theta^m}\end{align*}\).&lt;br /&gt;
+The subscript \(\theta=\theta^m\) means that after computing the vector of derivatives, we evaluate it at the current guess, \(\theta^m\). This gives the direction in $\theta$-space in which $R(\theta)$ &lt;em&gt;increases&lt;/em&gt; most rapidly. The idea of gradient descent is to move $\theta$ a little in the &lt;em&gt;opposite&lt;/em&gt; direction(since we wish to go downhill):&lt;br /&gt;
+\(\theta^{m+1}\leftarrow\theta^m - \rho\triangledown R(\theta^m)\).&lt;br /&gt;
+For a small enough value of the &lt;em&gt;learning rate&lt;/em&gt; $\rho$, this step will decrease the objective $R(\theta)$; i.e. $R(\theta^{m+1})\le R(\theta^m)$. If the gradient vector is zero, then we may have arrived at a minimum of the objective.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Calculation: the &lt;em&gt;chain rule&lt;/em&gt; of differentiation&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1072-regularization-and-stochastic-gradient-descent&quot;&gt;10.7.2. Regularization and Stochastic Gradient Descent&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;stochastic gradient descent&lt;/em&gt;(SGD):&lt;br /&gt;
+When n is large, instead of calculating over all &lt;em&gt;n&lt;/em&gt; observations, we can sample a small fraction or &lt;em&gt;minibatch&lt;/em&gt; of them each time we compute a gradient step.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Regularization:&lt;br /&gt;
+E.g. Ridge regularization on the weights, augmenting the objective function with a penalty term on classification problem:&lt;br /&gt;
+\(R(\theta;\lambda)=-\sum_{i=1}^n\sum_{m=0}^{M-1}y_{im}\log(f_m(x_i))
+                  +\lambda\sum_j\theta_j^2\).&lt;br /&gt;
+With $\lambda$ as preset at a small value or found using the validation-set approach. We can also use different values of $\lambda$ for the groups of weights from different layers. Lasso is also a popular alternative.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1073-dropout-learning&quot;&gt;10.7.3. Dropout Learning&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Efficient form of regularization, similar in some respects to ridge regularization. The idea is to randomly remove a fraction of the units in a layer when fitting the model, separately each time a training observation is processed. This prevents nodes from becoming over-specialized, and can be seen as a form of regularization.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1074-network-tuning&quot;&gt;10.7.4. Network Tuning&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Choices that all have an effect on the performance:&lt;br /&gt;
+  The number of hidden layers, and the number of units per layer.&lt;br /&gt;
+  Regularization tuning parameters.&lt;br /&gt;
+  Details of stochastic gradient descent.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;108-interpolation-and-double-descent&quot;&gt;10.8. Interpolation and Double Descent&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;In certain specific settings it can be possible for a statistical learning method that interpolates the training data to perform well; or at least, better than a slightly less complex model that does not quite interpolate the data. The phenomenon is known as &lt;em&gt;double descent&lt;/em&gt;, where the test error has a U-shape before the interpolation threshold is reached, and then it descends again (for a while, at least) as an increasingly flexible model is fit. The double-descent phenomenon does not contradict the bias-variance trade-off.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It has been used by the machine learning community to explain the successful practice of using an overparametrized neural network (many layers, and many hidden units), and then fitting all the way to zero training error. However, zero error fit is not always optimal, we typically do not want to rely on this behavior.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        
+        <pubDate>Thu, 28 May 2020 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/islr_ch10</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch10</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>ISLR - Chapter 9. Support Vector Machines</title>
+        
+          <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#chapter-9-support-vector-machines&quot; id=&quot;markdown-toc-chapter-9-support-vector-machines&quot;&gt;Chapter 9. Support Vector Machines&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#91-maximal-margin-classifier&quot; id=&quot;markdown-toc-91-maximal-margin-classifier&quot;&gt;9.1. Maximal Margin Classifier&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#911-what-is-a-hyperplane&quot; id=&quot;markdown-toc-911-what-is-a-hyperplane&quot;&gt;9.1.1. What Is a Hyperplane?&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#912-classification-using-a-separating-hyperplane&quot; id=&quot;markdown-toc-912-classification-using-a-separating-hyperplane&quot;&gt;9.1.2. Classification Using a Separating Hyperplane&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#913-the-maximal-margin-classifier&quot; id=&quot;markdown-toc-913-the-maximal-margin-classifier&quot;&gt;9.1.3. The Maximal Margin Classifier&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#914-construction-of-the-maximal-margin-classifier&quot; id=&quot;markdown-toc-914-construction-of-the-maximal-margin-classifier&quot;&gt;9.1.4. Construction of the Maximal Margin Classifier&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#915-the-non-separable-case&quot; id=&quot;markdown-toc-915-the-non-separable-case&quot;&gt;9.1.5. The Non-separable Case&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#92-support-vector-classifiers&quot; id=&quot;markdown-toc-92-support-vector-classifiers&quot;&gt;9.2. Support Vector Classifiers&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#921-overview-of-the-support-vector-classifier&quot; id=&quot;markdown-toc-921-overview-of-the-support-vector-classifier&quot;&gt;9.2.1. Overview of the Support Vector Classifier&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#922-details-of-the-support-vector-classifier&quot; id=&quot;markdown-toc-922-details-of-the-support-vector-classifier&quot;&gt;9.2.2. Details of the Support Vector Classifier&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#93-support-vector-machines&quot; id=&quot;markdown-toc-93-support-vector-machines&quot;&gt;9.3. Support Vector Machines&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#931-classification-with-non-linear-decision-boundaries&quot; id=&quot;markdown-toc-931-classification-with-non-linear-decision-boundaries&quot;&gt;9.3.1. Classification with Non-Linear Decision Boundaries&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#932-the-support-vector-machine&quot; id=&quot;markdown-toc-932-the-support-vector-machine&quot;&gt;9.3.2. The Support Vector Machine&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#94-svms-with-more-than-two-classes&quot; id=&quot;markdown-toc-94-svms-with-more-than-two-classes&quot;&gt;9.4. SVMs with More than Two Classes&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#941-one-versus-one-classification&quot; id=&quot;markdown-toc-941-one-versus-one-classification&quot;&gt;9.4.1. One-Versus-One Classification&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#95-relationship-to-logistic-regression&quot; id=&quot;markdown-toc-95-relationship-to-logistic-regression&quot;&gt;9.5. Relationship to Logistic Regression&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-9-support-vector-machines&quot;&gt;Chapter 9. Support Vector Machines&lt;/h2&gt;
+
+&lt;h2 id=&quot;91-maximal-margin-classifier&quot;&gt;9.1. Maximal Margin Classifier&lt;/h2&gt;
+
+&lt;h3 id=&quot;911-what-is-a-hyperplane&quot;&gt;9.1.1. What Is a Hyperplane?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;a &lt;em&gt;hyperplane&lt;/em&gt; is a flat affine subspace of dimemsion &lt;em&gt;p-1&lt;/em&gt;, in a &lt;em&gt;p&lt;/em&gt;-dimemsional space.&lt;br /&gt;
+The mathematical definition: \(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p = 0\)&lt;br /&gt;
+ A hyperplane can be referred as &lt;em&gt;decision boundary&lt;/em&gt;, means that a point \(X=(X_1,X_2,\ldots,X_p)^T\) in &lt;em&gt;p&lt;/em&gt;-dimemsional space satisfies the equation, then &lt;em&gt;X&lt;/em&gt; lies on the hyperplane. Rather, any point $X&amp;gt;0$ or $X&amp;lt;0$ lies to the both side of the hyperplane.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;912-classification-using-a-separating-hyperplane&quot;&gt;9.1.2. Classification Using a Separating Hyperplane&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Suppose that $n\times p$ data matrix &lt;strong&gt;X&lt;/strong&gt; that consists of &lt;em&gt;n&lt;/em&gt; training observations in &lt;em&gt;p&lt;/em&gt;-dimemsional space, $x_i = (x_{i1},x_{i2},\ldots,x_{ip})^T$ falls into two classes, $y_i\in { -1,1 }$. A test observation is a &lt;em&gt;p&lt;/em&gt;-vector of observed features \(x^* = (x_1^* \cdots x_p^*)^T\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Separating Hyperplane&lt;br /&gt;
+  \(f(x_i) = 
+  \begin{cases}
+  \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip} &amp;gt; 0 &amp;amp; \mbox{if }y_i = 1,\\
+  \beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip} &amp;lt; 0 &amp;amp; \mbox{if }y_i = -1.
+  \end{cases}\)&lt;br /&gt;
+  Equivalently, it has the property that&lt;br /&gt;
+  \(y_i f(x_i) = y_i(\beta_0 + \beta_1 x_{i1} + \cdots + \beta_p x_{ip}) &amp;gt; 0\)&lt;br /&gt;
+  Classify the test observation \(x*\) based on the sign of&lt;br /&gt;
+  \(f(x^*) = \beta_0 + \beta_1 x_1^* + \beta_2 x_2^* + \cdots + \beta_p x_p^*\).&lt;br /&gt;
+  if \(f(x^*)\) is positive, assign the test observation to class &lt;em&gt;1&lt;/em&gt; and if \(f(x^*)\) is negative, then assign it to class &lt;em&gt;-1&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Magnitude&lt;/em&gt; of \(f(x^*)\)&lt;br /&gt;
+  if \(f(x^*)\) is far from zero, it means that \(x^*\) lies far from the hyperplane, and so we can be confident about our class assignment for it.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;913-the-maximal-margin-classifier&quot;&gt;9.1.3. The Maximal Margin Classifier&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Separating hyperplanes have no unique solution, there are infinite number of $\beta$. The &lt;em&gt;maximal margin hyperplane&lt;/em&gt; (or &lt;em&gt;optimal separating hyperplane&lt;/em&gt;) is the separating hyperplane that is farthest from the training observations.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;A &lt;em&gt;margin&lt;/em&gt; is the smallest perpendicular distance from the observations to the hyperplane and the maximal margin hyperplane is the separating hyperplane for which the margin is largest. Then we classify a test observation based on which side of the maximal margin hyperplane it lies, is the &lt;em&gt;maximal margin classifier&lt;/em&gt;. The observations equidistant from the maximal margin hyperplane are the &lt;em&gt;support vectors&lt;/em&gt;.
+    &lt;h3 id=&quot;914-construction-of-the-maximal-margin-classifier&quot;&gt;9.1.4. Construction of the Maximal Margin Classifier&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The maximal margin hyperplane is the solution to the optimization problem:&lt;br /&gt;
+  \(\text{max}_{\beta_0,\beta_1,\ldots,\beta_p,M}M\) subject to \(\sum_{j=1}^p\beta_j^2=1,\)&lt;br /&gt;
+  \(y_i(\beta_0+\beta_1 x_{i1}+\beta_2 x_{i2}+\cdots+\beta_p x_{ip})\ge M\) \(\forall i=1,\cdots,n.\)&lt;br /&gt;
+  where the constraint $\beta^T\beta=1$ means that it is the unique solution of &lt;strong&gt;\(\beta\)&lt;/strong&gt;, the perpendicular distance.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;E.g. in &lt;em&gt;2&lt;/em&gt;-dimemsion space:&lt;br /&gt;
+  a hyperplane $\beta_0 + \beta_1 X_1 + \beta_2 X_2 = 0$,&lt;br /&gt;
+  the distance \(M = \frac{|\beta_0+\beta_1 X_1+\beta_2 X_2|}{\sqrt{\beta_1^2+\beta_2^2}}\)&lt;br /&gt;
+  with the constraint $\beta^T\beta=1$,&lt;br /&gt;
+  \(M = |\beta_0+\beta_1 X_1+\beta_2 X_2|\), that is,&lt;br /&gt;
+  \(y_i(\beta_0+\beta_1 x_{i1}+\beta_2 x_{i2})&amp;gt;0\).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;915-the-non-separable-case&quot;&gt;9.1.5. The Non-separable Case&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;The maximal margin classifier is a very natural way to perform classification, &lt;em&gt;if a separating hyperplane exists&lt;/em&gt;. In cases no separating hyperplane exists, there is no maximal margin classifier and the optimization problem has no solution with $M&amp;gt;0$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;92-support-vector-classifiers&quot;&gt;9.2. Support Vector Classifiers&lt;/h2&gt;
+
+&lt;h3 id=&quot;921-overview-of-the-support-vector-classifier&quot;&gt;9.2.1. Overview of the Support Vector Classifier&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A classifier based on a separating hyperplane will perfectly classify all of the training observations, can lead to overfit; sensitivity to individual observations. Thus, we consider a classifier based on a hyperplane that does not perfectly separate the two classes, in the interest of &lt;strong&gt;greater robustness and better classification&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;em&gt;support vector classifier&lt;/em&gt;, or a &lt;em&gt;soft margin classifier&lt;/em&gt;:&lt;br /&gt;
+Rather than seeking the largest possible margin with every observation is on the correct side of the hyperplane or margin, we allow some violations; observations to be on the incorrect side of the hyperplane or margin.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;922-details-of-the-support-vector-classifier&quot;&gt;9.2.2. Details of the Support Vector Classifier&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The support vector classifier is the solution to the optimization problem:&lt;br /&gt;
+\(\begin{align*}
+\text{max}_{\beta_0,\beta_1,\ldots,\beta_p,\epsilon_1,\ldots,\epsilon_n,M}M
+\end{align*}\) 
+subject to \(\sum_{j=1}^p\beta_j^2=1,\)&lt;br /&gt;
+\(y_i(\beta_0+\beta_1 x_{i1}+\beta_2 x_{i2}+\cdots+\beta_p x_{ip})\ge M(1-\epsilon_i)\), \(\epsilon_i\ge 0\), \(\sum_{i=1}^n\epsilon_i\le C\),&lt;br /&gt;
+where &lt;em&gt;C&lt;/em&gt; is a nonnegative tuning parameter and &lt;em&gt;M&lt;/em&gt; is the width of the maximizing margin. &lt;strong&gt;$\epsilon$&lt;/strong&gt; are the &lt;em&gt;slack variables&lt;/em&gt; that allow individual observations to be on the wrong side. Then we classify a test observation \(x^*\) based on the sign of \(f(x^*)=\beta_0 + \beta_1 x_1^* + \cdots + \beta_p x_p^*\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The slack variable $\epsilon_i$:&lt;br /&gt;
+If $\epsilon_i=0$ then the &lt;em&gt;i&lt;/em&gt;th observation is on the correct side of the margin and 
+if $\epsilon_i&amp;gt;0$ then he &lt;em&gt;i&lt;/em&gt;th observation is on the wrong side of the margin; we say that the &lt;em&gt;i&lt;/em&gt;th observation has violated the margin. If $\epsilon_i&amp;gt;1$ then it is on the wrong side of the hyperplane.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The tuning parameter &lt;em&gt;C&lt;/em&gt;:&lt;br /&gt;
+It bounds the sum of the $\epsilon_i$’s, determines the number and severity of the violations to the margin(and hyperplane) that we will tolerate. It can be referred as a &lt;em&gt;budget&lt;/em&gt; for the amount that the margin can be violated by the &lt;em&gt;n&lt;/em&gt; observations. For $C&amp;gt;0$ no more than &lt;em&gt;C&lt;/em&gt; observations can be on the wrong side of the hyperplane. As &lt;em&gt;C&lt;/em&gt; increases, the model will become more robust and the margin will widen. In practice, &lt;em&gt;C&lt;/em&gt; is chosen via cross-validation and it controls the bias-variance trade-off.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;em&gt;support vectors&lt;/em&gt;, only observations that either lie on the margin or that violate the margin will affect the hyperplane and the classifier. In other words, an observation that lies strictly on the correct side of the margin does not affect the support vector classifier. Changing the position of that (correct) observation would not change the classifier at all. The fact that only support vectors affect the classifier is in line with our previous assertion that C controls the bias-variance trade-off of the support vector classifier.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Since the support vector classifier’s decision rule is based only on a potentially small subset of the training observations, it is quite robust to the behavior of observations that are far away from the hyperplane.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;93-support-vector-machines&quot;&gt;9.3. Support Vector Machines&lt;/h2&gt;
+
+&lt;h3 id=&quot;931-classification-with-non-linear-decision-boundaries&quot;&gt;9.3.1. Classification with Non-Linear Decision Boundaries&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;The support vector classifier is for the setting that the decision boundary between the two classes is linear. In non-linear cases, we consider enlarging the feature space using functions of the predictors, such as quadratic and cubic terms.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;932-the-support-vector-machine&quot;&gt;9.3.2. The Support Vector Machine&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;em&gt;support vector machine&lt;/em&gt; (SVM) is an extension of the support vector classifier that results from enlarging the feature space in a specific way, using &lt;em&gt;kernels&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The linear support vector classifier can be represented as:&lt;br /&gt;
+\(f(x) = \beta_0+\sum_{i=1}^n\alpha_i\left\langle x,x_i \right\rangle\),&lt;br /&gt;
+where there are &lt;em&gt;n&lt;/em&gt; parameters $\alpha_i$, one per training observation. To estimate the parameters $\alpha_i$ and $\beta_0$, all we need are the \({n choose 2}\) inner products \(\left\langle x,x_i \right\rangle\) between all pairs of training observations.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In order to evaluate the function $f(x)$, we need to compute the inner product between the new point $x$ and each of the training points $x_i$. However, it turns out that $\alpha_i$ is nonzero only for the support vectors in the solution; that is, if a training observation is not a support vector, then its $\alpha_i$ equals zero. So if &lt;em&gt;S&lt;/em&gt; is the collection of indices of these support points, we can rewrite as:&lt;br /&gt;
+\(f(x) = \beta_0+\sum_{i\in\mathcal{S}}\alpha_i\left\langle x,x_i \right\rangle\). To summarize, in representing the linear classifier $f(x)$, and in computing its coefficients, all we need are inner products.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Now we replace the inner product with a &lt;em&gt;generalization&lt;/em&gt; of the form \(K(x_i,x_{i'})\), where &lt;em&gt;K&lt;/em&gt; is some function referred as a &lt;em&gt;kernel&lt;/em&gt;, quantifies the similarity of two observations. When the support vector classifier is combined with a non-linear kernel, with the function of polynomial or radial, the resulting classifier is known as a support vector machine. The function has the form:&lt;br /&gt;
+\(f(x) = \beta_0+\sum_{i\in\mathcal{S}}\alpha_i K(x,x_i)\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The advantage of using a kernel&lt;br /&gt;
+Rather than simply enlarging the feature space using functions of the original features, one advantage is computational, and it amounts to the fact that using kernels, one need only compute kernel function for all $n(n-1)/2$ distinct pairs $i,i’$. This can be done without explicitly working in the enlarged feature space, so large that computations are intractable. For some kernels, the feature space is &lt;em&gt;implicit&lt;/em&gt; and infinite-dimensional, the computations are impossible.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;94-svms-with-more-than-two-classes&quot;&gt;9.4. SVMs with More than Two Classes&lt;/h2&gt;
+
+&lt;h3 id=&quot;941-one-versus-one-classification&quot;&gt;9.4.1. One-Versus-One Classification&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;An alternative procedure for applying SVMs. Fit &lt;em&gt;K&lt;/em&gt; SVMs, each time comparing one of the &lt;em&gt;K&lt;/em&gt; classes to the remaining &lt;em&gt;K−1&lt;/em&gt; classes.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Let \(\beta_{0k},\beta_{1k},\ldots,\beta_{pk}\) denote the parameters that result from fitting an SVM comparing the &lt;em&gt;k&lt;/em&gt;th class(coded as +1) to the others (coded as −1)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For a test observation \(x^*\), assign it to the class for which \(\beta_{0k}+\beta_{1k}x_1^*+\ldots+\beta_{pk}x_p^*\) is largest, as this amounts to a high level of confidence that the test observation belongs to the &lt;em&gt;k&lt;/em&gt;th class rather than to any of the other classes.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;95-relationship-to-logistic-regression&quot;&gt;9.5. Relationship to Logistic Regression&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Rewrite the criterion for fitting the support vector classifier as&lt;br /&gt;
+\(\text{min}_{\beta_0,\beta_1,\ldots,\beta_p}\left\{\sum_{i=1}^n\text{max}\left[0, 1- y_i f(x_i) \right] + \lambda\sum_{j=1}^p\beta_j^2 \right\}\),&lt;br /&gt;
+where $\lambda$ is a nonnegative tuning parameter. When $\lambda$ is large then the coefficients $\beta_j$’s are small, more violations to the margin are tolerated, and a low-variance but high-bias classifier will result. Thus, a small value of $\lambda$ amounts to a small value of &lt;em&gt;C&lt;/em&gt; in support vector classifier. Note that \(\lambda\sum_{j=1}^p\beta_j^2\) term is the ridge penalty, plays a similar role in controlling the bias-variance trade-off for the support vector classifier.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Now taktes the “Loss + Penalty” form:&lt;br /&gt;
+\(\text{min}_{\beta_0,\beta_1,\ldots,\beta_p}\left\{L(\mathbf{X},\mathbf{y},\beta)+\lambda P(\beta)\right\}\).&lt;br /&gt;
+Left side term is some loss function quantifying the extent to which the model, parametrized by $\beta$, fits the data (&lt;strong&gt;X&lt;/strong&gt;,&lt;strong&gt;y&lt;/strong&gt;). Right side term is a penalty function on the parameter vector $\beta$ whose effect is controlled by a nonnegative tuning parameter $\lambda$. For support vector machine, the loss function takes the form:&lt;br /&gt;
+\(L(\mathbf{X},\mathbf{y},\beta)=\sum_{i=1}^n\text{max}\left[0,1- y_i(\beta_0+\beta_1 x_{i1}+\cdots+\beta_p x_{ip})\right]\).&lt;br /&gt;
+This is known as &lt;em&gt;hinge loss&lt;/em&gt;. It turns out that the hinge loss function is closely related to the loss function used in logistic regression.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The only support vectors play a role in the classifier obtained; observations on the correct side of the margin do not affect it. This is due to the fact that the hinge loss function is exactly zero for observations for which \(y_i(\beta_0+\beta_1 x_{i1}+\cdots+\beta_p x_{ip})\ge 1\), the observations that are on the correct side of the margin. In contrast, the loss function for logistic regression is not exactly zero anywhere. But it is very small for observations that are far from the decision boundary. Due to the similarities between two loss functions, they often give very similar results. When the classes are well separated, SVMs tend to behave better than logistic regression; in more overlapping regimes, logistic regression is often preferred.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The tuning parameter &lt;em&gt;C&lt;/em&gt; was first thought to be an unimportant “nuisance” parameter that could be set to some default value, like 1. However, the “Loss + Penalty” formulation indicates that this is not the case. Now we see that $\lambda$ or &lt;em&gt;C&lt;/em&gt;, determines the extent to which the model underfits or overfits the data.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Thu, 21 May 2020 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/islr_ch9</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch9</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>ISLR - Chapter 8. Tree-Based Methods</title>
         
           <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
