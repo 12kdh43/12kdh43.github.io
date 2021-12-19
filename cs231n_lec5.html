@@ -40,7 +40,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
 
 
 
-    <title>ISLR - Chapter 5. Resampling Methods</title>
+    <title>cs231n - Lecture 5. Convolutional Neural Networks</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -69,30 +69,30 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="" />
     <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
-    <link rel="canonical" href="http://0.0.0.0:4000/islr_ch5" />
+    <link rel="canonical" href="http://0.0.0.0:4000/cs231n_lec5" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="ISLR - Chapter 5. Resampling Methods" />
-    <meta property="og:description" content="Chapter 5. Resampling Methods 5.1. Cross-Validation 5.1.1. The Validation Set Approach 5.1.2. Leave-One-Out Cross-Validation 5.1.3. k-Fold Cross-Validation 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation 5.1.5. Cross-Validation on Classification Problems 5.2. The Bootstrap Chapter 5. Resampling Methods repeatedly drawing samples from a training set and refitting a model of interest on each" />
-    <meta property="og:url" content="http://0.0.0.0:4000/islr_ch5" />
+    <meta property="og:title" content="cs231n - Lecture 5. Convolutional Neural Networks" />
+    <meta property="og:description" content="Convolutional Neural Networks ConvNets are everywhere Classification, Retrieval, Detection, Segmentation, Image Captioning, etc. Recap: Fully Connected Layer $32\times 32\times 3$ image $\rightarrow$ stretch to $3072\times 1$ Then a dot product of $3072\times 1$ input x and scoring weights W, Wx is in $10 \times 3072$. With some activation function, we" />
+    <meta property="og:url" content="http://0.0.0.0:4000/cs231n_lec5" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta property="article:author" content="https://www.facebook.com/" />
-    <meta property="article:published_time" content="2020-04-23T00:00:00+09:00" />
-    <meta property="article:modified_time" content="2020-04-23T00:00:00+09:00" />
-    <meta property="article:tag" content="ISLR" />
+    <meta property="article:published_time" content="2021-12-19T00:00:00+09:00" />
+    <meta property="article:modified_time" content="2021-12-19T00:00:00+09:00" />
+    <meta property="article:tag" content="cs231n" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ISLR - Chapter 5. Resampling Methods" />
-    <meta name="twitter:description" content="Chapter 5. Resampling Methods 5.1. Cross-Validation 5.1.1. The Validation Set Approach 5.1.2. Leave-One-Out Cross-Validation 5.1.3. k-Fold Cross-Validation 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation 5.1.5. Cross-Validation on Classification Problems 5.2. The Bootstrap Chapter 5. Resampling Methods repeatedly drawing samples from a training set and refitting a model of interest on each" />
+    <meta name="twitter:title" content="cs231n - Lecture 5. Convolutional Neural Networks" />
+    <meta name="twitter:description" content="Convolutional Neural Networks ConvNets are everywhere Classification, Retrieval, Detection, Segmentation, Image Captioning, etc. Recap: Fully Connected Layer $32\times 32\times 3$ image $\rightarrow$ stretch to $3072\times 1$ Then a dot product of $3072\times 1$ input x and scoring weights W, Wx is in $10 \times 3072$. With some activation function, we" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Darron's Devlog" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="ISLR" />
+    <meta name="twitter:data2" content="cs231n" />
     <meta name="twitter:site" content="@" />
     <meta name="twitter:creator" content="@" />
     <meta property="og:image:width" content="1400" />
@@ -107,7 +107,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "name": "Darron's Devlog",
         "logo": "http://0.0.0.0:4000/"
     },
-    "url": "http://0.0.0.0:4000/islr_ch5",
+    "url": "http://0.0.0.0:4000/cs231n_lec5",
     "image": {
         "@type": "ImageObject",
         "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
@@ -116,9 +116,9 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://0.0.0.0:4000/islr_ch5"
+        "@id": "http://0.0.0.0:4000/cs231n_lec5"
     },
-    "description": "Chapter 5. Resampling Methods 5.1. Cross-Validation 5.1.1. The Validation Set Approach 5.1.2. Leave-One-Out Cross-Validation 5.1.3. k-Fold Cross-Validation 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation 5.1.5. Cross-Validation on Classification Problems 5.2. The Bootstrap Chapter 5. Resampling Methods repeatedly drawing samples from a training set and refitting a model of interest on each"
+    "description": "Convolutional Neural Networks ConvNets are everywhere Classification, Retrieval, Detection, Segmentation, Image Captioning, etc. Recap: Fully Connected Layer $32\times 32\times 3$ image $\rightarrow$ stretch to $3072\times 1$ Then a dot product of $3072\times 1$ input x and scoring weights W, Wx is in $10 \times 3072$. With some activation function, we"
 }
     </script>
 
@@ -131,7 +131,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="ISLR - Chapter 5. Resampling Methods" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="cs231n - Lecture 5. Convolutional Neural Networks" href="/feed.xml" />
 
 
 </head>
@@ -185,175 +185,109 @@ into the {body} of the default.hbs template -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
-        <article class="post-full  tag-islr  no-image">
+        <article class="post-full  tag-cs231n  no-image">
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="23 April 2020">23 April 2020</time>
+                    <time class="post-full-meta-date" datetime="19 December 2021">19 December 2021</time>
                     
                         <span class="date-divider">/</span>
                         
                             
-                               <a href='/tag/islr/'>ISLR</a>
+                               <a href='/tag/cs231n/'>CS231N</a>
                             
                         
                     
                 </section>
-                <h1 class="post-full-title">ISLR - Chapter 5. Resampling Methods</h1>
+                <h1 class="post-full-title">cs231n - Lecture 5. Convolutional Neural Networks</h1>
             </header>
 	<!--
             
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <ul id="markdown-toc">
-  <li><a href="#chapter-5-resampling-methods" id="markdown-toc-chapter-5-resampling-methods">Chapter 5. Resampling Methods</a></li>
-  <li><a href="#51--cross-validation" id="markdown-toc-51--cross-validation">5.1.  Cross-Validation</a>    <ul>
-      <li><a href="#511-the-validation-set-approach" id="markdown-toc-511-the-validation-set-approach">5.1.1. The Validation Set Approach</a></li>
-      <li><a href="#512-leave-one-out-cross-validation" id="markdown-toc-512-leave-one-out-cross-validation">5.1.2. Leave-One-Out Cross-Validation</a></li>
-      <li><a href="#513-k-fold-cross-validation" id="markdown-toc-513-k-fold-cross-validation">5.1.3. k-Fold Cross-Validation</a></li>
-      <li><a href="#514-bias-variance-trade-off-for-k-fold-cross-validation" id="markdown-toc-514-bias-variance-trade-off-for-k-fold-cross-validation">5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation</a></li>
-      <li><a href="#515-cross-validation-on-classification-problems" id="markdown-toc-515-cross-validation-on-classification-problems">5.1.5. Cross-Validation on Classification Problems</a></li>
-    </ul>
-  </li>
-  <li><a href="#52-the-bootstrap" id="markdown-toc-52-the-bootstrap">5.2. The Bootstrap</a></li>
-</ul>
-
-<h2 id="chapter-5-resampling-methods">Chapter 5. Resampling Methods</h2>
+                    <h3 id="convolutional-neural-networks">Convolutional Neural Networks</h3>
 <ul>
   <li>
-    <p>repeatedly drawing samples from a training set and refitting a model of interest on 
-each sample in order to obtain additional information about the fitted model.</p>
+    <p>ConvNets are everywhere<br />
+  Classification, Retrieval, Detection, Segmentation, Image Captioning, etc.</p>
   </li>
   <li>
-    <p>To optain information that would not be available from fitting the model only once 
-using the original training sample.<br />
-e.g. to estimate the variability of a model fit, draw different samples and fit it to 
-each new sample, then examine the extent to which the resulting fits differ.</p>
+    <p>Recap: Fully Connected Layer<br />
+  $32\times 32\times 3$ image $\rightarrow$ stretch to $3072\times 1$<br />
+  Then a dot product of $3072\times 1$ input <em>x</em> and scoring weights <em>W</em>, <em>Wx</em> is in $10 \times 3072$. With some activation function, we can make classification scores in <em>10</em> classes.</p>
   </li>
 </ul>
 
-<h2 id="51--cross-validation">5.1.  Cross-Validation</h2>
-<ul>
-  <li>In the absence of a very large designated test set that can be used to directly estimate 
-the test error rate, a class of methods that estimate the test error rate by <em>holding out</em> 
-a subset of the training observations from the fitting process, then applying the statistical 
-learning method to those held out observations.</li>
-</ul>
-
-<h3 id="511-the-validation-set-approach">5.1.1. The Validation Set Approach</h3>
+<h3 id="convolution-layer-preserve-spatial-structure">Convolution Layer: preserve spatial structure</h3>
 <ul>
   <li>
-    <p>randomly dividing the available set of observations into two parts;<br />
-a <em>training set</em> and a <em>validation set</em> (or hold-out set)<br />
-model is fit on the training set, and the fitted model is used to predict the responses for the 
-observations in the validation set. The validation set error rate estimates the test error rate.</p>
+    <p>Convolve the filter with the image, slide over the image spatially, computing dot products. Filters always extend the full depth of the input volume.<br />
+<img src="/assets/images/cs231n_lec5_0.png" alt="png" width="60%&quot;, height=&quot;60%" /><br />
+Convolve(slide) over all spatial locations, we can make an activation map of size $28\times 28\times 1$ for each convolution filter. For example, if we had <em>6</em> $5\times 5$ filters, we’ll get <em>6</em> separate activation maps. We stack these up to get a “new image” of size $28\times 28\times 6$.</p>
   </li>
   <li>
-    <p>Repeating this predecure, we have different estimate for the test MSE over random splits of the 
-observations and there are two issues:</p>
-    <ol>
-      <li>The validation estimate of the test error rate can be highly variable, depending on which observations 
- are included in the training set or the validation test.</li>
-      <li>Only a subset of the observations are used to fit the model. Trained on fewer observations, the 
- validation set error rate may <em>overestimate</em> the test error rate for the model fit on the entire 
- data set.</li>
-    </ol>
+    <p>ConvNet is a sequence of Convolution Layers, interspersed with activation functions.<br />
+<img src="/assets/images/cs231n_lec5_1.png" alt="png" width="70%&quot;, height=&quot;70%" /><br />
+Input convolved repeatedly with filters shrinks volumes spatially. By each sequence, an image is processed from low-level features to high-level features. Shrinking too fast is not good, doesn’t work well.</p>
+  </li>
+  <li>
+    <p>We call the layer convolutional because it is related to convolution of two signals: \(f[x,y]*g[x,y]=\sum_{n_1=-\infty}^\infty \sum_{n_2=-\infty}^\infty f[n_1,n_2]\cdot g[x-n_1,y-n_2]\); elementwise multiplication and sum of a filter and the signal (image)</p>
+  </li>
+  <li>
+    <p>Zero pad the border:<br />
+  The data on the border of an image will be convolved only once with each filter, while the others on the center of an image will be treated several times. Zero padding is introduced to solve this problem.</p>
+  </li>
+  <li>
+    <p>General CONV layers:<br />
+  with $N\times N$ input, $F\times F$ filter, applied with stride <em>s</em>, pad with <em>p</em> pixel border, the output is <strong>$(N+2P-F)/s + 1$</strong></p>
+  </li>
+  <li>
+    <p>Example:<br />
+  Input volume <strong>$32\times 32\times 3$</strong><br />
+  <strong><em>10</em> $5\times 5$</strong> filters with stride <strong><em>1</em></strong>, pad <strong><em>2</em></strong></p>
+
+    <p>$\rightarrow$ Output volume size: $(32+2*2-5)/1+1=32$ spatially, so $32\times 32\times 10$.</p>
+
+    <p>$\rightarrow$ Number of parameters in this layer: each filter has $5\times 5\times 3+1=76$ parameters(<em>+1</em> for bias), thus for all <em>760</em> params.</p>
   </li>
 </ul>
 
-<h3 id="512-leave-one-out-cross-validation">5.1.2. Leave-One-Out Cross-Validation</h3>
+<p><img src="/assets/images/cs231n_lec5_1.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
+
+<ul>
+  <li>$1\times 1$ convolution layers used:<br />
+  To reduce the number of channels, so the number of parameters,<br />
+  Then we can perform a deeper layers(Bottleneck architecture).</li>
+</ul>
+
+<h3 id="pooling-layer">Pooling layer</h3>
 <ul>
   <li>
-    <p>each single observation is used for the validation set, and the remaining observations are for the 
-training set. The statistical learning method is fit on the <em>n-1</em> training obs. The prediction is made 
-for the excluded observation.</p>
+    <p>Summarize the data in a partial space, into some representations<br />
+  Reducing output dimensions and the number of parameters<br />
+  Make it smaller and more manageable<br />
+  Operate over each activation map independently(downsampling)</p>
   </li>
   <li>
-    <p>LOOCV estiamte for the test MSE:<br />
-\(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n MSE_i\)<br />
-No overestimation on the test error, No variance of test MSE, but Expansive.</p>
-  </li>
-  <li>
-    <p>a shortcut of LOOCV on Least Squares(regression):<br />
-\(\begin{align*}
-CV_{(n)} = \frac{1}{n} \sum_{i=1}^n \left(\frac{y_i - \hat y_i}{1-h_i}\right)^2
-\end{align*}\)<br />
-where $\hat y_i$ is the fitted value from the original least squares fit, one-time build of a full 
-model and set a leverage $h_i = \frac{1}{n}+\frac{(x_i-\bar{x})^2}{\sum_{i^\prime=1}^n(x_{i^\prime}-\bar{x})^2}$. 
-The levearge lies between <em>1/n</em> and <em>1</em>, reflects the amount that an observation influences its own fit.</p>
+    <p>e.g. max pool with $2\times 2$ filters and stride <em>2</em>, $4\times 4$ input reduced to $2\times 2$ output consisted of regional maximums.</p>
   </li>
 </ul>
 
-<h3 id="513-k-fold-cross-validation">5.1.3. k-Fold Cross-Validation</h3>
+<h3 id="fully-connected-layer-fc-layer">Fully Connected Layer (FC layer)</h3>
 <ul>
-  <li>
-    <p>random division into <em>k</em> groups, or <em>folds</em>, of approximately equal size. A fold is used for the 
-validation set, and the method is fit on the remaining <em>k-1</em> folds. The MSE is computed on the 
-observations in the held-out fold and the procedure is repeated <em>k</em> times.</p>
-  </li>
-  <li>
-    <p>k-Fold CV estimate for the test MSE:<br />
-\(CV_{(k)} = \frac{1}{n}\sum_{i=1}^k MSE_i\)<br />
-when <em>k=n</em>, LOOCV is a special case of k-Fold. Using smaller <em>k</em>, k-fold CV has a computational 
-advantage to LOOCV.</p>
-  </li>
-  <li>
-    <p>We perform CV to:<br />
-To determine how well a given model can be expected to perform on independent data.<br />
-To identify a model results in the lowest test error, over different models or different levels of 
-flexibility.</p>
-  </li>
+  <li>Contains neurons that connect to the entire input volume, as in ordinary Neural
+Networks. Stacked and followed by some activations, finally we make predictions or classifications.</li>
 </ul>
 
-<h3 id="514-bias-variance-trade-off-for-k-fold-cross-validation">5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation</h3>
+<h3 id="summary">Summary</h3>
 <ul>
-  <li>
-    <p>Besides the computational advantage, k-fold CV often gives more accurate estimates of the test error 
-rate than does LOOCV.</p>
-  </li>
-  <li>
-    <p>LOOCV will give approximately unbiased estiamtes of the test error, containing <em>n-1</em>, almost as many as 
-the number of observations in the full data set. By contrast, k-fold CV will lead to an intermediate 
-level of bias, containing <em>(k-1)n/k</em> observations. Clearly, LOOCV is to be preferred in the perspective 
-of bias reduction.</p>
-  </li>
-  <li>
-    <p>But, in LOOCV, averaging the outputs of <em>n</em> fitted models, which are trained on an almost identical set 
-of observations, these outputs are highly correlated with each other. This high correlation results in 
-higher variance of test error estimate from LOOCV than from k-fold CV.</p>
-  </li>
+  <li>ConvNets stack CONV,POOL,FC layers</li>
+  <li>Trend towards smaller filters and deeper architectures</li>
+  <li>Trend towards getting rid of POOL/FC layers (just CONV)</li>
+  <li>Historically architectures looked like <code class="language-plaintext highlighter-rouge">[(CONV-RELU)*N-POOL?]*M-(FC-RELU)*K,SOFTMAX</code> where <em>N</em> is usually up to <em>~5</em>, <em>M</em> is large, $0\le K \le 2$.</li>
+  <li>but recent advances such as ResNet/GoogLeNet have challenged this paradigm</li>
 </ul>
-
-<h3 id="515-cross-validation-on-classification-problems">5.1.5. Cross-Validation on Classification Problems</h3>
-<ul>
-  <li>
-    <p>LOOCV on the classification:<br />
-\(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n Err_i\),  where \(Err_i = I(y_i \ne \hat{y}_i)\).</p>
-  </li>
-  <li>
-    <p>k-fold CV on the classification:<br />
-\(\frac{1}{n}\sum_{i=1}^k MCR_i\).</p>
-  </li>
-</ul>
-
-<h2 id="52-the-bootstrap">5.2. The Bootstrap</h2>
-<ul>
-  <li>
-    <p>Sampling with <em>replacement</em> on:<br />
-Dataset $Z = (z_1, \ldots, z_n)$, $ z_i = (x_i,y_i)$<br />
-Sample $Z^{*b}$, where $ b = 1, \ldots, B$ samples</p>
-  </li>
-  <li>
-    <p>for Any statistic term $S(Z)$ computed from full dataset <em>Z</em>,<br />
-and $S(Z^{*b})$ from bootstrap samples,<br />
-\(\begin{align*}
-Var(\hat{S(Z)}) = \frac{1}{B-1}\sum_{b=1}^B(S(Z^{*b})-\bar{S}^*)^2
-\end{align*}\)<br />
-$\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
-  </li>
-</ul>
-
 
                 </div>
             </section>
@@ -403,9 +337,9 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function () {
-                            var this_page_url = 'http://0.0.0.0:4000/islr_ch5';
-                            var this_page_identifier = '/islr_ch5';
-                            var this_page_title = 'ISLR - Chapter 5. Resampling Methods';
+                            var this_page_url = 'http://0.0.0.0:4000/cs231n_lec5';
+                            var this_page_identifier = '/cs231n_lec5';
+                            var this_page_title = 'cs231n - Lecture 5. Convolutional Neural Networks';
                         };
                         (function() {
                             var d = document, s = d.createElement('script');
@@ -440,7 +374,7 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; Darron's Devlog &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/islr/">Islr</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/cs231n/">Cs231n</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -450,66 +384,10 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                                 
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
-                                            <li><a href="/islr_ch10">ISLR - Chapter 10. Deep Learning</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                            <li><a href="/islr_ch9">ISLR - Chapter 9. Support Vector Machines</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                            <li><a href="/islr_ch8">ISLR - Chapter 8. Tree-Based Methods</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
+                                            <li><a href="/cs231n_lec6">cs231n - Lecture 6. Hardware and Software</a></li>
                                         
                                     
                                   
@@ -522,6 +400,17 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                                     
                                         
                                         
+                                            <li><a href="/cs231n_lec4">cs231n - Lecture 4. Neural Networks and Backpropagation</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/cs231n_lec3">cs231n - Lecture 3. Loss Functions and Optimization</a></li>
+                                        
                                     
                                   
                                 
@@ -533,18 +422,43 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
                                   
                                 
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/islr/">
+                            <a href="/tag/cs231n/">
                                 
-                                    See all 8 posts  →
+                                    See all 4 posts  →
                                 
                             </a>
                         </footer>
@@ -557,21 +471,21 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/islr_ch6">
+            <a class="post-card-content-link" href="/cs231n_lec6">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Islr</span>
+                                <span class="post-card-tags">Cs231n</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">ISLR - Chapter 6. Linear Model Selection and Regularization</h2>
+                    <h2 class="post-card-title">cs231n - Lecture 6. Hardware and Software</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation</p>
+                        <p>Deeplearning Software The point of deep learning frameworks (1) Quick to develop and test new ideas (2) Automatically compute gradients (3) Run it all efficiently on GPU (wrap cuDNN, cuBLAS, OpenCL, etc) Computational</p>
                     
                 </section>
             </a>
@@ -590,22 +504,21 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/islr_ch4">
+            <a class="post-card-content-link" href="/cs231n_lec4">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Islr</span>
+                                <span class="post-card-tags">Cs231n</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">ISLR - Chapter 4. Classification</h2>
+                    <h2 class="post-card-title">cs231n - Lecture 4. Neural Networks and Backpropagation</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>
-</p>
+                        <p>Image Features Problem: Linear Classifiers are not very powerful Visual Viewpoint: Linear classifiers learn one template per class Geometric Viewpoint: Linear classifiers can only draw linear decision boundaries Image Features: Motivation After applying</p>
                     
                 </section>
             </a>
@@ -632,18 +545,18 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">ISLR - Chapter 5. Resampling Methods</div>
+    <div class="floating-header-title">cs231n - Lecture 5. Convolutional Neural Networks</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=ISLR+-+Chapter+5.+Resampling+Methods&amp;url=https://12kdh43.github.io/islr_ch5"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs231n+-+Lecture+5.+Convolutional+Neural+Networks&amp;url=https://12kdh43.github.io/cs231n_lec5"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/islr_ch5"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs231n_lec5"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
