@@ -8,6 +8,523 @@
     
       
       <item>
+        <title>cs231n - Lecture 8. Training Neural Networks II</title>
+        
+          <description>&lt;h2 id=&quot;optimization&quot;&gt;Optimization&lt;/h2&gt;
+
+&lt;h3 id=&quot;problems-with-sgd&quot;&gt;Problems with SGD&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;What if loss changes quickly in one direction and slowly in another? What does gradient descent do?
+ Very slow progress along shallow dimension, jitter along steep direction&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What if the loss function has a local minima or saddle point?&lt;br /&gt;
+ Zero gradient, gradient descent gets stuck(more common in high dimension)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Gradients come from minibatches can be noisy&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;sgd--momentum&quot;&gt;SGD + Momentum&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;To avoid local minima, combine gradient at current point with &lt;em&gt;velocity&lt;/em&gt; to get step used to update weights; continue moving in the general direction as the previous iterations&lt;br /&gt;
+  \(v_{t+1}=\rho v_t + \nabla f(x_t)\)&lt;br /&gt;
+  \(x_{t+1}=x_t - \alpha v_{t+1}\)&lt;br /&gt;
+  with &lt;em&gt;rho&lt;/em&gt; giving “friction”; typically &lt;em&gt;0.9&lt;/em&gt; or &lt;em&gt;0.99&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;vx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compute_gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;vx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rho&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vx&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;nesterov-momentum&quot;&gt;Nesterov Momentum&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;“Look ahead” to the point where updating using velocity would take us; compute gradient there and mix it with velocity to get actual update direction&lt;br /&gt;
+  \(v_{t+1}=\rho v_t - \alpha\nabla f(x_t + \rho v_t)\)&lt;br /&gt;
+  \(x_{t+1}=x_t + v_{t+1}\)&lt;br /&gt;
+  rearrange with \(\tilde{x}_t = x_t + \rho v_t\),&lt;br /&gt;
+  \(v_{t+1}=\rho v_t - \alpha\nabla f(\tilde{x}_t)\)&lt;br /&gt;
+  \(\begin{align*}
+  \tilde{x}_{t+1} &amp;amp;= \tilde{x}_t - \rho v_t + (1+\rho)v_{t+1}
+                  &amp;amp;= \tilde{x}_t + v_{t+1} + \rho(v_{t+1}-v_t)
+  \end{align*}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;adagrad&quot;&gt;AdaGrad&lt;/h3&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compute_gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1e-7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Added element-wise scaling of the gradient based on the historical sum of squares in each dimension&lt;br /&gt;
+  “Per-parameter learning rates” or “adaptive learning rates”&lt;br /&gt;
+  Progress along “steep” directions is damped and “flat” directions is accelerated&lt;br /&gt;
+  Step size decays to zero over time&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;rmsprop-leaky-adagrad&quot;&gt;RMSProp: “Leaky AdaGrad”&lt;/h3&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compute_gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decay_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decay_rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1e-7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;adam&quot;&gt;Adam&lt;/h3&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;first_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;second_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_iterations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compute_gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;first_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# Momentum
+&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;second_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;first_unbias&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;			&lt;span class=&quot;c1&quot;&gt;# Bias correction
+&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;second_unbias&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first_unbias&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second_unbias&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1e-7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;# AdaGrad/ RMSProp
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sort of like RMSProp with momentum
+  Bias correction for the fact that first and second moment estimates start at zero&lt;br /&gt;
+  Adam with &lt;em&gt;beta1 = 0.9, beta2 = 0.999, and learning_rate = 1e-3 or 5e-4&lt;/em&gt; is a great starting point&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;learning-rate-schedules&quot;&gt;Learning rate schedules&lt;/h2&gt;
+
+&lt;h3 id=&quot;learning-rate-decays-over-time&quot;&gt;Learning rate decays over time&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Reduce learning rate by a certain value at a few fixed points(after some epochs)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;learning-rate-decay&quot;&gt;Learning Rate Decay&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Reduce learning rate gradually, e.g.&lt;br /&gt;
+  Cosine:  $\alpha_t = \frac{1}{2}\alpha_0(1+\mbox{cos}(t\pi / T))$&lt;br /&gt;
+  Linear: $\alpha_t = \alpha_0(1-t/T)$&lt;br /&gt;
+  Inverse sqrt: $\alpha_t = \alpha_0 / \sqrt{t}$&lt;br /&gt;
+  while $\alpha_0$ is the initial learning rate, $\alpha_t$ is one at epoch &lt;em&gt;t&lt;/em&gt;, and &lt;em&gt;T&lt;/em&gt; is the total number of epochs&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Linear Warmup&lt;br /&gt;
+  High initial learning rates can make loss explode; linearly increasing learning rate from &lt;em&gt;0&lt;/em&gt; over the first &lt;em&gt;~5000&lt;/em&gt; iterations can prevent this&lt;br /&gt;
+  Empirical rule of thumb: If you increase the batch size by &lt;em&gt;N&lt;/em&gt;, also scale the initial learning rate by &lt;em&gt;N&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;first-order-optimization&quot;&gt;First-Order Optimization&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Use gradient from linear approximation&lt;/li&gt;
+  &lt;li&gt;Step to minimize the approximation&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;second-order-optimization&quot;&gt;Second-Order Optimization&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Use gradient and &lt;strong&gt;Hessian&lt;/strong&gt; to form &lt;strong&gt;quadratic&lt;/strong&gt; approximation&lt;/li&gt;
+  &lt;li&gt;Step to the &lt;strong&gt;minima&lt;/strong&gt; of the (quadratic) approximation&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;But Hessian has &lt;em&gt;O(N^2)&lt;/em&gt; elements and inverting takes &lt;em&gt;O(N^3)&lt;/em&gt;, &lt;em&gt;N&lt;/em&gt; is extremely large
+    &lt;ul&gt;
+      &lt;li&gt;Quasi-Newton methods (BGFS most popular):&lt;br /&gt;
+  instead of inverting the Hessian, approximate inverse Hessian with rank 1 updates over time&lt;/li&gt;
+      &lt;li&gt;L-BFGS (Limited memory BFGS):&lt;br /&gt;
+  Does not form/store the full inverse Hessian. Usually works very well in full batch, deterministic mode, but does not transfer very well to mini-batch setting. Large-scale, stochastic setting is an active area of research.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Adam is a good default choice in many cases; even with constant learning rate&lt;/li&gt;
+  &lt;li&gt;SGD+Momentum can outperform Adam but may equire more tuning of LR and schedule. Cosine schedule preferred, since it has very few hyperparameters.&lt;/li&gt;
+  &lt;li&gt;L-BFGS is good if you can afford to do full batch updates.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;improve-test-error&quot;&gt;Improve test error&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Better optimization algorithms help reduce &lt;strong&gt;training&lt;/strong&gt; loss, but what we really care is about error on new data - how to reduce the gap?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;early-stopping-always-do-this&quot;&gt;Early Stopping: Always do this&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Stop training the model when accuracy on the validation set decreases. Or train for a long time, but always keep track of the model snapshot that worked best on val.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;model-ensembles&quot;&gt;Model Ensembles&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Train multiple independent models&lt;/li&gt;
+  &lt;li&gt;At test time average their results&lt;br /&gt;
+ (Take average of predicted probability distributions, then choose argmax)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;regularization&quot;&gt;Regularization&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;To improve single-model performance, add terms to loss&lt;br /&gt;
+  e.g. L1, L2, Elastic net.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;or, use Dropout:&lt;br /&gt;
+  In each forward pass, randomly set some neurons to zero. Probability of dropping is a hyperparameter; 0.5 is common.&lt;br /&gt;
+  It forces the network to have a redundant representation; Prevents co-adaptation of features. Dropout can be interpreted as training a large ensemble of models (that share parameters).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# dropout rate
+&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;train_step&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# drop in train time
+&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;H1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;U1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;H1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;U1&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;H2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;H1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;U2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;H2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;U2&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;H2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b3&lt;/span&gt;
+
+	&lt;span class=&quot;c1&quot;&gt;# backward pass: compute gradients...
+&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;# perform parameter update...
+&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;			&lt;span class=&quot;c1&quot;&gt;# scale at test time
+&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;H1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;H2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;H1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;H2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;more common: “Inverted dropout”&lt;br /&gt;
+  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;U1 = (np.random.rand(*H1.shape) &amp;lt; p) / p&lt;/code&gt; in train time and no scaling in test time&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A common pattern of regularization&lt;br /&gt;
+  Training: Add some kind of randomness&lt;br /&gt;
+  $y = fw(x,z)$&lt;br /&gt;
+  Testing: Average out randomness (sometimes approximate)&lt;br /&gt;
+  \(y = f(x) = E_z[f(x,z)] = \int p(z)f(x,z)\, dz\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Data Augmentation:&lt;br /&gt;
+  Addes &lt;em&gt;transformed&lt;/em&gt; data to train model&lt;br /&gt;
+  e.g. translation, rotation, stretching, shearing, lens distortions.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;DropConnect:&lt;br /&gt;
+  Training: Drop connections between neurons (set weights to 0)&lt;br /&gt;
+  Testing: Use all the connections&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fractional Pooling:&lt;br /&gt;
+  Training: Use randomized pooling regions&lt;br /&gt;
+  Testing: Average predictions from several regions&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Stochastic Depth:&lt;br /&gt;
+  Training: Skip some layers in the network&lt;br /&gt;
+  Testing: Use all the layer&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Cutout:&lt;br /&gt;
+  Training: Set random image regions to zero&lt;br /&gt;
+  Testing: Use full image&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Mixup:&lt;br /&gt;
+  Training: Train on random blends of images&lt;br /&gt;
+  Testing: Use original images&lt;br /&gt;
+  e.g. Randomly blend the pixels of pairs of training images, say 40% cat and 60% dog, and set the target label as cat:0.4 and dog:0.6.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Summary
+  Consider dropout for large fully-connected layers&lt;br /&gt;
+  Batch normalization and data augmentation almost always a good idea&lt;br /&gt;
+  Try cutout and mixup especially for small classification datasets&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;choosing-hyperparameters&quot;&gt;Choosing Hyperparameters&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Step 1: Check initial loss&lt;br /&gt;
+  Turn off weight decay, sanity check loss at initialization&lt;br /&gt;
+  e.g. &lt;em&gt;log(C)&lt;/em&gt; for softmax with &lt;em&gt;C&lt;/em&gt; classes&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Step 2: Overfit a small sample&lt;br /&gt;
+  Try to train to 100% training accuracy on a small sample of training data (~5-10 minibatches); fiddle with architecture, learning rate, weight initialization&lt;br /&gt;
+  If loss is not going down, LR too low or bad initialization. If loss explodes, then LR is too high or bad initialization.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Step 3: Find LR that makes loss go down&lt;br /&gt;
+  Use the architecture from the previous step, use all training data, turn on small weight decay, find a learning rate that makes the loss drop significantly within ~100 iterations.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Step 4: Coarse grid, train for ~1-5 epochs&lt;br /&gt;
+  Choose a few values of learning rate and weight decay around what worked from Step 3, train a few models for ~1-5 epochs.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Step 5: Refine grid, train longer&lt;br /&gt;
+  Pick best models from Step 4, train them for longer (~10-20 epochs) without learning rate decay&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Step 6: Look at loss and accuracy curves&lt;br /&gt;
+  If a ccuracy still going up, you need to train longer. If it goes down, huge train / val gap means overfitting. You need to increase regularization or get more data. If there’s no gap between train / val, it means underfitting. Train longer or use a bigger model.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Look at learning curves&lt;br /&gt;
+  Losses may be noisy, use a scatter plot and also plot moving average to see trends better. Cross-validation is useful too.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Step 7: &lt;strong&gt;GO TO Step 5&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Hyperparameters to play with:&lt;br /&gt;
+  network architecture,&lt;br /&gt;
+  learning rate, its decay schedule, update type,&lt;br /&gt;
+  regularization (L2/Dropout strength)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;for Hyper-Parameter Optimization, consider both Random Search and Grid Search&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;summary-1&quot;&gt;Summary&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Improve your training error:
+    &lt;ul&gt;
+      &lt;li&gt;Optimizers&lt;/li&gt;
+      &lt;li&gt;Learning rate schedules&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Improve your test error:
+    &lt;ul&gt;
+      &lt;li&gt;Regularization&lt;/li&gt;
+      &lt;li&gt;Choosing Hyperparameters&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Tue, 28 Dec 2021 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs231n_lec8</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec8</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>cs231n - Lecture 7. Training Neural Networks I</title>
+        
+          <description>&lt;h2 id=&quot;activation-functions&quot;&gt;Activation Functions&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec7_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;sigmoid&quot;&gt;Sigmoid&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;$\sigma(x)=1/(1+e^{-x})$
+    &lt;ul&gt;
+      &lt;li&gt;Squashes numbers to range [0,1]&lt;/li&gt;
+      &lt;li&gt;Historically popular since they have nice interpretation as a saturating “firing rate” of a neuron.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Problem:
+    &lt;ul&gt;
+      &lt;li&gt;Gradient Vanishing: Saturated neurons “kill” the gradients; If all the gradients flowing back will be zero and weights will never change.&lt;/li&gt;
+      &lt;li&gt;Sigmoid outputs are not zero-centered and always positive, so the gradients will be always all positive or all negative. Then the gradient update would follow a zig-zag path, resulting in bad efficiency.&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;exp()&lt;/em&gt; is a bit compute expensive.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tanhx&quot;&gt;tanh(x)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Squashes numbers to range [-1,1]&lt;br /&gt;
+  zero centered&lt;br /&gt;
+  &lt;strong&gt;but still kills gradients when saturated&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;relurectified-linear-unit&quot;&gt;ReLU(Rectified Linear Unit)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;\(f(x) = \mbox{max}(0,x)\)&lt;br /&gt;
+  Does not saturate (in &lt;em&gt;+&lt;/em&gt; region)&lt;br /&gt;
+  Very computationally efficient&lt;br /&gt;
+  Converges much faster than sigmoid/tanh&lt;br /&gt;
+  &lt;strong&gt;but has not zero-centered output and weights will never be updated for negative &lt;em&gt;x&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;leaky-relu&quot;&gt;Leaky ReLU&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;\(f(x) = \mbox{max}(0.01x,x)\)&lt;br /&gt;
+  (or &lt;em&gt;parametric&lt;/em&gt;, PReLU: \(f(x) = \mbox{max}(\alpha x, x)\))&lt;br /&gt;
+  Not saturate&lt;br /&gt;
+  Computationally efficient&lt;br /&gt;
+  Converges much faster&lt;br /&gt;
+  will not “die”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;eluexponential-linear-units&quot;&gt;ELU(Exponential Linear Units)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;\(f(n)= \begin{cases} x &amp;amp; \mbox{if }x&amp;gt;0 \\
+                      \alpha(\mbox{exp}(x)-1) &amp;amp; \mbox{if }x\le 0\end{cases}\)&lt;br /&gt;
+  ($\scriptstyle{\alpha = 1}$)&lt;br /&gt;
+  All benefits of ReLU&lt;br /&gt;
+  Closer to zero mean outputs&lt;br /&gt;
+  Negative saturation regime compared with Leaky ReLU adds some robustness to noise&lt;br /&gt;
+  &lt;strong&gt;Computation requires exp()&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;selu-scaled-exponential-linear-units&quot;&gt;SELU (Scaled Exponential Linear Units)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;\(f(n)= \begin{cases} \lambda x &amp;amp; \mbox{if }x&amp;gt;0 \\
+                      \lambda\alpha(e^x -1) &amp;amp; \mbox{otherwise}\end{cases}\)&lt;br /&gt;
+  ($\scriptstyle{\alpha=1.6733, \lambda=1.0507}$)&lt;br /&gt;
+  Scaled versionof ELU that works better for deep networks&lt;br /&gt;
+  “Self-normalizing” property;&lt;br /&gt;
+  Can train deep SELU networks without BatchNorm&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;maxout-neuron&quot;&gt;Maxout “Neuron”&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;\(\mbox{max}(w_1^T x + b_1, w_2^T x + b_2)\)&lt;br /&gt;
+  Nonlinearity; does not have the basic form of dot product&lt;br /&gt;
+  Generalizes ReLU and Leaky ReLU&lt;br /&gt;
+  Linear Regime; does not saturate or die&lt;br /&gt;
+  &lt;strong&gt;Complexity; Doubles the number of parameters/neuron&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;swish&quot;&gt;Swish&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;\(f(x)=x\sigma(\beta x)\)&lt;br /&gt;
+  train a neural network to generate and test out different non-linearities&lt;br /&gt;
+  outperformed all other options for &lt;em&gt;CIFAR-10&lt;/em&gt; accuracy&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Use &lt;em&gt;ReLU&lt;/em&gt; and be careful with learning rates&lt;br /&gt;
+  Try out &lt;em&gt;Leaky ReLU / Maxout / ELU / SELU&lt;/em&gt; to squeeze out some marginal gains&lt;br /&gt;
+  Don’t use sigmoid or tanh&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;data-preprocessing&quot;&gt;Data Preprocessing&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;We may have zero-centered, normalized, decorrelated(PCA) or whitened data&lt;/li&gt;
+  &lt;li&gt;After normalization, it will be less sensitive to small changes in weights and easier to optimize&lt;/li&gt;
+  &lt;li&gt;In practice for images, centering only used.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;weight-initialization&quot;&gt;Weight Initialization&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;First idea: Small random numbers&lt;br /&gt;
+  (gaussian with zero mean and 1e-2 standard deviation)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;W&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.01&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;D_in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D_out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It works okay for small networks, but problems with deeper networks&lt;br /&gt;
+  All activations and gradients tend to zero and no learning proceeded.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;xavier-initialization&quot;&gt;“Xavier” Initialization&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;std = 1/sqrt(D_in)&lt;/em&gt;&lt;br /&gt;
+  For conv layers, $\mbox{D_in}$ is $\mbox{filter_size}^2\times \mbox{input_channels}$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;W&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;D_in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D_out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;D_in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
+&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tanh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Activations are nicely scaled for deeper layers&lt;br /&gt;
+  works well especially in non-linear activation functions like sigmoid, tanh&lt;br /&gt;
+  &lt;strong&gt;but cannot used in ReLU activation function; activations collapse to zero and no learning&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;kaiming--msra-initialization&quot;&gt;Kaiming / MSRA Initialization&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;ReLU correction: &lt;em&gt;std = sqrt(2/D_in)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;W&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;D_in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D_out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;D_in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
+&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;batch-normalization&quot;&gt;Batch Normalization&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;To make each dimension zero-mean unit-variance, apply:&lt;br /&gt;
+  \(\hat{x}^{(k)} = \frac{x^{(k)} - E[x^{(k)}]}{\sqrt{\mbox{Var}[x^{(k)}]}}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Usually inserted after Fully Connected or Convolutional layers, and before nonlinearity.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Makes deep networks much easier to train&lt;br /&gt;
+  Improves gradient flow&lt;br /&gt;
+  Allows higher learning rates, faster convergence&lt;br /&gt;
+  Networks become more robust to initialization&lt;br /&gt;
+  Acts as regularization during training&lt;br /&gt;
+  Zero overhead at test-time: can be fused with conv&lt;br /&gt;
+  &lt;strong&gt;Behaves differently during training and testing: can have bugs&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Comparison of Normalization Layers&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec7_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;transfer-learning&quot;&gt;Transfer Learning&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Deep learning models are trained to capture characteristics of data, from general features at the first layer to specific features at the last layer.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In transfer learning, we import pre-trained model and fine-tune to our cases.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Strategies&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec7_2.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;50%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;E.g.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec7_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Transfer learning with CNNs is pervasive,&lt;br /&gt;
+  for Object Detection(Fast R-CNN), Image Captioning(CNN + RNN), etc.&lt;br /&gt;
+  but not always be necessary&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Mon, 27 Dec 2021 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs231n_lec7</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec7</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>cs231n - Lecture 6. Hardware and Software</title>
         
           <description>&lt;h3 id=&quot;deeplearning-software&quot;&gt;Deeplearning Software&lt;/h3&gt;
@@ -555,7 +1072,7 @@ Example feed-forward computation of a neural network&lt;br /&gt;
   &lt;li&gt;
     &lt;p&gt;Plugging in neural networks with loss functions&lt;br /&gt;
 $s = f(x;W_1,W_2) = W_2\mbox{max}(0,W_1 x)$ Nonlinear score function&lt;br /&gt;
-$L_i = \sum_{j\ne y_i}\mbox{max(0,s_j-s_{y_i}+1)}$ SVM Loss on predictions&lt;br /&gt;
+$L_i = \sum_{j\ne y_i}\mbox{max}(0,s_j-s_{y_i}+1)$ SVM Loss on predictions&lt;br /&gt;
 $R(W)=\sum_k W_k^2$ Regularization&lt;br /&gt;
 $L=\frac{1}{N}\sum_{i=1}^N L_i + \lambda R(W_1) + \lambda R(W_2)$ Total loss: data loss + regularization&lt;/p&gt;
   &lt;/li&gt;

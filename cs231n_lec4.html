@@ -301,7 +301,7 @@ Example feed-forward computation of a neural network<br />
   <li>
     <p>Plugging in neural networks with loss functions<br />
 $s = f(x;W_1,W_2) = W_2\mbox{max}(0,W_1 x)$ Nonlinear score function<br />
-$L_i = \sum_{j\ne y_i}\mbox{max(0,s_j-s_{y_i}+1)}$ SVM Loss on predictions<br />
+$L_i = \sum_{j\ne y_i}\mbox{max}(0,s_j-s_{y_i}+1)$ SVM Loss on predictions<br />
 $R(W)=\sum_k W_k^2$ Regularization<br />
 $L=\frac{1}{N}\sum_{i=1}^N L_i + \lambda R(W_1) + \lambda R(W_2)$ Total loss: data loss + regularization</p>
   </li>
@@ -424,6 +424,24 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
                                     
                                         
                                         
+                                            <li><a href="/cs231n_lec8">cs231n - Lecture 8. Training Neural Networks II</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/cs231n_lec7">cs231n - Lecture 7. Training Neural Networks I</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
                                             <li><a href="/cs231n_lec6">cs231n - Lecture 6. Hardware and Software</a></li>
                                         
                                     
@@ -433,8 +451,6 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
                                     
                                         
                                         
-                                            <li><a href="/cs231n_lec5">cs231n - Lecture 5. Convolutional Neural Networks</a></li>
-                                        
                                     
                                   
                                 
@@ -445,8 +461,6 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
                                   
                                     
                                         
-                                        
-                                            <li><a href="/cs231n_lec3">cs231n - Lecture 3. Loss Functions and Optimization</a></li>
                                         
                                     
                                   
@@ -495,7 +509,7 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
                         <footer class="read-next-card-footer">
                             <a href="/tag/cs231n/">
                                 
-                                    See all 4 posts  →
+                                    See all 6 posts  →
                                 
                             </a>
                         </footer>
@@ -618,7 +632,7 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
         <!-- The footer at the very bottom of the screen -->
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="/">Darron's Devlog</a> &copy; 2021</section>
+                <section class="copyright"><a href="/">Darron's Devlog</a> &copy; 2022</section>
                 <!-- 
 				<section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
                     <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
