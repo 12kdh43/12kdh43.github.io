@@ -40,7 +40,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
 
 
 
-    <title>ISLR - Chapter 5. Resampling Methods</title>
+    <title>cs231n - Lecture 9. CNN Architectures</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -69,30 +69,30 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="" />
     <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
-    <link rel="canonical" href="http://0.0.0.0:4000/islr_ch5" />
+    <link rel="canonical" href="http://0.0.0.0:4000/cs231n_lec9" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="ISLR - Chapter 5. Resampling Methods" />
-    <meta property="og:description" content="Chapter 5. Resampling Methods 5.1. Cross-Validation 5.1.1. The Validation Set Approach 5.1.2. Leave-One-Out Cross-Validation 5.1.3. k-Fold Cross-Validation 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation 5.1.5. Cross-Validation on Classification Problems 5.2. The Bootstrap Chapter 5. Resampling Methods repeatedly drawing samples from a training set and refitting a model of interest on each" />
-    <meta property="og:url" content="http://0.0.0.0:4000/islr_ch5" />
+    <meta property="og:title" content="cs231n - Lecture 9. CNN Architectures" />
+    <meta property="og:description" content="Review LeCun et al., 1998 $5\times 5$ Conv filters applied at stride 1 $2\times 2$ Subsampling (Pooling) layers applied at stride 2 i.e. architecture is [CONV-POOL-CONV-POOL-FC-FC] Stride: Downsample output activations Padding: Preserve input spatial dimensions in output activations Filter: Each conv filter outputs a “slice” in the activation Case Studies" />
+    <meta property="og:url" content="http://0.0.0.0:4000/cs231n_lec9" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta property="article:author" content="https://www.facebook.com/" />
-    <meta property="article:published_time" content="2020-04-23T00:00:00+09:00" />
-    <meta property="article:modified_time" content="2020-04-23T00:00:00+09:00" />
-    <meta property="article:tag" content="ISLR" />
+    <meta property="article:published_time" content="2022-01-03T00:00:00+09:00" />
+    <meta property="article:modified_time" content="2022-01-03T00:00:00+09:00" />
+    <meta property="article:tag" content="cs231n" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ISLR - Chapter 5. Resampling Methods" />
-    <meta name="twitter:description" content="Chapter 5. Resampling Methods 5.1. Cross-Validation 5.1.1. The Validation Set Approach 5.1.2. Leave-One-Out Cross-Validation 5.1.3. k-Fold Cross-Validation 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation 5.1.5. Cross-Validation on Classification Problems 5.2. The Bootstrap Chapter 5. Resampling Methods repeatedly drawing samples from a training set and refitting a model of interest on each" />
+    <meta name="twitter:title" content="cs231n - Lecture 9. CNN Architectures" />
+    <meta name="twitter:description" content="Review LeCun et al., 1998 $5\times 5$ Conv filters applied at stride 1 $2\times 2$ Subsampling (Pooling) layers applied at stride 2 i.e. architecture is [CONV-POOL-CONV-POOL-FC-FC] Stride: Downsample output activations Padding: Preserve input spatial dimensions in output activations Filter: Each conv filter outputs a “slice” in the activation Case Studies" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Darron's Devlog" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="ISLR" />
+    <meta name="twitter:data2" content="cs231n" />
     <meta name="twitter:site" content="@" />
     <meta name="twitter:creator" content="@" />
     <meta property="og:image:width" content="1400" />
@@ -107,7 +107,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "name": "Darron's Devlog",
         "logo": "http://0.0.0.0:4000/"
     },
-    "url": "http://0.0.0.0:4000/islr_ch5",
+    "url": "http://0.0.0.0:4000/cs231n_lec9",
     "image": {
         "@type": "ImageObject",
         "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
@@ -116,9 +116,9 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://0.0.0.0:4000/islr_ch5"
+        "@id": "http://0.0.0.0:4000/cs231n_lec9"
     },
-    "description": "Chapter 5. Resampling Methods 5.1. Cross-Validation 5.1.1. The Validation Set Approach 5.1.2. Leave-One-Out Cross-Validation 5.1.3. k-Fold Cross-Validation 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation 5.1.5. Cross-Validation on Classification Problems 5.2. The Bootstrap Chapter 5. Resampling Methods repeatedly drawing samples from a training set and refitting a model of interest on each"
+    "description": "Review LeCun et al., 1998 $5\times 5$ Conv filters applied at stride 1 $2\times 2$ Subsampling (Pooling) layers applied at stride 2 i.e. architecture is [CONV-POOL-CONV-POOL-FC-FC] Stride: Downsample output activations Padding: Preserve input spatial dimensions in output activations Filter: Each conv filter outputs a “slice” in the activation Case Studies"
 }
     </script>
 
@@ -131,7 +131,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="ISLR - Chapter 5. Resampling Methods" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="cs231n - Lecture 9. CNN Architectures" href="/feed.xml" />
 
 
 </head>
@@ -185,172 +185,248 @@ into the {body} of the default.hbs template -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
-        <article class="post-full  tag-islr  no-image">
+        <article class="post-full  tag-cs231n  no-image">
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="23 April 2020">23 April 2020</time>
+                    <time class="post-full-meta-date" datetime=" 3 January 2022"> 3 January 2022</time>
                     
                         <span class="date-divider">/</span>
                         
                             
-                               <a href='/tag/islr/'>ISLR</a>
+                               <a href='/tag/cs231n/'>CS231N</a>
                             
                         
                     
                 </section>
-                <h1 class="post-full-title">ISLR - Chapter 5. Resampling Methods</h1>
+                <h1 class="post-full-title">cs231n - Lecture 9. CNN Architectures</h1>
             </header>
 	<!--
             
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <ul id="markdown-toc">
-  <li><a href="#chapter-5-resampling-methods" id="markdown-toc-chapter-5-resampling-methods">Chapter 5. Resampling Methods</a></li>
-  <li><a href="#51--cross-validation" id="markdown-toc-51--cross-validation">5.1.  Cross-Validation</a>    <ul>
-      <li><a href="#511-the-validation-set-approach" id="markdown-toc-511-the-validation-set-approach">5.1.1. The Validation Set Approach</a></li>
-      <li><a href="#512-leave-one-out-cross-validation" id="markdown-toc-512-leave-one-out-cross-validation">5.1.2. Leave-One-Out Cross-Validation</a></li>
-      <li><a href="#513-k-fold-cross-validation" id="markdown-toc-513-k-fold-cross-validation">5.1.3. k-Fold Cross-Validation</a></li>
-      <li><a href="#514-bias-variance-trade-off-for-k-fold-cross-validation" id="markdown-toc-514-bias-variance-trade-off-for-k-fold-cross-validation">5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation</a></li>
-      <li><a href="#515-cross-validation-on-classification-problems" id="markdown-toc-515-cross-validation-on-classification-problems">5.1.5. Cross-Validation on Classification Problems</a></li>
+                    <h2 id="review">Review</h2>
+<ul>
+  <li>
+    <p><em>LeCun et al., 1998</em><br />
+  $5\times 5$ Conv filters applied at stride <em>1</em><br />
+  $2\times 2$ Subsampling (Pooling) layers applied at stride <em>2</em><br />
+  i.e. architecture is <code class="language-plaintext highlighter-rouge">[CONV-POOL-CONV-POOL-FC-FC]</code></p>
+  </li>
+  <li>
+    <p>Stride: Downsample output activations<br />
+  Padding: Preserve input spatial dimensions in output activations<br />
+  Filter: Each conv filter outputs a “slice” in the activation</p>
+  </li>
+</ul>
+
+<h2 id="case-studies">Case Studies</h2>
+<p><img src="/assets/images/cs231n_lec9_0.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
+
+<h3 id="alexnet-first-cnn-based-winner">AlexNet: First CNN-based winner</h3>
+<ul>
+  <li>Architecture: <code class="language-plaintext highlighter-rouge">[CONV1-MAXPOOL1-NORM1-CONV2-MAXPOOL2-NORM2-CONV3-CONV4-CONV5-MaxPOOL3-FC6-FC7-FC8]</code>
+    <ul>
+      <li>Input: $227\times 227\times 3$ images</li>
+      <li>First layer(CONV1):<br />
+  <em>96</em> $11\times 11$ filters applied at stride <em>4</em>, pad <em>0</em><br />
+  Output volume: $W’ = (W-F+2P)/S + 1 \rightarrow$ $55\times 55\times 96$<br />
+  Parameters: $(11* 11* 3 +1)* 96 =$ <strong>36K</strong></li>
+      <li>Second layer(POOL1):<br />
+  $3\times 3\times$ filters applied at stride <em>2</em><br />
+  Output volume: $27\times 27\times 96$<br />
+  Parameters: 0<br />
+  $\vdots$</li>
+      <li>CONV2($27\times 27\times 256$):<br />
+  <em>256</em> $5\times 5$ filters applied at stride <em>1</em>, pad <em>2</em></li>
+      <li>MAX POOL2($13\times 13\times 256):<br />
+  $3\times 3\times$ filters applied at stride <em>2</em></li>
+      <li>CONV3($13\times 13\times 384$):<br />
+  <em>384</em> $3\times 3$ filters applied at stride <em>1</em>, pad <em>1</em></li>
+      <li>CONV4($13\times 13\times 384$):<br />
+  <em>384</em> $3\times 3$ filters applied at stride <em>1</em>, pad <em>1</em></li>
+      <li>CONV5($13\times 13\times 256$):<br />
+  <em>256</em> $3\times 3$ filters applied at stride <em>1</em>, pad <em>1</em></li>
+      <li>MAX POOL3($6\times 6\times 256$):<br />
+  $3\times 3\times$ filters applied at stride <em>2</em></li>
+      <li>FC6(4096): <em>4096</em> neurons</li>
+      <li>FC7(4096): <em>4096</em> neurons</li>
+      <li>FC8(1000): <em>1000</em> neurons (class scores)</li>
     </ul>
   </li>
-  <li><a href="#52-the-bootstrap" id="markdown-toc-52-the-bootstrap">5.2. The Bootstrap</a></li>
-</ul>
-
-<h2 id="chapter-5-resampling-methods">Chapter 5. Resampling Methods</h2>
-<ul>
-  <li>
-    <p>repeatedly drawing samples from a training set and refitting a model of interest on 
-each sample in order to obtain additional information about the fitted model.</p>
+  <li>Historical note:
+    <ul>
+      <li>Network spread across <em>2</em> GPUs, half the neurons (feature maps) on each GPU.</li>
+      <li>CONV1, CONV2, CONV4, CONV5: Connections only with feature maps on same GPU</li>
+      <li>CONV3, FC6, FC7, FC8: Connections with all feature maps in preceding layer, communication across GPUs</li>
+    </ul>
   </li>
-  <li>
-    <p>To optain information that would not be available from fitting the model only once 
-using the original training sample.<br />
-e.g. to estimate the variability of a model fit, draw different samples and fit it to 
-each new sample, then examine the extent to which the resulting fits differ.</p>
-  </li>
-</ul>
-
-<h2 id="51--cross-validation">5.1.  Cross-Validation</h2>
-<ul>
-  <li>In the absence of a very large designated test set that can be used to directly estimate 
-the test error rate, a class of methods that estimate the test error rate by <em>holding out</em> 
-a subset of the training observations from the fitting process, then applying the statistical 
-learning method to those held out observations.</li>
-</ul>
-
-<h3 id="511-the-validation-set-approach">5.1.1. The Validation Set Approach</h3>
-<ul>
-  <li>
-    <p>randomly dividing the available set of observations into two parts;<br />
-a <em>training set</em> and a <em>validation set</em> (or hold-out set)<br />
-model is fit on the training set, and the fitted model is used to predict the responses for the 
-observations in the validation set. The validation set error rate estimates the test error rate.</p>
-  </li>
-  <li>
-    <p>Repeating this predecure, we have different estimate for the test MSE over random splits of the 
-observations and there are two issues:</p>
-    <ol>
-      <li>The validation estimate of the test error rate can be highly variable, depending on which observations 
- are included in the training set or the validation test.</li>
-      <li>Only a subset of the observations are used to fit the model. Trained on fewer observations, the 
- validation set error rate may <em>overestimate</em> the test error rate for the model fit on the entire 
- data set.</li>
-    </ol>
+  <li>Details/Retrospectives:
+    <ul>
+      <li><em>Krizhevsky et al. 2012</em></li>
+      <li>first use of ReLU</li>
+      <li>used Norm layers (not common anymore)</li>
+      <li>heavy data augmentation</li>
+      <li>dropout <em>0.5</em></li>
+      <li>batch size <em>128</em></li>
+      <li>SGD Momentum <em>0.9</em></li>
+      <li>Learning rate <em>1e-2</em>, reduced by <em>10</em> manually when val accuracy plateaus</li>
+      <li>L2 weight decay <em>5e-4</em></li>
+      <li>7 CNN ensemble: <em>18.2%</em> $\rightarrow$ <em>15.4%</em></li>
+    </ul>
   </li>
 </ul>
 
-<h3 id="512-leave-one-out-cross-validation">5.1.2. Leave-One-Out Cross-Validation</h3>
+<h3 id="zfnet-improved-hyperparameters-over-alexnet">ZFNet: Improved hyperparameters over AlexNet</h3>
 <ul>
-  <li>
-    <p>each single observation is used for the validation set, and the remaining observations are for the 
-training set. The statistical learning method is fit on the <em>n-1</em> training obs. The prediction is made 
-for the excluded observation.</p>
-  </li>
-  <li>
-    <p>LOOCV estiamte for the test MSE:<br />
-\(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n MSE_i\)<br />
-No overestimation on the test error, No variance of test MSE, but Expansive.</p>
-  </li>
-  <li>
-    <p>a shortcut of LOOCV on Least Squares(regression):<br />
-\(\begin{align*}
-CV_{(n)} = \frac{1}{n} \sum_{i=1}^n \left(\frac{y_i - \hat y_i}{1-h_i}\right)^2
-\end{align*}\)<br />
-where $\hat y_i$ is the fitted value from the original least squares fit, one-time build of a full 
-model and set a leverage $h_i = \frac{1}{n}+\frac{(x_i-\bar{x})^2}{\sum_{i^\prime=1}^n(x_{i^\prime}-\bar{x})^2}$. 
-The levearge lies between <em>1/n</em> and <em>1</em>, reflects the amount that an observation influences its own fit.</p>
+  <li>AlexNet but:
+    <ul>
+      <li>CONV1: change from ($11\times 11$ stride <em>4</em>) to ($7\times 7$ stride <em>2</em>)</li>
+      <li>CONV3,4,5: instead of <em>384</em>, <em>384</em>, <em>256</em> filters use <em>512</em>, <em>1024</em>, <em>512</em></li>
+      <li>ImageNet top 5 error: <em>16.4%</em> -&gt; <em>11.7%</em></li>
+      <li><em>Zeiler and Fergus, 2013</em></li>
+    </ul>
   </li>
 </ul>
 
-<h3 id="513-k-fold-cross-validation">5.1.3. k-Fold Cross-Validation</h3>
+<h3 id="vggnet-deeper-networks">VGGNet: Deeper Networks</h3>
 <ul>
-  <li>
-    <p>random division into <em>k</em> groups, or <em>folds</em>, of approximately equal size. A fold is used for the 
-validation set, and the method is fit on the remaining <em>k-1</em> folds. The MSE is computed on the 
-observations in the held-out fold and the procedure is repeated <em>k</em> times.</p>
+  <li>Small filters, Deeper networks
+    <ul>
+      <li>8 layers (AlexNet) $\rightarrow$ 16 - 19 layers (VGG16Net)</li>
+      <li>Only $3\times 3$ CONV stride <em>1</em>, pad <em>1</em> and $2\times 2$ MAX POOL with stride <em>2</em></li>
+      <li><em>11.7%</em> top 5 error(ZFNet) $\rightarrow$ <em>7.3%</em> top 5 error in ILSVRC’14</li>
+    </ul>
   </li>
   <li>
-    <p>k-Fold CV estimate for the test MSE:<br />
-\(CV_{(k)} = \frac{1}{n}\sum_{i=1}^k MSE_i\)<br />
-when <em>k=n</em>, LOOCV is a special case of k-Fold. Using smaller <em>k</em>, k-fold CV has a computational 
-advantage to LOOCV.</p>
+    <p>Why use smaller filters?<br />
+  :Stack of three $3\times 3$ conv (stride <em>1</em>) layers has same effective receptive field as one $7\times 7$ conv layer, but with deeper, more non-linearities and fewer parameters<br />
+  <img src="/assets/images/cs231n_lec9_1.png" alt="png" width="60%&quot;, height=&quot;60%" /></p>
   </li>
   <li>
-    <p>We perform CV to:<br />
-To determine how well a given model can be expected to perform on independent data.<br />
-To identify a model results in the lowest test error, over different models or different levels of 
-flexibility.</p>
+    <p>TOTAL memory: <code class="language-plaintext highlighter-rouge">24M * 4 bytes ~= 96MB</code> / image (for a forward pass)<br />
+  TOTAL params: <code class="language-plaintext highlighter-rouge">138M</code> parameters<br />
+  Most memory is in early CONV, Most params are in late FC</p>
+  </li>
+  <li>Details:
+    <ul>
+      <li><em>Simonyan and Zisserman, 2014</em></li>
+      <li>ILSVRC’14 2nd in classification, 1st in localization</li>
+      <li>Similar training procedure as <em>Krizhevsky 2012</em></li>
+      <li>No Local Response Normalisation (LRN)</li>
+      <li>Use VGG16 or VGG19 (VGG19 only slightly better, more memory)</li>
+      <li>Use ensembles for best results</li>
+      <li>FC7 features generalize well to other	tasks</li>
+    </ul>
   </li>
 </ul>
 
-<h3 id="514-bias-variance-trade-off-for-k-fold-cross-validation">5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation</h3>
+<h3 id="googlenet">GoogLeNet</h3>
 <ul>
-  <li>
-    <p>Besides the computational advantage, k-fold CV often gives more accurate estimates of the test error 
-rate than does LOOCV.</p>
+  <li><strong>Inception module</strong>:
+    <ul>
+      <li>design a good local network topology(network within a network) and then stack these modules on top of each other</li>
+      <li>Apply parallel filter operations on the input from previous layer: Multiple receptive field sizes for convolution(1x1, 3x3, 5x5), Pooling(3x3)</li>
+      <li>Concatenate all filter outputs together channel-wise</li>
+    </ul>
   </li>
-  <li>
-    <p>LOOCV will give approximately unbiased estiamtes of the test error, containing <em>n-1</em>, almost as many as 
-the number of observations in the full data set. By contrast, k-fold CV will lead to an intermediate 
-level of bias, containing <em>(k-1)n/k</em> observations. Clearly, LOOCV is to be preferred in the perspective 
-of bias reduction.</p>
-  </li>
-  <li>
-    <p>But, in LOOCV, averaging the outputs of <em>n</em> fitted models, which are trained on an almost identical set 
-of observations, these outputs are highly correlated with each other. This high correlation results in 
-higher variance of test error estimate from LOOCV than from k-fold CV.</p>
+  <li><em>“Bottlenect”</em> layers to reduce computational complexity of inception:
+    <ul>
+      <li>use 1x1 conv to reduce feature channel size; alternatively, interpret it as applying the same FC layer on each input pixel</li>
+      <li>preserves spatial dimensions, reduces depth</li>
+    </ul>
   </li>
 </ul>
 
-<h3 id="515-cross-validation-on-classification-problems">5.1.5. Cross-Validation on Classification Problems</h3>
+<p><img src="/assets/images/cs231n_lec9_2.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
+
 <ul>
-  <li>
-    <p>LOOCV on the classification:<br />
-\(CV_{(n)} = \frac{1}{n}\sum_{i=1}^n Err_i\),  where \(Err_i = I(y_i \ne \hat{y}_i)\).</p>
+  <li>Full GoogLeNet Architecture:
+    <ul>
+      <li>Stem Network: <code class="language-plaintext highlighter-rouge">[Conv-POOL-2x CONV-POOL]</code></li>
+      <li>Stack Inception modules: with dimension reduction on top of each other</li>
+      <li>Classifier output: <code class="language-plaintext highlighter-rouge">[(H*W*c)-Avg POOL-(1*1*c)-FC-Softmax]</code><br />
+  Global average pooling layer before final FC layer, avoids expensive FC layers</li>
+      <li>Auxiliary classification layers: <code class="language-plaintext highlighter-rouge">[AvgPool-1x1 Conv-FC-FC-Softmax]</code><br />
+  to inject additional gradient at lower layers</li>
+    </ul>
   </li>
-  <li>
-    <p>k-fold CV on the classification:<br />
-\(\frac{1}{n}\sum_{i=1}^k MCR_i\).</p>
+  <li>Details:
+    <ul>
+      <li>Deeper networks, with computational efficiency</li>
+      <li>ILSVRC’14 classification winner (<em>6.7%</em> top 5 error)</li>
+      <li>22 layers</li>
+      <li>Only 5 million parameters(12x less than AlexNet, 27x less than VGG-16)</li>
+      <li>Efficient “Inception” module</li>
+      <li>No FC layers</li>
+    </ul>
   </li>
 </ul>
 
-<h2 id="52-the-bootstrap">5.2. The Bootstrap</h2>
+<h3 id="resnet">ResNet</h3>
 <ul>
   <li>
-    <p>Sampling with <em>replacement</em> on:<br />
-Dataset $Z = (z_1, \ldots, z_n)$, $ z_i = (x_i,y_i)$<br />
-Sample $Z^{*b}$, where $ b = 1, \ldots, B$ samples</p>
+    <p>From 2015, “Revolution of Depth”; more than 100 layers</p>
+  </li>
+  <li>Stacking deeper layers on a “plain” convolutional neural network results in lower both test and training error. The deeper model performs worse, but it’s <strong>not caused by overfitting</strong>.
+    <ul>
+      <li>Fact: Deep models have more representation power (more parameters) than shallower models.</li>
+      <li>Hypothesis: the problem is an optimization problem, <strong>deeper models are harder to optimize</strong></li>
+      <li>Solution: copying the learned layers from the shallower model and setting additional layers to identity mapping.</li>
+    </ul>
+  </li>
+  <li><em>“Residual block”</em>:
+    <ul>
+      <li>Use network layers to fit a residual mapping instead of directly trying to fit a desired underlying mapping</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/cs231n_lec9_3.png" alt="png" width="60%&quot;, height=&quot;60%" /></p>
+<ul>
+  <li>Full ResNet Architecture:
+    <ul>
+      <li>Stack residual blocks</li>
+      <li>Every residual block has two $3\times 3$ conv layers</li>
+      <li>Periodically, double number of filters and downsample spatially using stride <em>2</em> (/2 in each dimension). Reduce the activation volume by half.</li>
+      <li>Additional conv layer at the beginning (7x7 conv in stem)</li>
+      <li>No FC layers at the end (only FC 1000 to output classes)</li>
+      <li>(In theory, you can train a ResNet with input image of variable sizes)</li>
+    </ul>
   </li>
   <li>
-    <p>for Any statistic term $S(Z)$ computed from full dataset <em>Z</em>,<br />
-and $S(Z^{*b})$ from bootstrap samples,<br />
-\(\begin{align*}
-Var(\hat{S(Z)}) = \frac{1}{B-1}\sum_{b=1}^B(S(Z^{*b})-\bar{S}^*)^2
-\end{align*}\)<br />
-$\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
+    <p>For deeper networks(ResNet-50+):
+  use bottleneck layer to improve efficiency (similar to GoogLeNet)<br />
+  e.g. <code class="language-plaintext highlighter-rouge">[(28x28x256 INPUT)-(1x1 CONV, 64)-(3x3 CONV, 64)-(1x1 CONV, 256)-(28x28x256 OUTPUT)]</code></p>
+  </li>
+  <li>Training ResNet in practice:
+    <ul>
+      <li>Batch Normalization after every CONV layer</li>
+      <li>Xavier initialization from <em>He et al.</em></li>
+      <li>SGD + Momentum (<em>0.9</em>)</li>
+      <li>Learning rate: <em>0.1</em>, divided by <em>10</em> when validation error plateaus</li>
+      <li>Mini-batch size <em>256</em></li>
+      <li>Weight decay of <em>1e-5</em></li>
+      <li>No dropout used</li>
+    </ul>
+  </li>
+  <li>Experimental Results:
+    <ul>
+      <li><em>He et al., 2015</em></li>
+      <li>Able to train very deep networks without degrading (152 layers on ImageNet, 1202 on Cifar)</li>
+      <li>Deeper networks now achieve lower training error as expected</li>
+      <li>Swept 1st place in all ILSVRC and COCO 2015 competitions</li>
+      <li>ILSVRC 2015 classification winner (<em>3.6%</em> top 5 error); better than human performance!</li>
+    </ul>
+  </li>
+  <li>Details:
+    <ul>
+      <li>Very deep networks using residual connections</li>
+      <li>152-layer model for ImageNet</li>
+      <li>ILSVRC’15 classification winner(<em>3.57%</em> top 5 error)</li>
+      <li>Swept all classification and detection competitions in ILSVRC’15 and COCO’15</li>
+    </ul>
   </li>
 </ul>
 
@@ -403,9 +479,9 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function () {
-                            var this_page_url = 'http://0.0.0.0:4000/islr_ch5';
-                            var this_page_identifier = '/islr_ch5';
-                            var this_page_title = 'ISLR - Chapter 5. Resampling Methods';
+                            var this_page_url = 'http://0.0.0.0:4000/cs231n_lec9';
+                            var this_page_identifier = '/cs231n_lec9';
+                            var this_page_title = 'cs231n - Lecture 9. CNN Architectures';
                         };
                         (function() {
                             var d = document, s = d.createElement('script');
@@ -440,7 +516,7 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; Darron's Devlog &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/islr/">Islr</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/cs231n/">Cs231n</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -450,42 +526,10 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                                 
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                     
                                         
                                         
-                                            <li><a href="/islr_ch10">ISLR - Chapter 10. Deep Learning</a></li>
+                                            <li><a href="/cs231n_lec11">cs231n - Lecture 11. Attention and Transformers</a></li>
                                         
                                     
                                   
@@ -494,8 +538,12 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                                     
                                         
                                         
-                                            <li><a href="/islr_ch9">ISLR - Chapter 9. Support Vector Machines</a></li>
+                                            <li><a href="/cs231n_lec10">cs231n - Lecture 10. Recurrent Neural Networks</a></li>
                                         
+                                    
+                                  
+                                
+                                  
                                     
                                   
                                 
@@ -503,28 +551,8 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                                     
                                         
                                         
-                                            <li><a href="/islr_ch8">ISLR - Chapter 8. Tree-Based Methods</a></li>
+                                            <li><a href="/cs231n_lec8">cs231n - Lecture 8. Training Neural Networks II</a></li>
                                         
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
                                     
                                   
                                 
@@ -547,14 +575,67 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                                         
                                         
                                     
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
                                   
                                 
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/islr/">
+                            <a href="/tag/cs231n/">
                                 
-                                    See all 8 posts  →
+                                    See all 9 posts  →
                                 
                             </a>
                         </footer>
@@ -567,21 +648,21 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/islr_ch6">
+            <a class="post-card-content-link" href="/cs231n_lec10">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Islr</span>
+                                <span class="post-card-tags">Cs231n</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">ISLR - Chapter 6. Linear Model Selection and Regularization</h2>
+                    <h2 class="post-card-title">cs231n - Lecture 10. Recurrent Neural Networks</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation</p>
+                        <p>RNN: Process Sequences one to one; vanilla neural networks one to many; e.g. Image Captioning(image to sequence of words) many to one; e.g. Action Prediction(video sequence to action class) many to many(1); e.g.</p>
                     
                 </section>
             </a>
@@ -600,22 +681,21 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/islr_ch4">
+            <a class="post-card-content-link" href="/cs231n_lec8">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Islr</span>
+                                <span class="post-card-tags">Cs231n</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">ISLR - Chapter 4. Classification</h2>
+                    <h2 class="post-card-title">cs231n - Lecture 8. Training Neural Networks II</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>
-</p>
+                        <p>Optimization Problems with SGD What if loss changes quickly in one direction and slowly in another? What does gradient descent do? Very slow progress along shallow dimension, jitter along steep direction What if</p>
                     
                 </section>
             </a>
@@ -642,18 +722,18 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$</p>
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">ISLR - Chapter 5. Resampling Methods</div>
+    <div class="floating-header-title">cs231n - Lecture 9. CNN Architectures</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=ISLR+-+Chapter+5.+Resampling+Methods&amp;url=https://12kdh43.github.io/islr_ch5"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs231n+-+Lecture+9.+CNN+Architectures&amp;url=https://12kdh43.github.io/cs231n_lec9"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/islr_ch5"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs231n_lec9"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 

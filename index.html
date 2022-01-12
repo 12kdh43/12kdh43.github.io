@@ -163,6 +163,72 @@ into the {body} of the default.hbs template -->
     <article class="post-card home-template no-image">
         
         <div class="post-card-content">
+            <a class="post-card-content-link" href="/cs231n_lec11">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Cs231n</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">cs231n - Lecture 11. Attention and Transformers</h2>
+                </header>
+                <section class="post-card-excerpt">
+					<p>Attention with RNNs Image Captioning using spatial features Input: Image I Output: Sequence y $= y_1, y_2, \ldots, y_T$ Encoder: $h_0 = f_W(z)$, where z is spatial CNN features, $f_W(\cdot)$ is an MLP Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, c)$, where context vector c is often...</p>
+                </section>
+            </a>
+        </div>
+    </article>
+
+    <article class="post-card home-template no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/cs231n_lec10">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Cs231n</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">cs231n - Lecture 10. Recurrent Neural Networks</h2>
+                </header>
+                <section class="post-card-excerpt">
+					<p>RNN: Process Sequences one to one; vanilla neural networks one to many; e.g. Image Captioning(image to sequence of words) many to one; e.g. Action Prediction(video sequence to action class) many to many(1); e.g. Video Captioning(video sequence to caption) many to many(2); e.g. Video Classification on...</p>
+                </section>
+            </a>
+        </div>
+    </article>
+
+    <article class="post-card home-template no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/cs231n_lec9">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Cs231n</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">cs231n - Lecture 9. CNN Architectures</h2>
+                </header>
+                <section class="post-card-excerpt">
+					<p>Review LeCun et al., 1998 $5\times 5$ Conv filters applied at stride 1 $2\times 2$ Subsampling (Pooling) layers applied at stride 2 i.e. architecture is [CONV-POOL-CONV-POOL-FC-FC] Stride: Downsample output activations Padding: Preserve input spatial dimensions in output activations Filter: Each conv filter outputs a “slice”...</p>
+                </section>
+            </a>
+        </div>
+    </article>
+
+    <article class="post-card home-template no-image">
+        
+        <div class="post-card-content">
             <a class="post-card-content-link" href="/cs231n_lec8">
                 <header class="post-card-header">
                     
@@ -530,72 +596,6 @@ into the {body} of the default.hbs template -->
                 </header>
                 <section class="post-card-excerpt">
 					<p>1. Data Info 2. Preprocessing 2.1. duplicated data found in train_data 3. Comparing between classification models 3.1 With Tf-idf vectorizer 3.1.1 MultinomialNB 3.1.2 LogisticRegression 3.2 With CountVectorizer 3.2.1 MultinomialNB 4. Balanced sampling approach - imblearn 5. Result: Best Model import sys import pandas as pd...</p>
-                </section>
-            </a>
-        </div>
-    </article>
-
-    <article class="post-card home-template no-image">
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/islr_ch7">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Islr</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">ISLR - Chapter 7. Moving Beyond Linearity</h2>
-                </header>
-                <section class="post-card-excerpt">
-					<p>Chapter 7. Moving Beyond Linearity 7.1. Polynomial Regression 7.2. Step Functions 7.3. Basis Functions 7.4. Regression Splines 7.4.1. Piecewise Polynomials 7.4.2. Constraints and Splines 7.4.3. The Spline Basis Representation 7.4.4. Choosing the Number and Locations of the Knots 7.4.5. Comparison to Polynomial Regression 7.5. Smoothing...</p>
-                </section>
-            </a>
-        </div>
-    </article>
-
-    <article class="post-card home-template no-image">
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/islr_ch6">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Islr</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">ISLR - Chapter 6. Linear Model Selection and Regularization</h2>
-                </header>
-                <section class="post-card-excerpt">
-					<p>Chapter 6. Linear Model Selection and Regularization 6.1. Subset Selection 6.1.1. Best Subset Selection 6.1.2. Stepwise Selection Forward Stepwise Selection Backward Stepwise Selection Hybrid Approaches 6.1.3. Choosing the Optimal Model Validation and Cross-Validation 6.2. Shrinkage Methods 6.2.1. Ridge Regression in Singular Value Decomposition 6.2.2. The...</p>
-                </section>
-            </a>
-        </div>
-    </article>
-
-    <article class="post-card home-template no-image">
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/islr_ch5">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Islr</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">ISLR - Chapter 5. Resampling Methods</h2>
-                </header>
-                <section class="post-card-excerpt">
-					<p>Chapter 5. Resampling Methods 5.1. Cross-Validation 5.1.1. The Validation Set Approach 5.1.2. Leave-One-Out Cross-Validation 5.1.3. k-Fold Cross-Validation 5.1.4. Bias-Variance Trade-Off for k-Fold Cross-Validation 5.1.5. Cross-Validation on Classification Problems 5.2. The Bootstrap Chapter 5. Resampling Methods repeatedly drawing samples from a training set and refitting a...</p>
                 </section>
             </a>
         </div>

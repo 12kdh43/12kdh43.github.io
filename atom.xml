@@ -8,6 +8,761 @@
     
       
       <item>
+        <title>cs231n - Lecture 11. Attention and Transformers</title>
+        
+          <description>&lt;h2 id=&quot;attention-with-rnns&quot;&gt;Attention with RNNs&lt;/h2&gt;
+
+&lt;h3 id=&quot;image-captioning-using-spatial-features&quot;&gt;Image Captioning using spatial features&lt;/h3&gt;
+&lt;p&gt;Input: Image &lt;em&gt;I&lt;/em&gt;&lt;br /&gt;
+Output: Sequence &lt;strong&gt;y&lt;/strong&gt; $= y_1, y_2, \ldots, y_T$&lt;br /&gt;
+Encoder: $h_0 = f_W(z)$, where &lt;em&gt;z&lt;/em&gt; is spatial CNN features, $f_W(\cdot)$ is an MLP&lt;br /&gt;
+Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, c)$, where context vector &lt;em&gt;c&lt;/em&gt; is often $c=h_0$&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+Problem: Input is “bottlenecked” through &lt;em&gt;c&lt;/em&gt;; especially in a long descriptions.  Model needs to encode everything it wants to say within &lt;em&gt;c&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Attention idea: New context vector &lt;em&gt;c_t&lt;/em&gt; at every time step&lt;br /&gt;
+Each context vector will attend to different image regions&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Alignment scores(scalars): $H \times W$ matrix &lt;strong&gt;&lt;em&gt;e&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
+  $e_{t,i,j} = f_{\mbox{att}}(h_{t-1}, z_{i,j})$&lt;br /&gt;
+  where $f_{\mbox{att}}(\cdot)$ is an MLP&lt;/li&gt;
+  &lt;li&gt;Normalize to get attention weights:&lt;br /&gt;
+  $a_{t,:,:} = \mbox{softmax}(e_{t,:,:})$,&lt;br /&gt;
+  $0&amp;lt;a_{t,i,j}&amp;lt;1$, attention values sum to &lt;em&gt;1&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Compute context vector &lt;em&gt;c&lt;/em&gt;: multiply &lt;em&gt;CNN features&lt;/em&gt; and &lt;em&gt;Attention weights&lt;/em&gt;&lt;br /&gt;
+  $c_t = \sum_{i,j} a_{t,i,j} z_{t,i,j}$&lt;/li&gt;
+  &lt;li&gt;Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, \color{red}{c_t})$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_1.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;50%&quot; /&gt;&lt;br /&gt;
+Each timestep of decode uses a different context vector that looks(attend) at different parts of the input image. This entire process is differentiable; model chooses its own attention weights. No attention supervision is required.&lt;/p&gt;
+
+&lt;h3 id=&quot;similar-tasks-in-nlp---language-translation-example&quot;&gt;Similar tasks in NLP - Language translation example&lt;/h3&gt;
+&lt;p&gt;Vanilla Encoder-Decoder setting:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Input: sequence &lt;strong&gt;x&lt;/strong&gt; $= x_1, x_2, \ldots, x_T$&lt;/li&gt;
+  &lt;li&gt;Output: sequence &lt;strong&gt;y&lt;/strong&gt; $= y_1, y_2, \ldots, y_T$&lt;/li&gt;
+  &lt;li&gt;Encoder: $h_0 = f_W(z)$, where $z_t = \mbox{RNN}(x_t, u_{t-1})$, $f_W(\cdot)$ is MLP, &lt;em&gt;u&lt;/em&gt; is the hidden RNN state&lt;/li&gt;
+  &lt;li&gt;Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, c)$, where context vector &lt;em&gt;c&lt;/em&gt; is often $c=h_0$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+Attention in NLP&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Alignment scores(scalars):&lt;br /&gt;
+  $e_{t,i} = f_{\mbox{att}}(h_{t-1}, z_t)$, where $f_{\mbox{att}}(\cdot)$ is an MLP&lt;/li&gt;
+  &lt;li&gt;Normalize to get attention weights:&lt;br /&gt;
+  $a_{t,:} = \mbox{softmax}(e_{t,:})$,&lt;br /&gt;
+  $0&amp;lt;a_{t,i}&amp;lt;1$, attention values sum to &lt;em&gt;1&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Compute context vector &lt;em&gt;c&lt;/em&gt;:&lt;br /&gt;
+  $c_t = \sum_i a_{t,i} z_{t,i}$&lt;/li&gt;
+  &lt;li&gt;Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, \color{red}c_t)$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Heatmap: visualization of attention weights; without any attention supervision, model learns different word orderings for different languages&lt;/p&gt;
+
+&lt;h2 id=&quot;general-attention-layer&quot;&gt;General Attention Layer&lt;/h2&gt;
+&lt;p&gt;Attention in image captioning before
+&lt;img src=&quot;/assets/images/cs231n_lec11_4.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;single-query-setting&quot;&gt;Single query setting&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_5.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;40%&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Inputs&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;input vectors: &lt;strong&gt;x&lt;/strong&gt;(shape: $N\times D$)&lt;br /&gt;
+  Attention operation is permutation invariant; produces the same output regardless of the order of elements(features) in the input vector. Stretch $H\times W = N$ into &lt;em&gt;N&lt;/em&gt; vectors, transform $H\times W\times D$ features into $N\times D$ input vectors &lt;strong&gt;x&lt;/strong&gt;(similar to attention in NLP).&lt;/li&gt;
+  &lt;li&gt;Query: &lt;strong&gt;h&lt;/strong&gt;(shape: D)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Operations&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Alignment
+    &lt;ul&gt;
+      &lt;li&gt;Change $f_{\mbox{att}}(\cdot)$ to a simple dot product:&lt;br /&gt;
+  $e_i = h\cdot x_i$; only works well with key &amp;amp; value transformation trick&lt;/li&gt;
+      &lt;li&gt;Change $f_{\mbox{att}}(\cdot)$ to a &lt;strong&gt;scaled&lt;/strong&gt; dot product:&lt;br /&gt;
+  $e_i = h\cdot x_i / \sqrt{D}$;&lt;br /&gt;
+  Larger dimensions means more terms in the dot product sum. So, the variance of the logits is higher. Large magnitude(length) vectors will produce much higher logits. Then, the post-softmax distribution(&lt;em&gt;e&lt;/em&gt;) has lower-entropy(high uncertainty) assuming logits are &lt;em&gt;I.I.D&lt;/em&gt;. Ultimately, these large magnitude vectors will cause softmax to peak and assign very little weight to all others. To reduce this effect, divide by $sqrt{D}$.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Attention: $\mathbf{a} = \mbox{softmax}(\mathbf{e})$&lt;/li&gt;
+  &lt;li&gt;Output: $\mathbf{c} = \sum_i a_i x_i$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Outputs&lt;/strong&gt;&lt;br /&gt;
+	- context vector: &lt;strong&gt;c&lt;/strong&gt;(shape: D)&lt;/p&gt;
+
+&lt;h3 id=&quot;multiple-query-setting&quot;&gt;Multiple query setting&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_6.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;40%&quot; /&gt;&lt;br /&gt;
+&lt;strong&gt;Inputs&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;input vectors: &lt;strong&gt;x&lt;/strong&gt;(shape: $N\times D$)&lt;/li&gt;
+  &lt;li&gt;Queries: &lt;strong&gt;q&lt;/strong&gt;(shape: $M\times D$); multiple query vectors&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Operations&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Alignment: $e_{i,j} = q_j\cdot x_i / \sqrt{D}$&lt;/li&gt;
+  &lt;li&gt;Attention: $\mathbf{a} = \mbox{softmax}(\mathbf{e})$&lt;/li&gt;
+  &lt;li&gt;Output: $y_j = \sum_i a_{i,j} x_i$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Outputs&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;context vectors: &lt;strong&gt;y&lt;/strong&gt;(shape: D);&lt;br /&gt;
+  each query creates a new output context vector&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;weight-layers-added&quot;&gt;Weight layers added&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_7.png&quot; alt=&quot;png&quot; width=&quot;45%&amp;quot;, height=&amp;quot;45%&quot; /&gt;&lt;br /&gt;
+Notice that the input vectors &lt;strong&gt;x&lt;/strong&gt; are used for both the alignment(&lt;strong&gt;e&lt;/strong&gt;) and attention calculations(&lt;strong&gt;y&lt;/strong&gt;); We can add more expressivity to the layer by adding a different FC layer before each of the two steps. The input and output dimensions can now change depending on the key and value FC layers.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Inputs&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;input vectors: &lt;strong&gt;x&lt;/strong&gt;(shape: $N\times D$)&lt;/li&gt;
+  &lt;li&gt;Queries: &lt;strong&gt;q&lt;/strong&gt;(shape: $M\times D_k$)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Operations&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Key vectors: $\mathbf{k} = \mathbf{x}W_k$&lt;/li&gt;
+  &lt;li&gt;Value vectors: $\mathbf{v} = \mathbf{x}W_v$&lt;/li&gt;
+  &lt;li&gt;Alignment: $e_{i,j} = q_j\cdot k_i / \sqrt{D}$&lt;/li&gt;
+  &lt;li&gt;Attention: $\mathbf{a} = \mbox{softmax}(\mathbf{e})$&lt;/li&gt;
+  &lt;li&gt;Output: $y_j = \sum_i a_{i,j} v_i$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Outputs&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;context vectors: &lt;strong&gt;y&lt;/strong&gt;(shape: $D_v$);&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;self-attention-layer&quot;&gt;Self attention layer&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_8.png&quot; alt=&quot;png&quot; width=&quot;45%&amp;quot;, height=&amp;quot;45%&quot; /&gt;&lt;br /&gt;
+Recall that the query vector was a function of the input vectors; Encoder $h_0=f_W(z)$, where &lt;em&gt;z&lt;/em&gt; is spatial CNN features, $f_W(\cdot)$ is an MLP. We can calculate the query vectors from the input vectors, defining a “self-attention” layer. No input query vectors anymore, instead query vectors are calculated using a FC layer.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Inputs&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;input vectors: &lt;strong&gt;x&lt;/strong&gt;(shape: $N\times D$)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Operations&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Key vectors: $\mathbf{k} = \mathbf{x}W_k$&lt;/li&gt;
+  &lt;li&gt;Value vectors: $\mathbf{v} = \mathbf{x}W_v$&lt;/li&gt;
+  &lt;li&gt;Query vectors: $\mathbf{q} = \mathbf{x}W_q$&lt;/li&gt;
+  &lt;li&gt;Alignment: $e_{i,j} = q_j\cdot k_i / \sqrt{D}$&lt;/li&gt;
+  &lt;li&gt;Attention: $\mathbf{a} = \mbox{softmax}(\mathbf{e})$&lt;/li&gt;
+  &lt;li&gt;Output: $y_j = \sum_i a_{i,j} v_i$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Outputs&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;context vectors: &lt;strong&gt;y&lt;/strong&gt;(shape: $D_v$)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;positional-encoding&quot;&gt;&lt;em&gt;Positional encoding&lt;/em&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_9.png&quot; alt=&quot;png&quot; width=&quot;35%&amp;quot;, height=&amp;quot;35%&quot; /&gt;&lt;br /&gt;
+Self attention attends over sets of inputs; is permutation invariant. To encode the ordered sequences(e.g. language, image), concatenate special positional encoding $p_j$ to each input vector $x_j$.&lt;/p&gt;
+
+&lt;p&gt;$\mathit{pos}: N\rightarrow R^d$ to process the position &lt;em&gt;j&lt;/em&gt; of the vector into a &lt;em&gt;d&lt;/em&gt;-dimensional vector; $p_j = \mathit{pos}(j)$&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Desiderata&lt;/strong&gt; of $\mathit{pos}(\cdot)$:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Should output a &lt;strong&gt;unique&lt;/strong&gt; encoding for each time-step(word’s position in a sentence).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Distance&lt;/strong&gt; between any two time-steps should be consistent across sentences with different lengths(variable inputs).&lt;/li&gt;
+  &lt;li&gt;Model should generalize to &lt;strong&gt;longer&lt;/strong&gt; sentences without any efforts. Its values should be bounded.&lt;/li&gt;
+  &lt;li&gt;Must be &lt;strong&gt;deterministic&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Options&lt;/strong&gt; for $\mathit{pos}(\cdot)$:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Learn a lookup table:
+    &lt;ul&gt;
+      &lt;li&gt;Learn parameters to use for $\mathit{pos}(t)$ for $t \in [0,T)$&lt;/li&gt;
+      &lt;li&gt;Lookup table contains $T\times d$ parameters&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Design a fixed function with the desiderata&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec11_10.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;40%&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;masked-self-attention-layer&quot;&gt;Masked self-attention layer&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_11.png&quot; alt=&quot;png&quot; width=&quot;45%&amp;quot;, height=&amp;quot;45%&quot; /&gt;&lt;br /&gt;
+Manually set alignment scores to $-\infty$, prevent vectors from looking at future vectors.&lt;/p&gt;
+
+&lt;h3 id=&quot;multi-head-self-attention-layer&quot;&gt;Multi-head self attention layer&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_12.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;br /&gt;
+Multiple self-attention heads in parallel; similar to ensemble&lt;/p&gt;
+
+&lt;h3 id=&quot;comparing-rnns-to-transformers&quot;&gt;Comparing RNNs to Transformers&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;RNNs&lt;/strong&gt;&lt;br /&gt;
+&lt;span style=&quot;color:green&quot;&gt;(+) LSTMs work reasonably well for long sequences.&lt;/span&gt;&lt;br /&gt;
+&lt;span style=&quot;color:red&quot;&gt;(-) Expects an ordered sequences of inputs&lt;/span&gt;&lt;br /&gt;
+&lt;span style=&quot;color:red&quot;&gt;(-) Sequential computation: subsequent hidden states can only be computed after the previous ones are done.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Transformers&lt;/strong&gt;&lt;br /&gt;
+&lt;span style=&quot;color:green&quot;&gt;(+) Good at long sequences. Each attention calculation looks at all inputs.&lt;/span&gt;&lt;br /&gt;
+&lt;span style=&quot;color:green&quot;&gt;(+) Can operate over unordered sets or ordered sequences with positional encodings.&lt;/span&gt;&lt;br /&gt;
+&lt;span style=&quot;color:green&quot;&gt;(+) Parallel computation: All alignment and attention scores for all inputs can be done in parallel.&lt;/span&gt;&lt;br /&gt;
+&lt;span style=&quot;color:red&quot;&gt;(-) Requires a lot of memory: N x M alignment and attention scalers need to be calculated and stored for a single self-attention head.&lt;/span&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;transformers&quot;&gt;Transformers&lt;/h2&gt;
+&lt;h3 id=&quot;image-captioning-using-transformers&quot;&gt;Image Captioning using transformers&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_13.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;No recurrence at all&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Input: Image &lt;strong&gt;I&lt;/strong&gt;&lt;br /&gt;
+Output: Sequence &lt;strong&gt;y&lt;/strong&gt; $= y_1, y_2, \ldots, y_T$&lt;br /&gt;
+Encoder: $c = T_W(z)$, where &lt;em&gt;z&lt;/em&gt; is spatial CNN features, $T_W(\cdot)$ is the transformer encoder&lt;br /&gt;
+Decoder: $y_t = T_D(y_{0:t-1}, c)$, where $T_D(\cdot)$ is the transformer decoder&lt;/p&gt;
+
+&lt;h4 id=&quot;the-transformer-encoder-block&quot;&gt;The Transformer encoder block&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_14.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+Inputs: Set of vectors &lt;strong&gt;x&lt;/strong&gt;&lt;br /&gt;
+Outputs: Set of vectors &lt;strong&gt;y&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Self-attention is the only interaction between vectors; Layer norm and MLP operate independently per vector. Highly scalable, highly parallelizable, but high memory usage.&lt;/p&gt;
+
+&lt;h4 id=&quot;the-transformer-decoder-block&quot;&gt;The Transformer Decoder block&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec11_15.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+Inputs: Set of vectors &lt;strong&gt;x&lt;/strong&gt; and Set of context vector &lt;strong&gt;c&lt;/strong&gt;&lt;br /&gt;
+Outputs: Set of vectors &lt;strong&gt;y&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Masked Self-attention only interacts with past inputs(&lt;em&gt;x&lt;/em&gt;, or previous output $y_{t-1}$). Multi-head attention block is NOT self-attention; it attends over the transformer encoder outputs. In this phase, we inject image features into the decoder. Highly scalable, highly parallelizable, but high memory usage.&lt;/p&gt;
+
+&lt;h3 id=&quot;image-captioning-using-only-transformers&quot;&gt;Image Captioning using ONLY transformers&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Transformers from pixels to language&lt;br /&gt;
+  &lt;em&gt;Dosovitskiy et al, “An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale”, ArXiv 2020&lt;/em&gt;  &lt;a href=&quot;https://colab.research.google.com/github/google-research/vision_transformer/blob/master/vit_jax.ipynb&quot; target=&quot;_blank&quot;&gt;colab notebook link&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Note: in Google Colab - TPU runtime setting&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# TPU initialization
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resolver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;distribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cluster_resolver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TPUClusterResolver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tpu&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'grpc://'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;environ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'COLAB_TPU_ADDR'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;experimental_connect_to_cluster&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resolver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tpu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;experimental&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;initialize_tpu_system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resolver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;strategy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;distribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TPUStrategy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resolver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# compile in strategy.scope
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sequential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input_shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;28&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;28&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)])&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strategy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;create_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'adam'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;loss&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;losses&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SparseCategoricalCrossentropy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_logits&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sparse_categorical_accuracy'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Adding &lt;strong&gt;attention&lt;/strong&gt; to RNNs allows them to “attend” to different parts of the input at every time step&lt;/li&gt;
+  &lt;li&gt;The &lt;strong&gt;general attention layer&lt;/strong&gt; is a new type of layer that can be used to design new neural network architectures&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Transformers&lt;/strong&gt; are a type of layer that uses self-attention and layer norm.
+    &lt;ul&gt;
+      &lt;li&gt;It is highly scalable and highly parallelizable&lt;/li&gt;
+      &lt;li&gt;Faster training, larger models, better performance across vision and language tasks&lt;/li&gt;
+      &lt;li&gt;They are quickly replacing RNNs, LSTMs, and may even replace convolutions.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        
+        <pubDate>Wed, 05 Jan 2022 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs231n_lec11</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec11</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>cs231n - Lecture 10. Recurrent Neural Networks</title>
+        
+          <description>&lt;h2 id=&quot;rnn-process-sequences&quot;&gt;RNN: Process Sequences&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec10_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;one to one; vanilla neural networks&lt;/li&gt;
+  &lt;li&gt;one to many; e.g. Image Captioning(image to sequence of words)&lt;/li&gt;
+  &lt;li&gt;many to one; e.g. Action Prediction(video sequence to action class)&lt;/li&gt;
+  &lt;li&gt;many to many(1); e.g. Video Captioning(video sequence to caption)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;many to many(2); e.g. Video Classification on frame level&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Why existing convnets are insufficient?:&lt;br /&gt;
+  Variable sequence length inputs and outputs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec10_1.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;70%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Key idea: RNNs have an “internal state” that is updated as a sequence is processed.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;RNN hidden state update:&lt;br /&gt;
+  \(h_t = f_W(h_{t-1}, x_t)\)&lt;br /&gt;
+  The same function and the same set of parameters are used at every time step.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;RNN output generation: \(y_t = f_{W_hy}(h_t)\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Simple(Vanilla) RNN: The state consists of a single hidden vector &lt;em&gt;h&lt;/em&gt;&lt;br /&gt;
+  $h_t = \mbox{tanh}(W_hh h_{t-1} + W_{xh}x_t)$&lt;br /&gt;
+  $y_t = W_{hy}h_t$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sequence-to-sequenceseq2seq-many-to-one--one-to-many&quot;&gt;Sequence to Sequence(Seq2Seq): Many-to-One + One-to-Many&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Many-to-One: Encode input sequence in a single vector&lt;br /&gt;
+  One-to-Many: Produce output sequence from single input vector&lt;br /&gt;
+  Encoder produces the last hidden state $h_T$ and decoder uses it as a default $h_0$. Weights($W_1, W_2$) are re-used for each procedure.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Example: Character-level Language Model Sampling&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec10_2.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;backpropagation&quot;&gt;Backpropagation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Backpropagation through time: Computationally Expensive&lt;br /&gt;
+  Forward through entire sequence to compute loss, then backward through entire sequence to compute gradient.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Truncated&lt;/strong&gt; Backpropagation through time:&lt;br /&gt;
+  Run forward and backward through &lt;strong&gt;chunks of the sequence&lt;/strong&gt; instead of whole sequence. Carry hidden states forward in time forever, but only backpropagate for some smaller number of steps.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;rnn-tradeoffs&quot;&gt;RNN tradeoffs&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;RNN Advantages:
+    &lt;ul&gt;
+      &lt;li&gt;Can process any length input&lt;/li&gt;
+      &lt;li&gt;Computation for step t can (in theory) use information from many steps back&lt;/li&gt;
+      &lt;li&gt;Model size doesn’t increase for longer input&lt;/li&gt;
+      &lt;li&gt;Same weights applied on every timestep, so there is symmetry in how inputs are processed.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;RNN Disadvantages:
+    &lt;ul&gt;
+      &lt;li&gt;Recurrent computation is slow&lt;/li&gt;
+      &lt;li&gt;In practice, difficult to access information from many steps back&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;image-captioning-cnn--rnn&quot;&gt;Image Captioning: CNN + RNN&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Instead of the final FC layer and the classifier in CNN, use FC output &lt;em&gt;v&lt;/em&gt;(say 4096 length vector) to formulate the default hidden state $h_0$ in RNN.
+    &lt;ul&gt;
+      &lt;li&gt;before: $h = \mbox{tanh}(W_{xh}\ast x+W_{hh}\ast h)$&lt;/li&gt;
+      &lt;li&gt;now: $h=\mbox{tanh}(W_{xh}\ast x + W_{hh}\ast h + W_{ih}\ast v)$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;RNN for Image Captioning&lt;br /&gt;
+  Re-sample the previous output $y_{t-1}$ as the next input $x_t$, iterate untill $y_t$ sample takes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;END&amp;gt;&lt;/code&gt; token.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;visual-question-answering-rnns-with-attention&quot;&gt;Visual Question Answering: RNNs with Attention&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec10_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;other-tasks&quot;&gt;Other tasks&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Visual Dialog: Conversations about images&lt;/li&gt;
+  &lt;li&gt;Visual Language Navigation: Go to the living room&lt;br /&gt;
+  Agent encodes instructions in language and uses an RNN to generate a series of movements as the visual input changes after each move.&lt;/li&gt;
+  &lt;li&gt;Visual Question Answering: Dataset Bias&lt;br /&gt;
+  With different types(Image + Question + Answer) of data used, model performances are better.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;long-short-term-memory-lstm&quot;&gt;Long Short Term Memory (LSTM)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Vanilla RNN&lt;br /&gt;
+  \(h_t = \mbox{tanh}(W_{hh}h_{t-1} + W_{xh}x_t) \\
+      = \mbox{tanh}\left(
+          (W_{hh} \ W_{hx}) {\begin{pmatrix} h_{t-1} \\ x_t \end{pmatrix}}
+                  \right) \\
+      = \mbox{tanh}\left(
+          W {\begin{pmatrix} h_{t-1} \\ x_t \end{pmatrix}}
+                  \right)\)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;\(\frac{\partial h_t}{\partial h_{t-1}} = \mbox{tanh}' (W_{hh}h_{t-1} + W_{xh}x_t)W_{hh}\)&lt;br /&gt;
+  $\frac{\partial L}{\partial W} = \sum_{t=1}^T \frac{\partial L_t}{\partial W}$&lt;/p&gt;
+
+\[\begin{align*}
+  \frac{\partial L_T}{\partial W} &amp;amp;= \frac{\partial L_T}{\partial h_T}
+                                      \frac{\partial h_t}{\partial h_{t-1}}\cdots
+                                      \frac{\partial h_1}{\partial W} \\
+                                   &amp;amp;= \frac{\partial L_T}{\partial h_T}(\prod_{t=2}^T \frac{\partial h_t}{\partial h_{t-1}})\frac{\partial h_1}{\partial W} \\
+                                  &amp;amp;= \frac{\partial L_T}{\partial h_T}(\prod_{t=2}^T \mbox{tanh}'(W_{hh}h_{t-1} + W_{xh}x_t))W_{hh}^{T-1} \frac{\partial h_1}{\partial W}
+  \end{align*}\]
+  &lt;/li&gt;
+  &lt;li&gt;Problem&lt;br /&gt;
+  As the output of &lt;em&gt;tanh&lt;/em&gt; function are in range of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[-1,1]&lt;/code&gt; and almost smaller than 1, vanilla RNN has &lt;strong&gt;&lt;em&gt;vanishing gradients&lt;/em&gt;&lt;/strong&gt;. If we assume no non-linearity, the gradient will be \(\frac{\partial L_T}{\partial W} = \frac{\partial L_T}{\partial h_T}W_{hh}^{T-1}\frac{\partial h_1}{\partial W}\). In this case, when the largest singular value is greater than 1, we have exploding gradients, while the value is smaller than 1, we have vanishing gradients.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;H&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;# dimensionality of hidden state
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;# number of time steps
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Whh&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# forward pass of an RNN (ignoring inputs x)
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;xrange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Whh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;hs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+	
+&lt;span class=&quot;c1&quot;&gt;# backward pass of the RNN
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dhs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;dss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;dhs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#start off the chain with random gradient
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;reversed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;xrange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dhs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;# backprop through the nonlinearity
+&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;dhs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Whh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;# backprop into previous hidden state
+&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# &quot;Whh.T&quot; multiplied by &quot;T&quot; times!
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;For exploding gradients: control with gradient clipping.&lt;br /&gt;
+  For vanishing gradients: change the architecture, LSTM introduced.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;LSTM:&lt;br /&gt;
+  \(\begin{pmatrix} i \\ f \\ o \\ g \end{pmatrix} =
+  \begin{pmatrix} \sigma \\ \sigma \\ \sigma \\ \mbox{tanh}\end{pmatrix} W \begin{pmatrix} h_{t-1} \\ x_t \end{pmatrix}\)&lt;br /&gt;
+  \(c_t = f \odot c_{t-1} + i \odot g\), &lt;em&gt;memory cell update&lt;/em&gt;&lt;br /&gt;
+  \(h_t = o \odot \mbox{tanh}(c_t)\), &lt;em&gt;hidden state update&lt;/em&gt;&lt;br /&gt;
+  where &lt;em&gt;W&lt;/em&gt; is a stack of $W_h$ and $W_x$&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec10_4.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;br /&gt;
+i: Input gate, whether to write to cell&lt;br /&gt;
+f: Forget gate, Whether to erase cell&lt;br /&gt;
+o: Output gate, How much to reveal cell&lt;br /&gt;
+g: Gate gate, How much to write to cell&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec10_5.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Backpropagation from $c_t$ to $c_{t-1}$ only elementwise multiplication by &lt;em&gt;f&lt;/em&gt;, no matrix multiply by &lt;em&gt;W&lt;/em&gt;. Notice that the gradient contains the &lt;em&gt;f&lt;/em&gt; gate’s vector of activations; it allows better control of gradients values, using suitable parameter updates of the forget gate. Also notice that are added through the &lt;em&gt;f, i, g,&lt;/em&gt; and &lt;em&gt;o&lt;/em&gt; gates, we can have better balancing of gradient values.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Recall: “PlainNets” vs. ResNets&lt;br /&gt;
+  ResNet is to PlainNet what LSTM is to RNN, kind of.&lt;br /&gt;
+  &lt;em&gt;Additive skip connections&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Do LSTMs solve the vanishing gradient problem?:&lt;br /&gt;
+  The LSTM architecture makes it easier for the RNN to preserve information over many timesteps. e.g. If $f=1$ and $i=0$, then the information of that cell is preserved indefinitely. By contrast, it’s harder for vanilla RNN to learn a recurrent weight matrix $W_h$ that preserves information in hidden state.&lt;br /&gt;
+  LSTM doesn’t guarantee that there is no vanishing/exploding gradient, but it does provide an easier way for the model to learn long-distance dependencies.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;in between: Highway Networks, &lt;em&gt;Srivastava et al, 2015, [arXiv:1505.00387v2]&lt;/em&gt;&lt;br /&gt;
+  A new architecture designed to ease gradient-based training of very deep networks. To regulate the flow of information and enlarge the possibility of studying extremely deep and efficient architectures.&lt;br /&gt;
+  $g = T(x, W_T)$, $y = g \odot H(x, W_H) + (1-g)\odot x$&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;other-rnn-variants&quot;&gt;Other RNN Variants&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Neural Architecture Search(NAS) with Reinforcement Learning, &lt;em&gt;Zoph et Le, 2017&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;RNN to design model; idea that we can represent the model architecture with a variable-length string.&lt;/li&gt;
+      &lt;li&gt;Apply reinforcement learning on a neural network to maximize the accuracy(as a reward) on validation set, find a good architecture.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;GRU; smaller LSTM, &lt;em&gt;“Learning phrase representations using rnn encoder-decoder for statistical machine translation”, Cho et al., 2014&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;“An Empirical Exploration of Recurrent Network Architectures”, Jozefowicz et al., 2015&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;LSTM: A Search Space Odyssey, Greff et al., 2015&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;recurrence-for-vision&quot;&gt;Recurrence for Vision&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;LSTM wer a good default choice until this year&lt;/li&gt;
+  &lt;li&gt;Use variants like GRU if you want faster compute and less parameters&lt;/li&gt;
+  &lt;li&gt;Use transformers (next lecture) as they are dominating NLP models&lt;/li&gt;
+  &lt;li&gt;almost everyday there is a new vision transformer model&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;RNNs allow a lot of flexibility in architecture design&lt;/li&gt;
+  &lt;li&gt;Vanilla RNNs are simple but don’t work very well&lt;/li&gt;
+  &lt;li&gt;Common to use LSTM or GRU: their additive interactions improve gradient flow&lt;/li&gt;
+  &lt;li&gt;Backward flow of gradients in RNN can explode or vanish. Exploding is controlled with gradient clipping. Vanishing is controlled with additive interactions (LSTM)&lt;/li&gt;
+  &lt;li&gt;Better/simpler architectures are a hot topic of current research, as well as new paradigms for reasoning over sequences&lt;/li&gt;
+  &lt;li&gt;Better understanding (both theoretical and empirical) is needed.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        
+        <pubDate>Tue, 04 Jan 2022 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs231n_lec10</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec10</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>cs231n - Lecture 9. CNN Architectures</title>
+        
+          <description>&lt;h2 id=&quot;review&quot;&gt;Review&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;LeCun et al., 1998&lt;/em&gt;&lt;br /&gt;
+  $5\times 5$ Conv filters applied at stride &lt;em&gt;1&lt;/em&gt;&lt;br /&gt;
+  $2\times 2$ Subsampling (Pooling) layers applied at stride &lt;em&gt;2&lt;/em&gt;&lt;br /&gt;
+  i.e. architecture is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[CONV-POOL-CONV-POOL-FC-FC]&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Stride: Downsample output activations&lt;br /&gt;
+  Padding: Preserve input spatial dimensions in output activations&lt;br /&gt;
+  Filter: Each conv filter outputs a “slice” in the activation&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;case-studies&quot;&gt;Case Studies&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec9_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;alexnet-first-cnn-based-winner&quot;&gt;AlexNet: First CNN-based winner&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Architecture: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[CONV1-MAXPOOL1-NORM1-CONV2-MAXPOOL2-NORM2-CONV3-CONV4-CONV5-MaxPOOL3-FC6-FC7-FC8]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Input: $227\times 227\times 3$ images&lt;/li&gt;
+      &lt;li&gt;First layer(CONV1):&lt;br /&gt;
+  &lt;em&gt;96&lt;/em&gt; $11\times 11$ filters applied at stride &lt;em&gt;4&lt;/em&gt;, pad &lt;em&gt;0&lt;/em&gt;&lt;br /&gt;
+  Output volume: $W’ = (W-F+2P)/S + 1 \rightarrow$ $55\times 55\times 96$&lt;br /&gt;
+  Parameters: $(11* 11* 3 +1)* 96 =$ &lt;strong&gt;36K&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;Second layer(POOL1):&lt;br /&gt;
+  $3\times 3\times$ filters applied at stride &lt;em&gt;2&lt;/em&gt;&lt;br /&gt;
+  Output volume: $27\times 27\times 96$&lt;br /&gt;
+  Parameters: 0&lt;br /&gt;
+  $\vdots$&lt;/li&gt;
+      &lt;li&gt;CONV2($27\times 27\times 256$):&lt;br /&gt;
+  &lt;em&gt;256&lt;/em&gt; $5\times 5$ filters applied at stride &lt;em&gt;1&lt;/em&gt;, pad &lt;em&gt;2&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;MAX POOL2($13\times 13\times 256):&lt;br /&gt;
+  $3\times 3\times$ filters applied at stride &lt;em&gt;2&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;CONV3($13\times 13\times 384$):&lt;br /&gt;
+  &lt;em&gt;384&lt;/em&gt; $3\times 3$ filters applied at stride &lt;em&gt;1&lt;/em&gt;, pad &lt;em&gt;1&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;CONV4($13\times 13\times 384$):&lt;br /&gt;
+  &lt;em&gt;384&lt;/em&gt; $3\times 3$ filters applied at stride &lt;em&gt;1&lt;/em&gt;, pad &lt;em&gt;1&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;CONV5($13\times 13\times 256$):&lt;br /&gt;
+  &lt;em&gt;256&lt;/em&gt; $3\times 3$ filters applied at stride &lt;em&gt;1&lt;/em&gt;, pad &lt;em&gt;1&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;MAX POOL3($6\times 6\times 256$):&lt;br /&gt;
+  $3\times 3\times$ filters applied at stride &lt;em&gt;2&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;FC6(4096): &lt;em&gt;4096&lt;/em&gt; neurons&lt;/li&gt;
+      &lt;li&gt;FC7(4096): &lt;em&gt;4096&lt;/em&gt; neurons&lt;/li&gt;
+      &lt;li&gt;FC8(1000): &lt;em&gt;1000&lt;/em&gt; neurons (class scores)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Historical note:
+    &lt;ul&gt;
+      &lt;li&gt;Network spread across &lt;em&gt;2&lt;/em&gt; GPUs, half the neurons (feature maps) on each GPU.&lt;/li&gt;
+      &lt;li&gt;CONV1, CONV2, CONV4, CONV5: Connections only with feature maps on same GPU&lt;/li&gt;
+      &lt;li&gt;CONV3, FC6, FC7, FC8: Connections with all feature maps in preceding layer, communication across GPUs&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Details/Retrospectives:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;Krizhevsky et al. 2012&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;first use of ReLU&lt;/li&gt;
+      &lt;li&gt;used Norm layers (not common anymore)&lt;/li&gt;
+      &lt;li&gt;heavy data augmentation&lt;/li&gt;
+      &lt;li&gt;dropout &lt;em&gt;0.5&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;batch size &lt;em&gt;128&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;SGD Momentum &lt;em&gt;0.9&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Learning rate &lt;em&gt;1e-2&lt;/em&gt;, reduced by &lt;em&gt;10&lt;/em&gt; manually when val accuracy plateaus&lt;/li&gt;
+      &lt;li&gt;L2 weight decay &lt;em&gt;5e-4&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;7 CNN ensemble: &lt;em&gt;18.2%&lt;/em&gt; $\rightarrow$ &lt;em&gt;15.4%&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;zfnet-improved-hyperparameters-over-alexnet&quot;&gt;ZFNet: Improved hyperparameters over AlexNet&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;AlexNet but:
+    &lt;ul&gt;
+      &lt;li&gt;CONV1: change from ($11\times 11$ stride &lt;em&gt;4&lt;/em&gt;) to ($7\times 7$ stride &lt;em&gt;2&lt;/em&gt;)&lt;/li&gt;
+      &lt;li&gt;CONV3,4,5: instead of &lt;em&gt;384&lt;/em&gt;, &lt;em&gt;384&lt;/em&gt;, &lt;em&gt;256&lt;/em&gt; filters use &lt;em&gt;512&lt;/em&gt;, &lt;em&gt;1024&lt;/em&gt;, &lt;em&gt;512&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;ImageNet top 5 error: &lt;em&gt;16.4%&lt;/em&gt; -&amp;gt; &lt;em&gt;11.7%&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;Zeiler and Fergus, 2013&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;vggnet-deeper-networks&quot;&gt;VGGNet: Deeper Networks&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Small filters, Deeper networks
+    &lt;ul&gt;
+      &lt;li&gt;8 layers (AlexNet) $\rightarrow$ 16 - 19 layers (VGG16Net)&lt;/li&gt;
+      &lt;li&gt;Only $3\times 3$ CONV stride &lt;em&gt;1&lt;/em&gt;, pad &lt;em&gt;1&lt;/em&gt; and $2\times 2$ MAX POOL with stride &lt;em&gt;2&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;11.7%&lt;/em&gt; top 5 error(ZFNet) $\rightarrow$ &lt;em&gt;7.3%&lt;/em&gt; top 5 error in ILSVRC’14&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Why use smaller filters?&lt;br /&gt;
+  :Stack of three $3\times 3$ conv (stride &lt;em&gt;1&lt;/em&gt;) layers has same effective receptive field as one $7\times 7$ conv layer, but with deeper, more non-linearities and fewer parameters&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec9_1.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;TOTAL memory: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;24M * 4 bytes ~= 96MB&lt;/code&gt; / image (for a forward pass)&lt;br /&gt;
+  TOTAL params: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;138M&lt;/code&gt; parameters&lt;br /&gt;
+  Most memory is in early CONV, Most params are in late FC&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Details:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;Simonyan and Zisserman, 2014&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;ILSVRC’14 2nd in classification, 1st in localization&lt;/li&gt;
+      &lt;li&gt;Similar training procedure as &lt;em&gt;Krizhevsky 2012&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;No Local Response Normalisation (LRN)&lt;/li&gt;
+      &lt;li&gt;Use VGG16 or VGG19 (VGG19 only slightly better, more memory)&lt;/li&gt;
+      &lt;li&gt;Use ensembles for best results&lt;/li&gt;
+      &lt;li&gt;FC7 features generalize well to other	tasks&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;googlenet&quot;&gt;GoogLeNet&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Inception module&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;design a good local network topology(network within a network) and then stack these modules on top of each other&lt;/li&gt;
+      &lt;li&gt;Apply parallel filter operations on the input from previous layer: Multiple receptive field sizes for convolution(1x1, 3x3, 5x5), Pooling(3x3)&lt;/li&gt;
+      &lt;li&gt;Concatenate all filter outputs together channel-wise&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;“Bottlenect”&lt;/em&gt; layers to reduce computational complexity of inception:
+    &lt;ul&gt;
+      &lt;li&gt;use 1x1 conv to reduce feature channel size; alternatively, interpret it as applying the same FC layer on each input pixel&lt;/li&gt;
+      &lt;li&gt;preserves spatial dimensions, reduces depth&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec9_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Full GoogLeNet Architecture:
+    &lt;ul&gt;
+      &lt;li&gt;Stem Network: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[Conv-POOL-2x CONV-POOL]&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Stack Inception modules: with dimension reduction on top of each other&lt;/li&gt;
+      &lt;li&gt;Classifier output: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[(H*W*c)-Avg POOL-(1*1*c)-FC-Softmax]&lt;/code&gt;&lt;br /&gt;
+  Global average pooling layer before final FC layer, avoids expensive FC layers&lt;/li&gt;
+      &lt;li&gt;Auxiliary classification layers: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[AvgPool-1x1 Conv-FC-FC-Softmax]&lt;/code&gt;&lt;br /&gt;
+  to inject additional gradient at lower layers&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Details:
+    &lt;ul&gt;
+      &lt;li&gt;Deeper networks, with computational efficiency&lt;/li&gt;
+      &lt;li&gt;ILSVRC’14 classification winner (&lt;em&gt;6.7%&lt;/em&gt; top 5 error)&lt;/li&gt;
+      &lt;li&gt;22 layers&lt;/li&gt;
+      &lt;li&gt;Only 5 million parameters(12x less than AlexNet, 27x less than VGG-16)&lt;/li&gt;
+      &lt;li&gt;Efficient “Inception” module&lt;/li&gt;
+      &lt;li&gt;No FC layers&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;resnet&quot;&gt;ResNet&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;From 2015, “Revolution of Depth”; more than 100 layers&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Stacking deeper layers on a “plain” convolutional neural network results in lower both test and training error. The deeper model performs worse, but it’s &lt;strong&gt;not caused by overfitting&lt;/strong&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;Fact: Deep models have more representation power (more parameters) than shallower models.&lt;/li&gt;
+      &lt;li&gt;Hypothesis: the problem is an optimization problem, &lt;strong&gt;deeper models are harder to optimize&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;Solution: copying the learned layers from the shallower model and setting additional layers to identity mapping.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;“Residual block”&lt;/em&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Use network layers to fit a residual mapping instead of directly trying to fit a desired underlying mapping&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec9_3.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Full ResNet Architecture:
+    &lt;ul&gt;
+      &lt;li&gt;Stack residual blocks&lt;/li&gt;
+      &lt;li&gt;Every residual block has two $3\times 3$ conv layers&lt;/li&gt;
+      &lt;li&gt;Periodically, double number of filters and downsample spatially using stride &lt;em&gt;2&lt;/em&gt; (/2 in each dimension). Reduce the activation volume by half.&lt;/li&gt;
+      &lt;li&gt;Additional conv layer at the beginning (7x7 conv in stem)&lt;/li&gt;
+      &lt;li&gt;No FC layers at the end (only FC 1000 to output classes)&lt;/li&gt;
+      &lt;li&gt;(In theory, you can train a ResNet with input image of variable sizes)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For deeper networks(ResNet-50+):
+  use bottleneck layer to improve efficiency (similar to GoogLeNet)&lt;br /&gt;
+  e.g. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[(28x28x256 INPUT)-(1x1 CONV, 64)-(3x3 CONV, 64)-(1x1 CONV, 256)-(28x28x256 OUTPUT)]&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Training ResNet in practice:
+    &lt;ul&gt;
+      &lt;li&gt;Batch Normalization after every CONV layer&lt;/li&gt;
+      &lt;li&gt;Xavier initialization from &lt;em&gt;He et al.&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;SGD + Momentum (&lt;em&gt;0.9&lt;/em&gt;)&lt;/li&gt;
+      &lt;li&gt;Learning rate: &lt;em&gt;0.1&lt;/em&gt;, divided by &lt;em&gt;10&lt;/em&gt; when validation error plateaus&lt;/li&gt;
+      &lt;li&gt;Mini-batch size &lt;em&gt;256&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Weight decay of &lt;em&gt;1e-5&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;No dropout used&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Experimental Results:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;He et al., 2015&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Able to train very deep networks without degrading (152 layers on ImageNet, 1202 on Cifar)&lt;/li&gt;
+      &lt;li&gt;Deeper networks now achieve lower training error as expected&lt;/li&gt;
+      &lt;li&gt;Swept 1st place in all ILSVRC and COCO 2015 competitions&lt;/li&gt;
+      &lt;li&gt;ILSVRC 2015 classification winner (&lt;em&gt;3.6%&lt;/em&gt; top 5 error); better than human performance!&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Details:
+    &lt;ul&gt;
+      &lt;li&gt;Very deep networks using residual connections&lt;/li&gt;
+      &lt;li&gt;152-layer model for ImageNet&lt;/li&gt;
+      &lt;li&gt;ILSVRC’15 classification winner(&lt;em&gt;3.57%&lt;/em&gt; top 5 error)&lt;/li&gt;
+      &lt;li&gt;Swept all classification and detection competitions in ILSVRC’15 and COCO’15&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Mon, 03 Jan 2022 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs231n_lec9</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec9</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>cs231n - Lecture 8. Training Neural Networks II</title>
         
           <description>&lt;h2 id=&quot;optimization&quot;&gt;Optimization&lt;/h2&gt;
