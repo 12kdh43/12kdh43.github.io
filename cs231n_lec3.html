@@ -193,6 +193,7 @@ into the {body} of the default.hbs template -->
                     
                         <span class="date-divider">/</span>
                         
+							
                             
                                <a href='/tag/cs231n/'>CS231N</a>
                             
@@ -281,7 +282,7 @@ Improve optimization by adding curvature</p>
 
 <h3 id="softmax-classifiermultinomial-logistic-regression">Softmax classifier(Multinomial Logistic Regression)</h3>
 <p><img src="/assets/images/cs231n_lec3_1.png" alt="png" width="80%&quot;, height=&quot;80%" /><br />
-where Kullback–Leibler divergence $D_{KL}(P||Q)=\sum_y P(y)\log\frac{P(y)}{Q(y)}$</p>
+The <em>information content</em>(also called the <em>surprisal</em> or <em>self-information</em>) is described as $h(E) = -\log P(E)$. For a discrete random variable <em>X</em>, its <em>entropy</em>(or expected; mean information) $H(X) = -\sum_{i=1}^N p_i \log p_i$. <em>Cross-entropy</em> is an approximaton of <em>q</em> to <em>p</em> is to minimizing <em>KL(p|q)</em>, while the <em>Kullback–Leibler divergence</em> as $D_{KL}(P||Q)=\sum_y P(y)\log\frac{P(y)}{Q(y)} = \sum_y P(y)\log P(y) - \sum_y P(y)\log Q(y)$. Thus, cross entropy loss $L = -\sum_y P(y)\log Q(y)$.</p>
 
 <p>Q1: What is the min/max possible softmax loss $L_i$?<br />
 min <em>0</em> to max $\infty$</p>
@@ -416,7 +417,7 @@ Full sum expensive when <em>N</em> is large. Approximate su using a minibatch of
                                     
                                         
                                         
-                                            <li><a href="/cs231n_lec11">cs231n - Lecture 11. Attention and Transformers</a></li>
+                                            <li><a href="/cs231n_lec12">cs231n - Lecture 12. Generative Models</a></li>
                                         
                                     
                                   
@@ -425,7 +426,7 @@ Full sum expensive when <em>N</em> is large. Approximate su using a minibatch of
                                     
                                         
                                         
-                                            <li><a href="/cs231n_lec10">cs231n - Lecture 10. Recurrent Neural Networks</a></li>
+                                            <li><a href="/cs231n_a1_q5">Assignment 1 - Q5, Image Features</a></li>
                                         
                                     
                                   
@@ -434,7 +435,49 @@ Full sum expensive when <em>N</em> is large. Approximate su using a minibatch of
                                     
                                         
                                         
-                                            <li><a href="/cs231n_lec9">cs231n - Lecture 9. CNN Architectures</a></li>
+                                            <li><a href="/cs231n_a1_q4">Assignment 1 - Q4, Two-Layer Neural Network</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
                                         
                                     
                                   
@@ -522,7 +565,7 @@ Full sum expensive when <em>N</em> is large. Approximate su using a minibatch of
                         <footer class="read-next-card-footer">
                             <a href="/tag/cs231n/">
                                 
-                                    See all 9 posts  →
+                                    See all 15 posts  →
                                 
                             </a>
                         </footer>
