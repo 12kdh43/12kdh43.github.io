@@ -414,12 +414,122 @@ into the {body} of the default.hbs template -->
 </ul>
 
 <h2 id="generative-adversarial-networksgans">Generative Adversarial Networks(GANs)</h2>
-<p>idea: Use a discriminator network to tell whether the generate image is within data distribution (“real”) or not<br />
-<img src="/assets/images/cs231n_lec12_9.png" alt="png" width="40%&quot;, height=&quot;40%" /></p>
+<p><img src="/assets/images/cs231n_lec12_9.png" alt="png" width="40%&quot;, height=&quot;40%" /><br />
+idea: Use a discriminator network to tell whether the generate image is within data distribution (“real”) or not</p>
 
-<!-- 
-### Training GANs: Two-player game  
--->
+<h3 id="training-gans-two-player-game">Training GANs: Two-player game</h3>
+<p><img src="/assets/images/cs231n_lec12_10.png" alt="png" width="60%&quot;, height=&quot;60%" /><br />
+Discriminator network: try to distinguish between real and fake images<br />
+Generator network: try to fool discriminator by generating real-looking images</p>
+
+<ul>
+  <li>Train jointly in <strong>minimax game</strong>;<br />
+  Minimax objective function:<br />
+  \(\mbox{min}_{\theta_g} \mbox{max}_{\theta_d}\left[\mathbb{E}_{x\sim {p_{data}}}\log D_{\theta_d}(x) + \mathbb{E}_{z\sim p(z)}\log(1-D_{\theta_d}(G_{\theta_g}(z))) \right]\)<br />
+  where $\theta_g$ is an objective for the generator objective and $\theta_d$ for the discriminator
+    <ul>
+      <li>$D_{\theta_d}(x)$: Discriminator outputs likelihood in <em>(0,1)</em> of real image</li>
+      <li>$D_{\theta_d}(G_{\theta_g}(z))$: Discriminator output for generated fake data <em>G(z)</em></li>
+    </ul>
+  </li>
+  <li>Discriminator($\theta_d$) wants to <strong>maximize objective</strong> such that <em>D(x)</em> is close to <em>1</em>(real) and <em>D(G(z))</em> is close to <em>0</em>(fake)</li>
+  <li>Generator($\theta_g$) wants to <em>minimize objective</em> such that <em>D(G(z))</em> is close to <em>1</em>(to fool discriminator)</li>
+</ul>
+
+<p>We alternate the minimax objection function with:</p>
+<ol>
+  <li><strong>Gradient ascent</strong> on discriminator<br />
+ \(\mbox{max}_{\theta_d}\left[\mathbb{E}_{x\sim p_{data}}\log D_{\theta_d}(x) + \mathbb{E}_{z\sim p(z)}\log(1-D_{\theta_d}(G_{\theta_g}(z))) \right]\)</li>
+  <li>1) <strong>Gradient descent</strong> on generator<br />
+ \(\mbox{min}_{\theta_g}\mathbb{E}_{z\sim p(z)}\log(1-D_{\theta_d}(G_{\theta_g}(z)))\)
+    <ul>
+      <li>In practice, optimizing this generator objective does not work well;<br />
+  When sample is likely fake, want to learn from it to improve generator (move to the right on <em>X</em> axis), but gradient near <em>0</em> in <em>X</em> axis is relatively flat; Gradient signal is dominated by region where sample is already good(near <em>1</em>).<br />
+  <img src="/assets/images/cs231n_lec12_11.png" alt="png" width="30%&quot;, height=&quot;30%" /></li>
+    </ul>
+
+    <p>2) <strong>Instead: Gradient ascent</strong> on generator, different objective<br />
+ \(\mbox{max}_{\theta_d}\mathbb{E}_{z\sim p(z)}\log(D_{\theta_d}(G_{\theta_g}(z)))\)</p>
+    <ul>
+      <li>Rather than minimizing likelihood of discriminator being correct, maximize likelihood of discriminator being wrong. Same objective of fooling discriminator, but now higher gradient signal for bad samples.<br />
+  <img src="/assets/images/cs231n_lec12_12.png" alt="png" width="35%&quot;, height=&quot;35%" /></li>
+    </ul>
+  </li>
+</ol>
+
+<ul>
+  <li>
+    <p>GAN training Algorithm<br />
+  <img src="/assets/images/cs231n_lec12_13.png" alt="png" width="70%&quot;, height=&quot;70%" /></p>
+  </li>
+  <li>
+    <p>After training, use generator network to generate new images</p>
+  </li>
+</ul>
+
+<h3 id="gan-convolutional-architectures">GAN: Convolutional Architectures</h3>
+<ul>
+  <li>
+    <p>Generator is an upsampling network with fractionally-strided convolutions<br />
+  Discriminator is a convolutional network</p>
+  </li>
+  <li>
+    <p>Architecture guidelines for stable Deep Conv GANs</p>
+    <ul>
+      <li>Replace any pooling layers with strided convolutions(discriminator) and fractional-strided convolutions(generator).</li>
+      <li>Use batchnorm in both network.</li>
+      <li>Remove fully connected hidden layers for deeper architecture.</li>
+      <li>Use ReLU activation in generator for all layers except for the output, which uses Tanh.</li>
+      <li>Use LeakyReLU activation in the discriminator for all layers.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="gan-interpretable-vector-math">GAN: Interpretable Vector Math</h3>
+<p><img src="/assets/images/cs231n_lec12_14.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
+<ul>
+  <li>works similar to a language model</li>
+</ul>
+
+<h3 id="2017-explosion-of-gans">2017: Explosion of GANs</h3>
+<ul>
+  <li>“The GAN Zoo”, <code class="language-plaintext highlighter-rouge">https://github.com/hindupuravinash/the-gan-zoo</code></li>
+  <li>check <code class="language-plaintext highlighter-rouge">https://github.com/soumith/ganhacks</code> for tips and tricks for training GANs</li>
+</ul>
+
+<h3 id="scene-graphs-to-gans">Scene graphs to GANs</h3>
+<p><img src="/assets/images/cs231n_lec12_15.png" alt="png" width="30%&quot;, height=&quot;30%" /></p>
+<ul>
+  <li>Specifying exactly what kind of image you want to generate. The explicit structure in scene graphs provides better image generation for complex scenes.</li>
+</ul>
+
+<h3 id="summary-gans">Summary: GANs</h3>
+<ul>
+  <li>Don’t work with an explicit density function</li>
+  <li>
+    <p>Take game-theoretic approach: learn to generate from training distribution through 2-player game</p>
+  </li>
+  <li>Pros:
+    <ul>
+      <li>Beautiful, state-of-the-art samples</li>
+    </ul>
+  </li>
+  <li>Cons:
+    <ul>
+      <li>Trickier / more unstable to train</li>
+      <li>Can’t solve inference queries such as $p(x)$, $p(z\vert x)$</li>
+    </ul>
+  </li>
+  <li>Active areas of research:
+    <ul>
+      <li>Better loss functions, more stable training (Wasserstein GAN, LSGAN, many others)</li>
+      <li>Conditional GANs, GANs for all kinds of applications</li>
+    </ul>
+  </li>
+  <li>Useful Resources on Generative Models<br />
+  CS236: Deep Generative Models (Stanford)<br />
+  CS 294-158 Deep Unsupervised Learning (Berkeley)</li>
+</ul>
 
                 </div>
             </section>
