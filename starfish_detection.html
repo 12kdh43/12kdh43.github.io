@@ -8,39 +8,13 @@
 	
 	<!-- On Post front-matter YAML, set "use_math: true" to use LaTex -->
 	
-	  
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    TeX: {
-        equationNumbers: {
-        autoNumber: "AMS"
-        }
-    },
-    tex2jax: {
-    inlineMath: [ ['$', '$'], ["\\(","\\)"]  ],
-    displayMath: [ ['$$', '$$'], ["\\[","\\]"]  ],
-    processEscapes: true,
-    }
-});
-MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
-        alert("Math Processing Error: "+message[1]);
-    });
-MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
-        alert("Math Processing Error: "+message[1]);
-    });
-</script>
-
-<script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-	
 
     <!-- Base Meta -->
     <!-- dynamically fixing the title for tag/author pages -->
 
 
 
-    <title>Unsupervised Representation Learning by Predicting Image Rotations</title>
+    <title>Starfish detection w/ TF Object Detection API</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -69,30 +43,48 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="" />
     <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
-    <link rel="canonical" href="http://0.0.0.0:4000/Self-Supervised_Rotations" />
+    <link rel="canonical" href="http://0.0.0.0:4000/starfish_detection" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Unsupervised Representation Learning by Predicting Image Rotations" />
-    <meta property="og:description" content="Unsupervised Representation Learning by Predicting Image Rotations Gidaris et al. 2018 https://github.com/gidariss/FeatureLearningRotNet ConvNet: (+) Unparalleled capacity to learn high level semantic image features (-) Require massive amounts of manually labeled data, expensive and impractical to scale $\rightarrow$ Unsupervised Learning Unsupervised semantic feature learning: Learn image features by training ConvNets to" />
-    <meta property="og:url" content="http://0.0.0.0:4000/Self-Supervised_Rotations" />
+    <meta property="og:title" content="Starfish detection w/ TF Object Detection API" />
+    <meta property="og:description" content="TensorFlow - Help Protect the Great Barrier Reef
+
+  Worked in Feb. 2022. to study object detection model.
+  With a mere adjustment, got 0.271 in Private Score.
+
+
+
+
+
+" />
+    <meta property="og:url" content="http://0.0.0.0:4000/starfish_detection" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta property="article:author" content="https://www.facebook.com/" />
-    <meta property="article:published_time" content="2022-01-25T00:00:00+09:00" />
-    <meta property="article:modified_time" content="2022-01-25T00:00:00+09:00" />
-    <meta property="article:tag" content="papers" />
+    <meta property="article:published_time" content="2022-02-15T00:00:00+09:00" />
+    <meta property="article:modified_time" content="2022-02-15T00:00:00+09:00" />
+    <meta property="article:tag" content="projects" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Unsupervised Representation Learning by Predicting Image Rotations" />
-    <meta name="twitter:description" content="Unsupervised Representation Learning by Predicting Image Rotations Gidaris et al. 2018 https://github.com/gidariss/FeatureLearningRotNet ConvNet: (+) Unparalleled capacity to learn high level semantic image features (-) Require massive amounts of manually labeled data, expensive and impractical to scale $\rightarrow$ Unsupervised Learning Unsupervised semantic feature learning: Learn image features by training ConvNets to" />
+    <meta name="twitter:title" content="Starfish detection w/ TF Object Detection API" />
+    <meta name="twitter:description" content="TensorFlow - Help Protect the Great Barrier Reef
+
+  Worked in Feb. 2022. to study object detection model.
+  With a mere adjustment, got 0.271 in Private Score.
+
+
+
+
+
+" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Darron's Devlog" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="papers" />
+    <meta name="twitter:data2" content="projects" />
     <meta name="twitter:site" content="@" />
     <meta name="twitter:creator" content="@" />
     <meta property="og:image:width" content="1400" />
@@ -107,7 +99,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "name": "Darron's Devlog",
         "logo": "http://0.0.0.0:4000/"
     },
-    "url": "http://0.0.0.0:4000/Self-Supervised_Rotations",
+    "url": "http://0.0.0.0:4000/starfish_detection",
     "image": {
         "@type": "ImageObject",
         "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
@@ -116,9 +108,18 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://0.0.0.0:4000/Self-Supervised_Rotations"
+        "@id": "http://0.0.0.0:4000/starfish_detection"
     },
-    "description": "Unsupervised Representation Learning by Predicting Image Rotations Gidaris et al. 2018 https://github.com/gidariss/FeatureLearningRotNet ConvNet: (+) Unparalleled capacity to learn high level semantic image features (-) Require massive amounts of manually labeled data, expensive and impractical to scale $\rightarrow$ Unsupervised Learning Unsupervised semantic feature learning: Learn image features by training ConvNets to"
+    "description": "TensorFlow - Help Protect the Great Barrier Reef
+
+  Worked in Feb. 2022. to study object detection model.
+  With a mere adjustment, got 0.271 in Private Score.
+
+
+
+
+
+"
 }
     </script>
 
@@ -131,7 +132,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="Unsupervised Representation Learning by Predicting Image Rotations" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Starfish detection w/ TF Object Detection API" href="/feed.xml" />
 
 
 </head>
@@ -185,101 +186,37 @@ into the {body} of the default.hbs template -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
-        <article class="post-full  tag-papers  no-image">
+        <article class="post-full  tag-projects  no-image">
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="25 January 2022">25 January 2022</time>
+                    <time class="post-full-meta-date" datetime="15 February 2022">15 February 2022</time>
                     
                         <span class="date-divider">/</span>
                         
 							
                             
-                               <a href='/tag/papers/'>PAPERS</a>
+                               <a href='/tag/projects/'>PROJECTS</a>
                             
                         
                     
                 </section>
-                <h1 class="post-full-title">Unsupervised Representation Learning by Predicting Image Rotations</h1>
+                <h1 class="post-full-title">Starfish detection w/ TF Object Detection API</h1>
             </header>
 	<!--
             
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h2 id="unsupervised-representation-learning-by-predicting-image-rotations">Unsupervised Representation Learning by Predicting Image Rotations</h2>
-<p><em>Gidaris et al. 2018</em><br />
-<code class="language-plaintext highlighter-rouge">https://github.com/gidariss/FeatureLearningRotNet</code></p>
-
+                    <h2 id="tensorflow---help-protect-the-great-barrier-reef">TensorFlow - Help Protect the Great Barrier Reef</h2>
 <ul>
-  <li>ConvNet:<br />
-  (+) Unparalleled capacity to learn high level semantic image features<br />
-  (-) Require massive amounts of manually labeled data, expensive and impractical to scale<br />
-  $\rightarrow$ <em>Unsupervised Learning</em></li>
-  <li>Unsupervised semantic feature learning:<br />
-  Learn image features by training ConvNets to recognize the 2d rotated images as input. With apparently simple task, provides a very powerful supervisory signal for semantic feature learning(Conv). Evaluated in various unsupervised feature learning benchmarks, exceeds SotA performance.</li>
+  <li>Worked in Feb. 2022. to study object detection model.</li>
+  <li>With a mere adjustment, got 0.271 in Private Score.</li>
 </ul>
 
-<h3 id="featurelearningrotnet">FeatureLearningRotNet</h3>
-<ul>
-  <li>How To:<br />
-  First define a small set of discrete geometric transformations, then each of those transformations are applied to each image on the dataset and produced transformed images are fed to ConvNet model that is trained to recognize the transformation of each image.
-    <ul>
-      <li>Set of geometric transformations define the classification pretext task that the ConvNet has to learn; to achieve unsupervised semantic feature learning, it is important to properly choose those geometric transformations.</li>
-    </ul>
-  </li>
-  <li>
-    <p>Purpose: to define the geometric transformations as rotations of 4 different degrees, ConvNet trained on the 4-way image classification task of recognizing one of the four Maximizing prob. $F^y(x^{y^{*}})$, probability of transformation <em>y</em> predicted by <em>F</em>, when given X is transformed by the transformation $y^{*}$.</p>
-  </li>
-  <li>With idea: In order a ConvNet model to be able recognize the rotation transformations, it will require to understand the concept of the objects depicted in the image	such as their location, type, and pose.</li>
-</ul>
+<iframe src="https://www.kaggle.com/embed/kwondalhyeon/starfish-detection-w-tf-object-detection-api?kernelSessionId=87885389" height="1200" style="margin: 0 auto; width: 100%; max-width: 100%;" frameborder="0" scrolling="auto" title="Starfish detection w/ TF Object Detection API"></iframe>
 
-<h3 id="overview">Overview</h3>
-<ol>
-  <li>define a set of <em>K</em> discrete geometric transformations \(G = \{g(\cdot\vert y)\}_{y=1}^K\), where $g(.\vert y)$ applies to input X, transformed image $X^y = g(X\vert y)$</li>
-  <li>ConvNet model F(.) gets as input an image $X^{y^{\ast}}$, to recognize unknown $y^{\ast}$ yields as output a probability distribution over all possible transformations	\(F(X^{y^{\ast}}\vert\theta) = \{ F^y(X^{y^{\ast}}\vert\theta) \}_{y=1}^K\), output <em>F</em> returns probs for all classes $y$.</li>
-  <li>Therefore, <em>N</em> training images \(D = \{ X_i \}_{i=0}^N\), the self-supervised training objective that ConvNet must learn to solve is:<br />
- \(\mbox{min}_{\theta}\frac{1}{N}\sum_{i=1}^N \mbox{loss}(X_i,\theta)\),<br />
- where the loss function is defined as:<br />
- \(\mbox{loss}(X_i,\theta) = -\frac{1}{K}\sum_{y=1}^K \log(F^y(g(X_i|y)|\theta))\)<br />
- (negative sum of log probs <em>F</em> for all classes <em>y</em>)</li>
-</ol>
-
-<ul>
-  <li>2d image rotations:<br />
-  $Rot(X, \phi)$, operator that rotates image X by $\phi$ degrees<br />
-  In this case 0, 90, 180, 270; K=4 for G, where $g(X|y)=Rot(X,(y-1)90)$</li>
-</ul>
-
-<h3 id="forcing-the-learning-of-semantic-features">Forcing the learning of semantic features</h3>
-<p>Fact that it is essentially impossible for a ConvNet model to effectively perform the above rotation recognition task, unless it has first learnt to recognize and detect classes of objects as well as their <strong>semantic parts</strong> in images.<br />
-$\rightarrow$ <strong>ATTENTION MAPS</strong><br />
-<img src="/assets/images/papers_self-supervised_rotations_0.png" alt="png" width="60%&quot;, height=&quot;60%" /></p>
-<ul>
-  <li>By comparing the attention maps from two models trained on supervised and unsupervised way, we observe that both models seem to focus on roughly <strong>the same image regions</strong>.</li>
-</ul>
-
-<p><img src="/assets/images/papers_self-supervised_rotations_1.png" alt="png" width="60%&quot;, height=&quot;60%" /></p>
-<ul>
-  <li>
-    <p>Also, trained on the proposed rotation recognition task, <strong>visualized layer filters</strong> learnt appear to have a big variety of edge filters on multiple orientations and multiple frequencies, then the filters learnt by the supervised task.</p>
-  </li>
-  <li>
-    <p>$*$ Activation-based Attention Maps from <em>“Paying More Attention to Attention”, Zagoruyko et al., 2017</em> - <a href="https://arxiv.org/abs/1612.03928">LINK</a><br />
-  Activation tensor of a conv. layer: $A\in R^{C\times H\times W}$ consists of <em>C</em> feautre planes with spatial dimensions <em>H</em>x<em>W</em><br />
-  Activation-based mapping function <em>F</em> w.r.t that layer: $\mathcal{F}: R^{C\times H\times W} \rightarrow R^{H\times W}$<br />
-  With implicit assumption: Absolute value of a hidden neuron activation(that results when the network is evaluated on given input) can be used as an indication about the importance of that neuron w.r.t. the specific input.<br />
-  By considering, therefore, the absolute values of the elements of tensor A,	we construct a spatial attention map by computing statistics of these values	across the channel dimension(<em>C</em>)</p>
-    <ul>
-      <li>sum of abs: $F_{sum}(A)=\sum_{i=1}^C\vert A_i\vert$</li>
-      <li>sum of abs, raised to the power of p(&gt;1): $F_{sum}^p(A) = \sum_{i=1}^C\vert A_i\vert^p$</li>
-      <li>max of abs, raised to the pwoer of p(&gt;1): $F_{max}^p(A) = \mbox{max}_{i=1,C}\vert A_i\vert^p$</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="transfer-learning">Transfer Learning</h3>
-<p>With a model trained on proposed rotation recognition task with unlabeled data, freeze its early conv. layers and attach the layers from a supervised model, evaluate on a supervised task with a subset of labeled data.</p>
+<!-- scrolling="auto" -->
 
                 </div>
             </section>
@@ -329,9 +266,9 @@ $\rightarrow$ <strong>ATTENTION MAPS</strong><br />
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function () {
-                            var this_page_url = 'http://0.0.0.0:4000/Self-Supervised_Rotations';
-                            var this_page_identifier = '/Self-Supervised_Rotations';
-                            var this_page_title = 'Unsupervised Representation Learning by Predicting Image Rotations';
+                            var this_page_url = 'http://0.0.0.0:4000/starfish_detection';
+                            var this_page_identifier = '/starfish_detection';
+                            var this_page_title = 'Starfish detection w/ TF Object Detection API';
                         };
                         (function() {
                             var d = document, s = d.createElement('script');
@@ -358,6 +295,137 @@ $\rightarrow$ <strong>ATTENTION MAPS</strong><br />
                 
                 
                 
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/built/images/blog-cover1.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; Darron's Devlog &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/projects/">Projects</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/fashion_GNN">GNN-based Fashion Coordinator</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/stock_portfolio">Stock Market Portfolio Modeling with R</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/kpop_fandom">K-POP Fandom Data Analysis with networkX</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/projects/">
+                                
+                                    See all 7 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
             
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
@@ -368,21 +436,21 @@ $\rightarrow$ <strong>ATTENTION MAPS</strong><br />
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs231n_lec13">
+            <a class="post-card-content-link" href="/Rotation">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Cs231n</span>
+                                <span class="post-card-tags">Papers</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">cs231n - Lecture 13. Self-Supervised Learning</h2>
+                    <h2 class="post-card-title">Unsupervised Representation Learning by Predicting Image Rotations</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>Self-Supervised Learning Generative vs. Self-supervised Learning Both aim to learn from data without manual label annotation Generative learning aims to model data distribution $p_{data}(x)$, e.g., generating realistic images. Self-supervised learning methods solve “pretext”</p>
+                        <p>Unsupervised Representation Learning by Predicting Image Rotations Gidaris et al. 2018 https://github.com/gidariss/FeatureLearningRotNet ConvNet: (+) Unparalleled capacity to learn high level semantic image features (-) Require massive amounts of manually labeled data, expensive and</p>
                     
                 </section>
             </a>
@@ -409,18 +477,18 @@ $\rightarrow$ <strong>ATTENTION MAPS</strong><br />
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">Unsupervised Representation Learning by Predicting Image Rotations</div>
+    <div class="floating-header-title">Starfish detection w/ TF Object Detection API</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Unsupervised+Representation+Learning+by+Predicting+Image+Rotations&amp;url=https://12kdh43.github.io/Self-Supervised_Rotations"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Starfish+detection+w%2F+TF+Object+Detection+API&amp;url=https://12kdh43.github.io/starfish_detection"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/Self-Supervised_Rotations"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/starfish_detection"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 

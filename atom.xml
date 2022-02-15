@@ -8,6 +8,28 @@
     
       
       <item>
+        <title>Starfish detection w/ TF Object Detection API</title>
+        
+          <description>&lt;h2 id=&quot;tensorflow---help-protect-the-great-barrier-reef&quot;&gt;TensorFlow - Help Protect the Great Barrier Reef&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Worked in Feb. 2022. to study object detection model.&lt;/li&gt;
+  &lt;li&gt;With a mere adjustment, got 0.271 in Private Score.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;iframe src=&quot;https://www.kaggle.com/embed/kwondalhyeon/starfish-detection-w-tf-object-detection-api?kernelSessionId=87885389&quot; height=&quot;1200&quot; style=&quot;margin: 0 auto; width: 100%; max-width: 100%;&quot; frameborder=&quot;0&quot; scrolling=&quot;auto&quot; title=&quot;Starfish detection w/ TF Object Detection API&quot;&gt;&lt;/iframe&gt;
+
+&lt;!-- scrolling=&quot;auto&quot; --&gt;
+</description>
+        
+        <pubDate>Tue, 15 Feb 2022 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/starfish_detection</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/starfish_detection</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Unsupervised Representation Learning by Predicting Image Rotations</title>
         
           <description>&lt;h2 id=&quot;unsupervised-representation-learning-by-predicting-image-rotations&quot;&gt;Unsupervised Representation Learning by Predicting Image Rotations&lt;/h2&gt;
@@ -57,12 +79,12 @@
 &lt;h3 id=&quot;forcing-the-learning-of-semantic-features&quot;&gt;Forcing the learning of semantic features&lt;/h3&gt;
 &lt;p&gt;Fact that it is essentially impossible for a ConvNet model to effectively perform the above rotation recognition task, unless it has first learnt to recognize and detect classes of objects as well as their &lt;strong&gt;semantic parts&lt;/strong&gt; in images.&lt;br /&gt;
 $\rightarrow$ &lt;strong&gt;ATTENTION MAPS&lt;/strong&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/images/papers_self-supervised_rotations_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/assets/images/papers_rotation_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;By comparing the attention maps from two models trained on supervised and unsupervised way, we observe that both models seem to focus on roughly &lt;strong&gt;the same image regions&lt;/strong&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/papers_self-supervised_rotations_1.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/papers_rotation_1.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;Also, trained on the proposed rotation recognition task, &lt;strong&gt;visualized layer filters&lt;/strong&gt; learnt appear to have a big variety of edge filters on multiple orientations and multiple frequencies, then the filters learnt by the supervised task.&lt;/p&gt;
@@ -87,8 +109,8 @@ $\rightarrow$ &lt;strong&gt;ATTENTION MAPS&lt;/strong&gt;&lt;br /&gt;
         
         <pubDate>Tue, 25 Jan 2022 00:00:00 +0900</pubDate>
         <link>
-        http://0.0.0.0:4000/Self-Supervised_Rotations</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/Self-Supervised_Rotations</guid>
+        http://0.0.0.0:4000/Rotation</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/Rotation</guid>
       </item>
       
     
@@ -137,7 +159,7 @@ $\rightarrow$ &lt;strong&gt;ATTENTION MAPS&lt;/strong&gt;&lt;br /&gt;
 &lt;h3 id=&quot;pretext-tasks-from-image-transformations&quot;&gt;Pretext tasks from image transformations&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;Predict Rotations&lt;br /&gt;
-  &lt;em&gt;Gidaris et al., 2018&lt;/em&gt; - &lt;a href=&quot;/Self-Supervised_Rotations&quot;&gt;(Paper Review)&lt;/a&gt; 
+  &lt;em&gt;Gidaris et al., 2018&lt;/em&gt; - &lt;a href=&quot;/Rotation&quot;&gt;(Paper Review)&lt;/a&gt; 
   &lt;img src=&quot;/assets/images/cs231n_lec13_17.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;Predict Relative Patch Locations&lt;br /&gt;
   &lt;em&gt;Doersch et al., 2015&lt;/em&gt;&lt;br /&gt;
