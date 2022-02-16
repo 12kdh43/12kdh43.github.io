@@ -11,14 +11,21 @@
         <title>Starfish detection w/ TF Object Detection API</title>
         
           <description>&lt;h2 id=&quot;tensorflow---help-protect-the-great-barrier-reef&quot;&gt;TensorFlow - Help Protect the Great Barrier Reef&lt;/h2&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;Worked in Feb. 2022. to study object detection model.&lt;/li&gt;
-  &lt;li&gt;With a mere adjustment, got 0.271 in Private Score.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Worked in Feb. 2022. to study object detection model&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Score(IoU=0.50:0.95):&lt;br /&gt;
+  &lt;em&gt;mAP@100: 0.364686 / AR@100: 0.491768 / Expected F2: 0.459727&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Direct link: &lt;a href=&quot;https://www.kaggle.com/kwondalhyeon/starfish-detection-w-tf-object-detection-api?scriptVersionId=87885389&quot;&gt;kaggle notebook&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;iframe src=&quot;https://www.kaggle.com/embed/kwondalhyeon/starfish-detection-w-tf-object-detection-api?kernelSessionId=87885389&quot; height=&quot;1200&quot; style=&quot;margin: 0 auto; width: 100%; max-width: 100%;&quot; frameborder=&quot;0&quot; scrolling=&quot;auto&quot; title=&quot;Starfish detection w/ TF Object Detection API&quot;&gt;&lt;/iframe&gt;
-
-&lt;!-- scrolling=&quot;auto&quot; --&gt;
 </description>
         
         <pubDate>Tue, 15 Feb 2022 00:00:00 +0900</pubDate>
