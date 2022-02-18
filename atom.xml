@@ -17,6 +17,10 @@
     &lt;p&gt;Worked in Feb. 2022. to study object detection model&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
+    &lt;p&gt;Task:&lt;br /&gt;
+  Underwater + Small object detection&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
     &lt;p&gt;Score(IoU=0.50:0.95):&lt;br /&gt;
   &lt;em&gt;mAP@100: 0.364686 / AR@100: 0.491768 / Expected F2: 0.459727&lt;/em&gt;&lt;/p&gt;
   &lt;/li&gt;
@@ -32,6 +36,170 @@
         <link>
         http://0.0.0.0:4000/starfish_detection</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/starfish_detection</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>cs231n - Lecture 14. Visualizing and Understanding</title>
+        
+          <description>&lt;h2 id=&quot;whats-going-on-inside-convnets&quot;&gt;What’s going on inside ConvNets?&lt;/h2&gt;
+
+&lt;h3 id=&quot;visualizing-what-models-have-learned&quot;&gt;Visualizing what models have learned&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;First layer: Visualize Filters&lt;br /&gt;
+  At the first layer, we can visualize the raw weights and see gabor-like features. While the higher layers are about the weights to the activations from the layer before, it is not very interpretable.&lt;/li&gt;
+  &lt;li&gt;Last layer: Visualize Representations(feature vector)
+    &lt;ul&gt;
+      &lt;li&gt;Nearest neighbors in feature space&lt;/li&gt;
+      &lt;li&gt;Dimensionality reduction: clustering with similarity; using simple algorithm(PCA) or more complex one(t-SNE)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Visualizing Activations:&lt;br /&gt;
+  &lt;em&gt;Yosinski et al, “Understanding Neural Networks Through Deep Visualization”, ICML DL Workshop 2014&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;understanding-input-pixels&quot;&gt;Understanding input pixels&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Maximally Activating Patches&lt;br /&gt;
+  Run many images, record values of chosen channel(layer or neuron) and visualize image patches that correspond to maximal activations.&lt;/li&gt;
+  &lt;li&gt;Saliency via Occlusion: &lt;em&gt;Zeiler and Fergus, “Visualizing and Understanding Convolutional Networks”, ECCV 2014&lt;/em&gt;.&lt;br /&gt;
+  Mask part of the image before feeding to CNN, slide the occluder and check how much predicted probabilities change. Found that when there are multiple objects, the classification performance improved as the false class object masked.&lt;/li&gt;
+  &lt;li&gt;Which pixels matter: Saliency via Backprop
+    &lt;ul&gt;
+      &lt;li&gt;Visualize the data gradient
+        &lt;ol&gt;
+          &lt;li&gt;foward an image&lt;/li&gt;
+          &lt;li&gt;set &lt;em&gt;activations&lt;/em&gt; in layer of interest to all zero, except for a 1.0 for a neuron of interest&lt;/li&gt;
+          &lt;li&gt;backprop to image input&lt;/li&gt;
+          &lt;li&gt;squish the channels of gradients to get 1-dimensional activation map(or we can run segmentation using grabcut on this heatmap).&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Can also find biases; to see what false classifier actually see&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Intermediate Features via (guided) backprop
+    &lt;ul&gt;
+      &lt;li&gt;Deconvolution-based approach:
+        &lt;ol&gt;
+          &lt;li&gt;Feed image into net&lt;/li&gt;
+          &lt;li&gt;Pick a layer, set the gradient there to be all zero except for one 1 for some neuron of interest&lt;/li&gt;
+          &lt;li&gt;Backprop to image(use guided backprop to pass the positive influence; activation with positive values, using modified relu or deconvnet)&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Visualizing CNN features: Gradient Ascent
+  (Guided) backprop: Find the part of an image that a neuron responds to.&lt;br /&gt;
+  Gradient ascent: Generate a synthetic image that maximally activates a neuron.&lt;br /&gt;
+  \(I^{\ast} = \mbox{argmax}_I f(I) + R(I)\); (neuron value + regularizer)
+    &lt;ul&gt;
+      &lt;li&gt;Optimization-based approach: freeze/fix the weights and run “image update” to find images that maximize the score of chosen class.&lt;br /&gt;
+  &lt;em&gt;Karen Simonyan, Andrea Vedaldi, Andrew Zisserman, “Deep Inside Convolutional Networks: Visualizing Image Classification Models and Saliency Maps”, Workshop at ICLR, 2014&lt;/em&gt;.&lt;/li&gt;
+      &lt;li&gt;Find images that maximize some class score: \(\mbox{argmax}_I S_c(I) - \lambda {\lVert I \rVert}^2_2\)
+        &lt;ol&gt;
+          &lt;li&gt;initialize image to zeros&lt;/li&gt;
+          &lt;li&gt;forward image to compute current scores&lt;/li&gt;
+          &lt;li&gt;set the &lt;em&gt;gradient&lt;/em&gt; of the scores vector to be &lt;em&gt;I&lt;/em&gt;, then backprop to image&lt;/li&gt;
+          &lt;li&gt;make a small update to the image&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Instead of using L2 norm, we can use better regularizer(Gaussian blur image, Clip pixels with small values/gradients to 0, …)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Optimize in FC6 latent space instead of pixel space:&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec14_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec14_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;adversarial-perturbations&quot;&gt;Adversarial perturbations&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Fooling Images / Adversarial Examples
+    &lt;ol&gt;
+      &lt;li&gt;Start from an arbitrary image&lt;/li&gt;
+      &lt;li&gt;Pick an arbitrary class&lt;/li&gt;
+      &lt;li&gt;Modify the image to maximize the class&lt;/li&gt;
+      &lt;li&gt;Repeat until network is fooled&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Ian Goodfellow, “Explaining and Harnessing Adversarial Examples”, 2014&lt;/em&gt;&lt;br /&gt;
+  Classifier is vulnerable to adversarical perturbation because of its linear nature. Check &lt;a href=&quot;https://www.youtube.com/watch?v=CIfsB_EYsVI&quot;&gt;Ian Goodfellow’s lecture&lt;/a&gt; from 2017&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Moosavi-Dezfooli, Seyed-Mohsen, et al. “Universal adversarial perturbations”, IEEE, 2017.&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;style-transfer&quot;&gt;Style Transfer&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;DeepDream: Amplify existing features&lt;br /&gt;
+  Rather than synthesizing an image to maximize a specific neuron, instead try to &lt;strong&gt;amplify&lt;/strong&gt; the neuron activations at some layer in the network.&lt;/li&gt;
+  &lt;li&gt;Choose an image and a layer in a CNN; repeat:
+    &lt;ol&gt;
+      &lt;li&gt;Forward: compute activations at chosen layer&lt;/li&gt;
+      &lt;li&gt;Set gradient of chosen layer &lt;em&gt;equal to its activation&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Backward: Compute gradient on image&lt;/li&gt;
+      &lt;li&gt;Update image&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec14_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Feature Inversion&lt;br /&gt;
+  &lt;em&gt;Mahendran and Vedaldi, “Understanding Deep Image Representations by Inverting Them”, CVPR 2015&lt;/em&gt;&lt;br /&gt;
+  Given a CNN feature vector for an image, find a new image that:
+    &lt;ul&gt;
+      &lt;li&gt;Matches the given feature vector&lt;/li&gt;
+      &lt;li&gt;“looks natural” (image prior regularization)&lt;br /&gt;
+  \(\begin{align*}
+  x^{\ast} &amp;amp;= \underset{x\in\mathbb{R}^{H \times W \times C}}{\mbox{argmin}} l(\Phi(x), \Phi_0) + \lambda \mathcal{R}(x) \\
+      &amp;amp; \mbox{where loss } l = {\lVert \Phi(x) - \Phi_0 \rVert}^2
+  \end{align*}\)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Texture Synthesis: Nearest Neighbor&lt;br /&gt;
+  Given a sample patch of some texture, generate a bigger image of the same texture&lt;br /&gt;
+  Generate pixels one at a time in scanline order; form neighborhood of already generated pixels and copy nearest neighbor from input&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Neural Texture Synthesis: Gram Matrix&lt;br /&gt;
+  a pair-wise statistics; interpret given &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CxHxW&lt;/code&gt; features as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HxW&lt;/code&gt; grid of C-dimensional vectors. By computing outer product and sum up for all spacial locations($G=V^T V$), it gives &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CxC&lt;/code&gt; matrix measuring co-occurrence.
+    &lt;ol&gt;
+      &lt;li&gt;Pretrain a CNN on ImageNet (VGG-19)&lt;/li&gt;
+      &lt;li&gt;Run input texture forward through CNN, record activations on every layer&lt;/li&gt;
+      &lt;li&gt;At each layer compute the Gram matrix&lt;/li&gt;
+      &lt;li&gt;Initialize generated image from random noise&lt;/li&gt;
+      &lt;li&gt;Pass generated image through CNN, compute Gram matrix on each layer&lt;/li&gt;
+      &lt;li&gt;Compute loss: weighted sum of L2 distance between Gram matrices&lt;/li&gt;
+      &lt;li&gt;Backprop to get gradient on image&lt;/li&gt;
+      &lt;li&gt;Make gradient step on image&lt;/li&gt;
+      &lt;li&gt;GOTO 5
+&lt;img src=&quot;/assets/images/cs231n_lec14_3.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Neural Style Transfer: Feature + Gram Reconstruction
+    &lt;ol&gt;
+      &lt;li&gt;Extract content targets (ConvNet activations of all layers for the given image)&lt;/li&gt;
+      &lt;li&gt;Extract style targets (Gram matrices of ConvNet activations of all layers)&lt;/li&gt;
+      &lt;li&gt;Optimize over image to have:
+        &lt;ul&gt;
+          &lt;li&gt;The content of the content image(activations match content)&lt;/li&gt;
+          &lt;li&gt;The style of the stlye image(Gram matrices of activations match style)&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec14_4.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+          &lt;li&gt;Problem: requires many forward, backward passes; VGG is very slow&lt;/li&gt;
+          &lt;li&gt;Solution: Train another neural network; &lt;strong&gt;Fast Style Transfer&lt;/strong&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Fast Style Transfer
+  &lt;img src=&quot;/assets/images/cs231n_lec14_5.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        
+        <pubDate>Thu, 03 Feb 2022 00:00:00 +0900</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs231n_lec14</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec14</guid>
       </item>
       
     

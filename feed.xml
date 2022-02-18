@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-02-16T08:59:55+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Starfish detection w/ TF Object Detection API</title><link href="http://0.0.0.0:4000/starfish_detection" rel="alternate" type="text/html" title="Starfish detection w/ TF Object Detection API" /><published>2022-02-15T00:00:00+09:00</published><updated>2022-02-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/starfish_detection</id><content type="html" xml:base="http://0.0.0.0:4000/starfish_detection">&lt;h2 id=&quot;tensorflow---help-protect-the-great-barrier-reef&quot;&gt;TensorFlow - Help Protect the Great Barrier Reef&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-02-18T17:21:52+09:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">Starfish detection w/ TF Object Detection API</title><link href="http://0.0.0.0:4000/starfish_detection" rel="alternate" type="text/html" title="Starfish detection w/ TF Object Detection API" /><published>2022-02-15T00:00:00+09:00</published><updated>2022-02-15T00:00:00+09:00</updated><id>http://0.0.0.0:4000/starfish_detection</id><content type="html" xml:base="http://0.0.0.0:4000/starfish_detection">&lt;h2 id=&quot;tensorflow---help-protect-the-great-barrier-reef&quot;&gt;TensorFlow - Help Protect the Great Barrier Reef&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;Worked in Feb. 2022. to study object detection model&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Task:&lt;br /&gt;
+  Underwater + Small object detection&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Score(IoU=0.50:0.95):&lt;br /&gt;
@@ -13,7 +17,157 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;iframe src=&quot;https://www.kaggle.com/embed/kwondalhyeon/starfish-detection-w-tf-object-detection-api?kernelSessionId=87885389&quot; height=&quot;1200&quot; style=&quot;margin: 0 auto; width: 100%; max-width: 100%;&quot; frameborder=&quot;0&quot; scrolling=&quot;auto&quot; title=&quot;Starfish detection w/ TF Object Detection API&quot;&gt;&lt;/iframe&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">TensorFlow - Help Protect the Great Barrier Reef Worked in Feb. 2022. to study object detection model Score(IoU=0.50:0.95): mAP@100: 0.364686 / AR@100: 0.491768 / Expected F2: 0.459727 Direct link: kaggle notebook</summary></entry><entry><title type="html">Unsupervised Representation Learning by Predicting Image Rotations</title><link href="http://0.0.0.0:4000/Rotation" rel="alternate" type="text/html" title="Unsupervised Representation Learning by Predicting Image Rotations" /><published>2022-01-25T00:00:00+09:00</published><updated>2022-01-25T00:00:00+09:00</updated><id>http://0.0.0.0:4000/Rotation</id><content type="html" xml:base="http://0.0.0.0:4000/Rotation">&lt;h2 id=&quot;unsupervised-representation-learning-by-predicting-image-rotations&quot;&gt;Unsupervised Representation Learning by Predicting Image Rotations&lt;/h2&gt;
+&lt;iframe src=&quot;https://www.kaggle.com/embed/kwondalhyeon/starfish-detection-w-tf-object-detection-api?kernelSessionId=87885389&quot; height=&quot;1200&quot; style=&quot;margin: 0 auto; width: 100%; max-width: 100%;&quot; frameborder=&quot;0&quot; scrolling=&quot;auto&quot; title=&quot;Starfish detection w/ TF Object Detection API&quot;&gt;&lt;/iframe&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">TensorFlow - Help Protect the Great Barrier Reef Worked in Feb. 2022. to study object detection model Task: Underwater + Small object detection Score(IoU=0.50:0.95): mAP@100: 0.364686 / AR@100: 0.491768 / Expected F2: 0.459727 Direct link: kaggle notebook</summary></entry><entry><title type="html">cs231n - Lecture 14. Visualizing and Understanding</title><link href="http://0.0.0.0:4000/cs231n_lec14" rel="alternate" type="text/html" title="cs231n - Lecture 14. Visualizing and Understanding" /><published>2022-02-03T00:00:00+09:00</published><updated>2022-02-03T00:00:00+09:00</updated><id>http://0.0.0.0:4000/cs231n_lec14</id><content type="html" xml:base="http://0.0.0.0:4000/cs231n_lec14">&lt;h2 id=&quot;whats-going-on-inside-convnets&quot;&gt;What’s going on inside ConvNets?&lt;/h2&gt;
+
+&lt;h3 id=&quot;visualizing-what-models-have-learned&quot;&gt;Visualizing what models have learned&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;First layer: Visualize Filters&lt;br /&gt;
+  At the first layer, we can visualize the raw weights and see gabor-like features. While the higher layers are about the weights to the activations from the layer before, it is not very interpretable.&lt;/li&gt;
+  &lt;li&gt;Last layer: Visualize Representations(feature vector)
+    &lt;ul&gt;
+      &lt;li&gt;Nearest neighbors in feature space&lt;/li&gt;
+      &lt;li&gt;Dimensionality reduction: clustering with similarity; using simple algorithm(PCA) or more complex one(t-SNE)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Visualizing Activations:&lt;br /&gt;
+  &lt;em&gt;Yosinski et al, “Understanding Neural Networks Through Deep Visualization”, ICML DL Workshop 2014&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;understanding-input-pixels&quot;&gt;Understanding input pixels&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Maximally Activating Patches&lt;br /&gt;
+  Run many images, record values of chosen channel(layer or neuron) and visualize image patches that correspond to maximal activations.&lt;/li&gt;
+  &lt;li&gt;Saliency via Occlusion: &lt;em&gt;Zeiler and Fergus, “Visualizing and Understanding Convolutional Networks”, ECCV 2014&lt;/em&gt;.&lt;br /&gt;
+  Mask part of the image before feeding to CNN, slide the occluder and check how much predicted probabilities change. Found that when there are multiple objects, the classification performance improved as the false class object masked.&lt;/li&gt;
+  &lt;li&gt;Which pixels matter: Saliency via Backprop
+    &lt;ul&gt;
+      &lt;li&gt;Visualize the data gradient
+        &lt;ol&gt;
+          &lt;li&gt;foward an image&lt;/li&gt;
+          &lt;li&gt;set &lt;em&gt;activations&lt;/em&gt; in layer of interest to all zero, except for a 1.0 for a neuron of interest&lt;/li&gt;
+          &lt;li&gt;backprop to image input&lt;/li&gt;
+          &lt;li&gt;squish the channels of gradients to get 1-dimensional activation map(or we can run segmentation using grabcut on this heatmap).&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Can also find biases; to see what false classifier actually see&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Intermediate Features via (guided) backprop
+    &lt;ul&gt;
+      &lt;li&gt;Deconvolution-based approach:
+        &lt;ol&gt;
+          &lt;li&gt;Feed image into net&lt;/li&gt;
+          &lt;li&gt;Pick a layer, set the gradient there to be all zero except for one 1 for some neuron of interest&lt;/li&gt;
+          &lt;li&gt;Backprop to image(use guided backprop to pass the positive influence; activation with positive values, using modified relu or deconvnet)&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Visualizing CNN features: Gradient Ascent
+  (Guided) backprop: Find the part of an image that a neuron responds to.&lt;br /&gt;
+  Gradient ascent: Generate a synthetic image that maximally activates a neuron.&lt;br /&gt;
+  \(I^{\ast} = \mbox{argmax}_I f(I) + R(I)\); (neuron value + regularizer)
+    &lt;ul&gt;
+      &lt;li&gt;Optimization-based approach: freeze/fix the weights and run “image update” to find images that maximize the score of chosen class.&lt;br /&gt;
+  &lt;em&gt;Karen Simonyan, Andrea Vedaldi, Andrew Zisserman, “Deep Inside Convolutional Networks: Visualizing Image Classification Models and Saliency Maps”, Workshop at ICLR, 2014&lt;/em&gt;.&lt;/li&gt;
+      &lt;li&gt;Find images that maximize some class score: \(\mbox{argmax}_I S_c(I) - \lambda {\lVert I \rVert}^2_2\)
+        &lt;ol&gt;
+          &lt;li&gt;initialize image to zeros&lt;/li&gt;
+          &lt;li&gt;forward image to compute current scores&lt;/li&gt;
+          &lt;li&gt;set the &lt;em&gt;gradient&lt;/em&gt; of the scores vector to be &lt;em&gt;I&lt;/em&gt;, then backprop to image&lt;/li&gt;
+          &lt;li&gt;make a small update to the image&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Instead of using L2 norm, we can use better regularizer(Gaussian blur image, Clip pixels with small values/gradients to 0, …)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Optimize in FC6 latent space instead of pixel space:&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec14_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec14_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;adversarial-perturbations&quot;&gt;Adversarial perturbations&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Fooling Images / Adversarial Examples
+    &lt;ol&gt;
+      &lt;li&gt;Start from an arbitrary image&lt;/li&gt;
+      &lt;li&gt;Pick an arbitrary class&lt;/li&gt;
+      &lt;li&gt;Modify the image to maximize the class&lt;/li&gt;
+      &lt;li&gt;Repeat until network is fooled&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Ian Goodfellow, “Explaining and Harnessing Adversarial Examples”, 2014&lt;/em&gt;&lt;br /&gt;
+  Classifier is vulnerable to adversarical perturbation because of its linear nature. Check &lt;a href=&quot;https://www.youtube.com/watch?v=CIfsB_EYsVI&quot;&gt;Ian Goodfellow’s lecture&lt;/a&gt; from 2017&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Moosavi-Dezfooli, Seyed-Mohsen, et al. “Universal adversarial perturbations”, IEEE, 2017.&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;style-transfer&quot;&gt;Style Transfer&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;DeepDream: Amplify existing features&lt;br /&gt;
+  Rather than synthesizing an image to maximize a specific neuron, instead try to &lt;strong&gt;amplify&lt;/strong&gt; the neuron activations at some layer in the network.&lt;/li&gt;
+  &lt;li&gt;Choose an image and a layer in a CNN; repeat:
+    &lt;ol&gt;
+      &lt;li&gt;Forward: compute activations at chosen layer&lt;/li&gt;
+      &lt;li&gt;Set gradient of chosen layer &lt;em&gt;equal to its activation&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Backward: Compute gradient on image&lt;/li&gt;
+      &lt;li&gt;Update image&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec14_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Feature Inversion&lt;br /&gt;
+  &lt;em&gt;Mahendran and Vedaldi, “Understanding Deep Image Representations by Inverting Them”, CVPR 2015&lt;/em&gt;&lt;br /&gt;
+  Given a CNN feature vector for an image, find a new image that:
+    &lt;ul&gt;
+      &lt;li&gt;Matches the given feature vector&lt;/li&gt;
+      &lt;li&gt;“looks natural” (image prior regularization)&lt;br /&gt;
+  \(\begin{align*}
+  x^{\ast} &amp;amp;= \underset{x\in\mathbb{R}^{H \times W \times C}}{\mbox{argmin}} l(\Phi(x), \Phi_0) + \lambda \mathcal{R}(x) \\
+      &amp;amp; \mbox{where loss } l = {\lVert \Phi(x) - \Phi_0 \rVert}^2
+  \end{align*}\)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Texture Synthesis: Nearest Neighbor&lt;br /&gt;
+  Given a sample patch of some texture, generate a bigger image of the same texture&lt;br /&gt;
+  Generate pixels one at a time in scanline order; form neighborhood of already generated pixels and copy nearest neighbor from input&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Neural Texture Synthesis: Gram Matrix&lt;br /&gt;
+  a pair-wise statistics; interpret given &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CxHxW&lt;/code&gt; features as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HxW&lt;/code&gt; grid of C-dimensional vectors. By computing outer product and sum up for all spacial locations($G=V^T V$), it gives &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CxC&lt;/code&gt; matrix measuring co-occurrence.
+    &lt;ol&gt;
+      &lt;li&gt;Pretrain a CNN on ImageNet (VGG-19)&lt;/li&gt;
+      &lt;li&gt;Run input texture forward through CNN, record activations on every layer&lt;/li&gt;
+      &lt;li&gt;At each layer compute the Gram matrix&lt;/li&gt;
+      &lt;li&gt;Initialize generated image from random noise&lt;/li&gt;
+      &lt;li&gt;Pass generated image through CNN, compute Gram matrix on each layer&lt;/li&gt;
+      &lt;li&gt;Compute loss: weighted sum of L2 distance between Gram matrices&lt;/li&gt;
+      &lt;li&gt;Backprop to get gradient on image&lt;/li&gt;
+      &lt;li&gt;Make gradient step on image&lt;/li&gt;
+      &lt;li&gt;GOTO 5
+&lt;img src=&quot;/assets/images/cs231n_lec14_3.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Neural Style Transfer: Feature + Gram Reconstruction
+    &lt;ol&gt;
+      &lt;li&gt;Extract content targets (ConvNet activations of all layers for the given image)&lt;/li&gt;
+      &lt;li&gt;Extract style targets (Gram matrices of ConvNet activations of all layers)&lt;/li&gt;
+      &lt;li&gt;Optimize over image to have:
+        &lt;ul&gt;
+          &lt;li&gt;The content of the content image(activations match content)&lt;/li&gt;
+          &lt;li&gt;The style of the stlye image(Gram matrices of activations match style)&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec14_4.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+          &lt;li&gt;Problem: requires many forward, backward passes; VGG is very slow&lt;/li&gt;
+          &lt;li&gt;Solution: Train another neural network; &lt;strong&gt;Fast Style Transfer&lt;/strong&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Fast Style Transfer
+  &lt;img src=&quot;/assets/images/cs231n_lec14_5.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">What’s going on inside ConvNets? Visualizing what models have learned First layer: Visualize Filters At the first layer, we can visualize the raw weights and see gabor-like features. While the higher layers are about the weights to the activations from the layer before, it is not very interpretable. Last layer: Visualize Representations(feature vector) Nearest neighbors in feature space Dimensionality reduction: clustering with similarity; using simple algorithm(PCA) or more complex one(t-SNE) Visualizing Activations: Yosinski et al, “Understanding Neural Networks Through Deep Visualization”, ICML DL Workshop 2014. Understanding input pixels Maximally Activating Patches Run many images, record values of chosen channel(layer or neuron) and visualize image patches that correspond to maximal activations. Saliency via Occlusion: Zeiler and Fergus, “Visualizing and Understanding Convolutional Networks”, ECCV 2014. Mask part of the image before feeding to CNN, slide the occluder and check how much predicted probabilities change. Found that when there are multiple objects, the classification performance improved as the false class object masked. Which pixels matter: Saliency via Backprop Visualize the data gradient foward an image set activations in layer of interest to all zero, except for a 1.0 for a neuron of interest backprop to image input squish the channels of gradients to get 1-dimensional activation map(or we can run segmentation using grabcut on this heatmap). Can also find biases; to see what false classifier actually see Intermediate Features via (guided) backprop Deconvolution-based approach: Feed image into net Pick a layer, set the gradient there to be all zero except for one 1 for some neuron of interest Backprop to image(use guided backprop to pass the positive influence; activation with positive values, using modified relu or deconvnet) Visualizing CNN features: Gradient Ascent (Guided) backprop: Find the part of an image that a neuron responds to. Gradient ascent: Generate a synthetic image that maximally activates a neuron. \(I^{\ast} = \mbox{argmax}_I f(I) + R(I)\); (neuron value + regularizer) Optimization-based approach: freeze/fix the weights and run “image update” to find images that maximize the score of chosen class. Karen Simonyan, Andrea Vedaldi, Andrew Zisserman, “Deep Inside Convolutional Networks: Visualizing Image Classification Models and Saliency Maps”, Workshop at ICLR, 2014. Find images that maximize some class score: \(\mbox{argmax}_I S_c(I) - \lambda {\lVert I \rVert}^2_2\) initialize image to zeros forward image to compute current scores set the gradient of the scores vector to be I, then backprop to image make a small update to the image Instead of using L2 norm, we can use better regularizer(Gaussian blur image, Clip pixels with small values/gradients to 0, …) Optimize in FC6 latent space instead of pixel space: Adversarial perturbations Fooling Images / Adversarial Examples Start from an arbitrary image Pick an arbitrary class Modify the image to maximize the class Repeat until network is fooled Ian Goodfellow, “Explaining and Harnessing Adversarial Examples”, 2014 Classifier is vulnerable to adversarical perturbation because of its linear nature. Check Ian Goodfellow’s lecture from 2017 Moosavi-Dezfooli, Seyed-Mohsen, et al. “Universal adversarial perturbations”, IEEE, 2017. Style Transfer DeepDream: Amplify existing features Rather than synthesizing an image to maximize a specific neuron, instead try to amplify the neuron activations at some layer in the network. Choose an image and a layer in a CNN; repeat: Forward: compute activations at chosen layer Set gradient of chosen layer equal to its activation Backward: Compute gradient on image Update image Feature Inversion Mahendran and Vedaldi, “Understanding Deep Image Representations by Inverting Them”, CVPR 2015 Given a CNN feature vector for an image, find a new image that: Matches the given feature vector “looks natural” (image prior regularization) \(\begin{align*} x^{\ast} &amp;amp;= \underset{x\in\mathbb{R}^{H \times W \times C}}{\mbox{argmin}} l(\Phi(x), \Phi_0) + \lambda \mathcal{R}(x) \\ &amp;amp; \mbox{where loss } l = {\lVert \Phi(x) - \Phi_0 \rVert}^2 \end{align*}\) Texture Synthesis: Nearest Neighbor Given a sample patch of some texture, generate a bigger image of the same texture Generate pixels one at a time in scanline order; form neighborhood of already generated pixels and copy nearest neighbor from input Neural Texture Synthesis: Gram Matrix a pair-wise statistics; interpret given CxHxW features as HxW grid of C-dimensional vectors. By computing outer product and sum up for all spacial locations($G=V^T V$), it gives CxC matrix measuring co-occurrence. Pretrain a CNN on ImageNet (VGG-19) Run input texture forward through CNN, record activations on every layer At each layer compute the Gram matrix Initialize generated image from random noise Pass generated image through CNN, compute Gram matrix on each layer Compute loss: weighted sum of L2 distance between Gram matrices Backprop to get gradient on image Make gradient step on image GOTO 5 Neural Style Transfer: Feature + Gram Reconstruction Extract content targets (ConvNet activations of all layers for the given image) Extract style targets (Gram matrices of ConvNet activations of all layers) Optimize over image to have: The content of the content image(activations match content) The style of the stlye image(Gram matrices of activations match style) Problem: requires many forward, backward passes; VGG is very slow Solution: Train another neural network; Fast Style Transfer Fast Style Transfer</summary></entry><entry><title type="html">Unsupervised Representation Learning by Predicting Image Rotations</title><link href="http://0.0.0.0:4000/Rotation" rel="alternate" type="text/html" title="Unsupervised Representation Learning by Predicting Image Rotations" /><published>2022-01-25T00:00:00+09:00</published><updated>2022-01-25T00:00:00+09:00</updated><id>http://0.0.0.0:4000/Rotation</id><content type="html" xml:base="http://0.0.0.0:4000/Rotation">&lt;h2 id=&quot;unsupervised-representation-learning-by-predicting-image-rotations&quot;&gt;Unsupervised Representation Learning by Predicting Image Rotations&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;Gidaris et al. 2018&lt;/em&gt;&lt;br /&gt;
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/gidariss/FeatureLearningRotNet&lt;/code&gt;&lt;/p&gt;
 
@@ -1797,85 +1951,4 @@ g: Gate gate, How much to write to cell&lt;/p&gt;
   &lt;li&gt;Transfer learning with CNNs is pervasive,&lt;br /&gt;
   for Object Detection(Fast R-CNN), Image Captioning(CNN + RNN), etc.&lt;br /&gt;
   but not always be necessary&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Activation Functions Sigmoid $\sigma(x)=1/(1+e^{-x})$ Squashes numbers to range [0,1] Historically popular since they have nice interpretation as a saturating “firing rate” of a neuron. Problem: Gradient Vanishing: Saturated neurons “kill” the gradients; If all the gradients flowing back will be zero and weights will never change. Sigmoid outputs are not zero-centered and always positive, so the gradients will be always all positive or all negative. Then the gradient update would follow a zig-zag path, resulting in bad efficiency. exp() is a bit compute expensive. tanh(x) Squashes numbers to range [-1,1] zero centered but still kills gradients when saturated ReLU(Rectified Linear Unit) \(f(x) = \mbox{max}(0,x)\) Does not saturate (in + region) Very computationally efficient Converges much faster than sigmoid/tanh but has not zero-centered output and weights will never be updated for negative x Leaky ReLU \(f(x) = \mbox{max}(0.01x,x)\) (or parametric, PReLU: \(f(x) = \mbox{max}(\alpha x, x)\)) Not saturate Computationally efficient Converges much faster will not “die” ELU(Exponential Linear Units) \(f(n)= \begin{cases} x &amp;amp; \mbox{if }x&amp;gt;0 \\ \alpha(\mbox{exp}(x)-1) &amp;amp; \mbox{if }x\le 0\end{cases}\) ($\scriptstyle{\alpha = 1}$) All benefits of ReLU Closer to zero mean outputs Negative saturation regime compared with Leaky ReLU adds some robustness to noise Computation requires exp() SELU (Scaled Exponential Linear Units) \(f(n)= \begin{cases} \lambda x &amp;amp; \mbox{if }x&amp;gt;0 \\ \lambda\alpha(e^x -1) &amp;amp; \mbox{otherwise}\end{cases}\) ($\scriptstyle{\alpha=1.6733, \lambda=1.0507}$) Scaled versionof ELU that works better for deep networks “Self-normalizing” property; Can train deep SELU networks without BatchNorm Maxout “Neuron” \(\mbox{max}(w_1^T x + b_1, w_2^T x + b_2)\) Nonlinearity; does not have the basic form of dot product Generalizes ReLU and Leaky ReLU Linear Regime; does not saturate or die Complexity; Doubles the number of parameters/neuron Swish \(f(x)=x\sigma(\beta x)\) train a neural network to generate and test out different non-linearities outperformed all other options for CIFAR-10 accuracy Summary Use ReLU and be careful with learning rates Try out Leaky ReLU / Maxout / ELU / SELU to squeeze out some marginal gains Don’t use sigmoid or tanh Data Preprocessing We may have zero-centered, normalized, decorrelated(PCA) or whitened data After normalization, it will be less sensitive to small changes in weights and easier to optimize In practice for images, centering only used. Weight Initialization First idea: Small random numbers (gaussian with zero mean and 1e-2 standard deviation) W = 0.01 * np.random.randn(D_in, D_out) It works okay for small networks, but problems with deeper networks All activations and gradients tend to zero and no learning proceeded. “Xavier” Initialization std = 1/sqrt(D_in) For conv layers, $\mbox{D_in}$ is $\mbox{filter_size}^2\times \mbox{input_channels}$ W = np.random.randn(D_in, D_out) / np.sqrt(D_in) x = np.tanh(x.dot(W)) Activations are nicely scaled for deeper layers works well especially in non-linear activation functions like sigmoid, tanh but cannot used in ReLU activation function; activations collapse to zero and no learning Kaiming / MSRA Initialization ReLU correction: std = sqrt(2/D_in) W = np.random.randn(D_in, D_out) * np.sqrt(2/D_in) x = np.maximum(0, x.dot(W)) Batch Normalization To make each dimension zero-mean unit-variance, apply: \(\hat{x}^{(k)} = \frac{x^{(k)} - E[x^{(k)}]}{\sqrt{\mbox{Var}[x^{(k)}]}}\) Usually inserted after Fully Connected or Convolutional layers, and before nonlinearity. Makes deep networks much easier to train Improves gradient flow Allows higher learning rates, faster convergence Networks become more robust to initialization Acts as regularization during training Zero overhead at test-time: can be fused with conv Behaves differently during training and testing: can have bugs Comparison of Normalization Layers Transfer Learning Deep learning models are trained to capture characteristics of data, from general features at the first layer to specific features at the last layer. In transfer learning, we import pre-trained model and fine-tune to our cases. Strategies E.g. Transfer learning with CNNs is pervasive, for Object Detection(Fast R-CNN), Image Captioning(CNN + RNN), etc. but not always be necessary</summary></entry><entry><title type="html">cs231n - Lecture 5. Convolutional Neural Networks</title><link href="http://0.0.0.0:4000/cs231n_lec5" rel="alternate" type="text/html" title="cs231n - Lecture 5. Convolutional Neural Networks" /><published>2021-12-19T00:00:00+09:00</published><updated>2021-12-19T00:00:00+09:00</updated><id>http://0.0.0.0:4000/cs231n_lec5</id><content type="html" xml:base="http://0.0.0.0:4000/cs231n_lec5">&lt;h3 id=&quot;convolutional-neural-networks&quot;&gt;Convolutional Neural Networks&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;ConvNets are everywhere&lt;br /&gt;
-  Classification, Retrieval, Detection, Segmentation, Image Captioning, etc.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Recap: Fully Connected Layer&lt;br /&gt;
-  $32\times 32\times 3$ image $\rightarrow$ stretch to $3072\times 1$&lt;br /&gt;
-  Then a dot product of $3072\times 1$ input &lt;em&gt;x&lt;/em&gt; and scoring weights &lt;em&gt;W&lt;/em&gt;, &lt;em&gt;Wx&lt;/em&gt; is in $10 \times 3072$. With some activation function, we can make classification scores in &lt;em&gt;10&lt;/em&gt; classes.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;convolution-layer-preserve-spatial-structure&quot;&gt;Convolution Layer: preserve spatial structure&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Convolve the filter with the image, slide over the image spatially, computing dot products. Filters always extend the full depth of the input volume.&lt;br /&gt;
-&lt;img src=&quot;/assets/images/cs231n_lec5_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;br /&gt;
-Convolve(slide) over all spatial locations, we can make an activation map of size $28\times 28\times 1$ for each convolution filter. For example, if we had &lt;em&gt;6&lt;/em&gt; $5\times 5$ filters, we’ll get &lt;em&gt;6&lt;/em&gt; separate activation maps. We stack these up to get a “new image” of size $28\times 28\times 6$.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;ConvNet is a sequence of Convolution Layers, interspersed with activation functions.&lt;br /&gt;
-&lt;img src=&quot;/assets/images/cs231n_lec5_1.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;70%&quot; /&gt;&lt;br /&gt;
-Input convolved repeatedly with filters shrinks volumes spatially. By each sequence, an image is processed from low-level features to high-level features. Shrinking too fast is not good, doesn’t work well.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;We call the layer convolutional because it is related to convolution of two signals: \(f[x,y]*g[x,y]=\sum_{n_1=-\infty}^\infty \sum_{n_2=-\infty}^\infty f[n_1,n_2]\cdot g[x-n_1,y-n_2]\); elementwise multiplication and sum of a filter and the signal (image)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Zero pad the border:&lt;br /&gt;
-  The data on the border of an image will be convolved only once with each filter, while the others on the center of an image will be treated several times. Zero padding is introduced to solve this problem.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;General CONV layers:&lt;br /&gt;
-  with $N\times N$ input, $F\times F$ filter, applied with stride &lt;em&gt;s&lt;/em&gt;, pad with &lt;em&gt;p&lt;/em&gt; pixel border, the output is &lt;strong&gt;$(N+2P-F)/s + 1$&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Example:&lt;br /&gt;
-  Input volume &lt;strong&gt;$32\times 32\times 3$&lt;/strong&gt;&lt;br /&gt;
-  &lt;strong&gt;&lt;em&gt;10&lt;/em&gt; $5\times 5$&lt;/strong&gt; filters with stride &lt;strong&gt;&lt;em&gt;1&lt;/em&gt;&lt;/strong&gt;, pad &lt;strong&gt;&lt;em&gt;2&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;p&gt;$\rightarrow$ Output volume size: $(32+2*2-5)/1+1=32$ spatially, so $32\times 32\times 10$.&lt;/p&gt;
-
-    &lt;p&gt;$\rightarrow$ Number of parameters in this layer: each filter has $5\times 5\times 3+1=76$ parameters(&lt;em&gt;+1&lt;/em&gt; for bias), thus for all &lt;em&gt;760&lt;/em&gt; params.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec5_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$1\times 1$ convolution layers used:&lt;br /&gt;
-  To reduce the number of channels, so the number of parameters,&lt;br /&gt;
-  Then we can perform a deeper layers(Bottleneck architecture).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;pooling-layer&quot;&gt;Pooling layer&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Summarize the data in a partial space, into some representations&lt;br /&gt;
-  Reducing output dimensions and the number of parameters&lt;br /&gt;
-  Make it smaller and more manageable&lt;br /&gt;
-  Operate over each activation map independently(downsampling)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;e.g. max pool with $2\times 2$ filters and stride &lt;em&gt;2&lt;/em&gt;, $4\times 4$ input reduced to $2\times 2$ output consisted of regional maximums.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;fully-connected-layer-fc-layer&quot;&gt;Fully Connected Layer (FC layer)&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Contains neurons that connect to the entire input volume, as in ordinary Neural
-Networks. Stacked and followed by some activations, finally we make predictions or classifications.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;ConvNets stack CONV,POOL,FC layers&lt;/li&gt;
-  &lt;li&gt;Trend towards smaller filters and deeper architectures&lt;/li&gt;
-  &lt;li&gt;Trend towards getting rid of POOL/FC layers (just CONV)&lt;/li&gt;
-  &lt;li&gt;Historically architectures looked like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[(CONV-RELU)*N-POOL?]*M-(FC-RELU)*K,SOFTMAX&lt;/code&gt; where &lt;em&gt;N&lt;/em&gt; is usually up to &lt;em&gt;~5&lt;/em&gt;, &lt;em&gt;M&lt;/em&gt; is large, $0\le K \le 2$.&lt;/li&gt;
-  &lt;li&gt;but recent advances such as ResNet/GoogLeNet have challenged this paradigm&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Convolutional Neural Networks ConvNets are everywhere Classification, Retrieval, Detection, Segmentation, Image Captioning, etc. Recap: Fully Connected Layer $32\times 32\times 3$ image $\rightarrow$ stretch to $3072\times 1$ Then a dot product of $3072\times 1$ input x and scoring weights W, Wx is in $10 \times 3072$. With some activation function, we can make classification scores in 10 classes. Convolution Layer: preserve spatial structure Convolve the filter with the image, slide over the image spatially, computing dot products. Filters always extend the full depth of the input volume. Convolve(slide) over all spatial locations, we can make an activation map of size $28\times 28\times 1$ for each convolution filter. For example, if we had 6 $5\times 5$ filters, we’ll get 6 separate activation maps. We stack these up to get a “new image” of size $28\times 28\times 6$. ConvNet is a sequence of Convolution Layers, interspersed with activation functions. Input convolved repeatedly with filters shrinks volumes spatially. By each sequence, an image is processed from low-level features to high-level features. Shrinking too fast is not good, doesn’t work well. We call the layer convolutional because it is related to convolution of two signals: \(f[x,y]*g[x,y]=\sum_{n_1=-\infty}^\infty \sum_{n_2=-\infty}^\infty f[n_1,n_2]\cdot g[x-n_1,y-n_2]\); elementwise multiplication and sum of a filter and the signal (image) Zero pad the border: The data on the border of an image will be convolved only once with each filter, while the others on the center of an image will be treated several times. Zero padding is introduced to solve this problem. General CONV layers: with $N\times N$ input, $F\times F$ filter, applied with stride s, pad with p pixel border, the output is $(N+2P-F)/s + 1$ Example: Input volume $32\times 32\times 3$ 10 $5\times 5$ filters with stride 1, pad 2 $\rightarrow$ Output volume size: $(32+2*2-5)/1+1=32$ spatially, so $32\times 32\times 10$. $\rightarrow$ Number of parameters in this layer: each filter has $5\times 5\times 3+1=76$ parameters(+1 for bias), thus for all 760 params. $1\times 1$ convolution layers used: To reduce the number of channels, so the number of parameters, Then we can perform a deeper layers(Bottleneck architecture). Pooling layer Summarize the data in a partial space, into some representations Reducing output dimensions and the number of parameters Make it smaller and more manageable Operate over each activation map independently(downsampling) e.g. max pool with $2\times 2$ filters and stride 2, $4\times 4$ input reduced to $2\times 2$ output consisted of regional maximums. Fully Connected Layer (FC layer) Contains neurons that connect to the entire input volume, as in ordinary Neural Networks. Stacked and followed by some activations, finally we make predictions or classifications. Summary ConvNets stack CONV,POOL,FC layers Trend towards smaller filters and deeper architectures Trend towards getting rid of POOL/FC layers (just CONV) Historically architectures looked like [(CONV-RELU)*N-POOL?]*M-(FC-RELU)*K,SOFTMAX where N is usually up to ~5, M is large, $0\le K \le 2$. but recent advances such as ResNet/GoogLeNet have challenged this paradigm</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Activation Functions Sigmoid $\sigma(x)=1/(1+e^{-x})$ Squashes numbers to range [0,1] Historically popular since they have nice interpretation as a saturating “firing rate” of a neuron. Problem: Gradient Vanishing: Saturated neurons “kill” the gradients; If all the gradients flowing back will be zero and weights will never change. Sigmoid outputs are not zero-centered and always positive, so the gradients will be always all positive or all negative. Then the gradient update would follow a zig-zag path, resulting in bad efficiency. exp() is a bit compute expensive. tanh(x) Squashes numbers to range [-1,1] zero centered but still kills gradients when saturated ReLU(Rectified Linear Unit) \(f(x) = \mbox{max}(0,x)\) Does not saturate (in + region) Very computationally efficient Converges much faster than sigmoid/tanh but has not zero-centered output and weights will never be updated for negative x Leaky ReLU \(f(x) = \mbox{max}(0.01x,x)\) (or parametric, PReLU: \(f(x) = \mbox{max}(\alpha x, x)\)) Not saturate Computationally efficient Converges much faster will not “die” ELU(Exponential Linear Units) \(f(n)= \begin{cases} x &amp;amp; \mbox{if }x&amp;gt;0 \\ \alpha(\mbox{exp}(x)-1) &amp;amp; \mbox{if }x\le 0\end{cases}\) ($\scriptstyle{\alpha = 1}$) All benefits of ReLU Closer to zero mean outputs Negative saturation regime compared with Leaky ReLU adds some robustness to noise Computation requires exp() SELU (Scaled Exponential Linear Units) \(f(n)= \begin{cases} \lambda x &amp;amp; \mbox{if }x&amp;gt;0 \\ \lambda\alpha(e^x -1) &amp;amp; \mbox{otherwise}\end{cases}\) ($\scriptstyle{\alpha=1.6733, \lambda=1.0507}$) Scaled versionof ELU that works better for deep networks “Self-normalizing” property; Can train deep SELU networks without BatchNorm Maxout “Neuron” \(\mbox{max}(w_1^T x + b_1, w_2^T x + b_2)\) Nonlinearity; does not have the basic form of dot product Generalizes ReLU and Leaky ReLU Linear Regime; does not saturate or die Complexity; Doubles the number of parameters/neuron Swish \(f(x)=x\sigma(\beta x)\) train a neural network to generate and test out different non-linearities outperformed all other options for CIFAR-10 accuracy Summary Use ReLU and be careful with learning rates Try out Leaky ReLU / Maxout / ELU / SELU to squeeze out some marginal gains Don’t use sigmoid or tanh Data Preprocessing We may have zero-centered, normalized, decorrelated(PCA) or whitened data After normalization, it will be less sensitive to small changes in weights and easier to optimize In practice for images, centering only used. Weight Initialization First idea: Small random numbers (gaussian with zero mean and 1e-2 standard deviation) W = 0.01 * np.random.randn(D_in, D_out) It works okay for small networks, but problems with deeper networks All activations and gradients tend to zero and no learning proceeded. “Xavier” Initialization std = 1/sqrt(D_in) For conv layers, $\mbox{D_in}$ is $\mbox{filter_size}^2\times \mbox{input_channels}$ W = np.random.randn(D_in, D_out) / np.sqrt(D_in) x = np.tanh(x.dot(W)) Activations are nicely scaled for deeper layers works well especially in non-linear activation functions like sigmoid, tanh but cannot used in ReLU activation function; activations collapse to zero and no learning Kaiming / MSRA Initialization ReLU correction: std = sqrt(2/D_in) W = np.random.randn(D_in, D_out) * np.sqrt(2/D_in) x = np.maximum(0, x.dot(W)) Batch Normalization To make each dimension zero-mean unit-variance, apply: \(\hat{x}^{(k)} = \frac{x^{(k)} - E[x^{(k)}]}{\sqrt{\mbox{Var}[x^{(k)}]}}\) Usually inserted after Fully Connected or Convolutional layers, and before nonlinearity. Makes deep networks much easier to train Improves gradient flow Allows higher learning rates, faster convergence Networks become more robust to initialization Acts as regularization during training Zero overhead at test-time: can be fused with conv Behaves differently during training and testing: can have bugs Comparison of Normalization Layers Transfer Learning Deep learning models are trained to capture characteristics of data, from general features at the first layer to specific features at the last layer. In transfer learning, we import pre-trained model and fine-tune to our cases. Strategies E.g. Transfer learning with CNNs is pervasive, for Object Detection(Fast R-CNN), Image Captioning(CNN + RNN), etc. but not always be necessary</summary></entry></feed>
