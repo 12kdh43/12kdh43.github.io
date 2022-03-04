@@ -8,6 +8,144 @@
     
       
       <item>
+        <title>DevEnv Setup</title>
+        
+          <description>&lt;ul&gt;
+  &lt;li&gt;On purpose of setting local development environment on a new SSD storage, followed instructions below. Post for later use.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Document &lt;a href=&quot;https://docs.microsoft.com/ko-kr/windows/ai/directml/gpu-cuda-in-wsl&quot;&gt;Enable NVIDIA CUDA on WSL&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Install stable version of Windows 11&lt;/li&gt;
+      &lt;li&gt;Enable WSL, install Ubuntu(20.04.3 LTS)&lt;br /&gt;
+  On Windows &lt;strong&gt;Settings&lt;/strong&gt; app, select &lt;strong&gt;Check for updates&lt;/strong&gt; in the &lt;strong&gt;Windows Update&lt;/strong&gt; section and get the latest kernel(5.10.43.3 or higher)&lt;br /&gt;
+  To check the version, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wsl cat /proc/version&lt;/code&gt; command in &lt;strong&gt;Powershell&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;Install the GPU driver&lt;br /&gt;
+  Download and install the NVIDIA CUDA enabled driver for WSL&lt;br /&gt;
+  (Studio version: 511.65-desktop-win10-win11-64bit-international-nsd-dch-whql)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Install Docker Desktop app on Windows
+    &lt;ul&gt;
+      &lt;li&gt;Run:&lt;br /&gt;
+  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker run --rm -it --gpus=all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -gpu -benchmark&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Result:
+        &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Windowed&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Simulation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stored&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;video&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;memory&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Single&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;precision&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;floating&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;point&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;simulation&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Devices&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;used&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;simulation&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GPU&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Device&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Ampere&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compute&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;capability&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;8.6&lt;/span&gt;
+
+  &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Compute&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;8.6&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CUDA&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NVIDIA&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GeForce&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RTX&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3070&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;47104&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bodies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iterations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;40.275&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;550.910&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;billion&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interactions&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;per&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;11018.199&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;single&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;precision&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GFLOP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flops&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;per&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interaction&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Setting Docker image for TensorFlow-GPU
+    &lt;ul&gt;
+      &lt;li&gt;Pull the latest TensorFlow-GPU image
+  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker run -it --gpus all tensorflow/tensorflow:latest-gpu&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Install Anaconda on user:root(ref: &lt;a href=&quot;https://omhdydy.tistory.com/6&quot;&gt;blog&lt;/a&gt;)
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  # update and install prerequisites
+  apt-get update
+  apt-get install wget
+  # get proper version of anaconda3
+  wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh 
+  sh Anaconda3-2021.11-Linux-x86_64.sh
+  exec bash
+  # create anaconda environment and install libraries(for stability)
+  conda create -n !env_name pip python=3.7
+  conda activate !env_name
+  pip install tensorflow-gpu
+  pip install ipykernel
+  python -m ipykernel install --user --name !env_name --display-name !dispaly_name
+  pip install jupyter
+  # escape with Ctrl + p, Ctrl + q
+  docker commit -m &quot;!message&quot; !container_id !image_name:tag
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;(Optional) Install TensorFlow Object Detection API
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  apt-get install git
+  git clone --depth 1 https://github.com/tensorflow/models
+  cd models/research/
+  apt install -y protobuf-compiler
+  # found a symlink err, fixed with running:
+  # ln -s /usr/lib/x86_64-linux-gnu/libcuda.so.1 /usr/local/cuda/lib64/libcuda.so
+  # and rerun: apt install -y protobuf-compiler
+  protoc object_detection/protos/*.proto --python_out=.
+  cd models/research/
+  # install Object Detection API
+  cp object_detection/packages/tf2/setup.py .
+  python -m pip install --use-feature=2020-resolver .
+  # run test
+  python object_detection/builders/model_builder_tf2_test.py
+  # rm -rf models (if desired)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;(Optional) Install JupyterLab Extensions and enable TensorBoard within Jupyterlab-Docker container&lt;br /&gt;
+  Stable versions worked on my local environment
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  curl -sL https://deb.nodesource.com/setup_12.x | bash -
+  apt-get install -y nodejs
+  node --version # check: v12.22.10
+  npm --version # check: 6.14.16
+  pip install jupyterlab==2.3.2 
+  pip install git+https://github.com/cliffwoolley/jupyter_tensorboard.git 
+  pip install tensorboard==2.2
+  jupyter labextension install jupyterlab_tensorboard
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+        &lt;p&gt;Commit and run container with any open port for JupyterLab&lt;br /&gt;
+  e.g.&lt;/p&gt;
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  docker run --rm -it --gpus all -p 4000:4000 !image_name:tag
+  conda activate !env_name
+  jupyter lab --ip='0.0.0.0' --port=4000 --no-browser --allow-root
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+        &lt;p&gt;On your &lt;strong&gt;Windows&lt;/strong&gt;, open &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localhost:4000&lt;/code&gt; with browser&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Setting Docker image for Jekyll blog
+    &lt;ul&gt;
+      &lt;li&gt;Get latest Ubuntu image and install packages
+        &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  docker run --rm -it -p 4000:4000 ubuntu
+  apt-get update
+  apt-get install git
+  apt-get install vim ruby-full build-essential zlib1g-dev -y
+
+  echo '# Install Ruby Gems to ~/gems' &amp;gt;&amp;gt; ~/.bashrc
+  echo 'export GEM_HOME=&quot;$HOME/gems&quot;' &amp;gt;&amp;gt; ~/.bashrc
+  echo 'export PATH=&quot;$HOME/gems/bin:$PATH&quot;' &amp;gt;&amp;gt; ~/.bashrc
+  source ~/.bashrc
+  gem install jekyll bundler
+		
+  jekyll -v # 4.2.1
+  mkdir -p /root/blog_home
+  echo 'export BLOG_HOME=&quot;/root/blog_home&quot;' &amp;gt;&amp;gt; ~/.bashrc
+  echo '# Start jekyll' &amp;gt;&amp;gt; ~/.bashrc
+  source ~/.bashrc
+  cd $BLOG_HOME # Get any jekyll blog template here
+  rm Gemfile.lock # if needed
+  bundle install
+  bundle exec jekyll serve --host 0.0.0.0 -p 4000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        
+        <pubDate>Wed, 02 Mar 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/DevEnv_Setup</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/DevEnv_Setup</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Starfish detection w/ TF Object Detection API</title>
         
           <description>&lt;h2 id=&quot;tensorflow---help-protect-the-great-barrier-reef&quot;&gt;TensorFlow - Help Protect the Great Barrier Reef&lt;/h2&gt;
@@ -32,7 +170,7 @@
 &lt;iframe src=&quot;https://www.kaggle.com/embed/kwondalhyeon/starfish-detection-w-tf-object-detection-api?kernelSessionId=87885389&quot; height=&quot;1200&quot; style=&quot;margin: 0 auto; width: 100%; max-width: 100%;&quot; frameborder=&quot;0&quot; scrolling=&quot;auto&quot; title=&quot;Starfish detection w/ TF Object Detection API&quot;&gt;&lt;/iframe&gt;
 </description>
         
-        <pubDate>Tue, 15 Feb 2022 00:00:00 +0900</pubDate>
+        <pubDate>Mon, 14 Feb 2022 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/starfish_detection</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/starfish_detection</guid>
@@ -196,7 +334,7 @@
 &lt;/ul&gt;
 </description>
         
-        <pubDate>Thu, 03 Feb 2022 00:00:00 +0900</pubDate>
+        <pubDate>Wed, 02 Feb 2022 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec14</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec14</guid>
@@ -282,7 +420,7 @@ $\rightarrow$ &lt;strong&gt;ATTENTION MAPS&lt;/strong&gt;&lt;br /&gt;
 &lt;p&gt;With a model trained on proposed rotation recognition task with unlabeled data, freeze its early conv. layers and attach the layers from a supervised model, evaluate on a supervised task with a subset of labeled data.&lt;/p&gt;
 </description>
         
-        <pubDate>Tue, 25 Jan 2022 00:00:00 +0900</pubDate>
+        <pubDate>Mon, 24 Jan 2022 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/Rotation</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/Rotation</guid>
@@ -487,7 +625,7 @@ Large training batch size is crucial for SimCLR, but it causes large memory foot
 &lt;img src=&quot;/assets/images/cs231n_lec13_16.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
 </description>
         
-        <pubDate>Thu, 20 Jan 2022 00:00:00 +0900</pubDate>
+        <pubDate>Wed, 19 Jan 2022 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec13</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec13</guid>
@@ -823,7 +961,7 @@ Generator network: try to fool discriminator by generating real-looking images&l
 &lt;/ul&gt;
 </description>
         
-        <pubDate>Mon, 10 Jan 2022 00:00:00 +0900</pubDate>
+        <pubDate>Sun, 09 Jan 2022 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec12</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec12</guid>
@@ -1113,7 +1251,7 @@ Outputs: Set of vectors &lt;strong&gt;y&lt;/strong&gt;&lt;/p&gt;
 &lt;/ul&gt;
 </description>
         
-        <pubDate>Wed, 05 Jan 2022 00:00:00 +0900</pubDate>
+        <pubDate>Tue, 04 Jan 2022 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec11</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec11</guid>
@@ -1341,7 +1479,7 @@ g: Gate gate, How much to write to cell&lt;/p&gt;
 &lt;/ul&gt;
 </description>
         
-        <pubDate>Tue, 04 Jan 2022 00:00:00 +0900</pubDate>
+        <pubDate>Mon, 03 Jan 2022 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec10</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec10</guid>
@@ -1578,7 +1716,7 @@ g: Gate gate, How much to write to cell&lt;/p&gt;
 
 </description>
         
-        <pubDate>Mon, 03 Jan 2022 00:00:00 +0900</pubDate>
+        <pubDate>Sun, 02 Jan 2022 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec9</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec9</guid>
@@ -1893,7 +2031,7 @@ g: Gate gate, How much to write to cell&lt;/p&gt;
 
 </description>
         
-        <pubDate>Tue, 28 Dec 2021 00:00:00 +0900</pubDate>
+        <pubDate>Mon, 27 Dec 2021 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec8</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec8</guid>
@@ -2095,7 +2233,7 @@ g: Gate gate, How much to write to cell&lt;/p&gt;
 
 </description>
         
-        <pubDate>Mon, 27 Dec 2021 00:00:00 +0900</pubDate>
+        <pubDate>Sun, 26 Dec 2021 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec7</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec7</guid>
@@ -2450,7 +2588,7 @@ g: Gate gate, How much to write to cell&lt;/p&gt;
 &lt;/ul&gt;
 </description>
         
-        <pubDate>Sun, 19 Dec 2021 00:00:00 +0900</pubDate>
+        <pubDate>Sat, 18 Dec 2021 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec6</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec6</guid>
@@ -2545,7 +2683,7 @@ Networks. Stacked and followed by some activations, finally we make predictions 
 &lt;/ul&gt;
 </description>
         
-        <pubDate>Sun, 19 Dec 2021 00:00:00 +0900</pubDate>
+        <pubDate>Sat, 18 Dec 2021 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec5</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec5</guid>
@@ -2677,7 +2815,7 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.&lt;/p&g
 
 </description>
         
-        <pubDate>Thu, 16 Dec 2021 00:00:00 +0900</pubDate>
+        <pubDate>Wed, 15 Dec 2021 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec4</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec4</guid>
@@ -2801,7 +2939,7 @@ Full sum expensive when &lt;em&gt;N&lt;/em&gt; is large. Approximate su using a 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         
-        <pubDate>Wed, 15 Dec 2021 00:00:00 +0900</pubDate>
+        <pubDate>Tue, 14 Dec 2021 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec3</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec3</guid>
@@ -2921,7 +3059,7 @@ hard cases in non-linearity&lt;/p&gt;
 &lt;/ul&gt;
 </description>
         
-        <pubDate>Tue, 14 Dec 2021 00:00:00 +0900</pubDate>
+        <pubDate>Mon, 13 Dec 2021 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/cs231n_lec2</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec2</guid>
@@ -2935,7 +3073,7 @@ hard cases in non-linearity&lt;/p&gt;
           <description>
 </description>
         
-        <pubDate>Wed, 15 Sep 2021 00:00:00 +0900</pubDate>
+        <pubDate>Tue, 14 Sep 2021 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/fashion_GNN</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/fashion_GNN</guid>
@@ -2949,7 +3087,7 @@ hard cases in non-linearity&lt;/p&gt;
           <description>&lt;p&gt;&lt;img src=&quot;/assets/images/m_slide_full.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
 </description>
         
-        <pubDate>Fri, 18 Jun 2021 00:00:00 +0900</pubDate>
+        <pubDate>Thu, 17 Jun 2021 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/stock_portfolio</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/stock_portfolio</guid>
@@ -2963,7 +3101,7 @@ hard cases in non-linearity&lt;/p&gt;
           <description>
 </description>
         
-        <pubDate>Wed, 02 Jun 2021 00:00:00 +0900</pubDate>
+        <pubDate>Tue, 01 Jun 2021 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/kpop_fandom</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/kpop_fandom</guid>
@@ -2977,7 +3115,7 @@ hard cases in non-linearity&lt;/p&gt;
           <description>
 </description>
         
-        <pubDate>Fri, 21 May 2021 00:00:00 +0900</pubDate>
+        <pubDate>Thu, 20 May 2021 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/stock_cluster</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/stock_cluster</guid>
@@ -2991,7 +3129,7 @@ hard cases in non-linearity&lt;/p&gt;
           <description>
 </description>
         
-        <pubDate>Wed, 16 Dec 2020 00:00:00 +0900</pubDate>
+        <pubDate>Tue, 15 Dec 2020 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/R_air_polution</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/R_air_polution</guid>
@@ -3005,7 +3143,7 @@ hard cases in non-linearity&lt;/p&gt;
           <description>
 </description>
         
-        <pubDate>Fri, 19 Jun 2020 00:00:00 +0900</pubDate>
+        <pubDate>Thu, 18 Jun 2020 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/NLP_korean_RNN</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/NLP_korean_RNN</guid>
@@ -3342,7 +3480,7 @@ With $\lambda$ as preset at a small value or found using the validation-set appr
 &lt;/ul&gt;
 </description>
         
-        <pubDate>Thu, 28 May 2020 00:00:00 +0900</pubDate>
+        <pubDate>Wed, 27 May 2020 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/islr_ch10</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch10</guid>
@@ -3553,7 +3691,7 @@ This is known as &lt;em&gt;hinge loss&lt;/em&gt;. It turns out that the hinge lo
 
 </description>
         
-        <pubDate>Thu, 21 May 2020 00:00:00 +0900</pubDate>
+        <pubDate>Wed, 20 May 2020 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/islr_ch9</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch9</guid>
@@ -4010,7 +4148,7 @@ This is known as &lt;em&gt;hinge loss&lt;/em&gt;. It turns out that the hinge lo
 &lt;/ul&gt;
 </description>
         
-        <pubDate>Thu, 14 May 2020 00:00:00 +0900</pubDate>
+        <pubDate>Wed, 13 May 2020 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/islr_ch8</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch8</guid>
@@ -4024,7 +4162,7 @@ This is known as &lt;em&gt;hinge loss&lt;/em&gt;. It turns out that the hinge lo
           <description>
 </description>
         
-        <pubDate>Sun, 10 May 2020 16:00:00 +0900</pubDate>
+        <pubDate>Sun, 10 May 2020 07:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/NLP_eng_ml</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/NLP_eng_ml</guid>
@@ -4417,7 +4555,7 @@ This is known as &lt;em&gt;hinge loss&lt;/em&gt;. It turns out that the hinge lo
 
 </description>
         
-        <pubDate>Thu, 07 May 2020 00:00:00 +0900</pubDate>
+        <pubDate>Wed, 06 May 2020 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/islr_ch7</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch7</guid>
@@ -4974,7 +5112,7 @@ reduced model can lead to better results than fitting the standard linear model.
 &lt;/ul&gt;
 </description>
         
-        <pubDate>Thu, 30 Apr 2020 00:00:00 +0900</pubDate>
+        <pubDate>Wed, 29 Apr 2020 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/islr_ch6</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch6</guid>
@@ -5135,7 +5273,7 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$&lt;/p&gt;
 
 </description>
         
-        <pubDate>Thu, 23 Apr 2020 00:00:00 +0900</pubDate>
+        <pubDate>Wed, 22 Apr 2020 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/islr_ch5</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch5</guid>
@@ -5149,7 +5287,7 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$&lt;/p&gt;
           <description>
 </description>
         
-        <pubDate>Thu, 16 Apr 2020 00:00:00 +0900</pubDate>
+        <pubDate>Wed, 15 Apr 2020 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/islr_ch4</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch4</guid>
@@ -5163,7 +5301,7 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$&lt;/p&gt;
           <description>
 </description>
         
-        <pubDate>Fri, 03 Apr 2020 00:00:00 +0900</pubDate>
+        <pubDate>Thu, 02 Apr 2020 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/islr_ch3</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch3</guid>
@@ -5177,7 +5315,7 @@ $\cdots \bar{S}^{*} = \frac{1}{B}\sum_{b=1}^B S(Z^{*b})$&lt;/p&gt;
           <description>
 </description>
         
-        <pubDate>Mon, 16 Mar 2020 00:00:00 +0900</pubDate>
+        <pubDate>Sun, 15 Mar 2020 15:00:00 +0000</pubDate>
         <link>
         http://0.0.0.0:4000/islr_ch2</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/islr_ch2</guid>
