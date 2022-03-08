@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-04T08:01:54+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">DevEnv Setup</title><link href="http://0.0.0.0:4000/DevEnv_Setup" rel="alternate" type="text/html" title="DevEnv Setup" /><published>2022-03-02T00:00:00+00:00</published><updated>2022-03-02T00:00:00+00:00</updated><id>http://0.0.0.0:4000/DevEnv_Setup</id><content type="html" xml:base="http://0.0.0.0:4000/DevEnv_Setup">&lt;ul&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-08T06:04:29+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">DevEnv Setup</title><link href="http://0.0.0.0:4000/DevEnv_Setup" rel="alternate" type="text/html" title="DevEnv Setup" /><published>2022-03-02T00:00:00+00:00</published><updated>2022-03-02T00:00:00+00:00</updated><id>http://0.0.0.0:4000/DevEnv_Setup</id><content type="html" xml:base="http://0.0.0.0:4000/DevEnv_Setup">&lt;ul&gt;
   &lt;li&gt;On purpose of setting local development environment on a new SSD storage, followed instructions below. Post for later use.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Document &lt;a href=&quot;https://docs.microsoft.com/ko-kr/windows/ai/directml/gpu-cuda-in-wsl&quot;&gt;Enable NVIDIA CUDA on WSL&lt;/a&gt;
+  &lt;li&gt;Document &lt;a href=&quot;https://docs.microsoft.com/en-us/windows/ai/directml/gpu-cuda-in-wsl&quot;&gt;Enable NVIDIA CUDA on WSL&lt;/a&gt;
     &lt;ul&gt;
       &lt;li&gt;Install stable version of Windows 11&lt;/li&gt;
       &lt;li&gt;Enable WSL, install Ubuntu(20.04.3 LTS)&lt;br /&gt;
@@ -141,7 +141,286 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;iframe src=&quot;https://www.kaggle.com/embed/kwondalhyeon/starfish-detection-w-tf-object-detection-api?kernelSessionId=87885389&quot; height=&quot;1200&quot; style=&quot;margin: 0 auto; width: 100%; max-width: 100%;&quot; frameborder=&quot;0&quot; scrolling=&quot;auto&quot; title=&quot;Starfish detection w/ TF Object Detection API&quot;&gt;&lt;/iframe&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">TensorFlow - Help Protect the Great Barrier Reef Worked in Feb. 2022. to study object detection model Task: Underwater + Small object detection Score(IoU=0.50:0.95): mAP@100: 0.364686 / AR@100: 0.491768 / Expected F2: 0.459727 Direct link: kaggle notebook</summary></entry><entry><title type="html">cs231n - Lecture 14. Visualizing and Understanding</title><link href="http://0.0.0.0:4000/cs231n_lec14" rel="alternate" type="text/html" title="cs231n - Lecture 14. Visualizing and Understanding" /><published>2022-02-02T15:00:00+00:00</published><updated>2022-02-02T15:00:00+00:00</updated><id>http://0.0.0.0:4000/cs231n_lec14</id><content type="html" xml:base="http://0.0.0.0:4000/cs231n_lec14">&lt;h2 id=&quot;whats-going-on-inside-convnets&quot;&gt;What’s going on inside ConvNets?&lt;/h2&gt;
+&lt;iframe src=&quot;https://www.kaggle.com/embed/kwondalhyeon/starfish-detection-w-tf-object-detection-api?kernelSessionId=87885389&quot; height=&quot;1200&quot; style=&quot;margin: 0 auto; width: 100%; max-width: 100%;&quot; frameborder=&quot;0&quot; scrolling=&quot;auto&quot; title=&quot;Starfish detection w/ TF Object Detection API&quot;&gt;&lt;/iframe&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">TensorFlow - Help Protect the Great Barrier Reef Worked in Feb. 2022. to study object detection model Task: Underwater + Small object detection Score(IoU=0.50:0.95): mAP@100: 0.364686 / AR@100: 0.491768 / Expected F2: 0.459727 Direct link: kaggle notebook</summary></entry><entry><title type="html">cs231n - Lecture 15. Detection and Segmentation</title><link href="http://0.0.0.0:4000/cs231n_lec15" rel="alternate" type="text/html" title="cs231n - Lecture 15. Detection and Segmentation" /><published>2022-02-07T00:00:00+00:00</published><updated>2022-02-07T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs231n_lec15</id><content type="html" xml:base="http://0.0.0.0:4000/cs231n_lec15">&lt;h3 id=&quot;computer-vision-tasks&quot;&gt;Computer Vision Tasks&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Image Classification: No spatial extent&lt;/li&gt;
+  &lt;li&gt;Semantic Segmentation: No objects, just pixels&lt;/li&gt;
+  &lt;li&gt;Object Detection/ Instance Segmentation: Multiple objects&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;semantic-segmentation&quot;&gt;Semantic Segmentation&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Paired training data:&lt;br /&gt;
+  For each training image, &lt;strong&gt;each pixel is labeled&lt;/strong&gt; with a semantic category.&lt;/li&gt;
+  &lt;li&gt;At test time, classify each pixel of a new image.&lt;/li&gt;
+  &lt;li&gt;Problem:&lt;br /&gt;
+  Classifying with only single pixel does not include context information.&lt;/li&gt;
+  &lt;li&gt;Idea:
+    &lt;ul&gt;
+      &lt;li&gt;Sliding Window&lt;br /&gt;
+  Extract patch from full image, classify center pixel with CNN.&lt;br /&gt;
+  $\color{red}{(-)}$ Very inefficient, not reusing shared features between overlapping patches.&lt;/li&gt;
+      &lt;li&gt;Convolution&lt;br /&gt;
+  Encode the entire image with conv net, and do semantic segmentation on top.&lt;br /&gt;
+  $\color{red}{(-)}$ CNN architectures often change the spatial sizes, but semantic segmentation requires the output size to be same as input size.&lt;/li&gt;
+      &lt;li&gt;Fully Convolutional&lt;br /&gt;
+  Design a network with &lt;strong&gt;only&lt;/strong&gt; convolutional layers without downsampling operators&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec15_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+  $\textcolor{red}{(-)}$ convolutions at original image resolution is very expensive&lt;br /&gt;
+  $\rightarrow$ Design convolutional network with &lt;strong&gt;downsampling and upsampling&lt;/strong&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec15_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Downsampling: Pooling, strided convolution&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In-Network Upsampling: Unpooling, strided transpose convolution&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Unpooling:&lt;br /&gt;
+  Nearest Neighbor: copy-paste to extended region&lt;br /&gt;
+  “Bed of Nails”: no positional argument, pad with zeros&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Max Unpooling: use positions from poolying layer ahead, pad with zeros&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Learnable Downsampling: Strided convolution&lt;br /&gt;
+  Output is a dot product between filter and input&lt;br /&gt;
+  Stride gives ratio between movement in input and output&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Learnable Upsampling: Transposed convolution&lt;br /&gt;
+  Input gives weight for filter&lt;br /&gt;
+  Output contains copies of the filter weighted by the input, summing at where at overlaps in the output&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec15_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Summary&lt;br /&gt;
+  Label each pixel in the image with a category label&lt;br /&gt;
+  Don’t differentiate instances, only care about pixels&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;object-detection&quot;&gt;Object Detection&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Multiple Objects:&lt;br /&gt;
+  Each image needs a different number of outputs;&lt;br /&gt;
+  $\rightarrow$ Apply a CNN to many different crops of the image, CNN classifies each crop as object or background.&lt;br /&gt;
+  $\color{red}{(-)}$ Need to apply CNN to huge number of locations, scales, and aspect ratios, very computationally expensive.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;r-cnn&quot;&gt;R-CNN&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_4.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Girshick et al, “Rich feature hierarchies for accurate object detection and
+semantic segmentation”, CVPR 2014&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;2-stage Detector: Region Proposal + Region Classification
+    &lt;ol&gt;
+      &lt;li&gt;Image as input&lt;/li&gt;
+      &lt;li&gt;Crop bounding boxes with Selective Search&lt;br /&gt;
+ Warp into same size pixels for CNN model&lt;/li&gt;
+      &lt;li&gt;Input Warped images into CNN&lt;/li&gt;
+      &lt;li&gt;Run classification on each&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm:
+    &lt;ol&gt;
+      &lt;li&gt;Region Proposals: Selective Search&lt;br /&gt;
+ Find “blobby” image regions that are likely to contain objects.&lt;br /&gt;
+ Relatively fast to run; e.g. Selective Search gives 2000 region proposals in a few seconds on CPU.&lt;/li&gt;
+      &lt;li&gt;CNN:&lt;br /&gt;
+ For a pre-trained CNN architecture, change the number of classes on the last classification layer(detection classes &lt;em&gt;N&lt;/em&gt; + background &lt;em&gt;1&lt;/em&gt;), fine-tune with dataset for Object Detection. From the region proposal input, outputs a fixed-length feature vector.&lt;/li&gt;
+      &lt;li&gt;SVM: Category-Specific Linear SVMs&lt;br /&gt;
+ Positive: ground-truth boxes&lt;br /&gt;
+ Negative: IoU under 0.3&lt;br /&gt;
+ Scores each feature vector for classes, classifies whether each one is positive/negative(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;is_object&lt;/code&gt;).&lt;/li&gt;
+      &lt;li&gt;Non-Maximum Suppression: with concept of &lt;strong&gt;IoU&lt;/strong&gt;&lt;br /&gt;
+ Intersection over Union; area of intersection divided by area of union&lt;br /&gt;
+ If there are two boxes with IoU over 0.5, consider them proposed on the same object, leave one with the highest score.&lt;/li&gt;
+      &lt;li&gt;Bounding Box Regression: adjust boxes from Selective Search
+        &lt;ul&gt;
+          &lt;li&gt;Algorithm:&lt;br /&gt;
+ Assume a bounding box $P^i = (P_x^i, P_y^i, P_w^i, P_h^i)$,&lt;br /&gt;
+ Ground-truth box $G = (G_x, G_y, G_w, G_h)$.&lt;br /&gt;
+ Define a function $d$, mapping $P$ close to $G$;&lt;br /&gt;
+ \(\hat{G}_x = P_w d_x(P) + P_x\)&lt;br /&gt;
+ \(\hat{G}_y = P_h d_y(P) + P_y\)&lt;br /&gt;
+ \(\hat{G}_w = P_w \mbox{exp}(d_w(P))\)&lt;br /&gt;
+ \(\hat{G}_h = P_h \mbox{exp}(d_h(P))\)&lt;br /&gt;
+ where $d_{\star}(P) = w_{\star}^T \phi_5(P)$, is modeled as a linear function(learnable weight vector &lt;em&gt;w&lt;/em&gt;) of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POOL5&lt;/code&gt; features of proposal &lt;em&gt;P&lt;/em&gt;($\phi_5(P)$). We learn $w_{\star}$ by optimizing the regularized least squares objective(Ridge regression)&lt;br /&gt;
+  &lt;em&gt;Learnable parameters on: 2, 3, 5&lt;/em&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Summary:&lt;br /&gt;
+  Score: 53.7% on Pascal VOC 2010&lt;br /&gt;
+  Problem:&lt;br /&gt;
+      1. Low Performance; Warping images into 224x224 size for AlexNet&lt;br /&gt;
+      2. Slow; Using all candidates from Selective Search&lt;br /&gt;
+      3. Not GPU-optimized; Using Selective Search and SVM&lt;br /&gt;
+      4. No Back Propagation; Not sharing computations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;fast-r-cnn&quot;&gt;Fast R-CNN&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_5.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Girshick, “Fast R-CNN”, ICCV 2015&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;idea:&lt;br /&gt;
+  Pass the image through convnet &lt;strong&gt;before&lt;/strong&gt; cropping. Crop the conv feature instead.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm:
+    &lt;ol&gt;
+      &lt;li&gt;Pass the full image through pre-trained CNN and extract feature maps.&lt;/li&gt;
+      &lt;li&gt;Get RoIs from a proposal method(Selective Search) and crop by RoI Pooling, get fixed size feature vectors.&lt;/li&gt;
+      &lt;li&gt;With RoI feature vectors, pass some fully connected layers and split into two branches.&lt;/li&gt;
+      &lt;li&gt;1) pass softmax and classify the class of RoI. no SVM used. 2) Run bounding box regression.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Cropping Features: RoI Pool &lt;!--[](href) link to terminologies --&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Project RoI proposals(on input image) onto CNN image features.&lt;/li&gt;
+      &lt;li&gt;Divide into subregions.&lt;/li&gt;
+      &lt;li&gt;Run pooling(Max-pool) within each subregion.&lt;br /&gt;
+  $\rightarrow$ Region features always be the same size regardless of input region size&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;faster-r-cnn&quot;&gt;Faster R-CNN&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_6.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Ren et al, “Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks”, NIPS 2015&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;idea:&lt;br /&gt;
+  Fast R-CNN is not GPU-optimized; runtime dominated by region proposals.&lt;br /&gt;
+  By inserting Region Proposal Network(RPN), implemented end-to-end architecture.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm:
+    &lt;ol&gt;
+      &lt;li&gt;Pass the full image through pre-trained CNN and extract feature maps.&lt;/li&gt;
+      &lt;li&gt;RPN:&lt;br /&gt;
+ For &lt;em&gt;K&lt;/em&gt; different anchor boxes of different size and scale at each point in the feature map, predict whether it contains an object(binary classification), and also predict a corrections from the anchor to the ground-truth box(regress 4 numbers per pixel).&lt;br /&gt;
+ &lt;img src=&quot;/assets/images/cs231n_lec15_7.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;Jointly train with 4 losses:&lt;br /&gt;
+ 1) RPN classify object / not object&lt;br /&gt;
+ 2) RPN regress box coordinates&lt;br /&gt;
+ 3) Final classification score (object classes)&lt;br /&gt;
+ 4) Final box coordinates&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Glossing over many details:
+    &lt;ul&gt;
+      &lt;li&gt;Ignore overlapping proposals with non-max suppression&lt;/li&gt;
+      &lt;li&gt;How are anchors determined?&lt;/li&gt;
+      &lt;li&gt;How do we sample positive / negative samples for training the RPN?&lt;/li&gt;
+      &lt;li&gt;How to parameterize bounding box regression?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Two-stage object detector:
+    &lt;ul&gt;
+      &lt;li&gt;First stage: Run once per image
+        &lt;ul&gt;
+          &lt;li&gt;Backbone network&lt;/li&gt;
+          &lt;li&gt;Region proposal network(RPN)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Second stage: Run once per region
+        &lt;ul&gt;
+          &lt;li&gt;Crop features: RoI pool/ align&lt;/li&gt;
+          &lt;li&gt;Predict object class&lt;/li&gt;
+          &lt;li&gt;Prediction bbox offset&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;single-stage-object-detectors-yolo--ssd--retinanet&quot;&gt;Single-Stage Object Detectors: YOLO / SSD / RetinaNet&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Algorithm:
+    &lt;ol&gt;
+      &lt;li&gt;Divide input imgae into grid&lt;/li&gt;
+      &lt;li&gt;Image a set of &lt;strong&gt;base boxes&lt;/strong&gt; centered at each grid cell&lt;/li&gt;
+      &lt;li&gt;Within each grid cell:
+        &lt;ul&gt;
+          &lt;li&gt;Regress from each of the &lt;em&gt;B&lt;/em&gt; base boxes to a final box with 5 numbers(dx, dy, dh, dw, confidence)&lt;/li&gt;
+          &lt;li&gt;Predict scores for each of &lt;em&gt;C&lt;/em&gt; classes(including background as a class)&lt;/li&gt;
+          &lt;li&gt;Looks a lot like RPN, but category-specific&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_8.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;instance-segmentation-mask-r-cnn&quot;&gt;Instance Segmentation: Mask R-CNN&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;He et al, “Mask R-CNN”, ICCV 2017&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec15_9.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec15_10.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec15_11.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec15_12.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec15_13.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;open-source-frameworks&quot;&gt;Open Source Frameworks&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/tensorflow/models/tree/master/research/object_detection&quot;&gt;TensorFlow Detection API&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/facebookresearch/detectron2&quot;&gt;Detectron2(Pytorch)&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;beyond-2d-object-detection&quot;&gt;Beyond 2D Object Detection&lt;/h2&gt;
+
+&lt;h3 id=&quot;object-detection--captioning-dense-captioning&quot;&gt;Object Detection + Captioning: Dense Captioning&lt;/h3&gt;
+
+&lt;h3 id=&quot;dense-video-captioning-timestep-t&quot;&gt;Dense Video Captioning: timestep “T”&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_14.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;objects--relationships-scene-graphs&quot;&gt;Objects + Relationships: Scene Graphs&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_15.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec15_16.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;3d-object-detection&quot;&gt;3D Object Detection&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_17.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;2D bounding box: (x, y, w, h)&lt;br /&gt;
+  $\rightarrow$ 3D oriented bounding box: (x, y, z, w, h, l, r, p, y)&lt;br /&gt;
+  $\rightarrow$ Simplified bbox: no roll &amp;amp; pitch&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Simple Camera Model:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec15_18.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+  A point on the image plane corresponds to a &lt;strong&gt;ray&lt;/strong&gt; in the 3D space&lt;br /&gt;
+  A 2D bounding box on an image is a &lt;strong&gt;frustrum&lt;/strong&gt; in the 3D space&lt;br /&gt;
+  Localize an object in 3D: The object can be anywhere in the &lt;strong&gt;camera viewing frustrum&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Monocular Camera:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec15_19.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;80%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Same idea as Faster RCNN, but proposals are in 3D&lt;/li&gt;
+      &lt;li&gt;3D bounding box proposal, regress 3D box parameters + class score&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;3D Shape Prediction: Mesh R-CNN
+&lt;img src=&quot;/assets/images/cs231n_lec15_20.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!--
+참고
+https://www.youtube.com/watch?v=jqNCdjOB15s
+https://towardsdatascience.com/understanding-region-of-interest-part-1-roi-pooling-e4f5dd65bb44
+https://yeomko.tistory.com/13 갈아먹는 object detection
+https://nuggy875.tistory.com/33 object detection 시리즈
+https://ropiens.tistory.com/73 
+--&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Computer Vision Tasks Image Classification: No spatial extent Semantic Segmentation: No objects, just pixels Object Detection/ Instance Segmentation: Multiple objects Semantic Segmentation Paired training data: For each training image, each pixel is labeled with a semantic category. At test time, classify each pixel of a new image. Problem: Classifying with only single pixel does not include context information. Idea: Sliding Window Extract patch from full image, classify center pixel with CNN. $\color{red}{(-)}$ Very inefficient, not reusing shared features between overlapping patches. Convolution Encode the entire image with conv net, and do semantic segmentation on top. $\color{red}{(-)}$ CNN architectures often change the spatial sizes, but semantic segmentation requires the output size to be same as input size. Fully Convolutional Design a network with only convolutional layers without downsampling operators $\textcolor{red}{(-)}$ convolutions at original image resolution is very expensive $\rightarrow$ Design convolutional network with downsampling and upsampling Downsampling: Pooling, strided convolution In-Network Upsampling: Unpooling, strided transpose convolution Unpooling: Nearest Neighbor: copy-paste to extended region “Bed of Nails”: no positional argument, pad with zeros Max Unpooling: use positions from poolying layer ahead, pad with zeros Learnable Downsampling: Strided convolution Output is a dot product between filter and input Stride gives ratio between movement in input and output Learnable Upsampling: Transposed convolution Input gives weight for filter Output contains copies of the filter weighted by the input, summing at where at overlaps in the output Summary Label each pixel in the image with a category label Don’t differentiate instances, only care about pixels Object Detection Multiple Objects: Each image needs a different number of outputs; $\rightarrow$ Apply a CNN to many different crops of the image, CNN classifies each crop as object or background. $\color{red}{(-)}$ Need to apply CNN to huge number of locations, scales, and aspect ratios, very computationally expensive. R-CNN Girshick et al, “Rich feature hierarchies for accurate object detection and semantic segmentation”, CVPR 2014 2-stage Detector: Region Proposal + Region Classification Image as input Crop bounding boxes with Selective Search Warp into same size pixels for CNN model Input Warped images into CNN Run classification on each Algorithm: Region Proposals: Selective Search Find “blobby” image regions that are likely to contain objects. Relatively fast to run; e.g. Selective Search gives 2000 region proposals in a few seconds on CPU. CNN: For a pre-trained CNN architecture, change the number of classes on the last classification layer(detection classes N + background 1), fine-tune with dataset for Object Detection. From the region proposal input, outputs a fixed-length feature vector. SVM: Category-Specific Linear SVMs Positive: ground-truth boxes Negative: IoU under 0.3 Scores each feature vector for classes, classifies whether each one is positive/negative(is_object). Non-Maximum Suppression: with concept of IoU Intersection over Union; area of intersection divided by area of union If there are two boxes with IoU over 0.5, consider them proposed on the same object, leave one with the highest score. Bounding Box Regression: adjust boxes from Selective Search Algorithm: Assume a bounding box $P^i = (P_x^i, P_y^i, P_w^i, P_h^i)$, Ground-truth box $G = (G_x, G_y, G_w, G_h)$. Define a function $d$, mapping $P$ close to $G$; \(\hat{G}_x = P_w d_x(P) + P_x\) \(\hat{G}_y = P_h d_y(P) + P_y\) \(\hat{G}_w = P_w \mbox{exp}(d_w(P))\) \(\hat{G}_h = P_h \mbox{exp}(d_h(P))\) where $d_{\star}(P) = w_{\star}^T \phi_5(P)$, is modeled as a linear function(learnable weight vector w) of the POOL5 features of proposal P($\phi_5(P)$). We learn $w_{\star}$ by optimizing the regularized least squares objective(Ridge regression) Learnable parameters on: 2, 3, 5 Summary: Score: 53.7% on Pascal VOC 2010 Problem: 1. Low Performance; Warping images into 224x224 size for AlexNet 2. Slow; Using all candidates from Selective Search 3. Not GPU-optimized; Using Selective Search and SVM 4. No Back Propagation; Not sharing computations Fast R-CNN Girshick, “Fast R-CNN”, ICCV 2015 idea: Pass the image through convnet before cropping. Crop the conv feature instead. Algorithm: Pass the full image through pre-trained CNN and extract feature maps. Get RoIs from a proposal method(Selective Search) and crop by RoI Pooling, get fixed size feature vectors. With RoI feature vectors, pass some fully connected layers and split into two branches. 1) pass softmax and classify the class of RoI. no SVM used. 2) Run bounding box regression. Cropping Features: RoI Pool Project RoI proposals(on input image) onto CNN image features. Divide into subregions. Run pooling(Max-pool) within each subregion. $\rightarrow$ Region features always be the same size regardless of input region size Faster R-CNN Ren et al, “Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks”, NIPS 2015 idea: Fast R-CNN is not GPU-optimized; runtime dominated by region proposals. By inserting Region Proposal Network(RPN), implemented end-to-end architecture. Algorithm: Pass the full image through pre-trained CNN and extract feature maps. RPN: For K different anchor boxes of different size and scale at each point in the feature map, predict whether it contains an object(binary classification), and also predict a corrections from the anchor to the ground-truth box(regress 4 numbers per pixel). Jointly train with 4 losses: 1) RPN classify object / not object 2) RPN regress box coordinates 3) Final classification score (object classes) 4) Final box coordinates Glossing over many details: Ignore overlapping proposals with non-max suppression How are anchors determined? How do we sample positive / negative samples for training the RPN? How to parameterize bounding box regression? Two-stage object detector: First stage: Run once per image Backbone network Region proposal network(RPN) Second stage: Run once per region Crop features: RoI pool/ align Predict object class Prediction bbox offset Single-Stage Object Detectors: YOLO / SSD / RetinaNet Algorithm: Divide input imgae into grid Image a set of base boxes centered at each grid cell Within each grid cell: Regress from each of the B base boxes to a final box with 5 numbers(dx, dy, dh, dw, confidence) Predict scores for each of C classes(including background as a class) Looks a lot like RPN, but category-specific Instance Segmentation: Mask R-CNN He et al, “Mask R-CNN”, ICCV 2017 Open Source Frameworks TensorFlow Detection API Detectron2(Pytorch) Beyond 2D Object Detection Object Detection + Captioning: Dense Captioning Dense Video Captioning: timestep “T” Objects + Relationships: Scene Graphs 3D Object Detection 2D bounding box: (x, y, w, h) $\rightarrow$ 3D oriented bounding box: (x, y, z, w, h, l, r, p, y) $\rightarrow$ Simplified bbox: no roll &amp;amp; pitch Simple Camera Model: A point on the image plane corresponds to a ray in the 3D space A 2D bounding box on an image is a frustrum in the 3D space Localize an object in 3D: The object can be anywhere in the camera viewing frustrum Monocular Camera: Same idea as Faster RCNN, but proposals are in 3D 3D bounding box proposal, regress 3D box parameters + class score 3D Shape Prediction: Mesh R-CNN</summary></entry><entry><title type="html">cs231n - Lecture 14. Visualizing and Understanding</title><link href="http://0.0.0.0:4000/cs231n_lec14" rel="alternate" type="text/html" title="cs231n - Lecture 14. Visualizing and Understanding" /><published>2022-02-02T15:00:00+00:00</published><updated>2022-02-02T15:00:00+00:00</updated><id>http://0.0.0.0:4000/cs231n_lec14</id><content type="html" xml:base="http://0.0.0.0:4000/cs231n_lec14">&lt;h2 id=&quot;whats-going-on-inside-convnets&quot;&gt;What’s going on inside ConvNets?&lt;/h2&gt;
 
 &lt;h3 id=&quot;visualizing-what-models-have-learned&quot;&gt;Visualizing what models have learned&lt;/h3&gt;
 &lt;ul&gt;
@@ -1588,304 +1867,4 @@ g: Gate gate, How much to write to cell&lt;/p&gt;
       &lt;li&gt;Swept all classification and detection competitions in ILSVRC’15 and COCO’15&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Review LeCun et al., 1998 $5\times 5$ Conv filters applied at stride 1 $2\times 2$ Subsampling (Pooling) layers applied at stride 2 i.e. architecture is [CONV-POOL-CONV-POOL-FC-FC] Stride: Downsample output activations Padding: Preserve input spatial dimensions in output activations Filter: Each conv filter outputs a “slice” in the activation Case Studies AlexNet: First CNN-based winner Architecture: [CONV1-MAXPOOL1-NORM1-CONV2-MAXPOOL2-NORM2-CONV3-CONV4-CONV5-MaxPOOL3-FC6-FC7-FC8] Input: $227\times 227\times 3$ images First layer(CONV1): 96 $11\times 11$ filters applied at stride 4, pad 0 Output volume: $W’ = (W-F+2P)/S + 1 \rightarrow$ $55\times 55\times 96$ Parameters: $(11* 11* 3 +1)* 96 =$ 36K Second layer(POOL1): $3\times 3\times$ filters applied at stride 2 Output volume: $27\times 27\times 96$ Parameters: 0 $\vdots$ CONV2($27\times 27\times 256$): 256 $5\times 5$ filters applied at stride 1, pad 2 MAX POOL2($13\times 13\times 256): $3\times 3\times$ filters applied at stride 2 CONV3($13\times 13\times 384$): 384 $3\times 3$ filters applied at stride 1, pad 1 CONV4($13\times 13\times 384$): 384 $3\times 3$ filters applied at stride 1, pad 1 CONV5($13\times 13\times 256$): 256 $3\times 3$ filters applied at stride 1, pad 1 MAX POOL3($6\times 6\times 256$): $3\times 3\times$ filters applied at stride 2 FC6(4096): 4096 neurons FC7(4096): 4096 neurons FC8(1000): 1000 neurons (class scores) Historical note: Network spread across 2 GPUs, half the neurons (feature maps) on each GPU. CONV1, CONV2, CONV4, CONV5: Connections only with feature maps on same GPU CONV3, FC6, FC7, FC8: Connections with all feature maps in preceding layer, communication across GPUs Details/Retrospectives: Krizhevsky et al. 2012 first use of ReLU used Norm layers (not common anymore) heavy data augmentation dropout 0.5 batch size 128 SGD Momentum 0.9 Learning rate 1e-2, reduced by 10 manually when val accuracy plateaus L2 weight decay 5e-4 7 CNN ensemble: 18.2% $\rightarrow$ 15.4% ZFNet: Improved hyperparameters over AlexNet AlexNet but: CONV1: change from ($11\times 11$ stride 4) to ($7\times 7$ stride 2) CONV3,4,5: instead of 384, 384, 256 filters use 512, 1024, 512 ImageNet top 5 error: 16.4% -&amp;gt; 11.7% Zeiler and Fergus, 2013 VGGNet: Deeper Networks Small filters, Deeper networks 8 layers (AlexNet) $\rightarrow$ 16 - 19 layers (VGG16Net) Only $3\times 3$ CONV stride 1, pad 1 and $2\times 2$ MAX POOL with stride 2 11.7% top 5 error(ZFNet) $\rightarrow$ 7.3% top 5 error in ILSVRC’14 Why use smaller filters? :Stack of three $3\times 3$ conv (stride 1) layers has same effective receptive field as one $7\times 7$ conv layer, but with deeper, more non-linearities and fewer parameters TOTAL memory: 24M * 4 bytes ~= 96MB / image (for a forward pass) TOTAL params: 138M parameters Most memory is in early CONV, Most params are in late FC Details: Simonyan and Zisserman, 2014 ILSVRC’14 2nd in classification, 1st in localization Similar training procedure as Krizhevsky 2012 No Local Response Normalisation (LRN) Use VGG16 or VGG19 (VGG19 only slightly better, more memory) Use ensembles for best results FC7 features generalize well to other tasks GoogLeNet Inception module: design a good local network topology(network within a network) and then stack these modules on top of each other Apply parallel filter operations on the input from previous layer: Multiple receptive field sizes for convolution(1x1, 3x3, 5x5), Pooling(3x3) Concatenate all filter outputs together channel-wise “Bottlenect” layers to reduce computational complexity of inception: use 1x1 conv to reduce feature channel size; alternatively, interpret it as applying the same FC layer on each input pixel preserves spatial dimensions, reduces depth Full GoogLeNet Architecture: Stem Network: [Conv-POOL-2x CONV-POOL] Stack Inception modules: with dimension reduction on top of each other Classifier output: [(H*W*c)-Avg POOL-(1*1*c)-FC-Softmax] Global average pooling layer before final FC layer, avoids expensive FC layers Auxiliary classification layers: [AvgPool-1x1 Conv-FC-FC-Softmax] to inject additional gradient at lower layers Details: Deeper networks, with computational efficiency ILSVRC’14 classification winner (6.7% top 5 error) 22 layers Only 5 million parameters(12x less than AlexNet, 27x less than VGG-16) Efficient “Inception” module No FC layers ResNet From 2015, “Revolution of Depth”; more than 100 layers Stacking deeper layers on a “plain” convolutional neural network results in lower both test and training error. The deeper model performs worse, but it’s not caused by overfitting. Fact: Deep models have more representation power (more parameters) than shallower models. Hypothesis: the problem is an optimization problem, deeper models are harder to optimize Solution: copying the learned layers from the shallower model and setting additional layers to identity mapping. “Residual block”: Use network layers to fit a residual mapping instead of directly trying to fit a desired underlying mapping Full ResNet Architecture: Stack residual blocks Every residual block has two $3\times 3$ conv layers Periodically, double number of filters and downsample spatially using stride 2 (/2 in each dimension). Reduce the activation volume by half. Additional conv layer at the beginning (7x7 conv in stem) No FC layers at the end (only FC 1000 to output classes) (In theory, you can train a ResNet with input image of variable sizes) For deeper networks(ResNet-50+): use bottleneck layer to improve efficiency (similar to GoogLeNet) e.g. [(28x28x256 INPUT)-(1x1 CONV, 64)-(3x3 CONV, 64)-(1x1 CONV, 256)-(28x28x256 OUTPUT)] Training ResNet in practice: Batch Normalization after every CONV layer Xavier initialization from He et al. SGD + Momentum (0.9) Learning rate: 0.1, divided by 10 when validation error plateaus Mini-batch size 256 Weight decay of 1e-5 No dropout used Experimental Results: He et al., 2015 Able to train very deep networks without degrading (152 layers on ImageNet, 1202 on Cifar) Deeper networks now achieve lower training error as expected Swept 1st place in all ILSVRC and COCO 2015 competitions ILSVRC 2015 classification winner (3.6% top 5 error); better than human performance! Details: Very deep networks using residual connections 152-layer model for ImageNet ILSVRC’15 classification winner(3.57% top 5 error) Swept all classification and detection competitions in ILSVRC’15 and COCO’15</summary></entry><entry><title type="html">cs231n - Lecture 8. Training Neural Networks II</title><link href="http://0.0.0.0:4000/cs231n_lec8" rel="alternate" type="text/html" title="cs231n - Lecture 8. Training Neural Networks II" /><published>2021-12-27T15:00:00+00:00</published><updated>2021-12-27T15:00:00+00:00</updated><id>http://0.0.0.0:4000/cs231n_lec8</id><content type="html" xml:base="http://0.0.0.0:4000/cs231n_lec8">&lt;h2 id=&quot;optimization&quot;&gt;Optimization&lt;/h2&gt;
-
-&lt;h3 id=&quot;problems-with-sgd&quot;&gt;Problems with SGD&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;What if loss changes quickly in one direction and slowly in another? What does gradient descent do?
- Very slow progress along shallow dimension, jitter along steep direction&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What if the loss function has a local minima or saddle point?&lt;br /&gt;
- Zero gradient, gradient descent gets stuck(more common in high dimension)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Gradients come from minibatches can be noisy&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;sgd--momentum&quot;&gt;SGD + Momentum&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;To avoid local minima, combine gradient at current point with &lt;em&gt;velocity&lt;/em&gt; to get step used to update weights; continue moving in the general direction as the previous iterations&lt;br /&gt;
-  \(v_{t+1}=\rho v_t + \nabla f(x_t)\)&lt;br /&gt;
-  \(x_{t+1}=x_t - \alpha v_{t+1}\)&lt;br /&gt;
-  with &lt;em&gt;rho&lt;/em&gt; giving “friction”; typically &lt;em&gt;0.9&lt;/em&gt; or &lt;em&gt;0.99&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;vx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compute_gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;vx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rho&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vx&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;nesterov-momentum&quot;&gt;Nesterov Momentum&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;“Look ahead” to the point where updating using velocity would take us; compute gradient there and mix it with velocity to get actual update direction&lt;br /&gt;
-  \(v_{t+1}=\rho v_t - \alpha\nabla f(x_t + \rho v_t)\)&lt;br /&gt;
-  \(x_{t+1}=x_t + v_{t+1}\)&lt;br /&gt;
-  rearrange with \(\tilde{x}_t = x_t + \rho v_t\),&lt;br /&gt;
-  \(v_{t+1}=\rho v_t - \alpha\nabla f(\tilde{x}_t)\)&lt;br /&gt;
-  \(\begin{align*}
-  \tilde{x}_{t+1} &amp;amp;= \tilde{x}_t - \rho v_t + (1+\rho)v_{t+1}
-                  &amp;amp;= \tilde{x}_t + v_{t+1} + \rho(v_{t+1}-v_t)
-  \end{align*}\)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;adagrad&quot;&gt;AdaGrad&lt;/h3&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compute_gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1e-7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Added element-wise scaling of the gradient based on the historical sum of squares in each dimension&lt;br /&gt;
-  “Per-parameter learning rates” or “adaptive learning rates”&lt;br /&gt;
-  Progress along “steep” directions is damped and “flat” directions is accelerated&lt;br /&gt;
-  Step size decays to zero over time&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;rmsprop-leaky-adagrad&quot;&gt;RMSProp: “Leaky AdaGrad”&lt;/h3&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compute_gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decay_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decay_rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grad_squared&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1e-7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;adam&quot;&gt;Adam&lt;/h3&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;first_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;second_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_iterations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compute_gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;first_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# Momentum
-&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;second_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dx&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;first_unbias&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;			&lt;span class=&quot;c1&quot;&gt;# Bias correction
-&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;second_unbias&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second_moment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beta2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first_unbias&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second_unbias&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1e-7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;# AdaGrad/ RMSProp
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Sort of like RMSProp with momentum
-  Bias correction for the fact that first and second moment estimates start at zero&lt;br /&gt;
-  Adam with &lt;em&gt;beta1 = 0.9, beta2 = 0.999, and learning_rate = 1e-3 or 5e-4&lt;/em&gt; is a great starting point&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;learning-rate-schedules&quot;&gt;Learning rate schedules&lt;/h2&gt;
-
-&lt;h3 id=&quot;learning-rate-decays-over-time&quot;&gt;Learning rate decays over time&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Reduce learning rate by a certain value at a few fixed points(after some epochs)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;learning-rate-decay&quot;&gt;Learning Rate Decay&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Reduce learning rate gradually, e.g.&lt;br /&gt;
-  Cosine:  $\alpha_t = \frac{1}{2}\alpha_0(1+\mbox{cos}(t\pi / T))$&lt;br /&gt;
-  Linear: $\alpha_t = \alpha_0(1-t/T)$&lt;br /&gt;
-  Inverse sqrt: $\alpha_t = \alpha_0 / \sqrt{t}$&lt;br /&gt;
-  while $\alpha_0$ is the initial learning rate, $\alpha_t$ is one at epoch &lt;em&gt;t&lt;/em&gt;, and &lt;em&gt;T&lt;/em&gt; is the total number of epochs&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Linear Warmup&lt;br /&gt;
-  High initial learning rates can make loss explode; linearly increasing learning rate from &lt;em&gt;0&lt;/em&gt; over the first &lt;em&gt;~5000&lt;/em&gt; iterations can prevent this&lt;br /&gt;
-  Empirical rule of thumb: If you increase the batch size by &lt;em&gt;N&lt;/em&gt;, also scale the initial learning rate by &lt;em&gt;N&lt;/em&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;first-order-optimization&quot;&gt;First-Order Optimization&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;Use gradient from linear approximation&lt;/li&gt;
-  &lt;li&gt;Step to minimize the approximation&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;second-order-optimization&quot;&gt;Second-Order Optimization&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;Use gradient and &lt;strong&gt;Hessian&lt;/strong&gt; to form &lt;strong&gt;quadratic&lt;/strong&gt; approximation&lt;/li&gt;
-  &lt;li&gt;Step to the &lt;strong&gt;minima&lt;/strong&gt; of the (quadratic) approximation&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;But Hessian has &lt;em&gt;O(N^2)&lt;/em&gt; elements and inverting takes &lt;em&gt;O(N^3)&lt;/em&gt;, &lt;em&gt;N&lt;/em&gt; is extremely large
-    &lt;ul&gt;
-      &lt;li&gt;Quasi-Newton methods (BGFS most popular):&lt;br /&gt;
-  instead of inverting the Hessian, approximate inverse Hessian with rank 1 updates over time&lt;/li&gt;
-      &lt;li&gt;L-BFGS (Limited memory BFGS):&lt;br /&gt;
-  Does not form/store the full inverse Hessian. Usually works very well in full batch, deterministic mode, but does not transfer very well to mini-batch setting. Large-scale, stochastic setting is an active area of research.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Adam is a good default choice in many cases; even with constant learning rate&lt;/li&gt;
-  &lt;li&gt;SGD+Momentum can outperform Adam but may equire more tuning of LR and schedule. Cosine schedule preferred, since it has very few hyperparameters.&lt;/li&gt;
-  &lt;li&gt;L-BFGS is good if you can afford to do full batch updates.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;improve-test-error&quot;&gt;Improve test error&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Better optimization algorithms help reduce &lt;strong&gt;training&lt;/strong&gt; loss, but what we really care is about error on new data - how to reduce the gap?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;early-stopping-always-do-this&quot;&gt;Early Stopping: Always do this&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Stop training the model when accuracy on the validation set decreases. Or train for a long time, but always keep track of the model snapshot that worked best on val.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;model-ensembles&quot;&gt;Model Ensembles&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;Train multiple independent models&lt;/li&gt;
-  &lt;li&gt;At test time average their results&lt;br /&gt;
- (Take average of predicted probability distributions, then choose argmax)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;regularization&quot;&gt;Regularization&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;To improve single-model performance, add terms to loss&lt;br /&gt;
-  e.g. L1, L2, Elastic net.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;or, use Dropout:&lt;br /&gt;
-  In each forward pass, randomly set some neurons to zero. Probability of dropping is a hyperparameter; 0.5 is common.&lt;br /&gt;
-  It forces the network to have a redundant representation; Prevents co-adaptation of features. Dropout can be interpreted as training a large ensemble of models (that share parameters).&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# dropout rate
-&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;train_step&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# drop in train time
-&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;H1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;U1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;H1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;U1&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;H2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;H1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;U2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;H2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;U2&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;H2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b3&lt;/span&gt;
-
-	&lt;span class=&quot;c1&quot;&gt;# backward pass: compute gradients...
-&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;# perform parameter update...
-&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;			&lt;span class=&quot;c1&quot;&gt;# scale at test time
-&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;H1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;H2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;H1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;H2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b3&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;more common: “Inverted dropout”&lt;br /&gt;
-  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;U1 = (np.random.rand(*H1.shape) &amp;lt; p) / p&lt;/code&gt; in train time and no scaling in test time&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;A common pattern of regularization&lt;br /&gt;
-  Training: Add some kind of randomness&lt;br /&gt;
-  $y = fw(x,z)$&lt;br /&gt;
-  Testing: Average out randomness (sometimes approximate)&lt;br /&gt;
-  \(y = f(x) = E_z[f(x,z)] = \int p(z)f(x,z)\, dz\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Data Augmentation:&lt;br /&gt;
-  Addes &lt;em&gt;transformed&lt;/em&gt; data to train model&lt;br /&gt;
-  e.g. translation, rotation, stretching, shearing, lens distortions.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;DropConnect:&lt;br /&gt;
-  Training: Drop connections between neurons (set weights to 0)&lt;br /&gt;
-  Testing: Use all the connections&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Fractional Pooling:&lt;br /&gt;
-  Training: Use randomized pooling regions&lt;br /&gt;
-  Testing: Average predictions from several regions&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Stochastic Depth:&lt;br /&gt;
-  Training: Skip some layers in the network&lt;br /&gt;
-  Testing: Use all the layer&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Cutout:&lt;br /&gt;
-  Training: Set random image regions to zero&lt;br /&gt;
-  Testing: Use full image&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Mixup:&lt;br /&gt;
-  Training: Train on random blends of images&lt;br /&gt;
-  Testing: Use original images&lt;br /&gt;
-  e.g. Randomly blend the pixels of pairs of training images, say 40% cat and 60% dog, and set the target label as cat:0.4 and dog:0.6.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Summary
-  Consider dropout for large fully-connected layers&lt;br /&gt;
-  Batch normalization and data augmentation almost always a good idea&lt;br /&gt;
-  Try cutout and mixup especially for small classification datasets&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;choosing-hyperparameters&quot;&gt;Choosing Hyperparameters&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Step 1: Check initial loss&lt;br /&gt;
-  Turn off weight decay, sanity check loss at initialization&lt;br /&gt;
-  e.g. &lt;em&gt;log(C)&lt;/em&gt; for softmax with &lt;em&gt;C&lt;/em&gt; classes&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Step 2: Overfit a small sample&lt;br /&gt;
-  Try to train to 100% training accuracy on a small sample of training data (~5-10 minibatches); fiddle with architecture, learning rate, weight initialization&lt;br /&gt;
-  If loss is not going down, LR too low or bad initialization. If loss explodes, then LR is too high or bad initialization.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Step 3: Find LR that makes loss go down&lt;br /&gt;
-  Use the architecture from the previous step, use all training data, turn on small weight decay, find a learning rate that makes the loss drop significantly within ~100 iterations.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Step 4: Coarse grid, train for ~1-5 epochs&lt;br /&gt;
-  Choose a few values of learning rate and weight decay around what worked from Step 3, train a few models for ~1-5 epochs.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Step 5: Refine grid, train longer&lt;br /&gt;
-  Pick best models from Step 4, train them for longer (~10-20 epochs) without learning rate decay&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Step 6: Look at loss and accuracy curves&lt;br /&gt;
-  If accuracy still going up, you need to train longer. If it goes down, huge train / val gap means overfitting. You need to increase regularization or get more data. If there’s no gap between train / val, it means underfitting. Train longer or use a bigger model.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Look at learning curves&lt;br /&gt;
-  Losses may be noisy, use a scatter plot and also plot moving average to see trends better. Cross-validation is useful too.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Step 7: &lt;strong&gt;GO TO Step 5&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Hyperparameters to play with:&lt;br /&gt;
-  network architecture,&lt;br /&gt;
-  learning rate, its decay schedule, update type,&lt;br /&gt;
-  regularization (L2/Dropout strength)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;for Hyper-Parameter Optimization, consider both Random Search and Grid Search&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;summary-1&quot;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Improve your training error:
-    &lt;ul&gt;
-      &lt;li&gt;Optimizers&lt;/li&gt;
-      &lt;li&gt;Learning rate schedules&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Improve your test error:
-    &lt;ul&gt;
-      &lt;li&gt;Regularization&lt;/li&gt;
-      &lt;li&gt;Choosing Hyperparameters&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Optimization Problems with SGD What if loss changes quickly in one direction and slowly in another? What does gradient descent do? Very slow progress along shallow dimension, jitter along steep direction What if the loss function has a local minima or saddle point? Zero gradient, gradient descent gets stuck(more common in high dimension) Gradients come from minibatches can be noisy SGD + Momentum To avoid local minima, combine gradient at current point with velocity to get step used to update weights; continue moving in the general direction as the previous iterations \(v_{t+1}=\rho v_t + \nabla f(x_t)\) \(x_{t+1}=x_t - \alpha v_{t+1}\) with rho giving “friction”; typically 0.9 or 0.99 vx = 0 while True: dx = compute_gradient(x) vx = rho * vx + dx x -= learning_rate * vx Nesterov Momentum “Look ahead” to the point where updating using velocity would take us; compute gradient there and mix it with velocity to get actual update direction \(v_{t+1}=\rho v_t - \alpha\nabla f(x_t + \rho v_t)\) \(x_{t+1}=x_t + v_{t+1}\) rearrange with \(\tilde{x}_t = x_t + \rho v_t\), \(v_{t+1}=\rho v_t - \alpha\nabla f(\tilde{x}_t)\) \(\begin{align*} \tilde{x}_{t+1} &amp;amp;= \tilde{x}_t - \rho v_t + (1+\rho)v_{t+1} &amp;amp;= \tilde{x}_t + v_{t+1} + \rho(v_{t+1}-v_t) \end{align*}\) AdaGrad grad_squared = 0 while True: dx = compute_gradient(x) grad_squared += dx * dx x -= learning_rate * dx / (np.sqrt(grad_squared) + 1e-7) Added element-wise scaling of the gradient based on the historical sum of squares in each dimension “Per-parameter learning rates” or “adaptive learning rates” Progress along “steep” directions is damped and “flat” directions is accelerated Step size decays to zero over time RMSProp: “Leaky AdaGrad” grad_squared = 0 while True: dx = compute_gradient(x) grad_squared = decay_rate * grad_squared + (1 - decay_rate) * dx * dx x -= learning_rate * dx / (np.sqrt(grad_squared) + 1e-7) Adam first_moment = 0 second_moment = 0 for t in range(1, num_iterations): dx = compute_gradient(x) first_moment = beta1 * first_moment + (1 - beta1) * dx # Momentum second_moment = beta2 * second_moment + (1 - beta2) * dx * dx first_unbias = first_moment / (1 - beta1 ** t) # Bias correction second_unbias = second_moment / (1 - beta2 ** t) x -= learning_rate * first_unbias / (np.sqrt(second_unbias) + 1e-7) # AdaGrad/ RMSProp Sort of like RMSProp with momentum Bias correction for the fact that first and second moment estimates start at zero Adam with beta1 = 0.9, beta2 = 0.999, and learning_rate = 1e-3 or 5e-4 is a great starting point Learning rate schedules Learning rate decays over time Reduce learning rate by a certain value at a few fixed points(after some epochs) Learning Rate Decay Reduce learning rate gradually, e.g. Cosine: $\alpha_t = \frac{1}{2}\alpha_0(1+\mbox{cos}(t\pi / T))$ Linear: $\alpha_t = \alpha_0(1-t/T)$ Inverse sqrt: $\alpha_t = \alpha_0 / \sqrt{t}$ while $\alpha_0$ is the initial learning rate, $\alpha_t$ is one at epoch t, and T is the total number of epochs Linear Warmup High initial learning rates can make loss explode; linearly increasing learning rate from 0 over the first ~5000 iterations can prevent this Empirical rule of thumb: If you increase the batch size by N, also scale the initial learning rate by N First-Order Optimization Use gradient from linear approximation Step to minimize the approximation Second-Order Optimization Use gradient and Hessian to form quadratic approximation Step to the minima of the (quadratic) approximation But Hessian has O(N^2) elements and inverting takes O(N^3), N is extremely large Quasi-Newton methods (BGFS most popular): instead of inverting the Hessian, approximate inverse Hessian with rank 1 updates over time L-BFGS (Limited memory BFGS): Does not form/store the full inverse Hessian. Usually works very well in full batch, deterministic mode, but does not transfer very well to mini-batch setting. Large-scale, stochastic setting is an active area of research. Summary Adam is a good default choice in many cases; even with constant learning rate SGD+Momentum can outperform Adam but may equire more tuning of LR and schedule. Cosine schedule preferred, since it has very few hyperparameters. L-BFGS is good if you can afford to do full batch updates. Improve test error Better optimization algorithms help reduce training loss, but what we really care is about error on new data - how to reduce the gap? Early Stopping: Always do this Stop training the model when accuracy on the validation set decreases. Or train for a long time, but always keep track of the model snapshot that worked best on val. Model Ensembles Train multiple independent models At test time average their results (Take average of predicted probability distributions, then choose argmax) Regularization To improve single-model performance, add terms to loss e.g. L1, L2, Elastic net. or, use Dropout: In each forward pass, randomly set some neurons to zero. Probability of dropping is a hyperparameter; 0.5 is common. It forces the network to have a redundant representation; Prevents co-adaptation of features. Dropout can be interpreted as training a large ensemble of models (that share parameters). p = 0.5 # dropout rate def train_step(X): # drop in train time H1 = np.maximum(0, np.dot(W1, X) + b1) U1 = np.random.rand(*H1.shape) &amp;lt; p H1 *= U1 H2 = np.maximum(0, np.dot(W2, H1) + b2) U2 = np.random.rand(*H2.shape) &amp;lt; p H2 *= U2 out = np.dot(W3, H2) + b3 # backward pass: compute gradients... # perform parameter update... def predict(X): # scale at test time H1 = np.maximum(0, np.dot(W1, X) + b1) * p H2 = np.maximum(0, np.dot(W2, H1) + b2) * p out = np.dot(W3, H2) + b3 more common: “Inverted dropout” U1 = (np.random.rand(*H1.shape) &amp;lt; p) / p in train time and no scaling in test time A common pattern of regularization Training: Add some kind of randomness $y = fw(x,z)$ Testing: Average out randomness (sometimes approximate) \(y = f(x) = E_z[f(x,z)] = \int p(z)f(x,z)\, dz\) Data Augmentation: Addes transformed data to train model e.g. translation, rotation, stretching, shearing, lens distortions. DropConnect: Training: Drop connections between neurons (set weights to 0) Testing: Use all the connections Fractional Pooling: Training: Use randomized pooling regions Testing: Average predictions from several regions Stochastic Depth: Training: Skip some layers in the network Testing: Use all the layer Cutout: Training: Set random image regions to zero Testing: Use full image Mixup: Training: Train on random blends of images Testing: Use original images e.g. Randomly blend the pixels of pairs of training images, say 40% cat and 60% dog, and set the target label as cat:0.4 and dog:0.6. Summary Consider dropout for large fully-connected layers Batch normalization and data augmentation almost always a good idea Try cutout and mixup especially for small classification datasets Choosing Hyperparameters Step 1: Check initial loss Turn off weight decay, sanity check loss at initialization e.g. log(C) for softmax with C classes Step 2: Overfit a small sample Try to train to 100% training accuracy on a small sample of training data (~5-10 minibatches); fiddle with architecture, learning rate, weight initialization If loss is not going down, LR too low or bad initialization. If loss explodes, then LR is too high or bad initialization. Step 3: Find LR that makes loss go down Use the architecture from the previous step, use all training data, turn on small weight decay, find a learning rate that makes the loss drop significantly within ~100 iterations. Step 4: Coarse grid, train for ~1-5 epochs Choose a few values of learning rate and weight decay around what worked from Step 3, train a few models for ~1-5 epochs. Step 5: Refine grid, train longer Pick best models from Step 4, train them for longer (~10-20 epochs) without learning rate decay Step 6: Look at loss and accuracy curves If accuracy still going up, you need to train longer. If it goes down, huge train / val gap means overfitting. You need to increase regularization or get more data. If there’s no gap between train / val, it means underfitting. Train longer or use a bigger model. Look at learning curves Losses may be noisy, use a scatter plot and also plot moving average to see trends better. Cross-validation is useful too. Step 7: GO TO Step 5 Hyperparameters to play with: network architecture, learning rate, its decay schedule, update type, regularization (L2/Dropout strength) for Hyper-Parameter Optimization, consider both Random Search and Grid Search Summary Improve your training error: Optimizers Learning rate schedules Improve your test error: Regularization Choosing Hyperparameters</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Review LeCun et al., 1998 $5\times 5$ Conv filters applied at stride 1 $2\times 2$ Subsampling (Pooling) layers applied at stride 2 i.e. architecture is [CONV-POOL-CONV-POOL-FC-FC] Stride: Downsample output activations Padding: Preserve input spatial dimensions in output activations Filter: Each conv filter outputs a “slice” in the activation Case Studies AlexNet: First CNN-based winner Architecture: [CONV1-MAXPOOL1-NORM1-CONV2-MAXPOOL2-NORM2-CONV3-CONV4-CONV5-MaxPOOL3-FC6-FC7-FC8] Input: $227\times 227\times 3$ images First layer(CONV1): 96 $11\times 11$ filters applied at stride 4, pad 0 Output volume: $W’ = (W-F+2P)/S + 1 \rightarrow$ $55\times 55\times 96$ Parameters: $(11* 11* 3 +1)* 96 =$ 36K Second layer(POOL1): $3\times 3\times$ filters applied at stride 2 Output volume: $27\times 27\times 96$ Parameters: 0 $\vdots$ CONV2($27\times 27\times 256$): 256 $5\times 5$ filters applied at stride 1, pad 2 MAX POOL2($13\times 13\times 256): $3\times 3\times$ filters applied at stride 2 CONV3($13\times 13\times 384$): 384 $3\times 3$ filters applied at stride 1, pad 1 CONV4($13\times 13\times 384$): 384 $3\times 3$ filters applied at stride 1, pad 1 CONV5($13\times 13\times 256$): 256 $3\times 3$ filters applied at stride 1, pad 1 MAX POOL3($6\times 6\times 256$): $3\times 3\times$ filters applied at stride 2 FC6(4096): 4096 neurons FC7(4096): 4096 neurons FC8(1000): 1000 neurons (class scores) Historical note: Network spread across 2 GPUs, half the neurons (feature maps) on each GPU. CONV1, CONV2, CONV4, CONV5: Connections only with feature maps on same GPU CONV3, FC6, FC7, FC8: Connections with all feature maps in preceding layer, communication across GPUs Details/Retrospectives: Krizhevsky et al. 2012 first use of ReLU used Norm layers (not common anymore) heavy data augmentation dropout 0.5 batch size 128 SGD Momentum 0.9 Learning rate 1e-2, reduced by 10 manually when val accuracy plateaus L2 weight decay 5e-4 7 CNN ensemble: 18.2% $\rightarrow$ 15.4% ZFNet: Improved hyperparameters over AlexNet AlexNet but: CONV1: change from ($11\times 11$ stride 4) to ($7\times 7$ stride 2) CONV3,4,5: instead of 384, 384, 256 filters use 512, 1024, 512 ImageNet top 5 error: 16.4% -&amp;gt; 11.7% Zeiler and Fergus, 2013 VGGNet: Deeper Networks Small filters, Deeper networks 8 layers (AlexNet) $\rightarrow$ 16 - 19 layers (VGG16Net) Only $3\times 3$ CONV stride 1, pad 1 and $2\times 2$ MAX POOL with stride 2 11.7% top 5 error(ZFNet) $\rightarrow$ 7.3% top 5 error in ILSVRC’14 Why use smaller filters? :Stack of three $3\times 3$ conv (stride 1) layers has same effective receptive field as one $7\times 7$ conv layer, but with deeper, more non-linearities and fewer parameters TOTAL memory: 24M * 4 bytes ~= 96MB / image (for a forward pass) TOTAL params: 138M parameters Most memory is in early CONV, Most params are in late FC Details: Simonyan and Zisserman, 2014 ILSVRC’14 2nd in classification, 1st in localization Similar training procedure as Krizhevsky 2012 No Local Response Normalisation (LRN) Use VGG16 or VGG19 (VGG19 only slightly better, more memory) Use ensembles for best results FC7 features generalize well to other tasks GoogLeNet Inception module: design a good local network topology(network within a network) and then stack these modules on top of each other Apply parallel filter operations on the input from previous layer: Multiple receptive field sizes for convolution(1x1, 3x3, 5x5), Pooling(3x3) Concatenate all filter outputs together channel-wise “Bottlenect” layers to reduce computational complexity of inception: use 1x1 conv to reduce feature channel size; alternatively, interpret it as applying the same FC layer on each input pixel preserves spatial dimensions, reduces depth Full GoogLeNet Architecture: Stem Network: [Conv-POOL-2x CONV-POOL] Stack Inception modules: with dimension reduction on top of each other Classifier output: [(H*W*c)-Avg POOL-(1*1*c)-FC-Softmax] Global average pooling layer before final FC layer, avoids expensive FC layers Auxiliary classification layers: [AvgPool-1x1 Conv-FC-FC-Softmax] to inject additional gradient at lower layers Details: Deeper networks, with computational efficiency ILSVRC’14 classification winner (6.7% top 5 error) 22 layers Only 5 million parameters(12x less than AlexNet, 27x less than VGG-16) Efficient “Inception” module No FC layers ResNet From 2015, “Revolution of Depth”; more than 100 layers Stacking deeper layers on a “plain” convolutional neural network results in lower both test and training error. The deeper model performs worse, but it’s not caused by overfitting. Fact: Deep models have more representation power (more parameters) than shallower models. Hypothesis: the problem is an optimization problem, deeper models are harder to optimize Solution: copying the learned layers from the shallower model and setting additional layers to identity mapping. “Residual block”: Use network layers to fit a residual mapping instead of directly trying to fit a desired underlying mapping Full ResNet Architecture: Stack residual blocks Every residual block has two $3\times 3$ conv layers Periodically, double number of filters and downsample spatially using stride 2 (/2 in each dimension). Reduce the activation volume by half. Additional conv layer at the beginning (7x7 conv in stem) No FC layers at the end (only FC 1000 to output classes) (In theory, you can train a ResNet with input image of variable sizes) For deeper networks(ResNet-50+): use bottleneck layer to improve efficiency (similar to GoogLeNet) e.g. [(28x28x256 INPUT)-(1x1 CONV, 64)-(3x3 CONV, 64)-(1x1 CONV, 256)-(28x28x256 OUTPUT)] Training ResNet in practice: Batch Normalization after every CONV layer Xavier initialization from He et al. SGD + Momentum (0.9) Learning rate: 0.1, divided by 10 when validation error plateaus Mini-batch size 256 Weight decay of 1e-5 No dropout used Experimental Results: He et al., 2015 Able to train very deep networks without degrading (152 layers on ImageNet, 1202 on Cifar) Deeper networks now achieve lower training error as expected Swept 1st place in all ILSVRC and COCO 2015 competitions ILSVRC 2015 classification winner (3.6% top 5 error); better than human performance! Details: Very deep networks using residual connections 152-layer model for ImageNet ILSVRC’15 classification winner(3.57% top 5 error) Swept all classification and detection competitions in ILSVRC’15 and COCO’15</summary></entry></feed>

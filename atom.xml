@@ -15,7 +15,7 @@
 &lt;/ul&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Document &lt;a href=&quot;https://docs.microsoft.com/ko-kr/windows/ai/directml/gpu-cuda-in-wsl&quot;&gt;Enable NVIDIA CUDA on WSL&lt;/a&gt;
+  &lt;li&gt;Document &lt;a href=&quot;https://docs.microsoft.com/en-us/windows/ai/directml/gpu-cuda-in-wsl&quot;&gt;Enable NVIDIA CUDA on WSL&lt;/a&gt;
     &lt;ul&gt;
       &lt;li&gt;Install stable version of Windows 11&lt;/li&gt;
       &lt;li&gt;Enable WSL, install Ubuntu(20.04.3 LTS)&lt;br /&gt;
@@ -174,6 +174,299 @@
         <link>
         http://0.0.0.0:4000/starfish_detection</link>
         <guid isPermaLink="true">http://0.0.0.0:4000/starfish_detection</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>cs231n - Lecture 15. Detection and Segmentation</title>
+        
+          <description>&lt;h3 id=&quot;computer-vision-tasks&quot;&gt;Computer Vision Tasks&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Image Classification: No spatial extent&lt;/li&gt;
+  &lt;li&gt;Semantic Segmentation: No objects, just pixels&lt;/li&gt;
+  &lt;li&gt;Object Detection/ Instance Segmentation: Multiple objects&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;semantic-segmentation&quot;&gt;Semantic Segmentation&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Paired training data:&lt;br /&gt;
+  For each training image, &lt;strong&gt;each pixel is labeled&lt;/strong&gt; with a semantic category.&lt;/li&gt;
+  &lt;li&gt;At test time, classify each pixel of a new image.&lt;/li&gt;
+  &lt;li&gt;Problem:&lt;br /&gt;
+  Classifying with only single pixel does not include context information.&lt;/li&gt;
+  &lt;li&gt;Idea:
+    &lt;ul&gt;
+      &lt;li&gt;Sliding Window&lt;br /&gt;
+  Extract patch from full image, classify center pixel with CNN.&lt;br /&gt;
+  $\color{red}{(-)}$ Very inefficient, not reusing shared features between overlapping patches.&lt;/li&gt;
+      &lt;li&gt;Convolution&lt;br /&gt;
+  Encode the entire image with conv net, and do semantic segmentation on top.&lt;br /&gt;
+  $\color{red}{(-)}$ CNN architectures often change the spatial sizes, but semantic segmentation requires the output size to be same as input size.&lt;/li&gt;
+      &lt;li&gt;Fully Convolutional&lt;br /&gt;
+  Design a network with &lt;strong&gt;only&lt;/strong&gt; convolutional layers without downsampling operators&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec15_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+  $\textcolor{red}{(-)}$ convolutions at original image resolution is very expensive&lt;br /&gt;
+  $\rightarrow$ Design convolutional network with &lt;strong&gt;downsampling and upsampling&lt;/strong&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec15_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Downsampling: Pooling, strided convolution&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In-Network Upsampling: Unpooling, strided transpose convolution&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Unpooling:&lt;br /&gt;
+  Nearest Neighbor: copy-paste to extended region&lt;br /&gt;
+  “Bed of Nails”: no positional argument, pad with zeros&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Max Unpooling: use positions from poolying layer ahead, pad with zeros&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Learnable Downsampling: Strided convolution&lt;br /&gt;
+  Output is a dot product between filter and input&lt;br /&gt;
+  Stride gives ratio between movement in input and output&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Learnable Upsampling: Transposed convolution&lt;br /&gt;
+  Input gives weight for filter&lt;br /&gt;
+  Output contains copies of the filter weighted by the input, summing at where at overlaps in the output&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec15_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Summary&lt;br /&gt;
+  Label each pixel in the image with a category label&lt;br /&gt;
+  Don’t differentiate instances, only care about pixels&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;object-detection&quot;&gt;Object Detection&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Multiple Objects:&lt;br /&gt;
+  Each image needs a different number of outputs;&lt;br /&gt;
+  $\rightarrow$ Apply a CNN to many different crops of the image, CNN classifies each crop as object or background.&lt;br /&gt;
+  $\color{red}{(-)}$ Need to apply CNN to huge number of locations, scales, and aspect ratios, very computationally expensive.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;r-cnn&quot;&gt;R-CNN&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_4.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Girshick et al, “Rich feature hierarchies for accurate object detection and
+semantic segmentation”, CVPR 2014&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;2-stage Detector: Region Proposal + Region Classification
+    &lt;ol&gt;
+      &lt;li&gt;Image as input&lt;/li&gt;
+      &lt;li&gt;Crop bounding boxes with Selective Search&lt;br /&gt;
+ Warp into same size pixels for CNN model&lt;/li&gt;
+      &lt;li&gt;Input Warped images into CNN&lt;/li&gt;
+      &lt;li&gt;Run classification on each&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm:
+    &lt;ol&gt;
+      &lt;li&gt;Region Proposals: Selective Search&lt;br /&gt;
+ Find “blobby” image regions that are likely to contain objects.&lt;br /&gt;
+ Relatively fast to run; e.g. Selective Search gives 2000 region proposals in a few seconds on CPU.&lt;/li&gt;
+      &lt;li&gt;CNN:&lt;br /&gt;
+ For a pre-trained CNN architecture, change the number of classes on the last classification layer(detection classes &lt;em&gt;N&lt;/em&gt; + background &lt;em&gt;1&lt;/em&gt;), fine-tune with dataset for Object Detection. From the region proposal input, outputs a fixed-length feature vector.&lt;/li&gt;
+      &lt;li&gt;SVM: Category-Specific Linear SVMs&lt;br /&gt;
+ Positive: ground-truth boxes&lt;br /&gt;
+ Negative: IoU under 0.3&lt;br /&gt;
+ Scores each feature vector for classes, classifies whether each one is positive/negative(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;is_object&lt;/code&gt;).&lt;/li&gt;
+      &lt;li&gt;Non-Maximum Suppression: with concept of &lt;strong&gt;IoU&lt;/strong&gt;&lt;br /&gt;
+ Intersection over Union; area of intersection divided by area of union&lt;br /&gt;
+ If there are two boxes with IoU over 0.5, consider them proposed on the same object, leave one with the highest score.&lt;/li&gt;
+      &lt;li&gt;Bounding Box Regression: adjust boxes from Selective Search
+        &lt;ul&gt;
+          &lt;li&gt;Algorithm:&lt;br /&gt;
+ Assume a bounding box $P^i = (P_x^i, P_y^i, P_w^i, P_h^i)$,&lt;br /&gt;
+ Ground-truth box $G = (G_x, G_y, G_w, G_h)$.&lt;br /&gt;
+ Define a function $d$, mapping $P$ close to $G$;&lt;br /&gt;
+ \(\hat{G}_x = P_w d_x(P) + P_x\)&lt;br /&gt;
+ \(\hat{G}_y = P_h d_y(P) + P_y\)&lt;br /&gt;
+ \(\hat{G}_w = P_w \mbox{exp}(d_w(P))\)&lt;br /&gt;
+ \(\hat{G}_h = P_h \mbox{exp}(d_h(P))\)&lt;br /&gt;
+ where $d_{\star}(P) = w_{\star}^T \phi_5(P)$, is modeled as a linear function(learnable weight vector &lt;em&gt;w&lt;/em&gt;) of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POOL5&lt;/code&gt; features of proposal &lt;em&gt;P&lt;/em&gt;($\phi_5(P)$). We learn $w_{\star}$ by optimizing the regularized least squares objective(Ridge regression)&lt;br /&gt;
+  &lt;em&gt;Learnable parameters on: 2, 3, 5&lt;/em&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Summary:&lt;br /&gt;
+  Score: 53.7% on Pascal VOC 2010&lt;br /&gt;
+  Problem:&lt;br /&gt;
+      1. Low Performance; Warping images into 224x224 size for AlexNet&lt;br /&gt;
+      2. Slow; Using all candidates from Selective Search&lt;br /&gt;
+      3. Not GPU-optimized; Using Selective Search and SVM&lt;br /&gt;
+      4. No Back Propagation; Not sharing computations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;fast-r-cnn&quot;&gt;Fast R-CNN&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_5.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Girshick, “Fast R-CNN”, ICCV 2015&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;idea:&lt;br /&gt;
+  Pass the image through convnet &lt;strong&gt;before&lt;/strong&gt; cropping. Crop the conv feature instead.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm:
+    &lt;ol&gt;
+      &lt;li&gt;Pass the full image through pre-trained CNN and extract feature maps.&lt;/li&gt;
+      &lt;li&gt;Get RoIs from a proposal method(Selective Search) and crop by RoI Pooling, get fixed size feature vectors.&lt;/li&gt;
+      &lt;li&gt;With RoI feature vectors, pass some fully connected layers and split into two branches.&lt;/li&gt;
+      &lt;li&gt;1) pass softmax and classify the class of RoI. no SVM used. 2) Run bounding box regression.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Cropping Features: RoI Pool &lt;!--[](href) link to terminologies --&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Project RoI proposals(on input image) onto CNN image features.&lt;/li&gt;
+      &lt;li&gt;Divide into subregions.&lt;/li&gt;
+      &lt;li&gt;Run pooling(Max-pool) within each subregion.&lt;br /&gt;
+  $\rightarrow$ Region features always be the same size regardless of input region size&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;faster-r-cnn&quot;&gt;Faster R-CNN&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_6.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Ren et al, “Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks”, NIPS 2015&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;idea:&lt;br /&gt;
+  Fast R-CNN is not GPU-optimized; runtime dominated by region proposals.&lt;br /&gt;
+  By inserting Region Proposal Network(RPN), implemented end-to-end architecture.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm:
+    &lt;ol&gt;
+      &lt;li&gt;Pass the full image through pre-trained CNN and extract feature maps.&lt;/li&gt;
+      &lt;li&gt;RPN:&lt;br /&gt;
+ For &lt;em&gt;K&lt;/em&gt; different anchor boxes of different size and scale at each point in the feature map, predict whether it contains an object(binary classification), and also predict a corrections from the anchor to the ground-truth box(regress 4 numbers per pixel).&lt;br /&gt;
+ &lt;img src=&quot;/assets/images/cs231n_lec15_7.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;Jointly train with 4 losses:&lt;br /&gt;
+ 1) RPN classify object / not object&lt;br /&gt;
+ 2) RPN regress box coordinates&lt;br /&gt;
+ 3) Final classification score (object classes)&lt;br /&gt;
+ 4) Final box coordinates&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Glossing over many details:
+    &lt;ul&gt;
+      &lt;li&gt;Ignore overlapping proposals with non-max suppression&lt;/li&gt;
+      &lt;li&gt;How are anchors determined?&lt;/li&gt;
+      &lt;li&gt;How do we sample positive / negative samples for training the RPN?&lt;/li&gt;
+      &lt;li&gt;How to parameterize bounding box regression?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Two-stage object detector:
+    &lt;ul&gt;
+      &lt;li&gt;First stage: Run once per image
+        &lt;ul&gt;
+          &lt;li&gt;Backbone network&lt;/li&gt;
+          &lt;li&gt;Region proposal network(RPN)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Second stage: Run once per region
+        &lt;ul&gt;
+          &lt;li&gt;Crop features: RoI pool/ align&lt;/li&gt;
+          &lt;li&gt;Predict object class&lt;/li&gt;
+          &lt;li&gt;Prediction bbox offset&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;single-stage-object-detectors-yolo--ssd--retinanet&quot;&gt;Single-Stage Object Detectors: YOLO / SSD / RetinaNet&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Algorithm:
+    &lt;ol&gt;
+      &lt;li&gt;Divide input imgae into grid&lt;/li&gt;
+      &lt;li&gt;Image a set of &lt;strong&gt;base boxes&lt;/strong&gt; centered at each grid cell&lt;/li&gt;
+      &lt;li&gt;Within each grid cell:
+        &lt;ul&gt;
+          &lt;li&gt;Regress from each of the &lt;em&gt;B&lt;/em&gt; base boxes to a final box with 5 numbers(dx, dy, dh, dw, confidence)&lt;/li&gt;
+          &lt;li&gt;Predict scores for each of &lt;em&gt;C&lt;/em&gt; classes(including background as a class)&lt;/li&gt;
+          &lt;li&gt;Looks a lot like RPN, but category-specific&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_8.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;instance-segmentation-mask-r-cnn&quot;&gt;Instance Segmentation: Mask R-CNN&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;He et al, “Mask R-CNN”, ICCV 2017&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec15_9.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec15_10.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec15_11.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec15_12.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec15_13.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;open-source-frameworks&quot;&gt;Open Source Frameworks&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/tensorflow/models/tree/master/research/object_detection&quot;&gt;TensorFlow Detection API&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/facebookresearch/detectron2&quot;&gt;Detectron2(Pytorch)&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;beyond-2d-object-detection&quot;&gt;Beyond 2D Object Detection&lt;/h2&gt;
+
+&lt;h3 id=&quot;object-detection--captioning-dense-captioning&quot;&gt;Object Detection + Captioning: Dense Captioning&lt;/h3&gt;
+
+&lt;h3 id=&quot;dense-video-captioning-timestep-t&quot;&gt;Dense Video Captioning: timestep “T”&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_14.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;objects--relationships-scene-graphs&quot;&gt;Objects + Relationships: Scene Graphs&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_15.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs231n_lec15_16.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;3d-object-detection&quot;&gt;3D Object Detection&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_17.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;2D bounding box: (x, y, w, h)&lt;br /&gt;
+  $\rightarrow$ 3D oriented bounding box: (x, y, z, w, h, l, r, p, y)&lt;br /&gt;
+  $\rightarrow$ Simplified bbox: no roll &amp;amp; pitch&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Simple Camera Model:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec15_18.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+  A point on the image plane corresponds to a &lt;strong&gt;ray&lt;/strong&gt; in the 3D space&lt;br /&gt;
+  A 2D bounding box on an image is a &lt;strong&gt;frustrum&lt;/strong&gt; in the 3D space&lt;br /&gt;
+  Localize an object in 3D: The object can be anywhere in the &lt;strong&gt;camera viewing frustrum&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Monocular Camera:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs231n_lec15_19.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;80%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Same idea as Faster RCNN, but proposals are in 3D&lt;/li&gt;
+      &lt;li&gt;3D bounding box proposal, regress 3D box parameters + class score&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;3D Shape Prediction: Mesh R-CNN
+&lt;img src=&quot;/assets/images/cs231n_lec15_20.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!--
+참고
+https://www.youtube.com/watch?v=jqNCdjOB15s
+https://towardsdatascience.com/understanding-region-of-interest-part-1-roi-pooling-e4f5dd65bb44
+https://yeomko.tistory.com/13 갈아먹는 object detection
+https://nuggy875.tistory.com/33 object detection 시리즈
+https://ropiens.tistory.com/73 
+--&gt;
+</description>
+        
+        <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs231n_lec15</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs231n_lec15</guid>
       </item>
       
     

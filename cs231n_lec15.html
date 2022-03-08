@@ -40,7 +40,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
 
 
 
-    <title>cs231n - Lecture 4. Neural Networks and Backpropagation</title>
+    <title>cs231n - Lecture 15. Detection and Segmentation</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -69,24 +69,24 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="" />
     <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
-    <link rel="canonical" href="http://0.0.0.0:4000/cs231n_lec4" />
+    <link rel="canonical" href="http://0.0.0.0:4000/cs231n_lec15" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="cs231n - Lecture 4. Neural Networks and Backpropagation" />
-    <meta property="og:description" content="Image Features Problem: Linear Classifiers are not very powerful Visual Viewpoint: Linear classifiers learn one template per class Geometric Viewpoint: Linear classifiers can only draw linear decision boundaries Image Features: Motivation After applying feature transform, points can be separated by linear classifier $f(x,y) = (r(x,y), \theta(x,y))$ Image Features vs. ConvNets" />
-    <meta property="og:url" content="http://0.0.0.0:4000/cs231n_lec4" />
+    <meta property="og:title" content="cs231n - Lecture 15. Detection and Segmentation" />
+    <meta property="og:description" content="Computer Vision Tasks Image Classification: No spatial extent Semantic Segmentation: No objects, just pixels Object Detection/ Instance Segmentation: Multiple objects Semantic Segmentation Paired training data: For each training image, each pixel is labeled with a semantic category. At test time, classify each pixel of a new image. Problem: Classifying with" />
+    <meta property="og:url" content="http://0.0.0.0:4000/cs231n_lec15" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta property="article:author" content="https://www.facebook.com/" />
-    <meta property="article:published_time" content="2021-12-15T15:00:00+00:00" />
-    <meta property="article:modified_time" content="2021-12-15T15:00:00+00:00" />
+    <meta property="article:published_time" content="2022-02-07T00:00:00+00:00" />
+    <meta property="article:modified_time" content="2022-02-07T00:00:00+00:00" />
     <meta property="article:tag" content="cs231n" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="cs231n - Lecture 4. Neural Networks and Backpropagation" />
-    <meta name="twitter:description" content="Image Features Problem: Linear Classifiers are not very powerful Visual Viewpoint: Linear classifiers learn one template per class Geometric Viewpoint: Linear classifiers can only draw linear decision boundaries Image Features: Motivation After applying feature transform, points can be separated by linear classifier $f(x,y) = (r(x,y), \theta(x,y))$ Image Features vs. ConvNets" />
+    <meta name="twitter:title" content="cs231n - Lecture 15. Detection and Segmentation" />
+    <meta name="twitter:description" content="Computer Vision Tasks Image Classification: No spatial extent Semantic Segmentation: No objects, just pixels Object Detection/ Instance Segmentation: Multiple objects Semantic Segmentation Paired training data: For each training image, each pixel is labeled with a semantic category. At test time, classify each pixel of a new image. Problem: Classifying with" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -107,7 +107,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "name": "Darron's Devlog",
         "logo": "http://0.0.0.0:4000/"
     },
-    "url": "http://0.0.0.0:4000/cs231n_lec4",
+    "url": "http://0.0.0.0:4000/cs231n_lec15",
     "image": {
         "@type": "ImageObject",
         "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
@@ -116,9 +116,9 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://0.0.0.0:4000/cs231n_lec4"
+        "@id": "http://0.0.0.0:4000/cs231n_lec15"
     },
-    "description": "Image Features Problem: Linear Classifiers are not very powerful Visual Viewpoint: Linear classifiers learn one template per class Geometric Viewpoint: Linear classifiers can only draw linear decision boundaries Image Features: Motivation After applying feature transform, points can be separated by linear classifier $f(x,y) = (r(x,y), \theta(x,y))$ Image Features vs. ConvNets"
+    "description": "Computer Vision Tasks Image Classification: No spatial extent Semantic Segmentation: No objects, just pixels Object Detection/ Instance Segmentation: Multiple objects Semantic Segmentation Paired training data: For each training image, each pixel is labeled with a semantic category. At test time, classify each pixel of a new image. Problem: Classifying with"
 }
     </script>
 
@@ -131,7 +131,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="cs231n - Lecture 4. Neural Networks and Backpropagation" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="cs231n - Lecture 15. Detection and Segmentation" href="/feed.xml" />
 
 
 </head>
@@ -190,7 +190,7 @@ into the {body} of the default.hbs template -->
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="15 December 2021">15 December 2021</time>
+                    <time class="post-full-meta-date" datetime=" 7 February 2022"> 7 February 2022</time>
                     
                         <span class="date-divider">/</span>
                         
@@ -201,132 +201,293 @@ into the {body} of the default.hbs template -->
                         
                     
                 </section>
-                <h1 class="post-full-title">cs231n - Lecture 4. Neural Networks and Backpropagation</h1>
+                <h1 class="post-full-title">cs231n - Lecture 15. Detection and Segmentation</h1>
             </header>
 	<!--
             
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h3 id="image-features">Image Features</h3>
+                    <h3 id="computer-vision-tasks">Computer Vision Tasks</h3>
 <ul>
-  <li>Problem: Linear Classifiers are not very powerful
+  <li>Image Classification: No spatial extent</li>
+  <li>Semantic Segmentation: No objects, just pixels</li>
+  <li>Object Detection/ Instance Segmentation: Multiple objects</li>
+</ul>
+
+<h2 id="semantic-segmentation">Semantic Segmentation</h2>
+<ul>
+  <li>Paired training data:<br />
+  For each training image, <strong>each pixel is labeled</strong> with a semantic category.</li>
+  <li>At test time, classify each pixel of a new image.</li>
+  <li>Problem:<br />
+  Classifying with only single pixel does not include context information.</li>
+  <li>Idea:
     <ul>
-      <li>Visual Viewpoint: Linear classifiers learn one template per class</li>
-      <li>Geometric Viewpoint: Linear classifiers can only draw linear decision boundaries</li>
+      <li>Sliding Window<br />
+  Extract patch from full image, classify center pixel with CNN.<br />
+  $\color{red}{(-)}$ Very inefficient, not reusing shared features between overlapping patches.</li>
+      <li>Convolution<br />
+  Encode the entire image with conv net, and do semantic segmentation on top.<br />
+  $\color{red}{(-)}$ CNN architectures often change the spatial sizes, but semantic segmentation requires the output size to be same as input size.</li>
+      <li>Fully Convolutional<br />
+  Design a network with <strong>only</strong> convolutional layers without downsampling operators<br />
+  <img src="/assets/images/cs231n_lec15_0.png" alt="png" width="80%&quot;, height=&quot;80%" /><br />
+  $\textcolor{red}{(-)}$ convolutions at original image resolution is very expensive<br />
+  $\rightarrow$ Design convolutional network with <strong>downsampling and upsampling</strong><br />
+  <img src="/assets/images/cs231n_lec15_1.png" alt="png" width="80%&quot;, height=&quot;80%" /></li>
     </ul>
   </li>
+  <li>Downsampling: Pooling, strided convolution</li>
   <li>
-    <p>Image Features: Motivation<br />
-After applying feature transform, points can be separated by linear classifier<br />
-$f(x,y) = (r(x,y), \theta(x,y))$</p>
+    <p>In-Network Upsampling: Unpooling, strided transpose convolution</p>
   </li>
-  <li>Image Features vs. ConvNets<br />
-<img src="/assets/images/cs231n_lec4_0.png" alt="png" width="60%&quot;, height=&quot;60%" /></li>
+  <li>
+    <p>Unpooling:<br />
+  Nearest Neighbor: copy-paste to extended region<br />
+  “Bed of Nails”: no positional argument, pad with zeros</p>
+  </li>
+  <li>
+    <p>Max Unpooling: use positions from poolying layer ahead, pad with zeros</p>
+  </li>
+  <li>
+    <p>Learnable Downsampling: Strided convolution<br />
+  Output is a dot product between filter and input<br />
+  Stride gives ratio between movement in input and output</p>
+  </li>
+  <li>
+    <p>Learnable Upsampling: Transposed convolution<br />
+  Input gives weight for filter<br />
+  Output contains copies of the filter weighted by the input, summing at where at overlaps in the output<br />
+  <img src="/assets/images/cs231n_lec15_2.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
+  </li>
+  <li>Summary<br />
+  Label each pixel in the image with a category label<br />
+  Don’t differentiate instances, only care about pixels</li>
 </ul>
 
-<h3 id="neural-networks">Neural Networks</h3>
-<ul>
-  <li>
-    <p>Neural networks, also called <em>Fully connected networks</em>(FCN) or sometimes <em>multi-layer perceptrons</em>(MLP)<br />
-(Before) Linear score function:<br />
-\(\begin{align*}&amp; f=Wx \\
-&amp; x\in\mathbb{R}^D, W\in\mathbb{R}^{C\times D}
-\end{align*}\)<br />
-$\rightarrow$ <em>2</em>-layer Neural Network:<br />
-\(\begin{align*}&amp; f=W_2 \mbox{max}(0,W_1 x) \\
-&amp; x\in\mathbb{R}^D, W_1\in\mathbb{R}^{H\times D}, 
-W_2\in\mathbb{R}^{C\times H}
-\end{align*}\)<br />
-$\rightarrow$ or <em>3</em>-layer Neural Network:<br />
-\(f=W_3\mbox{max}(0,W_2 \mbox{max}(0,W_1 x)) \\ 
-\vdots\)<br />
-(In practice we will usually add a learnable bias at each layer as well)</p>
-  </li>
-  <li>
-    <p>Neural networks: hierarchical computation<br />
-<img src="/assets/images/cs231n_lec4_1.png" alt="png" width="50%&quot;, height=&quot;50%" /><br />
-Learning 100s of templates instead of 10 and share templates between classes</p>
-  </li>
-  <li>
-    <p>Why is <em>max</em> operator important?<br />
-The function $\mbox{max}(0,z)$ is called the activation function.<br />
-Q: What if we try to build a neural network without one?<br />
-A: We end up with a linear classifier again!<br />
-$f=W_2 W_1 x, W_3=W_1 W_2, f = W_3 x$</p>
-  </li>
-  <li>
-    <p>Activation functions<br />
-  ReLU($\mbox{max}(0,z)$) is a good default choice for most problems<br />
-  Others: Sigmoid, tanh, Leaky ReLU, Maxout, ELU, etc.</p>
-  </li>
-  <li>
-    <p>Neural networks: Architectures<br />
-Example feed-forward computation of a neural network<br />
-<img src="/assets/images/cs231n_lec4_2.png" alt="png" width="50%&quot;, height=&quot;50%" /></p>
-  </li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># forward-pass of a 3-layer neural network:
-</span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="c1"># activation function (use sigmoid)
-</span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># random input vector of three numbers (3x1)
-</span><span class="n">h1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span> <span class="c1"># calculate first hidden layer activations (4x1)
-</span><span class="n">h2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W2</span><span class="p">,</span> <span class="n">h1</span><span class="p">)</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span> <span class="c1">#calculate second hidden layer activations (4x1)
-</span><span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W3</span><span class="p">,</span> <span class="n">h2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b3</span> <span class="c1">#output neuron (1x1)
-</span></code></pre></div></div>
-
-<p>Full implementation of training a <em>2</em>-layer Neural Network:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">randn</span>
-
-<span class="n">N</span><span class="p">,</span> <span class="n">D_in</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">D_out</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span>	<span class="c1"># Define the network
-</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">D_in</span><span class="p">),</span> <span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">D_out</span><span class="p">)</span>
-<span class="n">w1</span><span class="p">,</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">D_in</span><span class="p">,</span> <span class="n">H</span><span class="p">),</span> <span class="n">randn</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">D_out</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">):</span>					<span class="c1"># Forward pass
-</span>	<span class="n">h</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w1</span><span class="p">)))</span>
-	<span class="n">y_pred</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w2</span><span class="p">)</span>
-	<span class="n">loss</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span>
-	<span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">loss</span><span class="p">)</span>
-	
-	<span class="n">grad_y_pred</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>	<span class="c1"># Calculate the analytical gradients
-</span>	<span class="n">grad_w2</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="n">T</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">grad_y_pred</span><span class="p">)</span>
-	<span class="n">grad_h</span> <span class="o">=</span> <span class="n">grad_y_pred</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w2</span><span class="p">.</span><span class="n">T</span><span class="p">)</span>
-	<span class="n">grad_w1</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">T</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">grad_h</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">h</span><span class="p">))</span>
-	
-	<span class="n">w1</span> <span class="o">-=</span> <span class="mf">1e-4</span> <span class="o">*</span> <span class="n">grad_w1</span>				<span class="c1"># Gradient descent
-</span>	<span class="n">w2</span> <span class="o">-=</span> <span class="mf">1e-4</span> <span class="o">*</span> <span class="n">grad_w2</span>
-</code></pre></div></div>
+<h2 id="object-detection">Object Detection</h2>
+<p><img src="/assets/images/cs231n_lec15_3.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
 
 <ul>
-  <li>
-    <p>Plugging in neural networks with loss functions<br />
-$s = f(x;W_1,W_2) = W_2\mbox{max}(0,W_1 x)$ Nonlinear score function<br />
-$L_i = \sum_{j\ne y_i}\mbox{max}(0,s_j-s_{y_i}+1)$ SVM Loss on predictions<br />
-$R(W)=\sum_k W_k^2$ Regularization<br />
-$L=\frac{1}{N}\sum_{i=1}^N L_i + \lambda R(W_1) + \lambda R(W_2)$ Total loss: data loss + regularization</p>
-  </li>
-  <li>
-    <p>Problem: How to compute gradients?<br />
-If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
-  </li>
+  <li>Multiple Objects:<br />
+  Each image needs a different number of outputs;<br />
+  $\rightarrow$ Apply a CNN to many different crops of the image, CNN classifies each crop as object or background.<br />
+  $\color{red}{(-)}$ Need to apply CNN to huge number of locations, scales, and aspect ratios, very computationally expensive.</li>
 </ul>
 
-<h3 id="backpropagation">Backpropagation</h3>
+<h3 id="r-cnn">R-CNN</h3>
+<p><img src="/assets/images/cs231n_lec15_4.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
 <ul>
   <li>
-    <p>Chain rule:<br />
-\(\begin{align*}
-\frac{\partial f}{\partial y}=\frac{\partial f}{\partial q} \frac{\partial q}{\partial y} \mbox{Upstream gradient} \times \mbox{Local gradient}
-\end{align*}\)</p>
+    <p><em>Girshick et al, “Rich feature hierarchies for accurate object detection and
+semantic segmentation”, CVPR 2014</em></p>
+  </li>
+  <li>2-stage Detector: Region Proposal + Region Classification
+    <ol>
+      <li>Image as input</li>
+      <li>Crop bounding boxes with Selective Search<br />
+ Warp into same size pixels for CNN model</li>
+      <li>Input Warped images into CNN</li>
+      <li>Run classification on each</li>
+    </ol>
+  </li>
+  <li>Algorithm:
+    <ol>
+      <li>Region Proposals: Selective Search<br />
+ Find “blobby” image regions that are likely to contain objects.<br />
+ Relatively fast to run; e.g. Selective Search gives 2000 region proposals in a few seconds on CPU.</li>
+      <li>CNN:<br />
+ For a pre-trained CNN architecture, change the number of classes on the last classification layer(detection classes <em>N</em> + background <em>1</em>), fine-tune with dataset for Object Detection. From the region proposal input, outputs a fixed-length feature vector.</li>
+      <li>SVM: Category-Specific Linear SVMs<br />
+ Positive: ground-truth boxes<br />
+ Negative: IoU under 0.3<br />
+ Scores each feature vector for classes, classifies whether each one is positive/negative(<code class="language-plaintext highlighter-rouge">is_object</code>).</li>
+      <li>Non-Maximum Suppression: with concept of <strong>IoU</strong><br />
+ Intersection over Union; area of intersection divided by area of union<br />
+ If there are two boxes with IoU over 0.5, consider them proposed on the same object, leave one with the highest score.</li>
+      <li>Bounding Box Regression: adjust boxes from Selective Search
+        <ul>
+          <li>Algorithm:<br />
+ Assume a bounding box $P^i = (P_x^i, P_y^i, P_w^i, P_h^i)$,<br />
+ Ground-truth box $G = (G_x, G_y, G_w, G_h)$.<br />
+ Define a function $d$, mapping $P$ close to $G$;<br />
+ \(\hat{G}_x = P_w d_x(P) + P_x\)<br />
+ \(\hat{G}_y = P_h d_y(P) + P_y\)<br />
+ \(\hat{G}_w = P_w \mbox{exp}(d_w(P))\)<br />
+ \(\hat{G}_h = P_h \mbox{exp}(d_h(P))\)<br />
+ where $d_{\star}(P) = w_{\star}^T \phi_5(P)$, is modeled as a linear function(learnable weight vector <em>w</em>) of the <code class="language-plaintext highlighter-rouge">POOL5</code> features of proposal <em>P</em>($\phi_5(P)$). We learn $w_{\star}$ by optimizing the regularized least squares objective(Ridge regression)<br />
+  <em>Learnable parameters on: 2, 3, 5</em></li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+  <li>Summary:<br />
+  Score: 53.7% on Pascal VOC 2010<br />
+  Problem:<br />
+      1. Low Performance; Warping images into 224x224 size for AlexNet<br />
+      2. Slow; Using all candidates from Selective Search<br />
+      3. Not GPU-optimized; Using Selective Search and SVM<br />
+      4. No Back Propagation; Not sharing computations</li>
+</ul>
+
+<h3 id="fast-r-cnn">Fast R-CNN</h3>
+<p><img src="/assets/images/cs231n_lec15_5.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
+<ul>
+  <li>
+    <p><em>Girshick, “Fast R-CNN”, ICCV 2015</em></p>
   </li>
   <li>
-    <p>Patterns in gradient flow<br />
-<img src="/assets/images/cs231n_lec4_3.png" alt="png" width="60%&quot;, height=&quot;60%" /></p>
+    <p>idea:<br />
+  Pass the image through convnet <strong>before</strong> cropping. Crop the conv feature instead.</p>
+  </li>
+  <li>Algorithm:
+    <ol>
+      <li>Pass the full image through pre-trained CNN and extract feature maps.</li>
+      <li>Get RoIs from a proposal method(Selective Search) and crop by RoI Pooling, get fixed size feature vectors.</li>
+      <li>With RoI feature vectors, pass some fully connected layers and split into two branches.</li>
+      <li>1) pass softmax and classify the class of RoI. no SVM used. 2) Run bounding box regression.</li>
+    </ol>
+  </li>
+  <li>Cropping Features: RoI Pool <!--[](href) link to terminologies -->
+    <ol>
+      <li>Project RoI proposals(on input image) onto CNN image features.</li>
+      <li>Divide into subregions.</li>
+      <li>Run pooling(Max-pool) within each subregion.<br />
+  $\rightarrow$ Region features always be the same size regardless of input region size</li>
+    </ol>
   </li>
 </ul>
 
+<h3 id="faster-r-cnn">Faster R-CNN</h3>
+<p><img src="/assets/images/cs231n_lec15_6.png" alt="png" width="50%&quot;, height=&quot;80%" /></p>
+<ul>
+  <li>
+    <p><em>Ren et al, “Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks”, NIPS 2015</em></p>
+  </li>
+  <li>
+    <p>idea:<br />
+  Fast R-CNN is not GPU-optimized; runtime dominated by region proposals.<br />
+  By inserting Region Proposal Network(RPN), implemented end-to-end architecture.</p>
+  </li>
+  <li>Algorithm:
+    <ol>
+      <li>Pass the full image through pre-trained CNN and extract feature maps.</li>
+      <li>RPN:<br />
+ For <em>K</em> different anchor boxes of different size and scale at each point in the feature map, predict whether it contains an object(binary classification), and also predict a corrections from the anchor to the ground-truth box(regress 4 numbers per pixel).<br />
+ <img src="/assets/images/cs231n_lec15_7.png" alt="png" width="80%&quot;, height=&quot;80%" /></li>
+      <li>Jointly train with 4 losses:<br />
+ 1) RPN classify object / not object<br />
+ 2) RPN regress box coordinates<br />
+ 3) Final classification score (object classes)<br />
+ 4) Final box coordinates</li>
+    </ol>
+  </li>
+  <li>Glossing over many details:
+    <ul>
+      <li>Ignore overlapping proposals with non-max suppression</li>
+      <li>How are anchors determined?</li>
+      <li>How do we sample positive / negative samples for training the RPN?</li>
+      <li>How to parameterize bounding box regression?</li>
+    </ul>
+  </li>
+  <li>Two-stage object detector:
+    <ul>
+      <li>First stage: Run once per image
+        <ul>
+          <li>Backbone network</li>
+          <li>Region proposal network(RPN)</li>
+        </ul>
+      </li>
+      <li>Second stage: Run once per region
+        <ul>
+          <li>Crop features: RoI pool/ align</li>
+          <li>Predict object class</li>
+          <li>Prediction bbox offset</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="single-stage-object-detectors-yolo--ssd--retinanet">Single-Stage Object Detectors: YOLO / SSD / RetinaNet</h3>
+<ul>
+  <li>Algorithm:
+    <ol>
+      <li>Divide input imgae into grid</li>
+      <li>Image a set of <strong>base boxes</strong> centered at each grid cell</li>
+      <li>Within each grid cell:
+        <ul>
+          <li>Regress from each of the <em>B</em> base boxes to a final box with 5 numbers(dx, dy, dh, dw, confidence)</li>
+          <li>Predict scores for each of <em>C</em> classes(including background as a class)</li>
+          <li>Looks a lot like RPN, but category-specific</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<p><img src="/assets/images/cs231n_lec15_8.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
+
+<h2 id="instance-segmentation-mask-r-cnn">Instance Segmentation: Mask R-CNN</h2>
+<ul>
+  <li>He et al, “Mask R-CNN”, ICCV 2017<br />
+<img src="/assets/images/cs231n_lec15_9.png" alt="png" width="80%&quot;, height=&quot;80%" /><br />
+<img src="/assets/images/cs231n_lec15_10.png" alt="png" width="80%&quot;, height=&quot;80%" /><br />
+<img src="/assets/images/cs231n_lec15_11.png" alt="png" width="80%&quot;, height=&quot;80%" /><br />
+<img src="/assets/images/cs231n_lec15_12.png" alt="png" width="80%&quot;, height=&quot;80%" /><br />
+<img src="/assets/images/cs231n_lec15_13.png" alt="png" width="80%&quot;, height=&quot;80%" /></li>
+</ul>
+
+<h2 id="open-source-frameworks">Open Source Frameworks</h2>
+<p><a href="https://github.com/tensorflow/models/tree/master/research/object_detection">TensorFlow Detection API</a><br />
+<a href="https://github.com/facebookresearch/detectron2">Detectron2(Pytorch)</a></p>
+
+<h2 id="beyond-2d-object-detection">Beyond 2D Object Detection</h2>
+
+<h3 id="object-detection--captioning-dense-captioning">Object Detection + Captioning: Dense Captioning</h3>
+
+<h3 id="dense-video-captioning-timestep-t">Dense Video Captioning: timestep “T”</h3>
+<p><img src="/assets/images/cs231n_lec15_14.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
+
+<h3 id="objects--relationships-scene-graphs">Objects + Relationships: Scene Graphs</h3>
+<p><img src="/assets/images/cs231n_lec15_15.png" alt="png" width="80%&quot;, height=&quot;80%" /><br />
+<img src="/assets/images/cs231n_lec15_16.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
+
+<h3 id="3d-object-detection">3D Object Detection</h3>
+<p><img src="/assets/images/cs231n_lec15_17.png" alt="png" width="60%&quot;, height=&quot;80%" /></p>
+<ul>
+  <li>
+    <p>2D bounding box: (x, y, w, h)<br />
+  $\rightarrow$ 3D oriented bounding box: (x, y, z, w, h, l, r, p, y)<br />
+  $\rightarrow$ Simplified bbox: no roll &amp; pitch</p>
+  </li>
+  <li>
+    <p>Simple Camera Model:<br />
+  <img src="/assets/images/cs231n_lec15_18.png" alt="png" width="60%&quot;, height=&quot;80%" /><br />
+  A point on the image plane corresponds to a <strong>ray</strong> in the 3D space<br />
+  A 2D bounding box on an image is a <strong>frustrum</strong> in the 3D space<br />
+  Localize an object in 3D: The object can be anywhere in the <strong>camera viewing frustrum</strong></p>
+  </li>
+  <li>Monocular Camera:<br />
+  <img src="/assets/images/cs231n_lec15_19.png" alt="png" width="70%&quot;, height=&quot;80%" />
+    <ul>
+      <li>Same idea as Faster RCNN, but proposals are in 3D</li>
+      <li>3D bounding box proposal, regress 3D box parameters + class score</li>
+    </ul>
+  </li>
+  <li>3D Shape Prediction: Mesh R-CNN
+<img src="/assets/images/cs231n_lec15_20.png" alt="png" width="50%&quot;, height=&quot;80%" /></li>
+</ul>
+
+<!--
+참고
+https://www.youtube.com/watch?v=jqNCdjOB15s
+https://towardsdatascience.com/understanding-region-of-interest-part-1-roi-pooling-e4f5dd65bb44
+https://yeomko.tistory.com/13 갈아먹는 object detection
+https://nuggy875.tistory.com/33 object detection 시리즈
+https://ropiens.tistory.com/73 
+-->
 
                 </div>
             </section>
@@ -376,9 +537,9 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function () {
-                            var this_page_url = 'http://0.0.0.0:4000/cs231n_lec4';
-                            var this_page_identifier = '/cs231n_lec4';
-                            var this_page_title = 'cs231n - Lecture 4. Neural Networks and Backpropagation';
+                            var this_page_url = 'http://0.0.0.0:4000/cs231n_lec15';
+                            var this_page_identifier = '/cs231n_lec15';
+                            var this_page_title = 'cs231n - Lecture 15. Detection and Segmentation';
                         };
                         (function() {
                             var d = document, s = d.createElement('script');
@@ -428,11 +589,6 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
                                 
                                   
                                     
-                                        
-                                        
-                                            <li><a href="/cs231n_lec15">cs231n - Lecture 15. Detection and Segmentation</a></li>
-                                        
-                                    
                                   
                                 
                                   
@@ -459,12 +615,7 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
                                     
                                         
                                         
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
+                                            <li><a href="/cs231n_lec12">cs231n - Lecture 12. Generative Models</a></li>
                                         
                                     
                                   
@@ -512,6 +663,16 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
                                     
                                   
                                 
@@ -579,21 +740,21 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs231n_lec5">
+            <a class="post-card-content-link" href="/starfish_detection">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Cs231n</span>
+                                <span class="post-card-tags">Projects</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">cs231n - Lecture 5. Convolutional Neural Networks</h2>
+                    <h2 class="post-card-title">Starfish detection w/ TF Object Detection API</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>Convolutional Neural Networks ConvNets are everywhere Classification, Retrieval, Detection, Segmentation, Image Captioning, etc. Recap: Fully Connected Layer $32\times 32\times 3$ image $\rightarrow$ stretch to $3072\times 1$ Then a dot product of $3072\times 1$</p>
+                        <p>TensorFlow - Help Protect the Great Barrier Reef Worked in Feb. 2022. to study object detection model Task: Underwater + Small object detection Score(IoU=0.50:0.95): mAP@100: 0.364686 / AR@100: 0.491768 / Expected F2: 0.459727</p>
                     
                 </section>
             </a>
@@ -612,7 +773,7 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs231n_lec3">
+            <a class="post-card-content-link" href="/cs231n_lec14">
                 <header class="post-card-header">
                     
                         
@@ -622,11 +783,11 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
                         
                     
 
-                    <h2 class="post-card-title">cs231n - Lecture 3. Loss Functions and Optimization</h2>
+                    <h2 class="post-card-title">cs231n - Lecture 14. Visualizing and Understanding</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>Linear Classifier (cont.) Todo: Define a loss function: how good the classifier is Optimization: efficient way of finding the parameters that minimize the loss function Loss function given a dataset of examples \(\left\{</p>
+                        <p>What’s going on inside ConvNets? Visualizing what models have learned First layer: Visualize Filters At the first layer, we can visualize the raw weights and see gabor-like features. While the higher layers are</p>
                     
                 </section>
             </a>
@@ -653,18 +814,18 @@ If we can compute partial derivaties, then we can learn $W_1$ and $W_2$.</p>
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">cs231n - Lecture 4. Neural Networks and Backpropagation</div>
+    <div class="floating-header-title">cs231n - Lecture 15. Detection and Segmentation</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs231n+-+Lecture+4.+Neural+Networks+and+Backpropagation&amp;url=https://12kdh43.github.io/cs231n_lec4"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs231n+-+Lecture+15.+Detection+and+Segmentation&amp;url=https://12kdh43.github.io/cs231n_lec15"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs231n_lec4"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs231n_lec15"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 

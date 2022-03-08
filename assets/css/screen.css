@@ -743,7 +743,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 .post-full-content img,
 .post-full-content video {
     display: block;
-    margin: 1.5em auto;
+    margin: 0.2em auto;
     max-width: 1040px;
 }
 @media (max-width: 1040px) {
@@ -816,7 +816,7 @@ Usage (In Ghost editor):
 
 .post-full-content pre {
     overflow-x: auto;
-    margin: 1.5em 0 3em;
+    margin: 0.5em 0 3em;
     padding: 20px;
     max-width: 100%;
     border: color(var(--darkgrey) l(-10%)) 1px solid;
