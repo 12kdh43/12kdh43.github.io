@@ -206,7 +206,7 @@
       &lt;li&gt;Fully Convolutional&lt;br /&gt;
   Design a network with &lt;strong&gt;only&lt;/strong&gt; convolutional layers without downsampling operators&lt;br /&gt;
   &lt;img src=&quot;/assets/images/cs231n_lec15_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
-  $\textcolor{red}{(-)}$ convolutions at original image resolution is very expensive&lt;br /&gt;
+  $\color{red}{(-)}$ convolutions at original image resolution is very expensive&lt;br /&gt;
   $\rightarrow$ Design convolutional network with &lt;strong&gt;downsampling and upsampling&lt;/strong&gt;&lt;br /&gt;
   &lt;img src=&quot;/assets/images/cs231n_lec15_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
     &lt;/ul&gt;
