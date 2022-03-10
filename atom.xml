@@ -8,10 +8,477 @@
     
       
       <item>
+        <title>cs224n - Lecture 2. Neural Classifiers</title>
+        
+          <description>&lt;h3 id=&quot;review-main-idea-of-word2vec&quot;&gt;Review: Main idea of word2vec&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Start with random word vectors&lt;/li&gt;
+  &lt;li&gt;Iterate through each word in the whole corpus&lt;/li&gt;
+  &lt;li&gt;Try to predict surrounding words using word vectors: $P(o\mid c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}$&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Learning&lt;/strong&gt;: Update vectors so they can predict actual surrounding words better&lt;/li&gt;
+  &lt;li&gt;Doing no more than this, this algorithm learns word vectors that capture well word similarity and meaningful directions in a wordspace.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec2_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;A “bag of words” model; doesn’t actually pay any attention to word order or position. The model makes the same predictions at each position; the probability estimate would be the same if it is next to the center word or a bit further away.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We want a model that gives a reasonably high probability estimate to &lt;em&gt;all&lt;/em&gt; words that occur in the context(at all often)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Word2vec maximizes objective function by putting similar words nearby in high dimensional vector space&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;optimization-gradient-descent&quot;&gt;Optimization: Gradient Descent&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;To learn good word vectors: minimize a cost function $J(\theta)$&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Gradient Descent&lt;/strong&gt; is an algorithm to minimize $J(\theta)$ by changing $\theta$&lt;/li&gt;
+  &lt;li&gt;idea: from current value of $\theta$, calculate gradient of $J(\theta)$, then take small step in the direction of &lt;em&gt;negative&lt;/em&gt; gradient. Repreat.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec2_1.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;Algorithm:
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;theta_grad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evaluate_gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;J&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;corpus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta_grad&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;stochastic-gradient-descent&quot;&gt;Stochastic Gradient Descent&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Problem&lt;/strong&gt;: $J(\theta)$ is a function of &lt;strong&gt;all&lt;/strong&gt; windows in the corpus (often, billions!); so $\nabla_\theta J(\theta)$ is very expensive to compute&lt;/li&gt;
+  &lt;li&gt;Solution: Stochastic gradient descent(SGD)
+    &lt;ul&gt;
+      &lt;li&gt;Repeatedly sample windows, and update after each one, or each small batch&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm:
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;window&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sample_window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;corpus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;theta_grad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evaluate_gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;J&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta_grad&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Stochastic gradients with word vectors (Aside)
+    &lt;ul&gt;
+      &lt;li&gt;iteratively take gradients at each such window for SGD&lt;/li&gt;
+      &lt;li&gt;But in each window, we only have at most &lt;em&gt;2m + 1&lt;/em&gt; words,&lt;br /&gt;
+  so $\nabla_\theta J(\theta)$ is very sparse:&lt;br /&gt;
+  \(\nabla_\theta J_t(\theta) = \begin{bmatrix} 0  \\ \vdots \\ \nabla_{v_{\text{like}}} \\ \vdots 0 \\ \nabla_{u_I} \\ \vdots \\ \nabla_{u_{\text{learning}}} \\ \vdots \end{bmatrix} \in \mathbb{R}^{2dV}\)&lt;/li&gt;
+      &lt;li&gt;We might only update the word vectors that actually appear.&lt;/li&gt;
+      &lt;li&gt;Solution: either you need sparse matrix update operations to only update certain &lt;strong&gt;rows&lt;/strong&gt;(in most DL packages) of full embedding matrices &lt;em&gt;U&lt;/em&gt; and &lt;em&gt;V&lt;/em&gt;, or you need to keep around a hash for word vectors.&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec2_2.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;If you have millions of word vectors and do distributed computing, it is important to not have to send gigantic updates around.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2b-word2vec-algorithm-family-more-details&quot;&gt;2b. Word2vec algorithm family: More details&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Why two vectors? $\rightarrow$ Easier optimization. Average both at the end
+    &lt;ul&gt;
+      &lt;li&gt;But can implement the algorithm with just one vector per word, and it works slightly better, but it makes the algorithm much more complicated.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Two model variants:
+    &lt;ol&gt;
+      &lt;li&gt;Skip-grams(SG)&lt;br /&gt;
+ Predict context(“outside”) words (position independent) given center word&lt;/li&gt;
+      &lt;li&gt;Continuous Bag of Words(CBOW)&lt;br /&gt;
+ Predict center word from (bag of) context words&lt;br /&gt;
+  &lt;em&gt;We presented: Skip-gram model&lt;/em&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Additional efficiency in training:
+    &lt;ul&gt;
+      &lt;li&gt;Negative sampling&lt;br /&gt;
+  &lt;em&gt;So far: Focus on naive softmax(simpler, but expensive training method)&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-skip-gram-model-with-negative-samplingsgns&quot;&gt;The skip-gram model with negative sampling(SGNS)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;The normalization term is computationally expensive, especially on the denominator of $P(o\mid c)$.&lt;/li&gt;
+  &lt;li&gt;Main idea: train binary logistic regressions for a true pair (center word and a word in its context window) versus several noise pairs (the center word paired with a random word)&lt;/li&gt;
+  &lt;li&gt;From paper: &lt;em&gt;“Distributed Representations of Words and Phrases and their Compositionality” (Mikolov et al. 2013)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Overall objective function(to maximize):&lt;br /&gt;
+  \(J(\theta) = \frac{1}{T}\sum_{t=1}^T J_t(\theta)\)&lt;br /&gt;
+  \(J_t(\theta) = \log\sigma(u_o^T u_c) + \sum_{i=1}^k \mathbb{E}_{j~P(w)}\left[ \log\sigma(-u_j^T v_c) \right]\)&lt;br /&gt;
+  where the logistic/sigmoid function: $\sigma(x) = \frac{1}{1+ e^{-x}}$&lt;/li&gt;
+  &lt;li&gt;We maximize the probability of two words co-occuring in first log and minimize probability of noise words:&lt;br /&gt;
+  $J_{\text{neg-sample}}(u_o, v_c, U) = -\log \sigma(u_o^T v_c) - \sum_{k\in { \text{K sampled indicies} }} \log \sigma(-u_k^T v_c)$&lt;/li&gt;
+  &lt;li&gt;We take &lt;em&gt;k&lt;/em&gt; negative samples (using word probabilities)&lt;/li&gt;
+  &lt;li&gt;Maximize probability that real outside word appears, minimize probability that random words appear around center word&lt;/li&gt;
+  &lt;li&gt;Another trick: sample with $P(w) = U(w)^{3/4} / Z$, the unigram distribution $U(w)$ raised to the $3/4$ power (We provide this function in the starter code)&lt;/li&gt;
+  &lt;li&gt;The power makes less frequent words be sampled more often&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;why-not-capture-co-occurrence-counts-directly&quot;&gt;Why not capture co-occurrence counts directly?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Building a co-occurrence matrix &lt;em&gt;X&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;2 options: windows vs. full document&lt;/li&gt;
+      &lt;li&gt;Window: Similar to word2vec, use window around each word and captures some syntactic and semantic information&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec2_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;Word-document co-occurrence matrix will give general topics (all sports terms will have similar entries) learning to “Latent Semantic Analysis”; in tasks like information retrieval&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;co-occurrence-vectors&quot;&gt;Co-occurrence vectors&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Simple count co-occurrence vectors
+    &lt;ul&gt;
+      &lt;li&gt;Vectors increase in size with vocabulary&lt;/li&gt;
+      &lt;li&gt;Very high dimensional: require a lot of storage (though sparse)&lt;/li&gt;
+      &lt;li&gt;Subsequent classification models have sparsity issues $\rightarrow$ Models are less robust&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Low-dimensional vectors
+    &lt;ul&gt;
+      &lt;li&gt;idea: store “most” of the important information in a fixed, small number of directions: a dense vector&lt;/li&gt;
+      &lt;li&gt;Usually 25-1000 directions, similar to word2vec&lt;/li&gt;
+      &lt;li&gt;How to reduce the dimensionality?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;classic-method-dimensionality-reduction-on-x&quot;&gt;Classic Method: Dimensionality Reduction on X&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Singular Value Decomposition of co-occurrence matrix &lt;em&gt;X&lt;/em&gt;&lt;br /&gt;
+  Factorizes &lt;em&gt;X&lt;/em&gt; into $U\Sigma V^T$, where &lt;em&gt;U&lt;/em&gt; and &lt;em&gt;V&lt;/em&gt; are orthonormal&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec2_4.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+  Corresponding to the columns without singular values in $\Sigma$, bottom rows in $V^T$ are ignored. The singular values inside the diagonal matrix $\Sigma$ are ordered from largest down to smallest. Retaining only &lt;em&gt;k&lt;/em&gt; singular values, in order to generalize, the lower dimensional representation $\hat{X}$ is the best rank &lt;em&gt;k&lt;/em&gt; approximation to &lt;em&gt;X&lt;/em&gt;, in terms of least squares.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;hacks-to-x-several-used-in-rohde-et-al-2005-in-coals&quot;&gt;Hacks to X (several used in Rohde et al. 2005 in COALS)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Running an SVD on a raw count co-occurrence matrix works poorly; In the mathematical assumptions of SVD, we are expecting to have normally distributed errors. But there are exceedingly common words like “a”, “the”, and “and”, and there is a very large number of rare words.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Scaling the counts in the cells can help &lt;strong&gt;a lot&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Problem: function words(&lt;em&gt;the, he, has&lt;/em&gt;) are too frequent $\rightarrow$ syntax has too much impact. Some fixes:
+        &lt;ul&gt;
+          &lt;li&gt;log the frequencies&lt;/li&gt;
+          &lt;li&gt;$min(X,t)$, with $t\approx 100$&lt;/li&gt;
+          &lt;li&gt;ignore the function words&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Ramped windows that count closer words more than further away words&lt;/li&gt;
+  &lt;li&gt;Use Pearson correlations instead of counts, then set negative values to &lt;em&gt;0&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Etc.&lt;/li&gt;
+  &lt;li&gt;Result:&lt;br /&gt;
+  Interesting semantic patterns emerge in the scaled vectors; something like a word vector analogies.&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec2_5.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;towards-glove-count-based-vs-direct-prediction&quot;&gt;Towards GloVe: Count based vs. direct prediction&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec2_6.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;encoding-meaning-components-in-vector-differences&quot;&gt;Encoding meaning components in vector differences&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Pennington, Socher, and Manning, EMNLP 2014&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;What properties needed to make vector analogies work?&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Crucial insight: Ratios of co-occurrence probabilities can encode meaning components&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec2_7.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec2_8.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Q: How can we capture ratios of co-occurrence probabilities as linear meaning components in a word vector space?&lt;/li&gt;
+  &lt;li&gt;A: Log-bilinear model: the dot product between two word vectors attempts to approximate the log of the probability of co-occurrence; \(w_i \cdot w_j = \log P(i|j)\)&lt;br /&gt;
+  $\rightarrow$ with vector differences \(w_x \cdot (w_a - w_b) = \log \frac{P(x\mid a)}{P(x \mid b)}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;combining-the-best-of-both-worlds-glove&quot;&gt;Combining the best of both worlds: GloVe&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Pennington, Socher, and Manning, EMNLP 2014&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;With \(w_i \cdot w_j = \log P(i|j)\),&lt;br /&gt;
+  explicit loss function \(J = \sum_{i,j=1}^V f(X_{ij})(w_j^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2\)&lt;br /&gt;
+  to make the dot product to be similar to the log of the co-occurrence. To not have very common words dominate, capped the effect of high word counts using $f$ function. Optimize &lt;em&gt;J&lt;/em&gt; directly on the co-occurrence count matrix.
+    &lt;ul&gt;
+      &lt;li&gt;Fast training&lt;/li&gt;
+      &lt;li&gt;Scalable to hugh corpora&lt;/li&gt;
+      &lt;li&gt;Good performance even with small corpus and small vectors&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-to-evaluate-word-vectors&quot;&gt;How to evaluate word vectors?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Related to general evaluation in NLP: intrinsic vs. extrinsic&lt;/li&gt;
+  &lt;li&gt;Intrinsic:
+    &lt;ul&gt;
+      &lt;li&gt;Evaluation on a specific/intermediate subtask&lt;/li&gt;
+      &lt;li&gt;Fast to compute&lt;/li&gt;
+      &lt;li&gt;Helps to understand that system&lt;/li&gt;
+      &lt;li&gt;Not clear if really helpful unless correlation to real task is established&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Extrinsic:
+    &lt;ul&gt;
+      &lt;li&gt;Evaluation on a real task&lt;/li&gt;
+      &lt;li&gt;Can take a long time to compute accuracy&lt;/li&gt;
+      &lt;li&gt;Unclear if the subsystem is the problem or its interaction or other subsystems&lt;/li&gt;
+      &lt;li&gt;If replacing exactly one subsystem with another improves accuracy $\rightarrow$ Winning!&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;intrinsic-word-vector-evaluation&quot;&gt;Intrinsic word vector evaluation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Word Vector Analogies&lt;br /&gt;
+  |a:b :: c:?| $\rightarrow$ $d = \text{argmax}_i \frac{(x_b -x_a +x_c)^T x_i}{\lVert x_b -x_a +x_c\rVert}$&lt;br /&gt;
+  (e.g. man:woman :: king:?)&lt;/li&gt;
+  &lt;li&gt;Evalute word vectors by how well their cosine distance after addition captures intuitive semantic and syntactic analogy questions&lt;/li&gt;
+  &lt;li&gt;Discarding the input words from the search!&lt;/li&gt;
+  &lt;li&gt;Problem: What if the information is there but not linear?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;glove-visualizations&quot;&gt;GloVe Visualizations&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec2_9.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;analogy-evaluation-and-hyperparameters&quot;&gt;Analogy evaluation and hyperparameters&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec2_10.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec2_11.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;another-intrinsic-word-vector-evaluation&quot;&gt;Another intrinsic word vector evaluation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Word vector distances and their correlation with human judgements&lt;/li&gt;
+  &lt;li&gt;Example dataset: WordSim353 &lt;a href=&quot;http://www.cs.technion.ac.il/~gabr/resources/data/wordsim353/&quot;&gt;http://www.cs.technion.ac.il/~gabr/resources/data/wordsim353/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec2_12.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec2_13.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Some ideas from Glove paper have been shown to improve skip-gram(SG) model also (e.g., average both vectors)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;extrinsic-word-vector-evaluation&quot;&gt;Extrinsic word vector evaluation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;All subsequent NLP tasks&lt;/li&gt;
+  &lt;li&gt;One example where good word vectors should help directly: &lt;strong&gt;named entity recognition&lt;/strong&gt;: identifying references to a person, organization or location&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec2_14.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;word-senses&quot;&gt;Word senses&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Most words have lots of meanings
+    &lt;ul&gt;
+      &lt;li&gt;Especially common words&lt;/li&gt;
+      &lt;li&gt;Especially words that have existed for a long time&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Does one vector caputre all these meanings or do we have a mess?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;linear-algebric-structure-of-word-senses-with-applications-to-polysemy-arora--ma--tacl-2018&quot;&gt;&lt;em&gt;“Linear Algebric Structure of Word Senses, with Applications to Polysemy”, Arora, …, Ma, …, TACL 2018&lt;/em&gt;&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Different senses of a word reside in a linear superposition(weighted sum) in standard word embeddings like word2vec&lt;/li&gt;
+  &lt;li&gt;\(v_{\text{pike}} = \alpha_1 v_{\text{pike}_2} + \alpha_2 v_{\text{pike}_2} + \alpha_3 v_{\text{pike}_3}\)&lt;br /&gt;
+  where $\alpha_1 = \frac{f_1}{f_1+f_2+f_3}$, etc., for frequency &lt;em&gt;f&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Surprising result:&lt;br /&gt;
+  Commonly, it is impossible to reconstruct the original components from their sum, but, because of ideas from &lt;em&gt;sparse coding&lt;/em&gt; you can actually separate out the senses(providing they are relatively common)!&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec2_15.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Sat, 05 Mar 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs224n_lec2</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs224n_lec2</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>cs224n - Lecture 1. Word Vectors</title>
+        
+          <description>&lt;h3 id=&quot;objectives&quot;&gt;Objectives&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;The foundations of the effective modern methods for deep learning applied to NLP; from basics to key methods used in NLP: RNN, Attention, Transformers, etc.)&lt;/li&gt;
+  &lt;li&gt;A big picture understanding of human languages and the difficulties in understanding and producing them&lt;/li&gt;
+  &lt;li&gt;An understanding of and ability to build systems (in PyTorch) for some of the major problems in NLP: Word meaning, dependency parsing, machine translation, question answering&lt;br /&gt;
+&lt;!-- *CS145: translate human language sentences into SQL --&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NLP tasks:&lt;br /&gt;
+  Easy: Spell Checking, Keyword Search, Finding Synonyms&lt;br /&gt;
+  Medium: Parsing information from websites, documents, etc.&lt;br /&gt;
+  Hard: Machine Translation, Semantic Analysis, Coreference, QA&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;word-meaning&quot;&gt;Word meaning&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Commonest linguistic way of thinking of meaning:&lt;br /&gt;
+  signifier (symbol) $\Leftrightarrow$ signified (idea or thing)&lt;br /&gt;
+  $=$ denotational semantics&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Common NLP solution&lt;/strong&gt;: Use, e.g., &lt;em&gt;WordNet&lt;/em&gt;, a thesaurus containing lists of &lt;strong&gt;synonym sets&lt;/strong&gt; and &lt;strong&gt;hypernyms&lt;/strong&gt;(“is a” relationships).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Problems with resources like WordNet&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Great as a resource but missing nuance&lt;/li&gt;
+      &lt;li&gt;Missing new meanings of words; impossible to keep up-to-date&lt;/li&gt;
+      &lt;li&gt;Subjective&lt;/li&gt;
+      &lt;li&gt;Requires human labor to create and adapt&lt;/li&gt;
+      &lt;li&gt;Can’t compute accurate word similarity&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;representing-words-as-discrete-symbols&quot;&gt;Representing words as discrete symbols&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;In traditional NLP, we regard words as discrete symbols - a &lt;em&gt;localist&lt;/em&gt; representation.&lt;br /&gt;
+  $\rightarrow$ in a statistical machine learning systems, such symbols for words are separately represented by one-hot vectors. Thus we need to have huge vector dimension corresponding to the number of words in vocabulary.
+    &lt;ul&gt;
+      &lt;li&gt;But with discrete symbols, two vectors are orthogonal and there is no natural notion of similarity for one-hot vectors.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Solution:
+    &lt;ul&gt;
+      &lt;li&gt;Could try  to rely on WordNet’s list of synonyms to get similarity?&lt;br /&gt;
+  But it is well-known to fail badly; incompleteness, etc.&lt;/li&gt;
+      &lt;li&gt;Instead: learn to encode similarity in the vecotr themselves.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;representing-words-by-their-context&quot;&gt;Representing words by their context&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Distributional semantics: &lt;strong&gt;A word’s meaning is given by the words that frequently appear close-by&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;“You shall know a word by the company it keeps”&lt;/em&gt; (J. R. Firth 1957:11)&lt;/li&gt;
+      &lt;li&gt;One of the most successful ideas of modern statistical NLP&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;When a word &lt;em&gt;w&lt;/em&gt; appears in a text, its &lt;strong&gt;context&lt;/strong&gt; is the set of words that appear nearby(within a fixed-size window).&lt;/li&gt;
+  &lt;li&gt;Use the many contexts of &lt;em&gt;w&lt;/em&gt; to build up a representation of &lt;em&gt;w&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;word-vectors&quot;&gt;Word vectors&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A dense vector for each word, chosen so that it is similar to vectors of words that appear in similar contexts&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Note: as a &lt;em&gt;distributed&lt;/em&gt; representation, &lt;em&gt;word vectors&lt;/em&gt; are also called &lt;em&gt;word embeddings&lt;/em&gt; or &lt;em&gt;(neural) words representations&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;word2vec&quot;&gt;Word2vec&lt;/h2&gt;
+&lt;h3 id=&quot;word2vec-overview&quot;&gt;Word2vec: overview&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Word2vec&lt;/em&gt;(Mikolov et al. 2013) is a framework for learning word vectors&lt;/li&gt;
+  &lt;li&gt;idea:
+    &lt;ul&gt;
+      &lt;li&gt;We have a large corpus(“body”) of text&lt;/li&gt;
+      &lt;li&gt;Every word in a fixed vocabulary is representated by a vector&lt;/li&gt;
+      &lt;li&gt;Go through each position &lt;em&gt;t&lt;/em&gt; in the text, which has a center word &lt;em&gt;c&lt;/em&gt; and context(“outside”) words &lt;em&gt;o&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Use the similarity of the word vectors for &lt;em&gt;c&lt;/em&gt; and &lt;em&gt;o&lt;/em&gt; to calculate the probability of &lt;em&gt;o&lt;/em&gt; given &lt;em&gt;c&lt;/em&gt;(or vice versa)&lt;/li&gt;
+      &lt;li&gt;Keep adjusting the word vectors to maximize this probability&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;We can learn these word vectors from just a big pile of text by doing this distributional similarity task of being able to predict what words occur in the context of other words.&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Example windows and process for computing $P(w_{t+j}|w_t)$&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec1_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;word2vec-objective-function&quot;&gt;Word2vec: objective function&lt;/h3&gt;
+&lt;p&gt;For each position $t = 1, \ldots, T$, predict context words within a window of fixed size &lt;em&gt;m&lt;/em&gt;, given center word $w_j$. Data likelihood:&lt;br /&gt;
+\(\begin{align*}
+L(\theta) = \prod_{t=1}^T \prod_{\substack{-m\leqq j\leqq m \\ j\ne 0}} P(w_{t+j}|w_t;\theta)
+\end{align*}\)&lt;br /&gt;
+where $\theta$ is all variables to be optimized.&lt;/p&gt;
+
+&lt;p&gt;The objective function $J(\theta)$ is the (average) negative log likelihood:&lt;br /&gt;
+\(\begin{align*}
+J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substack{-m\leqq j\leqq m \\ j\ne 0}}\log P(w_{t+j}|w_t;\theta)
+\end{align*}\)&lt;br /&gt;
+Minimizing objective function $\Leftrightarrow$ Maximizing predictive accuracy&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Question: How to calculate $P(w_{t+j}\vert w_t;\theta)$?&lt;/li&gt;
+  &lt;li&gt;Answer: We will &lt;em&gt;use&lt;/em&gt; two vectors per word &lt;em&gt;w&lt;/em&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;$v_w$ when &lt;em&gt;w&lt;/em&gt; is a center word&lt;/li&gt;
+      &lt;li&gt;$u_w$ when &lt;em&gt;w&lt;/em&gt; is a context word&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Then for a centor word &lt;em&gt;c&lt;/em&gt; and a context word &lt;em&gt;o&lt;/em&gt;:&lt;br /&gt;
+  \(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;word2vec-prediction-function&quot;&gt;Word2vec: prediction function&lt;/h3&gt;
+&lt;p&gt;\(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\)&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;$u_w^T v_c$: Dot product compares similarity of &lt;em&gt;o&lt;/em&gt; and &lt;em&gt;c&lt;/em&gt;.&lt;br /&gt;
+ $u^T v = u\ .v = \sum_{i=1}^n u_i v_i$&lt;br /&gt;
+ Larger dot product = larger probability&lt;/li&gt;
+  &lt;li&gt;$\exp$: Exponentiation makes anything positive&lt;/li&gt;
+  &lt;li&gt;$\sum_{w \in V}\exp(u_w^T v_c)$: Normalize over entire vocabulary to give probability distribution.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;This is an example of the softmax function $\mathbb{R}^n \rightarrow (0,1)^n$(Open region) that maps arbitary values $x_i$ to a probability distribution $p_i$&lt;br /&gt;
+  \(\mbox{softmax}(x_i) = \frac{\exp(x_i)}{\sum_{j=1}^n\exp(x_j)} = p_i\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To train the model: Optimize value of parameters to minimize loss&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Recall: $\theta$ represents all the model parameters, in one long vector&lt;/li&gt;
+      &lt;li&gt;In our case, with &lt;em&gt;d&lt;/em&gt;-dimensional vectors and &lt;em&gt;V&lt;/em&gt;-many words, we have: $\theta \in \mathbb{R}^{2dV}$&lt;/li&gt;
+      &lt;li&gt;Remember: every word has two vectors&lt;/li&gt;
+      &lt;li&gt;We optimize these parameters by walking down the gradient(gradient descent)&lt;/li&gt;
+      &lt;li&gt;We compute &lt;strong&gt;all&lt;/strong&gt; vector gradients&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;word2vec-derivations-of-gradient&quot;&gt;Word2vec derivations of gradient&lt;/h3&gt;
+&lt;p&gt;\(\begin{align*}
+J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substack{-m\leqq j\leqq m \\ j\ne 0}}\log P(w_{t+j}|w_t;\theta)
+\end{align*}\)&lt;br /&gt;
+\(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\)&lt;/p&gt;
+
+&lt;p&gt;\(\frac{\partial}{\partial v_c} \log \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)} = \underbrace{\frac{\partial}{\partial v_c} \log \exp(u_o^T v_c)}_{(1)} - \underbrace{\frac{\partial}{\partial v_c} \log \sum_{w=1}^V \exp(u_w^T v_c)}_{(2)}\)&lt;br /&gt;
+\(\begin{align*}\cdots (1) &amp;amp;= \frac{\partial}{\partial v_c} u_o^T v_c \\
+							&amp;amp;= u_o \end{align*}\)&lt;br /&gt;
+\(\begin{align*}\cdots (2) &amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \frac{\partial}{\partial v_c} \exp(u_x^T v_c) \\
+							&amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \exp(u_x^T v_c) \cdot \frac{\partial}{\partial v_c} u_x^T v_c \\
+							&amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \exp(u_x^T v_c) \cdot u_x \\
+							\end{align*} \\\)&lt;br /&gt;
+\(\begin{align*}
+\frac{\partial}{\partial v_c} \log P(o|c) &amp;amp;= u_o - \frac{\sum_{x=1}^V \exp(u_x^T v_c)u_x}{\sum_{w=1}^V \exp(u_w^T v_c)} \\
+	&amp;amp; = u_o - \sum_{x=1}^V \underbrace{\frac{\exp(u_x^T v_c)}{\sum_{w=1}^V \exp(u_w^T v_c)}}_{\mbox{softmax formula}} u_x \\
+	&amp;amp; = u_o - \underbrace{\sum_{x=1}^V P(x|c) u_x}_{\mbox{Expectation}} \\
+	&amp;amp; = \mbox{observed} - \mbox{expected} \end{align*}\)&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 02 Mar 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs224n_lec1</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs224n_lec1</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>DevEnv Setup</title>
         
           <description>&lt;ul&gt;
-  &lt;li&gt;On purpose of setting local development environment on a new SSD storage, followed instructions below. Post for later use.&lt;/li&gt;
+  &lt;li&gt;For purpose of setting local development environment on a new SSD storage, followed instructions below. Post for later use.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;ol&gt;

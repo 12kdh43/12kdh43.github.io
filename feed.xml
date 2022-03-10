@@ -1,5 +1,275 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-08T06:09:12+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">DevEnv Setup</title><link href="http://0.0.0.0:4000/DevEnv_Setup" rel="alternate" type="text/html" title="DevEnv Setup" /><published>2022-03-02T00:00:00+00:00</published><updated>2022-03-02T00:00:00+00:00</updated><id>http://0.0.0.0:4000/DevEnv_Setup</id><content type="html" xml:base="http://0.0.0.0:4000/DevEnv_Setup">&lt;ul&gt;
-  &lt;li&gt;On purpose of setting local development environment on a new SSD storage, followed instructions below. Post for later use.&lt;/li&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-10T15:06:14+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">cs224n - Lecture 2. Neural Classifiers</title><link href="http://0.0.0.0:4000/cs224n_lec2" rel="alternate" type="text/html" title="cs224n - Lecture 2. Neural Classifiers" /><published>2022-03-05T00:00:00+00:00</published><updated>2022-03-05T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec2</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec2">&lt;h3 id=&quot;review-main-idea-of-word2vec&quot;&gt;Review: Main idea of word2vec&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Start with random word vectors&lt;/li&gt;
+  &lt;li&gt;Iterate through each word in the whole corpus&lt;/li&gt;
+  &lt;li&gt;Try to predict surrounding words using word vectors: $P(o\mid c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}$&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Learning&lt;/strong&gt;: Update vectors so they can predict actual surrounding words better&lt;/li&gt;
+  &lt;li&gt;Doing no more than this, this algorithm learns word vectors that capture well word similarity and meaningful directions in a wordspace.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec2_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;A “bag of words” model; doesn’t actually pay any attention to word order or position. The model makes the same predictions at each position; the probability estimate would be the same if it is next to the center word or a bit further away.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We want a model that gives a reasonably high probability estimate to &lt;em&gt;all&lt;/em&gt; words that occur in the context(at all often)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Word2vec maximizes objective function by putting similar words nearby in high dimensional vector space&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;optimization-gradient-descent&quot;&gt;Optimization: Gradient Descent&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;To learn good word vectors: minimize a cost function $J(\theta)$&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Gradient Descent&lt;/strong&gt; is an algorithm to minimize $J(\theta)$ by changing $\theta$&lt;/li&gt;
+  &lt;li&gt;idea: from current value of $\theta$, calculate gradient of $J(\theta)$, then take small step in the direction of &lt;em&gt;negative&lt;/em&gt; gradient. Repreat.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec2_1.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;Algorithm:
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;theta_grad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evaluate_gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;J&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;corpus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta_grad&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;stochastic-gradient-descent&quot;&gt;Stochastic Gradient Descent&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Problem&lt;/strong&gt;: $J(\theta)$ is a function of &lt;strong&gt;all&lt;/strong&gt; windows in the corpus (often, billions!); so $\nabla_\theta J(\theta)$ is very expensive to compute&lt;/li&gt;
+  &lt;li&gt;Solution: Stochastic gradient descent(SGD)
+    &lt;ul&gt;
+      &lt;li&gt;Repeatedly sample windows, and update after each one, or each small batch&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Algorithm:
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;window&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sample_window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;corpus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;theta_grad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evaluate_gradient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;J&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theta_grad&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Stochastic gradients with word vectors (Aside)
+    &lt;ul&gt;
+      &lt;li&gt;iteratively take gradients at each such window for SGD&lt;/li&gt;
+      &lt;li&gt;But in each window, we only have at most &lt;em&gt;2m + 1&lt;/em&gt; words,&lt;br /&gt;
+  so $\nabla_\theta J(\theta)$ is very sparse:&lt;br /&gt;
+  \(\nabla_\theta J_t(\theta) = \begin{bmatrix} 0  \\ \vdots \\ \nabla_{v_{\text{like}}} \\ \vdots 0 \\ \nabla_{u_I} \\ \vdots \\ \nabla_{u_{\text{learning}}} \\ \vdots \end{bmatrix} \in \mathbb{R}^{2dV}\)&lt;/li&gt;
+      &lt;li&gt;We might only update the word vectors that actually appear.&lt;/li&gt;
+      &lt;li&gt;Solution: either you need sparse matrix update operations to only update certain &lt;strong&gt;rows&lt;/strong&gt;(in most DL packages) of full embedding matrices &lt;em&gt;U&lt;/em&gt; and &lt;em&gt;V&lt;/em&gt;, or you need to keep around a hash for word vectors.&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec2_2.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;If you have millions of word vectors and do distributed computing, it is important to not have to send gigantic updates around.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2b-word2vec-algorithm-family-more-details&quot;&gt;2b. Word2vec algorithm family: More details&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Why two vectors? $\rightarrow$ Easier optimization. Average both at the end
+    &lt;ul&gt;
+      &lt;li&gt;But can implement the algorithm with just one vector per word, and it works slightly better, but it makes the algorithm much more complicated.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Two model variants:
+    &lt;ol&gt;
+      &lt;li&gt;Skip-grams(SG)&lt;br /&gt;
+ Predict context(“outside”) words (position independent) given center word&lt;/li&gt;
+      &lt;li&gt;Continuous Bag of Words(CBOW)&lt;br /&gt;
+ Predict center word from (bag of) context words&lt;br /&gt;
+  &lt;em&gt;We presented: Skip-gram model&lt;/em&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Additional efficiency in training:
+    &lt;ul&gt;
+      &lt;li&gt;Negative sampling&lt;br /&gt;
+  &lt;em&gt;So far: Focus on naive softmax(simpler, but expensive training method)&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-skip-gram-model-with-negative-samplingsgns&quot;&gt;The skip-gram model with negative sampling(SGNS)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;The normalization term is computationally expensive, especially on the denominator of $P(o\mid c)$.&lt;/li&gt;
+  &lt;li&gt;Main idea: train binary logistic regressions for a true pair (center word and a word in its context window) versus several noise pairs (the center word paired with a random word)&lt;/li&gt;
+  &lt;li&gt;From paper: &lt;em&gt;“Distributed Representations of Words and Phrases and their Compositionality” (Mikolov et al. 2013)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Overall objective function(to maximize):&lt;br /&gt;
+  \(J(\theta) = \frac{1}{T}\sum_{t=1}^T J_t(\theta)\)&lt;br /&gt;
+  \(J_t(\theta) = \log\sigma(u_o^T u_c) + \sum_{i=1}^k \mathbb{E}_{j~P(w)}\left[ \log\sigma(-u_j^T v_c) \right]\)&lt;br /&gt;
+  where the logistic/sigmoid function: $\sigma(x) = \frac{1}{1+ e^{-x}}$&lt;/li&gt;
+  &lt;li&gt;We maximize the probability of two words co-occuring in first log and minimize probability of noise words:&lt;br /&gt;
+  $J_{\text{neg-sample}}(u_o, v_c, U) = -\log \sigma(u_o^T v_c) - \sum_{k\in { \text{K sampled indicies} }} \log \sigma(-u_k^T v_c)$&lt;/li&gt;
+  &lt;li&gt;We take &lt;em&gt;k&lt;/em&gt; negative samples (using word probabilities)&lt;/li&gt;
+  &lt;li&gt;Maximize probability that real outside word appears, minimize probability that random words appear around center word&lt;/li&gt;
+  &lt;li&gt;Another trick: sample with $P(w) = U(w)^{3/4} / Z$, the unigram distribution $U(w)$ raised to the $3/4$ power (We provide this function in the starter code)&lt;/li&gt;
+  &lt;li&gt;The power makes less frequent words be sampled more often&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;why-not-capture-co-occurrence-counts-directly&quot;&gt;Why not capture co-occurrence counts directly?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Building a co-occurrence matrix &lt;em&gt;X&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;2 options: windows vs. full document&lt;/li&gt;
+      &lt;li&gt;Window: Similar to word2vec, use window around each word and captures some syntactic and semantic information&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec2_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;Word-document co-occurrence matrix will give general topics (all sports terms will have similar entries) learning to “Latent Semantic Analysis”; in tasks like information retrieval&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;co-occurrence-vectors&quot;&gt;Co-occurrence vectors&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Simple count co-occurrence vectors
+    &lt;ul&gt;
+      &lt;li&gt;Vectors increase in size with vocabulary&lt;/li&gt;
+      &lt;li&gt;Very high dimensional: require a lot of storage (though sparse)&lt;/li&gt;
+      &lt;li&gt;Subsequent classification models have sparsity issues $\rightarrow$ Models are less robust&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Low-dimensional vectors
+    &lt;ul&gt;
+      &lt;li&gt;idea: store “most” of the important information in a fixed, small number of directions: a dense vector&lt;/li&gt;
+      &lt;li&gt;Usually 25-1000 directions, similar to word2vec&lt;/li&gt;
+      &lt;li&gt;How to reduce the dimensionality?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;classic-method-dimensionality-reduction-on-x&quot;&gt;Classic Method: Dimensionality Reduction on X&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Singular Value Decomposition of co-occurrence matrix &lt;em&gt;X&lt;/em&gt;&lt;br /&gt;
+  Factorizes &lt;em&gt;X&lt;/em&gt; into $U\Sigma V^T$, where &lt;em&gt;U&lt;/em&gt; and &lt;em&gt;V&lt;/em&gt; are orthonormal&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec2_4.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+  Corresponding to the columns without singular values in $\Sigma$, bottom rows in $V^T$ are ignored. The singular values inside the diagonal matrix $\Sigma$ are ordered from largest down to smallest. Retaining only &lt;em&gt;k&lt;/em&gt; singular values, in order to generalize, the lower dimensional representation $\hat{X}$ is the best rank &lt;em&gt;k&lt;/em&gt; approximation to &lt;em&gt;X&lt;/em&gt;, in terms of least squares.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;hacks-to-x-several-used-in-rohde-et-al-2005-in-coals&quot;&gt;Hacks to X (several used in Rohde et al. 2005 in COALS)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Running an SVD on a raw count co-occurrence matrix works poorly; In the mathematical assumptions of SVD, we are expecting to have normally distributed errors. But there are exceedingly common words like “a”, “the”, and “and”, and there is a very large number of rare words.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Scaling the counts in the cells can help &lt;strong&gt;a lot&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Problem: function words(&lt;em&gt;the, he, has&lt;/em&gt;) are too frequent $\rightarrow$ syntax has too much impact. Some fixes:
+        &lt;ul&gt;
+          &lt;li&gt;log the frequencies&lt;/li&gt;
+          &lt;li&gt;$min(X,t)$, with $t\approx 100$&lt;/li&gt;
+          &lt;li&gt;ignore the function words&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Ramped windows that count closer words more than further away words&lt;/li&gt;
+  &lt;li&gt;Use Pearson correlations instead of counts, then set negative values to &lt;em&gt;0&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Etc.&lt;/li&gt;
+  &lt;li&gt;Result:&lt;br /&gt;
+  Interesting semantic patterns emerge in the scaled vectors; something like a word vector analogies.&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec2_5.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;towards-glove-count-based-vs-direct-prediction&quot;&gt;Towards GloVe: Count based vs. direct prediction&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec2_6.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;encoding-meaning-components-in-vector-differences&quot;&gt;Encoding meaning components in vector differences&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Pennington, Socher, and Manning, EMNLP 2014&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;What properties needed to make vector analogies work?&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Crucial insight: Ratios of co-occurrence probabilities can encode meaning components&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec2_7.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec2_8.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Q: How can we capture ratios of co-occurrence probabilities as linear meaning components in a word vector space?&lt;/li&gt;
+  &lt;li&gt;A: Log-bilinear model: the dot product between two word vectors attempts to approximate the log of the probability of co-occurrence; \(w_i \cdot w_j = \log P(i|j)\)&lt;br /&gt;
+  $\rightarrow$ with vector differences \(w_x \cdot (w_a - w_b) = \log \frac{P(x\mid a)}{P(x \mid b)}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;combining-the-best-of-both-worlds-glove&quot;&gt;Combining the best of both worlds: GloVe&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Pennington, Socher, and Manning, EMNLP 2014&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;With \(w_i \cdot w_j = \log P(i|j)\),&lt;br /&gt;
+  explicit loss function \(J = \sum_{i,j=1}^V f(X_{ij})(w_j^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2\)&lt;br /&gt;
+  to make the dot product to be similar to the log of the co-occurrence. To not have very common words dominate, capped the effect of high word counts using $f$ function. Optimize &lt;em&gt;J&lt;/em&gt; directly on the co-occurrence count matrix.
+    &lt;ul&gt;
+      &lt;li&gt;Fast training&lt;/li&gt;
+      &lt;li&gt;Scalable to hugh corpora&lt;/li&gt;
+      &lt;li&gt;Good performance even with small corpus and small vectors&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-to-evaluate-word-vectors&quot;&gt;How to evaluate word vectors?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Related to general evaluation in NLP: intrinsic vs. extrinsic&lt;/li&gt;
+  &lt;li&gt;Intrinsic:
+    &lt;ul&gt;
+      &lt;li&gt;Evaluation on a specific/intermediate subtask&lt;/li&gt;
+      &lt;li&gt;Fast to compute&lt;/li&gt;
+      &lt;li&gt;Helps to understand that system&lt;/li&gt;
+      &lt;li&gt;Not clear if really helpful unless correlation to real task is established&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Extrinsic:
+    &lt;ul&gt;
+      &lt;li&gt;Evaluation on a real task&lt;/li&gt;
+      &lt;li&gt;Can take a long time to compute accuracy&lt;/li&gt;
+      &lt;li&gt;Unclear if the subsystem is the problem or its interaction or other subsystems&lt;/li&gt;
+      &lt;li&gt;If replacing exactly one subsystem with another improves accuracy $\rightarrow$ Winning!&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;intrinsic-word-vector-evaluation&quot;&gt;Intrinsic word vector evaluation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Word Vector Analogies&lt;br /&gt;
+  |a:b :: c:?| $\rightarrow$ $d = \text{argmax}_i \frac{(x_b -x_a +x_c)^T x_i}{\lVert x_b -x_a +x_c\rVert}$&lt;br /&gt;
+  (e.g. man:woman :: king:?)&lt;/li&gt;
+  &lt;li&gt;Evalute word vectors by how well their cosine distance after addition captures intuitive semantic and syntactic analogy questions&lt;/li&gt;
+  &lt;li&gt;Discarding the input words from the search!&lt;/li&gt;
+  &lt;li&gt;Problem: What if the information is there but not linear?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;glove-visualizations&quot;&gt;GloVe Visualizations&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec2_9.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;analogy-evaluation-and-hyperparameters&quot;&gt;Analogy evaluation and hyperparameters&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec2_10.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec2_11.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;another-intrinsic-word-vector-evaluation&quot;&gt;Another intrinsic word vector evaluation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Word vector distances and their correlation with human judgements&lt;/li&gt;
+  &lt;li&gt;Example dataset: WordSim353 &lt;a href=&quot;http://www.cs.technion.ac.il/~gabr/resources/data/wordsim353/&quot;&gt;http://www.cs.technion.ac.il/~gabr/resources/data/wordsim353/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec2_12.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec2_13.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Some ideas from Glove paper have been shown to improve skip-gram(SG) model also (e.g., average both vectors)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;extrinsic-word-vector-evaluation&quot;&gt;Extrinsic word vector evaluation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;All subsequent NLP tasks&lt;/li&gt;
+  &lt;li&gt;One example where good word vectors should help directly: &lt;strong&gt;named entity recognition&lt;/strong&gt;: identifying references to a person, organization or location&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec2_14.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;word-senses&quot;&gt;Word senses&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Most words have lots of meanings
+    &lt;ul&gt;
+      &lt;li&gt;Especially common words&lt;/li&gt;
+      &lt;li&gt;Especially words that have existed for a long time&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Does one vector caputre all these meanings or do we have a mess?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;linear-algebric-structure-of-word-senses-with-applications-to-polysemy-arora--ma--tacl-2018&quot;&gt;&lt;em&gt;“Linear Algebric Structure of Word Senses, with Applications to Polysemy”, Arora, …, Ma, …, TACL 2018&lt;/em&gt;&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Different senses of a word reside in a linear superposition(weighted sum) in standard word embeddings like word2vec&lt;/li&gt;
+  &lt;li&gt;\(v_{\text{pike}} = \alpha_1 v_{\text{pike}_2} + \alpha_2 v_{\text{pike}_2} + \alpha_3 v_{\text{pike}_3}\)&lt;br /&gt;
+  where $\alpha_1 = \frac{f_1}{f_1+f_2+f_3}$, etc., for frequency &lt;em&gt;f&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Surprising result:&lt;br /&gt;
+  Commonly, it is impossible to reconstruct the original components from their sum, but, because of ideas from &lt;em&gt;sparse coding&lt;/em&gt; you can actually separate out the senses(providing they are relatively common)!&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec2_15.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs224n" /><summary type="html">Review: Main idea of word2vec Start with random word vectors Iterate through each word in the whole corpus Try to predict surrounding words using word vectors: $P(o\mid c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}$ Learning: Update vectors so they can predict actual surrounding words better Doing no more than this, this algorithm learns word vectors that capture well word similarity and meaningful directions in a wordspace. A “bag of words” model; doesn’t actually pay any attention to word order or position. The model makes the same predictions at each position; the probability estimate would be the same if it is next to the center word or a bit further away. We want a model that gives a reasonably high probability estimate to all words that occur in the context(at all often) Word2vec maximizes objective function by putting similar words nearby in high dimensional vector space Optimization: Gradient Descent To learn good word vectors: minimize a cost function $J(\theta)$ Gradient Descent is an algorithm to minimize $J(\theta)$ by changing $\theta$ idea: from current value of $\theta$, calculate gradient of $J(\theta)$, then take small step in the direction of negative gradient. Repreat. Algorithm: while True: theta_grad = evaluate_gradient(J, corpus, theta) theta = theta - alpha * theta_grad Stochastic Gradient Descent Problem: $J(\theta)$ is a function of all windows in the corpus (often, billions!); so $\nabla_\theta J(\theta)$ is very expensive to compute Solution: Stochastic gradient descent(SGD) Repeatedly sample windows, and update after each one, or each small batch Algorithm: while True: window = sample_window(corpus) theta_grad = evaluate_gradient(J, window, theta) theta = theta - alpha * theta_grad Stochastic gradients with word vectors (Aside) iteratively take gradients at each such window for SGD But in each window, we only have at most 2m + 1 words, so $\nabla_\theta J(\theta)$ is very sparse: \(\nabla_\theta J_t(\theta) = \begin{bmatrix} 0 \\ \vdots \\ \nabla_{v_{\text{like}}} \\ \vdots 0 \\ \nabla_{u_I} \\ \vdots \\ \nabla_{u_{\text{learning}}} \\ \vdots \end{bmatrix} \in \mathbb{R}^{2dV}\) We might only update the word vectors that actually appear. Solution: either you need sparse matrix update operations to only update certain rows(in most DL packages) of full embedding matrices U and V, or you need to keep around a hash for word vectors. If you have millions of word vectors and do distributed computing, it is important to not have to send gigantic updates around. 2b. Word2vec algorithm family: More details Why two vectors? $\rightarrow$ Easier optimization. Average both at the end But can implement the algorithm with just one vector per word, and it works slightly better, but it makes the algorithm much more complicated. Two model variants: Skip-grams(SG) Predict context(“outside”) words (position independent) given center word Continuous Bag of Words(CBOW) Predict center word from (bag of) context words We presented: Skip-gram model Additional efficiency in training: Negative sampling So far: Focus on naive softmax(simpler, but expensive training method) The skip-gram model with negative sampling(SGNS) The normalization term is computationally expensive, especially on the denominator of $P(o\mid c)$. Main idea: train binary logistic regressions for a true pair (center word and a word in its context window) versus several noise pairs (the center word paired with a random word) From paper: “Distributed Representations of Words and Phrases and their Compositionality” (Mikolov et al. 2013) Overall objective function(to maximize): \(J(\theta) = \frac{1}{T}\sum_{t=1}^T J_t(\theta)\) \(J_t(\theta) = \log\sigma(u_o^T u_c) + \sum_{i=1}^k \mathbb{E}_{j~P(w)}\left[ \log\sigma(-u_j^T v_c) \right]\) where the logistic/sigmoid function: $\sigma(x) = \frac{1}{1+ e^{-x}}$ We maximize the probability of two words co-occuring in first log and minimize probability of noise words: $J_{\text{neg-sample}}(u_o, v_c, U) = -\log \sigma(u_o^T v_c) - \sum_{k\in { \text{K sampled indicies} }} \log \sigma(-u_k^T v_c)$ We take k negative samples (using word probabilities) Maximize probability that real outside word appears, minimize probability that random words appear around center word Another trick: sample with $P(w) = U(w)^{3/4} / Z$, the unigram distribution $U(w)$ raised to the $3/4$ power (We provide this function in the starter code) The power makes less frequent words be sampled more often Why not capture co-occurrence counts directly? Building a co-occurrence matrix X 2 options: windows vs. full document Window: Similar to word2vec, use window around each word and captures some syntactic and semantic information Word-document co-occurrence matrix will give general topics (all sports terms will have similar entries) learning to “Latent Semantic Analysis”; in tasks like information retrieval Co-occurrence vectors Simple count co-occurrence vectors Vectors increase in size with vocabulary Very high dimensional: require a lot of storage (though sparse) Subsequent classification models have sparsity issues $\rightarrow$ Models are less robust Low-dimensional vectors idea: store “most” of the important information in a fixed, small number of directions: a dense vector Usually 25-1000 directions, similar to word2vec How to reduce the dimensionality? Classic Method: Dimensionality Reduction on X Singular Value Decomposition of co-occurrence matrix X Factorizes X into $U\Sigma V^T$, where U and V are orthonormal Corresponding to the columns without singular values in $\Sigma$, bottom rows in $V^T$ are ignored. The singular values inside the diagonal matrix $\Sigma$ are ordered from largest down to smallest. Retaining only k singular values, in order to generalize, the lower dimensional representation $\hat{X}$ is the best rank k approximation to X, in terms of least squares. Hacks to X (several used in Rohde et al. 2005 in COALS) Running an SVD on a raw count co-occurrence matrix works poorly; In the mathematical assumptions of SVD, we are expecting to have normally distributed errors. But there are exceedingly common words like “a”, “the”, and “and”, and there is a very large number of rare words. Scaling the counts in the cells can help a lot Problem: function words(the, he, has) are too frequent $\rightarrow$ syntax has too much impact. Some fixes: log the frequencies $min(X,t)$, with $t\approx 100$ ignore the function words Ramped windows that count closer words more than further away words Use Pearson correlations instead of counts, then set negative values to 0 Etc. Result: Interesting semantic patterns emerge in the scaled vectors; something like a word vector analogies. Towards GloVe: Count based vs. direct prediction Encoding meaning components in vector differences Pennington, Socher, and Manning, EMNLP 2014 What properties needed to make vector analogies work? Crucial insight: Ratios of co-occurrence probabilities can encode meaning components Q: How can we capture ratios of co-occurrence probabilities as linear meaning components in a word vector space? A: Log-bilinear model: the dot product between two word vectors attempts to approximate the log of the probability of co-occurrence; \(w_i \cdot w_j = \log P(i|j)\) $\rightarrow$ with vector differences \(w_x \cdot (w_a - w_b) = \log \frac{P(x\mid a)}{P(x \mid b)}\) Combining the best of both worlds: GloVe Pennington, Socher, and Manning, EMNLP 2014 With \(w_i \cdot w_j = \log P(i|j)\), explicit loss function \(J = \sum_{i,j=1}^V f(X_{ij})(w_j^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2\) to make the dot product to be similar to the log of the co-occurrence. To not have very common words dominate, capped the effect of high word counts using $f$ function. Optimize J directly on the co-occurrence count matrix. Fast training Scalable to hugh corpora Good performance even with small corpus and small vectors How to evaluate word vectors? Related to general evaluation in NLP: intrinsic vs. extrinsic Intrinsic: Evaluation on a specific/intermediate subtask Fast to compute Helps to understand that system Not clear if really helpful unless correlation to real task is established Extrinsic: Evaluation on a real task Can take a long time to compute accuracy Unclear if the subsystem is the problem or its interaction or other subsystems If replacing exactly one subsystem with another improves accuracy $\rightarrow$ Winning! Intrinsic word vector evaluation Word Vector Analogies |a:b :: c:?| $\rightarrow$ $d = \text{argmax}_i \frac{(x_b -x_a +x_c)^T x_i}{\lVert x_b -x_a +x_c\rVert}$ (e.g. man:woman :: king:?) Evalute word vectors by how well their cosine distance after addition captures intuitive semantic and syntactic analogy questions Discarding the input words from the search! Problem: What if the information is there but not linear? GloVe Visualizations Analogy evaluation and hyperparameters Another intrinsic word vector evaluation Word vector distances and their correlation with human judgements Example dataset: WordSim353 http://www.cs.technion.ac.il/~gabr/resources/data/wordsim353/ Some ideas from Glove paper have been shown to improve skip-gram(SG) model also (e.g., average both vectors) Extrinsic word vector evaluation All subsequent NLP tasks One example where good word vectors should help directly: named entity recognition: identifying references to a person, organization or location Word senses Most words have lots of meanings Especially common words Especially words that have existed for a long time Does one vector caputre all these meanings or do we have a mess? “Linear Algebric Structure of Word Senses, with Applications to Polysemy”, Arora, …, Ma, …, TACL 2018 Different senses of a word reside in a linear superposition(weighted sum) in standard word embeddings like word2vec \(v_{\text{pike}} = \alpha_1 v_{\text{pike}_2} + \alpha_2 v_{\text{pike}_2} + \alpha_3 v_{\text{pike}_3}\) where $\alpha_1 = \frac{f_1}{f_1+f_2+f_3}$, etc., for frequency f Surprising result: Commonly, it is impossible to reconstruct the original components from their sum, but, because of ideas from sparse coding you can actually separate out the senses(providing they are relatively common)!</summary></entry><entry><title type="html">DevEnv Setup</title><link href="http://0.0.0.0:4000/DevEnv_Setup" rel="alternate" type="text/html" title="DevEnv Setup" /><published>2022-03-02T00:00:00+00:00</published><updated>2022-03-02T00:00:00+00:00</updated><id>http://0.0.0.0:4000/DevEnv_Setup</id><content type="html" xml:base="http://0.0.0.0:4000/DevEnv_Setup">&lt;ul&gt;
+  &lt;li&gt;For purpose of setting local development environment on a new SSD storage, followed instructions below. Post for later use.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;ol&gt;
@@ -122,7 +392,174 @@
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Darron Kwon</name></author><category term="blog" /><summary type="html">On purpose of setting local development environment on a new SSD storage, followed instructions below. Post for later use. Document Enable NVIDIA CUDA on WSL Install stable version of Windows 11 Enable WSL, install Ubuntu(20.04.3 LTS) On Windows Settings app, select Check for updates in the Windows Update section and get the latest kernel(5.10.43.3 or higher) To check the version, run wsl cat /proc/version command in Powershell. Install the GPU driver Download and install the NVIDIA CUDA enabled driver for WSL (Studio version: 511.65-desktop-win10-win11-64bit-international-nsd-dch-whql) Install Docker Desktop app on Windows Run: docker run --rm -it --gpus=all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -gpu -benchmark Result: &amp;gt; Windowed mode &amp;gt; Simulation data stored in video memory &amp;gt; Single precision floating point simulation &amp;gt; 1 Devices used for simulation GPU Device 0: &quot;Ampere&quot; with compute capability 8.6 &amp;gt; Compute 8.6 CUDA device: [NVIDIA GeForce RTX 3070] 47104 bodies, total time for 10 iterations: 40.275 ms = 550.910 billion interactions per second = 11018.199 single-precision GFLOP/s at 20 flops per interaction Setting Docker image for TensorFlow-GPU Pull the latest TensorFlow-GPU image docker run -it --gpus all tensorflow/tensorflow:latest-gpu Install Anaconda on user:root(ref: blog) # update and install prerequisites apt-get update apt-get install wget # get proper version of anaconda3 wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh sh Anaconda3-2021.11-Linux-x86_64.sh exec bash # create anaconda environment and install libraries(for stability) conda create -n !env_name pip python=3.7 conda activate !env_name pip install tensorflow-gpu pip install ipykernel python -m ipykernel install --user --name !env_name --display-name !dispaly_name pip install jupyter # escape with Ctrl + p, Ctrl + q docker commit -m &quot;!message&quot; !container_id !image_name:tag (Optional) Install TensorFlow Object Detection API apt-get install git git clone --depth 1 https://github.com/tensorflow/models cd models/research/ apt install -y protobuf-compiler # found a symlink err, fixed with running: # ln -s /usr/lib/x86_64-linux-gnu/libcuda.so.1 /usr/local/cuda/lib64/libcuda.so # and rerun: apt install -y protobuf-compiler protoc object_detection/protos/*.proto --python_out=. cd models/research/ # install Object Detection API cp object_detection/packages/tf2/setup.py . python -m pip install --use-feature=2020-resolver . # run test python object_detection/builders/model_builder_tf2_test.py # rm -rf models (if desired) (Optional) Install JupyterLab Extensions and enable TensorBoard within Jupyterlab-Docker container Stable versions worked on my local environment curl -sL https://deb.nodesource.com/setup_12.x | bash - apt-get install -y nodejs node --version # check: v12.22.10 npm --version # check: 6.14.16 pip install jupyterlab==2.3.2 pip install git+https://github.com/cliffwoolley/jupyter_tensorboard.git pip install tensorboard==2.2 jupyter labextension install jupyterlab_tensorboard Commit and run container with any open port for JupyterLab e.g. docker run --rm -it --gpus all -p 4000:4000 !image_name:tag conda activate !env_name jupyter lab --ip='0.0.0.0' --port=4000 --no-browser --allow-root On your Windows, open localhost:4000 with browser Setting Docker image for Jekyll blog Get latest Ubuntu image and install packages docker run --rm -it -p 4000:4000 ubuntu apt-get update apt-get install git apt-get install vim ruby-full build-essential zlib1g-dev -y echo '# Install Ruby Gems to ~/gems' &amp;gt;&amp;gt; ~/.bashrc echo 'export GEM_HOME=&quot;$HOME/gems&quot;' &amp;gt;&amp;gt; ~/.bashrc echo 'export PATH=&quot;$HOME/gems/bin:$PATH&quot;' &amp;gt;&amp;gt; ~/.bashrc source ~/.bashrc gem install jekyll bundler jekyll -v # 4.2.1 mkdir -p /root/blog_home echo 'export BLOG_HOME=&quot;/root/blog_home&quot;' &amp;gt;&amp;gt; ~/.bashrc echo '# Start jekyll' &amp;gt;&amp;gt; ~/.bashrc source ~/.bashrc cd $BLOG_HOME # Get any jekyll blog template here rm Gemfile.lock # if needed bundle install bundle exec jekyll serve --host 0.0.0.0 -p 4000</summary></entry><entry><title type="html">Starfish detection w/ TF Object Detection API</title><link href="http://0.0.0.0:4000/starfish_detection" rel="alternate" type="text/html" title="Starfish detection w/ TF Object Detection API" /><published>2022-02-14T15:00:00+00:00</published><updated>2022-02-14T15:00:00+00:00</updated><id>http://0.0.0.0:4000/starfish_detection</id><content type="html" xml:base="http://0.0.0.0:4000/starfish_detection">&lt;h2 id=&quot;tensorflow---help-protect-the-great-barrier-reef&quot;&gt;TensorFlow - Help Protect the Great Barrier Reef&lt;/h2&gt;
+&lt;/ol&gt;</content><author><name>Darron Kwon</name></author><category term="blog" /><summary type="html">For purpose of setting local development environment on a new SSD storage, followed instructions below. Post for later use. Document Enable NVIDIA CUDA on WSL Install stable version of Windows 11 Enable WSL, install Ubuntu(20.04.3 LTS) On Windows Settings app, select Check for updates in the Windows Update section and get the latest kernel(5.10.43.3 or higher) To check the version, run wsl cat /proc/version command in Powershell. Install the GPU driver Download and install the NVIDIA CUDA enabled driver for WSL (Studio version: 511.65-desktop-win10-win11-64bit-international-nsd-dch-whql) Install Docker Desktop app on Windows Run: docker run --rm -it --gpus=all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -gpu -benchmark Result: &amp;gt; Windowed mode &amp;gt; Simulation data stored in video memory &amp;gt; Single precision floating point simulation &amp;gt; 1 Devices used for simulation GPU Device 0: &quot;Ampere&quot; with compute capability 8.6 &amp;gt; Compute 8.6 CUDA device: [NVIDIA GeForce RTX 3070] 47104 bodies, total time for 10 iterations: 40.275 ms = 550.910 billion interactions per second = 11018.199 single-precision GFLOP/s at 20 flops per interaction Setting Docker image for TensorFlow-GPU Pull the latest TensorFlow-GPU image docker run -it --gpus all tensorflow/tensorflow:latest-gpu Install Anaconda on user:root(ref: blog) # update and install prerequisites apt-get update apt-get install wget # get proper version of anaconda3 wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh sh Anaconda3-2021.11-Linux-x86_64.sh exec bash # create anaconda environment and install libraries(for stability) conda create -n !env_name pip python=3.7 conda activate !env_name pip install tensorflow-gpu pip install ipykernel python -m ipykernel install --user --name !env_name --display-name !dispaly_name pip install jupyter # escape with Ctrl + p, Ctrl + q docker commit -m &quot;!message&quot; !container_id !image_name:tag (Optional) Install TensorFlow Object Detection API apt-get install git git clone --depth 1 https://github.com/tensorflow/models cd models/research/ apt install -y protobuf-compiler # found a symlink err, fixed with running: # ln -s /usr/lib/x86_64-linux-gnu/libcuda.so.1 /usr/local/cuda/lib64/libcuda.so # and rerun: apt install -y protobuf-compiler protoc object_detection/protos/*.proto --python_out=. cd models/research/ # install Object Detection API cp object_detection/packages/tf2/setup.py . python -m pip install --use-feature=2020-resolver . # run test python object_detection/builders/model_builder_tf2_test.py # rm -rf models (if desired) (Optional) Install JupyterLab Extensions and enable TensorBoard within Jupyterlab-Docker container Stable versions worked on my local environment curl -sL https://deb.nodesource.com/setup_12.x | bash - apt-get install -y nodejs node --version # check: v12.22.10 npm --version # check: 6.14.16 pip install jupyterlab==2.3.2 pip install git+https://github.com/cliffwoolley/jupyter_tensorboard.git pip install tensorboard==2.2 jupyter labextension install jupyterlab_tensorboard Commit and run container with any open port for JupyterLab e.g. docker run --rm -it --gpus all -p 4000:4000 !image_name:tag conda activate !env_name jupyter lab --ip='0.0.0.0' --port=4000 --no-browser --allow-root On your Windows, open localhost:4000 with browser Setting Docker image for Jekyll blog Get latest Ubuntu image and install packages docker run --rm -it -p 4000:4000 ubuntu apt-get update apt-get install git apt-get install vim ruby-full build-essential zlib1g-dev -y echo '# Install Ruby Gems to ~/gems' &amp;gt;&amp;gt; ~/.bashrc echo 'export GEM_HOME=&quot;$HOME/gems&quot;' &amp;gt;&amp;gt; ~/.bashrc echo 'export PATH=&quot;$HOME/gems/bin:$PATH&quot;' &amp;gt;&amp;gt; ~/.bashrc source ~/.bashrc gem install jekyll bundler jekyll -v # 4.2.1 mkdir -p /root/blog_home echo 'export BLOG_HOME=&quot;/root/blog_home&quot;' &amp;gt;&amp;gt; ~/.bashrc echo '# Start jekyll' &amp;gt;&amp;gt; ~/.bashrc source ~/.bashrc cd $BLOG_HOME # Get any jekyll blog template here rm Gemfile.lock # if needed bundle install bundle exec jekyll serve --host 0.0.0.0 -p 4000</summary></entry><entry><title type="html">cs224n - Lecture 1. Word Vectors</title><link href="http://0.0.0.0:4000/cs224n_lec1" rel="alternate" type="text/html" title="cs224n - Lecture 1. Word Vectors" /><published>2022-03-02T00:00:00+00:00</published><updated>2022-03-02T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec1</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec1">&lt;h3 id=&quot;objectives&quot;&gt;Objectives&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;The foundations of the effective modern methods for deep learning applied to NLP; from basics to key methods used in NLP: RNN, Attention, Transformers, etc.)&lt;/li&gt;
+  &lt;li&gt;A big picture understanding of human languages and the difficulties in understanding and producing them&lt;/li&gt;
+  &lt;li&gt;An understanding of and ability to build systems (in PyTorch) for some of the major problems in NLP: Word meaning, dependency parsing, machine translation, question answering&lt;br /&gt;
+&lt;!-- *CS145: translate human language sentences into SQL --&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NLP tasks:&lt;br /&gt;
+  Easy: Spell Checking, Keyword Search, Finding Synonyms&lt;br /&gt;
+  Medium: Parsing information from websites, documents, etc.&lt;br /&gt;
+  Hard: Machine Translation, Semantic Analysis, Coreference, QA&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;word-meaning&quot;&gt;Word meaning&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Commonest linguistic way of thinking of meaning:&lt;br /&gt;
+  signifier (symbol) $\Leftrightarrow$ signified (idea or thing)&lt;br /&gt;
+  $=$ denotational semantics&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Common NLP solution&lt;/strong&gt;: Use, e.g., &lt;em&gt;WordNet&lt;/em&gt;, a thesaurus containing lists of &lt;strong&gt;synonym sets&lt;/strong&gt; and &lt;strong&gt;hypernyms&lt;/strong&gt;(“is a” relationships).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Problems with resources like WordNet&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Great as a resource but missing nuance&lt;/li&gt;
+      &lt;li&gt;Missing new meanings of words; impossible to keep up-to-date&lt;/li&gt;
+      &lt;li&gt;Subjective&lt;/li&gt;
+      &lt;li&gt;Requires human labor to create and adapt&lt;/li&gt;
+      &lt;li&gt;Can’t compute accurate word similarity&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;representing-words-as-discrete-symbols&quot;&gt;Representing words as discrete symbols&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;In traditional NLP, we regard words as discrete symbols - a &lt;em&gt;localist&lt;/em&gt; representation.&lt;br /&gt;
+  $\rightarrow$ in a statistical machine learning systems, such symbols for words are separately represented by one-hot vectors. Thus we need to have huge vector dimension corresponding to the number of words in vocabulary.
+    &lt;ul&gt;
+      &lt;li&gt;But with discrete symbols, two vectors are orthogonal and there is no natural notion of similarity for one-hot vectors.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Solution:
+    &lt;ul&gt;
+      &lt;li&gt;Could try  to rely on WordNet’s list of synonyms to get similarity?&lt;br /&gt;
+  But it is well-known to fail badly; incompleteness, etc.&lt;/li&gt;
+      &lt;li&gt;Instead: learn to encode similarity in the vecotr themselves.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;representing-words-by-their-context&quot;&gt;Representing words by their context&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Distributional semantics: &lt;strong&gt;A word’s meaning is given by the words that frequently appear close-by&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;“You shall know a word by the company it keeps”&lt;/em&gt; (J. R. Firth 1957:11)&lt;/li&gt;
+      &lt;li&gt;One of the most successful ideas of modern statistical NLP&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;When a word &lt;em&gt;w&lt;/em&gt; appears in a text, its &lt;strong&gt;context&lt;/strong&gt; is the set of words that appear nearby(within a fixed-size window).&lt;/li&gt;
+  &lt;li&gt;Use the many contexts of &lt;em&gt;w&lt;/em&gt; to build up a representation of &lt;em&gt;w&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;word-vectors&quot;&gt;Word vectors&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A dense vector for each word, chosen so that it is similar to vectors of words that appear in similar contexts&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Note: as a &lt;em&gt;distributed&lt;/em&gt; representation, &lt;em&gt;word vectors&lt;/em&gt; are also called &lt;em&gt;word embeddings&lt;/em&gt; or &lt;em&gt;(neural) words representations&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;word2vec&quot;&gt;Word2vec&lt;/h2&gt;
+&lt;h3 id=&quot;word2vec-overview&quot;&gt;Word2vec: overview&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Word2vec&lt;/em&gt;(Mikolov et al. 2013) is a framework for learning word vectors&lt;/li&gt;
+  &lt;li&gt;idea:
+    &lt;ul&gt;
+      &lt;li&gt;We have a large corpus(“body”) of text&lt;/li&gt;
+      &lt;li&gt;Every word in a fixed vocabulary is representated by a vector&lt;/li&gt;
+      &lt;li&gt;Go through each position &lt;em&gt;t&lt;/em&gt; in the text, which has a center word &lt;em&gt;c&lt;/em&gt; and context(“outside”) words &lt;em&gt;o&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Use the similarity of the word vectors for &lt;em&gt;c&lt;/em&gt; and &lt;em&gt;o&lt;/em&gt; to calculate the probability of &lt;em&gt;o&lt;/em&gt; given &lt;em&gt;c&lt;/em&gt;(or vice versa)&lt;/li&gt;
+      &lt;li&gt;Keep adjusting the word vectors to maximize this probability&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;We can learn these word vectors from just a big pile of text by doing this distributional similarity task of being able to predict what words occur in the context of other words.&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Example windows and process for computing $P(w_{t+j}|w_t)$&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec1_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;word2vec-objective-function&quot;&gt;Word2vec: objective function&lt;/h3&gt;
+&lt;p&gt;For each position $t = 1, \ldots, T$, predict context words within a window of fixed size &lt;em&gt;m&lt;/em&gt;, given center word $w_j$. Data likelihood:&lt;br /&gt;
+\(\begin{align*}
+L(\theta) = \prod_{t=1}^T \prod_{\substack{-m\leqq j\leqq m \\ j\ne 0}} P(w_{t+j}|w_t;\theta)
+\end{align*}\)&lt;br /&gt;
+where $\theta$ is all variables to be optimized.&lt;/p&gt;
+
+&lt;p&gt;The objective function $J(\theta)$ is the (average) negative log likelihood:&lt;br /&gt;
+\(\begin{align*}
+J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substack{-m\leqq j\leqq m \\ j\ne 0}}\log P(w_{t+j}|w_t;\theta)
+\end{align*}\)&lt;br /&gt;
+Minimizing objective function $\Leftrightarrow$ Maximizing predictive accuracy&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Question: How to calculate $P(w_{t+j}\vert w_t;\theta)$?&lt;/li&gt;
+  &lt;li&gt;Answer: We will &lt;em&gt;use&lt;/em&gt; two vectors per word &lt;em&gt;w&lt;/em&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;$v_w$ when &lt;em&gt;w&lt;/em&gt; is a center word&lt;/li&gt;
+      &lt;li&gt;$u_w$ when &lt;em&gt;w&lt;/em&gt; is a context word&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Then for a centor word &lt;em&gt;c&lt;/em&gt; and a context word &lt;em&gt;o&lt;/em&gt;:&lt;br /&gt;
+  \(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;word2vec-prediction-function&quot;&gt;Word2vec: prediction function&lt;/h3&gt;
+&lt;p&gt;\(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\)&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;$u_w^T v_c$: Dot product compares similarity of &lt;em&gt;o&lt;/em&gt; and &lt;em&gt;c&lt;/em&gt;.&lt;br /&gt;
+ $u^T v = u\ .v = \sum_{i=1}^n u_i v_i$&lt;br /&gt;
+ Larger dot product = larger probability&lt;/li&gt;
+  &lt;li&gt;$\exp$: Exponentiation makes anything positive&lt;/li&gt;
+  &lt;li&gt;$\sum_{w \in V}\exp(u_w^T v_c)$: Normalize over entire vocabulary to give probability distribution.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;This is an example of the softmax function $\mathbb{R}^n \rightarrow (0,1)^n$(Open region) that maps arbitary values $x_i$ to a probability distribution $p_i$&lt;br /&gt;
+  \(\mbox{softmax}(x_i) = \frac{\exp(x_i)}{\sum_{j=1}^n\exp(x_j)} = p_i\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To train the model: Optimize value of parameters to minimize loss&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Recall: $\theta$ represents all the model parameters, in one long vector&lt;/li&gt;
+      &lt;li&gt;In our case, with &lt;em&gt;d&lt;/em&gt;-dimensional vectors and &lt;em&gt;V&lt;/em&gt;-many words, we have: $\theta \in \mathbb{R}^{2dV}$&lt;/li&gt;
+      &lt;li&gt;Remember: every word has two vectors&lt;/li&gt;
+      &lt;li&gt;We optimize these parameters by walking down the gradient(gradient descent)&lt;/li&gt;
+      &lt;li&gt;We compute &lt;strong&gt;all&lt;/strong&gt; vector gradients&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;word2vec-derivations-of-gradient&quot;&gt;Word2vec derivations of gradient&lt;/h3&gt;
+&lt;p&gt;\(\begin{align*}
+J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substack{-m\leqq j\leqq m \\ j\ne 0}}\log P(w_{t+j}|w_t;\theta)
+\end{align*}\)&lt;br /&gt;
+\(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\)&lt;/p&gt;
+
+&lt;p&gt;\(\frac{\partial}{\partial v_c} \log \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)} = \underbrace{\frac{\partial}{\partial v_c} \log \exp(u_o^T v_c)}_{(1)} - \underbrace{\frac{\partial}{\partial v_c} \log \sum_{w=1}^V \exp(u_w^T v_c)}_{(2)}\)&lt;br /&gt;
+\(\begin{align*}\cdots (1) &amp;amp;= \frac{\partial}{\partial v_c} u_o^T v_c \\
+							&amp;amp;= u_o \end{align*}\)&lt;br /&gt;
+\(\begin{align*}\cdots (2) &amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \frac{\partial}{\partial v_c} \exp(u_x^T v_c) \\
+							&amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \exp(u_x^T v_c) \cdot \frac{\partial}{\partial v_c} u_x^T v_c \\
+							&amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \exp(u_x^T v_c) \cdot u_x \\
+							\end{align*} \\\)&lt;br /&gt;
+\(\begin{align*}
+\frac{\partial}{\partial v_c} \log P(o|c) &amp;amp;= u_o - \frac{\sum_{x=1}^V \exp(u_x^T v_c)u_x}{\sum_{w=1}^V \exp(u_w^T v_c)} \\
+	&amp;amp; = u_o - \sum_{x=1}^V \underbrace{\frac{\exp(u_x^T v_c)}{\sum_{w=1}^V \exp(u_w^T v_c)}}_{\mbox{softmax formula}} u_x \\
+	&amp;amp; = u_o - \underbrace{\sum_{x=1}^V P(x|c) u_x}_{\mbox{Expectation}} \\
+	&amp;amp; = \mbox{observed} - \mbox{expected} \end{align*}\)&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="cs224n" /><summary type="html">Objectives The foundations of the effective modern methods for deep learning applied to NLP; from basics to key methods used in NLP: RNN, Attention, Transformers, etc.) A big picture understanding of human languages and the difficulties in understanding and producing them An understanding of and ability to build systems (in PyTorch) for some of the major problems in NLP: Word meaning, dependency parsing, machine translation, question answering NLP tasks: Easy: Spell Checking, Keyword Search, Finding Synonyms Medium: Parsing information from websites, documents, etc. Hard: Machine Translation, Semantic Analysis, Coreference, QA Word meaning Commonest linguistic way of thinking of meaning: signifier (symbol) $\Leftrightarrow$ signified (idea or thing) $=$ denotational semantics Common NLP solution: Use, e.g., WordNet, a thesaurus containing lists of synonym sets and hypernyms(“is a” relationships). Problems with resources like WordNet Great as a resource but missing nuance Missing new meanings of words; impossible to keep up-to-date Subjective Requires human labor to create and adapt Can’t compute accurate word similarity Representing words as discrete symbols In traditional NLP, we regard words as discrete symbols - a localist representation. $\rightarrow$ in a statistical machine learning systems, such symbols for words are separately represented by one-hot vectors. Thus we need to have huge vector dimension corresponding to the number of words in vocabulary. But with discrete symbols, two vectors are orthogonal and there is no natural notion of similarity for one-hot vectors. Solution: Could try to rely on WordNet’s list of synonyms to get similarity? But it is well-known to fail badly; incompleteness, etc. Instead: learn to encode similarity in the vecotr themselves. Representing words by their context Distributional semantics: A word’s meaning is given by the words that frequently appear close-by “You shall know a word by the company it keeps” (J. R. Firth 1957:11) One of the most successful ideas of modern statistical NLP When a word w appears in a text, its context is the set of words that appear nearby(within a fixed-size window). Use the many contexts of w to build up a representation of w Word vectors A dense vector for each word, chosen so that it is similar to vectors of words that appear in similar contexts Note: as a distributed representation, word vectors are also called word embeddings or (neural) words representations Word2vec Word2vec: overview Word2vec(Mikolov et al. 2013) is a framework for learning word vectors idea: We have a large corpus(“body”) of text Every word in a fixed vocabulary is representated by a vector Go through each position t in the text, which has a center word c and context(“outside”) words o Use the similarity of the word vectors for c and o to calculate the probability of o given c(or vice versa) Keep adjusting the word vectors to maximize this probability We can learn these word vectors from just a big pile of text by doing this distributional similarity task of being able to predict what words occur in the context of other words. Example windows and process for computing $P(w_{t+j}|w_t)$ Word2vec: objective function For each position $t = 1, \ldots, T$, predict context words within a window of fixed size m, given center word $w_j$. Data likelihood: \(\begin{align*} L(\theta) = \prod_{t=1}^T \prod_{\substack{-m\leqq j\leqq m \\ j\ne 0}} P(w_{t+j}|w_t;\theta) \end{align*}\) where $\theta$ is all variables to be optimized. The objective function $J(\theta)$ is the (average) negative log likelihood: \(\begin{align*} J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substack{-m\leqq j\leqq m \\ j\ne 0}}\log P(w_{t+j}|w_t;\theta) \end{align*}\) Minimizing objective function $\Leftrightarrow$ Maximizing predictive accuracy Question: How to calculate $P(w_{t+j}\vert w_t;\theta)$? Answer: We will use two vectors per word w: $v_w$ when w is a center word $u_w$ when w is a context word Then for a centor word c and a context word o: \(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\) Word2vec: prediction function \(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\) $u_w^T v_c$: Dot product compares similarity of o and c. $u^T v = u\ .v = \sum_{i=1}^n u_i v_i$ Larger dot product = larger probability $\exp$: Exponentiation makes anything positive $\sum_{w \in V}\exp(u_w^T v_c)$: Normalize over entire vocabulary to give probability distribution. This is an example of the softmax function $\mathbb{R}^n \rightarrow (0,1)^n$(Open region) that maps arbitary values $x_i$ to a probability distribution $p_i$ \(\mbox{softmax}(x_i) = \frac{\exp(x_i)}{\sum_{j=1}^n\exp(x_j)} = p_i\) To train the model: Optimize value of parameters to minimize loss Recall: $\theta$ represents all the model parameters, in one long vector In our case, with d-dimensional vectors and V-many words, we have: $\theta \in \mathbb{R}^{2dV}$ Remember: every word has two vectors We optimize these parameters by walking down the gradient(gradient descent) We compute all vector gradients Word2vec derivations of gradient \(\begin{align*} J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substack{-m\leqq j\leqq m \\ j\ne 0}}\log P(w_{t+j}|w_t;\theta) \end{align*}\) \(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\) \(\frac{\partial}{\partial v_c} \log \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)} = \underbrace{\frac{\partial}{\partial v_c} \log \exp(u_o^T v_c)}_{(1)} - \underbrace{\frac{\partial}{\partial v_c} \log \sum_{w=1}^V \exp(u_w^T v_c)}_{(2)}\) \(\begin{align*}\cdots (1) &amp;amp;= \frac{\partial}{\partial v_c} u_o^T v_c \\ &amp;amp;= u_o \end{align*}\) \(\begin{align*}\cdots (2) &amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \frac{\partial}{\partial v_c} \exp(u_x^T v_c) \\ &amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \exp(u_x^T v_c) \cdot \frac{\partial}{\partial v_c} u_x^T v_c \\ &amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \exp(u_x^T v_c) \cdot u_x \\ \end{align*} \\\) \(\begin{align*} \frac{\partial}{\partial v_c} \log P(o|c) &amp;amp;= u_o - \frac{\sum_{x=1}^V \exp(u_x^T v_c)u_x}{\sum_{w=1}^V \exp(u_w^T v_c)} \\ &amp;amp; = u_o - \sum_{x=1}^V \underbrace{\frac{\exp(u_x^T v_c)}{\sum_{w=1}^V \exp(u_w^T v_c)}}_{\mbox{softmax formula}} u_x \\ &amp;amp; = u_o - \underbrace{\sum_{x=1}^V P(x|c) u_x}_{\mbox{Expectation}} \\ &amp;amp; = \mbox{observed} - \mbox{expected} \end{align*}\)</summary></entry><entry><title type="html">Starfish detection w/ TF Object Detection API</title><link href="http://0.0.0.0:4000/starfish_detection" rel="alternate" type="text/html" title="Starfish detection w/ TF Object Detection API" /><published>2022-02-14T15:00:00+00:00</published><updated>2022-02-14T15:00:00+00:00</updated><id>http://0.0.0.0:4000/starfish_detection</id><content type="html" xml:base="http://0.0.0.0:4000/starfish_detection">&lt;h2 id=&quot;tensorflow---help-protect-the-great-barrier-reef&quot;&gt;TensorFlow - Help Protect the Great Barrier Reef&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -1431,440 +1868,4 @@ Outputs: Set of vectors &lt;strong&gt;y&lt;/strong&gt;&lt;/p&gt;
       &lt;li&gt;They are quickly replacing RNNs, LSTMs, and may even replace convolutions.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Attention with RNNs Image Captioning using spatial features Input: Image I Output: Sequence y $= y_1, y_2, \ldots, y_T$ Encoder: $h_0 = f_W(z)$, where z is spatial CNN features, $f_W(\cdot)$ is an MLP Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, c)$, where context vector c is often $c=h_0$ Problem: Input is “bottlenecked” through c; especially in a long descriptions. Model needs to encode everything it wants to say within c Attention idea: New context vector c_t at every time step Each context vector will attend to different image regions Alignment scores(scalars): $H \times W$ matrix e $e_{t,i,j} = f_{\mbox{att}}(h_{t-1}, z_{i,j})$ where $f_{\mbox{att}}(\cdot)$ is an MLP Normalize to get attention weights: $a_{t,:,:} = \mbox{softmax}(e_{t,:,:})$, $0&amp;lt;a_{t,i,j}&amp;lt;1$, attention values sum to 1 Compute context vector c: multiply CNN features and Attention weights $c_t = \sum_{i,j} a_{t,i,j} z_{t,i,j}$ Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, \color{red}{c_t})$ Each timestep of decode uses a different context vector that looks(attend) at different parts of the input image. This entire process is differentiable; model chooses its own attention weights. No attention supervision is required. Similar tasks in NLP - Language translation example Vanilla Encoder-Decoder setting: Input: sequence x $= x_1, x_2, \ldots, x_T$ Output: sequence y $= y_1, y_2, \ldots, y_T$ Encoder: $h_0 = f_W(z)$, where $z_t = \mbox{RNN}(x_t, u_{t-1})$, $f_W(\cdot)$ is MLP, u is the hidden RNN state Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, c)$, where context vector c is often $c=h_0$ Attention in NLP Alignment scores(scalars): $e_{t,i} = f_{\mbox{att}}(h_{t-1}, z_t)$, where $f_{\mbox{att}}(\cdot)$ is an MLP Normalize to get attention weights: $a_{t,:} = \mbox{softmax}(e_{t,:})$, $0&amp;lt;a_{t,i}&amp;lt;1$, attention values sum to 1 Compute context vector c: $c_t = \sum_i a_{t,i} z_{t,i}$ Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, \color{red}c_t)$ Heatmap: visualization of attention weights; without any attention supervision, model learns different word orderings for different languages General Attention Layer Attention in image captioning before Single query setting Inputs input vectors: x(shape: $N\times D$) Attention operation is permutation invariant; produces the same output regardless of the order of elements(features) in the input vector. Stretch $H\times W = N$ into N vectors, transform $H\times W\times D$ features into $N\times D$ input vectors x(similar to attention in NLP). Query: h(shape: D) Operations Alignment Change $f_{\mbox{att}}(\cdot)$ to a simple dot product: $e_i = h\cdot x_i$; only works well with key &amp;amp; value transformation trick Change $f_{\mbox{att}}(\cdot)$ to a scaled dot product: $e_i = h\cdot x_i / \sqrt{D}$; Larger dimensions means more terms in the dot product sum. So, the variance of the logits is higher. Large magnitude(length) vectors will produce much higher logits. Then, the post-softmax distribution(e) has lower-entropy(high uncertainty) assuming logits are I.I.D. Ultimately, these large magnitude vectors will cause softmax to peak and assign very little weight to all others. To reduce this effect, divide by $sqrt{D}$. Attention: $\mathbf{a} = \mbox{softmax}(\mathbf{e})$ Output: $\mathbf{c} = \sum_i a_i x_i$ Outputs - context vector: c(shape: D) Multiple query setting Inputs input vectors: x(shape: $N\times D$) Queries: q(shape: $M\times D$); multiple query vectors Operations Alignment: $e_{i,j} = q_j\cdot x_i / \sqrt{D}$ Attention: $\mathbf{a} = \mbox{softmax}(\mathbf{e})$ Output: $y_j = \sum_i a_{i,j} x_i$ Outputs context vectors: y(shape: D); each query creates a new output context vector Weight layers added Notice that the input vectors x are used for both the alignment(e) and attention calculations(y); We can add more expressivity to the layer by adding a different FC layer before each of the two steps. The input and output dimensions can now change depending on the key and value FC layers. Inputs input vectors: x(shape: $N\times D$) Queries: q(shape: $M\times D_k$) Operations Key vectors: $\mathbf{k} = \mathbf{x}W_k$ Value vectors: $\mathbf{v} = \mathbf{x}W_v$ Alignment: $e_{i,j} = q_j\cdot k_i / \sqrt{D}$ Attention: $\mathbf{a} = \mbox{softmax}(\mathbf{e})$ Output: $y_j = \sum_i a_{i,j} v_i$ Outputs context vectors: y(shape: $D_v$); Self attention layer Recall that the query vector was a function of the input vectors; Encoder $h_0=f_W(z)$, where z is spatial CNN features, $f_W(\cdot)$ is an MLP. We can calculate the query vectors from the input vectors, defining a “self-attention” layer. No input query vectors anymore, instead query vectors are calculated using a FC layer. Inputs input vectors: x(shape: $N\times D$) Operations Key vectors: $\mathbf{k} = \mathbf{x}W_k$ Value vectors: $\mathbf{v} = \mathbf{x}W_v$ Query vectors: $\mathbf{q} = \mathbf{x}W_q$ Alignment: $e_{i,j} = q_j\cdot k_i / \sqrt{D}$ Attention: $\mathbf{a} = \mbox{softmax}(\mathbf{e})$ Output: $y_j = \sum_i a_{i,j} v_i$ Outputs context vectors: y(shape: $D_v$) Positional encoding Self attention attends over sets of inputs; is permutation invariant. To encode the ordered sequences(e.g. language, image), concatenate special positional encoding $p_j$ to each input vector $x_j$. $\mathit{pos}: N\rightarrow R^d$ to process the position j of the vector into a d-dimensional vector; $p_j = \mathit{pos}(j)$ Desiderata of $\mathit{pos}(\cdot)$: Should output a unique encoding for each time-step(word’s position in a sentence). Distance between any two time-steps should be consistent across sentences with different lengths(variable inputs). Model should generalize to longer sentences without any efforts. Its values should be bounded. Must be deterministic. Options for $\mathit{pos}(\cdot)$: Learn a lookup table: Learn parameters to use for $\mathit{pos}(t)$ for $t \in [0,T)$ Lookup table contains $T\times d$ parameters Design a fixed function with the desiderata Masked self-attention layer Manually set alignment scores to $-\infty$, prevent vectors from looking at future vectors. Multi-head self attention layer Multiple self-attention heads in parallel; similar to ensemble Comparing RNNs to Transformers RNNs (+) LSTMs work reasonably well for long sequences. (-) Expects an ordered sequences of inputs (-) Sequential computation: subsequent hidden states can only be computed after the previous ones are done. Transformers (+) Good at long sequences. Each attention calculation looks at all inputs. (+) Can operate over unordered sets or ordered sequences with positional encodings. (+) Parallel computation: All alignment and attention scores for all inputs can be done in parallel. (-) Requires a lot of memory: N x M alignment and attention scalers need to be calculated and stored for a single self-attention head. Transformers Image Captioning using transformers No recurrence at all Input: Image I Output: Sequence y $= y_1, y_2, \ldots, y_T$ Encoder: $c = T_W(z)$, where z is spatial CNN features, $T_W(\cdot)$ is the transformer encoder Decoder: $y_t = T_D(y_{0:t-1}, c)$, where $T_D(\cdot)$ is the transformer decoder The Transformer encoder block Inputs: Set of vectors x Outputs: Set of vectors y Self-attention is the only interaction between vectors; Layer norm and MLP operate independently per vector. Highly scalable, highly parallelizable, but high memory usage. The Transformer Decoder block Inputs: Set of vectors x and Set of context vector c Outputs: Set of vectors y Masked Self-attention only interacts with past inputs(x, or previous output $y_{t-1}$). Multi-head attention block is NOT self-attention; it attends over the transformer encoder outputs. In this phase, we inject image features into the decoder. Highly scalable, highly parallelizable, but high memory usage. Image Captioning using ONLY transformers Transformers from pixels to language Dosovitskiy et al, “An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale”, ArXiv 2020 colab notebook link Note: in Google Colab - TPU runtime setting import tensorflow as tf import os # TPU initialization resolver = tf.distribute.cluster_resolver.TPUClusterResolver(tpu='grpc://' + os.environ['COLAB_TPU_ADDR']) tf.config.experimental_connect_to_cluster(resolver) tf.tpu.experimental.initialize_tpu_system(resolver) strategy = tf.distribute.TPUStrategy(resolver) # compile in strategy.scope def create_model(): return tf.keras.Sequential( [tf.keras.layers.Conv2D(256, 3, activation='relu', input_shape=(28, 28, 1)), tf.keras.layers.Conv2D(256, 3, activation='relu'), tf.keras.layers.Flatten(), tf.keras.layers.Dense(256, activation='relu'), tf.keras.layers.Dense(128, activation='relu'), tf.keras.layers.Dense(10)]) with strategy.scope(): model = create_model() model.compile(optimizer='adam', loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics=['sparse_categorical_accuracy']) Summary Adding attention to RNNs allows them to “attend” to different parts of the input at every time step The general attention layer is a new type of layer that can be used to design new neural network architectures Transformers are a type of layer that uses self-attention and layer norm. It is highly scalable and highly parallelizable Faster training, larger models, better performance across vision and language tasks They are quickly replacing RNNs, LSTMs, and may even replace convolutions.</summary></entry><entry><title type="html">cs231n - Lecture 10. Recurrent Neural Networks</title><link href="http://0.0.0.0:4000/cs231n_lec10" rel="alternate" type="text/html" title="cs231n - Lecture 10. Recurrent Neural Networks" /><published>2022-01-03T15:00:00+00:00</published><updated>2022-01-03T15:00:00+00:00</updated><id>http://0.0.0.0:4000/cs231n_lec10</id><content type="html" xml:base="http://0.0.0.0:4000/cs231n_lec10">&lt;h2 id=&quot;rnn-process-sequences&quot;&gt;RNN: Process Sequences&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec10_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;one to one; vanilla neural networks&lt;/li&gt;
-  &lt;li&gt;one to many; e.g. Image Captioning(image to sequence of words)&lt;/li&gt;
-  &lt;li&gt;many to one; e.g. Action Prediction(video sequence to action class)&lt;/li&gt;
-  &lt;li&gt;many to many(1); e.g. Video Captioning(video sequence to caption)&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;many to many(2); e.g. Video Classification on frame level&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Why existing convnets are insufficient?:&lt;br /&gt;
-  Variable sequence length inputs and outputs&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec10_1.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;70%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Key idea: RNNs have an “internal state” that is updated as a sequence is processed.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;RNN hidden state update:&lt;br /&gt;
-  \(h_t = f_W(h_{t-1}, x_t)\)&lt;br /&gt;
-  The same function and the same set of parameters are used at every time step.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;RNN output generation: \(y_t = f_{W_hy}(h_t)\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Simple(Vanilla) RNN: The state consists of a single hidden vector &lt;em&gt;h&lt;/em&gt;&lt;br /&gt;
-  $h_t = \mbox{tanh}(W_hh h_{t-1} + W_{xh}x_t)$&lt;br /&gt;
-  $y_t = W_{hy}h_t$&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;sequence-to-sequenceseq2seq-many-to-one--one-to-many&quot;&gt;Sequence to Sequence(Seq2Seq): Many-to-One + One-to-Many&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Many-to-One: Encode input sequence in a single vector&lt;br /&gt;
-  One-to-Many: Produce output sequence from single input vector&lt;br /&gt;
-  Encoder produces the last hidden state $h_T$ and decoder uses it as a default $h_0$. Weights($W_1, W_2$) are re-used for each procedure.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Example: Character-level Language Model Sampling&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec10_2.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;40%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;backpropagation&quot;&gt;Backpropagation&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Backpropagation through time: Computationally Expensive&lt;br /&gt;
-  Forward through entire sequence to compute loss, then backward through entire sequence to compute gradient.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Truncated&lt;/strong&gt; Backpropagation through time:&lt;br /&gt;
-  Run forward and backward through &lt;strong&gt;chunks of the sequence&lt;/strong&gt; instead of whole sequence. Carry hidden states forward in time forever, but only backpropagate for some smaller number of steps.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;rnn-tradeoffs&quot;&gt;RNN tradeoffs&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;RNN Advantages:
-    &lt;ul&gt;
-      &lt;li&gt;Can process any length input&lt;/li&gt;
-      &lt;li&gt;Computation for step t can (in theory) use information from many steps back&lt;/li&gt;
-      &lt;li&gt;Model size doesn’t increase for longer input&lt;/li&gt;
-      &lt;li&gt;Same weights applied on every timestep, so there is symmetry in how inputs are processed.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;RNN Disadvantages:
-    &lt;ul&gt;
-      &lt;li&gt;Recurrent computation is slow&lt;/li&gt;
-      &lt;li&gt;In practice, difficult to access information from many steps back&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;image-captioning-cnn--rnn&quot;&gt;Image Captioning: CNN + RNN&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Instead of the final FC layer and the classifier in CNN, use FC output &lt;em&gt;v&lt;/em&gt;(say 4096 length vector) to formulate the default hidden state $h_0$ in RNN.
-    &lt;ul&gt;
-      &lt;li&gt;before: $h = \mbox{tanh}(W_{xh}\ast x+W_{hh}\ast h)$&lt;/li&gt;
-      &lt;li&gt;now: $h=\mbox{tanh}(W_{xh}\ast x + W_{hh}\ast h + W_{ih}\ast v)$&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;RNN for Image Captioning&lt;br /&gt;
-  Re-sample the previous output $y_{t-1}$ as the next input $x_t$, iterate untill $y_t$ sample takes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;END&amp;gt;&lt;/code&gt; token.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;visual-question-answering-rnns-with-attention&quot;&gt;Visual Question Answering: RNNs with Attention&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec10_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;other-tasks&quot;&gt;Other tasks&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Visual Dialog: Conversations about images&lt;/li&gt;
-  &lt;li&gt;Visual Language Navigation: Go to the living room&lt;br /&gt;
-  Agent encodes instructions in language and uses an RNN to generate a series of movements as the visual input changes after each move.&lt;/li&gt;
-  &lt;li&gt;Visual Question Answering: Dataset Bias&lt;br /&gt;
-  With different types(Image + Question + Answer) of data used, model performances are better.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;long-short-term-memory-lstm&quot;&gt;Long Short Term Memory (LSTM)&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Vanilla RNN&lt;br /&gt;
-  \(h_t = \mbox{tanh}(W_{hh}h_{t-1} + W_{xh}x_t) \\
-      = \mbox{tanh}\left(
-          (W_{hh} \ W_{hx}) {\begin{pmatrix} h_{t-1} \\ x_t \end{pmatrix}}
-                  \right) \\
-      = \mbox{tanh}\left(
-          W {\begin{pmatrix} h_{t-1} \\ x_t \end{pmatrix}}
-                  \right)\)&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;\(\frac{\partial h_t}{\partial h_{t-1}} = \mbox{tanh}' (W_{hh}h_{t-1} + W_{xh}x_t)W_{hh}\)&lt;br /&gt;
-  $\frac{\partial L}{\partial W} = \sum_{t=1}^T \frac{\partial L_t}{\partial W}$&lt;/p&gt;
-
-\[\begin{align*}
-  \frac{\partial L_T}{\partial W} &amp;amp;= \frac{\partial L_T}{\partial h_T}
-                                      \frac{\partial h_t}{\partial h_{t-1}}\cdots
-                                      \frac{\partial h_1}{\partial W} \\
-                                   &amp;amp;= \frac{\partial L_T}{\partial h_T}(\prod_{t=2}^T \frac{\partial h_t}{\partial h_{t-1}})\frac{\partial h_1}{\partial W} \\
-                                  &amp;amp;= \frac{\partial L_T}{\partial h_T}(\prod_{t=2}^T \mbox{tanh}'(W_{hh}h_{t-1} + W_{xh}x_t))W_{hh}^{T-1} \frac{\partial h_1}{\partial W}
-  \end{align*}\]
-  &lt;/li&gt;
-  &lt;li&gt;Problem&lt;br /&gt;
-  As the output of &lt;em&gt;tanh&lt;/em&gt; function are in range of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[-1,1]&lt;/code&gt; and almost smaller than 1, vanilla RNN has &lt;strong&gt;&lt;em&gt;vanishing gradients&lt;/em&gt;&lt;/strong&gt;. If we assume no non-linearity, the gradient will be \(\frac{\partial L_T}{\partial W} = \frac{\partial L_T}{\partial h_T}W_{hh}^{T-1}\frac{\partial h_1}{\partial W}\). In this case, when the largest singular value is greater than 1, we have exploding gradients, while the value is smaller than 1, we have vanishing gradients.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;H&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;# dimensionality of hidden state
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;# number of time steps
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Whh&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# forward pass of an RNN (ignoring inputs x)
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;hs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;xrange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Whh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;hs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-	
-&lt;span class=&quot;c1&quot;&gt;# backward pass of the RNN
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dhs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;dss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;dhs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;H&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#start off the chain with random gradient
-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;reversed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;xrange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;dss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dhs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;# backprop through the nonlinearity
-&lt;/span&gt;	&lt;span class=&quot;n&quot;&gt;dhs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Whh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;# backprop into previous hidden state
-&lt;/span&gt;		&lt;span class=&quot;c1&quot;&gt;# &quot;Whh.T&quot; multiplied by &quot;T&quot; times!
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;For exploding gradients: control with gradient clipping.&lt;br /&gt;
-  For vanishing gradients: change the architecture, LSTM introduced.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;LSTM:&lt;br /&gt;
-  \(\begin{pmatrix} i \\ f \\ o \\ g \end{pmatrix} =
-  \begin{pmatrix} \sigma \\ \sigma \\ \sigma \\ \mbox{tanh}\end{pmatrix} W \begin{pmatrix} h_{t-1} \\ x_t \end{pmatrix}\)&lt;br /&gt;
-  \(c_t = f \odot c_{t-1} + i \odot g\), &lt;em&gt;memory cell update&lt;/em&gt;&lt;br /&gt;
-  \(h_t = o \odot \mbox{tanh}(c_t)\), &lt;em&gt;hidden state update&lt;/em&gt;&lt;br /&gt;
-  where &lt;em&gt;W&lt;/em&gt; is a stack of $W_h$ and $W_x$&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec10_4.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;br /&gt;
-i: Input gate, whether to write to cell&lt;br /&gt;
-f: Forget gate, Whether to erase cell&lt;br /&gt;
-o: Output gate, How much to reveal cell&lt;br /&gt;
-g: Gate gate, How much to write to cell&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec10_5.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Backpropagation from $c_t$ to $c_{t-1}$ only elementwise multiplication by &lt;em&gt;f&lt;/em&gt;, no matrix multiply by &lt;em&gt;W&lt;/em&gt;. Notice that the gradient contains the &lt;em&gt;f&lt;/em&gt; gate’s vector of activations; it allows better control of gradients values, using suitable parameter updates of the forget gate. Also notice that are added through the &lt;em&gt;f, i, g,&lt;/em&gt; and &lt;em&gt;o&lt;/em&gt; gates, we can have better balancing of gradient values.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Recall: “PlainNets” vs. ResNets&lt;br /&gt;
-  ResNet is to PlainNet what LSTM is to RNN, kind of.&lt;br /&gt;
-  &lt;em&gt;Additive skip connections&lt;/em&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Do LSTMs solve the vanishing gradient problem?:&lt;br /&gt;
-  The LSTM architecture makes it easier for the RNN to preserve information over many timesteps. e.g. If $f=1$ and $i=0$, then the information of that cell is preserved indefinitely. By contrast, it’s harder for vanilla RNN to learn a recurrent weight matrix $W_h$ that preserves information in hidden state.&lt;br /&gt;
-  LSTM doesn’t guarantee that there is no vanishing/exploding gradient, but it does provide an easier way for the model to learn long-distance dependencies.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;in between: Highway Networks, &lt;em&gt;Srivastava et al, 2015, [arXiv:1505.00387v2]&lt;/em&gt;&lt;br /&gt;
-  A new architecture designed to ease gradient-based training of very deep networks. To regulate the flow of information and enlarge the possibility of studying extremely deep and efficient architectures.&lt;br /&gt;
-  $g = T(x, W_T)$, $y = g \odot H(x, W_H) + (1-g)\odot x$&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;other-rnn-variants&quot;&gt;Other RNN Variants&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Neural Architecture Search(NAS) with Reinforcement Learning, &lt;em&gt;Zoph et Le, 2017&lt;/em&gt;
-    &lt;ul&gt;
-      &lt;li&gt;RNN to design model; idea that we can represent the model architecture with a variable-length string.&lt;/li&gt;
-      &lt;li&gt;Apply reinforcement learning on a neural network to maximize the accuracy(as a reward) on validation set, find a good architecture.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;GRU; smaller LSTM, &lt;em&gt;“Learning phrase representations using rnn encoder-decoder for statistical machine translation”, Cho et al., 2014&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;“An Empirical Exploration of Recurrent Network Architectures”, Jozefowicz et al., 2015&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;LSTM: A Search Space Odyssey, Greff et al., 2015&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;recurrence-for-vision&quot;&gt;Recurrence for Vision&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;LSTM wer a good default choice until this year&lt;/li&gt;
-  &lt;li&gt;Use variants like GRU if you want faster compute and less parameters&lt;/li&gt;
-  &lt;li&gt;Use transformers (next lecture) as they are dominating NLP models&lt;/li&gt;
-  &lt;li&gt;almost everyday there is a new vision transformer model&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;RNNs allow a lot of flexibility in architecture design&lt;/li&gt;
-  &lt;li&gt;Vanilla RNNs are simple but don’t work very well&lt;/li&gt;
-  &lt;li&gt;Common to use LSTM or GRU: their additive interactions improve gradient flow&lt;/li&gt;
-  &lt;li&gt;Backward flow of gradients in RNN can explode or vanish. Exploding is controlled with gradient clipping. Vanishing is controlled with additive interactions (LSTM)&lt;/li&gt;
-  &lt;li&gt;Better/simpler architectures are a hot topic of current research, as well as new paradigms for reasoning over sequences&lt;/li&gt;
-  &lt;li&gt;Better understanding (both theoretical and empirical) is needed.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">RNN: Process Sequences one to one; vanilla neural networks one to many; e.g. Image Captioning(image to sequence of words) many to one; e.g. Action Prediction(video sequence to action class) many to many(1); e.g. Video Captioning(video sequence to caption) many to many(2); e.g. Video Classification on frame level Why existing convnets are insufficient?: Variable sequence length inputs and outputs Key idea: RNNs have an “internal state” that is updated as a sequence is processed. RNN hidden state update: \(h_t = f_W(h_{t-1}, x_t)\) The same function and the same set of parameters are used at every time step. RNN output generation: \(y_t = f_{W_hy}(h_t)\) Simple(Vanilla) RNN: The state consists of a single hidden vector h $h_t = \mbox{tanh}(W_hh h_{t-1} + W_{xh}x_t)$ $y_t = W_{hy}h_t$ Sequence to Sequence(Seq2Seq): Many-to-One + One-to-Many Many-to-One: Encode input sequence in a single vector One-to-Many: Produce output sequence from single input vector Encoder produces the last hidden state $h_T$ and decoder uses it as a default $h_0$. Weights($W_1, W_2$) are re-used for each procedure. Example: Character-level Language Model Sampling Backpropagation Backpropagation through time: Computationally Expensive Forward through entire sequence to compute loss, then backward through entire sequence to compute gradient. Truncated Backpropagation through time: Run forward and backward through chunks of the sequence instead of whole sequence. Carry hidden states forward in time forever, but only backpropagate for some smaller number of steps. RNN tradeoffs RNN Advantages: Can process any length input Computation for step t can (in theory) use information from many steps back Model size doesn’t increase for longer input Same weights applied on every timestep, so there is symmetry in how inputs are processed. RNN Disadvantages: Recurrent computation is slow In practice, difficult to access information from many steps back Image Captioning: CNN + RNN Instead of the final FC layer and the classifier in CNN, use FC output v(say 4096 length vector) to formulate the default hidden state $h_0$ in RNN. before: $h = \mbox{tanh}(W_{xh}\ast x+W_{hh}\ast h)$ now: $h=\mbox{tanh}(W_{xh}\ast x + W_{hh}\ast h + W_{ih}\ast v)$ RNN for Image Captioning Re-sample the previous output $y_{t-1}$ as the next input $x_t$, iterate untill $y_t$ sample takes &amp;lt;END&amp;gt; token. Visual Question Answering: RNNs with Attention Other tasks Visual Dialog: Conversations about images Visual Language Navigation: Go to the living room Agent encodes instructions in language and uses an RNN to generate a series of movements as the visual input changes after each move. Visual Question Answering: Dataset Bias With different types(Image + Question + Answer) of data used, model performances are better. Long Short Term Memory (LSTM) Vanilla RNN \(h_t = \mbox{tanh}(W_{hh}h_{t-1} + W_{xh}x_t) \\ = \mbox{tanh}\left( (W_{hh} \ W_{hx}) {\begin{pmatrix} h_{t-1} \\ x_t \end{pmatrix}} \right) \\ = \mbox{tanh}\left( W {\begin{pmatrix} h_{t-1} \\ x_t \end{pmatrix}} \right)\) \(\frac{\partial h_t}{\partial h_{t-1}} = \mbox{tanh}' (W_{hh}h_{t-1} + W_{xh}x_t)W_{hh}\) $\frac{\partial L}{\partial W} = \sum_{t=1}^T \frac{\partial L_t}{\partial W}$ \[\begin{align*} \frac{\partial L_T}{\partial W} &amp;amp;= \frac{\partial L_T}{\partial h_T} \frac{\partial h_t}{\partial h_{t-1}}\cdots \frac{\partial h_1}{\partial W} \\ &amp;amp;= \frac{\partial L_T}{\partial h_T}(\prod_{t=2}^T \frac{\partial h_t}{\partial h_{t-1}})\frac{\partial h_1}{\partial W} \\ &amp;amp;= \frac{\partial L_T}{\partial h_T}(\prod_{t=2}^T \mbox{tanh}'(W_{hh}h_{t-1} + W_{xh}x_t))W_{hh}^{T-1} \frac{\partial h_1}{\partial W} \end{align*}\] Problem As the output of tanh function are in range of [-1,1] and almost smaller than 1, vanilla RNN has vanishing gradients. If we assume no non-linearity, the gradient will be \(\frac{\partial L_T}{\partial W} = \frac{\partial L_T}{\partial h_T}W_{hh}^{T-1}\frac{\partial h_1}{\partial W}\). In this case, when the largest singular value is greater than 1, we have exploding gradients, while the value is smaller than 1, we have vanishing gradients. H = 5 # dimensionality of hidden state T = 50 # number of time steps Whh = np.random.randn(H, H) # forward pass of an RNN (ignoring inputs x) hs = {} ss = {} hs[-1] = np.random.randn(H) for t in xrange(T): ss[t] = np.dot(Whh, hs[t-1]) hs[t] = np.maximum(0, ss[t]) # backward pass of the RNN dhs = {} dss = {} dhs[T-1] = np.random.randn(H) #start off the chain with random gradient for t in reversed(xrange(T)): dss[t] = (hs[t] &amp;gt; 0) * dhs[t] # backprop through the nonlinearity dhs[t-1] = np.dot(Whh.T, dss[t]) # backprop into previous hidden state # &quot;Whh.T&quot; multiplied by &quot;T&quot; times! For exploding gradients: control with gradient clipping. For vanishing gradients: change the architecture, LSTM introduced. LSTM: \(\begin{pmatrix} i \\ f \\ o \\ g \end{pmatrix} = \begin{pmatrix} \sigma \\ \sigma \\ \sigma \\ \mbox{tanh}\end{pmatrix} W \begin{pmatrix} h_{t-1} \\ x_t \end{pmatrix}\) \(c_t = f \odot c_{t-1} + i \odot g\), memory cell update \(h_t = o \odot \mbox{tanh}(c_t)\), hidden state update where W is a stack of $W_h$ and $W_x$ i: Input gate, whether to write to cell f: Forget gate, Whether to erase cell o: Output gate, How much to reveal cell g: Gate gate, How much to write to cell Backpropagation from $c_t$ to $c_{t-1}$ only elementwise multiplication by f, no matrix multiply by W. Notice that the gradient contains the f gate’s vector of activations; it allows better control of gradients values, using suitable parameter updates of the forget gate. Also notice that are added through the f, i, g, and o gates, we can have better balancing of gradient values. Recall: “PlainNets” vs. ResNets ResNet is to PlainNet what LSTM is to RNN, kind of. Additive skip connections Do LSTMs solve the vanishing gradient problem?: The LSTM architecture makes it easier for the RNN to preserve information over many timesteps. e.g. If $f=1$ and $i=0$, then the information of that cell is preserved indefinitely. By contrast, it’s harder for vanilla RNN to learn a recurrent weight matrix $W_h$ that preserves information in hidden state. LSTM doesn’t guarantee that there is no vanishing/exploding gradient, but it does provide an easier way for the model to learn long-distance dependencies. in between: Highway Networks, Srivastava et al, 2015, [arXiv:1505.00387v2] A new architecture designed to ease gradient-based training of very deep networks. To regulate the flow of information and enlarge the possibility of studying extremely deep and efficient architectures. $g = T(x, W_T)$, $y = g \odot H(x, W_H) + (1-g)\odot x$ Other RNN Variants Neural Architecture Search(NAS) with Reinforcement Learning, Zoph et Le, 2017 RNN to design model; idea that we can represent the model architecture with a variable-length string. Apply reinforcement learning on a neural network to maximize the accuracy(as a reward) on validation set, find a good architecture. GRU; smaller LSTM, “Learning phrase representations using rnn encoder-decoder for statistical machine translation”, Cho et al., 2014 “An Empirical Exploration of Recurrent Network Architectures”, Jozefowicz et al., 2015 LSTM: A Search Space Odyssey, Greff et al., 2015 Recurrence for Vision LSTM wer a good default choice until this year Use variants like GRU if you want faster compute and less parameters Use transformers (next lecture) as they are dominating NLP models almost everyday there is a new vision transformer model Summary RNNs allow a lot of flexibility in architecture design Vanilla RNNs are simple but don’t work very well Common to use LSTM or GRU: their additive interactions improve gradient flow Backward flow of gradients in RNN can explode or vanish. Exploding is controlled with gradient clipping. Vanishing is controlled with additive interactions (LSTM) Better/simpler architectures are a hot topic of current research, as well as new paradigms for reasoning over sequences Better understanding (both theoretical and empirical) is needed.</summary></entry><entry><title type="html">cs231n - Lecture 9. CNN Architectures</title><link href="http://0.0.0.0:4000/cs231n_lec9" rel="alternate" type="text/html" title="cs231n - Lecture 9. CNN Architectures" /><published>2022-01-02T15:00:00+00:00</published><updated>2022-01-02T15:00:00+00:00</updated><id>http://0.0.0.0:4000/cs231n_lec9</id><content type="html" xml:base="http://0.0.0.0:4000/cs231n_lec9">&lt;h2 id=&quot;review&quot;&gt;Review&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;LeCun et al., 1998&lt;/em&gt;&lt;br /&gt;
-  $5\times 5$ Conv filters applied at stride &lt;em&gt;1&lt;/em&gt;&lt;br /&gt;
-  $2\times 2$ Subsampling (Pooling) layers applied at stride &lt;em&gt;2&lt;/em&gt;&lt;br /&gt;
-  i.e. architecture is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[CONV-POOL-CONV-POOL-FC-FC]&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Stride: Downsample output activations&lt;br /&gt;
-  Padding: Preserve input spatial dimensions in output activations&lt;br /&gt;
-  Filter: Each conv filter outputs a “slice” in the activation&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;case-studies&quot;&gt;Case Studies&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec9_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;alexnet-first-cnn-based-winner&quot;&gt;AlexNet: First CNN-based winner&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Architecture: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[CONV1-MAXPOOL1-NORM1-CONV2-MAXPOOL2-NORM2-CONV3-CONV4-CONV5-MaxPOOL3-FC6-FC7-FC8]&lt;/code&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Input: $227\times 227\times 3$ images&lt;/li&gt;
-      &lt;li&gt;First layer(CONV1):&lt;br /&gt;
-  &lt;em&gt;96&lt;/em&gt; $11\times 11$ filters applied at stride &lt;em&gt;4&lt;/em&gt;, pad &lt;em&gt;0&lt;/em&gt;&lt;br /&gt;
-  Output volume: $W’ = (W-F+2P)/S + 1 \rightarrow$ $55\times 55\times 96$&lt;br /&gt;
-  Parameters: $(11* 11* 3 +1)* 96 =$ &lt;strong&gt;36K&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;Second layer(POOL1):&lt;br /&gt;
-  $3\times 3\times$ filters applied at stride &lt;em&gt;2&lt;/em&gt;&lt;br /&gt;
-  Output volume: $27\times 27\times 96$&lt;br /&gt;
-  Parameters: 0&lt;br /&gt;
-  $\vdots$&lt;/li&gt;
-      &lt;li&gt;CONV2($27\times 27\times 256$):&lt;br /&gt;
-  &lt;em&gt;256&lt;/em&gt; $5\times 5$ filters applied at stride &lt;em&gt;1&lt;/em&gt;, pad &lt;em&gt;2&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;MAX POOL2($13\times 13\times 256):&lt;br /&gt;
-  $3\times 3\times$ filters applied at stride &lt;em&gt;2&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;CONV3($13\times 13\times 384$):&lt;br /&gt;
-  &lt;em&gt;384&lt;/em&gt; $3\times 3$ filters applied at stride &lt;em&gt;1&lt;/em&gt;, pad &lt;em&gt;1&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;CONV4($13\times 13\times 384$):&lt;br /&gt;
-  &lt;em&gt;384&lt;/em&gt; $3\times 3$ filters applied at stride &lt;em&gt;1&lt;/em&gt;, pad &lt;em&gt;1&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;CONV5($13\times 13\times 256$):&lt;br /&gt;
-  &lt;em&gt;256&lt;/em&gt; $3\times 3$ filters applied at stride &lt;em&gt;1&lt;/em&gt;, pad &lt;em&gt;1&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;MAX POOL3($6\times 6\times 256$):&lt;br /&gt;
-  $3\times 3\times$ filters applied at stride &lt;em&gt;2&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;FC6(4096): &lt;em&gt;4096&lt;/em&gt; neurons&lt;/li&gt;
-      &lt;li&gt;FC7(4096): &lt;em&gt;4096&lt;/em&gt; neurons&lt;/li&gt;
-      &lt;li&gt;FC8(1000): &lt;em&gt;1000&lt;/em&gt; neurons (class scores)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Historical note:
-    &lt;ul&gt;
-      &lt;li&gt;Network spread across &lt;em&gt;2&lt;/em&gt; GPUs, half the neurons (feature maps) on each GPU.&lt;/li&gt;
-      &lt;li&gt;CONV1, CONV2, CONV4, CONV5: Connections only with feature maps on same GPU&lt;/li&gt;
-      &lt;li&gt;CONV3, FC6, FC7, FC8: Connections with all feature maps in preceding layer, communication across GPUs&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Details/Retrospectives:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;em&gt;Krizhevsky et al. 2012&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;first use of ReLU&lt;/li&gt;
-      &lt;li&gt;used Norm layers (not common anymore)&lt;/li&gt;
-      &lt;li&gt;heavy data augmentation&lt;/li&gt;
-      &lt;li&gt;dropout &lt;em&gt;0.5&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;batch size &lt;em&gt;128&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;SGD Momentum &lt;em&gt;0.9&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;Learning rate &lt;em&gt;1e-2&lt;/em&gt;, reduced by &lt;em&gt;10&lt;/em&gt; manually when val accuracy plateaus&lt;/li&gt;
-      &lt;li&gt;L2 weight decay &lt;em&gt;5e-4&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;7 CNN ensemble: &lt;em&gt;18.2%&lt;/em&gt; $\rightarrow$ &lt;em&gt;15.4%&lt;/em&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;zfnet-improved-hyperparameters-over-alexnet&quot;&gt;ZFNet: Improved hyperparameters over AlexNet&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;AlexNet but:
-    &lt;ul&gt;
-      &lt;li&gt;CONV1: change from ($11\times 11$ stride &lt;em&gt;4&lt;/em&gt;) to ($7\times 7$ stride &lt;em&gt;2&lt;/em&gt;)&lt;/li&gt;
-      &lt;li&gt;CONV3,4,5: instead of &lt;em&gt;384&lt;/em&gt;, &lt;em&gt;384&lt;/em&gt;, &lt;em&gt;256&lt;/em&gt; filters use &lt;em&gt;512&lt;/em&gt;, &lt;em&gt;1024&lt;/em&gt;, &lt;em&gt;512&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;ImageNet top 5 error: &lt;em&gt;16.4%&lt;/em&gt; -&amp;gt; &lt;em&gt;11.7%&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;em&gt;Zeiler and Fergus, 2013&lt;/em&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;vggnet-deeper-networks&quot;&gt;VGGNet: Deeper Networks&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Small filters, Deeper networks
-    &lt;ul&gt;
-      &lt;li&gt;8 layers (AlexNet) $\rightarrow$ 16 - 19 layers (VGG16Net)&lt;/li&gt;
-      &lt;li&gt;Only $3\times 3$ CONV stride &lt;em&gt;1&lt;/em&gt;, pad &lt;em&gt;1&lt;/em&gt; and $2\times 2$ MAX POOL with stride &lt;em&gt;2&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;em&gt;11.7%&lt;/em&gt; top 5 error(ZFNet) $\rightarrow$ &lt;em&gt;7.3%&lt;/em&gt; top 5 error in ILSVRC’14&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Why use smaller filters?&lt;br /&gt;
-  :Stack of three $3\times 3$ conv (stride &lt;em&gt;1&lt;/em&gt;) layers has same effective receptive field as one $7\times 7$ conv layer, but with deeper, more non-linearities and fewer parameters&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec9_1.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;TOTAL memory: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;24M * 4 bytes ~= 96MB&lt;/code&gt; / image (for a forward pass)&lt;br /&gt;
-  TOTAL params: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;138M&lt;/code&gt; parameters&lt;br /&gt;
-  Most memory is in early CONV, Most params are in late FC&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Details:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;em&gt;Simonyan and Zisserman, 2014&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;ILSVRC’14 2nd in classification, 1st in localization&lt;/li&gt;
-      &lt;li&gt;Similar training procedure as &lt;em&gt;Krizhevsky 2012&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;No Local Response Normalisation (LRN)&lt;/li&gt;
-      &lt;li&gt;Use VGG16 or VGG19 (VGG19 only slightly better, more memory)&lt;/li&gt;
-      &lt;li&gt;Use ensembles for best results&lt;/li&gt;
-      &lt;li&gt;FC7 features generalize well to other	tasks&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;googlenet&quot;&gt;GoogLeNet&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Inception module&lt;/strong&gt;:
-    &lt;ul&gt;
-      &lt;li&gt;design a good local network topology(network within a network) and then stack these modules on top of each other&lt;/li&gt;
-      &lt;li&gt;Apply parallel filter operations on the input from previous layer: Multiple receptive field sizes for convolution(1x1, 3x3, 5x5), Pooling(3x3)&lt;/li&gt;
-      &lt;li&gt;Concatenate all filter outputs together channel-wise&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;“Bottlenect”&lt;/em&gt; layers to reduce computational complexity of inception:
-    &lt;ul&gt;
-      &lt;li&gt;use 1x1 conv to reduce feature channel size; alternatively, interpret it as applying the same FC layer on each input pixel&lt;/li&gt;
-      &lt;li&gt;preserves spatial dimensions, reduces depth&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec9_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Full GoogLeNet Architecture:
-    &lt;ul&gt;
-      &lt;li&gt;Stem Network: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[Conv-POOL-2x CONV-POOL]&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;Stack Inception modules: with dimension reduction on top of each other&lt;/li&gt;
-      &lt;li&gt;Classifier output: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[(H*W*c)-Avg POOL-(1*1*c)-FC-Softmax]&lt;/code&gt;&lt;br /&gt;
-  Global average pooling layer before final FC layer, avoids expensive FC layers&lt;/li&gt;
-      &lt;li&gt;Auxiliary classification layers: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[AvgPool-1x1 Conv-FC-FC-Softmax]&lt;/code&gt;&lt;br /&gt;
-  to inject additional gradient at lower layers&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Details:
-    &lt;ul&gt;
-      &lt;li&gt;Deeper networks, with computational efficiency&lt;/li&gt;
-      &lt;li&gt;ILSVRC’14 classification winner (&lt;em&gt;6.7%&lt;/em&gt; top 5 error)&lt;/li&gt;
-      &lt;li&gt;22 layers&lt;/li&gt;
-      &lt;li&gt;Only 5 million parameters(12x less than AlexNet, 27x less than VGG-16)&lt;/li&gt;
-      &lt;li&gt;Efficient “Inception” module&lt;/li&gt;
-      &lt;li&gt;No FC layers&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;resnet&quot;&gt;ResNet&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;From 2015, “Revolution of Depth”; more than 100 layers&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Stacking deeper layers on a “plain” convolutional neural network results in lower both test and training error. The deeper model performs worse, but it’s &lt;strong&gt;not caused by overfitting&lt;/strong&gt;.
-    &lt;ul&gt;
-      &lt;li&gt;Fact: Deep models have more representation power (more parameters) than shallower models.&lt;/li&gt;
-      &lt;li&gt;Hypothesis: the problem is an optimization problem, &lt;strong&gt;deeper models are harder to optimize&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;Solution: copying the learned layers from the shallower model and setting additional layers to identity mapping.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;“Residual block”&lt;/em&gt;:
-    &lt;ul&gt;
-      &lt;li&gt;Use network layers to fit a residual mapping instead of directly trying to fit a desired underlying mapping&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec9_3.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Full ResNet Architecture:
-    &lt;ul&gt;
-      &lt;li&gt;Stack residual blocks&lt;/li&gt;
-      &lt;li&gt;Every residual block has two $3\times 3$ conv layers&lt;/li&gt;
-      &lt;li&gt;Periodically, double number of filters and downsample spatially using stride &lt;em&gt;2&lt;/em&gt; (/2 in each dimension). Reduce the activation volume by half.&lt;/li&gt;
-      &lt;li&gt;Additional conv layer at the beginning (7x7 conv in stem)&lt;/li&gt;
-      &lt;li&gt;No FC layers at the end (only FC 1000 to output classes)&lt;/li&gt;
-      &lt;li&gt;(In theory, you can train a ResNet with input image of variable sizes)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;For deeper networks(ResNet-50+):
-  use bottleneck layer to improve efficiency (similar to GoogLeNet)&lt;br /&gt;
-  e.g. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[(28x28x256 INPUT)-(1x1 CONV, 64)-(3x3 CONV, 64)-(1x1 CONV, 256)-(28x28x256 OUTPUT)]&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Training ResNet in practice:
-    &lt;ul&gt;
-      &lt;li&gt;Batch Normalization after every CONV layer&lt;/li&gt;
-      &lt;li&gt;Xavier initialization from &lt;em&gt;He et al.&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;SGD + Momentum (&lt;em&gt;0.9&lt;/em&gt;)&lt;/li&gt;
-      &lt;li&gt;Learning rate: &lt;em&gt;0.1&lt;/em&gt;, divided by &lt;em&gt;10&lt;/em&gt; when validation error plateaus&lt;/li&gt;
-      &lt;li&gt;Mini-batch size &lt;em&gt;256&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;Weight decay of &lt;em&gt;1e-5&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;No dropout used&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Experimental Results:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;em&gt;He et al., 2015&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;Able to train very deep networks without degrading (152 layers on ImageNet, 1202 on Cifar)&lt;/li&gt;
-      &lt;li&gt;Deeper networks now achieve lower training error as expected&lt;/li&gt;
-      &lt;li&gt;Swept 1st place in all ILSVRC and COCO 2015 competitions&lt;/li&gt;
-      &lt;li&gt;ILSVRC 2015 classification winner (&lt;em&gt;3.6%&lt;/em&gt; top 5 error); better than human performance!&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Details:
-    &lt;ul&gt;
-      &lt;li&gt;Very deep networks using residual connections&lt;/li&gt;
-      &lt;li&gt;152-layer model for ImageNet&lt;/li&gt;
-      &lt;li&gt;ILSVRC’15 classification winner(&lt;em&gt;3.57%&lt;/em&gt; top 5 error)&lt;/li&gt;
-      &lt;li&gt;Swept all classification and detection competitions in ILSVRC’15 and COCO’15&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Review LeCun et al., 1998 $5\times 5$ Conv filters applied at stride 1 $2\times 2$ Subsampling (Pooling) layers applied at stride 2 i.e. architecture is [CONV-POOL-CONV-POOL-FC-FC] Stride: Downsample output activations Padding: Preserve input spatial dimensions in output activations Filter: Each conv filter outputs a “slice” in the activation Case Studies AlexNet: First CNN-based winner Architecture: [CONV1-MAXPOOL1-NORM1-CONV2-MAXPOOL2-NORM2-CONV3-CONV4-CONV5-MaxPOOL3-FC6-FC7-FC8] Input: $227\times 227\times 3$ images First layer(CONV1): 96 $11\times 11$ filters applied at stride 4, pad 0 Output volume: $W’ = (W-F+2P)/S + 1 \rightarrow$ $55\times 55\times 96$ Parameters: $(11* 11* 3 +1)* 96 =$ 36K Second layer(POOL1): $3\times 3\times$ filters applied at stride 2 Output volume: $27\times 27\times 96$ Parameters: 0 $\vdots$ CONV2($27\times 27\times 256$): 256 $5\times 5$ filters applied at stride 1, pad 2 MAX POOL2($13\times 13\times 256): $3\times 3\times$ filters applied at stride 2 CONV3($13\times 13\times 384$): 384 $3\times 3$ filters applied at stride 1, pad 1 CONV4($13\times 13\times 384$): 384 $3\times 3$ filters applied at stride 1, pad 1 CONV5($13\times 13\times 256$): 256 $3\times 3$ filters applied at stride 1, pad 1 MAX POOL3($6\times 6\times 256$): $3\times 3\times$ filters applied at stride 2 FC6(4096): 4096 neurons FC7(4096): 4096 neurons FC8(1000): 1000 neurons (class scores) Historical note: Network spread across 2 GPUs, half the neurons (feature maps) on each GPU. CONV1, CONV2, CONV4, CONV5: Connections only with feature maps on same GPU CONV3, FC6, FC7, FC8: Connections with all feature maps in preceding layer, communication across GPUs Details/Retrospectives: Krizhevsky et al. 2012 first use of ReLU used Norm layers (not common anymore) heavy data augmentation dropout 0.5 batch size 128 SGD Momentum 0.9 Learning rate 1e-2, reduced by 10 manually when val accuracy plateaus L2 weight decay 5e-4 7 CNN ensemble: 18.2% $\rightarrow$ 15.4% ZFNet: Improved hyperparameters over AlexNet AlexNet but: CONV1: change from ($11\times 11$ stride 4) to ($7\times 7$ stride 2) CONV3,4,5: instead of 384, 384, 256 filters use 512, 1024, 512 ImageNet top 5 error: 16.4% -&amp;gt; 11.7% Zeiler and Fergus, 2013 VGGNet: Deeper Networks Small filters, Deeper networks 8 layers (AlexNet) $\rightarrow$ 16 - 19 layers (VGG16Net) Only $3\times 3$ CONV stride 1, pad 1 and $2\times 2$ MAX POOL with stride 2 11.7% top 5 error(ZFNet) $\rightarrow$ 7.3% top 5 error in ILSVRC’14 Why use smaller filters? :Stack of three $3\times 3$ conv (stride 1) layers has same effective receptive field as one $7\times 7$ conv layer, but with deeper, more non-linearities and fewer parameters TOTAL memory: 24M * 4 bytes ~= 96MB / image (for a forward pass) TOTAL params: 138M parameters Most memory is in early CONV, Most params are in late FC Details: Simonyan and Zisserman, 2014 ILSVRC’14 2nd in classification, 1st in localization Similar training procedure as Krizhevsky 2012 No Local Response Normalisation (LRN) Use VGG16 or VGG19 (VGG19 only slightly better, more memory) Use ensembles for best results FC7 features generalize well to other tasks GoogLeNet Inception module: design a good local network topology(network within a network) and then stack these modules on top of each other Apply parallel filter operations on the input from previous layer: Multiple receptive field sizes for convolution(1x1, 3x3, 5x5), Pooling(3x3) Concatenate all filter outputs together channel-wise “Bottlenect” layers to reduce computational complexity of inception: use 1x1 conv to reduce feature channel size; alternatively, interpret it as applying the same FC layer on each input pixel preserves spatial dimensions, reduces depth Full GoogLeNet Architecture: Stem Network: [Conv-POOL-2x CONV-POOL] Stack Inception modules: with dimension reduction on top of each other Classifier output: [(H*W*c)-Avg POOL-(1*1*c)-FC-Softmax] Global average pooling layer before final FC layer, avoids expensive FC layers Auxiliary classification layers: [AvgPool-1x1 Conv-FC-FC-Softmax] to inject additional gradient at lower layers Details: Deeper networks, with computational efficiency ILSVRC’14 classification winner (6.7% top 5 error) 22 layers Only 5 million parameters(12x less than AlexNet, 27x less than VGG-16) Efficient “Inception” module No FC layers ResNet From 2015, “Revolution of Depth”; more than 100 layers Stacking deeper layers on a “plain” convolutional neural network results in lower both test and training error. The deeper model performs worse, but it’s not caused by overfitting. Fact: Deep models have more representation power (more parameters) than shallower models. Hypothesis: the problem is an optimization problem, deeper models are harder to optimize Solution: copying the learned layers from the shallower model and setting additional layers to identity mapping. “Residual block”: Use network layers to fit a residual mapping instead of directly trying to fit a desired underlying mapping Full ResNet Architecture: Stack residual blocks Every residual block has two $3\times 3$ conv layers Periodically, double number of filters and downsample spatially using stride 2 (/2 in each dimension). Reduce the activation volume by half. Additional conv layer at the beginning (7x7 conv in stem) No FC layers at the end (only FC 1000 to output classes) (In theory, you can train a ResNet with input image of variable sizes) For deeper networks(ResNet-50+): use bottleneck layer to improve efficiency (similar to GoogLeNet) e.g. [(28x28x256 INPUT)-(1x1 CONV, 64)-(3x3 CONV, 64)-(1x1 CONV, 256)-(28x28x256 OUTPUT)] Training ResNet in practice: Batch Normalization after every CONV layer Xavier initialization from He et al. SGD + Momentum (0.9) Learning rate: 0.1, divided by 10 when validation error plateaus Mini-batch size 256 Weight decay of 1e-5 No dropout used Experimental Results: He et al., 2015 Able to train very deep networks without degrading (152 layers on ImageNet, 1202 on Cifar) Deeper networks now achieve lower training error as expected Swept 1st place in all ILSVRC and COCO 2015 competitions ILSVRC 2015 classification winner (3.6% top 5 error); better than human performance! Details: Very deep networks using residual connections 152-layer model for ImageNet ILSVRC’15 classification winner(3.57% top 5 error) Swept all classification and detection competitions in ILSVRC’15 and COCO’15</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Attention with RNNs Image Captioning using spatial features Input: Image I Output: Sequence y $= y_1, y_2, \ldots, y_T$ Encoder: $h_0 = f_W(z)$, where z is spatial CNN features, $f_W(\cdot)$ is an MLP Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, c)$, where context vector c is often $c=h_0$ Problem: Input is “bottlenecked” through c; especially in a long descriptions. Model needs to encode everything it wants to say within c Attention idea: New context vector c_t at every time step Each context vector will attend to different image regions Alignment scores(scalars): $H \times W$ matrix e $e_{t,i,j} = f_{\mbox{att}}(h_{t-1}, z_{i,j})$ where $f_{\mbox{att}}(\cdot)$ is an MLP Normalize to get attention weights: $a_{t,:,:} = \mbox{softmax}(e_{t,:,:})$, $0&amp;lt;a_{t,i,j}&amp;lt;1$, attention values sum to 1 Compute context vector c: multiply CNN features and Attention weights $c_t = \sum_{i,j} a_{t,i,j} z_{t,i,j}$ Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, \color{red}{c_t})$ Each timestep of decode uses a different context vector that looks(attend) at different parts of the input image. This entire process is differentiable; model chooses its own attention weights. No attention supervision is required. Similar tasks in NLP - Language translation example Vanilla Encoder-Decoder setting: Input: sequence x $= x_1, x_2, \ldots, x_T$ Output: sequence y $= y_1, y_2, \ldots, y_T$ Encoder: $h_0 = f_W(z)$, where $z_t = \mbox{RNN}(x_t, u_{t-1})$, $f_W(\cdot)$ is MLP, u is the hidden RNN state Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, c)$, where context vector c is often $c=h_0$ Attention in NLP Alignment scores(scalars): $e_{t,i} = f_{\mbox{att}}(h_{t-1}, z_t)$, where $f_{\mbox{att}}(\cdot)$ is an MLP Normalize to get attention weights: $a_{t,:} = \mbox{softmax}(e_{t,:})$, $0&amp;lt;a_{t,i}&amp;lt;1$, attention values sum to 1 Compute context vector c: $c_t = \sum_i a_{t,i} z_{t,i}$ Decoder: $y_t = g_v(y_{t-1}, h_{t-1}, \color{red}c_t)$ Heatmap: visualization of attention weights; without any attention supervision, model learns different word orderings for different languages General Attention Layer Attention in image captioning before Single query setting Inputs input vectors: x(shape: $N\times D$) Attention operation is permutation invariant; produces the same output regardless of the order of elements(features) in the input vector. Stretch $H\times W = N$ into N vectors, transform $H\times W\times D$ features into $N\times D$ input vectors x(similar to attention in NLP). Query: h(shape: D) Operations Alignment Change $f_{\mbox{att}}(\cdot)$ to a simple dot product: $e_i = h\cdot x_i$; only works well with key &amp;amp; value transformation trick Change $f_{\mbox{att}}(\cdot)$ to a scaled dot product: $e_i = h\cdot x_i / \sqrt{D}$; Larger dimensions means more terms in the dot product sum. So, the variance of the logits is higher. Large magnitude(length) vectors will produce much higher logits. Then, the post-softmax distribution(e) has lower-entropy(high uncertainty) assuming logits are I.I.D. Ultimately, these large magnitude vectors will cause softmax to peak and assign very little weight to all others. To reduce this effect, divide by $sqrt{D}$. Attention: $\mathbf{a} = \mbox{softmax}(\mathbf{e})$ Output: $\mathbf{c} = \sum_i a_i x_i$ Outputs - context vector: c(shape: D) Multiple query setting Inputs input vectors: x(shape: $N\times D$) Queries: q(shape: $M\times D$); multiple query vectors Operations Alignment: $e_{i,j} = q_j\cdot x_i / \sqrt{D}$ Attention: $\mathbf{a} = \mbox{softmax}(\mathbf{e})$ Output: $y_j = \sum_i a_{i,j} x_i$ Outputs context vectors: y(shape: D); each query creates a new output context vector Weight layers added Notice that the input vectors x are used for both the alignment(e) and attention calculations(y); We can add more expressivity to the layer by adding a different FC layer before each of the two steps. The input and output dimensions can now change depending on the key and value FC layers. Inputs input vectors: x(shape: $N\times D$) Queries: q(shape: $M\times D_k$) Operations Key vectors: $\mathbf{k} = \mathbf{x}W_k$ Value vectors: $\mathbf{v} = \mathbf{x}W_v$ Alignment: $e_{i,j} = q_j\cdot k_i / \sqrt{D}$ Attention: $\mathbf{a} = \mbox{softmax}(\mathbf{e})$ Output: $y_j = \sum_i a_{i,j} v_i$ Outputs context vectors: y(shape: $D_v$); Self attention layer Recall that the query vector was a function of the input vectors; Encoder $h_0=f_W(z)$, where z is spatial CNN features, $f_W(\cdot)$ is an MLP. We can calculate the query vectors from the input vectors, defining a “self-attention” layer. No input query vectors anymore, instead query vectors are calculated using a FC layer. Inputs input vectors: x(shape: $N\times D$) Operations Key vectors: $\mathbf{k} = \mathbf{x}W_k$ Value vectors: $\mathbf{v} = \mathbf{x}W_v$ Query vectors: $\mathbf{q} = \mathbf{x}W_q$ Alignment: $e_{i,j} = q_j\cdot k_i / \sqrt{D}$ Attention: $\mathbf{a} = \mbox{softmax}(\mathbf{e})$ Output: $y_j = \sum_i a_{i,j} v_i$ Outputs context vectors: y(shape: $D_v$) Positional encoding Self attention attends over sets of inputs; is permutation invariant. To encode the ordered sequences(e.g. language, image), concatenate special positional encoding $p_j$ to each input vector $x_j$. $\mathit{pos}: N\rightarrow R^d$ to process the position j of the vector into a d-dimensional vector; $p_j = \mathit{pos}(j)$ Desiderata of $\mathit{pos}(\cdot)$: Should output a unique encoding for each time-step(word’s position in a sentence). Distance between any two time-steps should be consistent across sentences with different lengths(variable inputs). Model should generalize to longer sentences without any efforts. Its values should be bounded. Must be deterministic. Options for $\mathit{pos}(\cdot)$: Learn a lookup table: Learn parameters to use for $\mathit{pos}(t)$ for $t \in [0,T)$ Lookup table contains $T\times d$ parameters Design a fixed function with the desiderata Masked self-attention layer Manually set alignment scores to $-\infty$, prevent vectors from looking at future vectors. Multi-head self attention layer Multiple self-attention heads in parallel; similar to ensemble Comparing RNNs to Transformers RNNs (+) LSTMs work reasonably well for long sequences. (-) Expects an ordered sequences of inputs (-) Sequential computation: subsequent hidden states can only be computed after the previous ones are done. Transformers (+) Good at long sequences. Each attention calculation looks at all inputs. (+) Can operate over unordered sets or ordered sequences with positional encodings. (+) Parallel computation: All alignment and attention scores for all inputs can be done in parallel. (-) Requires a lot of memory: N x M alignment and attention scalers need to be calculated and stored for a single self-attention head. Transformers Image Captioning using transformers No recurrence at all Input: Image I Output: Sequence y $= y_1, y_2, \ldots, y_T$ Encoder: $c = T_W(z)$, where z is spatial CNN features, $T_W(\cdot)$ is the transformer encoder Decoder: $y_t = T_D(y_{0:t-1}, c)$, where $T_D(\cdot)$ is the transformer decoder The Transformer encoder block Inputs: Set of vectors x Outputs: Set of vectors y Self-attention is the only interaction between vectors; Layer norm and MLP operate independently per vector. Highly scalable, highly parallelizable, but high memory usage. The Transformer Decoder block Inputs: Set of vectors x and Set of context vector c Outputs: Set of vectors y Masked Self-attention only interacts with past inputs(x, or previous output $y_{t-1}$). Multi-head attention block is NOT self-attention; it attends over the transformer encoder outputs. In this phase, we inject image features into the decoder. Highly scalable, highly parallelizable, but high memory usage. Image Captioning using ONLY transformers Transformers from pixels to language Dosovitskiy et al, “An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale”, ArXiv 2020 colab notebook link Note: in Google Colab - TPU runtime setting import tensorflow as tf import os # TPU initialization resolver = tf.distribute.cluster_resolver.TPUClusterResolver(tpu='grpc://' + os.environ['COLAB_TPU_ADDR']) tf.config.experimental_connect_to_cluster(resolver) tf.tpu.experimental.initialize_tpu_system(resolver) strategy = tf.distribute.TPUStrategy(resolver) # compile in strategy.scope def create_model(): return tf.keras.Sequential( [tf.keras.layers.Conv2D(256, 3, activation='relu', input_shape=(28, 28, 1)), tf.keras.layers.Conv2D(256, 3, activation='relu'), tf.keras.layers.Flatten(), tf.keras.layers.Dense(256, activation='relu'), tf.keras.layers.Dense(128, activation='relu'), tf.keras.layers.Dense(10)]) with strategy.scope(): model = create_model() model.compile(optimizer='adam', loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics=['sparse_categorical_accuracy']) Summary Adding attention to RNNs allows them to “attend” to different parts of the input at every time step The general attention layer is a new type of layer that can be used to design new neural network architectures Transformers are a type of layer that uses self-attention and layer norm. It is highly scalable and highly parallelizable Faster training, larger models, better performance across vision and language tasks They are quickly replacing RNNs, LSTMs, and may even replace convolutions.</summary></entry></feed>
