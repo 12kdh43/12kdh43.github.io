@@ -390,7 +390,7 @@ into the {body} of the default.hbs template -->
 <ul>
   <li><em>Pennington, Socher, and Manning, EMNLP 2014</em></li>
   <li>With \(w_i \cdot w_j = \log P(i|j)\),<br />
-  explicit loss function \(J = \sum_{i,j=1}^V f(X_{ij})(w_j^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2\)<br />
+  explicit loss function \(J = \sum_{i,j=1}^V f(X_{ij})(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2\)<br />
   to make the dot product to be similar to the log of the co-occurrence. To not have very common words dominate, capped the effect of high word counts using $f$ function. Optimize <em>J</em> directly on the co-occurrence count matrix.
     <ul>
       <li>Fast training</li>
@@ -586,6 +586,8 @@ into the {body} of the default.hbs template -->
                                             <li><a href="/cs224n_lec1">cs224n - Lecture 1. Word Vectors</a></li>
                                         
                                     
+                                  
+                                
                                   
                                 
                                   

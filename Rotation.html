@@ -210,7 +210,7 @@ into the {body} of the default.hbs template -->
                 <div class="kg-card-markdown">
                     <h2 id="unsupervised-representation-learning-by-predicting-image-rotations">Unsupervised Representation Learning by Predicting Image Rotations</h2>
 <p><em>Gidaris et al. 2018</em><br />
-<code class="language-plaintext highlighter-rouge">https://github.com/gidariss/FeatureLearningRotNet</code></p>
+<a href="https://github.com/gidariss/FeatureLearningRotNet">https://github.com/gidariss/FeatureLearningRotNet</a></p>
 
 <ul>
   <li>ConvNet:<br />
@@ -255,22 +255,28 @@ into the {body} of the default.hbs template -->
 <h3 id="forcing-the-learning-of-semantic-features">Forcing the learning of semantic features</h3>
 <p>Fact that it is essentially impossible for a ConvNet model to effectively perform the above rotation recognition task, unless it has first learnt to recognize and detect classes of objects as well as their <strong>semantic parts</strong> in images.<br />
 $\rightarrow$ <strong>ATTENTION MAPS</strong><br />
-<img src="/assets/images/papers_rotation_0.png" alt="png" width="60%&quot;, height=&quot;60%" /></p>
+<img src="/assets/images/papers/papers_rotation_0.png" alt="png" width="60%&quot;, height=&quot;60%" /></p>
 <ul>
   <li>By comparing the attention maps from two models trained on supervised and unsupervised way, we observe that both models seem to focus on roughly <strong>the same image regions</strong>.</li>
 </ul>
 
-<p><img src="/assets/images/papers_rotation_1.png" alt="png" width="60%&quot;, height=&quot;60%" /></p>
+<p><img src="/assets/images/papers/papers_rotation_1.png" alt="png" width="60%&quot;, height=&quot;60%" /></p>
 <ul>
-  <li>
-    <p>Also, trained on the proposed rotation recognition task, <strong>visualized layer filters</strong> learnt appear to have a big variety of edge filters on multiple orientations and multiple frequencies, then the filters learnt by the supervised task.</p>
+  <li>Also, trained on the proposed rotation recognition task, <strong>visualized layer filters</strong> learnt appear to have a big variety of edge filters on multiple orientations and multiple frequencies, then the filters learnt by the supervised task.
+    <ul>
+      <li><strong>Absence of low-level visual artifacts</strong>:<br />
+  An additional important advantage of using image rotations over other geometric transformations, is that they do not leave e any easily detectable low-level visual artifacts that will lead the ConvNet to learn trivial features with no practical value for the vision perception tasks.</li>
+      <li><strong>Well-posedness</strong>:<br />
+  Human captured images tend to depict objects in an “up-standing” position. When defining the rotation recognition task, there is usually no ambiguity of what is the rotation transformation.</li>
+      <li><strong>Implementing image rotations</strong>:<br />
+  Flip and transpose.</li>
+    </ul>
   </li>
-  <li>
-    <p>$*$ Activation-based Attention Maps from <em>“Paying More Attention to Attention”, Zagoruyko et al., 2017</em> - <a href="https://arxiv.org/abs/1612.03928">LINK</a><br />
+  <li>$*$ Activation-based Attention Maps from <em>“Paying More Attention to Attention”, Zagoruyko et al., 2017</em> - <a href="https://arxiv.org/abs/1612.03928">https://arxiv.org/abs/1612.03928</a><br />
   Activation tensor of a conv. layer: $A\in R^{C\times H\times W}$ consists of <em>C</em> feautre planes with spatial dimensions <em>H</em>x<em>W</em><br />
   Activation-based mapping function <em>F</em> w.r.t that layer: $\mathcal{F}: R^{C\times H\times W} \rightarrow R^{H\times W}$<br />
   With implicit assumption: Absolute value of a hidden neuron activation(that results when the network is evaluated on given input) can be used as an indication about the importance of that neuron w.r.t. the specific input.<br />
-  By considering, therefore, the absolute values of the elements of tensor A,	we construct a spatial attention map by computing statistics of these values	across the channel dimension(<em>C</em>)</p>
+  By considering, therefore, the absolute values of the elements of tensor A,	we construct a spatial attention map by computing statistics of these values	across the channel dimension(<em>C</em>)
     <ul>
       <li>sum of abs: $F_{sum}(A)=\sum_{i=1}^C\vert A_i\vert$</li>
       <li>sum of abs, raised to the power of p(&gt;1): $F_{sum}^p(A) = \sum_{i=1}^C\vert A_i\vert^p$</li>
@@ -281,6 +287,80 @@ $\rightarrow$ <strong>ATTENTION MAPS</strong><br />
 
 <h3 id="transfer-learning">Transfer Learning</h3>
 <p>With a model trained on proposed rotation recognition task with unlabeled data, freeze its early conv. layers and attach the layers from a supervised model, evaluate on a supervised task with a subset of labeled data.</p>
+
+<h3 id="experimental-results">Experimental Results</h3>
+
+<h4 id="cifar-10-experiments">CIFAR-10 Experiments</h4>
+<ul>
+  <li>
+    <p><strong><em>RotNet</em> implementation details</strong>:<br />
+  Network-In-Network (NIN) architectures (<em>Lin et al., 2013</em>)<br />
+  Pretask train: <code class="language-plaintext highlighter-rouge">optimizer = SGD, batch_size = 128, momentum = 0.9, weight_decay = 5e−4, lr = 0.1, lr_decay = 0.2 (after 30, 60, 80 epochs), num_epochs = 100</code></p>
+  </li>
+  <li><strong>Evaluation of the learned feature hierarchies</strong>:<br />
+  Using the CIFAR-10 training images, train three <em>RotNet</em> models which have 3, 4, and 5 conv. blocks respectively. Afterwards, on top of the feature maps generated by each conv. block of each <em>RotNet</em> model, add classifiers trained in a supervised way on the object recognition task of CIFAR-10; consists of 3 FC layers. The accuracy results of CIFAR-10 test set:<br />
+  <img src="/assets/images/papers/papers_rotation_2.png" alt="png" width="100%&quot;, height=&quot;100%" />
+    <ol>
+      <li>In all cases the feature maps generated by the 2nd conv. block achieve the highest accuracy, i.e., between 88.26% and 89.06%. Then the accuracy gradually degrades, which we assume is because they start becoming more and more specific on the self-supervised task of rotation prediction.</li>
+      <li>Observe that increasing the total depth of the RotNet models leads to increased object recognition performance by the feature maps generated by earlier layers. We assume that this is because increasing the depth of the model and thus the complexity of its head (i.e., top ConvNet layers) allows the features of earlier layers to be less specific to the rotation prediction task.</li>
+    </ol>
+  </li>
+  <li><strong>Exploring the quality of the learned features w.r.t. the number of recognized rotations</strong>:<br />
+  <img src="/assets/images/papers/papers_rotation_3.png" alt="png" width="100%&quot;, height=&quot;100%" />
+    <ul>
+      <li>Observed that 4 discrete rotations as proposed achieved better performance over other cases.</li>
+    </ul>
+  </li>
+  <li><strong>Comparison against supervised and other unsupervised methods</strong>:<br />
+  <img src="/assets/images/papers/papers_rotation_4.png" alt="png" width="100%&quot;, height=&quot;100%" /><br />
+  <img src="/assets/images/papers/papers_rotation_5.png" alt="png" width="100%&quot;, height=&quot;100%" />
+    <ul>
+      <li>Model using the feature maps generated by the 2nd conv. block of a RotNet model with 4 conv. blocks in total.<br />
+  (a) <em>RotNet + non-linear</em>: a non-linear classifier with 3 fully connected layers<br />
+  (b) <em>RotNet +conv.</em>: three conv. layers + a linear prediction layer</li>
+      <li>Achieved best result among the unsupervised approaches</li>
+      <li>Very close to the fully supervised NIN model</li>
+      <li>Observed that fine-tuning the unsupervised learned features further improves the classification performance</li>
+    </ul>
+  </li>
+  <li><strong>Correlation between object classification task and rotation prediction task</strong>:<br />
+  <img src="/assets/images/papers/papers_rotation_6.png" alt="png" width="80%&quot;, height=&quot;100%" />
+    <ul>
+      <li>As the ability of the RotNet features for solving the rotation prediction task improves(as the rotation prediction accuracy increases), their ability to help solving the object recognition task improves as well(the object recognition accuracy also increases).</li>
+      <li>Object recognition accuracy converges fast w.r.t. the number of training epochs used for solving the pretext task of rotation prediction.</li>
+    </ul>
+  </li>
+  <li><strong>Semi-supervised setting</strong>:<br />
+  <img src="/assets/images/papers/papers_rotation_7.png" alt="png" width="80%&quot;, height=&quot;100%" /><br />
+  Train a 4 block RotNet model on the rotation prediction task using the entire image dataset of CIFAR-10, then train on top of its feature maps object classifiers using only a subset of the available images and their corresponding labels. As feature maps we use those from 2nd conv. block of the RotNet model. As a classifier we use a set of convolutional layers of the same e architecture as the 3rd conv. block of a NIN model plus a linear classifier, all randomly initialized.  For training the object classifier we use for each category 20, 100, 400, 1000, or 5000 image examples. Comapred with a supervised model that is trained only on the available examples each time:
+    <ul>
+      <li>Observed that our unsupervised trained model exceeds in this semi-supervised setting the supervised model when the number of examples per category drops below 1000; can be useful when there are only small subset of labeled data.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="evaluation-of-self-supervised-features-trained-in-imagenet">Evaluation of self-supervised features trained in ImageNet</h4>
+<ul>
+  <li>
+    <p>Train a <em>RotNet</em> model on the training images of the ImageNet dataset and evaluate the performance of the self-self-supervised features on the image classification tasks of ImageNet, Places, and PASCAL VOC datasets and on the object detection and object segmentation tasks of PASCAL VOC.</p>
+  </li>
+  <li>
+    <p><strong>Implementation details</strong>:<br />
+  Based on an AlexNet architecture, without local response normalization units, dropout units, or groups in the colvolutional layers, while it includes batch normalization units after each linear layer (either convolutional or fully connected).<br />
+  Train with <code class="language-plaintext highlighter-rouge">SGD, batch_size=192, momentum=0.9, weight_decay=5e-4, lr=0.01, lr_decay=0.1(after 10, 20 epochs), num_epochs=30</code></p>
+  </li>
+  <li><strong>ImageNet classification task</strong>:<br />
+  <img src="/assets/images/papers/papers_rotation_8.png" alt="png" width="100%&quot;, height=&quot;100%" />
+    <ul>
+      <li>Observed that <em>our approach surpasses all the other methods by a significant margin</em></li>
+    </ul>
+  </li>
+  <li><strong>Transfer learning evaluation on PASCAL VOC</strong>:<br />
+  <img src="/assets/images/papers/papers_rotation_9.png" alt="png" width="100%&quot;, height=&quot;100%" /></li>
+  <li><strong>Places classification task:</strong><br />
+  <img src="/assets/images/papers/papers_rotation_10.png" alt="png" width="100%&quot;, height=&quot;100%" /></li>
+</ul>
+
 
                 </div>
             </section>
@@ -358,6 +438,115 @@ $\rightarrow$ <strong>ATTENTION MAPS</strong><br />
                 
                 
                 
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/built/images/blog-cover1.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; Darron's Devlog &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/papers/">Papers</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/Mask_R-CNN">Mask R-CNN</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/papers/">
+                                
+                                    See all 1 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
                 
             
 

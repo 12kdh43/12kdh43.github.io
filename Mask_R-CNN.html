@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	
+	<!-- On Post front-matter YAML, set "use_math: true" to use LaTex -->
+	
+	  
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+        autoNumber: "AMS"
+        }
+    },
+    tex2jax: {
+    inlineMath: [ ['$', '$'], ["\\(","\\)"]  ],
+    displayMath: [ ['$$', '$$'], ["\\[","\\]"]  ],
+    processEscapes: true,
+    }
+});
+MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+        alert("Math Processing Error: "+message[1]);
+    });
+MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+        alert("Math Processing Error: "+message[1]);
+    });
+</script>
+
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+	
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Mask R-CNN</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <!-- syntax.css -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+	
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="" />
+    <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
+    <link rel="canonical" href="http://0.0.0.0:4000/Mask_R-CNN" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="Darron's Devlog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mask R-CNN" />
+    <meta property="og:description" content="Mask R-CNN Kaiming He, Georgia Gkioxari, Piotr Dollár, Ross Girshick, ICCV 2017 https://github.com/facebookresearch/Detectron What’s different? Models so far R-CNN: 2-stage model for Object detection Fast R-CNN: RoI on feature map Faster R-CNN: RPN network Instance Segmentation Combining to tasks: Object detection(Fast/Faster R-CNN): classify individual objects and localize each using a" />
+    <meta property="og:url" content="http://0.0.0.0:4000/Mask_R-CNN" />
+    <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2022-02-15T00:00:00+00:00" />
+    <meta property="article:modified_time" content="2022-02-15T00:00:00+00:00" />
+    <meta property="article:tag" content="papers" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mask R-CNN" />
+    <meta name="twitter:description" content="Mask R-CNN Kaiming He, Georgia Gkioxari, Piotr Dollár, Ross Girshick, ICCV 2017 https://github.com/facebookresearch/Detectron What’s different? Models so far R-CNN: 2-stage model for Object detection Fast R-CNN: RoI on feature map Faster R-CNN: RPN network Instance Segmentation Combining to tasks: Object detection(Fast/Faster R-CNN): classify individual objects and localize each using a" />
+    <meta name="twitter:url" content="http://0.0.0.0:4000/" />
+    <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Darron's Devlog" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="papers" />
+    <meta name="twitter:site" content="@" />
+    <meta name="twitter:creator" content="@" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Darron's Devlog",
+        "logo": "http://0.0.0.0:4000/"
+    },
+    "url": "http://0.0.0.0:4000/Mask_R-CNN",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://0.0.0.0:4000/Mask_R-CNN"
+    },
+    "description": "Mask R-CNN Kaiming He, Georgia Gkioxari, Piotr Dollár, Ross Girshick, ICCV 2017 https://github.com/facebookresearch/Detectron What’s different? Models so far R-CNN: 2-stage model for Object detection Fast R-CNN: RoI on feature map Faster R-CNN: RPN network Instance Segmentation Combining to tasks: Object detection(Fast/Faster R-CNN): classify individual objects and localize each using a"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Mask R-CNN" href="/feed.xml" />
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="/">Darron's Devlog</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
+    <li class="nav-projects" role="menuitem"><a href="/tag/projects/">Projects</a></li>
+    <li class="nav-studies" role="menuitem"><a href="/tag/studies/">Studies</a></li>
+	<li class="nav-blog" role="menuitem"><a href="/tag/blog/">Blog</a></li>
+    <li class="nav-archive" role="menuitem">
+        <a href="/archive.html">All Posts</a>
+    </li>
+</ul>
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+            
+        </div>
+        
+            <a class="subscribe-button" href="#subscribe">Search</a>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full  tag-papers  no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="15 February 2022">15 February 2022</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+							
+                            
+                               <a href='/tag/papers/'>PAPERS</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">Mask R-CNN</h1>
+            </header>
+	<!--
+            
+	-->
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <h2 id="mask-r-cnn">Mask R-CNN</h2>
+<p><em>Kaiming He, Georgia Gkioxari, Piotr Dollár, Ross Girshick, ICCV 2017</em><br />
+<a href="https://github.com/facebookresearch/Detectron">https://github.com/facebookresearch/Detectron</a></p>
+
+<h3 id="whats-different">What’s different?</h3>
+<ul>
+  <li>
+    <p>Models so far<br />
+  R-CNN: 2-stage model for Object detection<br />
+  Fast R-CNN: RoI on feature map<br />
+  Faster R-CNN: RPN network</p>
+  </li>
+  <li><em>Instance Segmentation</em><br />
+  Combining to tasks:
+    <ul>
+      <li>Object detection(Fast/Faster R-CNN): classify individual objects and localize each using a bounding box.</li>
+      <li>Semantic segmentation(FCN; Fully Convolutional Network): classify each pixel into a fixed set of categories without differentiating object instances.</li>
+    </ul>
+  </li>
+  <li>Mask R-CNN:<br />
+  1) Model for <em>instance segmentation</em>: Mask prediction branch<br />
+  2) FPN(feature pyramid network) before RPN<br />
+  3) RoI align</li>
+</ul>
+
+<h3 id="mask-prediction">Mask prediction</h3>
+<ul>
+  <li>
+    <p>Mask loss<br />
+  In the second stage, in parallel to predicting the class and box offset, Mask R-CNN also outputs a binary mask(ones to the object and zeros elsewhere) for each RoI. Defined multi-task loss on each sampled RoI: $L = L_{cls} + L_{box} + L_{mask}$<br />
+  The mask branch has a $Km^2$-dimensional output for each RoI, which encodes <em>K</em> binary masks of resolution <em>m\times m</em>, one for each of the <em>K</em> classes. To this we apply a per-pixel sigmoid, and define $L_{mask}$ as the <strong>average binary cross-entropy loss</strong>.  For an RoI associated with ground-truth class <em>k</em>, $L_{mask}$ is only defined on the <em>k</em>-th mask(other mask outputs do not contribute to the loss).</p>
+  </li>
+  <li>
+    <p><em>Decouples</em> mask and class prediction<br />
+  This definition of mask loss allows the network to generate masks for each class without competition among classes; we rely on the dedicated classification branch to predict the class label used to select the output mask.<br />
+  With a per-pixel sigmoid and a binary loss, masks do not compete across classes; in contrast to FCNs for semantic segmentation using a per-pixel softmax and a multinomial cross-entropy loss.</p>
+  </li>
+  <li>
+    <p>Mask Representation<br />
+  Unlike class labels or box offsets, extracting the spatial structure of masks can be addressed naturally by the pixel-to-pixel correspondence provided by convolutions.<br />
+  Predicting an $m\times m$ mask from each RoI using an FCN, allows each layer in the mask branch to have $m\times m$ object spatial layout without collapsing it into a vector representation that lacks spatial dimensions.<br />
+  This pixel-to-pixel behavior requires RoI features, small cropped feature maps, to be well aligned to faithfully preserve the explicit per-pixel spatial correspondence; <em>RoIAlign</em>.</p>
+  </li>
+</ul>
+
+<h3 id="roialign">RoIAlign</h3>
+<ul>
+  <li>RoIPool(or RoI Pooling)<br />
+  <em>Quantizes</em> a floating-number RoI to the discrete granularity(integerize by <em>rounding</em>) of the feature map, its result is then subdivided into spatial bins, and finally feature values covered by each bin are aggregated(usually by max pooling).
+    <ul>
+      <li>Problem: Quantizations introduce misalignments between the RoI and the extracted features. This may not impact classification, which is robust to small translations, but it has a large negative effect on predicting pixel-accurate masks.</li>
+    </ul>
+  </li>
+  <li>
+    <p>RoIAlign layer<br />
+  Instead of any quantization of the RoI boundaries or bins, use bilinear interpolation(<a href="https://arxiv.org/abs/1506.02025">Spatial transformer networks</a>) to compute the exact values of the input features at four regularly sampled locations in each RoI bin, and aggregate the result(using max or average).<br />
+  e.g.<br />
+  <img src="/assets/images/papers/Mask_R-CNN_0.png" alt="png" width="60%&quot;, height=&quot;100%" /><br />
+  <img src="/assets/images/papers/Mask_R-CNN_1.png" alt="png" width="60%&quot;, height=&quot;100%" /><br />
+  (from CS231n lecture)<br />
+  Feature $f_{xy}$ for point $(x, y)$ is a linear combination of features at its four neighboring grid cells:<br />
+  $f_{xy} = \sum_{i,j=1}^2 f_{i,j} \text{max}(0, 1 - \left\vert x - x_i \right\vert) \text{max}(0, 1 - \left\vert y - y_i \right\vert)$</p>
+  </li>
+  <li>RoIAlign improves mask accuracy by relative 10% to 50%, showing bigger gains under stricter localization metrics.<br />
+<!--
+  [Understanding Region of Interest — (RoI Pooling)](https://towardsdatascience.com/understanding-region-of-interest-part-1-roi-pooling-e4f5dd65bb44)  
+  [Understanding Region of Interest — (RoI Align and RoI Warp)](https://towardsdatascience.com/understanding-region-of-interest-part-2-roi-align-and-roi-warp-f795196fc193)  
+--></li>
+</ul>
+
+<h3 id="network-architecture">Network Architecture</h3>
+<ul>
+  <li><em>backbone</em>:  Faster R-CNN with an FPN(ResNet-FPN)
+    <ul>
+      <li>FPN, Feature pyramid network(<a href="https://arxiv.org/abs/1612.03144">Lin et al.</a>):<br />
+  Uses a top-down architecture with lateral connections to build an in-network feature pyramid from a single-scale input.</li>
+      <li>RPN:<br />
+  RoI align on each FPN feature maps</li>
+    </ul>
+  </li>
+  <li><em>head</em>:<br />
+  <img src="/assets/images/papers/Mask_R-CNN_2.png" alt="png" width="80%&quot;, height=&quot;100%" /><br />
+  Add a fully convolutional mask prediction branch, extending the Faster R-CNN box heads from the ResNet and FPN papers. Train with additional mask loss.</li>
+</ul>
+
+<h3 id="experiments">Experiments</h3>
+<ul>
+  <li><strong>Comparison to the sota methods in instance segmentation</strong></li>
+</ul>
+
+<p><img src="/assets/images/papers/Mask_R-CNN_3.png" alt="png" width="100%&quot;, height=&quot;100%" /><br />
+<img src="/assets/images/papers/Mask_R-CNN_4.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<ul>
+  <li>Ablations
+    <ul>
+      <li><strong>Architecture</strong><br />
+  <img src="/assets/images/papers/Mask_R-CNN_5.png" alt="png" width="60%&quot;, height=&quot;100%" /></li>
+      <li><strong>Multinomial vs. Independent Masks</strong><br />
+  <img src="/assets/images/papers/Mask_R-CNN_6.png" alt="png" width="60%&quot;, height=&quot;100%" /></li>
+      <li><strong>Class-Specific vs. Class-Agnostic Masks</strong><br />
+  Interestingly, Mask R-CNN with classagnostic masks(predicting a single <em>m×m</em> output regardless of class)) is nearly as effective as class-specific masks(default; <em>m×m</em> mask per class).</li>
+      <li><strong>RoIAlign</strong><br />
+  ResNet50-C4 backbone of stride 16<br />
+  <img src="/assets/images/papers/Mask_R-CNN_7.png" alt="png" width="100%&quot;, height=&quot;100%" /><br />
+  ResNet-50-C5 backbone of stride 32<br />
+  <img src="/assets/images/papers/Mask_R-CNN_8.png" alt="png" width="100%&quot;, height=&quot;100%" /><br />
+  Note that with RoIAlign, using stride-32 C5 features is more accurate than using stride-16 C4 features. Used with FPN, which has finer multi-level strides, RoIAlign shows better result.</li>
+      <li><strong>Mask branch</strong><br />
+  <img src="/assets/images/papers/Mask_R-CNN_9.png" alt="png" width="100%&quot;, height=&quot;100%" /></li>
+    </ul>
+  </li>
+  <li><strong>Bounding Box Detection Results</strong><br />
+  Our approach largely closes the gap between object detection and the more 	challenging instance segmentation task.</li>
+</ul>
+
+<p><img src="/assets/images/papers/Mask_R-CNN_10.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<h3 id="mask-r-cnn-for-human-pose-estimation">Mask R-CNN for Human Pose Estimation</h3>
+<ul>
+  <li>
+    <p>By modeling a keypoint’s location as a one-hot mask, and adopt Mask R-CNN to predict <em>K</em> masks, one for each of <em>K</em> keypoint types, this framework can easily be extended to human pose estimation.</p>
+  </li>
+  <li>
+    <p><strong>Main Results and Ablations</strong>:<br />
+  <img src="/assets/images/papers/Mask_R-CNN_11.png" alt="png" width="100%&quot;, height=&quot;100%" /><br />
+  <img src="/assets/images/papers/Mask_R-CNN_12.png" alt="png" width="100%&quot;, height=&quot;100%" /><br />
+  <img src="/assets/images/papers/Mask_R-CNN_13.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+  </li>
+</ul>
+
+<p>$\therefore$ We have <em>a unified model that can simultaneously predict boxes, segments, and keypoints</em> while running at 5 fps.</p>
+
+<!-- https://ganghee-lee.tistory.com/40 -->
+
+                </div>
+            </section>
+
+            <!-- Email subscribe form at the bottom of the page -->
+	<!--
+            
+                <section class="subscribe-form">
+                    <h3 class="subscribe-form-title">Subscribe to Darron's Devlog</h3>
+                    <p>Get the latest posts delivered right to your inbox</p>
+                    <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()" 
+               id="searchtext" type="text" name="searchtext"  
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+                </section>
+            
+	-->
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function () {
+                            var this_page_url = 'http://0.0.0.0:4000/Mask_R-CNN';
+                            var this_page_identifier = '/Mask_R-CNN';
+                            var this_page_title = 'Mask R-CNN';
+                        };
+                        (function() {
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                </section>
+            
+
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/built/images/blog-cover1.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; Darron's Devlog &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/papers/">Papers</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/Rotation">Unsupervised Representation Learning by Predicting Image Rotations</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/papers/">
+                                
+                                    See all 1 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                    <article class="post-card post-template no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/DevEnv_Setup">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Blog</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">DevEnv Setup</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>For purpose of setting local development environment on a new SSD storage, followed instructions below. Post for later use. Document Enable NVIDIA CUDA on WSL Install stable version of Windows 11 Enable WSL,</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                    <article class="post-card post-template no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/starfish_detection">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Projects</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Starfish detection w/ TF Object Detection API</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>TensorFlow - Help Protect the Great Barrier Reef Worked in Feb. 2022. to study object detection model Task: Underwater + Small object detection Score(IoU=0.50:0.95): mAP@100: 0.364686 / AR@100: 0.491768 / Expected F2: 0.459727</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="/">
+            
+            <span>Darron's Devlog</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Mask R-CNN</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Mask+R-CNN&amp;url=https://12kdh43.github.io/Mask_R-CNN"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/Mask_R-CNN"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="/">Darron's Devlog</a> &copy; 2022</section>
+                <!-- 
+				<section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyllt/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                -->
+				<nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+        <div id="subscribe" class="subscribe-overlay">
+            <a class="subscribe-overlay-close" href="#"></a>
+            <div class="subscribe-overlay-content">
+                
+                <h1 class="subscribe-overlay-title">Search Darron's Devlog</h1>
+                <p class="subscribe-overlay-description">
+				</p>
+                <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()" 
+               id="searchtext" type="text" name="searchtext"  
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+            </div>
+        </div>
+    
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+	
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

@@ -192,7 +192,7 @@
 &lt;ul&gt;
   &lt;li&gt;&lt;em&gt;Pennington, Socher, and Manning, EMNLP 2014&lt;/em&gt;&lt;/li&gt;
   &lt;li&gt;With \(w_i \cdot w_j = \log P(i|j)\),&lt;br /&gt;
-  explicit loss function \(J = \sum_{i,j=1}^V f(X_{ij})(w_j^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2\)&lt;br /&gt;
+  explicit loss function \(J = \sum_{i,j=1}^V f(X_{ij})(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2\)&lt;br /&gt;
   to make the dot product to be similar to the log of the co-occurrence. To not have very common words dominate, capped the effect of high word counts using $f$ function. Optimize &lt;em&gt;J&lt;/em&gt; directly on the co-occurrence count matrix.
     &lt;ul&gt;
       &lt;li&gt;Fast training&lt;/li&gt;
@@ -613,6 +613,153 @@ J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substac
     
       
       <item>
+        <title>Mask R-CNN</title>
+        
+          <description>&lt;h2 id=&quot;mask-r-cnn&quot;&gt;Mask R-CNN&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Kaiming He, Georgia Gkioxari, Piotr Dollár, Ross Girshick, ICCV 2017&lt;/em&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/facebookresearch/Detectron&quot;&gt;https://github.com/facebookresearch/Detectron&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;whats-different&quot;&gt;What’s different?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Models so far&lt;br /&gt;
+  R-CNN: 2-stage model for Object detection&lt;br /&gt;
+  Fast R-CNN: RoI on feature map&lt;br /&gt;
+  Faster R-CNN: RPN network&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Instance Segmentation&lt;/em&gt;&lt;br /&gt;
+  Combining to tasks:
+    &lt;ul&gt;
+      &lt;li&gt;Object detection(Fast/Faster R-CNN): classify individual objects and localize each using a bounding box.&lt;/li&gt;
+      &lt;li&gt;Semantic segmentation(FCN; Fully Convolutional Network): classify each pixel into a fixed set of categories without differentiating object instances.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Mask R-CNN:&lt;br /&gt;
+  1) Model for &lt;em&gt;instance segmentation&lt;/em&gt;: Mask prediction branch&lt;br /&gt;
+  2) FPN(feature pyramid network) before RPN&lt;br /&gt;
+  3) RoI align&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;mask-prediction&quot;&gt;Mask prediction&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Mask loss&lt;br /&gt;
+  In the second stage, in parallel to predicting the class and box offset, Mask R-CNN also outputs a binary mask(ones to the object and zeros elsewhere) for each RoI. Defined multi-task loss on each sampled RoI: $L = L_{cls} + L_{box} + L_{mask}$&lt;br /&gt;
+  The mask branch has a $Km^2$-dimensional output for each RoI, which encodes &lt;em&gt;K&lt;/em&gt; binary masks of resolution &lt;em&gt;m\times m&lt;/em&gt;, one for each of the &lt;em&gt;K&lt;/em&gt; classes. To this we apply a per-pixel sigmoid, and define $L_{mask}$ as the &lt;strong&gt;average binary cross-entropy loss&lt;/strong&gt;.  For an RoI associated with ground-truth class &lt;em&gt;k&lt;/em&gt;, $L_{mask}$ is only defined on the &lt;em&gt;k&lt;/em&gt;-th mask(other mask outputs do not contribute to the loss).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Decouples&lt;/em&gt; mask and class prediction&lt;br /&gt;
+  This definition of mask loss allows the network to generate masks for each class without competition among classes; we rely on the dedicated classification branch to predict the class label used to select the output mask.&lt;br /&gt;
+  With a per-pixel sigmoid and a binary loss, masks do not compete across classes; in contrast to FCNs for semantic segmentation using a per-pixel softmax and a multinomial cross-entropy loss.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Mask Representation&lt;br /&gt;
+  Unlike class labels or box offsets, extracting the spatial structure of masks can be addressed naturally by the pixel-to-pixel correspondence provided by convolutions.&lt;br /&gt;
+  Predicting an $m\times m$ mask from each RoI using an FCN, allows each layer in the mask branch to have $m\times m$ object spatial layout without collapsing it into a vector representation that lacks spatial dimensions.&lt;br /&gt;
+  This pixel-to-pixel behavior requires RoI features, small cropped feature maps, to be well aligned to faithfully preserve the explicit per-pixel spatial correspondence; &lt;em&gt;RoIAlign&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;roialign&quot;&gt;RoIAlign&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;RoIPool(or RoI Pooling)&lt;br /&gt;
+  &lt;em&gt;Quantizes&lt;/em&gt; a floating-number RoI to the discrete granularity(integerize by &lt;em&gt;rounding&lt;/em&gt;) of the feature map, its result is then subdivided into spatial bins, and finally feature values covered by each bin are aggregated(usually by max pooling).
+    &lt;ul&gt;
+      &lt;li&gt;Problem: Quantizations introduce misalignments between the RoI and the extracted features. This may not impact classification, which is robust to small translations, but it has a large negative effect on predicting pixel-accurate masks.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;RoIAlign layer&lt;br /&gt;
+  Instead of any quantization of the RoI boundaries or bins, use bilinear interpolation(&lt;a href=&quot;https://arxiv.org/abs/1506.02025&quot;&gt;Spatial transformer networks&lt;/a&gt;) to compute the exact values of the input features at four regularly sampled locations in each RoI bin, and aggregate the result(using max or average).&lt;br /&gt;
+  e.g.&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_1.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  (from CS231n lecture)&lt;br /&gt;
+  Feature $f_{xy}$ for point $(x, y)$ is a linear combination of features at its four neighboring grid cells:&lt;br /&gt;
+  $f_{xy} = \sum_{i,j=1}^2 f_{i,j} \text{max}(0, 1 - \left\vert x - x_i \right\vert) \text{max}(0, 1 - \left\vert y - y_i \right\vert)$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;RoIAlign improves mask accuracy by relative 10% to 50%, showing bigger gains under stricter localization metrics.&lt;br /&gt;
+&lt;!--
+  [Understanding Region of Interest — (RoI Pooling)](https://towardsdatascience.com/understanding-region-of-interest-part-1-roi-pooling-e4f5dd65bb44)  
+  [Understanding Region of Interest — (RoI Align and RoI Warp)](https://towardsdatascience.com/understanding-region-of-interest-part-2-roi-align-and-roi-warp-f795196fc193)  
+--&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;network-architecture&quot;&gt;Network Architecture&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;backbone&lt;/em&gt;:  Faster R-CNN with an FPN(ResNet-FPN)
+    &lt;ul&gt;
+      &lt;li&gt;FPN, Feature pyramid network(&lt;a href=&quot;https://arxiv.org/abs/1612.03144&quot;&gt;Lin et al.&lt;/a&gt;):&lt;br /&gt;
+  Uses a top-down architecture with lateral connections to build an in-network feature pyramid from a single-scale input.&lt;/li&gt;
+      &lt;li&gt;RPN:&lt;br /&gt;
+  RoI align on each FPN feature maps&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;head&lt;/em&gt;:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  Add a fully convolutional mask prediction branch, extending the Faster R-CNN box heads from the ResNet and FPN papers. Train with additional mask loss.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;experiments&quot;&gt;Experiments&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Comparison to the sota methods in instance segmentation&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/papers/Mask_R-CNN_3.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/papers/Mask_R-CNN_4.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ablations
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Architecture&lt;/strong&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_5.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Multinomial vs. Independent Masks&lt;/strong&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_6.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Class-Specific vs. Class-Agnostic Masks&lt;/strong&gt;&lt;br /&gt;
+  Interestingly, Mask R-CNN with classagnostic masks(predicting a single &lt;em&gt;m×m&lt;/em&gt; output regardless of class)) is nearly as effective as class-specific masks(default; &lt;em&gt;m×m&lt;/em&gt; mask per class).&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;RoIAlign&lt;/strong&gt;&lt;br /&gt;
+  ResNet50-C4 backbone of stride 16&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_7.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  ResNet-50-C5 backbone of stride 32&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_8.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  Note that with RoIAlign, using stride-32 C5 features is more accurate than using stride-16 C4 features. Used with FPN, which has finer multi-level strides, RoIAlign shows better result.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Mask branch&lt;/strong&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_9.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Bounding Box Detection Results&lt;/strong&gt;&lt;br /&gt;
+  Our approach largely closes the gap between object detection and the more 	challenging instance segmentation task.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/papers/Mask_R-CNN_10.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;mask-r-cnn-for-human-pose-estimation&quot;&gt;Mask R-CNN for Human Pose Estimation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;By modeling a keypoint’s location as a one-hot mask, and adopt Mask R-CNN to predict &lt;em&gt;K&lt;/em&gt; masks, one for each of &lt;em&gt;K&lt;/em&gt; keypoint types, this framework can easily be extended to human pose estimation.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Main Results and Ablations&lt;/strong&gt;:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_11.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_12.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_13.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$\therefore$ We have &lt;em&gt;a unified model that can simultaneously predict boxes, segments, and keypoints&lt;/em&gt; while running at 5 fps.&lt;/p&gt;
+
+&lt;!-- https://ganghee-lee.tistory.com/40 --&gt;
+</description>
+        
+        <pubDate>Tue, 15 Feb 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/Mask_R-CNN</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/Mask_R-CNN</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Starfish detection w/ TF Object Detection API</title>
         
           <description>&lt;h2 id=&quot;tensorflow---help-protect-the-great-barrier-reef&quot;&gt;TensorFlow - Help Protect the Great Barrier Reef&lt;/h2&gt;
@@ -920,14 +1067,6 @@ semantic segmentation”, CVPR 2014&lt;/em&gt;&lt;/p&gt;
 &lt;img src=&quot;/assets/images/cs231n_lec15_20.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;!--
-참고
-https://www.youtube.com/watch?v=jqNCdjOB15s
-https://towardsdatascience.com/understanding-region-of-interest-part-1-roi-pooling-e4f5dd65bb44
-https://yeomko.tistory.com/13 갈아먹는 object detection
-https://nuggy875.tistory.com/33 object detection 시리즈
-https://ropiens.tistory.com/73 
---&gt;
 </description>
         
         <pubDate>Mon, 07 Feb 2022 00:00:00 +0000</pubDate>
@@ -1107,7 +1246,7 @@ https://ropiens.tistory.com/73
         
           <description>&lt;h2 id=&quot;unsupervised-representation-learning-by-predicting-image-rotations&quot;&gt;Unsupervised Representation Learning by Predicting Image Rotations&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;Gidaris et al. 2018&lt;/em&gt;&lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/gidariss/FeatureLearningRotNet&lt;/code&gt;&lt;/p&gt;
+&lt;a href=&quot;https://github.com/gidariss/FeatureLearningRotNet&quot;&gt;https://github.com/gidariss/FeatureLearningRotNet&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;ConvNet:&lt;br /&gt;
@@ -1152,22 +1291,28 @@ https://ropiens.tistory.com/73
 &lt;h3 id=&quot;forcing-the-learning-of-semantic-features&quot;&gt;Forcing the learning of semantic features&lt;/h3&gt;
 &lt;p&gt;Fact that it is essentially impossible for a ConvNet model to effectively perform the above rotation recognition task, unless it has first learnt to recognize and detect classes of objects as well as their &lt;strong&gt;semantic parts&lt;/strong&gt; in images.&lt;br /&gt;
 $\rightarrow$ &lt;strong&gt;ATTENTION MAPS&lt;/strong&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/images/papers_rotation_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/assets/images/papers/papers_rotation_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;By comparing the attention maps from two models trained on supervised and unsupervised way, we observe that both models seem to focus on roughly &lt;strong&gt;the same image regions&lt;/strong&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/papers_rotation_1.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/papers/papers_rotation_1.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Also, trained on the proposed rotation recognition task, &lt;strong&gt;visualized layer filters&lt;/strong&gt; learnt appear to have a big variety of edge filters on multiple orientations and multiple frequencies, then the filters learnt by the supervised task.&lt;/p&gt;
+  &lt;li&gt;Also, trained on the proposed rotation recognition task, &lt;strong&gt;visualized layer filters&lt;/strong&gt; learnt appear to have a big variety of edge filters on multiple orientations and multiple frequencies, then the filters learnt by the supervised task.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Absence of low-level visual artifacts&lt;/strong&gt;:&lt;br /&gt;
+  An additional important advantage of using image rotations over other geometric transformations, is that they do not leave e any easily detectable low-level visual artifacts that will lead the ConvNet to learn trivial features with no practical value for the vision perception tasks.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Well-posedness&lt;/strong&gt;:&lt;br /&gt;
+  Human captured images tend to depict objects in an “up-standing” position. When defining the rotation recognition task, there is usually no ambiguity of what is the rotation transformation.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Implementing image rotations&lt;/strong&gt;:&lt;br /&gt;
+  Flip and transpose.&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;$*$ Activation-based Attention Maps from &lt;em&gt;“Paying More Attention to Attention”, Zagoruyko et al., 2017&lt;/em&gt; - &lt;a href=&quot;https://arxiv.org/abs/1612.03928&quot;&gt;LINK&lt;/a&gt;&lt;br /&gt;
+  &lt;li&gt;$*$ Activation-based Attention Maps from &lt;em&gt;“Paying More Attention to Attention”, Zagoruyko et al., 2017&lt;/em&gt; - &lt;a href=&quot;https://arxiv.org/abs/1612.03928&quot;&gt;https://arxiv.org/abs/1612.03928&lt;/a&gt;&lt;br /&gt;
   Activation tensor of a conv. layer: $A\in R^{C\times H\times W}$ consists of &lt;em&gt;C&lt;/em&gt; feautre planes with spatial dimensions &lt;em&gt;H&lt;/em&gt;x&lt;em&gt;W&lt;/em&gt;&lt;br /&gt;
   Activation-based mapping function &lt;em&gt;F&lt;/em&gt; w.r.t that layer: $\mathcal{F}: R^{C\times H\times W} \rightarrow R^{H\times W}$&lt;br /&gt;
   With implicit assumption: Absolute value of a hidden neuron activation(that results when the network is evaluated on given input) can be used as an indication about the importance of that neuron w.r.t. the specific input.&lt;br /&gt;
-  By considering, therefore, the absolute values of the elements of tensor A,	we construct a spatial attention map by computing statistics of these values	across the channel dimension(&lt;em&gt;C&lt;/em&gt;)&lt;/p&gt;
+  By considering, therefore, the absolute values of the elements of tensor A,	we construct a spatial attention map by computing statistics of these values	across the channel dimension(&lt;em&gt;C&lt;/em&gt;)
     &lt;ul&gt;
       &lt;li&gt;sum of abs: $F_{sum}(A)=\sum_{i=1}^C\vert A_i\vert$&lt;/li&gt;
       &lt;li&gt;sum of abs, raised to the power of p(&amp;gt;1): $F_{sum}^p(A) = \sum_{i=1}^C\vert A_i\vert^p$&lt;/li&gt;
@@ -1178,6 +1323,80 @@ $\rightarrow$ &lt;strong&gt;ATTENTION MAPS&lt;/strong&gt;&lt;br /&gt;
 
 &lt;h3 id=&quot;transfer-learning&quot;&gt;Transfer Learning&lt;/h3&gt;
 &lt;p&gt;With a model trained on proposed rotation recognition task with unlabeled data, freeze its early conv. layers and attach the layers from a supervised model, evaluate on a supervised task with a subset of labeled data.&lt;/p&gt;
+
+&lt;h3 id=&quot;experimental-results&quot;&gt;Experimental Results&lt;/h3&gt;
+
+&lt;h4 id=&quot;cifar-10-experiments&quot;&gt;CIFAR-10 Experiments&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;&lt;em&gt;RotNet&lt;/em&gt; implementation details&lt;/strong&gt;:&lt;br /&gt;
+  Network-In-Network (NIN) architectures (&lt;em&gt;Lin et al., 2013&lt;/em&gt;)&lt;br /&gt;
+  Pretask train: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;optimizer = SGD, batch_size = 128, momentum = 0.9, weight_decay = 5e−4, lr = 0.1, lr_decay = 0.2 (after 30, 60, 80 epochs), num_epochs = 100&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Evaluation of the learned feature hierarchies&lt;/strong&gt;:&lt;br /&gt;
+  Using the CIFAR-10 training images, train three &lt;em&gt;RotNet&lt;/em&gt; models which have 3, 4, and 5 conv. blocks respectively. Afterwards, on top of the feature maps generated by each conv. block of each &lt;em&gt;RotNet&lt;/em&gt; model, add classifiers trained in a supervised way on the object recognition task of CIFAR-10; consists of 3 FC layers. The accuracy results of CIFAR-10 test set:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/papers_rotation_2.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ol&gt;
+      &lt;li&gt;In all cases the feature maps generated by the 2nd conv. block achieve the highest accuracy, i.e., between 88.26% and 89.06%. Then the accuracy gradually degrades, which we assume is because they start becoming more and more specific on the self-supervised task of rotation prediction.&lt;/li&gt;
+      &lt;li&gt;Observe that increasing the total depth of the RotNet models leads to increased object recognition performance by the feature maps generated by earlier layers. We assume that this is because increasing the depth of the model and thus the complexity of its head (i.e., top ConvNet layers) allows the features of earlier layers to be less specific to the rotation prediction task.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Exploring the quality of the learned features w.r.t. the number of recognized rotations&lt;/strong&gt;:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/papers_rotation_3.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Observed that 4 discrete rotations as proposed achieved better performance over other cases.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Comparison against supervised and other unsupervised methods&lt;/strong&gt;:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/papers_rotation_4.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/papers_rotation_5.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Model using the feature maps generated by the 2nd conv. block of a RotNet model with 4 conv. blocks in total.&lt;br /&gt;
+  (a) &lt;em&gt;RotNet + non-linear&lt;/em&gt;: a non-linear classifier with 3 fully connected layers&lt;br /&gt;
+  (b) &lt;em&gt;RotNet +conv.&lt;/em&gt;: three conv. layers + a linear prediction layer&lt;/li&gt;
+      &lt;li&gt;Achieved best result among the unsupervised approaches&lt;/li&gt;
+      &lt;li&gt;Very close to the fully supervised NIN model&lt;/li&gt;
+      &lt;li&gt;Observed that fine-tuning the unsupervised learned features further improves the classification performance&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Correlation between object classification task and rotation prediction task&lt;/strong&gt;:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/papers_rotation_6.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;As the ability of the RotNet features for solving the rotation prediction task improves(as the rotation prediction accuracy increases), their ability to help solving the object recognition task improves as well(the object recognition accuracy also increases).&lt;/li&gt;
+      &lt;li&gt;Object recognition accuracy converges fast w.r.t. the number of training epochs used for solving the pretext task of rotation prediction.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Semi-supervised setting&lt;/strong&gt;:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/papers_rotation_7.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  Train a 4 block RotNet model on the rotation prediction task using the entire image dataset of CIFAR-10, then train on top of its feature maps object classifiers using only a subset of the available images and their corresponding labels. As feature maps we use those from 2nd conv. block of the RotNet model. As a classifier we use a set of convolutional layers of the same e architecture as the 3rd conv. block of a NIN model plus a linear classifier, all randomly initialized.  For training the object classifier we use for each category 20, 100, 400, 1000, or 5000 image examples. Comapred with a supervised model that is trained only on the available examples each time:
+    &lt;ul&gt;
+      &lt;li&gt;Observed that our unsupervised trained model exceeds in this semi-supervised setting the supervised model when the number of examples per category drops below 1000; can be useful when there are only small subset of labeled data.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;evaluation-of-self-supervised-features-trained-in-imagenet&quot;&gt;Evaluation of self-supervised features trained in ImageNet&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Train a &lt;em&gt;RotNet&lt;/em&gt; model on the training images of the ImageNet dataset and evaluate the performance of the self-self-supervised features on the image classification tasks of ImageNet, Places, and PASCAL VOC datasets and on the object detection and object segmentation tasks of PASCAL VOC.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Implementation details&lt;/strong&gt;:&lt;br /&gt;
+  Based on an AlexNet architecture, without local response normalization units, dropout units, or groups in the colvolutional layers, while it includes batch normalization units after each linear layer (either convolutional or fully connected).&lt;br /&gt;
+  Train with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SGD, batch_size=192, momentum=0.9, weight_decay=5e-4, lr=0.01, lr_decay=0.1(after 10, 20 epochs), num_epochs=30&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ImageNet classification task&lt;/strong&gt;:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/papers_rotation_8.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Observed that &lt;em&gt;our approach surpasses all the other methods by a significant margin&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Transfer learning evaluation on PASCAL VOC&lt;/strong&gt;:&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/papers_rotation_9.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Places classification task:&lt;/strong&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/papers/papers_rotation_10.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 </description>
         
         <pubDate>Mon, 24 Jan 2022 15:00:00 +0000</pubDate>
