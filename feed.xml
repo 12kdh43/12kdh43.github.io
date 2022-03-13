@@ -1,4 +1,143 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-12T12:43:03+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">cs224n - Lecture 2. Neural Classifiers</title><link href="http://0.0.0.0:4000/cs224n_lec2" rel="alternate" type="text/html" title="cs224n - Lecture 2. Neural Classifiers" /><published>2022-03-05T00:00:00+00:00</published><updated>2022-03-05T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec2</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec2">&lt;h3 id=&quot;review-main-idea-of-word2vec&quot;&gt;Review: Main idea of word2vec&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-13T14:33:06+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">cs224n - Lecture 3. Backprop and Neural Networks</title><link href="http://0.0.0.0:4000/cs224n_lec3" rel="alternate" type="text/html" title="cs224n - Lecture 3. Backprop and Neural Networks" /><published>2022-03-08T00:00:00+00:00</published><updated>2022-03-08T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec3</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec3">&lt;h3 id=&quot;named-entity-recognitionner&quot;&gt;Named Entity Recognition(NER)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Task: &lt;strong&gt;find&lt;/strong&gt; and &lt;strong&gt;classify&lt;/strong&gt; names in text&lt;/li&gt;
+  &lt;li&gt;Possible uses:
+    &lt;ul&gt;
+      &lt;li&gt;Tracking mentions of particular entities in documents&lt;/li&gt;
+      &lt;li&gt;For question answering, answers are usually named entities&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Often followed by Named Entity Linking/Canonicalization into Knowledge Base&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;simple-ner-window-classification-using-binary-logistic-classifier&quot;&gt;Simple NER: Window classification using binary logistic classifier&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Using word vectors, build a context window of word vectors, then pass through a neural network and feed it to logistic classifier.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;idea: classify each word in its context window of neighboring words&lt;/li&gt;
+  &lt;li&gt;Train logistic classifier on hand-labeled data to classify center word {yes/no} for each class based on a concatenation of word vectors in a window
+    &lt;ul&gt;
+      &lt;li&gt;In practice, we usually use multi-class softmax&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Example: Classify “Paris” as +/- location(binary for is_location) in context of sentence with window length 2:&lt;br /&gt;
+  sentence $=$ “$\mbox{ the  museums  in  Paris  are  amazing  to  see   . }$”
+  $x_{\text{window}} = [x_{\text{museums}}\quad x_{\text{in}}\quad x_{\text{Paris}}\quad x_{\text{are}}\quad x_{\text{amazing}}]^T$&lt;/li&gt;
+  &lt;li&gt;Resulting vector $x_{\text{window}} = x\in \mathbb{R}^{5d}$, a column vector.&lt;/li&gt;
+  &lt;li&gt;To classify all words: run classifier for each class on the vector centered on each word in the sentence&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec3_0.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;computing-gradients-by-hand&quot;&gt;Computing Gradients by Hand&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Matrix calculus: Fully vectorized gradients
+    &lt;ul&gt;
+      &lt;li&gt;“Multivariable calculus is just like single-variable calculus if you use matrices”&lt;/li&gt;
+      &lt;li&gt;Much faster and more usful than non-vectorized gradients&lt;/li&gt;
+      &lt;li&gt;But doing a non-vectorized gradient can be good for intuition; partial derivative for one parameter&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Vector gradient&lt;br /&gt;
+  Given a function with &lt;em&gt;1&lt;/em&gt; output and &lt;em&gt;n&lt;/em&gt; inputs&lt;br /&gt;
+  $f(x) = f(x_1, x_2, \ldots, x_n)$&lt;br /&gt;
+  Its gradient is a vector of partial derivatives w.r.t each input&lt;br /&gt;
+  \(\frac{\partial f}{\partial x} = \left[\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots, \frac{\partial f}{\partial x_n} \right]\)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Jacobian Matrix: Generalization of the Gradient&lt;br /&gt;
+  Given a function with &lt;strong&gt;&lt;em&gt;m&lt;/em&gt; outputs&lt;/strong&gt; and &lt;em&gt;n&lt;/em&gt; inputs&lt;br /&gt;
+  $f(x) = [f_1(x_1, x_2, \ldots, x_n), \ldots, f_m(x_1, x_2, \ldots, x_n)]$&lt;br /&gt;
+  It’s Jacobian is an &lt;strong&gt;$m \times n$&lt;/strong&gt; matrix of partial derivatives&lt;br /&gt;
+  \(\begin{align*}
+  \frac{\partial f}{\partial x} = 
+  \begin{bmatrix}
+  \frac{\partial f_1}{\partial x_1} &amp;amp; \cdots &amp;amp; \frac{\partial f_1}{\partial x_n} \\
+  \vdots &amp;amp; \ddots &amp;amp; \vdots \\
+  \frac{\partial f_m}{\partial x_1} &amp;amp; \cdots &amp;amp; \frac{\partial f_m}{\partial x_n}
+  \end{bmatrix}
+  \end{align*}\) $\quad\quad$ \(\begin{align*}\left( \frac{\partial f}{\partial x} \right)_{ij} = \frac{\partial f_i}{\partial x_j}\end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Chain Rule
+    &lt;ul&gt;
+      &lt;li&gt;For composition of one-variable functions: &lt;strong&gt;multiply derivatives&lt;/strong&gt;&lt;br /&gt;
+  $z = g(y)$, $y = f(x)$&lt;br /&gt;
+  \(\begin{align*}\frac{dz}{dx} = \frac{dz}{dy}\frac{dy}{dx}\end{align*}\)&lt;/li&gt;
+      &lt;li&gt;For multiple variables at once: &lt;strong&gt;multiply Jacobians&lt;/strong&gt;&lt;br /&gt;
+  $h = f(z)$&lt;br /&gt;
+  $z = Wx + b$&lt;br /&gt;
+  \(\begin{align*}\frac{\partial h}{\partial x} = \frac{\partial h}{\partial z}\frac{\partial z}{\partial x} = \cdots\end{align*}\)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Example Jacobian: Elementwise activation function&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec3_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Other Jacobians&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec3_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Write out the Jacobians&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec3_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Derivative with respect to Matrix: Output shape&lt;br /&gt;
+  for $\frac{\partial s}{\partial W}$, output $s$ is a scalar and input $W \in \mathbb{R}^{n\times m}$: &lt;em&gt;1&lt;/em&gt; by &lt;em&gt;nm&lt;/em&gt; Jacobian?&lt;br /&gt;
+  $\rightarrow$ is inconvenient to do \(\theta^{\text{new}} = \theta^{\text{old}} - \alpha\nabla_\theta J(\theta)\) gradient descent.
+    &lt;ul&gt;
+      &lt;li&gt;Instead, use the &lt;strong&gt;shape convention&lt;/strong&gt;: the shape of the gradient is the shape of the parameters&lt;br /&gt;
+  &lt;em&gt;n&lt;/em&gt; by &lt;em&gt;m&lt;/em&gt; matrix \(\begin{align*}\frac{\partial s}{\partial W} = 
+  \begin{bmatrix} 
+  \frac{\partial s}{\partial W_{11}} &amp;amp; \cdots &amp;amp; \frac{\partial s}{\partial W_{1m}} \\ 
+  \vdots &amp;amp; \ddots &amp;amp; \vdots \\
+  \frac{\partial s}{\partial W_{n1}} &amp;amp; \cdots &amp;amp; \frac{\partial s}{\partial W_{nm}}
+  \end{bmatrix}\end{align*}\)&lt;/li&gt;
+      &lt;li&gt;$\frac{\partial s}{\partial W} = \delta\frac{\partial z}{\partial W}$&lt;br /&gt;
+  $z = Wx + b$&lt;br /&gt;
+  \(\begin{align*}
+  \frac{\partial s}{\partial W} &amp;amp;= \delta^T x^T \\
+  &amp;amp; = \begin{bmatrix} \delta_1 \\ \vdots \\ \delta_n \end{bmatrix} [x_1, \ldots, x_m] = 
+  \begin{bmatrix} \delta_1 x_1 &amp;amp; \cdots &amp;amp; \delta_1 x_m \\
+  \vdots &amp;amp; \ddots &amp;amp; \vdots \\
+  \delta_n x_1 &amp;amp; \cdots &amp;amp; \delta_n x_m \end{bmatrix}
+  \end{align*}\)&lt;br /&gt;
+  denote that $\delta$ is local error signal at &lt;em&gt;z&lt;/em&gt; and &lt;em&gt;x&lt;/em&gt; is local input signal.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;what-shape-should-derivatives-be&quot;&gt;What shape should derivatives be?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Two options:
+    &lt;ol&gt;
+      &lt;li&gt;Use Jacobian form as much as possible, reshape to follow the shape convention at the end:
+        &lt;ul&gt;
+          &lt;li&gt;at the end transpose $\frac{\partial s}{\partial b}$ to make the derivative a column vector, resulting in $\delta^T$&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Always follow the shape convention
+        &lt;ul&gt;
+          &lt;li&gt;Look at dimensions to figure out when to transpose and/or reorder terms&lt;/li&gt;
+          &lt;li&gt;The error message $\delta$ that arrives at a hidden layer has the same dimensionality as that hidden layer&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;backpropagation-chain-rule&quot;&gt;Backpropagation: Chain Rule&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Other trick:&lt;br /&gt;
+  &lt;strong&gt;re-use&lt;/strong&gt; derivatives computed for higher layers in computing derivatives for lower layers to minimize computation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec4_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="cs224n" /><summary type="html">Named Entity Recognition(NER) Task: find and classify names in text Possible uses: Tracking mentions of particular entities in documents For question answering, answers are usually named entities Often followed by Named Entity Linking/Canonicalization into Knowledge Base Simple NER: Window classification using binary logistic classifier Using word vectors, build a context window of word vectors, then pass through a neural network and feed it to logistic classifier. idea: classify each word in its context window of neighboring words Train logistic classifier on hand-labeled data to classify center word {yes/no} for each class based on a concatenation of word vectors in a window In practice, we usually use multi-class softmax Example: Classify “Paris” as +/- location(binary for is_location) in context of sentence with window length 2: sentence $=$ “$\mbox{ the museums in Paris are amazing to see . }$” $x_{\text{window}} = [x_{\text{museums}}\quad x_{\text{in}}\quad x_{\text{Paris}}\quad x_{\text{are}}\quad x_{\text{amazing}}]^T$ Resulting vector $x_{\text{window}} = x\in \mathbb{R}^{5d}$, a column vector. To classify all words: run classifier for each class on the vector centered on each word in the sentence Computing Gradients by Hand Matrix calculus: Fully vectorized gradients “Multivariable calculus is just like single-variable calculus if you use matrices” Much faster and more usful than non-vectorized gradients But doing a non-vectorized gradient can be good for intuition; partial derivative for one parameter Vector gradient Given a function with 1 output and n inputs $f(x) = f(x_1, x_2, \ldots, x_n)$ Its gradient is a vector of partial derivatives w.r.t each input \(\frac{\partial f}{\partial x} = \left[\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots, \frac{\partial f}{\partial x_n} \right]\) Jacobian Matrix: Generalization of the Gradient Given a function with m outputs and n inputs $f(x) = [f_1(x_1, x_2, \ldots, x_n), \ldots, f_m(x_1, x_2, \ldots, x_n)]$ It’s Jacobian is an $m \times n$ matrix of partial derivatives \(\begin{align*} \frac{\partial f}{\partial x} = \begin{bmatrix} \frac{\partial f_1}{\partial x_1} &amp;amp; \cdots &amp;amp; \frac{\partial f_1}{\partial x_n} \\ \vdots &amp;amp; \ddots &amp;amp; \vdots \\ \frac{\partial f_m}{\partial x_1} &amp;amp; \cdots &amp;amp; \frac{\partial f_m}{\partial x_n} \end{bmatrix} \end{align*}\) $\quad\quad$ \(\begin{align*}\left( \frac{\partial f}{\partial x} \right)_{ij} = \frac{\partial f_i}{\partial x_j}\end{align*}\) Chain Rule For composition of one-variable functions: multiply derivatives $z = g(y)$, $y = f(x)$ \(\begin{align*}\frac{dz}{dx} = \frac{dz}{dy}\frac{dy}{dx}\end{align*}\) For multiple variables at once: multiply Jacobians $h = f(z)$ $z = Wx + b$ \(\begin{align*}\frac{\partial h}{\partial x} = \frac{\partial h}{\partial z}\frac{\partial z}{\partial x} = \cdots\end{align*}\) Example Jacobian: Elementwise activation function Other Jacobians Write out the Jacobians Derivative with respect to Matrix: Output shape for $\frac{\partial s}{\partial W}$, output $s$ is a scalar and input $W \in \mathbb{R}^{n\times m}$: 1 by nm Jacobian? $\rightarrow$ is inconvenient to do \(\theta^{\text{new}} = \theta^{\text{old}} - \alpha\nabla_\theta J(\theta)\) gradient descent. Instead, use the shape convention: the shape of the gradient is the shape of the parameters n by m matrix \(\begin{align*}\frac{\partial s}{\partial W} = \begin{bmatrix} \frac{\partial s}{\partial W_{11}} &amp;amp; \cdots &amp;amp; \frac{\partial s}{\partial W_{1m}} \\ \vdots &amp;amp; \ddots &amp;amp; \vdots \\ \frac{\partial s}{\partial W_{n1}} &amp;amp; \cdots &amp;amp; \frac{\partial s}{\partial W_{nm}} \end{bmatrix}\end{align*}\) $\frac{\partial s}{\partial W} = \delta\frac{\partial z}{\partial W}$ $z = Wx + b$ \(\begin{align*} \frac{\partial s}{\partial W} &amp;amp;= \delta^T x^T \\ &amp;amp; = \begin{bmatrix} \delta_1 \\ \vdots \\ \delta_n \end{bmatrix} [x_1, \ldots, x_m] = \begin{bmatrix} \delta_1 x_1 &amp;amp; \cdots &amp;amp; \delta_1 x_m \\ \vdots &amp;amp; \ddots &amp;amp; \vdots \\ \delta_n x_1 &amp;amp; \cdots &amp;amp; \delta_n x_m \end{bmatrix} \end{align*}\) denote that $\delta$ is local error signal at z and x is local input signal. What shape should derivatives be? Two options: Use Jacobian form as much as possible, reshape to follow the shape convention at the end: at the end transpose $\frac{\partial s}{\partial b}$ to make the derivative a column vector, resulting in $\delta^T$ Always follow the shape convention Look at dimensions to figure out when to transpose and/or reorder terms The error message $\delta$ that arrives at a hidden layer has the same dimensionality as that hidden layer Backpropagation: Chain Rule Other trick: re-use derivatives computed for higher layers in computing derivatives for lower layers to minimize computation</summary></entry><entry><title type="html">cs224n - Lecture 2. Neural Classifiers</title><link href="http://0.0.0.0:4000/cs224n_lec2" rel="alternate" type="text/html" title="cs224n - Lecture 2. Neural Classifiers" /><published>2022-03-05T00:00:00+00:00</published><updated>2022-03-05T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec2</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec2">&lt;h3 id=&quot;review-main-idea-of-word2vec&quot;&gt;Review: Main idea of word2vec&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;Start with random word vectors&lt;/li&gt;
   &lt;li&gt;Iterate through each word in the whole corpus&lt;/li&gt;
@@ -1473,326 +1612,4 @@ Large training batch size is crucial for SimCLR, but it causes large memory foot
 &lt;h3 id=&quot;other-examples&quot;&gt;Other examples&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec13_14.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
 &lt;img src=&quot;/assets/images/cs231n_lec13_15.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/images/cs231n_lec13_16.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Self-Supervised Learning Generative vs. Self-supervised Learning Both aim to learn from data without manual label annotation Generative learning aims to model data distribution $p_{data}(x)$, e.g., generating realistic images. Self-supervised learning methods solve “pretext” tasks that produce good features for downstream tasks. Learn with supervised learning objectives, e.g., classification, regression. Labels of these pretext tasks are generated automatically. Self-supervised pretext tasks Example: learn to predict image transformations / complete corrupted images; e.g. image completion, rotation prediction, “jigsaw puzzle”, coloriztaion. Solving the pretext tasks allow the model to learn good features. We can automatically generate labels for the pretext tasks. Learning to generate pixel-level details is often unnecessary; learn high-level semantic features with pretext tasks instead(only encode high-level features sufficient enough to distinguish different objects, Contrastive Methods): Epstein, 2016 How to evaluate a self-supervised learning method? Self-supervised learning: With lots of unlabeled data, learn good feature extractors from self-supervised pretext tasks, e.g., predicting image rotations. Supervised Learning: With small amount of labeled data on the target task, attach a shallow network on the feature extractor; train the shallow network and evaluate on the target task, e.g., classification, detection. Pretext tasks from image transformations Predict Rotations Gidaris et al., 2018 - (Paper Review) Predict Relative Patch Locations Doersch et al., 2015 Solving “jigsaw puzzles”; shuffled patches Noroozi &amp;amp; Favaro, 2016 Predict Missing Pixels(Inpainting); encoder-decoder Pathak et al., 2016 Image Coloring; Split-brain Autoencoder Richard Zhang/ Phillip Isola Video Coloring; from t=0 reference frame to the later frames Summary: Pretext tasks Pretext tasks focus on “visual common sense”; by image transformations, can learn without supervision(big labeled data). The models are forced learn good features about natural images, e.g., semantic representation of an object category, in order to solve the pretext tasks. We don’t care about the performance of these pretext tasks, but rather how useful the learned features are for downstream tasks. $\color{red}{Problems}$: 1) coming up with individual pretext tasks is tedious, and 2) the learned representations may not be general; tied to a specific pretext task. Contrastive Representation Learning For a more general pretext task, A formulation of contrastive learning What we want: $\mbox{score}(f(x), f(x^+)) » score(f(x), f(x^-))$ x: reference sample, x+: positive sample, x-: negative sample Given a chosen score function, we aim to learn an encoder function f that yields high score for positive pairs and low scores for negative pairs. Loss function given 1 positive sample and N-1 negative samples: seems familiar with Cross entropy loss for a N-way softmax classifier! i.e., learn to find the positive sample from the N samples Commonly known as the InfoNCE loss(van den Oord et al., 2018) A lower bound on the mutual information between $f(x)$ and $f(x^+)$ \(\rightarrow MI[f(x), f(x^+)] - \log(N) \ge -L\) The larger the negative sample size(N), the tighter the bound SimCLR: A Simple Framework for Contrastive Learning Chen et al., 2020 Cosine similarity as the score function: \(s(u, v) = \frac{u^T v}{\lVert u \rVert \lVert v \rVert}\) Use a projection network h(.) to project features to a space where contrastive learning is applied. Generate positive samples through data augmentation: random cropping, random color distortion, and random blur. Evaluate: Freeze feature encoder, train(finetune) on a supervised downstream task SimCLR design choices: Projection head($z=g(.)$) Linear / non-linear projection heads improve representation learning. A possible explanation: contrastive learning objective may discard useful information for downstream tasks. representation space z is trained to be invariant to data transformation. by leveraging the projection head g(.), more information can be preserved in the h representation space SimCLR design choices: Large batch size Large training batch size is crucial for SimCLR, but it causes large memory footprint during backpropagation; requires distributed training on TPUs. Momentum Contrastive Learning (MoCo) He et al., 2020 Key differences to SimCLR: Keep a running queue of keys (negative samples). Compute gradients and update the encoder only through the queries. Decouple min-batch size with the number of keys: can support a large number of negative samples. MoCo V2 Chen et al., 2020 A hybrid of ideas from SimCLR and MoCo: From SimCLR: non-linear projection head and strong data augmentation. From MoCo: momentum-updated queues that allow training on a large number of negative samples (no TPU required). Key takeaways(vs. SimCLR, MoCo V1): Non-linear projection head and strong data augmentation are crucial for contrastive learning. Decoupling mini-batch size with negative sample size allows MoCo-V2 to outperform SimCLR with smaller batch size (256 vs. 8192). Achieved with much smaller memory footprint. Instance vs. Sequence Contrastive Learning Instance-level contrastive learning: Based on positive &amp;amp; negative instances. E.g., SimCLR, MoCo Sequence-level contrastive learning: Based on sequential / temporal orders. E.g., Contrastive Predictive Coding (CPC) Contrastive Predictive Coding (CPC) van den Oord et al., 2018 Contrastive: contrast between “right” and “wrong” sequences using contrastive learning. Predictive: the model has to predict future patterns given the current context. Coding: the model learns useful feature vectors, or “code”, for downstream tasks, similar to other context self-supervised methods. Encode all samples in a sequence into vectors $z_t = g_{\mbox{enc}}(x_t)$ Summarize context (e.g., half of a sequence) into a context code $c_t$ using an auto-regressive model ($g_{\mbox{ar}}$). The original paper uses GRU-RNN here. Compute InfoNCE loss between the context $c_t$ and future code $z_{t+k}$ using the following time-dependent score funtion: $s_k(z_{t+k}, c_t) = z_{t+k}^T W_k c_t$, where $W_k$ is a trainable matrix. Summary(CPC): Contrast “right” sequence with “wrong” sequence. InfoNCE loss with a time-dependent score function. Can be applied to a variety of learning problems, but not as effective in learning image representations compared to instance-level methods. Other examples</summary></entry><entry><title type="html">cs231n - Lecture 12. Generative Models</title><link href="http://0.0.0.0:4000/cs231n_lec12" rel="alternate" type="text/html" title="cs231n - Lecture 12. Generative Models" /><published>2022-01-09T15:00:00+00:00</published><updated>2022-01-09T15:00:00+00:00</updated><id>http://0.0.0.0:4000/cs231n_lec12</id><content type="html" xml:base="http://0.0.0.0:4000/cs231n_lec12">&lt;h3 id=&quot;supervised-vs-unsupervised&quot;&gt;Supervised vs. Unsupervised&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Supervised Learning:&lt;br /&gt;
-  Data: $(x,y)$; &lt;em&gt;y&lt;/em&gt; is label&lt;br /&gt;
-  Goal: Learn a function to map $x\rightarrow y$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Unsupervised Learning:&lt;br /&gt;
-  Data: &lt;em&gt;x&lt;/em&gt;; no labels&lt;br /&gt;
-  Goal: Learn some underlying hidden structure of the data&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;generative-modeling&quot;&gt;Generative Modeling&lt;/h3&gt;
-&lt;p&gt;Given training data, generate new samples from same distribution&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Objectives:
-    &lt;ol&gt;
-      &lt;li&gt;Learn $p_{\scriptstyle\text{model}}(x)$ that approximates $p_{\scriptstyle\text{data}}(x)$&lt;/li&gt;
-      &lt;li&gt;Sampling new &lt;em&gt;x&lt;/em&gt; from $p_{\scriptstyle\text{model}}(x)$&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Formulate as density estimation problems:
-    &lt;ul&gt;
-      &lt;li&gt;Explicit density estimation: explicitly define and solve for $p_{\scriptstyle\text{model}}(x)$.&lt;/li&gt;
-      &lt;li&gt;Implicit density estimation: learn model that can sample from $p_{\scriptstyle\text{model}}(x)$ without explicitly defining it.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Why Generative Models?&lt;br /&gt;
-  Realistic samples for artwork, super-resolution, colorization, etc.&lt;br /&gt;
-  Learn useful features for downstream tasks such as classification.&lt;br /&gt;
-  Getting insights from high-dimensional data (physics, medical imaging, etc.)&lt;br /&gt;
-  Modeling physical world for simulation and planning (robotics and reinforcement learning applications)&lt;br /&gt;
-  …&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;pixelrnn-and-pixelcnn-a-brief-overview&quot;&gt;PixelRNN and PixelCNN; a brief overview&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Fully visible belief network (FVBN)&lt;br /&gt;
-  is an explicit density model, defines tractable density function using chain rule to decompose the likelihood of an image &lt;em&gt;x&lt;/em&gt; into product of &lt;em&gt;1&lt;/em&gt;-d distributions:&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec12_0.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;40%&quot; /&gt;&lt;br /&gt;
-  Then maximize likelihood of training data. It is a complex distribution over pixel values, express using a neural network.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;pixelrnn-van-der-oord-et-al-2016&quot;&gt;PixelRNN, &lt;em&gt;van der Oord et al., 2016&lt;/em&gt;&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Generate image pixels starting from corner, dependency on previous pixels modeled using an RNN(LSTM). 
-  &lt;img src=&quot;/assets/images/cs231n_lec12_1.png&quot; alt=&quot;png&quot; width=&quot;35%&amp;quot;, height=&amp;quot;35%&quot; /&gt;&lt;br /&gt;
-  Drawback: sequential generation is slow in both training and inference&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;pixelcnn-van-der-oord-et-al-2016&quot;&gt;PixelCNN, &lt;em&gt;van der Oord et al., 2016&lt;/em&gt;&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Generate image pixels starting from corner, ependency on previous pixels modeled using a CNN over context region(&lt;strong&gt;masked convolution&lt;/strong&gt;)&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec12_2.png&quot; alt=&quot;png&quot; width=&quot;35%&amp;quot;, height=&amp;quot;35%&quot; /&gt;&lt;br /&gt;
-  Training is faster than PixelRNN: it can parallelize convolutions since context region values known from training images.&lt;br /&gt;
-  Generation is still slow: for a 32x32 image, we need to do forward passes of the network &lt;em&gt;1024&lt;/em&gt; times for a single image.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Improving PixelCNN performance&lt;br /&gt;
-  Gated convolutional layers, Short-cut connections, Discretized logistic loss, Multi-scale, Training tricks, etc.&lt;br /&gt;
-  See also PixelCNN++, &lt;em&gt;Salimans et al., 2017&lt;/em&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Pros:&lt;br /&gt;
-  Can explicitly compute likelihood &lt;em&gt;p(x)&lt;/em&gt;&lt;br /&gt;
-  Easy to optimize&lt;br /&gt;
-  Good samples&lt;/li&gt;
-  &lt;li&gt;Cons:&lt;br /&gt;
-  Sequential generation is slow&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;variational-autoencodervae&quot;&gt;Variational Autoencoder(VAE)&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;VAE is an explicit density model, defines intractable(approximate) density function with latent &lt;strong&gt;z&lt;/strong&gt;:&lt;br /&gt;
-  $p_\theta(x) = \int p_\theta(z)p_\theta(x|z)\, dz$&lt;br /&gt;
-  No dependencies among pixels, can generate all pixels at the same time. But cannot optimize directly, derive and optimize lower bound on likelihood instead&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;background-autoencoders&quot;&gt;Background: Autoencoders&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Unsupervised approach for learning a lower-dimensional feature representation from unlabeled training data&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec12_3.png&quot; alt=&quot;png&quot; width=&quot;35%&amp;quot;, height=&amp;quot;35%&quot; /&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;z&lt;/strong&gt; usually smaller than &lt;strong&gt;x&lt;/strong&gt;: with dimensionality reduction to capture meaningful factors of variation in data. Train such that features can be used to reconstruct original data($\hat{x}$)&lt;/li&gt;
-      &lt;li&gt;“Autoencoding”; encoding input itself(&lt;em&gt;L2&lt;/em&gt; loss)&lt;/li&gt;
-      &lt;li&gt;After training, throw away decoder and adjust to the final task&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Encoder can be used to initialize a supervised model;
-  Transfer from large, unlabeled dataset(Autoencoder) to small, labeled dataset and fine-tune; train for final task.&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec12_4.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;40%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;But we can’t generate new images from an autoencoder because we don’t know the space of &lt;strong&gt;z&lt;/strong&gt;. $\rightarrow$ Variational Autoencoders for a generative model.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;variational-autoencoders-probabilistic-spin-on-autoencoders&quot;&gt;Variational Autoencoders: Probabilistic spin on autoencoders&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Assume training data \(\left\{ x^{(i)}\right\} _{i=1}^N\) is generated from the distribution of unobserved (latent) representation &lt;strong&gt;z&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;Intuition from autoencoders: &lt;strong&gt;x&lt;/strong&gt; is an image, &lt;strong&gt;z&lt;/strong&gt; is latent factors used to generate &lt;strong&gt;x&lt;/strong&gt;: attributes, orientation, etc.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec12_5.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;40%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;We want to estimate the true parameters $\theta^*$ of this generative model given training data &lt;em&gt;x&lt;/em&gt;.&lt;/li&gt;
-  &lt;li&gt;Model representation:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;em&gt;p(z)&lt;/em&gt;: Choose prior to be simple, e.g. Gaussian.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;z&lt;/strong&gt;: Reasonable for latent attributes, e.g. pose, how much smile.&lt;/li&gt;
-      &lt;li&gt;&lt;em&gt;p(x|z)&lt;/em&gt;: Generating images, conditional probability is complex&lt;br /&gt;
-  $\rightarrow$ represent with neural network&lt;/li&gt;
-      &lt;li&gt;$p_\theta(x)$: Learn model parameters to maximize likelihood of training data&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;variational-autoencoders-intractability&quot;&gt;Variational Autoencoders: Intractability&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Data likelihood:&lt;br /&gt;
-  $p_\theta(x) = \int p_\theta(z)p_\theta(x|z)\, dz$&lt;br /&gt;
-  where $p_\theta(z)$ is a Simple Gaussian prior and $p_\theta(x|z)$ is a decoder neural network, it is intractable to compute &lt;em&gt;p(x|z)&lt;/em&gt; for every &lt;em&gt;z&lt;/em&gt;.&lt;br /&gt;
-  while &lt;em&gt;Monte Carlo estimation&lt;/em&gt;-$\log p(x) \approx \log\frac{1}{k}\sum_{i=1}^k p(x|z^{(i)})$, where $z^{(i)}\sim p(z)$- is too high variance.&lt;/li&gt;
-  &lt;li&gt;divided by intractable $p_\theta(x)$, Posterior density also intractable:&lt;br /&gt;
-  $p_\theta(z|x) = p_\theta(x|z)p_\theta(z)/p_\theta(x)$&lt;/li&gt;
-  &lt;li&gt;Solution:&lt;br /&gt;
-  In addition to modeling $p_\theta(x|z)$, learn $q_\phi(z|x)$ that approximates the true posterior $p_\theta(z|x)$. $q_\phi$, approximate posterior allows us to derive a lower bound on the data likelihood that is tractable, which can be optimized.&lt;br /&gt;
-  &lt;strong&gt;Variational inference&lt;/strong&gt; is to approximate the unknown posterior distribution from only the observed data &lt;em&gt;x&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-\[\begin{align*}
-\log p_\theta(x^{(i)})
-&amp;amp;= \mathbf{E}_{z~q_\phi(z|x^{(i)})}\left[ \log p_\theta(x^{(i)}) \right] \quad \textit(p_\theta(x^{(i)})\ does\ not\ depend\ on\ z) \\
-&amp;amp;= \mathbf{E}_z \left[
-	\log\frac{p_\theta(x^{(i)}|z)p_\theta(z)}{p_\theta(z|x^{(i)})} \right] \quad \textit(Bayes'\ Rule) \\
-&amp;amp;= \mathbf{E}_z \left[ 
-	\log\frac{p_\theta(x^{(i)}|z)p_\theta(z)}{p_\theta(z|x^{(i)})}
-		\frac{q_\phi(z|x^{(i)})}{q_\phi(z|x^{(i)})} \right] \quad \textit(Multiply\ by\ constant)\\
-&amp;amp;= \mathbf{E}_z \left[\log p_\theta(x^{(i)}|z) \right]
-	- \mathbf{E}_z \left[ \log\frac{q_\phi(z|x^{(i)})}{p_\theta(z)}\right]
-	+ \mathbf{E}_z \left[ \log\frac{q_\phi(z|x^{(i)})}{p_\theta(z|x^{(i)})}\right] \quad \textit(Logarithms) \\
-&amp;amp;= \mathbf{E}_z \left[\log p_\theta(x^{(i)}|z) \right]
-	- D_{KL}(q_\phi(z|x^{(i)})|p_\theta(z)) + D_{KL}(q_\phi(z|x^{(i)})|p_\theta(z|x^{(i)}))
-\end{align*}\]
-
-&lt;ul&gt;
-  &lt;li&gt;With taking expectation with respect to &lt;em&gt;z&lt;/em&gt;(using encoder network) let us write nice &lt;em&gt;KL&lt;/em&gt; terms;
-    &lt;ul&gt;
-      &lt;li&gt;\(\mathbf{E}_z \left[\log p_\theta(x^{(i)}\vert z) \right]\): &lt;strong&gt;Decoder&lt;/strong&gt; network gives $p_\theta(x\vert z)$, can compute estimate of this term through sampling(need some trick to differentiate through sampling). It reconstruct the input data.&lt;/li&gt;
-      &lt;li&gt;\(D_{KL}(q_\phi(z\vert x^{(i)})\vert p_\theta(z))\): KL term between Gaussian for encoder and &lt;em&gt;z&lt;/em&gt; prior has nice closed-form solution. &lt;strong&gt;Encoder&lt;/strong&gt; makes approximate posterior distribution close to prior.&lt;/li&gt;
-      &lt;li&gt;\(D_{KL}(q_\phi(z\vert x^{(i)})\vert p_\theta(z\vert x^{(i)}))\): is intractable, we can’t compute this term; but we know KL divergence always greater than &lt;em&gt;0&lt;/em&gt;.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;To maximize the data likelihood, we can rewrite&lt;br /&gt;
-\(\begin{align*}
-\log p_\theta (x^{(i)}) &amp;amp;= \mathbf{E}_z \left[ \log p _\theta (x^{(i)}\vert z) \right]
-                      - D_{KL}(q_\phi (z\vert x^{(i)})\vert p_\theta (z)) + D_{KL}(q_\phi (z\vert x^{(i)})\vert p_\theta (z\vert x^{(i)})) \\
-                      &amp;amp;= \mathcal{L}(x^{(i)},\theta ,\phi ) + (C\ge 0)
-\end{align*}\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;\(\mathcal{L}(x^{(i)},\theta,\phi)\): &lt;em&gt;Decoder - Encoder&lt;/em&gt;&lt;br /&gt;
-  &lt;strong&gt;Tractable lower bound&lt;/strong&gt; which we can take gradient of and optimize. Maximizing this &lt;em&gt;evidence lower bound(ELBO)&lt;/em&gt;, we can maximize $\log p_\theta(x)$. Later, we take minus on this term for the loss function of a neural network.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec12_6.png&quot; alt=&quot;png&quot; width=&quot;45%&amp;quot;, height=&amp;quot;45%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Encoder part; \(D_{KL}(q_\phi(z\vert x^{(i)})\vert p_\theta(z))\)&lt;br /&gt;
-  We choose &lt;em&gt;q(z)&lt;/em&gt; as a Gaussian distribution, $q(z\vert x) = N(\mu_{z\vert x}, \Sigma_{z\vert x})$. Computing the KL divergence, \(D_{KL}(N(\mu_{z\vert x}, \Sigma_{z\vert x}))\vert N(0,I))\), having analytical solution.&lt;/li&gt;
-  &lt;li&gt;Reparameterization trick &lt;em&gt;z&lt;/em&gt;:&lt;br /&gt;
-  to make sampling differentiable, input sample $\epsilon\sim N(0,I)$ to the graph $z = \mu_{z\vert x} + \epsilon\sigma_{z\vert x}$; where $\mu, \sigma$ are the part of computation graph.&lt;/li&gt;
-  &lt;li&gt;Decoder part;&lt;br /&gt;
-  Maximize likelihood of original input being reconstructed, $\hat{x}-x$.&lt;/li&gt;
-  &lt;li&gt;For every minibatch of input data, compute $\mathcal{L}$ graph forward pass and backprop.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec12_7.png&quot; alt=&quot;png&quot; width=&quot;75%&amp;quot;, height=&amp;quot;75%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;variational-autoencoders-generating-data&quot;&gt;Variational Autoencoders: Generating Data&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec12_8.png&quot; alt=&quot;png&quot; width=&quot;55%&amp;quot;, height=&amp;quot;55%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Diagonal prior on &lt;strong&gt;z&lt;/strong&gt; for independent latent variables&lt;/li&gt;
-  &lt;li&gt;Different dimensions of &lt;strong&gt;z&lt;/strong&gt; encode interpretable factors of variation;&lt;br /&gt;
-  Also good feature representation taht can be computed using $q_\phi(z\vert x)$.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;summary-1&quot;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Probabilistic spin to traditional autoencoders, allows generating data&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Defines an intractable density; derive and optimize a (variational) lower bound&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Pros:&lt;br /&gt;
-  Principled approach to generative models&lt;br /&gt;
-  Interpretable latent space&lt;br /&gt;
-  Allows inference of $q(z\vert x)$, can be useful feature representation for other tasks  - Cons:&lt;br /&gt;
-  Maximizes lower bound of likelihood: not as good evaluation as tractable model&lt;br /&gt;
-  Samples &lt;em&gt;mean&lt;/em&gt;; blurrier and lower quality compared to state-of-the-art (GANs)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;generative-adversarial-networksgans&quot;&gt;Generative Adversarial Networks(GANs)&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec12_9.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;40%&quot; /&gt;&lt;br /&gt;
-idea: Use a discriminator network to tell whether the generate image is within data distribution (“real”) or not&lt;/p&gt;
-
-&lt;h3 id=&quot;training-gans-two-player-game&quot;&gt;Training GANs: Two-player game&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec12_10.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;br /&gt;
-Discriminator network: try to distinguish between real and fake images&lt;br /&gt;
-Generator network: try to fool discriminator by generating real-looking images&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Train jointly in &lt;strong&gt;minimax game&lt;/strong&gt;;&lt;br /&gt;
-  Minimax objective function:&lt;br /&gt;
-  \(\mbox{min}_{\theta_g} \mbox{max}_{\theta_d}\left[\mathbb{E}_{x\sim {p_{data}}}\log D_{\theta_d}(x) + \mathbb{E}_{z\sim p(z)}\log(1-D_{\theta_d}(G_{\theta_g}(z))) \right]\)&lt;br /&gt;
-  where $\theta_g$ is an objective for the generator objective and $\theta_d$ for the discriminator
-    &lt;ul&gt;
-      &lt;li&gt;$D_{\theta_d}(x)$: Discriminator outputs likelihood in &lt;em&gt;(0,1)&lt;/em&gt; of real image&lt;/li&gt;
-      &lt;li&gt;$D_{\theta_d}(G_{\theta_g}(z))$: Discriminator output for generated fake data &lt;em&gt;G(z)&lt;/em&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Discriminator($\theta_d$) wants to &lt;strong&gt;maximize objective&lt;/strong&gt; such that &lt;em&gt;D(x)&lt;/em&gt; is close to &lt;em&gt;1&lt;/em&gt;(real) and &lt;em&gt;D(G(z))&lt;/em&gt; is close to &lt;em&gt;0&lt;/em&gt;(fake)&lt;/li&gt;
-  &lt;li&gt;Generator($\theta_g$) wants to &lt;em&gt;minimize objective&lt;/em&gt; such that &lt;em&gt;D(G(z))&lt;/em&gt; is close to &lt;em&gt;1&lt;/em&gt;(to fool discriminator)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We alternate the minimax objection function with:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Gradient ascent&lt;/strong&gt; on discriminator&lt;br /&gt;
- \(\mbox{max}_{\theta_d}\left[\mathbb{E}_{x\sim p_{data}}\log D_{\theta_d}(x) + \mathbb{E}_{z\sim p(z)}\log(1-D_{\theta_d}(G_{\theta_g}(z))) \right]\)&lt;/li&gt;
-  &lt;li&gt;1) &lt;strong&gt;Gradient descent&lt;/strong&gt; on generator&lt;br /&gt;
- \(\mbox{min}_{\theta_g}\mathbb{E}_{z\sim p(z)}\log(1-D_{\theta_d}(G_{\theta_g}(z)))\)
-    &lt;ul&gt;
-      &lt;li&gt;In practice, optimizing this generator objective does not work well;&lt;br /&gt;
-  When sample is likely fake, want to learn from it to improve generator (move to the right on &lt;em&gt;X&lt;/em&gt; axis), but gradient near &lt;em&gt;0&lt;/em&gt; in &lt;em&gt;X&lt;/em&gt; axis is relatively flat; Gradient signal is dominated by region where sample is already good(near &lt;em&gt;1&lt;/em&gt;).&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec12_11.png&quot; alt=&quot;png&quot; width=&quot;30%&amp;quot;, height=&amp;quot;30%&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;p&gt;2) &lt;strong&gt;Instead: Gradient ascent&lt;/strong&gt; on generator, different objective&lt;br /&gt;
- \(\mbox{max}_{\theta_d}\mathbb{E}_{z\sim p(z)}\log(D_{\theta_d}(G_{\theta_g}(z)))\)&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Rather than minimizing likelihood of discriminator being correct, maximize likelihood of discriminator being wrong. Same objective of fooling discriminator, but now higher gradient signal for bad samples.&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec12_12.png&quot; alt=&quot;png&quot; width=&quot;35%&amp;quot;, height=&amp;quot;35%&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;GAN training Algorithm&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec12_13.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;70%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;After training, use generator network to generate new images&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;gan-convolutional-architectures&quot;&gt;GAN: Convolutional Architectures&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Generator is an upsampling network with fractionally-strided convolutions&lt;br /&gt;
-  Discriminator is a convolutional network&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Architecture guidelines for stable Deep Conv GANs&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Replace any pooling layers with strided convolutions(discriminator) and fractional-strided convolutions(generator).&lt;/li&gt;
-      &lt;li&gt;Use batchnorm in both network.&lt;/li&gt;
-      &lt;li&gt;Remove fully connected hidden layers for deeper architecture.&lt;/li&gt;
-      &lt;li&gt;Use ReLU activation in generator for all layers except for the output, which uses Tanh.&lt;/li&gt;
-      &lt;li&gt;Use LeakyReLU activation in the discriminator for all layers.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;gan-interpretable-vector-math&quot;&gt;GAN: Interpretable Vector Math&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec12_14.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;works similar to a language model&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;2017-explosion-of-gans&quot;&gt;2017: Explosion of GANs&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;“The GAN Zoo”, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/hindupuravinash/the-gan-zoo&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;check &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/soumith/ganhacks&lt;/code&gt; for tips and tricks for training GANs&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;scene-graphs-to-gans&quot;&gt;Scene graphs to GANs&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec12_15.png&quot; alt=&quot;png&quot; width=&quot;30%&amp;quot;, height=&amp;quot;30%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Specifying exactly what kind of image you want to generate. The explicit structure in scene graphs provides better image generation for complex scenes.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;summary-gans&quot;&gt;Summary: GANs&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Don’t work with an explicit density function&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Take game-theoretic approach: learn to generate from training distribution through 2-player game&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Pros:
-    &lt;ul&gt;
-      &lt;li&gt;Beautiful, state-of-the-art samples&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Cons:
-    &lt;ul&gt;
-      &lt;li&gt;Trickier / more unstable to train&lt;/li&gt;
-      &lt;li&gt;Can’t solve inference queries such as $p(x)$, $p(z\vert x)$&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Active areas of research:
-    &lt;ul&gt;
-      &lt;li&gt;Better loss functions, more stable training (Wasserstein GAN, LSGAN, many others)&lt;/li&gt;
-      &lt;li&gt;Conditional GANs, GANs for all kinds of applications&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Useful Resources on Generative Models&lt;br /&gt;
-  CS236: Deep Generative Models (Stanford)&lt;br /&gt;
-  CS 294-158 Deep Unsupervised Learning (Berkeley)&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Supervised vs. Unsupervised Supervised Learning: Data: $(x,y)$; y is label Goal: Learn a function to map $x\rightarrow y$ Unsupervised Learning: Data: x; no labels Goal: Learn some underlying hidden structure of the data Generative Modeling Given training data, generate new samples from same distribution Objectives: Learn $p_{\scriptstyle\text{model}}(x)$ that approximates $p_{\scriptstyle\text{data}}(x)$ Sampling new x from $p_{\scriptstyle\text{model}}(x)$ Formulate as density estimation problems: Explicit density estimation: explicitly define and solve for $p_{\scriptstyle\text{model}}(x)$. Implicit density estimation: learn model that can sample from $p_{\scriptstyle\text{model}}(x)$ without explicitly defining it. Why Generative Models? Realistic samples for artwork, super-resolution, colorization, etc. Learn useful features for downstream tasks such as classification. Getting insights from high-dimensional data (physics, medical imaging, etc.) Modeling physical world for simulation and planning (robotics and reinforcement learning applications) … PixelRNN and PixelCNN; a brief overview Fully visible belief network (FVBN) is an explicit density model, defines tractable density function using chain rule to decompose the likelihood of an image x into product of 1-d distributions: Then maximize likelihood of training data. It is a complex distribution over pixel values, express using a neural network. PixelRNN, van der Oord et al., 2016 Generate image pixels starting from corner, dependency on previous pixels modeled using an RNN(LSTM). Drawback: sequential generation is slow in both training and inference PixelCNN, van der Oord et al., 2016 Generate image pixels starting from corner, ependency on previous pixels modeled using a CNN over context region(masked convolution) Training is faster than PixelRNN: it can parallelize convolutions since context region values known from training images. Generation is still slow: for a 32x32 image, we need to do forward passes of the network 1024 times for a single image. Improving PixelCNN performance Gated convolutional layers, Short-cut connections, Discretized logistic loss, Multi-scale, Training tricks, etc. See also PixelCNN++, Salimans et al., 2017 Summary Pros: Can explicitly compute likelihood p(x) Easy to optimize Good samples Cons: Sequential generation is slow Variational Autoencoder(VAE) VAE is an explicit density model, defines intractable(approximate) density function with latent z: $p_\theta(x) = \int p_\theta(z)p_\theta(x|z)\, dz$ No dependencies among pixels, can generate all pixels at the same time. But cannot optimize directly, derive and optimize lower bound on likelihood instead Background: Autoencoders Unsupervised approach for learning a lower-dimensional feature representation from unlabeled training data z usually smaller than x: with dimensionality reduction to capture meaningful factors of variation in data. Train such that features can be used to reconstruct original data($\hat{x}$) “Autoencoding”; encoding input itself(L2 loss) After training, throw away decoder and adjust to the final task Encoder can be used to initialize a supervised model; Transfer from large, unlabeled dataset(Autoencoder) to small, labeled dataset and fine-tune; train for final task. But we can’t generate new images from an autoencoder because we don’t know the space of z. $\rightarrow$ Variational Autoencoders for a generative model. Variational Autoencoders: Probabilistic spin on autoencoders Assume training data \(\left\{ x^{(i)}\right\} _{i=1}^N\) is generated from the distribution of unobserved (latent) representation z Intuition from autoencoders: x is an image, z is latent factors used to generate x: attributes, orientation, etc. We want to estimate the true parameters $\theta^*$ of this generative model given training data x. Model representation: p(z): Choose prior to be simple, e.g. Gaussian. z: Reasonable for latent attributes, e.g. pose, how much smile. p(x|z): Generating images, conditional probability is complex $\rightarrow$ represent with neural network $p_\theta(x)$: Learn model parameters to maximize likelihood of training data Variational Autoencoders: Intractability Data likelihood: $p_\theta(x) = \int p_\theta(z)p_\theta(x|z)\, dz$ where $p_\theta(z)$ is a Simple Gaussian prior and $p_\theta(x|z)$ is a decoder neural network, it is intractable to compute p(x|z) for every z. while Monte Carlo estimation-$\log p(x) \approx \log\frac{1}{k}\sum_{i=1}^k p(x|z^{(i)})$, where $z^{(i)}\sim p(z)$- is too high variance. divided by intractable $p_\theta(x)$, Posterior density also intractable: $p_\theta(z|x) = p_\theta(x|z)p_\theta(z)/p_\theta(x)$ Solution: In addition to modeling $p_\theta(x|z)$, learn $q_\phi(z|x)$ that approximates the true posterior $p_\theta(z|x)$. $q_\phi$, approximate posterior allows us to derive a lower bound on the data likelihood that is tractable, which can be optimized. Variational inference is to approximate the unknown posterior distribution from only the observed data x \[\begin{align*} \log p_\theta(x^{(i)}) &amp;amp;= \mathbf{E}_{z~q_\phi(z|x^{(i)})}\left[ \log p_\theta(x^{(i)}) \right] \quad \textit(p_\theta(x^{(i)})\ does\ not\ depend\ on\ z) \\ &amp;amp;= \mathbf{E}_z \left[ \log\frac{p_\theta(x^{(i)}|z)p_\theta(z)}{p_\theta(z|x^{(i)})} \right] \quad \textit(Bayes'\ Rule) \\ &amp;amp;= \mathbf{E}_z \left[ \log\frac{p_\theta(x^{(i)}|z)p_\theta(z)}{p_\theta(z|x^{(i)})} \frac{q_\phi(z|x^{(i)})}{q_\phi(z|x^{(i)})} \right] \quad \textit(Multiply\ by\ constant)\\ &amp;amp;= \mathbf{E}_z \left[\log p_\theta(x^{(i)}|z) \right] - \mathbf{E}_z \left[ \log\frac{q_\phi(z|x^{(i)})}{p_\theta(z)}\right] + \mathbf{E}_z \left[ \log\frac{q_\phi(z|x^{(i)})}{p_\theta(z|x^{(i)})}\right] \quad \textit(Logarithms) \\ &amp;amp;= \mathbf{E}_z \left[\log p_\theta(x^{(i)}|z) \right] - D_{KL}(q_\phi(z|x^{(i)})|p_\theta(z)) + D_{KL}(q_\phi(z|x^{(i)})|p_\theta(z|x^{(i)})) \end{align*}\] With taking expectation with respect to z(using encoder network) let us write nice KL terms; \(\mathbf{E}_z \left[\log p_\theta(x^{(i)}\vert z) \right]\): Decoder network gives $p_\theta(x\vert z)$, can compute estimate of this term through sampling(need some trick to differentiate through sampling). It reconstruct the input data. \(D_{KL}(q_\phi(z\vert x^{(i)})\vert p_\theta(z))\): KL term between Gaussian for encoder and z prior has nice closed-form solution. Encoder makes approximate posterior distribution close to prior. \(D_{KL}(q_\phi(z\vert x^{(i)})\vert p_\theta(z\vert x^{(i)}))\): is intractable, we can’t compute this term; but we know KL divergence always greater than 0. To maximize the data likelihood, we can rewrite \(\begin{align*} \log p_\theta (x^{(i)}) &amp;amp;= \mathbf{E}_z \left[ \log p _\theta (x^{(i)}\vert z) \right] - D_{KL}(q_\phi (z\vert x^{(i)})\vert p_\theta (z)) + D_{KL}(q_\phi (z\vert x^{(i)})\vert p_\theta (z\vert x^{(i)})) \\ &amp;amp;= \mathcal{L}(x^{(i)},\theta ,\phi ) + (C\ge 0) \end{align*}\) \(\mathcal{L}(x^{(i)},\theta,\phi)\): Decoder - Encoder Tractable lower bound which we can take gradient of and optimize. Maximizing this evidence lower bound(ELBO), we can maximize $\log p_\theta(x)$. Later, we take minus on this term for the loss function of a neural network. Encoder part; \(D_{KL}(q_\phi(z\vert x^{(i)})\vert p_\theta(z))\) We choose q(z) as a Gaussian distribution, $q(z\vert x) = N(\mu_{z\vert x}, \Sigma_{z\vert x})$. Computing the KL divergence, \(D_{KL}(N(\mu_{z\vert x}, \Sigma_{z\vert x}))\vert N(0,I))\), having analytical solution. Reparameterization trick z: to make sampling differentiable, input sample $\epsilon\sim N(0,I)$ to the graph $z = \mu_{z\vert x} + \epsilon\sigma_{z\vert x}$; where $\mu, \sigma$ are the part of computation graph. Decoder part; Maximize likelihood of original input being reconstructed, $\hat{x}-x$. For every minibatch of input data, compute $\mathcal{L}$ graph forward pass and backprop. Variational Autoencoders: Generating Data Diagonal prior on z for independent latent variables Different dimensions of z encode interpretable factors of variation; Also good feature representation taht can be computed using $q_\phi(z\vert x)$. Summary Probabilistic spin to traditional autoencoders, allows generating data Defines an intractable density; derive and optimize a (variational) lower bound Pros: Principled approach to generative models Interpretable latent space Allows inference of $q(z\vert x)$, can be useful feature representation for other tasks - Cons: Maximizes lower bound of likelihood: not as good evaluation as tractable model Samples mean; blurrier and lower quality compared to state-of-the-art (GANs) Generative Adversarial Networks(GANs) idea: Use a discriminator network to tell whether the generate image is within data distribution (“real”) or not Training GANs: Two-player game Discriminator network: try to distinguish between real and fake images Generator network: try to fool discriminator by generating real-looking images Train jointly in minimax game; Minimax objective function: \(\mbox{min}_{\theta_g} \mbox{max}_{\theta_d}\left[\mathbb{E}_{x\sim {p_{data}}}\log D_{\theta_d}(x) + \mathbb{E}_{z\sim p(z)}\log(1-D_{\theta_d}(G_{\theta_g}(z))) \right]\) where $\theta_g$ is an objective for the generator objective and $\theta_d$ for the discriminator $D_{\theta_d}(x)$: Discriminator outputs likelihood in (0,1) of real image $D_{\theta_d}(G_{\theta_g}(z))$: Discriminator output for generated fake data G(z) Discriminator($\theta_d$) wants to maximize objective such that D(x) is close to 1(real) and D(G(z)) is close to 0(fake) Generator($\theta_g$) wants to minimize objective such that D(G(z)) is close to 1(to fool discriminator) We alternate the minimax objection function with: Gradient ascent on discriminator \(\mbox{max}_{\theta_d}\left[\mathbb{E}_{x\sim p_{data}}\log D_{\theta_d}(x) + \mathbb{E}_{z\sim p(z)}\log(1-D_{\theta_d}(G_{\theta_g}(z))) \right]\) 1) Gradient descent on generator \(\mbox{min}_{\theta_g}\mathbb{E}_{z\sim p(z)}\log(1-D_{\theta_d}(G_{\theta_g}(z)))\) In practice, optimizing this generator objective does not work well; When sample is likely fake, want to learn from it to improve generator (move to the right on X axis), but gradient near 0 in X axis is relatively flat; Gradient signal is dominated by region where sample is already good(near 1). 2) Instead: Gradient ascent on generator, different objective \(\mbox{max}_{\theta_d}\mathbb{E}_{z\sim p(z)}\log(D_{\theta_d}(G_{\theta_g}(z)))\) Rather than minimizing likelihood of discriminator being correct, maximize likelihood of discriminator being wrong. Same objective of fooling discriminator, but now higher gradient signal for bad samples. GAN training Algorithm After training, use generator network to generate new images GAN: Convolutional Architectures Generator is an upsampling network with fractionally-strided convolutions Discriminator is a convolutional network Architecture guidelines for stable Deep Conv GANs Replace any pooling layers with strided convolutions(discriminator) and fractional-strided convolutions(generator). Use batchnorm in both network. Remove fully connected hidden layers for deeper architecture. Use ReLU activation in generator for all layers except for the output, which uses Tanh. Use LeakyReLU activation in the discriminator for all layers. GAN: Interpretable Vector Math works similar to a language model 2017: Explosion of GANs “The GAN Zoo”, https://github.com/hindupuravinash/the-gan-zoo check https://github.com/soumith/ganhacks for tips and tricks for training GANs Scene graphs to GANs Specifying exactly what kind of image you want to generate. The explicit structure in scene graphs provides better image generation for complex scenes. Summary: GANs Don’t work with an explicit density function Take game-theoretic approach: learn to generate from training distribution through 2-player game Pros: Beautiful, state-of-the-art samples Cons: Trickier / more unstable to train Can’t solve inference queries such as $p(x)$, $p(z\vert x)$ Active areas of research: Better loss functions, more stable training (Wasserstein GAN, LSGAN, many others) Conditional GANs, GANs for all kinds of applications Useful Resources on Generative Models CS236: Deep Generative Models (Stanford) CS 294-158 Deep Unsupervised Learning (Berkeley)</summary></entry></feed>
+&lt;img src=&quot;/assets/images/cs231n_lec13_16.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Self-Supervised Learning Generative vs. Self-supervised Learning Both aim to learn from data without manual label annotation Generative learning aims to model data distribution $p_{data}(x)$, e.g., generating realistic images. Self-supervised learning methods solve “pretext” tasks that produce good features for downstream tasks. Learn with supervised learning objectives, e.g., classification, regression. Labels of these pretext tasks are generated automatically. Self-supervised pretext tasks Example: learn to predict image transformations / complete corrupted images; e.g. image completion, rotation prediction, “jigsaw puzzle”, coloriztaion. Solving the pretext tasks allow the model to learn good features. We can automatically generate labels for the pretext tasks. Learning to generate pixel-level details is often unnecessary; learn high-level semantic features with pretext tasks instead(only encode high-level features sufficient enough to distinguish different objects, Contrastive Methods): Epstein, 2016 How to evaluate a self-supervised learning method? Self-supervised learning: With lots of unlabeled data, learn good feature extractors from self-supervised pretext tasks, e.g., predicting image rotations. Supervised Learning: With small amount of labeled data on the target task, attach a shallow network on the feature extractor; train the shallow network and evaluate on the target task, e.g., classification, detection. Pretext tasks from image transformations Predict Rotations Gidaris et al., 2018 - (Paper Review) Predict Relative Patch Locations Doersch et al., 2015 Solving “jigsaw puzzles”; shuffled patches Noroozi &amp;amp; Favaro, 2016 Predict Missing Pixels(Inpainting); encoder-decoder Pathak et al., 2016 Image Coloring; Split-brain Autoencoder Richard Zhang/ Phillip Isola Video Coloring; from t=0 reference frame to the later frames Summary: Pretext tasks Pretext tasks focus on “visual common sense”; by image transformations, can learn without supervision(big labeled data). The models are forced learn good features about natural images, e.g., semantic representation of an object category, in order to solve the pretext tasks. We don’t care about the performance of these pretext tasks, but rather how useful the learned features are for downstream tasks. $\color{red}{Problems}$: 1) coming up with individual pretext tasks is tedious, and 2) the learned representations may not be general; tied to a specific pretext task. Contrastive Representation Learning For a more general pretext task, A formulation of contrastive learning What we want: $\mbox{score}(f(x), f(x^+)) » score(f(x), f(x^-))$ x: reference sample, x+: positive sample, x-: negative sample Given a chosen score function, we aim to learn an encoder function f that yields high score for positive pairs and low scores for negative pairs. Loss function given 1 positive sample and N-1 negative samples: seems familiar with Cross entropy loss for a N-way softmax classifier! i.e., learn to find the positive sample from the N samples Commonly known as the InfoNCE loss(van den Oord et al., 2018) A lower bound on the mutual information between $f(x)$ and $f(x^+)$ \(\rightarrow MI[f(x), f(x^+)] - \log(N) \ge -L\) The larger the negative sample size(N), the tighter the bound SimCLR: A Simple Framework for Contrastive Learning Chen et al., 2020 Cosine similarity as the score function: \(s(u, v) = \frac{u^T v}{\lVert u \rVert \lVert v \rVert}\) Use a projection network h(.) to project features to a space where contrastive learning is applied. Generate positive samples through data augmentation: random cropping, random color distortion, and random blur. Evaluate: Freeze feature encoder, train(finetune) on a supervised downstream task SimCLR design choices: Projection head($z=g(.)$) Linear / non-linear projection heads improve representation learning. A possible explanation: contrastive learning objective may discard useful information for downstream tasks. representation space z is trained to be invariant to data transformation. by leveraging the projection head g(.), more information can be preserved in the h representation space SimCLR design choices: Large batch size Large training batch size is crucial for SimCLR, but it causes large memory footprint during backpropagation; requires distributed training on TPUs. Momentum Contrastive Learning (MoCo) He et al., 2020 Key differences to SimCLR: Keep a running queue of keys (negative samples). Compute gradients and update the encoder only through the queries. Decouple min-batch size with the number of keys: can support a large number of negative samples. MoCo V2 Chen et al., 2020 A hybrid of ideas from SimCLR and MoCo: From SimCLR: non-linear projection head and strong data augmentation. From MoCo: momentum-updated queues that allow training on a large number of negative samples (no TPU required). Key takeaways(vs. SimCLR, MoCo V1): Non-linear projection head and strong data augmentation are crucial for contrastive learning. Decoupling mini-batch size with negative sample size allows MoCo-V2 to outperform SimCLR with smaller batch size (256 vs. 8192). Achieved with much smaller memory footprint. Instance vs. Sequence Contrastive Learning Instance-level contrastive learning: Based on positive &amp;amp; negative instances. E.g., SimCLR, MoCo Sequence-level contrastive learning: Based on sequential / temporal orders. E.g., Contrastive Predictive Coding (CPC) Contrastive Predictive Coding (CPC) van den Oord et al., 2018 Contrastive: contrast between “right” and “wrong” sequences using contrastive learning. Predictive: the model has to predict future patterns given the current context. Coding: the model learns useful feature vectors, or “code”, for downstream tasks, similar to other context self-supervised methods. Encode all samples in a sequence into vectors $z_t = g_{\mbox{enc}}(x_t)$ Summarize context (e.g., half of a sequence) into a context code $c_t$ using an auto-regressive model ($g_{\mbox{ar}}$). The original paper uses GRU-RNN here. Compute InfoNCE loss between the context $c_t$ and future code $z_{t+k}$ using the following time-dependent score funtion: $s_k(z_{t+k}, c_t) = z_{t+k}^T W_k c_t$, where $W_k$ is a trainable matrix. Summary(CPC): Contrast “right” sequence with “wrong” sequence. InfoNCE loss with a time-dependent score function. Can be applied to a variety of learning problems, but not as effective in learning image representations compared to instance-level methods. Other examples</summary></entry></feed>

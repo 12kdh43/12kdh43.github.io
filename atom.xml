@@ -8,6 +8,159 @@
     
       
       <item>
+        <title>cs224n - Lecture 3. Backprop and Neural Networks</title>
+        
+          <description>&lt;h3 id=&quot;named-entity-recognitionner&quot;&gt;Named Entity Recognition(NER)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Task: &lt;strong&gt;find&lt;/strong&gt; and &lt;strong&gt;classify&lt;/strong&gt; names in text&lt;/li&gt;
+  &lt;li&gt;Possible uses:
+    &lt;ul&gt;
+      &lt;li&gt;Tracking mentions of particular entities in documents&lt;/li&gt;
+      &lt;li&gt;For question answering, answers are usually named entities&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Often followed by Named Entity Linking/Canonicalization into Knowledge Base&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;simple-ner-window-classification-using-binary-logistic-classifier&quot;&gt;Simple NER: Window classification using binary logistic classifier&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Using word vectors, build a context window of word vectors, then pass through a neural network and feed it to logistic classifier.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;idea: classify each word in its context window of neighboring words&lt;/li&gt;
+  &lt;li&gt;Train logistic classifier on hand-labeled data to classify center word {yes/no} for each class based on a concatenation of word vectors in a window
+    &lt;ul&gt;
+      &lt;li&gt;In practice, we usually use multi-class softmax&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Example: Classify “Paris” as +/- location(binary for is_location) in context of sentence with window length 2:&lt;br /&gt;
+  sentence $=$ “$\mbox{ the  museums  in  Paris  are  amazing  to  see   . }$”
+  $x_{\text{window}} = [x_{\text{museums}}\quad x_{\text{in}}\quad x_{\text{Paris}}\quad x_{\text{are}}\quad x_{\text{amazing}}]^T$&lt;/li&gt;
+  &lt;li&gt;Resulting vector $x_{\text{window}} = x\in \mathbb{R}^{5d}$, a column vector.&lt;/li&gt;
+  &lt;li&gt;To classify all words: run classifier for each class on the vector centered on each word in the sentence&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec3_0.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;computing-gradients-by-hand&quot;&gt;Computing Gradients by Hand&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Matrix calculus: Fully vectorized gradients
+    &lt;ul&gt;
+      &lt;li&gt;“Multivariable calculus is just like single-variable calculus if you use matrices”&lt;/li&gt;
+      &lt;li&gt;Much faster and more usful than non-vectorized gradients&lt;/li&gt;
+      &lt;li&gt;But doing a non-vectorized gradient can be good for intuition; partial derivative for one parameter&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Vector gradient&lt;br /&gt;
+  Given a function with &lt;em&gt;1&lt;/em&gt; output and &lt;em&gt;n&lt;/em&gt; inputs&lt;br /&gt;
+  $f(x) = f(x_1, x_2, \ldots, x_n)$&lt;br /&gt;
+  Its gradient is a vector of partial derivatives w.r.t each input&lt;br /&gt;
+  \(\frac{\partial f}{\partial x} = \left[\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots, \frac{\partial f}{\partial x_n} \right]\)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Jacobian Matrix: Generalization of the Gradient&lt;br /&gt;
+  Given a function with &lt;strong&gt;&lt;em&gt;m&lt;/em&gt; outputs&lt;/strong&gt; and &lt;em&gt;n&lt;/em&gt; inputs&lt;br /&gt;
+  $f(x) = [f_1(x_1, x_2, \ldots, x_n), \ldots, f_m(x_1, x_2, \ldots, x_n)]$&lt;br /&gt;
+  It’s Jacobian is an &lt;strong&gt;$m \times n$&lt;/strong&gt; matrix of partial derivatives&lt;br /&gt;
+  \(\begin{align*}
+  \frac{\partial f}{\partial x} = 
+  \begin{bmatrix}
+  \frac{\partial f_1}{\partial x_1} &amp;amp; \cdots &amp;amp; \frac{\partial f_1}{\partial x_n} \\
+  \vdots &amp;amp; \ddots &amp;amp; \vdots \\
+  \frac{\partial f_m}{\partial x_1} &amp;amp; \cdots &amp;amp; \frac{\partial f_m}{\partial x_n}
+  \end{bmatrix}
+  \end{align*}\) $\quad\quad$ \(\begin{align*}\left( \frac{\partial f}{\partial x} \right)_{ij} = \frac{\partial f_i}{\partial x_j}\end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Chain Rule
+    &lt;ul&gt;
+      &lt;li&gt;For composition of one-variable functions: &lt;strong&gt;multiply derivatives&lt;/strong&gt;&lt;br /&gt;
+  $z = g(y)$, $y = f(x)$&lt;br /&gt;
+  \(\begin{align*}\frac{dz}{dx} = \frac{dz}{dy}\frac{dy}{dx}\end{align*}\)&lt;/li&gt;
+      &lt;li&gt;For multiple variables at once: &lt;strong&gt;multiply Jacobians&lt;/strong&gt;&lt;br /&gt;
+  $h = f(z)$&lt;br /&gt;
+  $z = Wx + b$&lt;br /&gt;
+  \(\begin{align*}\frac{\partial h}{\partial x} = \frac{\partial h}{\partial z}\frac{\partial z}{\partial x} = \cdots\end{align*}\)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Example Jacobian: Elementwise activation function&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec3_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Other Jacobians&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec3_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Write out the Jacobians&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec3_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Derivative with respect to Matrix: Output shape&lt;br /&gt;
+  for $\frac{\partial s}{\partial W}$, output $s$ is a scalar and input $W \in \mathbb{R}^{n\times m}$: &lt;em&gt;1&lt;/em&gt; by &lt;em&gt;nm&lt;/em&gt; Jacobian?&lt;br /&gt;
+  $\rightarrow$ is inconvenient to do \(\theta^{\text{new}} = \theta^{\text{old}} - \alpha\nabla_\theta J(\theta)\) gradient descent.
+    &lt;ul&gt;
+      &lt;li&gt;Instead, use the &lt;strong&gt;shape convention&lt;/strong&gt;: the shape of the gradient is the shape of the parameters&lt;br /&gt;
+  &lt;em&gt;n&lt;/em&gt; by &lt;em&gt;m&lt;/em&gt; matrix \(\begin{align*}\frac{\partial s}{\partial W} = 
+  \begin{bmatrix} 
+  \frac{\partial s}{\partial W_{11}} &amp;amp; \cdots &amp;amp; \frac{\partial s}{\partial W_{1m}} \\ 
+  \vdots &amp;amp; \ddots &amp;amp; \vdots \\
+  \frac{\partial s}{\partial W_{n1}} &amp;amp; \cdots &amp;amp; \frac{\partial s}{\partial W_{nm}}
+  \end{bmatrix}\end{align*}\)&lt;/li&gt;
+      &lt;li&gt;$\frac{\partial s}{\partial W} = \delta\frac{\partial z}{\partial W}$&lt;br /&gt;
+  $z = Wx + b$&lt;br /&gt;
+  \(\begin{align*}
+  \frac{\partial s}{\partial W} &amp;amp;= \delta^T x^T \\
+  &amp;amp; = \begin{bmatrix} \delta_1 \\ \vdots \\ \delta_n \end{bmatrix} [x_1, \ldots, x_m] = 
+  \begin{bmatrix} \delta_1 x_1 &amp;amp; \cdots &amp;amp; \delta_1 x_m \\
+  \vdots &amp;amp; \ddots &amp;amp; \vdots \\
+  \delta_n x_1 &amp;amp; \cdots &amp;amp; \delta_n x_m \end{bmatrix}
+  \end{align*}\)&lt;br /&gt;
+  denote that $\delta$ is local error signal at &lt;em&gt;z&lt;/em&gt; and &lt;em&gt;x&lt;/em&gt; is local input signal.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;what-shape-should-derivatives-be&quot;&gt;What shape should derivatives be?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Two options:
+    &lt;ol&gt;
+      &lt;li&gt;Use Jacobian form as much as possible, reshape to follow the shape convention at the end:
+        &lt;ul&gt;
+          &lt;li&gt;at the end transpose $\frac{\partial s}{\partial b}$ to make the derivative a column vector, resulting in $\delta^T$&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Always follow the shape convention
+        &lt;ul&gt;
+          &lt;li&gt;Look at dimensions to figure out when to transpose and/or reorder terms&lt;/li&gt;
+          &lt;li&gt;The error message $\delta$ that arrives at a hidden layer has the same dimensionality as that hidden layer&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;backpropagation-chain-rule&quot;&gt;Backpropagation: Chain Rule&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Other trick:&lt;br /&gt;
+  &lt;strong&gt;re-use&lt;/strong&gt; derivatives computed for higher layers in computing derivatives for lower layers to minimize computation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec4_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+</description>
+        
+        <pubDate>Tue, 08 Mar 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs224n_lec3</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs224n_lec3</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>cs224n - Lecture 2. Neural Classifiers</title>
         
           <description>&lt;h3 id=&quot;review-main-idea-of-word2vec&quot;&gt;Review: Main idea of word2vec&lt;/h3&gt;
