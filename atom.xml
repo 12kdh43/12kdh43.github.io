@@ -8,6 +8,258 @@
     
       
       <item>
+        <title>cs224n - Lecture 4. Dependency Parsing</title>
+        
+          <description>&lt;h3 id=&quot;two-views-of-linguistic-structure-phrase-structure&quot;&gt;Two views of linguistic structure: Phrase structure&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Constituency = phrase structure grammar = context-free grammers(CFGs)&lt;br /&gt;
+  &lt;strong&gt;Phrase structure&lt;/strong&gt; organizes words into nested constituents&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Starting unit: &lt;strong&gt;words&lt;/strong&gt; (noun, preposition, adjective, determiner, …)&lt;br /&gt;
+  the, $\ $ cat, $\ $ cuddly, $\ $ by, $\ $ door&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Words combine into &lt;strong&gt;phrases&lt;/strong&gt;&lt;br /&gt;
+  the cuddly cat(noun phrase),&lt;br /&gt;
+  by the door(prepositional phrase; preposition(by) + noun phrase)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Phrases can combine into bigger phrases&lt;br /&gt;
+  the cuddly cat by the door(noun phrase)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Lexicon:&lt;br /&gt;
+  $\text{N} \rightarrow \text{cat}$&lt;br /&gt;
+  $\text{N} \rightarrow \text{door}$&lt;br /&gt;
+  $\text{Det} \rightarrow \text{the}$&lt;br /&gt;
+  $P \rightarrow \text{by}$&lt;br /&gt;
+  $\text{Adj} \rightarrow \text{cuddly}$&lt;br /&gt;
+  $\vdots$&lt;/li&gt;
+  &lt;li&gt;Grammar:&lt;br /&gt;
+  $\text{NP} \rightarrow \text{Det } \  \text{ (Adj)}^{\ast} \  \text{ N } \  \text{ (PP)}$&lt;br /&gt;
+  $\text{PP} \rightarrow \text{P } \  \text{ NP}$&lt;br /&gt;
+  $\vdots$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;two-views-of-linguistic-structure-dependency-structure&quot;&gt;Two views of linguistic structure: Dependency structure&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Dependency structure shows which words depend on (modify, attach to, or are arguments of) which other words.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;why-do-we-need-sentence-structure&quot;&gt;Why do we need sentence structure?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Humans communicate complex ideas by composing words together into bigger units to convey complex meanings&lt;/li&gt;
+  &lt;li&gt;Listeners need to work out what modifies &lt;em&gt;attaches to&lt;/em&gt; what&lt;/li&gt;
+  &lt;li&gt;A model needs to understand sentence structure in order to be able to interpret language correctly&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ambiguities&quot;&gt;Ambiguities&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Prepositional phrase ambiguity
+    &lt;ul&gt;
+      &lt;li&gt;A key parsing decision is how we ‘attach’ various constituents
+        &lt;ul&gt;
+          &lt;li&gt;&lt;em&gt;PP&lt;/em&gt;s, adverbial or participial phrases, infinitives, coordinations&lt;br /&gt;
+  e.g.&lt;br /&gt;
+  \(\begin{align*}
+  \text{The board approved [its acquisition]} &amp;amp; \text{[by Royal Trustco Ltd.]} \\
+                                      &amp;amp; \text{[of Toronto]} \\
+                                      &amp;amp; \text{[for \$27 a share]} \\
+                                      &amp;amp; \text{[at its monthly meeting].}
+  \end{align*}\)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;With a sentence of &lt;em&gt;k&lt;/em&gt; prepositional phrases at the end of it, the number of parses is given by the Catalan numbers; $C_n = (2n)!/[(n+1)!n!]$, an exponential series growing as the number of prepositional phrases.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Coordination scopre ambiguity&lt;br /&gt;
+  e.g. &lt;strong&gt;Shuttle veteran&lt;/strong&gt; and longtime NASA executive__ Fred Gregory appointed to board&lt;br /&gt;
+      $\rightarrow$ 1 or 2 person?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Adjectival/Adverbial Modifier ambiguity&lt;br /&gt;
+  e.g. Students get &lt;strong&gt;first hand job experience&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Verb Phrase(VP) attachment ambiguity&lt;br /&gt;
+  e.g. Mutilated body washes up on Rio beach &lt;strong&gt;to be used for Olympics beach volleyball&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;dependency-paths-help-extract-semantic-interpretation&quot;&gt;Dependency paths help extract semantic interpretation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;simple practical example: extracting protein-protein interaction&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec4_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;dependency-grammar-and-dependency-structure&quot;&gt;Dependency Grammar and Dependency Structure&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Dependency syntax postulates that syntactic structure consists of relations between lexical items, normally binary asymmetric relations (“arrows”) called &lt;strong&gt;dependencies&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec4_1.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The arrows are commonly &lt;strong&gt;typed&lt;/strong&gt; with the name of grammatical relations (subject, prepositional object, apposition, etc.)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;An arrow connects a &lt;strong&gt;head&lt;/strong&gt;(governor, superior, regent) with a &lt;strong&gt;dependent&lt;/strong&gt;(modifier, inferior, subordinate)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Usually, dependencies form a tree(a connected, acyclic, single-root graph)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Check: some people draw the arrows one way; some the other way&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Usually add a fake ROOT so every word is a dependent of precisely 1 other node&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-rise-of-annotated-data--universal-dependencies-treebanks&quot;&gt;The rise of annotated data &amp;amp; Universal Dependencies treebanks&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Advantages of treebank
+    &lt;ul&gt;
+      &lt;li&gt;Reusability of the labor
+        &lt;ul&gt;
+          &lt;li&gt;Many parsers, part-of-speech taggers, etc. can be built on it&lt;/li&gt;
+          &lt;li&gt;Valuable resource for linguistic&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Broad coverage, not just a few intuitions&lt;/li&gt;
+      &lt;li&gt;Frequencies and distributional information(statistics)&lt;/li&gt;
+      &lt;li&gt;A way to evaluate NLP systems&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;dependency-conditioning-preferences&quot;&gt;Dependency Conditioning Preferences&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec4_2.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The sources of information for dependency parsing
+    &lt;ol&gt;
+      &lt;li&gt;Bilexical affinities: The dependency $\text{discussion}\rightarrow\text{issues}$ is plausible&lt;/li&gt;
+      &lt;li&gt;Dependency distance: Most dependencies are between nearby words&lt;/li&gt;
+      &lt;li&gt;Intervening material: Dependencies rarely span intervening verbs or punctuation&lt;/li&gt;
+      &lt;li&gt;Valency of heads: How many dependents on which side are usual for a head?&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;dependency-parsing&quot;&gt;Dependency Parsing&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;A sentence is parsed by choosing for each word what other word (including ROOT) it is a dependent of&lt;/li&gt;
+  &lt;li&gt;Usually some constraints:
+    &lt;ul&gt;
+      &lt;li&gt;Only one word is a dependent of ROOT&lt;/li&gt;
+      &lt;li&gt;Don’t want cycles $A\rightarrow B$, $B\rightarrow A$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;This makes the dependencies a tree&lt;/li&gt;
+  &lt;li&gt;Final issue is whether arrows can cross(be &lt;strong&gt;non-projective&lt;/strong&gt;) or not&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;projectivity&quot;&gt;Projectivity&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Definition of a &lt;strong&gt;projective parse&lt;/strong&gt;: There are no crossing dependency arcs when the words are laid out in their linear order, with all arcs above the words&lt;/li&gt;
+  &lt;li&gt;Dependencies corresponding to a CFG tree must be &lt;strong&gt;projective&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;i.e., by forming dependencies by taking 1 child of each category as head&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Most syntactic structure is projective like this, but dependency theory normally does allow non-projective structures to account for displaced constituents
+    &lt;ul&gt;
+      &lt;li&gt;You can’t easily get the semantics of certain constructions right without these nonprojective dependencies&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;e.g.&lt;br /&gt;
+  &lt;strong&gt;From&lt;/strong&gt; who did Bill buy the coffee yesterday?&lt;br /&gt;
+  Who did Bill buy the coffee &lt;strong&gt;from&lt;/strong&gt; yesterday&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;methods-of-dependency-parsing&quot;&gt;Methods of Dependency Parsing&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Dynamic programming, &lt;em&gt;Eisner(1996)&lt;/em&gt;: $O(n^3)$ complexity&lt;/li&gt;
+  &lt;li&gt;Graph algorithms, &lt;em&gt;McDonald et al.(2005)&lt;/em&gt;: creating a Minimun Spanning Tree&lt;/li&gt;
+  &lt;li&gt;Constraint Satisfaction, &lt;em&gt;Karlsson(1990)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;“Transition-based parsing” or “deterministic dependency parsing”&lt;br /&gt;
+ Greedy choice of attachments guided by good machine learning classifiers&lt;br /&gt;
+ E.g., MaltParser, &lt;em&gt;Nivre et al.(2008)&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;greedy-transition-based-parsing-nivre-2003&quot;&gt;Greedy transition-based parsing, Nivre 2003&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;A simple form of greedy discriminative dependency parser&lt;/li&gt;
+  &lt;li&gt;The parser does a sequence of bottom-up actions
+    &lt;ul&gt;
+      &lt;li&gt;Roughly like “shift” or “reduce” in a shift-reduce parser, but the “reduce” actions are specialized to create dependencies with head on left or right&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The parser has:
+    &lt;ul&gt;
+      &lt;li&gt;a stack $\sigma$, written with top to the right
+        &lt;ul&gt;
+          &lt;li&gt;which starts with the ROOT symbol&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;a buffer $\beta$, written with top to the left
+        &lt;ul&gt;
+          &lt;li&gt;which starts with the input sentence&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;a set of dependency arcs A
+        &lt;ul&gt;
+          &lt;li&gt;which starts off empty&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;a set of actions&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;basic-transition-based-dependency-parser&quot;&gt;Basic transition-based dependency parser&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec4_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Arc-standard transition-based parser&lt;br /&gt;
+  E.g., Analysis of “I ate fish”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec4_4.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec4_5.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;maltparser-nivre-and-hall-2005&quot;&gt;MaltParser, Nivre and Hall 2005&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;How we choose the next action?&lt;br /&gt;
+  Answer: Machine Learning!&lt;/li&gt;
+  &lt;li&gt;Each action is predicted by a discriminative classifier (e.g., softmax classifier) over legal move
+    &lt;ul&gt;
+      &lt;li&gt;Max of 3 untyped choices; max of $\lvert R \rvert \times 2 + 1 $ when typed&lt;/li&gt;
+      &lt;li&gt;Features: top of stack word, POS; first in buffer word, POS; etc.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;There is NO search(in the simplest form)
+    &lt;ul&gt;
+      &lt;li&gt;But you can profitably do a beam search if you wish(slower but better): You keep &lt;em&gt;k&lt;/em&gt; good parse prefixes at each time step&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The model’s accuracy is &lt;em&gt;fractionally&lt;/em&gt; below the state of the art in dependency parsing, but it provides &lt;strong&gt;very fast linear time parsing&lt;/strong&gt;, with high accuracy, great for parsing the web&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;conventional-feature-representation&quot;&gt;Conventional Feature Representation&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec4_6.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;evaluation-of-dependency-parsing-labeled-dependency-accuracy&quot;&gt;Evaluation of Dependency Parsing: (labeled) dependency accuracy&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec4_7.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 11 Mar 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs224n_lec4</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs224n_lec4</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>cs224n - Lecture 3. Backprop and Neural Networks</title>
         
           <description>&lt;h3 id=&quot;named-entity-recognitionner&quot;&gt;Named Entity Recognition(NER)&lt;/h3&gt;
@@ -798,7 +1050,7 @@ J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substac
   &lt;li&gt;
     &lt;p&gt;Mask loss&lt;br /&gt;
   In the second stage, in parallel to predicting the class and box offset, Mask R-CNN also outputs a binary mask(ones to the object and zeros elsewhere) for each RoI. Defined multi-task loss on each sampled RoI: $L = L_{cls} + L_{box} + L_{mask}$&lt;br /&gt;
-  The mask branch has a $Km^2$-dimensional output for each RoI, which encodes &lt;em&gt;K&lt;/em&gt; binary masks of resolution &lt;em&gt;m\times m&lt;/em&gt;, one for each of the &lt;em&gt;K&lt;/em&gt; classes. To this we apply a per-pixel sigmoid, and define $L_{mask}$ as the &lt;strong&gt;average binary cross-entropy loss&lt;/strong&gt;.  For an RoI associated with ground-truth class &lt;em&gt;k&lt;/em&gt;, $L_{mask}$ is only defined on the &lt;em&gt;k&lt;/em&gt;-th mask(other mask outputs do not contribute to the loss).&lt;/p&gt;
+  The mask branch has a $Km^2$-dimensional output for each RoI, which encodes &lt;em&gt;K&lt;/em&gt; binary masks of resolution $m\times m$, one for each of the &lt;em&gt;K&lt;/em&gt; classes. To this we apply a per-pixel sigmoid, and define $L_{mask}$ as the &lt;strong&gt;average binary cross-entropy loss&lt;/strong&gt;.  For an RoI associated with ground-truth class &lt;em&gt;k&lt;/em&gt;, $L_{mask}$ is only defined on the &lt;em&gt;k&lt;/em&gt;-th mask(other mask outputs do not contribute to the loss).&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;em&gt;Decouples&lt;/em&gt; mask and class prediction&lt;br /&gt;

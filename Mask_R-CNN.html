@@ -238,7 +238,7 @@ into the {body} of the default.hbs template -->
   <li>
     <p>Mask loss<br />
   In the second stage, in parallel to predicting the class and box offset, Mask R-CNN also outputs a binary mask(ones to the object and zeros elsewhere) for each RoI. Defined multi-task loss on each sampled RoI: $L = L_{cls} + L_{box} + L_{mask}$<br />
-  The mask branch has a $Km^2$-dimensional output for each RoI, which encodes <em>K</em> binary masks of resolution <em>m\times m</em>, one for each of the <em>K</em> classes. To this we apply a per-pixel sigmoid, and define $L_{mask}$ as the <strong>average binary cross-entropy loss</strong>.  For an RoI associated with ground-truth class <em>k</em>, $L_{mask}$ is only defined on the <em>k</em>-th mask(other mask outputs do not contribute to the loss).</p>
+  The mask branch has a $Km^2$-dimensional output for each RoI, which encodes <em>K</em> binary masks of resolution $m\times m$, one for each of the <em>K</em> classes. To this we apply a per-pixel sigmoid, and define $L_{mask}$ as the <strong>average binary cross-entropy loss</strong>.  For an RoI associated with ground-truth class <em>k</em>, $L_{mask}$ is only defined on the <em>k</em>-th mask(other mask outputs do not contribute to the loss).</p>
   </li>
   <li>
     <p><em>Decouples</em> mask and class prediction<br />
@@ -436,6 +436,8 @@ into the {body} of the default.hbs template -->
                         <div class="read-next-card-content">
                             <ul>
                                 
+                                
+                                  
                                 
                                   
                                 

@@ -40,7 +40,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
 
 
 
-    <title>cs231n - Lecture 2. Image Classification</title>
+    <title>cs224n - Lecture 4. Dependency Parsing</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -69,30 +69,30 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="" />
     <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
-    <link rel="canonical" href="http://0.0.0.0:4000/cs231n_lec2" />
+    <link rel="canonical" href="http://0.0.0.0:4000/cs224n_lec4" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="cs231n - Lecture 2. Image Classification" />
-    <meta property="og:description" content="Image Classification: A Core Task in Computer Vision The Problem: Semantic Gap considering image as a tensor of integers between [0,255] with 3 channels RGB Challenges: Viewpoint variation Background Clutter Illumination Occlusion Deformation Intraclass variation An image classifier def classify_image(image): # Some magic here? return class_label ML: Data-Driven Approach Collect" />
-    <meta property="og:url" content="http://0.0.0.0:4000/cs231n_lec2" />
+    <meta property="og:title" content="cs224n - Lecture 4. Dependency Parsing" />
+    <meta property="og:description" content="Two views of linguistic structure: Phrase structure Constituency = phrase structure grammar = context-free grammers(CFGs) Phrase structure organizes words into nested constituents Starting unit: words (noun, preposition, adjective, determiner, …) the, $\ $ cat, $\ $ cuddly, $\ $ by, $\ $ door Words combine into phrases the cuddly cat(noun" />
+    <meta property="og:url" content="http://0.0.0.0:4000/cs224n_lec4" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta property="article:author" content="https://www.facebook.com/" />
-    <meta property="article:published_time" content="2021-12-13T15:00:00+00:00" />
-    <meta property="article:modified_time" content="2021-12-13T15:00:00+00:00" />
-    <meta property="article:tag" content="cs231n" />
+    <meta property="article:published_time" content="2022-03-11T00:00:00+00:00" />
+    <meta property="article:modified_time" content="2022-03-11T00:00:00+00:00" />
+    <meta property="article:tag" content="cs224n" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="cs231n - Lecture 2. Image Classification" />
-    <meta name="twitter:description" content="Image Classification: A Core Task in Computer Vision The Problem: Semantic Gap considering image as a tensor of integers between [0,255] with 3 channels RGB Challenges: Viewpoint variation Background Clutter Illumination Occlusion Deformation Intraclass variation An image classifier def classify_image(image): # Some magic here? return class_label ML: Data-Driven Approach Collect" />
+    <meta name="twitter:title" content="cs224n - Lecture 4. Dependency Parsing" />
+    <meta name="twitter:description" content="Two views of linguistic structure: Phrase structure Constituency = phrase structure grammar = context-free grammers(CFGs) Phrase structure organizes words into nested constituents Starting unit: words (noun, preposition, adjective, determiner, …) the, $\ $ cat, $\ $ cuddly, $\ $ by, $\ $ door Words combine into phrases the cuddly cat(noun" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Darron's Devlog" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="cs231n" />
+    <meta name="twitter:data2" content="cs224n" />
     <meta name="twitter:site" content="@" />
     <meta name="twitter:creator" content="@" />
     <meta property="og:image:width" content="1400" />
@@ -107,7 +107,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "name": "Darron's Devlog",
         "logo": "http://0.0.0.0:4000/"
     },
-    "url": "http://0.0.0.0:4000/cs231n_lec2",
+    "url": "http://0.0.0.0:4000/cs224n_lec4",
     "image": {
         "@type": "ImageObject",
         "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
@@ -116,9 +116,9 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://0.0.0.0:4000/cs231n_lec2"
+        "@id": "http://0.0.0.0:4000/cs224n_lec4"
     },
-    "description": "Image Classification: A Core Task in Computer Vision The Problem: Semantic Gap considering image as a tensor of integers between [0,255] with 3 channels RGB Challenges: Viewpoint variation Background Clutter Illumination Occlusion Deformation Intraclass variation An image classifier def classify_image(image): # Some magic here? return class_label ML: Data-Driven Approach Collect"
+    "description": "Two views of linguistic structure: Phrase structure Constituency = phrase structure grammar = context-free grammers(CFGs) Phrase structure organizes words into nested constituents Starting unit: words (noun, preposition, adjective, determiner, …) the, $\ $ cat, $\ $ cuddly, $\ $ by, $\ $ door Words combine into phrases the cuddly cat(noun"
 }
     </script>
 
@@ -131,7 +131,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="cs231n - Lecture 2. Image Classification" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="cs224n - Lecture 4. Dependency Parsing" href="/feed.xml" />
 
 
 </head>
@@ -186,135 +186,267 @@ into the {body} of the default.hbs template -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
-        <article class="post-full  tag-cs231n  no-image">
+        <article class="post-full  tag-cs224n  no-image">
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="13 December 2021">13 December 2021</time>
+                    <time class="post-full-meta-date" datetime="11 March 2022">11 March 2022</time>
                     
                         <span class="date-divider">/</span>
                         
 							
                             
-                               <a href='/tag/cs231n/'>CS231N</a>
+                               <a href='/tag/cs224n/'>CS224N</a>
                             
                         
                     
                 </section>
-                <h1 class="post-full-title">cs231n - Lecture 2. Image Classification</h1>
+                <h1 class="post-full-title">cs224n - Lecture 4. Dependency Parsing</h1>
             </header>
 	<!--
             
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h3 id="image-classification-a-core-task-in-computer-vision">Image Classification: A Core Task in Computer Vision</h3>
-
+                    <h3 id="two-views-of-linguistic-structure-phrase-structure">Two views of linguistic structure: Phrase structure</h3>
 <ul>
   <li>
-    <p>The Problem: Semantic Gap<br />
-considering image as a tensor of integers between [0,255] with 3 channels RGB</p>
+    <p>Constituency = phrase structure grammar = context-free grammers(CFGs)<br />
+  <strong>Phrase structure</strong> organizes words into nested constituents</p>
   </li>
   <li>
-    <p>Challenges:<br />
-  Viewpoint variation<br />
-  Background Clutter
-  Illumination<br />
-  Occlusion<br />
-  Deformation<br />
-  Intraclass variation</p>
+    <p>Starting unit: <strong>words</strong> (noun, preposition, adjective, determiner, …)<br />
+  the, $\ $ cat, $\ $ cuddly, $\ $ by, $\ $ door</p>
   </li>
   <li>
-    <p>An image classifier</p>
+    <p>Words combine into <strong>phrases</strong><br />
+  the cuddly cat(noun phrase),<br />
+  by the door(prepositional phrase; preposition(by) + noun phrase)</p>
+  </li>
+  <li>
+    <p>Phrases can combine into bigger phrases<br />
+  the cuddly cat by the door(noun phrase)</p>
+  </li>
+  <li>Lexicon:<br />
+  $\text{N} \rightarrow \text{cat}$<br />
+  $\text{N} \rightarrow \text{door}$<br />
+  $\text{Det} \rightarrow \text{the}$<br />
+  $P \rightarrow \text{by}$<br />
+  $\text{Adj} \rightarrow \text{cuddly}$<br />
+  $\vdots$</li>
+  <li>Grammar:<br />
+  $\text{NP} \rightarrow \text{Det } \  \text{ (Adj)}^{\ast} \  \text{ N } \  \text{ (PP)}$<br />
+  $\text{PP} \rightarrow \text{P } \  \text{ NP}$<br />
+  $\vdots$</li>
+</ul>
+
+<h3 id="two-views-of-linguistic-structure-dependency-structure">Two views of linguistic structure: Dependency structure</h3>
+<ul>
+  <li>Dependency structure shows which words depend on (modify, attach to, or are arguments of) which other words.</li>
+</ul>
+
+<h3 id="why-do-we-need-sentence-structure">Why do we need sentence structure?</h3>
+<ul>
+  <li>Humans communicate complex ideas by composing words together into bigger units to convey complex meanings</li>
+  <li>Listeners need to work out what modifies <em>attaches to</em> what</li>
+  <li>A model needs to understand sentence structure in order to be able to interpret language correctly</li>
+</ul>
+
+<h3 id="ambiguities">Ambiguities</h3>
+<ul>
+  <li>Prepositional phrase ambiguity
+    <ul>
+      <li>A key parsing decision is how we ‘attach’ various constituents
+        <ul>
+          <li><em>PP</em>s, adverbial or participial phrases, infinitives, coordinations<br />
+  e.g.<br />
+  \(\begin{align*}
+  \text{The board approved [its acquisition]} &amp; \text{[by Royal Trustco Ltd.]} \\
+                                      &amp; \text{[of Toronto]} \\
+                                      &amp; \text{[for \$27 a share]} \\
+                                      &amp; \text{[at its monthly meeting].}
+  \end{align*}\)</li>
+        </ul>
+      </li>
+      <li>With a sentence of <em>k</em> prepositional phrases at the end of it, the number of parses is given by the Catalan numbers; $C_n = (2n)!/[(n+1)!n!]$, an exponential series growing as the number of prepositional phrases.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Coordination scopre ambiguity<br />
+  e.g. <strong>Shuttle veteran</strong> and longtime NASA executive__ Fred Gregory appointed to board<br />
+      $\rightarrow$ 1 or 2 person?</p>
+  </li>
+  <li>
+    <p>Adjectival/Adverbial Modifier ambiguity<br />
+  e.g. Students get <strong>first hand job experience</strong></p>
+  </li>
+  <li>Verb Phrase(VP) attachment ambiguity<br />
+  e.g. Mutilated body washes up on Rio beach <strong>to be used for Olympics beach volleyball</strong></li>
+</ul>
+
+<h3 id="dependency-paths-help-extract-semantic-interpretation">Dependency paths help extract semantic interpretation</h3>
+<ul>
+  <li>simple practical example: extracting protein-protein interaction</li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec4_0.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+
+<h3 id="dependency-grammar-and-dependency-structure">Dependency Grammar and Dependency Structure</h3>
+<ul>
+  <li>Dependency syntax postulates that syntactic structure consists of relations between lexical items, normally binary asymmetric relations (“arrows”) called <strong>dependencies</strong></li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec4_1.png" alt="png" width="60%&quot;, height=&quot;100%" /></p>
+<ul>
+  <li>
+    <p>The arrows are commonly <strong>typed</strong> with the name of grammatical relations (subject, prepositional object, apposition, etc.)</p>
+  </li>
+  <li>An arrow connects a <strong>head</strong>(governor, superior, regent) with a <strong>dependent</strong>(modifier, inferior, subordinate)</li>
+  <li>
+    <p>Usually, dependencies form a tree(a connected, acyclic, single-root graph)</p>
+  </li>
+  <li>
+    <p>Check: some people draw the arrows one way; some the other way</p>
+  </li>
+  <li>Usually add a fake ROOT so every word is a dependent of precisely 1 other node</li>
+</ul>
+
+<h3 id="the-rise-of-annotated-data--universal-dependencies-treebanks">The rise of annotated data &amp; Universal Dependencies treebanks</h3>
+<ul>
+  <li>Advantages of treebank
+    <ul>
+      <li>Reusability of the labor
+        <ul>
+          <li>Many parsers, part-of-speech taggers, etc. can be built on it</li>
+          <li>Valuable resource for linguistic</li>
+        </ul>
+      </li>
+      <li>Broad coverage, not just a few intuitions</li>
+      <li>Frequencies and distributional information(statistics)</li>
+      <li>A way to evaluate NLP systems</li>
+    </ul>
   </li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">classify_image</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>  
-<span class="c1"># Some magic here?  
-</span>	<span class="k">return</span> <span class="n">class_label</span>  
-</code></pre></div></div>
-
+<h3 id="dependency-conditioning-preferences">Dependency Conditioning Preferences</h3>
+<p><img src="/assets/images/cs224n/lec4_2.png" alt="png" width="60%&quot;, height=&quot;100%" /></p>
 <ul>
-  <li>ML: Data-Driven Approach
+  <li>The sources of information for dependency parsing
     <ol>
-      <li>Collect a dataset of images and labels</li>
-      <li>Use ML algorithms to train a classifier</li>
-      <li>Evaluate the classifier on new images</li>
+      <li>Bilexical affinities: The dependency $\text{discussion}\rightarrow\text{issues}$ is plausible</li>
+      <li>Dependency distance: Most dependencies are between nearby words</li>
+      <li>Intervening material: Dependencies rarely span intervening verbs or punctuation</li>
+      <li>Valency of heads: How many dependents on which side are usual for a head?</li>
     </ol>
   </li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">images</span><span class="p">,</span><span class="n">labels</span><span class="p">):</span>  
-	<span class="c1"># Machine Learning!  
-</span>	<span class="k">return</span> <span class="n">model</span>  
-
-<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">test_images</span><span class="p">):</span>  
-	<span class="c1"># Use model to predict labels  
-</span>	<span class="k">return</span> <span class="n">test_labels</span>  
-</code></pre></div></div>
-
+<h3 id="dependency-parsing">Dependency Parsing</h3>
 <ul>
-  <li>Nearest Neighbor Classifier<br />
-Predict the label of the most similar training imgae<br />
-Training data with labels x $\leftrightarrow$ query data \(x^*\)<br />
-distance metric \(|x,x^*| \rightarrow R\)<br />
-<em>L1</em> distance \(d_1(I_1,I_2) = \sum_p |I_1^p-I_2^p|\)<br />
-pixel-wise absolute value differences $\rightarrow$ sum for scoring</li>
+  <li>A sentence is parsed by choosing for each word what other word (including ROOT) it is a dependent of</li>
+  <li>Usually some constraints:
+    <ul>
+      <li>Only one word is a dependent of ROOT</li>
+      <li>Don’t want cycles $A\rightarrow B$, $B\rightarrow A$</li>
+    </ul>
+  </li>
+  <li>This makes the dependencies a tree</li>
+  <li>Final issue is whether arrows can cross(be <strong>non-projective</strong>) or not</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="k">class</span> <span class="nc">NearestNeighbor</span><span class="p">:</span>  
-	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-		<span class="k">pass</span>
-
-	<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>  <span class="c1">### Memorize training data
-</span>		<span class="s">""" X is N x D for n example. Y is 1-dim of size N"""</span>  
-		<span class="bp">self</span><span class="p">.</span><span class="n">Xtr</span> <span class="o">=</span> <span class="n">Xf</span>
-		<span class="bp">self</span><span class="p">.</span><span class="n">ytr</span> <span class="o">=</span> <span class="n">y</span>  
-
-	<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">):</span>  
-		<span class="n">num_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  
-		<span class="n">Ypred</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_test</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">ytr</span><span class="p">.</span><span class="n">dtype</span><span class="p">)</span>
-		
-		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">num_test</span><span class="p">):</span>
-			<span class="c1">### find closest train image for each test image, predict label of its
-</span>			<span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">Xtr</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,:]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-			<span class="n">min_index</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>  
-			<span class="n">Ypred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">ytr</span><span class="p">[</span><span class="n">min_index</span><span class="p">]</span>
-		<span class="k">return</span> <span class="n">Ypred</span>
-</code></pre></div></div>
-
+<h3 id="projectivity">Projectivity</h3>
 <ul>
-  <li>
-    <p>Q: With <em>N</em> examples, how fast are training and prediction?<br />
-Answer: Train <strong>O(1)</strong>, predict <strong>O(N)</strong><br />
-$\rightarrow$ Bad: we want fast at prediction; slow for training is ok.</p>
+  <li>Definition of a <strong>projective parse</strong>: There are no crossing dependency arcs when the words are laid out in their linear order, with all arcs above the words</li>
+  <li>Dependencies corresponding to a CFG tree must be <strong>projective</strong>
+    <ul>
+      <li>i.e., by forming dependencies by taking 1 child of each category as head</li>
+    </ul>
   </li>
-  <li>
-    <p>KNN with majority vote<br />
-Distance metric: <em>L1(Manhattan), L2(Euclidean)</em></p>
+  <li>Most syntactic structure is projective like this, but dependency theory normally does allow non-projective structures to account for displaced constituents
+    <ul>
+      <li>You can’t easily get the semantics of certain constructions right without these nonprojective dependencies</li>
+    </ul>
   </li>
-  <li>
-    <p>Hyperparameters<br />
-To find best value of <em>k</em> and best distance(metric) to use, use train-val-test approach</p>
+  <li>e.g.<br />
+  <strong>From</strong> who did Bill buy the coffee yesterday?<br />
+  Who did Bill buy the coffee <strong>from</strong> yesterday</li>
+</ul>
+
+<h3 id="methods-of-dependency-parsing">Methods of Dependency Parsing</h3>
+<ol>
+  <li>Dynamic programming, <em>Eisner(1996)</em>: $O(n^3)$ complexity</li>
+  <li>Graph algorithms, <em>McDonald et al.(2005)</em>: creating a Minimun Spanning Tree</li>
+  <li>Constraint Satisfaction, <em>Karlsson(1990)</em></li>
+  <li>“Transition-based parsing” or “deterministic dependency parsing”<br />
+ Greedy choice of attachments guided by good machine learning classifiers<br />
+ E.g., MaltParser, <em>Nivre et al.(2008)</em></li>
+</ol>
+
+<h3 id="greedy-transition-based-parsing-nivre-2003">Greedy transition-based parsing, Nivre 2003</h3>
+<ul>
+  <li>A simple form of greedy discriminative dependency parser</li>
+  <li>The parser does a sequence of bottom-up actions
+    <ul>
+      <li>Roughly like “shift” or “reduce” in a shift-reduce parser, but the “reduce” actions are specialized to create dependencies with head on left or right</li>
+    </ul>
   </li>
-  <li>
-    <p>However, pixel distances are not informative for KNN<br />
-very slow at test time <em>&amp;</em> curse of dimensionality</p>
+  <li>The parser has:
+    <ul>
+      <li>a stack $\sigma$, written with top to the right
+        <ul>
+          <li>which starts with the ROOT symbol</li>
+        </ul>
+      </li>
+      <li>a buffer $\beta$, written with top to the left
+        <ul>
+          <li>which starts with the input sentence</li>
+        </ul>
+      </li>
+      <li>a set of dependency arcs A
+        <ul>
+          <li>which starts off empty</li>
+        </ul>
+      </li>
+      <li>a set of actions</li>
+    </ul>
   </li>
 </ul>
 
-<h3 id="linear-classifier">Linear Classifier</h3>
+<h3 id="basic-transition-based-dependency-parser">Basic transition-based dependency parser</h3>
+<p><img src="/assets/images/cs224n/lec4_3.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+
 <ul>
-  <li>
-    <p>Parametric Approach<br />
-$f(x,W)=Wx+b$; <em>W</em> for parameters or weights</p>
-  </li>
-  <li>
-    <p>Interpreting a linear classifier: Geometric Viewpoint<br />
-hard cases in non-linearity</p>
-  </li>
+  <li>Arc-standard transition-based parser<br />
+  E.g., Analysis of “I ate fish”</li>
 </ul>
+
+<p><img src="/assets/images/cs224n/lec4_4.png" alt="png" width="50%&quot;, height=&quot;100%" /><br />
+<img src="/assets/images/cs224n/lec4_5.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+
+<h3 id="maltparser-nivre-and-hall-2005">MaltParser, Nivre and Hall 2005</h3>
+<ul>
+  <li>How we choose the next action?<br />
+  Answer: Machine Learning!</li>
+  <li>Each action is predicted by a discriminative classifier (e.g., softmax classifier) over legal move
+    <ul>
+      <li>Max of 3 untyped choices; max of $\lvert R \rvert \times 2 + 1 $ when typed</li>
+      <li>Features: top of stack word, POS; first in buffer word, POS; etc.</li>
+    </ul>
+  </li>
+  <li>There is NO search(in the simplest form)
+    <ul>
+      <li>But you can profitably do a beam search if you wish(slower but better): You keep <em>k</em> good parse prefixes at each time step</li>
+    </ul>
+  </li>
+  <li>The model’s accuracy is <em>fractionally</em> below the state of the art in dependency parsing, but it provides <strong>very fast linear time parsing</strong>, with high accuracy, great for parsing the web</li>
+</ul>
+
+<h3 id="conventional-feature-representation">Conventional Feature Representation</h3>
+<p><img src="/assets/images/cs224n/lec4_6.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+
+<h3 id="evaluation-of-dependency-parsing-labeled-dependency-accuracy">Evaluation of Dependency Parsing: (labeled) dependency accuracy</h3>
+<p><img src="/assets/images/cs224n/lec4_7.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+
 
                 </div>
             </section>
@@ -364,9 +496,9 @@ hard cases in non-linearity</p>
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function () {
-                            var this_page_url = 'http://0.0.0.0:4000/cs231n_lec2';
-                            var this_page_identifier = '/cs231n_lec2';
-                            var this_page_title = 'cs231n - Lecture 2. Image Classification';
+                            var this_page_url = 'http://0.0.0.0:4000/cs224n_lec4';
+                            var this_page_identifier = '/cs224n_lec4';
+                            var this_page_title = 'cs224n - Lecture 4. Dependency Parsing';
                         };
                         (function() {
                             var d = document, s = d.createElement('script');
@@ -401,7 +533,7 @@ hard cases in non-linearity</p>
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; Darron's Devlog &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/cs231n/">Cs231n</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/cs224n/">Cs224n</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -411,6 +543,35 @@ hard cases in non-linearity</p>
                                 
                                 
                                   
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/cs224n_lec3">cs224n - Lecture 3. Backprop and Neural Networks</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/cs224n_lec2">cs224n - Lecture 2. Neural Classifiers</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/cs224n_lec1">cs224n - Lecture 1. Word Vectors</a></li>
+                                        
+                                    
+                                  
                                 
                                   
                                 
@@ -425,106 +586,27 @@ hard cases in non-linearity</p>
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                            <li><a href="/cs231n_lec15">cs231n - Lecture 15. Detection and Segmentation</a></li>
-                                        
-                                    
-                                  
                                 
                                   
-                                    
-                                        
-                                        
-                                            <li><a href="/cs231n_lec14">cs231n - Lecture 14. Visualizing and Understanding</a></li>
-                                        
-                                    
+                                
                                   
                                 
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                            <li><a href="/cs231n_lec13">cs231n - Lecture 13. Self-Supervised Learning</a></li>
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
-                                  
                                 
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
                                   
                                 
                                   
@@ -562,9 +644,9 @@ hard cases in non-linearity</p>
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/cs231n/">
+                            <a href="/tag/cs224n/">
                                 
-                                    See all 13 posts  →
+                                    See all 3 posts  →
                                 
                             </a>
                         </footer>
@@ -574,58 +656,27 @@ hard cases in non-linearity</p>
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
             
-                    <article class="post-card post-template no-image">
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs231n_lec3">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Cs231n</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">cs231n - Lecture 3. Loss Functions and Optimization</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>Linear Classifier (cont.) Todo: Define a loss function: how good the classifier is Optimization: efficient way of finding the parameters that minimize the loss function Loss function given a dataset of examples \(\left\{</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                
-            </footer>
-        </div>
-    </article>
-
-            
 
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
             
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/fashion_GNN">
+            <a class="post-card-content-link" href="/cs224n_lec3">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Projects</span>
+                                <span class="post-card-tags">Cs224n</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">GNN-based Fashion Coordinator</h2>
+                    <h2 class="post-card-title">cs224n - Lecture 3. Backprop and Neural Networks</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>
-</p>
+                        <p>Named Entity Recognition(NER) Task: find and classify names in text Possible uses: Tracking mentions of particular entities in documents For question answering, answers are usually named entities Often followed by Named Entity Linking/Canonicalization</p>
                     
                 </section>
             </a>
@@ -652,18 +703,18 @@ hard cases in non-linearity</p>
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">cs231n - Lecture 2. Image Classification</div>
+    <div class="floating-header-title">cs224n - Lecture 4. Dependency Parsing</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs231n+-+Lecture+2.+Image+Classification&amp;url=https://12kdh43.github.io/cs231n_lec2"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs224n+-+Lecture+4.+Dependency+Parsing&amp;url=https://12kdh43.github.io/cs224n_lec4"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs231n_lec2"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs224n_lec4"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
