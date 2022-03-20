@@ -8,6 +8,436 @@
     
       
       <item>
+        <title>cs224n - Lecture 5. Language Models and RNNs</title>
+        
+          <description>&lt;h3 id=&quot;how-do-we-gain-from-a-neural-dependency-parser&quot;&gt;How do we gain from a neural dependency parser?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;So far…&lt;br /&gt;
+  Transition based dependency parsers were an efficient linear time method for giving the syntactic structure of natural language text.&lt;br /&gt;
+  Worked pretty well before neural nets came along.&lt;br /&gt;
+  $\color{red}{(-)}$ They worked with indicator features, specifying some condition and then checking whether it was true of a configuration. Problems of those features are:
+    &lt;ul&gt;
+      &lt;li&gt;Problem #1: sparse&lt;/li&gt;
+      &lt;li&gt;Problem #2: incomplete&lt;/li&gt;
+      &lt;li&gt;Problem #3: &lt;strong&gt;expensive computation&lt;/strong&gt;&lt;br /&gt;
+  More than 95% of parsing time is consumed by feature computation&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Neural Approach:&lt;br /&gt;
+  Start with the same configuration of a stack and a buffer, run exactly the same transition sequence but with a dense vector.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;a-neural-dependency-parserchen-and-manning-2014&quot;&gt;A neural dependency parser(&lt;em&gt;Chen and Manning, 2014&lt;/em&gt;)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Results on English parsing to Stanford Dependencies:
+    &lt;ul&gt;
+      &lt;li&gt;Unlabeled attachment score (UAS) = head&lt;/li&gt;
+      &lt;li&gt;Labeled attachment score (LAS) = head and label&lt;/li&gt;
+      &lt;li&gt;2% more accurate than the symbolic dependency parser&lt;/li&gt;
+      &lt;li&gt;noticeably faster&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;first-win-distributed-representations&quot;&gt;First win: Distributed Representations&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Represent each word as a &lt;em&gt;d&lt;/em&gt;-dimensional dense vector (i.e., word embedding)
+    &lt;ul&gt;
+      &lt;li&gt;Similar words are expected to have close vectors.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Meanwhile, &lt;strong&gt;part-of-speech tags&lt;/strong&gt;(POS) and &lt;strong&gt;dependency labels&lt;/strong&gt; are also represented as &lt;em&gt;d&lt;/em&gt;-dimensional vectors.
+    &lt;ul&gt;
+      &lt;li&gt;The smaller discrete sets also exhibit many semantical similarities.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Extracting Tokens &amp;amp; vector representations from configuration
+    &lt;ul&gt;
+      &lt;li&gt;Extract a set of tokens based on the stack / buffer positions:&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;second-win-deep-learning-classifiers-are-non-linear-classifiers&quot;&gt;Second win: Deep Learning classifiers are non-linear classifiers&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A &lt;strong&gt;softmax classifier&lt;/strong&gt; assigns classes $y\in C$ based on inputs $x \in \mathbb{R}^d$ via the probability:&lt;br /&gt;
+  \(\begin{align*}
+  p(y\mid x) = \frac{\exp(W_y . x)}{\sum_{c=1}^C \exp(W_c . x)}
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;We train the weight matrix $W \in \mathbb{R}^{C\times d}$ to minimize the neg. log loss: $\sum_i - \log p(y_i\mid x_i)$ (a.k.a. “&lt;em&gt;cross entropy loss&lt;/em&gt;”)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Traditional ML classifiers&lt;/strong&gt; (including Naive Bayes, SVMs, logistic regression and softmax classifier) are not very powerful classifiers: they only &lt;strong&gt;give linear decision boundaries&lt;/strong&gt;; limiting, unhelpful when a problem is complex.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Neural networks can learn much more complex functions with nonlinear decision boundaries.
+    &lt;ul&gt;
+      &lt;li&gt;Non-linear in the original space, linear for the softmax at the top of the neural network&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;simple-feed-forward-neural-network-multi-class-classifier&quot;&gt;Simple feed-forward neural network multi-class classifier&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_3.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;neural-dependency-parser-model-architecture&quot;&gt;Neural Dependency Parser Model Architecture&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_4.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;dependency-parsing-for-sentence-structure&quot;&gt;Dependency parsing for sentence structure&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;C &amp;amp; M 2014 showed that neural networks can accurately determine the structure of sentences, supporting meaning interpretation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_5.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It was the first simple, successful neural dependency parser&lt;/li&gt;
+  &lt;li&gt;The dense representations (and non-linear classifier) let it outperform other greedy parsers in both accuracy and speed&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;further-developments-in-transition-based-neural-dependency-parsing&quot;&gt;Further developments in transition-based neural dependency parsing&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Improvements
+  Bigger, deeper networks with better tuned hyperparameters&lt;br /&gt;
+  Beam search&lt;br /&gt;
+  Global, conditional random field (CRF)-style inference over the decision sequence&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Leading to SyntaxNet and the Parsey McParseFace model(2016):&lt;br /&gt;
+  “The World’s Most Accurate Parser”&lt;br /&gt;
+  &lt;a href=&quot;https://ai.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html&quot;&gt;https://ai.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;graph-based-dependency-parsers&quot;&gt;Graph-based dependency parsers&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Compute a score for every possible pair; dependency (choice of head) for each word
+    &lt;ul&gt;
+      &lt;li&gt;Doing this well requires more than just knowing the two words&lt;/li&gt;
+      &lt;li&gt;We need good “contextual” representations of each word token, which we will develop in the coming lectures&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Repeat the same process for each other word; find the best parse (MST algorithm)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_7.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;a-neural-graph-based-dependency-parser&quot;&gt;A Neural graph-based dependency parser&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Dozat and Manning 2017; Dozat, Qi, and Manning 2017&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;This paper revived interest in graph-based dependency parsing in a neural world
+    &lt;ul&gt;
+      &lt;li&gt;Designed a biaffine scoring model for neural dependency parsing&lt;/li&gt;
+      &lt;li&gt;Also crucially uses a neural sequence model&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Great results&lt;/strong&gt;, but slower than the simple neural transition-based parsers
+    &lt;ul&gt;
+      &lt;li&gt;There are $n^2$ possible dependencies in a sentence of length $n$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_6.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;a-bit-more-about-neural-networks&quot;&gt;A bit more about neural networks&lt;/h2&gt;
+
+&lt;h3 id=&quot;regularization&quot;&gt;Regularization&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A full loss function includes &lt;strong&gt;regularization&lt;/strong&gt; over all parameters $\theta$, e.g., L2 regularization:&lt;br /&gt;
+  \(\begin{align*}
+  J(\theta) = \frac{1}{N}\sum_{i=1}^N -\log \left( \frac{e^{f_{y_i}}}{\sum_{c=1}^C e^{f_c}} \right) + \lambda\sum_k \theta_k^2
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Classic view: Regularization works to prevent &lt;strong&gt;overfitting&lt;/strong&gt; when we have a lot of features (or later a very powerful/deep model, etc.)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Now: Regularization &lt;strong&gt;produces models that generalize well&lt;/strong&gt; when we have a “big” model&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;We &lt;strong&gt;do not care that our models overfit on the training data&lt;/strong&gt;, even though they are hugely overfit&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;dropout&quot;&gt;Dropout&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;[Srivastava, Hinton, Krizhevsky, Sutskever, &amp;amp; Salakhutdinov 2012/JMLR 2014]&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Preventing Feature Co-adaptation = Good Regularization Method&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Training time: at each instance(or batch) of evaluation (in online SGD-training), randomly set 50% of the inputs to each neuron to 0&lt;/li&gt;
+      &lt;li&gt;Test time: halve the model weights (because we now keep twice as many active neurons)&lt;br /&gt;
+  (Except usually only drop first layer inputs a little (~15%) or not at all)&lt;/li&gt;
+      &lt;li&gt;Prevents feature co-adaptation: A feature cannot only be useful in the presence of particular other features&lt;/li&gt;
+      &lt;li&gt;In a single layer: A kind of middle-ground between Naive Bayes (where all feature weights are set independently) and logistic regression models (where weights are set in the context of all others)&lt;/li&gt;
+      &lt;li&gt;Can be thought of as a form of model bagging (i.e., like an ensemble model)&lt;/li&gt;
+      &lt;li&gt;Nowadays usually thought of as &lt;strong&gt;strong, feature-dependent regularizer&lt;/strong&gt;&lt;br /&gt;
+  &lt;em&gt;[Wager, Wang, &amp;amp; Liang 2013]&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;vectorization&quot;&gt;“Vectorization”&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;E.g., looping over word vectors versus concatenating them all into one large matrix and then multiplying the softmax weights with that matrix:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# number of windows to classify
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# dimensionality of each window
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# number of classes
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;wordvectors_list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;wordvectors_one_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;timeit&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wordvectors_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;timeit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;W&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wordvectors_one_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Always try to use vectors and matrices rather than for loops; the speed gain goes from 1 to 2 orders of magnitude with GPUs.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;non-linearities-old-and-new&quot;&gt;Non-linearities, old and new&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;logistic(“sigmoid”)&lt;br /&gt;
+  \(\begin{align*} f(z) = \frac{1}{1+\exp(-z)}\end{align*}\)&lt;/li&gt;
+  &lt;li&gt;tanh&lt;br /&gt;
+  \(\begin{align*} f(z) = \tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}\end{align*}\)&lt;br /&gt;
+  tanh is just a rescaled and shifted sigmoid(2x as steep, [-1, 1]):&lt;br /&gt;
+  $tanh(z) = 2 \text{logistic}(2z) - 1$&lt;/li&gt;
+  &lt;li&gt;hard tanh&lt;br /&gt;
+  \(\begin{align*} \text{PHardTanh}(x) = \begin{cases}
+  -1 &amp;amp; \mbox{ if } x &amp;lt; -1 \\
+  x &amp;amp; \mbox{ if } -1 \le x \le 1 \\
+  1 &amp;amp; \mbox{ if } x &amp;gt; 1 \end{cases}\end{align*}\)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ReLU(Rectrified Linear Unit)&lt;br /&gt;
+  $\text{rect}(z) = \text{max}(z, 0)$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Others&lt;br /&gt;
+  Leaky ReLU / Parametric ReLU, Swish(&lt;em&gt;Ramachandran, Zoph &amp;amp; Le 2017&lt;/em&gt;)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Both logistic and tanh are still used in various places(e.g., to get a probability), but are no longer the defaults for making deep networks&lt;br /&gt;
+  For building a deep network, first try ReLU - it trains quickly and performs well due to good gradient backflow&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;parameter-initialization&quot;&gt;Parameter Initialization&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Initialize weights to small random values (i.e., not zero matrices)&lt;br /&gt;
+  To avoid symmetries that prevent learning/specialization&lt;/li&gt;
+  &lt;li&gt;Initialize hidden layer biases to 0 and output (or reconstruction) biases to optimal value if weights were 0 (e.g., mean target or inverse sigmoid of mean target)&lt;/li&gt;
+  &lt;li&gt;Initialize &lt;strong&gt;all other weights&lt;/strong&gt; $~ \text{Uniform}(–r, r)$, with $r$ chosen so numbers get neither too big or too small (later the need for this is removed with use of &lt;em&gt;layer normalization&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;Xavier initialization has variance inversely proportional to &lt;em&gt;fan-in&lt;/em&gt; $n_{in}$ (previous layer size) and &lt;em&gt;fan-out&lt;/em&gt; $n_{out}$ (next layer size):&lt;br /&gt;
+  \(\begin{align*}
+  Var(W_i) = \frac{2}{n_{in} + n_{out}}
+  \end{align*}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;optimizers&quot;&gt;Optimizers&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;SGD will work just fine, but getting good results will often require hand-tuning the learning rate&lt;/li&gt;
+  &lt;li&gt;Sophisticated “adaptive” optimizers that scale the parameter adjustment by an accumulated gradient; &lt;em&gt;Adam&lt;/em&gt; is fairly good, safe place to start in many cases&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;learning-rates&quot;&gt;Learning Rates&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;A constant learning rate. Start around $lr = 0.001$?
+    &lt;ul&gt;
+      &lt;li&gt;It must be order of magnitude right – try powers of 10&lt;br /&gt;
+  Too big: model may diverge or not converge&lt;br /&gt;
+  Too small: model may not have trained by the assignment deadline&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Better try &lt;em&gt;learning rate decay&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;By hand: : halve the learning rate every &lt;em&gt;k&lt;/em&gt; epochs&lt;/li&gt;
+      &lt;li&gt;By a formula: $lr = lr_0 e^{-kt}$, for epoch $t$&lt;/li&gt;
+      &lt;li&gt;There are fancier methods like cyclic learning rates (q.v.)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Fancier optimizers still use a learning rate but it may be an initial rate that the optimizer shrinks – so you may want to start with a higher learning rate&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;language-modeling&quot;&gt;Language Modeling&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Language Modeling&lt;/strong&gt; is the task of predicting what word comes next&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;More formally: given a sequence of words $x^{(1)}, x^{(2)}, \ldots, x^{(t)}$, compute the probability distribution of the next words $x^{(t+1)}$:&lt;br /&gt;
+  $P(x^{(t+1)} \mid x^{(t)}, \ldots, x^{(1)})$&lt;br /&gt;
+  where $x^{(t+1)}$ can be any word in the vocabulary \(V = \left\{ w_1, \ldots, w_{\lvert V \rvert} \right\}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You can also think of a Language Model as a system that &lt;strong&gt;assigns probability to a piece of text&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;For example, if we have some text $x^{(1)}, x^{(2)}, \ldots, x^{(T)}$, then the probability of this text (according to the Language Model) is:&lt;br /&gt;
+  \(\begin{align*}
+  P(x^{(1)}, \ldots, x^{(T)}) &amp;amp;= P(x^{(1)}) \times P(x^{(2)}\mid x^{(1)}) \times \cdots \times P(x^{(T)}\mid x^{(T-1)}, \ldots, x^{(1)}) \\
+  &amp;amp;= \prod_{t=1}^T \underbrace{P(x^{(t)}\mid x^{(t-1)}, \ldots, x^{(1)})}_{\text{This is what our LM provides}}
+  \end{align*}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;n-gram-language-models&quot;&gt;n-gram Language Models&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Question: How to learn a Language Model?&lt;/li&gt;
+  &lt;li&gt;Answer(traditional, pre- Deep Learning): learn an &lt;strong&gt;n-gram Language Model&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Definition: A _n-gram__ is a chunk of &lt;em&gt;n&lt;/em&gt; consecutive words.&lt;/li&gt;
+  &lt;li&gt;Idea: Collect statistics about how frequent different n-grams are and use these to predict next word.&lt;/li&gt;
+  &lt;li&gt;First we make a &lt;strong&gt;Markov assumption&lt;/strong&gt;: $x^{(t+1)}$ depends only on the preceding &lt;em&gt;n-1&lt;/em&gt; words;&lt;/li&gt;
+&lt;/ul&gt;
+
+\[\begin{align*}
+P(x^{(t+1)}\mid x^{(t)}, \ldots, x^{(1)}) &amp;amp;= \overbrace{P(x^{(t+1)}\mid x^{(t)}, \ldots, x^{(t-n+2)})}^{n-1 \text{words}} &amp;amp;\text{(assumption)} \\
+&amp;amp;= \frac{\overbrace{P(x^{(t+1)}, x^{(t)}, \ldots, x^{(t-n+2)})}^{\text{prob of a n-gram}}}{\underbrace{P(x^{(t)}, \ldots, x^{(t-n+2)})}_{\text{prob of a (n-1)-gram}}} &amp;amp;\text{(definition of conditional prob)}
+\end{align*}\]
+
+&lt;ul&gt;
+  &lt;li&gt;Question: How do we get these &lt;em&gt;n&lt;/em&gt;-gram and &lt;em&gt;(n-1)&lt;/em&gt;-gram probabilities?&lt;/li&gt;
+  &lt;li&gt;Answer: By counting them in some large corpus of text&lt;/li&gt;
+&lt;/ul&gt;
+
+\[\begin{align*}
+\approx \frac{\text{count}(x^{(t+1)}, x^{(t)}, \ldots, x^{(t-n+2)})}{\text{count}(x^{(t)}, \ldots, x^{(t-n+2)})} &amp;amp;&amp;amp;\text{(statistical approxtimation)}  
+\end{align*}\]
+
+&lt;h3 id=&quot;n-gram-language-models-example&quot;&gt;n-gram Language Models: Example&lt;/h3&gt;
+&lt;p&gt;Suppose we are learning a &lt;strong&gt;4-gram&lt;/strong&gt; Language Model.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;del&gt;as the proctor started the clock&lt;/del&gt;, the students opened their &lt;strong&gt;w&lt;/strong&gt;(target)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;\(\begin{align*}
+P(\mathbf{w}|\text{students opened their}) = \frac{\text{count}(\text{students opened their } \mathbf{w})}{\text{students opened their}}
+\end{align*}\)&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;For example, suppose that in the corpus:
+    &lt;ul&gt;
+      &lt;li&gt;“students opened their” occurred 1000 times&lt;/li&gt;
+      &lt;li&gt;“students opened their &lt;strong&gt;books&lt;/strong&gt;” occurred 400 times&lt;br /&gt;
+  $\rightarrow P(\text{books}|\text{students opened their}) = 0.4$&lt;/li&gt;
+      &lt;li&gt;“students opened their &lt;strong&gt;exams&lt;/strong&gt;” occurred 100 times&lt;br /&gt;
+  $\rightarrow P(\text{exams}|\text{students opened their}) = 0.1$&lt;br /&gt;
+  Then, Should we have discarded the “proctor” context?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Naive Bayes: a class specific unigram language model, counting individual words&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;problems-with-n-gram-language-models&quot;&gt;Problems with n-gram Language Models&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Sparsity:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_8.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Storage: Need to store count for all n-grams you saw in the corpus&lt;br /&gt;
+  Increasing &lt;em&gt;n&lt;/em&gt; or increasing corpus increases model size&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;n-gram-language-models-in-practice&quot;&gt;n-gram Language Models in practice&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;You can build a simple trigram Language Model over a 1.7 million word corpus (Reuters) in a few &lt;strong&gt;seconds&lt;/strong&gt; on your laptop&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_9.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You can also use a Language Model to generate text
+    &lt;ul&gt;
+      &lt;li&gt;Get probability distribution, sample one. move forward and iterate.&lt;/li&gt;
+      &lt;li&gt;Results are &lt;em&gt;incoherent&lt;/em&gt;. Need to consider more &lt;em&gt;n&lt;/em&gt; words but increasing &lt;em&gt;n&lt;/em&gt; worsens sparsity problem, and increases model size&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-to-build-a-neural-language-model&quot;&gt;How to build a neural Language Model?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Recall the Language Modeling task:
+    &lt;ul&gt;
+      &lt;li&gt;Input: sequence of words $x^{(1)}, x^{(2)}, \ldots, x^{(t)}$&lt;/li&gt;
+      &lt;li&gt;Output: prob dist of the next word $P(x^{(t+1)} \mid x^{(t)}, \ldots, x^{(1)})$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window-based neural model&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_10.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;a-fixed-window-neural-language-model&quot;&gt;A fixed-window neural Language Model&lt;/h3&gt;
+&lt;p&gt;Approximately: &lt;em&gt;Y. Bengio, et al. (2000/2003): A Neural Probabilistic Language Model&lt;/em&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec5_11.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;span style=&quot;color:green&quot;&gt;Improvements&lt;/span&gt; over &lt;em&gt;n&lt;/em&gt;-gram LM:
+    &lt;ul&gt;
+      &lt;li&gt;No sparsity problem&lt;/li&gt;
+      &lt;li&gt;Don’t need to store all observed &lt;em&gt;n&lt;/em&gt;-grams&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Remaining &lt;span style=&quot;color:red&quot;&gt;problems&lt;/span&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Fixed window is &lt;strong&gt;too small&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;Enlarging window enlarges $W$&lt;/li&gt;
+      &lt;li&gt;Window can never be large enough&lt;/li&gt;
+      &lt;li&gt;$x^{(1)}$ and $x^{(2)}$ are multiplied by completely different weights in $W$. &lt;strong&gt;No symmetry&lt;/strong&gt; in how the inputs are processed.&lt;br /&gt;
+$\rightarrow$ We need a neural architecture that can process &lt;em&gt;any length input&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;recurrent-neural-networks-rnn&quot;&gt;Recurrent Neural Networks (RNN)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Core idea: Apply the same weights $W$ repeatedly&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_12.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec5_13.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;RNN &lt;span style=&quot;color:green&quot;&gt;Advantages&lt;/span&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Can process &lt;strong&gt;any length&lt;/strong&gt; input&lt;/li&gt;
+      &lt;li&gt;Computation for step &lt;em&gt;t&lt;/em&gt; can (in theory) use information from &lt;strong&gt;many steps back&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Model size doesn’t increase&lt;/strong&gt; for longer input context&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Symmetry&lt;/strong&gt; input process; same weights applied on every timestep&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;RNN &lt;span style=&quot;color:red&quot;&gt;Disadvantages&lt;/span&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Recurrent computation is &lt;strong&gt;slow&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;In practice, difficult to access information from &lt;strong&gt;many steps back&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs224n_lec5</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs224n_lec5</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>cs224n - Lecture 4. Dependency Parsing</title>
         
           <description>&lt;h3 id=&quot;two-views-of-linguistic-structure-phrase-structure&quot;&gt;Two views of linguistic structure: Phrase structure&lt;/h3&gt;

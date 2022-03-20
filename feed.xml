@@ -1,4 +1,419 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-15T10:20:18+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">cs224n - Lecture 4. Dependency Parsing</title><link href="http://0.0.0.0:4000/cs224n_lec4" rel="alternate" type="text/html" title="cs224n - Lecture 4. Dependency Parsing" /><published>2022-03-11T00:00:00+00:00</published><updated>2022-03-11T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec4</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec4">&lt;h3 id=&quot;two-views-of-linguistic-structure-phrase-structure&quot;&gt;Two views of linguistic structure: Phrase structure&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-20T11:41:45+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">cs224n - Lecture 5. Language Models and RNNs</title><link href="http://0.0.0.0:4000/cs224n_lec5" rel="alternate" type="text/html" title="cs224n - Lecture 5. Language Models and RNNs" /><published>2022-03-15T00:00:00+00:00</published><updated>2022-03-15T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec5</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec5">&lt;h3 id=&quot;how-do-we-gain-from-a-neural-dependency-parser&quot;&gt;How do we gain from a neural dependency parser?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;So far…&lt;br /&gt;
+  Transition based dependency parsers were an efficient linear time method for giving the syntactic structure of natural language text.&lt;br /&gt;
+  Worked pretty well before neural nets came along.&lt;br /&gt;
+  $\color{red}{(-)}$ They worked with indicator features, specifying some condition and then checking whether it was true of a configuration. Problems of those features are:
+    &lt;ul&gt;
+      &lt;li&gt;Problem #1: sparse&lt;/li&gt;
+      &lt;li&gt;Problem #2: incomplete&lt;/li&gt;
+      &lt;li&gt;Problem #3: &lt;strong&gt;expensive computation&lt;/strong&gt;&lt;br /&gt;
+  More than 95% of parsing time is consumed by feature computation&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Neural Approach:&lt;br /&gt;
+  Start with the same configuration of a stack and a buffer, run exactly the same transition sequence but with a dense vector.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;a-neural-dependency-parserchen-and-manning-2014&quot;&gt;A neural dependency parser(&lt;em&gt;Chen and Manning, 2014&lt;/em&gt;)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Results on English parsing to Stanford Dependencies:
+    &lt;ul&gt;
+      &lt;li&gt;Unlabeled attachment score (UAS) = head&lt;/li&gt;
+      &lt;li&gt;Labeled attachment score (LAS) = head and label&lt;/li&gt;
+      &lt;li&gt;2% more accurate than the symbolic dependency parser&lt;/li&gt;
+      &lt;li&gt;noticeably faster&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;first-win-distributed-representations&quot;&gt;First win: Distributed Representations&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Represent each word as a &lt;em&gt;d&lt;/em&gt;-dimensional dense vector (i.e., word embedding)
+    &lt;ul&gt;
+      &lt;li&gt;Similar words are expected to have close vectors.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Meanwhile, &lt;strong&gt;part-of-speech tags&lt;/strong&gt;(POS) and &lt;strong&gt;dependency labels&lt;/strong&gt; are also represented as &lt;em&gt;d&lt;/em&gt;-dimensional vectors.
+    &lt;ul&gt;
+      &lt;li&gt;The smaller discrete sets also exhibit many semantical similarities.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Extracting Tokens &amp;amp; vector representations from configuration
+    &lt;ul&gt;
+      &lt;li&gt;Extract a set of tokens based on the stack / buffer positions:&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;second-win-deep-learning-classifiers-are-non-linear-classifiers&quot;&gt;Second win: Deep Learning classifiers are non-linear classifiers&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A &lt;strong&gt;softmax classifier&lt;/strong&gt; assigns classes $y\in C$ based on inputs $x \in \mathbb{R}^d$ via the probability:&lt;br /&gt;
+  \(\begin{align*}
+  p(y\mid x) = \frac{\exp(W_y . x)}{\sum_{c=1}^C \exp(W_c . x)}
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;We train the weight matrix $W \in \mathbb{R}^{C\times d}$ to minimize the neg. log loss: $\sum_i - \log p(y_i\mid x_i)$ (a.k.a. “&lt;em&gt;cross entropy loss&lt;/em&gt;”)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Traditional ML classifiers&lt;/strong&gt; (including Naive Bayes, SVMs, logistic regression and softmax classifier) are not very powerful classifiers: they only &lt;strong&gt;give linear decision boundaries&lt;/strong&gt;; limiting, unhelpful when a problem is complex.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Neural networks can learn much more complex functions with nonlinear decision boundaries.
+    &lt;ul&gt;
+      &lt;li&gt;Non-linear in the original space, linear for the softmax at the top of the neural network&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;simple-feed-forward-neural-network-multi-class-classifier&quot;&gt;Simple feed-forward neural network multi-class classifier&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_3.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;neural-dependency-parser-model-architecture&quot;&gt;Neural Dependency Parser Model Architecture&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_4.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;dependency-parsing-for-sentence-structure&quot;&gt;Dependency parsing for sentence structure&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;C &amp;amp; M 2014 showed that neural networks can accurately determine the structure of sentences, supporting meaning interpretation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_5.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It was the first simple, successful neural dependency parser&lt;/li&gt;
+  &lt;li&gt;The dense representations (and non-linear classifier) let it outperform other greedy parsers in both accuracy and speed&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;further-developments-in-transition-based-neural-dependency-parsing&quot;&gt;Further developments in transition-based neural dependency parsing&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Improvements
+  Bigger, deeper networks with better tuned hyperparameters&lt;br /&gt;
+  Beam search&lt;br /&gt;
+  Global, conditional random field (CRF)-style inference over the decision sequence&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Leading to SyntaxNet and the Parsey McParseFace model(2016):&lt;br /&gt;
+  “The World’s Most Accurate Parser”&lt;br /&gt;
+  &lt;a href=&quot;https://ai.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html&quot;&gt;https://ai.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;graph-based-dependency-parsers&quot;&gt;Graph-based dependency parsers&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Compute a score for every possible pair; dependency (choice of head) for each word
+    &lt;ul&gt;
+      &lt;li&gt;Doing this well requires more than just knowing the two words&lt;/li&gt;
+      &lt;li&gt;We need good “contextual” representations of each word token, which we will develop in the coming lectures&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Repeat the same process for each other word; find the best parse (MST algorithm)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_7.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;a-neural-graph-based-dependency-parser&quot;&gt;A Neural graph-based dependency parser&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Dozat and Manning 2017; Dozat, Qi, and Manning 2017&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;This paper revived interest in graph-based dependency parsing in a neural world
+    &lt;ul&gt;
+      &lt;li&gt;Designed a biaffine scoring model for neural dependency parsing&lt;/li&gt;
+      &lt;li&gt;Also crucially uses a neural sequence model&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Great results&lt;/strong&gt;, but slower than the simple neural transition-based parsers
+    &lt;ul&gt;
+      &lt;li&gt;There are $n^2$ possible dependencies in a sentence of length $n$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_6.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;a-bit-more-about-neural-networks&quot;&gt;A bit more about neural networks&lt;/h2&gt;
+
+&lt;h3 id=&quot;regularization&quot;&gt;Regularization&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A full loss function includes &lt;strong&gt;regularization&lt;/strong&gt; over all parameters $\theta$, e.g., L2 regularization:&lt;br /&gt;
+  \(\begin{align*}
+  J(\theta) = \frac{1}{N}\sum_{i=1}^N -\log \left( \frac{e^{f_{y_i}}}{\sum_{c=1}^C e^{f_c}} \right) + \lambda\sum_k \theta_k^2
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Classic view: Regularization works to prevent &lt;strong&gt;overfitting&lt;/strong&gt; when we have a lot of features (or later a very powerful/deep model, etc.)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Now: Regularization &lt;strong&gt;produces models that generalize well&lt;/strong&gt; when we have a “big” model&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;We &lt;strong&gt;do not care that our models overfit on the training data&lt;/strong&gt;, even though they are hugely overfit&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;dropout&quot;&gt;Dropout&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;[Srivastava, Hinton, Krizhevsky, Sutskever, &amp;amp; Salakhutdinov 2012/JMLR 2014]&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Preventing Feature Co-adaptation = Good Regularization Method&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Training time: at each instance(or batch) of evaluation (in online SGD-training), randomly set 50% of the inputs to each neuron to 0&lt;/li&gt;
+      &lt;li&gt;Test time: halve the model weights (because we now keep twice as many active neurons)&lt;br /&gt;
+  (Except usually only drop first layer inputs a little (~15%) or not at all)&lt;/li&gt;
+      &lt;li&gt;Prevents feature co-adaptation: A feature cannot only be useful in the presence of particular other features&lt;/li&gt;
+      &lt;li&gt;In a single layer: A kind of middle-ground between Naive Bayes (where all feature weights are set independently) and logistic regression models (where weights are set in the context of all others)&lt;/li&gt;
+      &lt;li&gt;Can be thought of as a form of model bagging (i.e., like an ensemble model)&lt;/li&gt;
+      &lt;li&gt;Nowadays usually thought of as &lt;strong&gt;strong, feature-dependent regularizer&lt;/strong&gt;&lt;br /&gt;
+  &lt;em&gt;[Wager, Wang, &amp;amp; Liang 2013]&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;vectorization&quot;&gt;“Vectorization”&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;E.g., looping over word vectors versus concatenating them all into one large matrix and then multiplying the softmax weights with that matrix:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# number of windows to classify
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# dimensionality of each window
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# number of classes
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;wordvectors_list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;wordvectors_one_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;timeit&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;W&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wordvectors_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;timeit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;W&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wordvectors_one_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Always try to use vectors and matrices rather than for loops; the speed gain goes from 1 to 2 orders of magnitude with GPUs.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;non-linearities-old-and-new&quot;&gt;Non-linearities, old and new&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;logistic(“sigmoid”)&lt;br /&gt;
+  \(\begin{align*} f(z) = \frac{1}{1+\exp(-z)}\end{align*}\)&lt;/li&gt;
+  &lt;li&gt;tanh&lt;br /&gt;
+  \(\begin{align*} f(z) = \tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}\end{align*}\)&lt;br /&gt;
+  tanh is just a rescaled and shifted sigmoid(2x as steep, [-1, 1]):&lt;br /&gt;
+  $tanh(z) = 2 \text{logistic}(2z) - 1$&lt;/li&gt;
+  &lt;li&gt;hard tanh&lt;br /&gt;
+  \(\begin{align*} \text{PHardTanh}(x) = \begin{cases}
+  -1 &amp;amp; \mbox{ if } x &amp;lt; -1 \\
+  x &amp;amp; \mbox{ if } -1 \le x \le 1 \\
+  1 &amp;amp; \mbox{ if } x &amp;gt; 1 \end{cases}\end{align*}\)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ReLU(Rectrified Linear Unit)&lt;br /&gt;
+  $\text{rect}(z) = \text{max}(z, 0)$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Others&lt;br /&gt;
+  Leaky ReLU / Parametric ReLU, Swish(&lt;em&gt;Ramachandran, Zoph &amp;amp; Le 2017&lt;/em&gt;)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Both logistic and tanh are still used in various places(e.g., to get a probability), but are no longer the defaults for making deep networks&lt;br /&gt;
+  For building a deep network, first try ReLU - it trains quickly and performs well due to good gradient backflow&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;parameter-initialization&quot;&gt;Parameter Initialization&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Initialize weights to small random values (i.e., not zero matrices)&lt;br /&gt;
+  To avoid symmetries that prevent learning/specialization&lt;/li&gt;
+  &lt;li&gt;Initialize hidden layer biases to 0 and output (or reconstruction) biases to optimal value if weights were 0 (e.g., mean target or inverse sigmoid of mean target)&lt;/li&gt;
+  &lt;li&gt;Initialize &lt;strong&gt;all other weights&lt;/strong&gt; $~ \text{Uniform}(–r, r)$, with $r$ chosen so numbers get neither too big or too small (later the need for this is removed with use of &lt;em&gt;layer normalization&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;Xavier initialization has variance inversely proportional to &lt;em&gt;fan-in&lt;/em&gt; $n_{in}$ (previous layer size) and &lt;em&gt;fan-out&lt;/em&gt; $n_{out}$ (next layer size):&lt;br /&gt;
+  \(\begin{align*}
+  Var(W_i) = \frac{2}{n_{in} + n_{out}}
+  \end{align*}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;optimizers&quot;&gt;Optimizers&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;SGD will work just fine, but getting good results will often require hand-tuning the learning rate&lt;/li&gt;
+  &lt;li&gt;Sophisticated “adaptive” optimizers that scale the parameter adjustment by an accumulated gradient; &lt;em&gt;Adam&lt;/em&gt; is fairly good, safe place to start in many cases&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;learning-rates&quot;&gt;Learning Rates&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;A constant learning rate. Start around $lr = 0.001$?
+    &lt;ul&gt;
+      &lt;li&gt;It must be order of magnitude right – try powers of 10&lt;br /&gt;
+  Too big: model may diverge or not converge&lt;br /&gt;
+  Too small: model may not have trained by the assignment deadline&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Better try &lt;em&gt;learning rate decay&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;By hand: : halve the learning rate every &lt;em&gt;k&lt;/em&gt; epochs&lt;/li&gt;
+      &lt;li&gt;By a formula: $lr = lr_0 e^{-kt}$, for epoch $t$&lt;/li&gt;
+      &lt;li&gt;There are fancier methods like cyclic learning rates (q.v.)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Fancier optimizers still use a learning rate but it may be an initial rate that the optimizer shrinks – so you may want to start with a higher learning rate&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;language-modeling&quot;&gt;Language Modeling&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Language Modeling&lt;/strong&gt; is the task of predicting what word comes next&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;More formally: given a sequence of words $x^{(1)}, x^{(2)}, \ldots, x^{(t)}$, compute the probability distribution of the next words $x^{(t+1)}$:&lt;br /&gt;
+  $P(x^{(t+1)} \mid x^{(t)}, \ldots, x^{(1)})$&lt;br /&gt;
+  where $x^{(t+1)}$ can be any word in the vocabulary \(V = \left\{ w_1, \ldots, w_{\lvert V \rvert} \right\}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You can also think of a Language Model as a system that &lt;strong&gt;assigns probability to a piece of text&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;For example, if we have some text $x^{(1)}, x^{(2)}, \ldots, x^{(T)}$, then the probability of this text (according to the Language Model) is:&lt;br /&gt;
+  \(\begin{align*}
+  P(x^{(1)}, \ldots, x^{(T)}) &amp;amp;= P(x^{(1)}) \times P(x^{(2)}\mid x^{(1)}) \times \cdots \times P(x^{(T)}\mid x^{(T-1)}, \ldots, x^{(1)}) \\
+  &amp;amp;= \prod_{t=1}^T \underbrace{P(x^{(t)}\mid x^{(t-1)}, \ldots, x^{(1)})}_{\text{This is what our LM provides}}
+  \end{align*}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;n-gram-language-models&quot;&gt;n-gram Language Models&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Question: How to learn a Language Model?&lt;/li&gt;
+  &lt;li&gt;Answer(traditional, pre- Deep Learning): learn an &lt;strong&gt;n-gram Language Model&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Definition: A _n-gram__ is a chunk of &lt;em&gt;n&lt;/em&gt; consecutive words.&lt;/li&gt;
+  &lt;li&gt;Idea: Collect statistics about how frequent different n-grams are and use these to predict next word.&lt;/li&gt;
+  &lt;li&gt;First we make a &lt;strong&gt;Markov assumption&lt;/strong&gt;: $x^{(t+1)}$ depends only on the preceding &lt;em&gt;n-1&lt;/em&gt; words;&lt;/li&gt;
+&lt;/ul&gt;
+
+\[\begin{align*}
+P(x^{(t+1)}\mid x^{(t)}, \ldots, x^{(1)}) &amp;amp;= \overbrace{P(x^{(t+1)}\mid x^{(t)}, \ldots, x^{(t-n+2)})}^{n-1 \text{words}} &amp;amp;\text{(assumption)} \\
+&amp;amp;= \frac{\overbrace{P(x^{(t+1)}, x^{(t)}, \ldots, x^{(t-n+2)})}^{\text{prob of a n-gram}}}{\underbrace{P(x^{(t)}, \ldots, x^{(t-n+2)})}_{\text{prob of a (n-1)-gram}}} &amp;amp;\text{(definition of conditional prob)}
+\end{align*}\]
+
+&lt;ul&gt;
+  &lt;li&gt;Question: How do we get these &lt;em&gt;n&lt;/em&gt;-gram and &lt;em&gt;(n-1)&lt;/em&gt;-gram probabilities?&lt;/li&gt;
+  &lt;li&gt;Answer: By counting them in some large corpus of text&lt;/li&gt;
+&lt;/ul&gt;
+
+\[\begin{align*}
+\approx \frac{\text{count}(x^{(t+1)}, x^{(t)}, \ldots, x^{(t-n+2)})}{\text{count}(x^{(t)}, \ldots, x^{(t-n+2)})} &amp;amp;&amp;amp;\text{(statistical approxtimation)}  
+\end{align*}\]
+
+&lt;h3 id=&quot;n-gram-language-models-example&quot;&gt;n-gram Language Models: Example&lt;/h3&gt;
+&lt;p&gt;Suppose we are learning a &lt;strong&gt;4-gram&lt;/strong&gt; Language Model.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;del&gt;as the proctor started the clock&lt;/del&gt;, the students opened their &lt;strong&gt;w&lt;/strong&gt;(target)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;\(\begin{align*}
+P(\mathbf{w}|\text{students opened their}) = \frac{\text{count}(\text{students opened their } \mathbf{w})}{\text{students opened their}}
+\end{align*}\)&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;For example, suppose that in the corpus:
+    &lt;ul&gt;
+      &lt;li&gt;“students opened their” occurred 1000 times&lt;/li&gt;
+      &lt;li&gt;“students opened their &lt;strong&gt;books&lt;/strong&gt;” occurred 400 times&lt;br /&gt;
+  $\rightarrow P(\text{books}|\text{students opened their}) = 0.4$&lt;/li&gt;
+      &lt;li&gt;“students opened their &lt;strong&gt;exams&lt;/strong&gt;” occurred 100 times&lt;br /&gt;
+  $\rightarrow P(\text{exams}|\text{students opened their}) = 0.1$&lt;br /&gt;
+  Then, Should we have discarded the “proctor” context?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Naive Bayes: a class specific unigram language model, counting individual words&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;problems-with-n-gram-language-models&quot;&gt;Problems with n-gram Language Models&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Sparsity:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_8.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Storage: Need to store count for all n-grams you saw in the corpus&lt;br /&gt;
+  Increasing &lt;em&gt;n&lt;/em&gt; or increasing corpus increases model size&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;n-gram-language-models-in-practice&quot;&gt;n-gram Language Models in practice&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;You can build a simple trigram Language Model over a 1.7 million word corpus (Reuters) in a few &lt;strong&gt;seconds&lt;/strong&gt; on your laptop&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_9.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You can also use a Language Model to generate text
+    &lt;ul&gt;
+      &lt;li&gt;Get probability distribution, sample one. move forward and iterate.&lt;/li&gt;
+      &lt;li&gt;Results are &lt;em&gt;incoherent&lt;/em&gt;. Need to consider more &lt;em&gt;n&lt;/em&gt; words but increasing &lt;em&gt;n&lt;/em&gt; worsens sparsity problem, and increases model size&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-to-build-a-neural-language-model&quot;&gt;How to build a neural Language Model?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Recall the Language Modeling task:
+    &lt;ul&gt;
+      &lt;li&gt;Input: sequence of words $x^{(1)}, x^{(2)}, \ldots, x^{(t)}$&lt;/li&gt;
+      &lt;li&gt;Output: prob dist of the next word $P(x^{(t+1)} \mid x^{(t)}, \ldots, x^{(1)})$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window-based neural model&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_10.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;a-fixed-window-neural-language-model&quot;&gt;A fixed-window neural Language Model&lt;/h3&gt;
+&lt;p&gt;Approximately: &lt;em&gt;Y. Bengio, et al. (2000/2003): A Neural Probabilistic Language Model&lt;/em&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec5_11.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;span style=&quot;color:green&quot;&gt;Improvements&lt;/span&gt; over &lt;em&gt;n&lt;/em&gt;-gram LM:
+    &lt;ul&gt;
+      &lt;li&gt;No sparsity problem&lt;/li&gt;
+      &lt;li&gt;Don’t need to store all observed &lt;em&gt;n&lt;/em&gt;-grams&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Remaining &lt;span style=&quot;color:red&quot;&gt;problems&lt;/span&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Fixed window is &lt;strong&gt;too small&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;Enlarging window enlarges $W$&lt;/li&gt;
+      &lt;li&gt;Window can never be large enough&lt;/li&gt;
+      &lt;li&gt;$x^{(1)}$ and $x^{(2)}$ are multiplied by completely different weights in $W$. &lt;strong&gt;No symmetry&lt;/strong&gt; in how the inputs are processed.&lt;br /&gt;
+$\rightarrow$ We need a neural architecture that can process &lt;em&gt;any length input&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;recurrent-neural-networks-rnn&quot;&gt;Recurrent Neural Networks (RNN)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Core idea: Apply the same weights $W$ repeatedly&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_12.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec5_13.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;RNN &lt;span style=&quot;color:green&quot;&gt;Advantages&lt;/span&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Can process &lt;strong&gt;any length&lt;/strong&gt; input&lt;/li&gt;
+      &lt;li&gt;Computation for step &lt;em&gt;t&lt;/em&gt; can (in theory) use information from &lt;strong&gt;many steps back&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Model size doesn’t increase&lt;/strong&gt; for longer input context&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Symmetry&lt;/strong&gt; input process; same weights applied on every timestep&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;RNN &lt;span style=&quot;color:red&quot;&gt;Disadvantages&lt;/span&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Recurrent computation is &lt;strong&gt;slow&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;In practice, difficult to access information from &lt;strong&gt;many steps back&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs224n" /><summary type="html">How do we gain from a neural dependency parser? So far… Transition based dependency parsers were an efficient linear time method for giving the syntactic structure of natural language text. Worked pretty well before neural nets came along. $\color{red}{(-)}$ They worked with indicator features, specifying some condition and then checking whether it was true of a configuration. Problems of those features are: Problem #1: sparse Problem #2: incomplete Problem #3: expensive computation More than 95% of parsing time is consumed by feature computation Neural Approach: Start with the same configuration of a stack and a buffer, run exactly the same transition sequence but with a dense vector. A neural dependency parser(Chen and Manning, 2014) Results on English parsing to Stanford Dependencies: Unlabeled attachment score (UAS) = head Labeled attachment score (LAS) = head and label 2% more accurate than the symbolic dependency parser noticeably faster First win: Distributed Representations Represent each word as a d-dimensional dense vector (i.e., word embedding) Similar words are expected to have close vectors. Meanwhile, part-of-speech tags(POS) and dependency labels are also represented as d-dimensional vectors. The smaller discrete sets also exhibit many semantical similarities. Extracting Tokens &amp;amp; vector representations from configuration Extract a set of tokens based on the stack / buffer positions: Second win: Deep Learning classifiers are non-linear classifiers A softmax classifier assigns classes $y\in C$ based on inputs $x \in \mathbb{R}^d$ via the probability: \(\begin{align*} p(y\mid x) = \frac{\exp(W_y . x)}{\sum_{c=1}^C \exp(W_c . x)} \end{align*}\) We train the weight matrix $W \in \mathbb{R}^{C\times d}$ to minimize the neg. log loss: $\sum_i - \log p(y_i\mid x_i)$ (a.k.a. “cross entropy loss”) Traditional ML classifiers (including Naive Bayes, SVMs, logistic regression and softmax classifier) are not very powerful classifiers: they only give linear decision boundaries; limiting, unhelpful when a problem is complex. Neural networks can learn much more complex functions with nonlinear decision boundaries. Non-linear in the original space, linear for the softmax at the top of the neural network Simple feed-forward neural network multi-class classifier Neural Dependency Parser Model Architecture Dependency parsing for sentence structure C &amp;amp; M 2014 showed that neural networks can accurately determine the structure of sentences, supporting meaning interpretation It was the first simple, successful neural dependency parser The dense representations (and non-linear classifier) let it outperform other greedy parsers in both accuracy and speed Further developments in transition-based neural dependency parsing Improvements Bigger, deeper networks with better tuned hyperparameters Beam search Global, conditional random field (CRF)-style inference over the decision sequence Leading to SyntaxNet and the Parsey McParseFace model(2016): “The World’s Most Accurate Parser” https://ai.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html Graph-based dependency parsers Compute a score for every possible pair; dependency (choice of head) for each word Doing this well requires more than just knowing the two words We need good “contextual” representations of each word token, which we will develop in the coming lectures Repeat the same process for each other word; find the best parse (MST algorithm) A Neural graph-based dependency parser Dozat and Manning 2017; Dozat, Qi, and Manning 2017 This paper revived interest in graph-based dependency parsing in a neural world Designed a biaffine scoring model for neural dependency parsing Also crucially uses a neural sequence model Great results, but slower than the simple neural transition-based parsers There are $n^2$ possible dependencies in a sentence of length $n$ A bit more about neural networks Regularization A full loss function includes regularization over all parameters $\theta$, e.g., L2 regularization: \(\begin{align*} J(\theta) = \frac{1}{N}\sum_{i=1}^N -\log \left( \frac{e^{f_{y_i}}}{\sum_{c=1}^C e^{f_c}} \right) + \lambda\sum_k \theta_k^2 \end{align*}\) Classic view: Regularization works to prevent overfitting when we have a lot of features (or later a very powerful/deep model, etc.) Now: Regularization produces models that generalize well when we have a “big” model We do not care that our models overfit on the training data, even though they are hugely overfit Dropout [Srivastava, Hinton, Krizhevsky, Sutskever, &amp;amp; Salakhutdinov 2012/JMLR 2014] Preventing Feature Co-adaptation = Good Regularization Method Training time: at each instance(or batch) of evaluation (in online SGD-training), randomly set 50% of the inputs to each neuron to 0 Test time: halve the model weights (because we now keep twice as many active neurons) (Except usually only drop first layer inputs a little (~15%) or not at all) Prevents feature co-adaptation: A feature cannot only be useful in the presence of particular other features In a single layer: A kind of middle-ground between Naive Bayes (where all feature weights are set independently) and logistic regression models (where weights are set in the context of all others) Can be thought of as a form of model bagging (i.e., like an ensemble model) Nowadays usually thought of as strong, feature-dependent regularizer [Wager, Wang, &amp;amp; Liang 2013] “Vectorization” E.g., looping over word vectors versus concatenating them all into one large matrix and then multiplying the softmax weights with that matrix: from numpy import random N = 500 # number of windows to classify d = 300 # dimensionality of each window C = 5 # number of classes W = random.rand(C, d) wordvectors_list = [random.rand(d, 1) for i in range(N)] wordvectors_one_matrix = random.rand(d, N) %timeit [W.dot(wordvectors_list[i]) for i in range(N)] %timeit W.dot(wordvectors_one_matrix) Always try to use vectors and matrices rather than for loops; the speed gain goes from 1 to 2 orders of magnitude with GPUs. Non-linearities, old and new logistic(“sigmoid”) \(\begin{align*} f(z) = \frac{1}{1+\exp(-z)}\end{align*}\) tanh \(\begin{align*} f(z) = \tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}\end{align*}\) tanh is just a rescaled and shifted sigmoid(2x as steep, [-1, 1]): $tanh(z) = 2 \text{logistic}(2z) - 1$ hard tanh \(\begin{align*} \text{PHardTanh}(x) = \begin{cases} -1 &amp;amp; \mbox{ if } x &amp;lt; -1 \\ x &amp;amp; \mbox{ if } -1 \le x \le 1 \\ 1 &amp;amp; \mbox{ if } x &amp;gt; 1 \end{cases}\end{align*}\) ReLU(Rectrified Linear Unit) $\text{rect}(z) = \text{max}(z, 0)$ Others Leaky ReLU / Parametric ReLU, Swish(Ramachandran, Zoph &amp;amp; Le 2017) Both logistic and tanh are still used in various places(e.g., to get a probability), but are no longer the defaults for making deep networks For building a deep network, first try ReLU - it trains quickly and performs well due to good gradient backflow Parameter Initialization Initialize weights to small random values (i.e., not zero matrices) To avoid symmetries that prevent learning/specialization Initialize hidden layer biases to 0 and output (or reconstruction) biases to optimal value if weights were 0 (e.g., mean target or inverse sigmoid of mean target) Initialize all other weights $~ \text{Uniform}(–r, r)$, with $r$ chosen so numbers get neither too big or too small (later the need for this is removed with use of layer normalization) Xavier initialization has variance inversely proportional to fan-in $n_{in}$ (previous layer size) and fan-out $n_{out}$ (next layer size): \(\begin{align*} Var(W_i) = \frac{2}{n_{in} + n_{out}} \end{align*}\) Optimizers SGD will work just fine, but getting good results will often require hand-tuning the learning rate Sophisticated “adaptive” optimizers that scale the parameter adjustment by an accumulated gradient; Adam is fairly good, safe place to start in many cases Learning Rates A constant learning rate. Start around $lr = 0.001$? It must be order of magnitude right – try powers of 10 Too big: model may diverge or not converge Too small: model may not have trained by the assignment deadline Better try learning rate decay By hand: : halve the learning rate every k epochs By a formula: $lr = lr_0 e^{-kt}$, for epoch $t$ There are fancier methods like cyclic learning rates (q.v.) Fancier optimizers still use a learning rate but it may be an initial rate that the optimizer shrinks – so you may want to start with a higher learning rate Language Modeling Language Modeling is the task of predicting what word comes next More formally: given a sequence of words $x^{(1)}, x^{(2)}, \ldots, x^{(t)}$, compute the probability distribution of the next words $x^{(t+1)}$: $P(x^{(t+1)} \mid x^{(t)}, \ldots, x^{(1)})$ where $x^{(t+1)}$ can be any word in the vocabulary \(V = \left\{ w_1, \ldots, w_{\lvert V \rvert} \right\}\) You can also think of a Language Model as a system that assigns probability to a piece of text For example, if we have some text $x^{(1)}, x^{(2)}, \ldots, x^{(T)}$, then the probability of this text (according to the Language Model) is: \(\begin{align*} P(x^{(1)}, \ldots, x^{(T)}) &amp;amp;= P(x^{(1)}) \times P(x^{(2)}\mid x^{(1)}) \times \cdots \times P(x^{(T)}\mid x^{(T-1)}, \ldots, x^{(1)}) \\ &amp;amp;= \prod_{t=1}^T \underbrace{P(x^{(t)}\mid x^{(t-1)}, \ldots, x^{(1)})}_{\text{This is what our LM provides}} \end{align*}\) n-gram Language Models Question: How to learn a Language Model? Answer(traditional, pre- Deep Learning): learn an n-gram Language Model Definition: A _n-gram__ is a chunk of n consecutive words. Idea: Collect statistics about how frequent different n-grams are and use these to predict next word. First we make a Markov assumption: $x^{(t+1)}$ depends only on the preceding n-1 words; \[\begin{align*} P(x^{(t+1)}\mid x^{(t)}, \ldots, x^{(1)}) &amp;amp;= \overbrace{P(x^{(t+1)}\mid x^{(t)}, \ldots, x^{(t-n+2)})}^{n-1 \text{words}} &amp;amp;\text{(assumption)} \\ &amp;amp;= \frac{\overbrace{P(x^{(t+1)}, x^{(t)}, \ldots, x^{(t-n+2)})}^{\text{prob of a n-gram}}}{\underbrace{P(x^{(t)}, \ldots, x^{(t-n+2)})}_{\text{prob of a (n-1)-gram}}} &amp;amp;\text{(definition of conditional prob)} \end{align*}\] Question: How do we get these n-gram and (n-1)-gram probabilities? Answer: By counting them in some large corpus of text \[\begin{align*} \approx \frac{\text{count}(x^{(t+1)}, x^{(t)}, \ldots, x^{(t-n+2)})}{\text{count}(x^{(t)}, \ldots, x^{(t-n+2)})} &amp;amp;&amp;amp;\text{(statistical approxtimation)} \end{align*}\] n-gram Language Models: Example Suppose we are learning a 4-gram Language Model. as the proctor started the clock, the students opened their w(target) \(\begin{align*} P(\mathbf{w}|\text{students opened their}) = \frac{\text{count}(\text{students opened their } \mathbf{w})}{\text{students opened their}} \end{align*}\) For example, suppose that in the corpus: “students opened their” occurred 1000 times “students opened their books” occurred 400 times $\rightarrow P(\text{books}|\text{students opened their}) = 0.4$ “students opened their exams” occurred 100 times $\rightarrow P(\text{exams}|\text{students opened their}) = 0.1$ Then, Should we have discarded the “proctor” context? Naive Bayes: a class specific unigram language model, counting individual words Problems with n-gram Language Models Sparsity: Storage: Need to store count for all n-grams you saw in the corpus Increasing n or increasing corpus increases model size n-gram Language Models in practice You can build a simple trigram Language Model over a 1.7 million word corpus (Reuters) in a few seconds on your laptop You can also use a Language Model to generate text Get probability distribution, sample one. move forward and iterate. Results are incoherent. Need to consider more n words but increasing n worsens sparsity problem, and increases model size How to build a neural Language Model? Recall the Language Modeling task: Input: sequence of words $x^{(1)}, x^{(2)}, \ldots, x^{(t)}$ Output: prob dist of the next word $P(x^{(t+1)} \mid x^{(t)}, \ldots, x^{(1)})$ Window-based neural model A fixed-window neural Language Model Approximately: Y. Bengio, et al. (2000/2003): A Neural Probabilistic Language Model Improvements over n-gram LM: No sparsity problem Don’t need to store all observed n-grams Remaining problems: Fixed window is too small Enlarging window enlarges $W$ Window can never be large enough $x^{(1)}$ and $x^{(2)}$ are multiplied by completely different weights in $W$. No symmetry in how the inputs are processed. $\rightarrow$ We need a neural architecture that can process any length input Recurrent Neural Networks (RNN) Core idea: Apply the same weights $W$ repeatedly RNN Advantages: Can process any length input Computation for step t can (in theory) use information from many steps back Model size doesn’t increase for longer input context Symmetry input process; same weights applied on every timestep RNN Disadvantages: Recurrent computation is slow In practice, difficult to access information from many steps back</summary></entry><entry><title type="html">cs224n - Lecture 4. Dependency Parsing</title><link href="http://0.0.0.0:4000/cs224n_lec4" rel="alternate" type="text/html" title="cs224n - Lecture 4. Dependency Parsing" /><published>2022-03-11T00:00:00+00:00</published><updated>2022-03-11T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec4</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec4">&lt;h3 id=&quot;two-views-of-linguistic-structure-phrase-structure&quot;&gt;Two views of linguistic structure: Phrase structure&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;Constituency = phrase structure grammar = context-free grammers(CFGs)&lt;br /&gt;
@@ -1507,155 +1922,4 @@ semantic segmentation”, CVPR 2014&lt;/em&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;Fast Style Transfer
   &lt;img src=&quot;/assets/images/cs231n_lec14_5.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">What’s going on inside ConvNets? Visualizing what models have learned First layer: Visualize Filters At the first layer, we can visualize the raw weights and see gabor-like features. While the higher layers are about the weights to the activations from the layer before, it is not very interpretable. Last layer: Visualize Representations(feature vector) Nearest neighbors in feature space Dimensionality reduction: clustering with similarity; using simple algorithm(PCA) or more complex one(t-SNE) Visualizing Activations: Yosinski et al, “Understanding Neural Networks Through Deep Visualization”, ICML DL Workshop 2014. Understanding input pixels Maximally Activating Patches Run many images, record values of chosen channel(layer or neuron) and visualize image patches that correspond to maximal activations. Saliency via Occlusion: Zeiler and Fergus, “Visualizing and Understanding Convolutional Networks”, ECCV 2014. Mask part of the image before feeding to CNN, slide the occluder and check how much predicted probabilities change. Found that when there are multiple objects, the classification performance improved as the false class object masked. Which pixels matter: Saliency via Backprop Visualize the data gradient foward an image set activations in layer of interest to all zero, except for a 1.0 for a neuron of interest backprop to image input squish the channels of gradients to get 1-dimensional activation map(or we can run segmentation using grabcut on this heatmap). Can also find biases; to see what false classifier actually see Intermediate Features via (guided) backprop Deconvolution-based approach: Feed image into net Pick a layer, set the gradient there to be all zero except for one 1 for some neuron of interest Backprop to image(use guided backprop to pass the positive influence; activation with positive values, using modified relu or deconvnet) Visualizing CNN features: Gradient Ascent (Guided) backprop: Find the part of an image that a neuron responds to. Gradient ascent: Generate a synthetic image that maximally activates a neuron. \(I^{\ast} = \mbox{argmax}_I f(I) + R(I)\); (neuron value + regularizer) Optimization-based approach: freeze/fix the weights and run “image update” to find images that maximize the score of chosen class. Karen Simonyan, Andrea Vedaldi, Andrew Zisserman, “Deep Inside Convolutional Networks: Visualizing Image Classification Models and Saliency Maps”, Workshop at ICLR, 2014. Find images that maximize some class score: \(\mbox{argmax}_I S_c(I) - \lambda {\lVert I \rVert}^2_2\) initialize image to zeros forward image to compute current scores set the gradient of the scores vector to be I, then backprop to image make a small update to the image Instead of using L2 norm, we can use better regularizer(Gaussian blur image, Clip pixels with small values/gradients to 0, …) Optimize in FC6 latent space instead of pixel space: Adversarial perturbations Fooling Images / Adversarial Examples Start from an arbitrary image Pick an arbitrary class Modify the image to maximize the class Repeat until network is fooled Ian Goodfellow, “Explaining and Harnessing Adversarial Examples”, 2014 Classifier is vulnerable to adversarical perturbation because of its linear nature. Check Ian Goodfellow’s lecture from 2017 Moosavi-Dezfooli, Seyed-Mohsen, et al. “Universal adversarial perturbations”, IEEE, 2017. Style Transfer DeepDream: Amplify existing features Rather than synthesizing an image to maximize a specific neuron, instead try to amplify the neuron activations at some layer in the network. Choose an image and a layer in a CNN; repeat: Forward: compute activations at chosen layer Set gradient of chosen layer equal to its activation Backward: Compute gradient on image Update image Feature Inversion Mahendran and Vedaldi, “Understanding Deep Image Representations by Inverting Them”, CVPR 2015 Given a CNN feature vector for an image, find a new image that: Matches the given feature vector “looks natural” (image prior regularization) \(\begin{align*} x^{\ast} &amp;amp;= \underset{x\in\mathbb{R}^{H \times W \times C}}{\mbox{argmin}} l(\Phi(x), \Phi_0) + \lambda \mathcal{R}(x) \\ &amp;amp; \mbox{where loss } l = {\lVert \Phi(x) - \Phi_0 \rVert}^2 \end{align*}\) Texture Synthesis: Nearest Neighbor Given a sample patch of some texture, generate a bigger image of the same texture Generate pixels one at a time in scanline order; form neighborhood of already generated pixels and copy nearest neighbor from input Neural Texture Synthesis: Gram Matrix a pair-wise statistics; interpret given CxHxW features as HxW grid of C-dimensional vectors. By computing outer product and sum up for all spacial locations($G=V^T V$), it gives CxC matrix measuring co-occurrence. Pretrain a CNN on ImageNet (VGG-19) Run input texture forward through CNN, record activations on every layer At each layer compute the Gram matrix Initialize generated image from random noise Pass generated image through CNN, compute Gram matrix on each layer Compute loss: weighted sum of L2 distance between Gram matrices Backprop to get gradient on image Make gradient step on image GOTO 5 Neural Style Transfer: Feature + Gram Reconstruction Extract content targets (ConvNet activations of all layers for the given image) Extract style targets (Gram matrices of ConvNet activations of all layers) Optimize over image to have: The content of the content image(activations match content) The style of the stlye image(Gram matrices of activations match style) Problem: requires many forward, backward passes; VGG is very slow Solution: Train another neural network; Fast Style Transfer Fast Style Transfer</summary></entry><entry><title type="html">Unsupervised Representation Learning by Predicting Image Rotations</title><link href="http://0.0.0.0:4000/Rotation" rel="alternate" type="text/html" title="Unsupervised Representation Learning by Predicting Image Rotations" /><published>2022-01-24T15:00:00+00:00</published><updated>2022-01-24T15:00:00+00:00</updated><id>http://0.0.0.0:4000/Rotation</id><content type="html" xml:base="http://0.0.0.0:4000/Rotation">&lt;h2 id=&quot;unsupervised-representation-learning-by-predicting-image-rotations&quot;&gt;Unsupervised Representation Learning by Predicting Image Rotations&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;Gidaris et al. 2018&lt;/em&gt;&lt;br /&gt;
-&lt;a href=&quot;https://github.com/gidariss/FeatureLearningRotNet&quot;&gt;https://github.com/gidariss/FeatureLearningRotNet&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;ConvNet:&lt;br /&gt;
-  (+) Unparalleled capacity to learn high level semantic image features&lt;br /&gt;
-  (-) Require massive amounts of manually labeled data, expensive and impractical to scale&lt;br /&gt;
-  $\rightarrow$ &lt;em&gt;Unsupervised Learning&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;Unsupervised semantic feature learning:&lt;br /&gt;
-  Learn image features by training ConvNets to recognize the 2d rotated images as input. With apparently simple task, provides a very powerful supervisory signal for semantic feature learning(Conv). Evaluated in various unsupervised feature learning benchmarks, exceeds SotA performance.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;featurelearningrotnet&quot;&gt;FeatureLearningRotNet&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;How To:&lt;br /&gt;
-  First define a small set of discrete geometric transformations, then each of those transformations are applied to each image on the dataset and produced transformed images are fed to ConvNet model that is trained to recognize the transformation of each image.
-    &lt;ul&gt;
-      &lt;li&gt;Set of geometric transformations define the classification pretext task that the ConvNet has to learn; to achieve unsupervised semantic feature learning, it is important to properly choose those geometric transformations.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Purpose: to define the geometric transformations as rotations of 4 different degrees, ConvNet trained on the 4-way image classification task of recognizing one of the four Maximizing prob. $F^y(x^{y^{*}})$, probability of transformation &lt;em&gt;y&lt;/em&gt; predicted by &lt;em&gt;F&lt;/em&gt;, when given X is transformed by the transformation $y^{*}$.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;With idea: In order a ConvNet model to be able recognize the rotation transformations, it will require to understand the concept of the objects depicted in the image	such as their location, type, and pose.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;overview&quot;&gt;Overview&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;define a set of &lt;em&gt;K&lt;/em&gt; discrete geometric transformations \(G = \{g(\cdot\vert y)\}_{y=1}^K\), where $g(.\vert y)$ applies to input X, transformed image $X^y = g(X\vert y)$&lt;/li&gt;
-  &lt;li&gt;ConvNet model F(.) gets as input an image $X^{y^{\ast}}$, to recognize unknown $y^{\ast}$ yields as output a probability distribution over all possible transformations	\(F(X^{y^{\ast}}\vert\theta) = \{ F^y(X^{y^{\ast}}\vert\theta) \}_{y=1}^K\), output &lt;em&gt;F&lt;/em&gt; returns probs for all classes $y$.&lt;/li&gt;
-  &lt;li&gt;Therefore, &lt;em&gt;N&lt;/em&gt; training images \(D = \{ X_i \}_{i=0}^N\), the self-supervised training objective that ConvNet must learn to solve is:&lt;br /&gt;
- \(\mbox{min}_{\theta}\frac{1}{N}\sum_{i=1}^N \mbox{loss}(X_i,\theta)\),&lt;br /&gt;
- where the loss function is defined as:&lt;br /&gt;
- \(\mbox{loss}(X_i,\theta) = -\frac{1}{K}\sum_{y=1}^K \log(F^y(g(X_i|y)|\theta))\)&lt;br /&gt;
- (negative sum of log probs &lt;em&gt;F&lt;/em&gt; for all classes &lt;em&gt;y&lt;/em&gt;)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;2d image rotations:&lt;br /&gt;
-  $Rot(X, \phi)$, operator that rotates image X by $\phi$ degrees&lt;br /&gt;
-  In this case 0, 90, 180, 270; K=4 for G, where $g(X|y)=Rot(X,(y-1)90)$&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;forcing-the-learning-of-semantic-features&quot;&gt;Forcing the learning of semantic features&lt;/h3&gt;
-&lt;p&gt;Fact that it is essentially impossible for a ConvNet model to effectively perform the above rotation recognition task, unless it has first learnt to recognize and detect classes of objects as well as their &lt;strong&gt;semantic parts&lt;/strong&gt; in images.&lt;br /&gt;
-$\rightarrow$ &lt;strong&gt;ATTENTION MAPS&lt;/strong&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/images/papers/papers_rotation_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;By comparing the attention maps from two models trained on supervised and unsupervised way, we observe that both models seem to focus on roughly &lt;strong&gt;the same image regions&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/papers/papers_rotation_1.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Also, trained on the proposed rotation recognition task, &lt;strong&gt;visualized layer filters&lt;/strong&gt; learnt appear to have a big variety of edge filters on multiple orientations and multiple frequencies, then the filters learnt by the supervised task.
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Absence of low-level visual artifacts&lt;/strong&gt;:&lt;br /&gt;
-  An additional important advantage of using image rotations over other geometric transformations, is that they do not leave e any easily detectable low-level visual artifacts that will lead the ConvNet to learn trivial features with no practical value for the vision perception tasks.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Well-posedness&lt;/strong&gt;:&lt;br /&gt;
-  Human captured images tend to depict objects in an “up-standing” position. When defining the rotation recognition task, there is usually no ambiguity of what is the rotation transformation.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Implementing image rotations&lt;/strong&gt;:&lt;br /&gt;
-  Flip and transpose.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;$*$ Activation-based Attention Maps from &lt;em&gt;“Paying More Attention to Attention”, Zagoruyko et al., 2017&lt;/em&gt; - &lt;a href=&quot;https://arxiv.org/abs/1612.03928&quot;&gt;https://arxiv.org/abs/1612.03928&lt;/a&gt;&lt;br /&gt;
-  Activation tensor of a conv. layer: $A\in R^{C\times H\times W}$ consists of &lt;em&gt;C&lt;/em&gt; feautre planes with spatial dimensions &lt;em&gt;H&lt;/em&gt;x&lt;em&gt;W&lt;/em&gt;&lt;br /&gt;
-  Activation-based mapping function &lt;em&gt;F&lt;/em&gt; w.r.t that layer: $\mathcal{F}: R^{C\times H\times W} \rightarrow R^{H\times W}$&lt;br /&gt;
-  With implicit assumption: Absolute value of a hidden neuron activation(that results when the network is evaluated on given input) can be used as an indication about the importance of that neuron w.r.t. the specific input.&lt;br /&gt;
-  By considering, therefore, the absolute values of the elements of tensor A,	we construct a spatial attention map by computing statistics of these values	across the channel dimension(&lt;em&gt;C&lt;/em&gt;)
-    &lt;ul&gt;
-      &lt;li&gt;sum of abs: $F_{sum}(A)=\sum_{i=1}^C\vert A_i\vert$&lt;/li&gt;
-      &lt;li&gt;sum of abs, raised to the power of p(&amp;gt;1): $F_{sum}^p(A) = \sum_{i=1}^C\vert A_i\vert^p$&lt;/li&gt;
-      &lt;li&gt;max of abs, raised to the pwoer of p(&amp;gt;1): $F_{max}^p(A) = \mbox{max}_{i=1,C}\vert A_i\vert^p$&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;transfer-learning&quot;&gt;Transfer Learning&lt;/h3&gt;
-&lt;p&gt;With a model trained on proposed rotation recognition task with unlabeled data, freeze its early conv. layers and attach the layers from a supervised model, evaluate on a supervised task with a subset of labeled data.&lt;/p&gt;
-
-&lt;h3 id=&quot;experimental-results&quot;&gt;Experimental Results&lt;/h3&gt;
-
-&lt;h4 id=&quot;cifar-10-experiments&quot;&gt;CIFAR-10 Experiments&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;&lt;em&gt;RotNet&lt;/em&gt; implementation details&lt;/strong&gt;:&lt;br /&gt;
-  Network-In-Network (NIN) architectures (&lt;em&gt;Lin et al., 2013&lt;/em&gt;)&lt;br /&gt;
-  Pretask train: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;optimizer = SGD, batch_size = 128, momentum = 0.9, weight_decay = 5e−4, lr = 0.1, lr_decay = 0.2 (after 30, 60, 80 epochs), num_epochs = 100&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Evaluation of the learned feature hierarchies&lt;/strong&gt;:&lt;br /&gt;
-  Using the CIFAR-10 training images, train three &lt;em&gt;RotNet&lt;/em&gt; models which have 3, 4, and 5 conv. blocks respectively. Afterwards, on top of the feature maps generated by each conv. block of each &lt;em&gt;RotNet&lt;/em&gt; model, add classifiers trained in a supervised way on the object recognition task of CIFAR-10; consists of 3 FC layers. The accuracy results of CIFAR-10 test set:&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/papers_rotation_2.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
-    &lt;ol&gt;
-      &lt;li&gt;In all cases the feature maps generated by the 2nd conv. block achieve the highest accuracy, i.e., between 88.26% and 89.06%. Then the accuracy gradually degrades, which we assume is because they start becoming more and more specific on the self-supervised task of rotation prediction.&lt;/li&gt;
-      &lt;li&gt;Observe that increasing the total depth of the RotNet models leads to increased object recognition performance by the feature maps generated by earlier layers. We assume that this is because increasing the depth of the model and thus the complexity of its head (i.e., top ConvNet layers) allows the features of earlier layers to be less specific to the rotation prediction task.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Exploring the quality of the learned features w.r.t. the number of recognized rotations&lt;/strong&gt;:&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/papers_rotation_3.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Observed that 4 discrete rotations as proposed achieved better performance over other cases.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Comparison against supervised and other unsupervised methods&lt;/strong&gt;:&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/papers_rotation_4.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/papers_rotation_5.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Model using the feature maps generated by the 2nd conv. block of a RotNet model with 4 conv. blocks in total.&lt;br /&gt;
-  (a) &lt;em&gt;RotNet + non-linear&lt;/em&gt;: a non-linear classifier with 3 fully connected layers&lt;br /&gt;
-  (b) &lt;em&gt;RotNet +conv.&lt;/em&gt;: three conv. layers + a linear prediction layer&lt;/li&gt;
-      &lt;li&gt;Achieved best result among the unsupervised approaches&lt;/li&gt;
-      &lt;li&gt;Very close to the fully supervised NIN model&lt;/li&gt;
-      &lt;li&gt;Observed that fine-tuning the unsupervised learned features further improves the classification performance&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Correlation between object classification task and rotation prediction task&lt;/strong&gt;:&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/papers_rotation_6.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
-    &lt;ul&gt;
-      &lt;li&gt;As the ability of the RotNet features for solving the rotation prediction task improves(as the rotation prediction accuracy increases), their ability to help solving the object recognition task improves as well(the object recognition accuracy also increases).&lt;/li&gt;
-      &lt;li&gt;Object recognition accuracy converges fast w.r.t. the number of training epochs used for solving the pretext task of rotation prediction.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Semi-supervised setting&lt;/strong&gt;:&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/papers_rotation_7.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
-  Train a 4 block RotNet model on the rotation prediction task using the entire image dataset of CIFAR-10, then train on top of its feature maps object classifiers using only a subset of the available images and their corresponding labels. As feature maps we use those from 2nd conv. block of the RotNet model. As a classifier we use a set of convolutional layers of the same e architecture as the 3rd conv. block of a NIN model plus a linear classifier, all randomly initialized.  For training the object classifier we use for each category 20, 100, 400, 1000, or 5000 image examples. Comapred with a supervised model that is trained only on the available examples each time:
-    &lt;ul&gt;
-      &lt;li&gt;Observed that our unsupervised trained model exceeds in this semi-supervised setting the supervised model when the number of examples per category drops below 1000; can be useful when there are only small subset of labeled data.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;evaluation-of-self-supervised-features-trained-in-imagenet&quot;&gt;Evaluation of self-supervised features trained in ImageNet&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Train a &lt;em&gt;RotNet&lt;/em&gt; model on the training images of the ImageNet dataset and evaluate the performance of the self-self-supervised features on the image classification tasks of ImageNet, Places, and PASCAL VOC datasets and on the object detection and object segmentation tasks of PASCAL VOC.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Implementation details&lt;/strong&gt;:&lt;br /&gt;
-  Based on an AlexNet architecture, without local response normalization units, dropout units, or groups in the colvolutional layers, while it includes batch normalization units after each linear layer (either convolutional or fully connected).&lt;br /&gt;
-  Train with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SGD, batch_size=192, momentum=0.9, weight_decay=5e-4, lr=0.01, lr_decay=0.1(after 10, 20 epochs), num_epochs=30&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;ImageNet classification task&lt;/strong&gt;:&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/papers_rotation_8.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Observed that &lt;em&gt;our approach surpasses all the other methods by a significant margin&lt;/em&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Transfer learning evaluation on PASCAL VOC&lt;/strong&gt;:&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/papers_rotation_9.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Places classification task:&lt;/strong&gt;&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/papers_rotation_10.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="papers" /><summary type="html">Unsupervised Representation Learning by Predicting Image Rotations Gidaris et al. 2018 https://github.com/gidariss/FeatureLearningRotNet ConvNet: (+) Unparalleled capacity to learn high level semantic image features (-) Require massive amounts of manually labeled data, expensive and impractical to scale $\rightarrow$ Unsupervised Learning Unsupervised semantic feature learning: Learn image features by training ConvNets to recognize the 2d rotated images as input. With apparently simple task, provides a very powerful supervisory signal for semantic feature learning(Conv). Evaluated in various unsupervised feature learning benchmarks, exceeds SotA performance. FeatureLearningRotNet How To: First define a small set of discrete geometric transformations, then each of those transformations are applied to each image on the dataset and produced transformed images are fed to ConvNet model that is trained to recognize the transformation of each image. Set of geometric transformations define the classification pretext task that the ConvNet has to learn; to achieve unsupervised semantic feature learning, it is important to properly choose those geometric transformations. Purpose: to define the geometric transformations as rotations of 4 different degrees, ConvNet trained on the 4-way image classification task of recognizing one of the four Maximizing prob. $F^y(x^{y^{*}})$, probability of transformation y predicted by F, when given X is transformed by the transformation $y^{*}$. With idea: In order a ConvNet model to be able recognize the rotation transformations, it will require to understand the concept of the objects depicted in the image such as their location, type, and pose. Overview define a set of K discrete geometric transformations \(G = \{g(\cdot\vert y)\}_{y=1}^K\), where $g(.\vert y)$ applies to input X, transformed image $X^y = g(X\vert y)$ ConvNet model F(.) gets as input an image $X^{y^{\ast}}$, to recognize unknown $y^{\ast}$ yields as output a probability distribution over all possible transformations \(F(X^{y^{\ast}}\vert\theta) = \{ F^y(X^{y^{\ast}}\vert\theta) \}_{y=1}^K\), output F returns probs for all classes $y$. Therefore, N training images \(D = \{ X_i \}_{i=0}^N\), the self-supervised training objective that ConvNet must learn to solve is: \(\mbox{min}_{\theta}\frac{1}{N}\sum_{i=1}^N \mbox{loss}(X_i,\theta)\), where the loss function is defined as: \(\mbox{loss}(X_i,\theta) = -\frac{1}{K}\sum_{y=1}^K \log(F^y(g(X_i|y)|\theta))\) (negative sum of log probs F for all classes y) 2d image rotations: $Rot(X, \phi)$, operator that rotates image X by $\phi$ degrees In this case 0, 90, 180, 270; K=4 for G, where $g(X|y)=Rot(X,(y-1)90)$ Forcing the learning of semantic features Fact that it is essentially impossible for a ConvNet model to effectively perform the above rotation recognition task, unless it has first learnt to recognize and detect classes of objects as well as their semantic parts in images. $\rightarrow$ ATTENTION MAPS By comparing the attention maps from two models trained on supervised and unsupervised way, we observe that both models seem to focus on roughly the same image regions. Also, trained on the proposed rotation recognition task, visualized layer filters learnt appear to have a big variety of edge filters on multiple orientations and multiple frequencies, then the filters learnt by the supervised task. Absence of low-level visual artifacts: An additional important advantage of using image rotations over other geometric transformations, is that they do not leave e any easily detectable low-level visual artifacts that will lead the ConvNet to learn trivial features with no practical value for the vision perception tasks. Well-posedness: Human captured images tend to depict objects in an “up-standing” position. When defining the rotation recognition task, there is usually no ambiguity of what is the rotation transformation. Implementing image rotations: Flip and transpose. $*$ Activation-based Attention Maps from “Paying More Attention to Attention”, Zagoruyko et al., 2017 - https://arxiv.org/abs/1612.03928 Activation tensor of a conv. layer: $A\in R^{C\times H\times W}$ consists of C feautre planes with spatial dimensions HxW Activation-based mapping function F w.r.t that layer: $\mathcal{F}: R^{C\times H\times W} \rightarrow R^{H\times W}$ With implicit assumption: Absolute value of a hidden neuron activation(that results when the network is evaluated on given input) can be used as an indication about the importance of that neuron w.r.t. the specific input. By considering, therefore, the absolute values of the elements of tensor A, we construct a spatial attention map by computing statistics of these values across the channel dimension(C) sum of abs: $F_{sum}(A)=\sum_{i=1}^C\vert A_i\vert$ sum of abs, raised to the power of p(&amp;gt;1): $F_{sum}^p(A) = \sum_{i=1}^C\vert A_i\vert^p$ max of abs, raised to the pwoer of p(&amp;gt;1): $F_{max}^p(A) = \mbox{max}_{i=1,C}\vert A_i\vert^p$ Transfer Learning With a model trained on proposed rotation recognition task with unlabeled data, freeze its early conv. layers and attach the layers from a supervised model, evaluate on a supervised task with a subset of labeled data. Experimental Results CIFAR-10 Experiments RotNet implementation details: Network-In-Network (NIN) architectures (Lin et al., 2013) Pretask train: optimizer = SGD, batch_size = 128, momentum = 0.9, weight_decay = 5e−4, lr = 0.1, lr_decay = 0.2 (after 30, 60, 80 epochs), num_epochs = 100 Evaluation of the learned feature hierarchies: Using the CIFAR-10 training images, train three RotNet models which have 3, 4, and 5 conv. blocks respectively. Afterwards, on top of the feature maps generated by each conv. block of each RotNet model, add classifiers trained in a supervised way on the object recognition task of CIFAR-10; consists of 3 FC layers. The accuracy results of CIFAR-10 test set: In all cases the feature maps generated by the 2nd conv. block achieve the highest accuracy, i.e., between 88.26% and 89.06%. Then the accuracy gradually degrades, which we assume is because they start becoming more and more specific on the self-supervised task of rotation prediction. Observe that increasing the total depth of the RotNet models leads to increased object recognition performance by the feature maps generated by earlier layers. We assume that this is because increasing the depth of the model and thus the complexity of its head (i.e., top ConvNet layers) allows the features of earlier layers to be less specific to the rotation prediction task. Exploring the quality of the learned features w.r.t. the number of recognized rotations: Observed that 4 discrete rotations as proposed achieved better performance over other cases. Comparison against supervised and other unsupervised methods: Model using the feature maps generated by the 2nd conv. block of a RotNet model with 4 conv. blocks in total. (a) RotNet + non-linear: a non-linear classifier with 3 fully connected layers (b) RotNet +conv.: three conv. layers + a linear prediction layer Achieved best result among the unsupervised approaches Very close to the fully supervised NIN model Observed that fine-tuning the unsupervised learned features further improves the classification performance Correlation between object classification task and rotation prediction task: As the ability of the RotNet features for solving the rotation prediction task improves(as the rotation prediction accuracy increases), their ability to help solving the object recognition task improves as well(the object recognition accuracy also increases). Object recognition accuracy converges fast w.r.t. the number of training epochs used for solving the pretext task of rotation prediction. Semi-supervised setting: Train a 4 block RotNet model on the rotation prediction task using the entire image dataset of CIFAR-10, then train on top of its feature maps object classifiers using only a subset of the available images and their corresponding labels. As feature maps we use those from 2nd conv. block of the RotNet model. As a classifier we use a set of convolutional layers of the same e architecture as the 3rd conv. block of a NIN model plus a linear classifier, all randomly initialized. For training the object classifier we use for each category 20, 100, 400, 1000, or 5000 image examples. Comapred with a supervised model that is trained only on the available examples each time: Observed that our unsupervised trained model exceeds in this semi-supervised setting the supervised model when the number of examples per category drops below 1000; can be useful when there are only small subset of labeled data. Evaluation of self-supervised features trained in ImageNet Train a RotNet model on the training images of the ImageNet dataset and evaluate the performance of the self-self-supervised features on the image classification tasks of ImageNet, Places, and PASCAL VOC datasets and on the object detection and object segmentation tasks of PASCAL VOC. Implementation details: Based on an AlexNet architecture, without local response normalization units, dropout units, or groups in the colvolutional layers, while it includes batch normalization units after each linear layer (either convolutional or fully connected). Train with SGD, batch_size=192, momentum=0.9, weight_decay=5e-4, lr=0.01, lr_decay=0.1(after 10, 20 epochs), num_epochs=30 ImageNet classification task: Observed that our approach surpasses all the other methods by a significant margin Transfer learning evaluation on PASCAL VOC: Places classification task:</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">What’s going on inside ConvNets? Visualizing what models have learned First layer: Visualize Filters At the first layer, we can visualize the raw weights and see gabor-like features. While the higher layers are about the weights to the activations from the layer before, it is not very interpretable. Last layer: Visualize Representations(feature vector) Nearest neighbors in feature space Dimensionality reduction: clustering with similarity; using simple algorithm(PCA) or more complex one(t-SNE) Visualizing Activations: Yosinski et al, “Understanding Neural Networks Through Deep Visualization”, ICML DL Workshop 2014. Understanding input pixels Maximally Activating Patches Run many images, record values of chosen channel(layer or neuron) and visualize image patches that correspond to maximal activations. Saliency via Occlusion: Zeiler and Fergus, “Visualizing and Understanding Convolutional Networks”, ECCV 2014. Mask part of the image before feeding to CNN, slide the occluder and check how much predicted probabilities change. Found that when there are multiple objects, the classification performance improved as the false class object masked. Which pixels matter: Saliency via Backprop Visualize the data gradient foward an image set activations in layer of interest to all zero, except for a 1.0 for a neuron of interest backprop to image input squish the channels of gradients to get 1-dimensional activation map(or we can run segmentation using grabcut on this heatmap). Can also find biases; to see what false classifier actually see Intermediate Features via (guided) backprop Deconvolution-based approach: Feed image into net Pick a layer, set the gradient there to be all zero except for one 1 for some neuron of interest Backprop to image(use guided backprop to pass the positive influence; activation with positive values, using modified relu or deconvnet) Visualizing CNN features: Gradient Ascent (Guided) backprop: Find the part of an image that a neuron responds to. Gradient ascent: Generate a synthetic image that maximally activates a neuron. \(I^{\ast} = \mbox{argmax}_I f(I) + R(I)\); (neuron value + regularizer) Optimization-based approach: freeze/fix the weights and run “image update” to find images that maximize the score of chosen class. Karen Simonyan, Andrea Vedaldi, Andrew Zisserman, “Deep Inside Convolutional Networks: Visualizing Image Classification Models and Saliency Maps”, Workshop at ICLR, 2014. Find images that maximize some class score: \(\mbox{argmax}_I S_c(I) - \lambda {\lVert I \rVert}^2_2\) initialize image to zeros forward image to compute current scores set the gradient of the scores vector to be I, then backprop to image make a small update to the image Instead of using L2 norm, we can use better regularizer(Gaussian blur image, Clip pixels with small values/gradients to 0, …) Optimize in FC6 latent space instead of pixel space: Adversarial perturbations Fooling Images / Adversarial Examples Start from an arbitrary image Pick an arbitrary class Modify the image to maximize the class Repeat until network is fooled Ian Goodfellow, “Explaining and Harnessing Adversarial Examples”, 2014 Classifier is vulnerable to adversarical perturbation because of its linear nature. Check Ian Goodfellow’s lecture from 2017 Moosavi-Dezfooli, Seyed-Mohsen, et al. “Universal adversarial perturbations”, IEEE, 2017. Style Transfer DeepDream: Amplify existing features Rather than synthesizing an image to maximize a specific neuron, instead try to amplify the neuron activations at some layer in the network. Choose an image and a layer in a CNN; repeat: Forward: compute activations at chosen layer Set gradient of chosen layer equal to its activation Backward: Compute gradient on image Update image Feature Inversion Mahendran and Vedaldi, “Understanding Deep Image Representations by Inverting Them”, CVPR 2015 Given a CNN feature vector for an image, find a new image that: Matches the given feature vector “looks natural” (image prior regularization) \(\begin{align*} x^{\ast} &amp;amp;= \underset{x\in\mathbb{R}^{H \times W \times C}}{\mbox{argmin}} l(\Phi(x), \Phi_0) + \lambda \mathcal{R}(x) \\ &amp;amp; \mbox{where loss } l = {\lVert \Phi(x) - \Phi_0 \rVert}^2 \end{align*}\) Texture Synthesis: Nearest Neighbor Given a sample patch of some texture, generate a bigger image of the same texture Generate pixels one at a time in scanline order; form neighborhood of already generated pixels and copy nearest neighbor from input Neural Texture Synthesis: Gram Matrix a pair-wise statistics; interpret given CxHxW features as HxW grid of C-dimensional vectors. By computing outer product and sum up for all spacial locations($G=V^T V$), it gives CxC matrix measuring co-occurrence. Pretrain a CNN on ImageNet (VGG-19) Run input texture forward through CNN, record activations on every layer At each layer compute the Gram matrix Initialize generated image from random noise Pass generated image through CNN, compute Gram matrix on each layer Compute loss: weighted sum of L2 distance between Gram matrices Backprop to get gradient on image Make gradient step on image GOTO 5 Neural Style Transfer: Feature + Gram Reconstruction Extract content targets (ConvNet activations of all layers for the given image) Extract style targets (Gram matrices of ConvNet activations of all layers) Optimize over image to have: The content of the content image(activations match content) The style of the stlye image(Gram matrices of activations match style) Problem: requires many forward, backward passes; VGG is very slow Solution: Train another neural network; Fast Style Transfer Fast Style Transfer</summary></entry></feed>
