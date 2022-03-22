@@ -40,7 +40,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
 
 
 
-    <title>cs224n - Lecture 3. Backprop and Neural Networks</title>
+    <title>cs224n - Lecture 6. Simple and LSTM RNNs</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -69,24 +69,24 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="" />
     <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
-    <link rel="canonical" href="http://0.0.0.0:4000/cs224n_lec3" />
+    <link rel="canonical" href="http://0.0.0.0:4000/cs224n_lec6" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="cs224n - Lecture 3. Backprop and Neural Networks" />
-    <meta property="og:description" content="Named Entity Recognition(NER) Task: find and classify names in text Possible uses: Tracking mentions of particular entities in documents For question answering, answers are usually named entities Often followed by Named Entity Linking/Canonicalization into Knowledge Base Simple NER: Window classification using binary logistic classifier Using word vectors, build a context" />
-    <meta property="og:url" content="http://0.0.0.0:4000/cs224n_lec3" />
+    <meta property="og:title" content="cs224n - Lecture 6. Simple and LSTM RNNs" />
+    <meta property="og:description" content="The Simple RNN Language Model Training an RNN Language Model Get a big corpus of text which is a sequence of words $x^{(1)}, \ldots, x^{(T)}$ Feed into RNN-LM; compute output distribution $\hat{y}^{(t)}$ for every step $t$. i.e., predict probability distribution of every word, given words so far Loss function on" />
+    <meta property="og:url" content="http://0.0.0.0:4000/cs224n_lec6" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta property="article:author" content="https://www.facebook.com/" />
-    <meta property="article:published_time" content="2022-03-08T00:00:00+00:00" />
-    <meta property="article:modified_time" content="2022-03-08T00:00:00+00:00" />
+    <meta property="article:published_time" content="2022-03-20T00:00:00+00:00" />
+    <meta property="article:modified_time" content="2022-03-20T00:00:00+00:00" />
     <meta property="article:tag" content="cs224n" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="cs224n - Lecture 3. Backprop and Neural Networks" />
-    <meta name="twitter:description" content="Named Entity Recognition(NER) Task: find and classify names in text Possible uses: Tracking mentions of particular entities in documents For question answering, answers are usually named entities Often followed by Named Entity Linking/Canonicalization into Knowledge Base Simple NER: Window classification using binary logistic classifier Using word vectors, build a context" />
+    <meta name="twitter:title" content="cs224n - Lecture 6. Simple and LSTM RNNs" />
+    <meta name="twitter:description" content="The Simple RNN Language Model Training an RNN Language Model Get a big corpus of text which is a sequence of words $x^{(1)}, \ldots, x^{(T)}$ Feed into RNN-LM; compute output distribution $\hat{y}^{(t)}$ for every step $t$. i.e., predict probability distribution of every word, given words so far Loss function on" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -107,7 +107,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "name": "Darron's Devlog",
         "logo": "http://0.0.0.0:4000/"
     },
-    "url": "http://0.0.0.0:4000/cs224n_lec3",
+    "url": "http://0.0.0.0:4000/cs224n_lec6",
     "image": {
         "@type": "ImageObject",
         "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
@@ -116,9 +116,9 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://0.0.0.0:4000/cs224n_lec3"
+        "@id": "http://0.0.0.0:4000/cs224n_lec6"
     },
-    "description": "Named Entity Recognition(NER) Task: find and classify names in text Possible uses: Tracking mentions of particular entities in documents For question answering, answers are usually named entities Often followed by Named Entity Linking/Canonicalization into Knowledge Base Simple NER: Window classification using binary logistic classifier Using word vectors, build a context"
+    "description": "The Simple RNN Language Model Training an RNN Language Model Get a big corpus of text which is a sequence of words $x^{(1)}, \ldots, x^{(T)}$ Feed into RNN-LM; compute output distribution $\hat{y}^{(t)}$ for every step $t$. i.e., predict probability distribution of every word, given words so far Loss function on"
 }
     </script>
 
@@ -131,7 +131,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="cs224n - Lecture 3. Backprop and Neural Networks" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="cs224n - Lecture 6. Simple and LSTM RNNs" href="/feed.xml" />
 
 
 </head>
@@ -190,7 +190,7 @@ into the {body} of the default.hbs template -->
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime=" 8 March 2022"> 8 March 2022</time>
+                    <time class="post-full-meta-date" datetime="20 March 2022">20 March 2022</time>
                     
                         <span class="date-divider">/</span>
                         
@@ -201,153 +201,343 @@ into the {body} of the default.hbs template -->
                         
                     
                 </section>
-                <h1 class="post-full-title">cs224n - Lecture 3. Backprop and Neural Networks</h1>
+                <h1 class="post-full-title">cs224n - Lecture 6. Simple and LSTM RNNs</h1>
             </header>
 	<!--
             
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h3 id="named-entity-recognitionner">Named Entity Recognition(NER)</h3>
+                    <h3 id="the-simple-rnn-language-model">The Simple RNN Language Model</h3>
+<p><img src="/assets/images/cs224n/lec5_13.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<h3 id="training-an-rnn-language-model">Training an RNN Language Model</h3>
 <ul>
-  <li>Task: <strong>find</strong> and <strong>classify</strong> names in text</li>
-  <li>Possible uses:
-    <ul>
-      <li>Tracking mentions of particular entities in documents</li>
-      <li>For question answering, answers are usually named entities</li>
-    </ul>
+  <li>Get a <strong>big corpus of text</strong> which is a sequence of words  $x^{(1)}, \ldots, x^{(T)}$</li>
+  <li>Feed into RNN-LM; compute output distribution $\hat{y}^{(t)}$ <strong>for every step $t$</strong>.<br />
+  i.e., predict probability distribution of <em>every word</em>, given words so far</li>
+  <li>
+    <p><strong>Loss function</strong> on step is <strong>cross-entropy</strong>(negative log-likelihood) between predicted probability distribution $\hat{y}^{(t)}$, and the true next word $y^{(t)}$(one-hot for $x^{(t+1)}$):<br />
+  \(\begin{align*}
+  J^{(t)}(\theta) = CE(y^{(t)}, \hat{y}^{(t)}) = -\sum_{w\in V} y_w^{(t)} \log \hat{y}_w^{(t)} = -\log \hat{y}_{x_{t+1}}^{(t)}
+  \end{align*}\)</p>
   </li>
-  <li>Often followed by Named Entity Linking/Canonicalization into Knowledge Base</li>
+  <li>
+    <p>Average this to get <strong>overall loss</strong> for entire training set:<br />
+  \(\begin{align*}
+  J(\theta) = \frac{1}{T}\sum_{t=1}^T J^{(t)}(\theta) = \frac{1}{T}\sum_{t=1}^T -\log \hat{y}_{x_{t+1}}^{(t)}
+  \end{align*}\)</p>
+  </li>
+  <li>
+    <p><em>“Teacher forcing”</em> algorithm:<br />
+  At each step, reset to what was actually in the corpus and <strong>not reuse</strong> what the model have suggested.</p>
+  </li>
+  <li>
+    <p>However: Computing loss and gradients across <strong>entire corpus</strong> $x^{(1)}, \ldots, x^{(T)}$ is <strong>too expensive</strong><br />
+  In pratice, consider $x^{(1)}, \ldots, x^{(T)}$ as a <em>sentence</em> or a <em>document</em></p>
+  </li>
+  <li>Recall: <strong>Stochastic Gradient Descent</strong> allows us to compute loss and gradients for small chunk of data, and update.<br />
+  Compute loss $J(\theta)$ for a sentence (actually, a batch of sentences), compute gradients and update weights. Repeat.</li>
 </ul>
 
-<h3 id="simple-ner-window-classification-using-binary-logistic-classifier">Simple NER: Window classification using binary logistic classifier</h3>
+<h3 id="training-the-parameters-rnns-backpropagation-for-rnns">Training the parameters RNNs: Backpropagation for RNNs</h3>
+<p><img src="/assets/images/cs224n/lec6_0.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+<ul>
+  <li><strong>Question</strong>: What’s the derivative of $J^{(t)}(\theta)$ w.r.t. the <strong>repeated</strong> weight matrix $W_h$?</li>
+  <li>
+    <p><strong>Answer</strong>: sum of the gradient w.r.t. each time it appears<br />
+  \(\begin{align*}
+  \frac{\partial J^{(t)}}{\partial W_h} = \sum_{i=1}^t \left. \frac{\partial J^{(t)}}{\partial W_h} \right|_{(i)}
+  \end{align*}\)</p>
+  </li>
+  <li>Backpropagation for RNNs: Proof sketch</li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec6_1.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+
+<ul>
+  <li>How to calculate:<br />
+  Backpropagate over timesteps $i=t,\ldots,0$, summing gradients as you go.<br />
+  <em>“Backpropagation through time, [Werbos, P.G., 1988, Neural Networks 1, and others]”</em></li>
+</ul>
+
+<h3 id="generating-text-with-a-rnn-language-model">Generating text with a RNN Language Model</h3>
 <ul>
   <li>
-    <p>Using word vectors, build a context window of word vectors, then pass through a neural network and feed it to logistic classifier.</p>
+    <p>Like a n-gram Language Model, use an RNN Language Model to <strong>generate text</strong> by <strong>repeated sampling</strong>. Sampled output becomes next step’s input.</p>
   </li>
-  <li>idea: classify each word in its context window of neighboring words</li>
-  <li>Train logistic classifier on hand-labeled data to classify center word {yes/no} for each class based on a concatenation of word vectors in a window
-    <ul>
-      <li>In practice, we usually use multi-class softmax</li>
-    </ul>
-  </li>
-  <li>Example: Classify “Paris” as +/- location(binary for is_location) in context of sentence with window length 2:<br />
-  sentence $=$ “$\mbox{ the  museums  in  Paris  are  amazing  to  see   . }$”
-  $x_{\text{window}} = [x_{\text{museums}}\quad x_{\text{in}}\quad x_{\text{Paris}}\quad x_{\text{are}}\quad x_{\text{amazing}}]^T$</li>
-  <li>Resulting vector $x_{\text{window}} = x\in \mathbb{R}^{5d}$, a column vector.</li>
-  <li>To classify all words: run classifier for each class on the vector centered on each word in the sentence</li>
-</ul>
-
-<p><img src="/assets/images/cs224n/lec3_0.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
-
-<h3 id="computing-gradients-by-hand">Computing Gradients by Hand</h3>
-<ul>
-  <li>Matrix calculus: Fully vectorized gradients
-    <ul>
-      <li>“Multivariable calculus is just like single-variable calculus if you use matrices”</li>
-      <li>Much faster and more usful than non-vectorized gradients</li>
-      <li>But doing a non-vectorized gradient can be good for intuition; partial derivative for one parameter</li>
-    </ul>
-  </li>
-  <li>Vector gradient<br />
-  Given a function with <em>1</em> output and <em>n</em> inputs<br />
-  $f(x) = f(x_1, x_2, \ldots, x_n)$<br />
-  Its gradient is a vector of partial derivatives w.r.t each input<br />
-  \(\frac{\partial f}{\partial x} = \left[\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots, \frac{\partial f}{\partial x_n} \right]\)</li>
   <li>
-    <p>Jacobian Matrix: Generalization of the Gradient<br />
-  Given a function with <strong><em>m</em> outputs</strong> and <em>n</em> inputs<br />
-  $f(x) = [f_1(x_1, x_2, \ldots, x_n), \ldots, f_m(x_1, x_2, \ldots, x_n)]$<br />
-  It’s Jacobian is an <strong>$m \times n$</strong> matrix of partial derivatives<br />
-  \(\begin{align*}
-  \frac{\partial f}{\partial x} = 
-  \begin{bmatrix}
-  \frac{\partial f_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial f_1}{\partial x_n} \\
-  \vdots &amp; \ddots &amp; \vdots \\
-  \frac{\partial f_m}{\partial x_1} &amp; \cdots &amp; \frac{\partial f_m}{\partial x_n}
-  \end{bmatrix}
-  \end{align*}\) $\quad\quad$ \(\begin{align*}\left( \frac{\partial f}{\partial x} \right)_{ij} = \frac{\partial f_i}{\partial x_j}\end{align*}\)</p>
+    <p>You can train an RNN-LM on any kind of text, then generate text in that style.</p>
   </li>
-  <li>Chain Rule
-    <ul>
-      <li>For composition of one-variable functions: <strong>multiply derivatives</strong><br />
-  $z = g(y)$, $y = f(x)$<br />
-  \(\begin{align*}\frac{dz}{dx} = \frac{dz}{dy}\frac{dy}{dx}\end{align*}\)</li>
-      <li>For multiple variables at once: <strong>multiply Jacobians</strong><br />
-  $h = f(z)$<br />
-  $z = Wx + b$<br />
-  \(\begin{align*}\frac{\partial h}{\partial x} = \frac{\partial h}{\partial z}\frac{\partial z}{\partial x} = \cdots\end{align*}\)</li>
-    </ul>
-  </li>
-  <li>Example Jacobian: Elementwise activation function</li>
 </ul>
 
-<p><img src="/assets/images/cs224n/lec3_1.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
-
+<h3 id="evaluating-language-models">Evaluating Language Models</h3>
 <ul>
-  <li>Other Jacobians</li>
+  <li>The standard <strong>evaluation metric</strong> for Language Model is <strong>perlexity</strong>; a <em>geometric mean of the inverse probabilities</em>.</li>
 </ul>
 
-<p><img src="/assets/images/cs224n/lec3_2.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+<p><img src="/assets/images/cs224n/lec6_2.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
 
 <ul>
-  <li>Write out the Jacobians</li>
-</ul>
-
-<p><img src="/assets/images/cs224n/lec3_3.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
-
-<ul>
-  <li>Derivative with respect to Matrix: Output shape<br />
-  for $\frac{\partial s}{\partial W}$, output $s$ is a scalar and input $W \in \mathbb{R}^{n\times m}$: <em>1</em> by <em>nm</em> Jacobian?<br />
-  $\rightarrow$ is inconvenient to do \(\theta^{\text{new}} = \theta^{\text{old}} - \alpha\nabla_\theta J(\theta)\) gradient descent.
-    <ul>
-      <li>Instead, use the <strong>shape convention</strong>: the shape of the gradient is the shape of the parameters<br />
-  <em>n</em> by <em>m</em> matrix \(\begin{align*}\frac{\partial s}{\partial W} = 
-  \begin{bmatrix} 
-  \frac{\partial s}{\partial W_{11}} &amp; \cdots &amp; \frac{\partial s}{\partial W_{1m}} \\ 
-  \vdots &amp; \ddots &amp; \vdots \\
-  \frac{\partial s}{\partial W_{n1}} &amp; \cdots &amp; \frac{\partial s}{\partial W_{nm}}
-  \end{bmatrix}\end{align*}\)</li>
-      <li>$\frac{\partial s}{\partial W} = \delta\frac{\partial z}{\partial W}$<br />
-  $z = Wx + b$<br />
+  <li>
+    <p>This is equal to <strong>the exponential</strong> of the cross-entropy loss $J(\theta)$:<br />
   \(\begin{align*}
-  \frac{\partial s}{\partial W} &amp;= \delta^T x^T \\
-  &amp; = \begin{bmatrix} \delta_1 \\ \vdots \\ \delta_n \end{bmatrix} [x_1, \ldots, x_m] = 
-  \begin{bmatrix} \delta_1 x_1 &amp; \cdots &amp; \delta_1 x_m \\
-  \vdots &amp; \ddots &amp; \vdots \\
-  \delta_n x_1 &amp; \cdots &amp; \delta_n x_m \end{bmatrix}
+  = \prod_{t=1}^T \left( \frac{1}{\hat{y}_{x_{t+1}}^{(t)}}\right)^{1/T} = \exp \left( \frac{1}{T}\sum_{t=1}^T -\log \hat{y}_{x_{t+1}}^{(t)} \right) = \exp(J(\theta))
   \end{align*}\)<br />
-  denote that $\delta$ is local error signal at <em>z</em> and <em>x</em> is local input signal.</li>
+  $\rightarrow$ Lower perplexity is better</p>
+  </li>
+  <li>
+    <p>RNNs have greatly improved perplexity</p>
+  </li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec6_3.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<h3 id="why-should-we-care-about-language-modeling">Why should we care about Language Modeling?</h3>
+<ul>
+  <li>
+    <p>Language Modeling is a <strong>benchmark task</strong> that helps us <strong>measure our progress</strong> on understanding language</p>
+  </li>
+  <li>
+    <p>Language Modeling is a <strong>subcomponent</strong> of <strong>many</strong> NLP tasks, especially those involving <strong>generating text</strong> or <strong>estimating the probability of text</strong>:</p>
+    <ul>
+      <li>Predictive typing</li>
+      <li>Speech recognition</li>
+      <li>Handwriting recognition</li>
+      <li>Spelling/grammar correction</li>
+      <li>Authorship identification</li>
+      <li>Machine translation</li>
+      <li>Summarization</li>
+      <li>Dialogue</li>
+      <li>etc.</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="what-shape-should-derivatives-be">What shape should derivatives be?</h3>
+<h3 id="recap">Recap</h3>
 <ul>
-  <li>Two options:
+  <li>
+    <p>Language Model: A system that predicts the next word</p>
+  </li>
+  <li>Recurrent Neural Network: A family of neural networks that:
+    <ul>
+      <li>Take sequential input of any length</li>
+      <li>Apply the same weights on each step</li>
+      <li>Can optionally produce output on each step</li>
+    </ul>
+  </li>
+  <li>Recurrent Neural Network $\ne$ Language Model<br />
+  shown that RNNs are a great way to build a LM, but RNNs are useful for much more</li>
+</ul>
+
+<h3 id="other-rnn-uses">Other RNN uses</h3>
+<ul>
+  <li>
+    <p>Sequence tagging: e.g., part-of-speech tagging, named entity recognition<br />
+  <img src="/assets/images/cs224n/lec6_4.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+  </li>
+  <li>Sentence classification: e.g., sentiment classification<br />
+  <img src="/assets/images/cs224n/lec6_5.png" alt="png" width="80%&quot;, height=&quot;100%" />
     <ol>
-      <li>Use Jacobian form as much as possible, reshape to follow the shape convention at the end:
-        <ul>
-          <li>at the end transpose $\frac{\partial s}{\partial b}$ to make the derivative a column vector, resulting in $\delta^T$</li>
-        </ul>
-      </li>
-      <li>Always follow the shape convention
-        <ul>
-          <li>Look at dimensions to figure out when to transpose and/or reorder terms</li>
-          <li>The error message $\delta$ that arrives at a hidden layer has the same dimensionality as that hidden layer</li>
-        </ul>
-      </li>
+      <li>Basic way: 
+ Use the final hidden state. After running RNN(or LSTM), the final hidden state was encoded the whole sentence and treat it as the whole meaning of the sentence. Then put an extra classifier layer.</li>
+      <li>Usually better:<br />
+ Take element-wise max or mean of all hidden states to more symmetrically encode the hidden state over each time step.</li>
     </ol>
   </li>
+  <li>
+    <p>Language encoder module: e.g., question answering, machine translation, many other tasks<br />
+  <img src="/assets/images/cs224n/lec6_6.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+  </li>
+  <li>Generate text: e.g., speech recognition, machine translation, summarization<br />
+  <img src="/assets/images/cs224n/lec6_7.png" alt="png" width="100%&quot;, height=&quot;100%" /></li>
 </ul>
 
-<h3 id="backpropagation-chain-rule">Backpropagation: Chain Rule</h3>
+<h3 id="problems-with-vanishing-and-exploding-gradients">Problems with Vanishing and Exploding Gradients</h3>
+<p><img src="/assets/images/cs224n/lec6_8.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<h3 id="vanishing-gradient-proof-sketch-linear-case">Vanishing gradient: Proof sketch (linear case)</h3>
 <ul>
-  <li>Other trick:<br />
-  <strong>re-use</strong> derivatives computed for higher layers in computing derivatives for lower layers to minimize computation</li>
+  <li>Recall:<br />
+  $\hat{h}^{(t)} = \sigma(W_h h^{(t-1)} + W_x x^{(t)} + b_1)$</li>
+  <li>What if $\sigma(x) = x$?<br />
+  \(\begin{align*}
+  \frac{\partial h^{(t)}}{\partial h^{(t-1)}} 
+  &amp;= \text{diag} \left( \sigma^\prime \left( W_h h^{(t-1)} + W_x x^{(t)} + b_1 \right) \right) W_h &amp;&amp;(\text{chain rule}) \\
+  &amp;= I\ W_h = W_h
+  \end{align*}\)</li>
+  <li>Consider the gradient of the loss $J^{(i)}(\theta)$ on step $i$, w.r.t. the hidden state $h^{(j)}$ one some previous step $j$. Let $l = i - j$<br />
+  \(\begin{align*}
+  \frac{\partial J^{(i)}(\theta)}{\partial h^{(j)}}
+  &amp;= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{j &lt; t \le i}\frac{\partial h^{(t)}}{\partial h^{(t-1)}} &amp;&amp;(\text{chain rule}) \\
+  &amp;= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{j &lt; t \le i} W_h = \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} W_h^l &amp;&amp;(\text{value of } \frac{\partial h^{(t)}}{\partial h^{(t-1)}})
+  \end{align*}\)<br />
+  $\rightarrow$ If $W_h$ is “small”, then $W_h^l$ gets exponentially problematic as $l$ becomes large</li>
+  <li>
+    <p>Consider if the eigenvalues of $W_h$ are all less than 1(sufficient but not necessary):<br />
+  $\lambda_1, \lambda_2, \ldots, \lambda_n &lt; 1$<br />
+  $q_1, q_2, \ldots, q_n$ (eigenvectors)<br />
+  Rewrite using the eigenvectors of $W_h$ as a basis:<br />
+  \(\begin{align*}
+  \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} = \sum_{i=1}^n c_i \lambda_i^l q_i \approx 0
+  \end{align*}\) (for large $l$)<br />
+  $\therefore \lambda_i^l$ approaches 0 as $l$ grows, gradient vanishes</p>
+  </li>
+  <li>Choosing nonlinear activations $\sigma$<br />
+  Pretty much the same thing, except the proof requires $\lambda_i &lt; \gamma$ for some $\gamma$ dependdent on dimensionality and $\sigma$</li>
 </ul>
 
-<p><img src="/assets/images/cs231n_lec4_3.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+<h3 id="why-is-vanishing-gradient-a-problem">Why is vanishing gradient a problem?</h3>
+<ul>
+  <li>Gradient signal from far away is lost because it’s much smaller than gradient signal from close-by. So, model weights are updated only with respect to near effects, not <strong>long-term effects</strong>.</li>
+</ul>
+
+<h3 id="effect-of-vanishing-gradient-on-rnn-lm">Effect of vanishing gradient on RNN-LM</h3>
+<ul>
+  <li>LM task:
+    <blockquote>
+      <p>“When she tried to print her tickets, she found that the printer was out of toner. She went to the stationery store to buy more toner. It was very overpriced. After installing the toner into the printer, she finally printed her [target]”</p>
+    </blockquote>
+  </li>
+  <li>To learn from this training example, the RNN-LM needs to model the dependency between “tickets” on the 7th step and the target word “tickets” at the end<br />
+  But if gradient is small, the model can’t learn this dependency and  the model is unable to predict similar long-distance dependencies at test time</li>
+</ul>
+
+<h3 id="why-is-exploding-gradient-a-problem">Why is exploding gradient a problem?</h3>
+<ul>
+  <li>If the gradient becomes too big, then the SGD update step becomes too big:<br />
+  This can cause <strong>bad updates</strong>: we take too large a step and reach a weird and bad parameter configuration (with large loss)</li>
+  <li>In the worst case, this will result in <em>Inf</em> or <em>NaN</em> in your network<br />
+  (then you have to restart training from an earlier checkpoint)</li>
+</ul>
+
+<h3 id="gradient-clipping-solution-for-exploding-gradient">Gradient clipping: solution for exploding gradient</h3>
+<ul>
+  <li>If the norm of the gradient is greater than some threshold, scale it down before applying SGD update</li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec6_9.png" alt="png" width="70%&quot;, height=&quot;100%" /></p>
+
+<ul>
+  <li>
+    <p>Intuition: take a step in the same direction, but a smaller step</p>
+  </li>
+  <li>
+    <p>In practice, remembering to clip gradients is important, but exploding gradients are an easy problem to solve</p>
+  </li>
+</ul>
+
+<h3 id="how-to-fix-the-vanishing-gradient-problem">How to fix the vanishing gradient problem?</h3>
+<ul>
+  <li>
+    <p>The main problem is that it’s too difficult for the RNN to learn to preserve information <em>over many timesteps</em></p>
+  </li>
+  <li>
+    <p>In a vanilla RNN, the hidden state is constantly being <strong>rewritten</strong><br />
+  $h^{(t)} = \sigma \left( W_h h^{(t-1)} + W_x x^{(t)} + b \right)$<br />
+  $\rightarrow$ How about a RNN with separate <strong>memory</strong>?</p>
+  </li>
+</ul>
+
+<h3 id="long-short-term-memory-rnns-lstms">Long Short-Term Memory RNNs (LSTMs)</h3>
+<ul>
+  <li>
+    <p>Proposed by <em>“Long short-term memory”, Hochreiter and Schmidhuber, 1997</em>, but really a crucial part of the modern LSTM is from <em>“Learning to Forgt: Continual Prediction with LSTM”, Gers et al., 2000</em>.</p>
+  </li>
+  <li>On step $t$, there is a hidden state $h^{(t)}$ and a cell state $c^{(t)}$
+    <ul>
+      <li>Both are vectors length $n$</li>
+      <li>The cell stores <strong>long-term information</strong></li>
+      <li>The LSTM can <em>read, erase, and write</em> information from the cell<br />
+  The cell becomes conceptually rather like RAM in a computer</li>
+    </ul>
+  </li>
+  <li>The selection of which information is erased/written/read is controlled by three corresponding <strong>gates</strong>
+    <ul>
+      <li>The gates are also vectors length $n$</li>
+      <li>On each timestep, each element of the gates can be <strong>open</strong> (1), <strong>closed</strong> (0), or somewhere in-between</li>
+      <li>The gates are <strong>dynamic</strong>: their value is computed based on the current context</li>
+    </ul>
+  </li>
+  <li>With a sequence of inputs $x^{(t)}$, compute a sequence of hidden states $h^{(t)}$ and cell states $c^{(t)}$.</li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec6_10.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<p><img src="/assets/images/cs224n/lec6_11.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<h3 id="how-does-lstm-solve-vanishing-gradients">How does LSTM solve vanishing gradients?</h3>
+<ul>
+  <li>The LSTM architecture makes it easier for the RNN to preserve information over many timesteps
+    <ul>
+      <li>e.g., if the forget gate is set to 1 for a cell dimension and the input gate set to 0, then the information of that cell is preserved indefinitely.</li>
+      <li>In practice, you get about 100 timesteps rather than about 7 of effective memory.</li>
+    </ul>
+  </li>
+  <li>LSTM doesn’t <em>guarantee</em> that there is no vanishing/exploding gradient, but it does provide an easier way for the model to learn long-distance dependencies
+    <h3 id="lstm-real-world-success">LSTM: real-world success</h3>
+  </li>
+  <li>In 2013–2015, LSTMs started achieving state-of-the-art results
+    <ul>
+      <li>Successful tasks include handwriting recognition, speech recognition, machine translation, parsing, and image captioning, as well as language models</li>
+      <li>LSTMs became the <strong>dominant approach</strong> for most NLP tasks</li>
+    </ul>
+  </li>
+  <li>Now (2021), other approaches (e.g., Transformers) have become dominant for many tasks
+    <ul>
+      <li>For example, in WMT (a Machine Translation conference + competition):<br />
+  In WMT 2016, the summary report contains “RNN” 44 times<br />
+  In WMT 2019, “RNN” 7 times, “Transformer” 105 times</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="is-vanishingexploding-gradient-just-a-rnn-problem">Is vanishing/exploding gradient just a RNN problem?</h3>
+<ul>
+  <li>It can be a problem for all neural architectures (including <strong>feed-forward</strong> and <strong>convolutional</strong>), especially <strong>very deep</strong> ones.<br />
+  Due to chain rule / choice of nonlinearity function, gradient can become vanishingly small as it backpropagates. Thus, lower layers are learned very slowly (hard to train)</li>
+  <li>
+    <p>Solution: lots of new deep feedforward/convolutional architectures that <strong>add more direct connections</strong> (thus allowing the gradient to flow)</p>
+  </li>
+  <li>For example:
+    <ul>
+      <li>Resnet, <em>“Deep Residual Learning for Image Recognition”, He et al, 2015.</em>	 
+  <img src="/assets/images/cs224n/lec6_12.png" alt="png" width="60%&quot;, height=&quot;100%" /><br />
+  Also known as skip-connects, the identity connection preserves information by default and makes deep networks much easier to train.</li>
+      <li>Densenet, <em>“Densely Connected Convolutional Networks”, Huang et al, 2017.</em><br />
+  <img src="/assets/images/cs224n/lec6_13.png" alt="png" width="50%&quot;, height=&quot;100%" /><br />
+  Dense connections that directly connect each layer to all future layers</li>
+      <li>HighwayNet, <em>“Highway Networks”, Srivastava et al, 2015.</em><br />
+  <img src="/assets/images/cs224n/lec6_14.png" alt="png" width="50%&quot;, height=&quot;100%" /><br />
+  Similar to residual connections, but controlled by a dynamic gate.</li>
+    </ul>
+  </li>
+  <li>Conclusion: Though vanishing/exploding gradients are a general problem, <strong>RNNs are particularly unstable</strong> due to the repeated multiplication by the <strong>same</strong> weight matrix (<em>Bengio et al, 1994</em>)</li>
+</ul>
+
+<h3 id="bidirectional-and-multi-layer-rnns-motivation">Bidirectional and Multi-layer RNNs: motivation</h3>
+<ul>
+  <li>Example: Sentiment Classification task</li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec6_15.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<p><img src="/assets/images/cs224n/lec6_16.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<p><img src="/assets/images/cs224n/lec6_17.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<ul>
+  <li>
+    <p>Note: bidirectional RNNs are only applicable if you have access to the <strong>entire input sequence</strong><br />
+  They are <strong>not</strong> applicable to Language Modeling, because in LM you <em>only</em> have left context available.</p>
+  </li>
+  <li>
+    <p>If you do have entire input sequence(e.g., any kind of encoding), <strong>bidirectionality is powerful</strong> (you should use it by default).</p>
+  </li>
+  <li>
+    <p>For example, <strong>BERT</strong> (<strong>Bidirectional</strong> Encoder Representations from Transformers) is a powerful pretrained contextual representation system <strong>built on bidirectionality</strong>.</p>
+  </li>
+</ul>
 
                 </div>
             </section>
@@ -397,9 +587,9 @@ into the {body} of the default.hbs template -->
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function () {
-                            var this_page_url = 'http://0.0.0.0:4000/cs224n_lec3';
-                            var this_page_identifier = '/cs224n_lec3';
-                            var this_page_title = 'cs224n - Lecture 3. Backprop and Neural Networks';
+                            var this_page_url = 'http://0.0.0.0:4000/cs224n_lec6';
+                            var this_page_identifier = '/cs224n_lec6';
+                            var this_page_title = 'cs224n - Lecture 6. Simple and LSTM RNNs';
                         };
                         (function() {
                             var d = document, s = d.createElement('script');
@@ -445,11 +635,6 @@ into the {body} of the default.hbs template -->
                                 
                                   
                                     
-                                        
-                                        
-                                            <li><a href="/cs224n_lec6">cs224n - Lecture 6. Simple and LSTM RNNs</a></li>
-                                        
-                                    
                                   
                                 
                                   
@@ -471,6 +656,11 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                            <li><a href="/cs224n_lec3">cs224n - Lecture 3. Backprop and Neural Networks</a></li>
+                                        
                                     
                                   
                                 
@@ -571,43 +761,13 @@ into the {body} of the default.hbs template -->
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
             
-                    <article class="post-card post-template no-image">
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs224n_lec4">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Cs224n</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">cs224n - Lecture 4. Dependency Parsing</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>Two views of linguistic structure: Phrase structure Constituency = phrase structure grammar = context-free grammers(CFGs) Phrase structure organizes words into nested constituents Starting unit: words (noun, preposition, adjective, determiner, …) the, $\ $</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                
-            </footer>
-        </div>
-    </article>
-
-            
 
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
             
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs224n_lec2">
+            <a class="post-card-content-link" href="/cs224n_lec5">
                 <header class="post-card-header">
                     
                         
@@ -617,11 +777,11 @@ into the {body} of the default.hbs template -->
                         
                     
 
-                    <h2 class="post-card-title">cs224n - Lecture 2. Neural Classifiers</h2>
+                    <h2 class="post-card-title">cs224n - Lecture 5. Language Models and RNNs</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>Review: Main idea of word2vec Start with random word vectors Iterate through each word in the whole corpus Try to predict surrounding words using word vectors: $P(o\mid c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T</p>
+                        <p>How do we gain from a neural dependency parser? So far… Transition based dependency parsers were an efficient linear time method for giving the syntactic structure of natural language text. Worked pretty well</p>
                     
                 </section>
             </a>
@@ -648,18 +808,18 @@ into the {body} of the default.hbs template -->
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">cs224n - Lecture 3. Backprop and Neural Networks</div>
+    <div class="floating-header-title">cs224n - Lecture 6. Simple and LSTM RNNs</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs224n+-+Lecture+3.+Backprop+and+Neural+Networks&amp;url=https://12kdh43.github.io/cs224n_lec3"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs224n+-+Lecture+6.+Simple+and+LSTM+RNNs&amp;url=https://12kdh43.github.io/cs224n_lec6"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs224n_lec3"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs224n_lec6"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 

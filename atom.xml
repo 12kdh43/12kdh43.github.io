@@ -8,6 +8,349 @@
     
       
       <item>
+        <title>cs224n - Lecture 6. Simple and LSTM RNNs</title>
+        
+          <description>&lt;h3 id=&quot;the-simple-rnn-language-model&quot;&gt;The Simple RNN Language Model&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_13.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;training-an-rnn-language-model&quot;&gt;Training an RNN Language Model&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Get a &lt;strong&gt;big corpus of text&lt;/strong&gt; which is a sequence of words  $x^{(1)}, \ldots, x^{(T)}$&lt;/li&gt;
+  &lt;li&gt;Feed into RNN-LM; compute output distribution $\hat{y}^{(t)}$ &lt;strong&gt;for every step $t$&lt;/strong&gt;.&lt;br /&gt;
+  i.e., predict probability distribution of &lt;em&gt;every word&lt;/em&gt;, given words so far&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Loss function&lt;/strong&gt; on step is &lt;strong&gt;cross-entropy&lt;/strong&gt;(negative log-likelihood) between predicted probability distribution $\hat{y}^{(t)}$, and the true next word $y^{(t)}$(one-hot for $x^{(t+1)}$):&lt;br /&gt;
+  \(\begin{align*}
+  J^{(t)}(\theta) = CE(y^{(t)}, \hat{y}^{(t)}) = -\sum_{w\in V} y_w^{(t)} \log \hat{y}_w^{(t)} = -\log \hat{y}_{x_{t+1}}^{(t)}
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Average this to get &lt;strong&gt;overall loss&lt;/strong&gt; for entire training set:&lt;br /&gt;
+  \(\begin{align*}
+  J(\theta) = \frac{1}{T}\sum_{t=1}^T J^{(t)}(\theta) = \frac{1}{T}\sum_{t=1}^T -\log \hat{y}_{x_{t+1}}^{(t)}
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;“Teacher forcing”&lt;/em&gt; algorithm:&lt;br /&gt;
+  At each step, reset to what was actually in the corpus and &lt;strong&gt;not reuse&lt;/strong&gt; what the model have suggested.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;However: Computing loss and gradients across &lt;strong&gt;entire corpus&lt;/strong&gt; $x^{(1)}, \ldots, x^{(T)}$ is &lt;strong&gt;too expensive&lt;/strong&gt;&lt;br /&gt;
+  In pratice, consider $x^{(1)}, \ldots, x^{(T)}$ as a &lt;em&gt;sentence&lt;/em&gt; or a &lt;em&gt;document&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Recall: &lt;strong&gt;Stochastic Gradient Descent&lt;/strong&gt; allows us to compute loss and gradients for small chunk of data, and update.&lt;br /&gt;
+  Compute loss $J(\theta)$ for a sentence (actually, a batch of sentences), compute gradients and update weights. Repeat.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;training-the-parameters-rnns-backpropagation-for-rnns&quot;&gt;Training the parameters RNNs: Backpropagation for RNNs&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Question&lt;/strong&gt;: What’s the derivative of $J^{(t)}(\theta)$ w.r.t. the &lt;strong&gt;repeated&lt;/strong&gt; weight matrix $W_h$?&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Answer&lt;/strong&gt;: sum of the gradient w.r.t. each time it appears&lt;br /&gt;
+  \(\begin{align*}
+  \frac{\partial J^{(t)}}{\partial W_h} = \sum_{i=1}^t \left. \frac{\partial J^{(t)}}{\partial W_h} \right|_{(i)}
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Backpropagation for RNNs: Proof sketch&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How to calculate:&lt;br /&gt;
+  Backpropagate over timesteps $i=t,\ldots,0$, summing gradients as you go.&lt;br /&gt;
+  &lt;em&gt;“Backpropagation through time, [Werbos, P.G., 1988, Neural Networks 1, and others]”&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;generating-text-with-a-rnn-language-model&quot;&gt;Generating text with a RNN Language Model&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Like a n-gram Language Model, use an RNN Language Model to &lt;strong&gt;generate text&lt;/strong&gt; by &lt;strong&gt;repeated sampling&lt;/strong&gt;. Sampled output becomes next step’s input.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You can train an RNN-LM on any kind of text, then generate text in that style.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;evaluating-language-models&quot;&gt;Evaluating Language Models&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;The standard &lt;strong&gt;evaluation metric&lt;/strong&gt; for Language Model is &lt;strong&gt;perlexity&lt;/strong&gt;; a &lt;em&gt;geometric mean of the inverse probabilities&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;This is equal to &lt;strong&gt;the exponential&lt;/strong&gt; of the cross-entropy loss $J(\theta)$:&lt;br /&gt;
+  \(\begin{align*}
+  = \prod_{t=1}^T \left( \frac{1}{\hat{y}_{x_{t+1}}^{(t)}}\right)^{1/T} = \exp \left( \frac{1}{T}\sum_{t=1}^T -\log \hat{y}_{x_{t+1}}^{(t)} \right) = \exp(J(\theta))
+  \end{align*}\)&lt;br /&gt;
+  $\rightarrow$ Lower perplexity is better&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;RNNs have greatly improved perplexity&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_3.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;why-should-we-care-about-language-modeling&quot;&gt;Why should we care about Language Modeling?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Language Modeling is a &lt;strong&gt;benchmark task&lt;/strong&gt; that helps us &lt;strong&gt;measure our progress&lt;/strong&gt; on understanding language&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Language Modeling is a &lt;strong&gt;subcomponent&lt;/strong&gt; of &lt;strong&gt;many&lt;/strong&gt; NLP tasks, especially those involving &lt;strong&gt;generating text&lt;/strong&gt; or &lt;strong&gt;estimating the probability of text&lt;/strong&gt;:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Predictive typing&lt;/li&gt;
+      &lt;li&gt;Speech recognition&lt;/li&gt;
+      &lt;li&gt;Handwriting recognition&lt;/li&gt;
+      &lt;li&gt;Spelling/grammar correction&lt;/li&gt;
+      &lt;li&gt;Authorship identification&lt;/li&gt;
+      &lt;li&gt;Machine translation&lt;/li&gt;
+      &lt;li&gt;Summarization&lt;/li&gt;
+      &lt;li&gt;Dialogue&lt;/li&gt;
+      &lt;li&gt;etc.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;recap&quot;&gt;Recap&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Language Model: A system that predicts the next word&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Recurrent Neural Network: A family of neural networks that:
+    &lt;ul&gt;
+      &lt;li&gt;Take sequential input of any length&lt;/li&gt;
+      &lt;li&gt;Apply the same weights on each step&lt;/li&gt;
+      &lt;li&gt;Can optionally produce output on each step&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Recurrent Neural Network $\ne$ Language Model&lt;br /&gt;
+  shown that RNNs are a great way to build a LM, but RNNs are useful for much more&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;other-rnn-uses&quot;&gt;Other RNN uses&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sequence tagging: e.g., part-of-speech tagging, named entity recognition&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec6_4.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Sentence classification: e.g., sentiment classification&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec6_5.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Basic way: 
+ Use the final hidden state. After running RNN(or LSTM), the final hidden state was encoded the whole sentence and treat it as the whole meaning of the sentence. Then put an extra classifier layer.&lt;/li&gt;
+      &lt;li&gt;Usually better:&lt;br /&gt;
+ Take element-wise max or mean of all hidden states to more symmetrically encode the hidden state over each time step.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Language encoder module: e.g., question answering, machine translation, many other tasks&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec6_6.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Generate text: e.g., speech recognition, machine translation, summarization&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec6_7.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;problems-with-vanishing-and-exploding-gradients&quot;&gt;Problems with Vanishing and Exploding Gradients&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_8.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;vanishing-gradient-proof-sketch-linear-case&quot;&gt;Vanishing gradient: Proof sketch (linear case)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Recall:&lt;br /&gt;
+  $\hat{h}^{(t)} = \sigma(W_h h^{(t-1)} + W_x x^{(t)} + b_1)$&lt;/li&gt;
+  &lt;li&gt;What if $\sigma(x) = x$?&lt;br /&gt;
+  \(\begin{align*}
+  \frac{\partial h^{(t)}}{\partial h^{(t-1)}} 
+  &amp;amp;= \text{diag} \left( \sigma^\prime \left( W_h h^{(t-1)} + W_x x^{(t)} + b_1 \right) \right) W_h &amp;amp;&amp;amp;(\text{chain rule}) \\
+  &amp;amp;= I\ W_h = W_h
+  \end{align*}\)&lt;/li&gt;
+  &lt;li&gt;Consider the gradient of the loss $J^{(i)}(\theta)$ on step $i$, w.r.t. the hidden state $h^{(j)}$ one some previous step $j$. Let $l = i - j$&lt;br /&gt;
+  \(\begin{align*}
+  \frac{\partial J^{(i)}(\theta)}{\partial h^{(j)}}
+  &amp;amp;= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{j &amp;lt; t \le i}\frac{\partial h^{(t)}}{\partial h^{(t-1)}} &amp;amp;&amp;amp;(\text{chain rule}) \\
+  &amp;amp;= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{j &amp;lt; t \le i} W_h = \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} W_h^l &amp;amp;&amp;amp;(\text{value of } \frac{\partial h^{(t)}}{\partial h^{(t-1)}})
+  \end{align*}\)&lt;br /&gt;
+  $\rightarrow$ If $W_h$ is “small”, then $W_h^l$ gets exponentially problematic as $l$ becomes large&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Consider if the eigenvalues of $W_h$ are all less than 1(sufficient but not necessary):&lt;br /&gt;
+  $\lambda_1, \lambda_2, \ldots, \lambda_n &amp;lt; 1$&lt;br /&gt;
+  $q_1, q_2, \ldots, q_n$ (eigenvectors)&lt;br /&gt;
+  Rewrite using the eigenvectors of $W_h$ as a basis:&lt;br /&gt;
+  \(\begin{align*}
+  \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} = \sum_{i=1}^n c_i \lambda_i^l q_i \approx 0
+  \end{align*}\) (for large $l$)&lt;br /&gt;
+  $\therefore \lambda_i^l$ approaches 0 as $l$ grows, gradient vanishes&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Choosing nonlinear activations $\sigma$&lt;br /&gt;
+  Pretty much the same thing, except the proof requires $\lambda_i &amp;lt; \gamma$ for some $\gamma$ dependdent on dimensionality and $\sigma$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;why-is-vanishing-gradient-a-problem&quot;&gt;Why is vanishing gradient a problem?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Gradient signal from far away is lost because it’s much smaller than gradient signal from close-by. So, model weights are updated only with respect to near effects, not &lt;strong&gt;long-term effects&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;effect-of-vanishing-gradient-on-rnn-lm&quot;&gt;Effect of vanishing gradient on RNN-LM&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;LM task:
+    &lt;blockquote&gt;
+      &lt;p&gt;“When she tried to print her tickets, she found that the printer was out of toner. She went to the stationery store to buy more toner. It was very overpriced. After installing the toner into the printer, she finally printed her [target]”&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;To learn from this training example, the RNN-LM needs to model the dependency between “tickets” on the 7th step and the target word “tickets” at the end&lt;br /&gt;
+  But if gradient is small, the model can’t learn this dependency and  the model is unable to predict similar long-distance dependencies at test time&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;why-is-exploding-gradient-a-problem&quot;&gt;Why is exploding gradient a problem?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;If the gradient becomes too big, then the SGD update step becomes too big:&lt;br /&gt;
+  This can cause &lt;strong&gt;bad updates&lt;/strong&gt;: we take too large a step and reach a weird and bad parameter configuration (with large loss)&lt;/li&gt;
+  &lt;li&gt;In the worst case, this will result in &lt;em&gt;Inf&lt;/em&gt; or &lt;em&gt;NaN&lt;/em&gt; in your network&lt;br /&gt;
+  (then you have to restart training from an earlier checkpoint)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;gradient-clipping-solution-for-exploding-gradient&quot;&gt;Gradient clipping: solution for exploding gradient&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;If the norm of the gradient is greater than some threshold, scale it down before applying SGD update&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_9.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Intuition: take a step in the same direction, but a smaller step&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In practice, remembering to clip gradients is important, but exploding gradients are an easy problem to solve&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-to-fix-the-vanishing-gradient-problem&quot;&gt;How to fix the vanishing gradient problem?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The main problem is that it’s too difficult for the RNN to learn to preserve information &lt;em&gt;over many timesteps&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In a vanilla RNN, the hidden state is constantly being &lt;strong&gt;rewritten&lt;/strong&gt;&lt;br /&gt;
+  $h^{(t)} = \sigma \left( W_h h^{(t-1)} + W_x x^{(t)} + b \right)$&lt;br /&gt;
+  $\rightarrow$ How about a RNN with separate &lt;strong&gt;memory&lt;/strong&gt;?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;long-short-term-memory-rnns-lstms&quot;&gt;Long Short-Term Memory RNNs (LSTMs)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Proposed by &lt;em&gt;“Long short-term memory”, Hochreiter and Schmidhuber, 1997&lt;/em&gt;, but really a crucial part of the modern LSTM is from &lt;em&gt;“Learning to Forgt: Continual Prediction with LSTM”, Gers et al., 2000&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;On step $t$, there is a hidden state $h^{(t)}$ and a cell state $c^{(t)}$
+    &lt;ul&gt;
+      &lt;li&gt;Both are vectors length $n$&lt;/li&gt;
+      &lt;li&gt;The cell stores &lt;strong&gt;long-term information&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;The LSTM can &lt;em&gt;read, erase, and write&lt;/em&gt; information from the cell&lt;br /&gt;
+  The cell becomes conceptually rather like RAM in a computer&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The selection of which information is erased/written/read is controlled by three corresponding &lt;strong&gt;gates&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;The gates are also vectors length $n$&lt;/li&gt;
+      &lt;li&gt;On each timestep, each element of the gates can be &lt;strong&gt;open&lt;/strong&gt; (1), &lt;strong&gt;closed&lt;/strong&gt; (0), or somewhere in-between&lt;/li&gt;
+      &lt;li&gt;The gates are &lt;strong&gt;dynamic&lt;/strong&gt;: their value is computed based on the current context&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;With a sequence of inputs $x^{(t)}$, compute a sequence of hidden states $h^{(t)}$ and cell states $c^{(t)}$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_10.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_11.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;how-does-lstm-solve-vanishing-gradients&quot;&gt;How does LSTM solve vanishing gradients?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;The LSTM architecture makes it easier for the RNN to preserve information over many timesteps
+    &lt;ul&gt;
+      &lt;li&gt;e.g., if the forget gate is set to 1 for a cell dimension and the input gate set to 0, then the information of that cell is preserved indefinitely.&lt;/li&gt;
+      &lt;li&gt;In practice, you get about 100 timesteps rather than about 7 of effective memory.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;LSTM doesn’t &lt;em&gt;guarantee&lt;/em&gt; that there is no vanishing/exploding gradient, but it does provide an easier way for the model to learn long-distance dependencies
+    &lt;h3 id=&quot;lstm-real-world-success&quot;&gt;LSTM: real-world success&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In 2013–2015, LSTMs started achieving state-of-the-art results
+    &lt;ul&gt;
+      &lt;li&gt;Successful tasks include handwriting recognition, speech recognition, machine translation, parsing, and image captioning, as well as language models&lt;/li&gt;
+      &lt;li&gt;LSTMs became the &lt;strong&gt;dominant approach&lt;/strong&gt; for most NLP tasks&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Now (2021), other approaches (e.g., Transformers) have become dominant for many tasks
+    &lt;ul&gt;
+      &lt;li&gt;For example, in WMT (a Machine Translation conference + competition):&lt;br /&gt;
+  In WMT 2016, the summary report contains “RNN” 44 times&lt;br /&gt;
+  In WMT 2019, “RNN” 7 times, “Transformer” 105 times&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;is-vanishingexploding-gradient-just-a-rnn-problem&quot;&gt;Is vanishing/exploding gradient just a RNN problem?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;It can be a problem for all neural architectures (including &lt;strong&gt;feed-forward&lt;/strong&gt; and &lt;strong&gt;convolutional&lt;/strong&gt;), especially &lt;strong&gt;very deep&lt;/strong&gt; ones.&lt;br /&gt;
+  Due to chain rule / choice of nonlinearity function, gradient can become vanishingly small as it backpropagates. Thus, lower layers are learned very slowly (hard to train)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Solution: lots of new deep feedforward/convolutional architectures that &lt;strong&gt;add more direct connections&lt;/strong&gt; (thus allowing the gradient to flow)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;For example:
+    &lt;ul&gt;
+      &lt;li&gt;Resnet, &lt;em&gt;“Deep Residual Learning for Image Recognition”, He et al, 2015.&lt;/em&gt;	 
+  &lt;img src=&quot;/assets/images/cs224n/lec6_12.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  Also known as skip-connects, the identity connection preserves information by default and makes deep networks much easier to train.&lt;/li&gt;
+      &lt;li&gt;Densenet, &lt;em&gt;“Densely Connected Convolutional Networks”, Huang et al, 2017.&lt;/em&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec6_13.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  Dense connections that directly connect each layer to all future layers&lt;/li&gt;
+      &lt;li&gt;HighwayNet, &lt;em&gt;“Highway Networks”, Srivastava et al, 2015.&lt;/em&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec6_14.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  Similar to residual connections, but controlled by a dynamic gate.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Conclusion: Though vanishing/exploding gradients are a general problem, &lt;strong&gt;RNNs are particularly unstable&lt;/strong&gt; due to the repeated multiplication by the &lt;strong&gt;same&lt;/strong&gt; weight matrix (&lt;em&gt;Bengio et al, 1994&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;bidirectional-and-multi-layer-rnns-motivation&quot;&gt;Bidirectional and Multi-layer RNNs: motivation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Example: Sentiment Classification task&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_15.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_16.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_17.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Note: bidirectional RNNs are only applicable if you have access to the &lt;strong&gt;entire input sequence&lt;/strong&gt;&lt;br /&gt;
+  They are &lt;strong&gt;not&lt;/strong&gt; applicable to Language Modeling, because in LM you &lt;em&gt;only&lt;/em&gt; have left context available.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If you do have entire input sequence(e.g., any kind of encoding), &lt;strong&gt;bidirectionality is powerful&lt;/strong&gt; (you should use it by default).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For example, &lt;strong&gt;BERT&lt;/strong&gt; (&lt;strong&gt;Bidirectional&lt;/strong&gt; Encoder Representations from Transformers) is a powerful pretrained contextual representation system &lt;strong&gt;built on bidirectionality&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        
+        <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs224n_lec6</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs224n_lec6</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>cs224n - Lecture 5. Language Models and RNNs</title>
         
           <description>&lt;h3 id=&quot;how-do-we-gain-from-a-neural-dependency-parser&quot;&gt;How do we gain from a neural dependency parser?&lt;/h3&gt;

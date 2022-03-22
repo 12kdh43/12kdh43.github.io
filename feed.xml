@@ -1,4 +1,333 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-20T11:41:45+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">cs224n - Lecture 5. Language Models and RNNs</title><link href="http://0.0.0.0:4000/cs224n_lec5" rel="alternate" type="text/html" title="cs224n - Lecture 5. Language Models and RNNs" /><published>2022-03-15T00:00:00+00:00</published><updated>2022-03-15T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec5</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec5">&lt;h3 id=&quot;how-do-we-gain-from-a-neural-dependency-parser&quot;&gt;How do we gain from a neural dependency parser?&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-22T12:53:49+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">cs224n - Lecture 6. Simple and LSTM RNNs</title><link href="http://0.0.0.0:4000/cs224n_lec6" rel="alternate" type="text/html" title="cs224n - Lecture 6. Simple and LSTM RNNs" /><published>2022-03-20T00:00:00+00:00</published><updated>2022-03-20T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec6</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec6">&lt;h3 id=&quot;the-simple-rnn-language-model&quot;&gt;The Simple RNN Language Model&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_13.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;training-an-rnn-language-model&quot;&gt;Training an RNN Language Model&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Get a &lt;strong&gt;big corpus of text&lt;/strong&gt; which is a sequence of words  $x^{(1)}, \ldots, x^{(T)}$&lt;/li&gt;
+  &lt;li&gt;Feed into RNN-LM; compute output distribution $\hat{y}^{(t)}$ &lt;strong&gt;for every step $t$&lt;/strong&gt;.&lt;br /&gt;
+  i.e., predict probability distribution of &lt;em&gt;every word&lt;/em&gt;, given words so far&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Loss function&lt;/strong&gt; on step is &lt;strong&gt;cross-entropy&lt;/strong&gt;(negative log-likelihood) between predicted probability distribution $\hat{y}^{(t)}$, and the true next word $y^{(t)}$(one-hot for $x^{(t+1)}$):&lt;br /&gt;
+  \(\begin{align*}
+  J^{(t)}(\theta) = CE(y^{(t)}, \hat{y}^{(t)}) = -\sum_{w\in V} y_w^{(t)} \log \hat{y}_w^{(t)} = -\log \hat{y}_{x_{t+1}}^{(t)}
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Average this to get &lt;strong&gt;overall loss&lt;/strong&gt; for entire training set:&lt;br /&gt;
+  \(\begin{align*}
+  J(\theta) = \frac{1}{T}\sum_{t=1}^T J^{(t)}(\theta) = \frac{1}{T}\sum_{t=1}^T -\log \hat{y}_{x_{t+1}}^{(t)}
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;“Teacher forcing”&lt;/em&gt; algorithm:&lt;br /&gt;
+  At each step, reset to what was actually in the corpus and &lt;strong&gt;not reuse&lt;/strong&gt; what the model have suggested.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;However: Computing loss and gradients across &lt;strong&gt;entire corpus&lt;/strong&gt; $x^{(1)}, \ldots, x^{(T)}$ is &lt;strong&gt;too expensive&lt;/strong&gt;&lt;br /&gt;
+  In pratice, consider $x^{(1)}, \ldots, x^{(T)}$ as a &lt;em&gt;sentence&lt;/em&gt; or a &lt;em&gt;document&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Recall: &lt;strong&gt;Stochastic Gradient Descent&lt;/strong&gt; allows us to compute loss and gradients for small chunk of data, and update.&lt;br /&gt;
+  Compute loss $J(\theta)$ for a sentence (actually, a batch of sentences), compute gradients and update weights. Repeat.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;training-the-parameters-rnns-backpropagation-for-rnns&quot;&gt;Training the parameters RNNs: Backpropagation for RNNs&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Question&lt;/strong&gt;: What’s the derivative of $J^{(t)}(\theta)$ w.r.t. the &lt;strong&gt;repeated&lt;/strong&gt; weight matrix $W_h$?&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Answer&lt;/strong&gt;: sum of the gradient w.r.t. each time it appears&lt;br /&gt;
+  \(\begin{align*}
+  \frac{\partial J^{(t)}}{\partial W_h} = \sum_{i=1}^t \left. \frac{\partial J^{(t)}}{\partial W_h} \right|_{(i)}
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Backpropagation for RNNs: Proof sketch&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How to calculate:&lt;br /&gt;
+  Backpropagate over timesteps $i=t,\ldots,0$, summing gradients as you go.&lt;br /&gt;
+  &lt;em&gt;“Backpropagation through time, [Werbos, P.G., 1988, Neural Networks 1, and others]”&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;generating-text-with-a-rnn-language-model&quot;&gt;Generating text with a RNN Language Model&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Like a n-gram Language Model, use an RNN Language Model to &lt;strong&gt;generate text&lt;/strong&gt; by &lt;strong&gt;repeated sampling&lt;/strong&gt;. Sampled output becomes next step’s input.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You can train an RNN-LM on any kind of text, then generate text in that style.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;evaluating-language-models&quot;&gt;Evaluating Language Models&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;The standard &lt;strong&gt;evaluation metric&lt;/strong&gt; for Language Model is &lt;strong&gt;perlexity&lt;/strong&gt;; a &lt;em&gt;geometric mean of the inverse probabilities&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;This is equal to &lt;strong&gt;the exponential&lt;/strong&gt; of the cross-entropy loss $J(\theta)$:&lt;br /&gt;
+  \(\begin{align*}
+  = \prod_{t=1}^T \left( \frac{1}{\hat{y}_{x_{t+1}}^{(t)}}\right)^{1/T} = \exp \left( \frac{1}{T}\sum_{t=1}^T -\log \hat{y}_{x_{t+1}}^{(t)} \right) = \exp(J(\theta))
+  \end{align*}\)&lt;br /&gt;
+  $\rightarrow$ Lower perplexity is better&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;RNNs have greatly improved perplexity&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_3.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;why-should-we-care-about-language-modeling&quot;&gt;Why should we care about Language Modeling?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Language Modeling is a &lt;strong&gt;benchmark task&lt;/strong&gt; that helps us &lt;strong&gt;measure our progress&lt;/strong&gt; on understanding language&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Language Modeling is a &lt;strong&gt;subcomponent&lt;/strong&gt; of &lt;strong&gt;many&lt;/strong&gt; NLP tasks, especially those involving &lt;strong&gt;generating text&lt;/strong&gt; or &lt;strong&gt;estimating the probability of text&lt;/strong&gt;:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Predictive typing&lt;/li&gt;
+      &lt;li&gt;Speech recognition&lt;/li&gt;
+      &lt;li&gt;Handwriting recognition&lt;/li&gt;
+      &lt;li&gt;Spelling/grammar correction&lt;/li&gt;
+      &lt;li&gt;Authorship identification&lt;/li&gt;
+      &lt;li&gt;Machine translation&lt;/li&gt;
+      &lt;li&gt;Summarization&lt;/li&gt;
+      &lt;li&gt;Dialogue&lt;/li&gt;
+      &lt;li&gt;etc.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;recap&quot;&gt;Recap&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Language Model: A system that predicts the next word&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Recurrent Neural Network: A family of neural networks that:
+    &lt;ul&gt;
+      &lt;li&gt;Take sequential input of any length&lt;/li&gt;
+      &lt;li&gt;Apply the same weights on each step&lt;/li&gt;
+      &lt;li&gt;Can optionally produce output on each step&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Recurrent Neural Network $\ne$ Language Model&lt;br /&gt;
+  shown that RNNs are a great way to build a LM, but RNNs are useful for much more&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;other-rnn-uses&quot;&gt;Other RNN uses&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sequence tagging: e.g., part-of-speech tagging, named entity recognition&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec6_4.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Sentence classification: e.g., sentiment classification&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec6_5.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Basic way: 
+ Use the final hidden state. After running RNN(or LSTM), the final hidden state was encoded the whole sentence and treat it as the whole meaning of the sentence. Then put an extra classifier layer.&lt;/li&gt;
+      &lt;li&gt;Usually better:&lt;br /&gt;
+ Take element-wise max or mean of all hidden states to more symmetrically encode the hidden state over each time step.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Language encoder module: e.g., question answering, machine translation, many other tasks&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec6_6.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Generate text: e.g., speech recognition, machine translation, summarization&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec6_7.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;problems-with-vanishing-and-exploding-gradients&quot;&gt;Problems with Vanishing and Exploding Gradients&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_8.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;vanishing-gradient-proof-sketch-linear-case&quot;&gt;Vanishing gradient: Proof sketch (linear case)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Recall:&lt;br /&gt;
+  $\hat{h}^{(t)} = \sigma(W_h h^{(t-1)} + W_x x^{(t)} + b_1)$&lt;/li&gt;
+  &lt;li&gt;What if $\sigma(x) = x$?&lt;br /&gt;
+  \(\begin{align*}
+  \frac{\partial h^{(t)}}{\partial h^{(t-1)}} 
+  &amp;amp;= \text{diag} \left( \sigma^\prime \left( W_h h^{(t-1)} + W_x x^{(t)} + b_1 \right) \right) W_h &amp;amp;&amp;amp;(\text{chain rule}) \\
+  &amp;amp;= I\ W_h = W_h
+  \end{align*}\)&lt;/li&gt;
+  &lt;li&gt;Consider the gradient of the loss $J^{(i)}(\theta)$ on step $i$, w.r.t. the hidden state $h^{(j)}$ one some previous step $j$. Let $l = i - j$&lt;br /&gt;
+  \(\begin{align*}
+  \frac{\partial J^{(i)}(\theta)}{\partial h^{(j)}}
+  &amp;amp;= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{j &amp;lt; t \le i}\frac{\partial h^{(t)}}{\partial h^{(t-1)}} &amp;amp;&amp;amp;(\text{chain rule}) \\
+  &amp;amp;= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{j &amp;lt; t \le i} W_h = \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} W_h^l &amp;amp;&amp;amp;(\text{value of } \frac{\partial h^{(t)}}{\partial h^{(t-1)}})
+  \end{align*}\)&lt;br /&gt;
+  $\rightarrow$ If $W_h$ is “small”, then $W_h^l$ gets exponentially problematic as $l$ becomes large&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Consider if the eigenvalues of $W_h$ are all less than 1(sufficient but not necessary):&lt;br /&gt;
+  $\lambda_1, \lambda_2, \ldots, \lambda_n &amp;lt; 1$&lt;br /&gt;
+  $q_1, q_2, \ldots, q_n$ (eigenvectors)&lt;br /&gt;
+  Rewrite using the eigenvectors of $W_h$ as a basis:&lt;br /&gt;
+  \(\begin{align*}
+  \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} = \sum_{i=1}^n c_i \lambda_i^l q_i \approx 0
+  \end{align*}\) (for large $l$)&lt;br /&gt;
+  $\therefore \lambda_i^l$ approaches 0 as $l$ grows, gradient vanishes&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Choosing nonlinear activations $\sigma$&lt;br /&gt;
+  Pretty much the same thing, except the proof requires $\lambda_i &amp;lt; \gamma$ for some $\gamma$ dependdent on dimensionality and $\sigma$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;why-is-vanishing-gradient-a-problem&quot;&gt;Why is vanishing gradient a problem?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Gradient signal from far away is lost because it’s much smaller than gradient signal from close-by. So, model weights are updated only with respect to near effects, not &lt;strong&gt;long-term effects&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;effect-of-vanishing-gradient-on-rnn-lm&quot;&gt;Effect of vanishing gradient on RNN-LM&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;LM task:
+    &lt;blockquote&gt;
+      &lt;p&gt;“When she tried to print her tickets, she found that the printer was out of toner. She went to the stationery store to buy more toner. It was very overpriced. After installing the toner into the printer, she finally printed her [target]”&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;To learn from this training example, the RNN-LM needs to model the dependency between “tickets” on the 7th step and the target word “tickets” at the end&lt;br /&gt;
+  But if gradient is small, the model can’t learn this dependency and  the model is unable to predict similar long-distance dependencies at test time&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;why-is-exploding-gradient-a-problem&quot;&gt;Why is exploding gradient a problem?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;If the gradient becomes too big, then the SGD update step becomes too big:&lt;br /&gt;
+  This can cause &lt;strong&gt;bad updates&lt;/strong&gt;: we take too large a step and reach a weird and bad parameter configuration (with large loss)&lt;/li&gt;
+  &lt;li&gt;In the worst case, this will result in &lt;em&gt;Inf&lt;/em&gt; or &lt;em&gt;NaN&lt;/em&gt; in your network&lt;br /&gt;
+  (then you have to restart training from an earlier checkpoint)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;gradient-clipping-solution-for-exploding-gradient&quot;&gt;Gradient clipping: solution for exploding gradient&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;If the norm of the gradient is greater than some threshold, scale it down before applying SGD update&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_9.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Intuition: take a step in the same direction, but a smaller step&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In practice, remembering to clip gradients is important, but exploding gradients are an easy problem to solve&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-to-fix-the-vanishing-gradient-problem&quot;&gt;How to fix the vanishing gradient problem?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The main problem is that it’s too difficult for the RNN to learn to preserve information &lt;em&gt;over many timesteps&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In a vanilla RNN, the hidden state is constantly being &lt;strong&gt;rewritten&lt;/strong&gt;&lt;br /&gt;
+  $h^{(t)} = \sigma \left( W_h h^{(t-1)} + W_x x^{(t)} + b \right)$&lt;br /&gt;
+  $\rightarrow$ How about a RNN with separate &lt;strong&gt;memory&lt;/strong&gt;?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;long-short-term-memory-rnns-lstms&quot;&gt;Long Short-Term Memory RNNs (LSTMs)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Proposed by &lt;em&gt;“Long short-term memory”, Hochreiter and Schmidhuber, 1997&lt;/em&gt;, but really a crucial part of the modern LSTM is from &lt;em&gt;“Learning to Forgt: Continual Prediction with LSTM”, Gers et al., 2000&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;On step $t$, there is a hidden state $h^{(t)}$ and a cell state $c^{(t)}$
+    &lt;ul&gt;
+      &lt;li&gt;Both are vectors length $n$&lt;/li&gt;
+      &lt;li&gt;The cell stores &lt;strong&gt;long-term information&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;The LSTM can &lt;em&gt;read, erase, and write&lt;/em&gt; information from the cell&lt;br /&gt;
+  The cell becomes conceptually rather like RAM in a computer&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The selection of which information is erased/written/read is controlled by three corresponding &lt;strong&gt;gates&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;The gates are also vectors length $n$&lt;/li&gt;
+      &lt;li&gt;On each timestep, each element of the gates can be &lt;strong&gt;open&lt;/strong&gt; (1), &lt;strong&gt;closed&lt;/strong&gt; (0), or somewhere in-between&lt;/li&gt;
+      &lt;li&gt;The gates are &lt;strong&gt;dynamic&lt;/strong&gt;: their value is computed based on the current context&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;With a sequence of inputs $x^{(t)}$, compute a sequence of hidden states $h^{(t)}$ and cell states $c^{(t)}$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_10.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_11.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;how-does-lstm-solve-vanishing-gradients&quot;&gt;How does LSTM solve vanishing gradients?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;The LSTM architecture makes it easier for the RNN to preserve information over many timesteps
+    &lt;ul&gt;
+      &lt;li&gt;e.g., if the forget gate is set to 1 for a cell dimension and the input gate set to 0, then the information of that cell is preserved indefinitely.&lt;/li&gt;
+      &lt;li&gt;In practice, you get about 100 timesteps rather than about 7 of effective memory.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;LSTM doesn’t &lt;em&gt;guarantee&lt;/em&gt; that there is no vanishing/exploding gradient, but it does provide an easier way for the model to learn long-distance dependencies
+    &lt;h3 id=&quot;lstm-real-world-success&quot;&gt;LSTM: real-world success&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In 2013–2015, LSTMs started achieving state-of-the-art results
+    &lt;ul&gt;
+      &lt;li&gt;Successful tasks include handwriting recognition, speech recognition, machine translation, parsing, and image captioning, as well as language models&lt;/li&gt;
+      &lt;li&gt;LSTMs became the &lt;strong&gt;dominant approach&lt;/strong&gt; for most NLP tasks&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Now (2021), other approaches (e.g., Transformers) have become dominant for many tasks
+    &lt;ul&gt;
+      &lt;li&gt;For example, in WMT (a Machine Translation conference + competition):&lt;br /&gt;
+  In WMT 2016, the summary report contains “RNN” 44 times&lt;br /&gt;
+  In WMT 2019, “RNN” 7 times, “Transformer” 105 times&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;is-vanishingexploding-gradient-just-a-rnn-problem&quot;&gt;Is vanishing/exploding gradient just a RNN problem?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;It can be a problem for all neural architectures (including &lt;strong&gt;feed-forward&lt;/strong&gt; and &lt;strong&gt;convolutional&lt;/strong&gt;), especially &lt;strong&gt;very deep&lt;/strong&gt; ones.&lt;br /&gt;
+  Due to chain rule / choice of nonlinearity function, gradient can become vanishingly small as it backpropagates. Thus, lower layers are learned very slowly (hard to train)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Solution: lots of new deep feedforward/convolutional architectures that &lt;strong&gt;add more direct connections&lt;/strong&gt; (thus allowing the gradient to flow)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;For example:
+    &lt;ul&gt;
+      &lt;li&gt;Resnet, &lt;em&gt;“Deep Residual Learning for Image Recognition”, He et al, 2015.&lt;/em&gt;	 
+  &lt;img src=&quot;/assets/images/cs224n/lec6_12.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  Also known as skip-connects, the identity connection preserves information by default and makes deep networks much easier to train.&lt;/li&gt;
+      &lt;li&gt;Densenet, &lt;em&gt;“Densely Connected Convolutional Networks”, Huang et al, 2017.&lt;/em&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec6_13.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  Dense connections that directly connect each layer to all future layers&lt;/li&gt;
+      &lt;li&gt;HighwayNet, &lt;em&gt;“Highway Networks”, Srivastava et al, 2015.&lt;/em&gt;&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec6_14.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+  Similar to residual connections, but controlled by a dynamic gate.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Conclusion: Though vanishing/exploding gradients are a general problem, &lt;strong&gt;RNNs are particularly unstable&lt;/strong&gt; due to the repeated multiplication by the &lt;strong&gt;same&lt;/strong&gt; weight matrix (&lt;em&gt;Bengio et al, 1994&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;bidirectional-and-multi-layer-rnns-motivation&quot;&gt;Bidirectional and Multi-layer RNNs: motivation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Example: Sentiment Classification task&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_15.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_16.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec6_17.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Note: bidirectional RNNs are only applicable if you have access to the &lt;strong&gt;entire input sequence&lt;/strong&gt;&lt;br /&gt;
+  They are &lt;strong&gt;not&lt;/strong&gt; applicable to Language Modeling, because in LM you &lt;em&gt;only&lt;/em&gt; have left context available.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If you do have entire input sequence(e.g., any kind of encoding), &lt;strong&gt;bidirectionality is powerful&lt;/strong&gt; (you should use it by default).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;For example, &lt;strong&gt;BERT&lt;/strong&gt; (&lt;strong&gt;Bidirectional&lt;/strong&gt; Encoder Representations from Transformers) is a powerful pretrained contextual representation system &lt;strong&gt;built on bidirectionality&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs224n" /><summary type="html">The Simple RNN Language Model Training an RNN Language Model Get a big corpus of text which is a sequence of words $x^{(1)}, \ldots, x^{(T)}$ Feed into RNN-LM; compute output distribution $\hat{y}^{(t)}$ for every step $t$. i.e., predict probability distribution of every word, given words so far Loss function on step is cross-entropy(negative log-likelihood) between predicted probability distribution $\hat{y}^{(t)}$, and the true next word $y^{(t)}$(one-hot for $x^{(t+1)}$): \(\begin{align*} J^{(t)}(\theta) = CE(y^{(t)}, \hat{y}^{(t)}) = -\sum_{w\in V} y_w^{(t)} \log \hat{y}_w^{(t)} = -\log \hat{y}_{x_{t+1}}^{(t)} \end{align*}\) Average this to get overall loss for entire training set: \(\begin{align*} J(\theta) = \frac{1}{T}\sum_{t=1}^T J^{(t)}(\theta) = \frac{1}{T}\sum_{t=1}^T -\log \hat{y}_{x_{t+1}}^{(t)} \end{align*}\) “Teacher forcing” algorithm: At each step, reset to what was actually in the corpus and not reuse what the model have suggested. However: Computing loss and gradients across entire corpus $x^{(1)}, \ldots, x^{(T)}$ is too expensive In pratice, consider $x^{(1)}, \ldots, x^{(T)}$ as a sentence or a document Recall: Stochastic Gradient Descent allows us to compute loss and gradients for small chunk of data, and update. Compute loss $J(\theta)$ for a sentence (actually, a batch of sentences), compute gradients and update weights. Repeat. Training the parameters RNNs: Backpropagation for RNNs Question: What’s the derivative of $J^{(t)}(\theta)$ w.r.t. the repeated weight matrix $W_h$? Answer: sum of the gradient w.r.t. each time it appears \(\begin{align*} \frac{\partial J^{(t)}}{\partial W_h} = \sum_{i=1}^t \left. \frac{\partial J^{(t)}}{\partial W_h} \right|_{(i)} \end{align*}\) Backpropagation for RNNs: Proof sketch How to calculate: Backpropagate over timesteps $i=t,\ldots,0$, summing gradients as you go. “Backpropagation through time, [Werbos, P.G., 1988, Neural Networks 1, and others]” Generating text with a RNN Language Model Like a n-gram Language Model, use an RNN Language Model to generate text by repeated sampling. Sampled output becomes next step’s input. You can train an RNN-LM on any kind of text, then generate text in that style. Evaluating Language Models The standard evaluation metric for Language Model is perlexity; a geometric mean of the inverse probabilities. This is equal to the exponential of the cross-entropy loss $J(\theta)$: \(\begin{align*} = \prod_{t=1}^T \left( \frac{1}{\hat{y}_{x_{t+1}}^{(t)}}\right)^{1/T} = \exp \left( \frac{1}{T}\sum_{t=1}^T -\log \hat{y}_{x_{t+1}}^{(t)} \right) = \exp(J(\theta)) \end{align*}\) $\rightarrow$ Lower perplexity is better RNNs have greatly improved perplexity Why should we care about Language Modeling? Language Modeling is a benchmark task that helps us measure our progress on understanding language Language Modeling is a subcomponent of many NLP tasks, especially those involving generating text or estimating the probability of text: Predictive typing Speech recognition Handwriting recognition Spelling/grammar correction Authorship identification Machine translation Summarization Dialogue etc. Recap Language Model: A system that predicts the next word Recurrent Neural Network: A family of neural networks that: Take sequential input of any length Apply the same weights on each step Can optionally produce output on each step Recurrent Neural Network $\ne$ Language Model shown that RNNs are a great way to build a LM, but RNNs are useful for much more Other RNN uses Sequence tagging: e.g., part-of-speech tagging, named entity recognition Sentence classification: e.g., sentiment classification Basic way: Use the final hidden state. After running RNN(or LSTM), the final hidden state was encoded the whole sentence and treat it as the whole meaning of the sentence. Then put an extra classifier layer. Usually better: Take element-wise max or mean of all hidden states to more symmetrically encode the hidden state over each time step. Language encoder module: e.g., question answering, machine translation, many other tasks Generate text: e.g., speech recognition, machine translation, summarization Problems with Vanishing and Exploding Gradients Vanishing gradient: Proof sketch (linear case) Recall: $\hat{h}^{(t)} = \sigma(W_h h^{(t-1)} + W_x x^{(t)} + b_1)$ What if $\sigma(x) = x$? \(\begin{align*} \frac{\partial h^{(t)}}{\partial h^{(t-1)}} &amp;amp;= \text{diag} \left( \sigma^\prime \left( W_h h^{(t-1)} + W_x x^{(t)} + b_1 \right) \right) W_h &amp;amp;&amp;amp;(\text{chain rule}) \\ &amp;amp;= I\ W_h = W_h \end{align*}\) Consider the gradient of the loss $J^{(i)}(\theta)$ on step $i$, w.r.t. the hidden state $h^{(j)}$ one some previous step $j$. Let $l = i - j$ \(\begin{align*} \frac{\partial J^{(i)}(\theta)}{\partial h^{(j)}} &amp;amp;= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{j &amp;lt; t \le i}\frac{\partial h^{(t)}}{\partial h^{(t-1)}} &amp;amp;&amp;amp;(\text{chain rule}) \\ &amp;amp;= \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} \prod_{j &amp;lt; t \le i} W_h = \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} W_h^l &amp;amp;&amp;amp;(\text{value of } \frac{\partial h^{(t)}}{\partial h^{(t-1)}}) \end{align*}\) $\rightarrow$ If $W_h$ is “small”, then $W_h^l$ gets exponentially problematic as $l$ becomes large Consider if the eigenvalues of $W_h$ are all less than 1(sufficient but not necessary): $\lambda_1, \lambda_2, \ldots, \lambda_n &amp;lt; 1$ $q_1, q_2, \ldots, q_n$ (eigenvectors) Rewrite using the eigenvectors of $W_h$ as a basis: \(\begin{align*} \frac{\partial J^{(i)}(\theta)}{\partial h^{(i)}} = \sum_{i=1}^n c_i \lambda_i^l q_i \approx 0 \end{align*}\) (for large $l$) $\therefore \lambda_i^l$ approaches 0 as $l$ grows, gradient vanishes Choosing nonlinear activations $\sigma$ Pretty much the same thing, except the proof requires $\lambda_i &amp;lt; \gamma$ for some $\gamma$ dependdent on dimensionality and $\sigma$ Why is vanishing gradient a problem? Gradient signal from far away is lost because it’s much smaller than gradient signal from close-by. So, model weights are updated only with respect to near effects, not long-term effects. Effect of vanishing gradient on RNN-LM LM task: “When she tried to print her tickets, she found that the printer was out of toner. She went to the stationery store to buy more toner. It was very overpriced. After installing the toner into the printer, she finally printed her [target]” To learn from this training example, the RNN-LM needs to model the dependency between “tickets” on the 7th step and the target word “tickets” at the end But if gradient is small, the model can’t learn this dependency and the model is unable to predict similar long-distance dependencies at test time Why is exploding gradient a problem? If the gradient becomes too big, then the SGD update step becomes too big: This can cause bad updates: we take too large a step and reach a weird and bad parameter configuration (with large loss) In the worst case, this will result in Inf or NaN in your network (then you have to restart training from an earlier checkpoint) Gradient clipping: solution for exploding gradient If the norm of the gradient is greater than some threshold, scale it down before applying SGD update Intuition: take a step in the same direction, but a smaller step In practice, remembering to clip gradients is important, but exploding gradients are an easy problem to solve How to fix the vanishing gradient problem? The main problem is that it’s too difficult for the RNN to learn to preserve information over many timesteps In a vanilla RNN, the hidden state is constantly being rewritten $h^{(t)} = \sigma \left( W_h h^{(t-1)} + W_x x^{(t)} + b \right)$ $\rightarrow$ How about a RNN with separate memory? Long Short-Term Memory RNNs (LSTMs) Proposed by “Long short-term memory”, Hochreiter and Schmidhuber, 1997, but really a crucial part of the modern LSTM is from “Learning to Forgt: Continual Prediction with LSTM”, Gers et al., 2000. On step $t$, there is a hidden state $h^{(t)}$ and a cell state $c^{(t)}$ Both are vectors length $n$ The cell stores long-term information The LSTM can read, erase, and write information from the cell The cell becomes conceptually rather like RAM in a computer The selection of which information is erased/written/read is controlled by three corresponding gates The gates are also vectors length $n$ On each timestep, each element of the gates can be open (1), closed (0), or somewhere in-between The gates are dynamic: their value is computed based on the current context With a sequence of inputs $x^{(t)}$, compute a sequence of hidden states $h^{(t)}$ and cell states $c^{(t)}$. How does LSTM solve vanishing gradients? The LSTM architecture makes it easier for the RNN to preserve information over many timesteps e.g., if the forget gate is set to 1 for a cell dimension and the input gate set to 0, then the information of that cell is preserved indefinitely. In practice, you get about 100 timesteps rather than about 7 of effective memory. LSTM doesn’t guarantee that there is no vanishing/exploding gradient, but it does provide an easier way for the model to learn long-distance dependencies LSTM: real-world success In 2013–2015, LSTMs started achieving state-of-the-art results Successful tasks include handwriting recognition, speech recognition, machine translation, parsing, and image captioning, as well as language models LSTMs became the dominant approach for most NLP tasks Now (2021), other approaches (e.g., Transformers) have become dominant for many tasks For example, in WMT (a Machine Translation conference + competition): In WMT 2016, the summary report contains “RNN” 44 times In WMT 2019, “RNN” 7 times, “Transformer” 105 times Is vanishing/exploding gradient just a RNN problem? It can be a problem for all neural architectures (including feed-forward and convolutional), especially very deep ones. Due to chain rule / choice of nonlinearity function, gradient can become vanishingly small as it backpropagates. Thus, lower layers are learned very slowly (hard to train) Solution: lots of new deep feedforward/convolutional architectures that add more direct connections (thus allowing the gradient to flow) For example: Resnet, “Deep Residual Learning for Image Recognition”, He et al, 2015. Also known as skip-connects, the identity connection preserves information by default and makes deep networks much easier to train. Densenet, “Densely Connected Convolutional Networks”, Huang et al, 2017. Dense connections that directly connect each layer to all future layers HighwayNet, “Highway Networks”, Srivastava et al, 2015. Similar to residual connections, but controlled by a dynamic gate. Conclusion: Though vanishing/exploding gradients are a general problem, RNNs are particularly unstable due to the repeated multiplication by the same weight matrix (Bengio et al, 1994) Bidirectional and Multi-layer RNNs: motivation Example: Sentiment Classification task Note: bidirectional RNNs are only applicable if you have access to the entire input sequence They are not applicable to Language Modeling, because in LM you only have left context available. If you do have entire input sequence(e.g., any kind of encoding), bidirectionality is powerful (you should use it by default). For example, BERT (Bidirectional Encoder Representations from Transformers) is a powerful pretrained contextual representation system built on bidirectionality.</summary></entry><entry><title type="html">cs224n - Lecture 5. Language Models and RNNs</title><link href="http://0.0.0.0:4000/cs224n_lec5" rel="alternate" type="text/html" title="cs224n - Lecture 5. Language Models and RNNs" /><published>2022-03-15T00:00:00+00:00</published><updated>2022-03-15T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec5</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec5">&lt;h3 id=&quot;how-do-we-gain-from-a-neural-dependency-parser&quot;&gt;How do we gain from a neural dependency parser?&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;So far…&lt;br /&gt;
   Transition based dependency parsers were an efficient linear time method for giving the syntactic structure of natural language text.&lt;br /&gt;
@@ -1772,154 +2101,4 @@ semantic segmentation”, CVPR 2014&lt;/em&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;3D Shape Prediction: Mesh R-CNN
 &lt;img src=&quot;/assets/images/cs231n_lec15_20.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Computer Vision Tasks Image Classification: No spatial extent Semantic Segmentation: No objects, just pixels Object Detection/ Instance Segmentation: Multiple objects Semantic Segmentation Paired training data: For each training image, each pixel is labeled with a semantic category. At test time, classify each pixel of a new image. Problem: Classifying with only single pixel does not include context information. Idea: Sliding Window Extract patch from full image, classify center pixel with CNN. $\color{red}{(-)}$ Very inefficient, not reusing shared features between overlapping patches. Convolution Encode the entire image with conv net, and do semantic segmentation on top. $\color{red}{(-)}$ CNN architectures often change the spatial sizes, but semantic segmentation requires the output size to be same as input size. Fully Convolutional Design a network with only convolutional layers without downsampling operators $\color{red}{(-)}$ convolutions at original image resolution is very expensive $\rightarrow$ Design convolutional network with downsampling and upsampling Downsampling: Pooling, strided convolution In-Network Upsampling: Unpooling, strided transpose convolution Unpooling: Nearest Neighbor: copy-paste to extended region “Bed of Nails”: no positional argument, pad with zeros Max Unpooling: use positions from poolying layer ahead, pad with zeros Learnable Downsampling: Strided convolution Output is a dot product between filter and input Stride gives ratio between movement in input and output Learnable Upsampling: Transposed convolution Input gives weight for filter Output contains copies of the filter weighted by the input, summing at where at overlaps in the output Summary Label each pixel in the image with a category label Don’t differentiate instances, only care about pixels Object Detection Multiple Objects: Each image needs a different number of outputs; $\rightarrow$ Apply a CNN to many different crops of the image, CNN classifies each crop as object or background. $\color{red}{(-)}$ Need to apply CNN to huge number of locations, scales, and aspect ratios, very computationally expensive. R-CNN Girshick et al, “Rich feature hierarchies for accurate object detection and semantic segmentation”, CVPR 2014 2-stage Detector: Region Proposal + Region Classification Image as input Crop bounding boxes with Selective Search Warp into same size pixels for CNN model Input Warped images into CNN Run classification on each Algorithm: Region Proposals: Selective Search Find “blobby” image regions that are likely to contain objects. Relatively fast to run; e.g. Selective Search gives 2000 region proposals in a few seconds on CPU. CNN: For a pre-trained CNN architecture, change the number of classes on the last classification layer(detection classes N + background 1), fine-tune with dataset for Object Detection. From the region proposal input, outputs a fixed-length feature vector. SVM: Category-Specific Linear SVMs Positive: ground-truth boxes Negative: IoU under 0.3 Scores each feature vector for classes, classifies whether each one is positive/negative(is_object). Non-Maximum Suppression: with concept of IoU Intersection over Union; area of intersection divided by area of union If there are two boxes with IoU over 0.5, consider them proposed on the same object, leave one with the highest score. Bounding Box Regression: adjust boxes from Selective Search Algorithm: Assume a bounding box $P^i = (P_x^i, P_y^i, P_w^i, P_h^i)$, Ground-truth box $G = (G_x, G_y, G_w, G_h)$. Define a function $d$, mapping $P$ close to $G$; \(\hat{G}_x = P_w d_x(P) + P_x\) \(\hat{G}_y = P_h d_y(P) + P_y\) \(\hat{G}_w = P_w \mbox{exp}(d_w(P))\) \(\hat{G}_h = P_h \mbox{exp}(d_h(P))\) where $d_{\star}(P) = w_{\star}^T \phi_5(P)$, is modeled as a linear function(learnable weight vector w) of the POOL5 features of proposal P($\phi_5(P)$). We learn $w_{\star}$ by optimizing the regularized least squares objective(Ridge regression) Learnable parameters on: 2, 3, 5 Summary: Score: 53.7% on Pascal VOC 2010 Problem: 1. Low Performance; Warping images into 224x224 size for AlexNet 2. Slow; Using all candidates from Selective Search 3. Not GPU-optimized; Using Selective Search and SVM 4. No Back Propagation; Not sharing computations Fast R-CNN Girshick, “Fast R-CNN”, ICCV 2015 idea: Pass the image through convnet before cropping. Crop the conv feature instead. Algorithm: Pass the full image through pre-trained CNN and extract feature maps. Get RoIs from a proposal method(Selective Search) and crop by RoI Pooling, get fixed size feature vectors. With RoI feature vectors, pass some fully connected layers and split into two branches. 1) pass softmax and classify the class of RoI. no SVM used. 2) Run bounding box regression. Cropping Features: RoI Pool Project RoI proposals(on input image) onto CNN image features. Divide into subregions. Run pooling(Max-pool) within each subregion. $\rightarrow$ Region features always be the same size regardless of input region size Faster R-CNN Ren et al, “Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks”, NIPS 2015 idea: Fast R-CNN is not GPU-optimized; runtime dominated by region proposals. By inserting Region Proposal Network(RPN), implemented end-to-end architecture. Algorithm: Pass the full image through pre-trained CNN and extract feature maps. RPN: For K different anchor boxes of different size and scale at each point in the feature map, predict whether it contains an object(binary classification), and also predict a corrections from the anchor to the ground-truth box(regress 4 numbers per pixel). Jointly train with 4 losses: 1) RPN classify object / not object 2) RPN regress box coordinates 3) Final classification score (object classes) 4) Final box coordinates Glossing over many details: Ignore overlapping proposals with non-max suppression How are anchors determined? How do we sample positive / negative samples for training the RPN? How to parameterize bounding box regression? Two-stage object detector: First stage: Run once per image Backbone network Region proposal network(RPN) Second stage: Run once per region Crop features: RoI pool/ align Predict object class Prediction bbox offset Single-Stage Object Detectors: YOLO / SSD / RetinaNet Algorithm: Divide input imgae into grid Image a set of base boxes centered at each grid cell Within each grid cell: Regress from each of the B base boxes to a final box with 5 numbers(dx, dy, dh, dw, confidence) Predict scores for each of C classes(including background as a class) Looks a lot like RPN, but category-specific Instance Segmentation: Mask R-CNN He et al, “Mask R-CNN”, ICCV 2017 Open Source Frameworks TensorFlow Detection API Detectron2(Pytorch) Beyond 2D Object Detection Object Detection + Captioning: Dense Captioning Dense Video Captioning: timestep “T” Objects + Relationships: Scene Graphs 3D Object Detection 2D bounding box: (x, y, w, h) $\rightarrow$ 3D oriented bounding box: (x, y, z, w, h, l, r, p, y) $\rightarrow$ Simplified bbox: no roll &amp;amp; pitch Simple Camera Model: A point on the image plane corresponds to a ray in the 3D space A 2D bounding box on an image is a frustrum in the 3D space Localize an object in 3D: The object can be anywhere in the camera viewing frustrum Monocular Camera: Same idea as Faster RCNN, but proposals are in 3D 3D bounding box proposal, regress 3D box parameters + class score 3D Shape Prediction: Mesh R-CNN</summary></entry><entry><title type="html">cs231n - Lecture 14. Visualizing and Understanding</title><link href="http://0.0.0.0:4000/cs231n_lec14" rel="alternate" type="text/html" title="cs231n - Lecture 14. Visualizing and Understanding" /><published>2022-02-02T15:00:00+00:00</published><updated>2022-02-02T15:00:00+00:00</updated><id>http://0.0.0.0:4000/cs231n_lec14</id><content type="html" xml:base="http://0.0.0.0:4000/cs231n_lec14">&lt;h2 id=&quot;whats-going-on-inside-convnets&quot;&gt;What’s going on inside ConvNets?&lt;/h2&gt;
-
-&lt;h3 id=&quot;visualizing-what-models-have-learned&quot;&gt;Visualizing what models have learned&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;First layer: Visualize Filters&lt;br /&gt;
-  At the first layer, we can visualize the raw weights and see gabor-like features. While the higher layers are about the weights to the activations from the layer before, it is not very interpretable.&lt;/li&gt;
-  &lt;li&gt;Last layer: Visualize Representations(feature vector)
-    &lt;ul&gt;
-      &lt;li&gt;Nearest neighbors in feature space&lt;/li&gt;
-      &lt;li&gt;Dimensionality reduction: clustering with similarity; using simple algorithm(PCA) or more complex one(t-SNE)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Visualizing Activations:&lt;br /&gt;
-  &lt;em&gt;Yosinski et al, “Understanding Neural Networks Through Deep Visualization”, ICML DL Workshop 2014&lt;/em&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;understanding-input-pixels&quot;&gt;Understanding input pixels&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Maximally Activating Patches&lt;br /&gt;
-  Run many images, record values of chosen channel(layer or neuron) and visualize image patches that correspond to maximal activations.&lt;/li&gt;
-  &lt;li&gt;Saliency via Occlusion: &lt;em&gt;Zeiler and Fergus, “Visualizing and Understanding Convolutional Networks”, ECCV 2014&lt;/em&gt;.&lt;br /&gt;
-  Mask part of the image before feeding to CNN, slide the occluder and check how much predicted probabilities change. Found that when there are multiple objects, the classification performance improved as the false class object masked.&lt;/li&gt;
-  &lt;li&gt;Which pixels matter: Saliency via Backprop
-    &lt;ul&gt;
-      &lt;li&gt;Visualize the data gradient
-        &lt;ol&gt;
-          &lt;li&gt;foward an image&lt;/li&gt;
-          &lt;li&gt;set &lt;em&gt;activations&lt;/em&gt; in layer of interest to all zero, except for a 1.0 for a neuron of interest&lt;/li&gt;
-          &lt;li&gt;backprop to image input&lt;/li&gt;
-          &lt;li&gt;squish the channels of gradients to get 1-dimensional activation map(or we can run segmentation using grabcut on this heatmap).&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Can also find biases; to see what false classifier actually see&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Intermediate Features via (guided) backprop
-    &lt;ul&gt;
-      &lt;li&gt;Deconvolution-based approach:
-        &lt;ol&gt;
-          &lt;li&gt;Feed image into net&lt;/li&gt;
-          &lt;li&gt;Pick a layer, set the gradient there to be all zero except for one 1 for some neuron of interest&lt;/li&gt;
-          &lt;li&gt;Backprop to image(use guided backprop to pass the positive influence; activation with positive values, using modified relu or deconvnet)&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Visualizing CNN features: Gradient Ascent
-  (Guided) backprop: Find the part of an image that a neuron responds to.&lt;br /&gt;
-  Gradient ascent: Generate a synthetic image that maximally activates a neuron.&lt;br /&gt;
-  \(I^{\ast} = \mbox{argmax}_I f(I) + R(I)\); (neuron value + regularizer)
-    &lt;ul&gt;
-      &lt;li&gt;Optimization-based approach: freeze/fix the weights and run “image update” to find images that maximize the score of chosen class.&lt;br /&gt;
-  &lt;em&gt;Karen Simonyan, Andrea Vedaldi, Andrew Zisserman, “Deep Inside Convolutional Networks: Visualizing Image Classification Models and Saliency Maps”, Workshop at ICLR, 2014&lt;/em&gt;.&lt;/li&gt;
-      &lt;li&gt;Find images that maximize some class score: \(\mbox{argmax}_I S_c(I) - \lambda {\lVert I \rVert}^2_2\)
-        &lt;ol&gt;
-          &lt;li&gt;initialize image to zeros&lt;/li&gt;
-          &lt;li&gt;forward image to compute current scores&lt;/li&gt;
-          &lt;li&gt;set the &lt;em&gt;gradient&lt;/em&gt; of the scores vector to be &lt;em&gt;I&lt;/em&gt;, then backprop to image&lt;/li&gt;
-          &lt;li&gt;make a small update to the image&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Instead of using L2 norm, we can use better regularizer(Gaussian blur image, Clip pixels with small values/gradients to 0, …)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Optimize in FC6 latent space instead of pixel space:&lt;br /&gt;
-&lt;img src=&quot;/assets/images/cs231n_lec14_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/images/cs231n_lec14_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;adversarial-perturbations&quot;&gt;Adversarial perturbations&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Fooling Images / Adversarial Examples
-    &lt;ol&gt;
-      &lt;li&gt;Start from an arbitrary image&lt;/li&gt;
-      &lt;li&gt;Pick an arbitrary class&lt;/li&gt;
-      &lt;li&gt;Modify the image to maximize the class&lt;/li&gt;
-      &lt;li&gt;Repeat until network is fooled&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;Ian Goodfellow, “Explaining and Harnessing Adversarial Examples”, 2014&lt;/em&gt;&lt;br /&gt;
-  Classifier is vulnerable to adversarical perturbation because of its linear nature. Check &lt;a href=&quot;https://www.youtube.com/watch?v=CIfsB_EYsVI&quot;&gt;Ian Goodfellow’s lecture&lt;/a&gt; from 2017&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;Moosavi-Dezfooli, Seyed-Mohsen, et al. “Universal adversarial perturbations”, IEEE, 2017.&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;style-transfer&quot;&gt;Style Transfer&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;DeepDream: Amplify existing features&lt;br /&gt;
-  Rather than synthesizing an image to maximize a specific neuron, instead try to &lt;strong&gt;amplify&lt;/strong&gt; the neuron activations at some layer in the network.&lt;/li&gt;
-  &lt;li&gt;Choose an image and a layer in a CNN; repeat:
-    &lt;ol&gt;
-      &lt;li&gt;Forward: compute activations at chosen layer&lt;/li&gt;
-      &lt;li&gt;Set gradient of chosen layer &lt;em&gt;equal to its activation&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;Backward: Compute gradient on image&lt;/li&gt;
-      &lt;li&gt;Update image&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec14_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Feature Inversion&lt;br /&gt;
-  &lt;em&gt;Mahendran and Vedaldi, “Understanding Deep Image Representations by Inverting Them”, CVPR 2015&lt;/em&gt;&lt;br /&gt;
-  Given a CNN feature vector for an image, find a new image that:
-    &lt;ul&gt;
-      &lt;li&gt;Matches the given feature vector&lt;/li&gt;
-      &lt;li&gt;“looks natural” (image prior regularization)&lt;br /&gt;
-  \(\begin{align*}
-  x^{\ast} &amp;amp;= \underset{x\in\mathbb{R}^{H \times W \times C}}{\mbox{argmin}} l(\Phi(x), \Phi_0) + \lambda \mathcal{R}(x) \\
-      &amp;amp; \mbox{where loss } l = {\lVert \Phi(x) - \Phi_0 \rVert}^2
-  \end{align*}\)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Texture Synthesis: Nearest Neighbor&lt;br /&gt;
-  Given a sample patch of some texture, generate a bigger image of the same texture&lt;br /&gt;
-  Generate pixels one at a time in scanline order; form neighborhood of already generated pixels and copy nearest neighbor from input&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Neural Texture Synthesis: Gram Matrix&lt;br /&gt;
-  a pair-wise statistics; interpret given &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CxHxW&lt;/code&gt; features as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HxW&lt;/code&gt; grid of C-dimensional vectors. By computing outer product and sum up for all spacial locations($G=V^T V$), it gives &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CxC&lt;/code&gt; matrix measuring co-occurrence.
-    &lt;ol&gt;
-      &lt;li&gt;Pretrain a CNN on ImageNet (VGG-19)&lt;/li&gt;
-      &lt;li&gt;Run input texture forward through CNN, record activations on every layer&lt;/li&gt;
-      &lt;li&gt;At each layer compute the Gram matrix&lt;/li&gt;
-      &lt;li&gt;Initialize generated image from random noise&lt;/li&gt;
-      &lt;li&gt;Pass generated image through CNN, compute Gram matrix on each layer&lt;/li&gt;
-      &lt;li&gt;Compute loss: weighted sum of L2 distance between Gram matrices&lt;/li&gt;
-      &lt;li&gt;Backprop to get gradient on image&lt;/li&gt;
-      &lt;li&gt;Make gradient step on image&lt;/li&gt;
-      &lt;li&gt;GOTO 5
-&lt;img src=&quot;/assets/images/cs231n_lec14_3.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;60%&quot; /&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Neural Style Transfer: Feature + Gram Reconstruction
-    &lt;ol&gt;
-      &lt;li&gt;Extract content targets (ConvNet activations of all layers for the given image)&lt;/li&gt;
-      &lt;li&gt;Extract style targets (Gram matrices of ConvNet activations of all layers)&lt;/li&gt;
-      &lt;li&gt;Optimize over image to have:
-        &lt;ul&gt;
-          &lt;li&gt;The content of the content image(activations match content)&lt;/li&gt;
-          &lt;li&gt;The style of the stlye image(Gram matrices of activations match style)&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec14_4.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
-          &lt;li&gt;Problem: requires many forward, backward passes; VGG is very slow&lt;/li&gt;
-          &lt;li&gt;Solution: Train another neural network; &lt;strong&gt;Fast Style Transfer&lt;/strong&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Fast Style Transfer
-  &lt;img src=&quot;/assets/images/cs231n_lec14_5.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">What’s going on inside ConvNets? Visualizing what models have learned First layer: Visualize Filters At the first layer, we can visualize the raw weights and see gabor-like features. While the higher layers are about the weights to the activations from the layer before, it is not very interpretable. Last layer: Visualize Representations(feature vector) Nearest neighbors in feature space Dimensionality reduction: clustering with similarity; using simple algorithm(PCA) or more complex one(t-SNE) Visualizing Activations: Yosinski et al, “Understanding Neural Networks Through Deep Visualization”, ICML DL Workshop 2014. Understanding input pixels Maximally Activating Patches Run many images, record values of chosen channel(layer or neuron) and visualize image patches that correspond to maximal activations. Saliency via Occlusion: Zeiler and Fergus, “Visualizing and Understanding Convolutional Networks”, ECCV 2014. Mask part of the image before feeding to CNN, slide the occluder and check how much predicted probabilities change. Found that when there are multiple objects, the classification performance improved as the false class object masked. Which pixels matter: Saliency via Backprop Visualize the data gradient foward an image set activations in layer of interest to all zero, except for a 1.0 for a neuron of interest backprop to image input squish the channels of gradients to get 1-dimensional activation map(or we can run segmentation using grabcut on this heatmap). Can also find biases; to see what false classifier actually see Intermediate Features via (guided) backprop Deconvolution-based approach: Feed image into net Pick a layer, set the gradient there to be all zero except for one 1 for some neuron of interest Backprop to image(use guided backprop to pass the positive influence; activation with positive values, using modified relu or deconvnet) Visualizing CNN features: Gradient Ascent (Guided) backprop: Find the part of an image that a neuron responds to. Gradient ascent: Generate a synthetic image that maximally activates a neuron. \(I^{\ast} = \mbox{argmax}_I f(I) + R(I)\); (neuron value + regularizer) Optimization-based approach: freeze/fix the weights and run “image update” to find images that maximize the score of chosen class. Karen Simonyan, Andrea Vedaldi, Andrew Zisserman, “Deep Inside Convolutional Networks: Visualizing Image Classification Models and Saliency Maps”, Workshop at ICLR, 2014. Find images that maximize some class score: \(\mbox{argmax}_I S_c(I) - \lambda {\lVert I \rVert}^2_2\) initialize image to zeros forward image to compute current scores set the gradient of the scores vector to be I, then backprop to image make a small update to the image Instead of using L2 norm, we can use better regularizer(Gaussian blur image, Clip pixels with small values/gradients to 0, …) Optimize in FC6 latent space instead of pixel space: Adversarial perturbations Fooling Images / Adversarial Examples Start from an arbitrary image Pick an arbitrary class Modify the image to maximize the class Repeat until network is fooled Ian Goodfellow, “Explaining and Harnessing Adversarial Examples”, 2014 Classifier is vulnerable to adversarical perturbation because of its linear nature. Check Ian Goodfellow’s lecture from 2017 Moosavi-Dezfooli, Seyed-Mohsen, et al. “Universal adversarial perturbations”, IEEE, 2017. Style Transfer DeepDream: Amplify existing features Rather than synthesizing an image to maximize a specific neuron, instead try to amplify the neuron activations at some layer in the network. Choose an image and a layer in a CNN; repeat: Forward: compute activations at chosen layer Set gradient of chosen layer equal to its activation Backward: Compute gradient on image Update image Feature Inversion Mahendran and Vedaldi, “Understanding Deep Image Representations by Inverting Them”, CVPR 2015 Given a CNN feature vector for an image, find a new image that: Matches the given feature vector “looks natural” (image prior regularization) \(\begin{align*} x^{\ast} &amp;amp;= \underset{x\in\mathbb{R}^{H \times W \times C}}{\mbox{argmin}} l(\Phi(x), \Phi_0) + \lambda \mathcal{R}(x) \\ &amp;amp; \mbox{where loss } l = {\lVert \Phi(x) - \Phi_0 \rVert}^2 \end{align*}\) Texture Synthesis: Nearest Neighbor Given a sample patch of some texture, generate a bigger image of the same texture Generate pixels one at a time in scanline order; form neighborhood of already generated pixels and copy nearest neighbor from input Neural Texture Synthesis: Gram Matrix a pair-wise statistics; interpret given CxHxW features as HxW grid of C-dimensional vectors. By computing outer product and sum up for all spacial locations($G=V^T V$), it gives CxC matrix measuring co-occurrence. Pretrain a CNN on ImageNet (VGG-19) Run input texture forward through CNN, record activations on every layer At each layer compute the Gram matrix Initialize generated image from random noise Pass generated image through CNN, compute Gram matrix on each layer Compute loss: weighted sum of L2 distance between Gram matrices Backprop to get gradient on image Make gradient step on image GOTO 5 Neural Style Transfer: Feature + Gram Reconstruction Extract content targets (ConvNet activations of all layers for the given image) Extract style targets (Gram matrices of ConvNet activations of all layers) Optimize over image to have: The content of the content image(activations match content) The style of the stlye image(Gram matrices of activations match style) Problem: requires many forward, backward passes; VGG is very slow Solution: Train another neural network; Fast Style Transfer Fast Style Transfer</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Computer Vision Tasks Image Classification: No spatial extent Semantic Segmentation: No objects, just pixels Object Detection/ Instance Segmentation: Multiple objects Semantic Segmentation Paired training data: For each training image, each pixel is labeled with a semantic category. At test time, classify each pixel of a new image. Problem: Classifying with only single pixel does not include context information. Idea: Sliding Window Extract patch from full image, classify center pixel with CNN. $\color{red}{(-)}$ Very inefficient, not reusing shared features between overlapping patches. Convolution Encode the entire image with conv net, and do semantic segmentation on top. $\color{red}{(-)}$ CNN architectures often change the spatial sizes, but semantic segmentation requires the output size to be same as input size. Fully Convolutional Design a network with only convolutional layers without downsampling operators $\color{red}{(-)}$ convolutions at original image resolution is very expensive $\rightarrow$ Design convolutional network with downsampling and upsampling Downsampling: Pooling, strided convolution In-Network Upsampling: Unpooling, strided transpose convolution Unpooling: Nearest Neighbor: copy-paste to extended region “Bed of Nails”: no positional argument, pad with zeros Max Unpooling: use positions from poolying layer ahead, pad with zeros Learnable Downsampling: Strided convolution Output is a dot product between filter and input Stride gives ratio between movement in input and output Learnable Upsampling: Transposed convolution Input gives weight for filter Output contains copies of the filter weighted by the input, summing at where at overlaps in the output Summary Label each pixel in the image with a category label Don’t differentiate instances, only care about pixels Object Detection Multiple Objects: Each image needs a different number of outputs; $\rightarrow$ Apply a CNN to many different crops of the image, CNN classifies each crop as object or background. $\color{red}{(-)}$ Need to apply CNN to huge number of locations, scales, and aspect ratios, very computationally expensive. R-CNN Girshick et al, “Rich feature hierarchies for accurate object detection and semantic segmentation”, CVPR 2014 2-stage Detector: Region Proposal + Region Classification Image as input Crop bounding boxes with Selective Search Warp into same size pixels for CNN model Input Warped images into CNN Run classification on each Algorithm: Region Proposals: Selective Search Find “blobby” image regions that are likely to contain objects. Relatively fast to run; e.g. Selective Search gives 2000 region proposals in a few seconds on CPU. CNN: For a pre-trained CNN architecture, change the number of classes on the last classification layer(detection classes N + background 1), fine-tune with dataset for Object Detection. From the region proposal input, outputs a fixed-length feature vector. SVM: Category-Specific Linear SVMs Positive: ground-truth boxes Negative: IoU under 0.3 Scores each feature vector for classes, classifies whether each one is positive/negative(is_object). Non-Maximum Suppression: with concept of IoU Intersection over Union; area of intersection divided by area of union If there are two boxes with IoU over 0.5, consider them proposed on the same object, leave one with the highest score. Bounding Box Regression: adjust boxes from Selective Search Algorithm: Assume a bounding box $P^i = (P_x^i, P_y^i, P_w^i, P_h^i)$, Ground-truth box $G = (G_x, G_y, G_w, G_h)$. Define a function $d$, mapping $P$ close to $G$; \(\hat{G}_x = P_w d_x(P) + P_x\) \(\hat{G}_y = P_h d_y(P) + P_y\) \(\hat{G}_w = P_w \mbox{exp}(d_w(P))\) \(\hat{G}_h = P_h \mbox{exp}(d_h(P))\) where $d_{\star}(P) = w_{\star}^T \phi_5(P)$, is modeled as a linear function(learnable weight vector w) of the POOL5 features of proposal P($\phi_5(P)$). We learn $w_{\star}$ by optimizing the regularized least squares objective(Ridge regression) Learnable parameters on: 2, 3, 5 Summary: Score: 53.7% on Pascal VOC 2010 Problem: 1. Low Performance; Warping images into 224x224 size for AlexNet 2. Slow; Using all candidates from Selective Search 3. Not GPU-optimized; Using Selective Search and SVM 4. No Back Propagation; Not sharing computations Fast R-CNN Girshick, “Fast R-CNN”, ICCV 2015 idea: Pass the image through convnet before cropping. Crop the conv feature instead. Algorithm: Pass the full image through pre-trained CNN and extract feature maps. Get RoIs from a proposal method(Selective Search) and crop by RoI Pooling, get fixed size feature vectors. With RoI feature vectors, pass some fully connected layers and split into two branches. 1) pass softmax and classify the class of RoI. no SVM used. 2) Run bounding box regression. Cropping Features: RoI Pool Project RoI proposals(on input image) onto CNN image features. Divide into subregions. Run pooling(Max-pool) within each subregion. $\rightarrow$ Region features always be the same size regardless of input region size Faster R-CNN Ren et al, “Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks”, NIPS 2015 idea: Fast R-CNN is not GPU-optimized; runtime dominated by region proposals. By inserting Region Proposal Network(RPN), implemented end-to-end architecture. Algorithm: Pass the full image through pre-trained CNN and extract feature maps. RPN: For K different anchor boxes of different size and scale at each point in the feature map, predict whether it contains an object(binary classification), and also predict a corrections from the anchor to the ground-truth box(regress 4 numbers per pixel). Jointly train with 4 losses: 1) RPN classify object / not object 2) RPN regress box coordinates 3) Final classification score (object classes) 4) Final box coordinates Glossing over many details: Ignore overlapping proposals with non-max suppression How are anchors determined? How do we sample positive / negative samples for training the RPN? How to parameterize bounding box regression? Two-stage object detector: First stage: Run once per image Backbone network Region proposal network(RPN) Second stage: Run once per region Crop features: RoI pool/ align Predict object class Prediction bbox offset Single-Stage Object Detectors: YOLO / SSD / RetinaNet Algorithm: Divide input imgae into grid Image a set of base boxes centered at each grid cell Within each grid cell: Regress from each of the B base boxes to a final box with 5 numbers(dx, dy, dh, dw, confidence) Predict scores for each of C classes(including background as a class) Looks a lot like RPN, but category-specific Instance Segmentation: Mask R-CNN He et al, “Mask R-CNN”, ICCV 2017 Open Source Frameworks TensorFlow Detection API Detectron2(Pytorch) Beyond 2D Object Detection Object Detection + Captioning: Dense Captioning Dense Video Captioning: timestep “T” Objects + Relationships: Scene Graphs 3D Object Detection 2D bounding box: (x, y, w, h) $\rightarrow$ 3D oriented bounding box: (x, y, z, w, h, l, r, p, y) $\rightarrow$ Simplified bbox: no roll &amp;amp; pitch Simple Camera Model: A point on the image plane corresponds to a ray in the 3D space A 2D bounding box on an image is a frustrum in the 3D space Localize an object in 3D: The object can be anywhere in the camera viewing frustrum Monocular Camera: Same idea as Faster RCNN, but proposals are in 3D 3D bounding box proposal, regress 3D box parameters + class score 3D Shape Prediction: Mesh R-CNN</summary></entry></feed>
