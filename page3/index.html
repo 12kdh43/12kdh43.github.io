@@ -14,7 +14,7 @@
 
 
 
-    <title>cs224n - Darron's Devlog</title>
+    <title>Darron's Devlog</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -43,19 +43,19 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="" />
     <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
-    <link rel="canonical" href="http://0.0.0.0:4000/tag/cs224n/" />
+    <link rel="canonical" href="http://0.0.0.0:4000/page3/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="cs224n - Darron's Devlog" />
+    <meta property="og:title" content="Darron's Devlog" />
     <meta property="og:description" content="" />
-    <meta property="og:url" content="http://0.0.0.0:4000/tag/cs224n/" />
+    <meta property="og:url" content="http://0.0.0.0:4000/page3/" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="cs224n - Darron's Devlog" />
+    <meta name="twitter:title" content="Darron's Devlog" />
     <meta name="twitter:description" content="" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
@@ -75,7 +75,7 @@
         "name": "Darron's Devlog",
         "logo": "http://0.0.0.0:4000/"
     },
-    "url": "http://0.0.0.0:4000/tag/cs224n/",
+    "url": "http://0.0.0.0:4000/page3/",
     "image": {
         "@type": "ImageObject",
         "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
@@ -84,7 +84,7 @@
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://0.0.0.0:4000/tag/cs224n/"
+        "@id": "http://0.0.0.0:4000/page3/"
     },
     "description": ""
 }
@@ -99,11 +99,11 @@
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="Studies - cs224n" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Darron's Devlog" href="/feed.xml" />
 
 
 </head>
-<body class="page-template">
+<body class="paged archive-template">
 
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
@@ -112,14 +112,19 @@
 into the {body} of the default.hbs template -->
 
 <!-- The big featured header, it uses blog cover image as a BG if available -->
-<header class="site-header outer">
+
+<header class="site-header outer " style="background-image:  url(/assets/built/images/blog-cover1.png) ">
     <div class="inner">
+        <div class="site-header-content">
+            <h1 class="site-title">
+                
+                    Darron's Devlog
+                
+            </h1>
+            <h2 class="site-description"></h2>
+        </div>
         <nav class="site-nav">
     <div class="site-nav-left">
-        
-            
-                <a class="site-nav-logo" href="/">Darron's Devlog</a>
-            
         
         
             <ul class="nav" role="menu">
@@ -148,95 +153,56 @@ into the {body} of the default.hbs template -->
     </div>
 </header>
 
-<!-- Everything inside the #post tags pulls data from the post -->
-<!-- #post -->
+<!-- The main content area -->
 
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
-        <article class="post-full  post page no-image">
-
-            <header class="post-full-header">
-                <h1 class="post-full-title">Studies - cs224n</h1>
-            </header>
-
+        <div class="post-feed">
+            <!-- The tag below includes the markup for each post - partials/post-card.hbs -->
             
-
-            <section class="post-full-content">
-                <p><em>CS224n: Natural Language Processing with Deep Learning</em><br />
-Official site: <a href="http://web.stanford.edu/class/cs224n/index.html">http://web.stanford.edu/class/cs224n/index.html</a></p>
-
-<p>based on the original lecture in Winter 2021</p>
-
-<ul>
-  <li><a href="https://github.com/12kdh43/cs224n">GitHub: My solutions for Assignments</a></li>
-</ul>
-<div class="well article">
-
-	
-    <li><span class="post-date">
+    <article class="post-card home-template no-image">
         
-        2022-03-02 </span><a href="/cs224n_lec1">cs224n - Lecture 1. Word Vectors</a></li>
-	
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/islr_ch2">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Islr</span>
+                            
+                        
+                    
 
-	
-    <li><span class="post-date">
-        
-        2022-03-05 </span><a href="/cs224n_lec2">cs224n - Lecture 2. Neural Classifiers</a></li>
-	
+                    <h2 class="post-card-title">ISLR - Chapter 2. Statistical Learning</h2>
+                </header>
+                <section class="post-card-excerpt">
+					<p>Chapter 2. Statistical Learning 2.1. What is Statistical Learning? 2.1.1. Why Estimate $f$ ? Prediction Inference 2.1.2. Estimating $f$ : By Using Training Data Parametric Methods: Model-based approach Non-parametric Methods: Data-driven approach Example of Nonparametric model: KNN Reg. 2.1.3. Trade-off between Prediction Accuray &amp; Interpretability...</p>
+                </section>
+            </a>
+        </div>
+    </article>
 
-	
-    <li><span class="post-date">
-        
-        2022-03-08 </span><a href="/cs224n_lec3">cs224n - Lecture 3. Backprop and Neural Networks</a></li>
-	
 
-	
-    <li><span class="post-date">
-        
-        2022-03-11 </span><a href="/cs224n_lec4">cs224n - Lecture 4. Dependency Parsing</a></li>
-	
-
-	
-    <li><span class="post-date">
-        
-        2022-03-15 </span><a href="/cs224n_lec5">cs224n - Lecture 5. Language Models and RNNs</a></li>
-	
-
-	
-    <li><span class="post-date">
-        
-        2022-03-20 </span><a href="/cs224n_lec6">cs224n - Lecture 6. Simple and LSTM RNNs</a></li>
-	
-
-	
-    <li><span class="post-date">
-        
-        2022-03-23 </span><a href="/cs224n_lec7">cs224n - Lecture 7. Translation, Seq2Seq, Attention</a></li>
-	
-
-</div>
-
-            </section>
-
-        </article>
+        </div>
 
     </div>
 </main>
 
-<!-- /post -->
-
-<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
-<script>
-$(function() {
-    var $postContent = $(".post-full-content");
-    $postContent.fitVids();
-});
-</script>
-
-
 
         <!-- Previous/next page links - displayed on every page -->
+        
+            
+                <nav class="pagination" role="pagination">
+    
+        
+            <a class="newer-posts" href="/page2/" title="Previous Page">&laquo; Newer Posts</a>
+      
+    
+    <span class="page-number"> Page 3 of 3 </span>
+     
+</nav>
+            
         
 
         <!-- The footer at the very bottom of the screen -->
@@ -311,7 +277,7 @@ $(function() {
     <!-- Paginator increased to "infinit" in _config.yml -->
     <!-- if paginator.posts  -->
     <!-- <script>
-        var maxPages = parseInt('');
+        var maxPages = parseInt('3');
     </script>
     <script src="/assets/js/infinitescroll.js"></script> -->
     <!-- /endif -->
@@ -334,14 +300,6 @@ $(function() {
 
 	
     <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
-    
-        <script>
-$(function() {
-    var $postContent = $(".post-full-content");
-    $postContent.fitVids();
-});
-</script>
-
     
 
     <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->

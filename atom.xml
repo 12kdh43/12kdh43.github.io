@@ -8,6 +8,343 @@
     
       
       <item>
+        <title>cs224n - Lecture 7. Translation, Seq2Seq, Attention</title>
+        
+          <description>&lt;h2 id=&quot;new-task-machine-translation&quot;&gt;New Task: Machine Translation&lt;/h2&gt;
+
+&lt;h2 id=&quot;pre-neural-machine-translation&quot;&gt;Pre-Neural Machine Translation&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Machine Translation (MT)&lt;/strong&gt; is the task of translating a sentence &lt;em&gt;x&lt;/em&gt; from one language (the &lt;strong&gt;source language&lt;/strong&gt;) to a sentence &lt;em&gt;y&lt;/em&gt; in another language (the &lt;strong&gt;target language&lt;/strong&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;1990s-2010s-statistical-machine-translation&quot;&gt;1990s-2010s: Statistical Machine Translation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Core idea: Learn a &lt;strong&gt;probabilistic model&lt;/strong&gt; from &lt;strong&gt;data&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Find best translated sentence &lt;em&gt;y&lt;/em&gt;, given sentence &lt;em&gt;x&lt;/em&gt;&lt;br /&gt;
+  $\text{argmax}_y P(y|x)$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Use &lt;strong&gt;Bayes Rule&lt;/strong&gt; to break this down into &lt;strong&gt;two components&lt;/strong&gt; to be learned separately:&lt;br /&gt;
+  $= \text{argmax}_y P(x|y)P(y)$
+    &lt;ul&gt;
+      &lt;li&gt;$P(x\vert y)$: &lt;strong&gt;Translation model&lt;/strong&gt; that models how words and phrases should be translated (&lt;em&gt;fidelity&lt;/em&gt;); Learnt from parallel data.&lt;/li&gt;
+      &lt;li&gt;$P(y)$: &lt;strong&gt;Language Model&lt;/strong&gt; that models how to write good English (&lt;em&gt;fluency&lt;/em&gt;). Learnt from monolingual data.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Question: How to learn translation model $P(x\vert y)$?
+    &lt;ul&gt;
+      &lt;li&gt;First, need large amount of &lt;strong&gt;parallel data&lt;/strong&gt;&lt;br /&gt;
+  (e.g., pairs of human-translated French/English sentences)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;learning-alignment-for-smt&quot;&gt;Learning alignment for SMT&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Question: How to learn translation model $P(x\vert y)$ from the parallel corpus?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Break it down further: Introduce latent &lt;em&gt;a&lt;/em&gt; variable into the model:&lt;br /&gt;
+  $P(x, a|y)$&lt;br /&gt;
+  where &lt;em&gt;a&lt;/em&gt; is the &lt;strong&gt;alignment&lt;/strong&gt;, i.e. word-level correspondence between source sentence &lt;em&gt;x&lt;/em&gt; and target sentence &lt;em&gt;y&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Alignment is the &lt;strong&gt;correspondence between particular words&lt;/strong&gt; in the translated sentence pair, capturing the grammatical differences between languages. &lt;strong&gt;Typological differences&lt;/strong&gt; lead to complicated alignments.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Alignment is complex:&lt;br /&gt;
+  Some words have &lt;strong&gt;no counterpart&lt;/strong&gt;&lt;br /&gt;
+  Alignment can be &lt;strong&gt;many-to-one&lt;/strong&gt;, &lt;strong&gt;one-to-many&lt;/strong&gt;, or &lt;strong&gt;many-to-many&lt;/strong&gt;(phrase-level)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;We learn $P(x, a\vert y)$ as a combination of many factors, including:
+    &lt;ul&gt;
+      &lt;li&gt;Probability of particular words aligning (also depends on position in sent)&lt;/li&gt;
+      &lt;li&gt;Probability of particular words having a particular fertility (number of corresponding words)&lt;/li&gt;
+      &lt;li&gt;etc.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Alignments &lt;em&gt;a&lt;/em&gt; are &lt;strong&gt;latent variables&lt;/strong&gt;: They aren’t explicitly specified in the data
+    &lt;ul&gt;
+      &lt;li&gt;Require the use of special learning algorithms (like Expectation-Maximization) for learning the parameters of distributions with latent variables&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;decoding-for-smt&quot;&gt;Decoding for SMT&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;How to compute $\text{argmax}_y$?&lt;/li&gt;
+  &lt;li&gt;Translation Model $P(x\vert y)$&lt;/li&gt;
+  &lt;li&gt;Language Model $P(y)$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Enumerating every possible &lt;em&gt;y&lt;/em&gt; and calculate the probability is too expensive;&lt;br /&gt;
+  $\rightarrow$ Impose strong &lt;strong&gt;independence assumptions&lt;/strong&gt; in model, use dynamic programming for globally optimal solutions (e.g. Viterbi algorithm). This process is called &lt;strong&gt;&lt;em&gt;decoding&lt;/em&gt;&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_1.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;about-smt&quot;&gt;about SMT&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;SMT was a huge research field&lt;/li&gt;
+  &lt;li&gt;The best systems were extremely complex
+    &lt;ul&gt;
+      &lt;li&gt;Hundreds of important details we haven’t mentioned here&lt;/li&gt;
+      &lt;li&gt;Systems had many separately-designed subcomponents&lt;/li&gt;
+      &lt;li&gt;Lots of feature engineering; need to design features to capture particular language phenomena&lt;/li&gt;
+      &lt;li&gt;Require compiling and maintaining extra resources (like tables of equivalent phrases)&lt;/li&gt;
+      &lt;li&gt;Lots of human effort to maintain; repeated effort for each language pair&lt;/li&gt;
+      &lt;li&gt;Fairly successful, &lt;em&gt;Google Translate&lt;/em&gt; launched in mid 2000s.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;neural-machine-translation-2014&quot;&gt;Neural Machine Translation (2014~)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Neural Machine Translation (NMT)&lt;/strong&gt; is a way to do Machine Translation with a &lt;em&gt;single end-to-end neural network&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The neural network architecture is called a &lt;strong&gt;sequence-to-sequence&lt;/strong&gt; model (aka &lt;strong&gt;seq2seq&lt;/strong&gt;) and it involves &lt;strong&gt;two RNNs&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sequence-to-sequence-model&quot;&gt;Sequence-to-sequence Model&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_2.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+(Note: This diagram shows &lt;strong&gt;test time&lt;/strong&gt; behavior: decoder output is fed in as next step’s input)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sequence-to-sequence is useful for &lt;strong&gt;more than just MT&lt;/strong&gt;&lt;br /&gt;
+  Many NLP tasks can be phrased as sequence-to-sequence:
+    &lt;ul&gt;
+      &lt;li&gt;Summarization (long text $\rightarrow$ short text)&lt;/li&gt;
+      &lt;li&gt;Dialogue (previous utterances $\rightarrow$ next utterance)&lt;/li&gt;
+      &lt;li&gt;Parsing (input text $\rightarrow$ output parse as sequence)&lt;/li&gt;
+      &lt;li&gt;Code generation (natural language $\rightarrow$ Python code)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;An example of a &lt;strong&gt;Conditional Language Model&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Language Model&lt;/strong&gt; because the decoder is predicting the next word of the target sentence &lt;em&gt;y&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Conditional&lt;/strong&gt; because its prediction are &lt;em&gt;also&lt;/em&gt; conditioned on the source sentence &lt;em&gt;x&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;NMT directly calculates $P(y\vert x)$:&lt;br /&gt;
+  $P(y|x) = P(y_1|x)P(y_2|y_1,x)P(y_3|y_1,y_2,x)\ldots P(y_T|y_1,\ldots, y_{T-1}, x)$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Question: How to &lt;strong&gt;train&lt;/strong&gt; a NMT system?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;training-a-neural-machine-translation-system&quot;&gt;Training a Neural Machine Translation system&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_3.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;End-to-End: update all of the parameters of the both encoder and decoder.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;multi-layer-rnns&quot;&gt;Multi-layer RNNs&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;RNNs are already “deep” on one dimension (they unroll horizontally over many timesteps), but shallow; a single layer of recurrent structure about the sentences.&lt;/li&gt;
+  &lt;li&gt;We can also make them “deep” in another dimension by &lt;strong&gt;applying multiple RNNs&lt;/strong&gt; -  a multi-layer RNN(or &lt;strong&gt;stacked RNNs&lt;/strong&gt;). This allows the network to compute &lt;strong&gt;more complex representations&lt;/strong&gt;; The lower RNNs should compute lower-level features and the higher RNNs should compute higher-level features.&lt;/li&gt;
+  &lt;li&gt;It’s not same: four LSTMs with a hidden state 500 each are more powerful than one 2000 layer LSTM (though we have the same number of parameters roughly).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;multi-layer-deep-encoder-decoder-machine-translation-net&quot;&gt;Multi-layer deep encoder-decoder machine translation net&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_4.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;multi-layer-rnns-in-practice&quot;&gt;Multi-layer RNNs in practice&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;High-performing RNNs are usually multi-layer&lt;/strong&gt; (but aren’t as deep as convolutional or feed-forward networks)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;For example: In a 2017 paper, (&lt;em&gt;“Massive Exploration of Neural Machine Translation Architecutres”, Britz et al&lt;/em&gt;.) find that for Neural Machine Translation, &lt;strong&gt;2 to 4 layers&lt;/strong&gt; is best for the encoder RNN, and &lt;strong&gt;4 layers&lt;/strong&gt; is best for the decoder RNN
+    &lt;ul&gt;
+      &lt;li&gt;Often 2 layers is a lot better than 1, and 3 might be a little better than 2 (rules of thumb)&lt;/li&gt;
+      &lt;li&gt;Usually, &lt;strong&gt;skip-connections/dense-connections&lt;/strong&gt; are needed to train deeper RNNs (e.g., 8 layers)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Transformer&lt;/strong&gt;-based networks (e.g., BERT) are usually deeper, like &lt;strong&gt;12 or 24 layers&lt;/strong&gt; having a lot of skipping-like connections.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;greedy-decoding&quot;&gt;Greedy Decoding&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Greedy decoding&lt;/strong&gt;(take most probable word on each step) is what we saw so far; taking argmax on each step of the decoder
+    &lt;ul&gt;
+      &lt;li&gt;Problem: has no way to undo decisions&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;exhaustive-search-decoding&quot;&gt;Exhaustive search decoding&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ideally, we want to find a (length &lt;em&gt;T&lt;/em&gt;) translation &lt;em&gt;y&lt;/em&gt; that maximizes&lt;br /&gt;
+  \(\begin{align*}
+  P(y|x) &amp;amp;= P(y_1|x)P(y_2|y_1,x)P(y_3|y_1,y_2,x)\ldots P(y_T|y_1,\ldots, y_{T-1}, x) \\
+  &amp;amp;= \prod_{t=1}^T P(y_t|y_1,\ldots,y_{t-1},x)
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We could try computing &lt;strong&gt;all possible sequences&lt;/strong&gt; &lt;em&gt;y&lt;/em&gt;&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;This means that on each step &lt;em&gt;t&lt;/em&gt; of the decoder, we’re tracking $V^t$ possible partial translations, where &lt;em&gt;V&lt;/em&gt; is vocab size&lt;/li&gt;
+      &lt;li&gt;This $O(V^T)$ complexity is &lt;strong&gt;far too expensive&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;beam-search-decoding&quot;&gt;Beam search decoding&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Core idea: On each step of decoder, keep track of the &lt;em&gt;k most probable&lt;/em&gt; partial translations (which we call &lt;strong&gt;&lt;em&gt;hypotheses&lt;/em&gt;&lt;/strong&gt;)
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;k&lt;/em&gt; is the &lt;strong&gt;beam size&lt;/strong&gt; (in practice around 5 to 10)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;A hypothesis $y_1, \ldots, y_t$ has a &lt;strong&gt;score&lt;/strong&gt; which is its log probability:&lt;br /&gt;
+  $\text{score}(y_1, \ldots, y_t) = \log P_{LM}(y_1, \ldots, y_t|x) = \sum_{i=1}^t \log P_{LM}(y_i|y_1, \ldots, y_{i-1},x)$
+    &lt;ul&gt;
+      &lt;li&gt;Scores are all negative, and higher is better&lt;/li&gt;
+      &lt;li&gt;Search for high-scoring hypotheses, tracking top &lt;em&gt;k&lt;/em&gt; on each step&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Not guaranteed&lt;/strong&gt; to find optimal solution, but much more efficient&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Stopping criterion
+    &lt;ul&gt;
+      &lt;li&gt;In &lt;strong&gt;greedy decoding&lt;/strong&gt;, usually we decode until the model produces an &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;END&amp;gt;&lt;/code&gt; token&lt;/strong&gt; (“&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;START&amp;gt;&lt;/code&gt; &lt;em&gt;he hit me with a pie&lt;/em&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;END&amp;gt;&lt;/code&gt;”)&lt;/li&gt;
+      &lt;li&gt;In &lt;strong&gt;beam search decoding&lt;/strong&gt;, different hypotheses may produce &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;END&amp;gt;&lt;/code&gt; tokens on &lt;strong&gt;different timesteps&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;When a hypothesis produces &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;END&amp;gt;&lt;/code&gt;, that hypothesis is &lt;strong&gt;complete&lt;/strong&gt;.&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;Place it aside&lt;/strong&gt; and continue exploring other hypotheses via beam search.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Usually continue beam search until:
+        &lt;ul&gt;
+          &lt;li&gt;We reach timestep &lt;em&gt;T&lt;/em&gt; or we have at least &lt;em&gt;n&lt;/em&gt; completed hypotheses (where &lt;em&gt;T&lt;/em&gt; and &lt;em&gt;n&lt;/em&gt; are some pre-defined cutoff)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Finishing up
+    &lt;ul&gt;
+      &lt;li&gt;We have our list of completed hypotheses. Then how to select top one with highest score?&lt;/li&gt;
+      &lt;li&gt;Each hypothesis $y_1,\ldots, y_t$ on our list has a score:&lt;br /&gt;
+  \(\text{score}(y_1, \ldots, y_t) = \log P_{LM}(y_1, \ldots, y_t|x) = \sum_{i=1}^t \log P_{LM}(y_i|y_1, \ldots, y_{i-1},x)\)&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Problem: longer hypotheses have lower scores&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;Fix: Normalize by length.&lt;br /&gt;
+  \(\frac{1}{t}\sum_{i=1}^t \log P_{LM}(y_i|y_1, \ldots, y_{i-1},x)\)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;advantages-of-nmt&quot;&gt;Advantages of NMT&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Better &lt;strong&gt;performance&lt;/strong&gt;:&lt;br /&gt;
+  More &lt;strong&gt;fluent&lt;/strong&gt;&lt;br /&gt;
+  Better use of &lt;strong&gt;context&lt;/strong&gt;&lt;br /&gt;
+  Better use of &lt;strong&gt;phrase similarities&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A &lt;strong&gt;single neural network&lt;/strong&gt; to be optimized end-to-end&lt;br /&gt;
+  No subcomponents to be individually optimized&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Requires much less &lt;strong&gt;human engineering effort&lt;/strong&gt;&lt;br /&gt;
+  No feature engineering&lt;br /&gt;
+  Same method for all language pairs&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;disadvantages-of-nmt&quot;&gt;Disadvantages of NMT&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Less interpretable&lt;/strong&gt;&lt;br /&gt;
+  Hard to debug&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Difficult to control&lt;/strong&gt;&lt;br /&gt;
+  For example, can’t easily specify rules or guidelines for translation&lt;br /&gt;
+  Safety concerns&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-do-we-evaluate-machine-translation&quot;&gt;How do we evaluate Machine Translation?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;BLEU&lt;/strong&gt; (Bilingual Evaluation Understudy)&lt;br /&gt;
+  Compares the machine-written translation to one or several human-written translation(s), and computes a &lt;strong&gt;similarity score&lt;/strong&gt; based on:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;n&lt;/em&gt;-gram precision (usually 1 to 4)&lt;/li&gt;
+      &lt;li&gt;Plus a penalty for too-short system translations&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Useful but imperfect&lt;br /&gt;
+  There are many valid ways to translate a sentence&lt;br /&gt;
+  So a good translation can get a poor BLEU score because it has low &lt;em&gt;n&lt;/em&gt;-gram overlap with the human translation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;mt-progress-over-time&quot;&gt;MT progress over time&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_5.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NMT: perhaps the biggest success story of NLP Deep Learning?&lt;br /&gt;
+  Neural Machine Translation went from a &lt;strong&gt;fringe research attempt&lt;/strong&gt; in 2014 to the &lt;strong&gt;leading standard method&lt;/strong&gt; in 2016
+    &lt;ul&gt;
+      &lt;li&gt;2014: First seq2seq paper published&lt;/li&gt;
+      &lt;li&gt;2016: Google Translate switches from SMT to NMT – and by 2018 everyone has&lt;/li&gt;
+      &lt;li&gt;SMT systems, built by hundreds of engineers over many years, outperformed by NMT systems trained by a &lt;strong&gt;small group&lt;/strong&gt; of engineers in a few &lt;strong&gt;months&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Many difficulties remain:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Out-of-vocabulary&lt;/strong&gt; words&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Domain mismatch&lt;/strong&gt; between train and test data&lt;/li&gt;
+      &lt;li&gt;Maintaining &lt;strong&gt;context&lt;/strong&gt; over longer text&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Low-resource&lt;/strong&gt; language pairs&lt;/li&gt;
+      &lt;li&gt;Failures to accurately capture &lt;strong&gt;sentence meaning&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Pronoun&lt;/strong&gt; (or &lt;strong&gt;zero pronoun&lt;/strong&gt;) &lt;strong&gt;resolution&lt;/strong&gt; errors&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Morphological agreement&lt;/strong&gt; errors&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Bias&lt;/strong&gt; in training data&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;attention&quot;&gt;ATTENTION&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_6.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Information bottlenect: the last hidden state of encoder RNN needs to capture &lt;em&gt;all information&lt;/em&gt; about the source sentence.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Core idea: on each step of the decoder, &lt;strong&gt;use direct connection to the encoder&lt;/strong&gt; to &lt;strong&gt;focus on a particular part&lt;/strong&gt; of the source sequence&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Each step, dot products a decoder hidden state to all encoder hidden states and get &lt;em&gt;Attention scores&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Take softmax to turn scores into &lt;em&gt;Attention distribution&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Using this distribution, take a &lt;strong&gt;weighted sum&lt;/strong&gt; of the encoder hidden states to calculate &lt;em&gt;Attention output&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Concatenate with decoder hidden state, predict $\hat{y_i}$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_7.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs224n_lec7</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs224n_lec7</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>cs224n - Lecture 6. Simple and LSTM RNNs</title>
         
           <description>&lt;h3 id=&quot;the-simple-rnn-language-model&quot;&gt;The Simple RNN Language Model&lt;/h3&gt;

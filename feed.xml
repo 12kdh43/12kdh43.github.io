@@ -1,4 +1,326 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-22T12:53:49+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">cs224n - Lecture 6. Simple and LSTM RNNs</title><link href="http://0.0.0.0:4000/cs224n_lec6" rel="alternate" type="text/html" title="cs224n - Lecture 6. Simple and LSTM RNNs" /><published>2022-03-20T00:00:00+00:00</published><updated>2022-03-20T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec6</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec6">&lt;h3 id=&quot;the-simple-rnn-language-model&quot;&gt;The Simple RNN Language Model&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-25T09:59:43+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">cs224n - Lecture 7. Translation, Seq2Seq, Attention</title><link href="http://0.0.0.0:4000/cs224n_lec7" rel="alternate" type="text/html" title="cs224n - Lecture 7. Translation, Seq2Seq, Attention" /><published>2022-03-23T00:00:00+00:00</published><updated>2022-03-23T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec7</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec7">&lt;h2 id=&quot;new-task-machine-translation&quot;&gt;New Task: Machine Translation&lt;/h2&gt;
+
+&lt;h2 id=&quot;pre-neural-machine-translation&quot;&gt;Pre-Neural Machine Translation&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Machine Translation (MT)&lt;/strong&gt; is the task of translating a sentence &lt;em&gt;x&lt;/em&gt; from one language (the &lt;strong&gt;source language&lt;/strong&gt;) to a sentence &lt;em&gt;y&lt;/em&gt; in another language (the &lt;strong&gt;target language&lt;/strong&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;1990s-2010s-statistical-machine-translation&quot;&gt;1990s-2010s: Statistical Machine Translation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Core idea: Learn a &lt;strong&gt;probabilistic model&lt;/strong&gt; from &lt;strong&gt;data&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Find best translated sentence &lt;em&gt;y&lt;/em&gt;, given sentence &lt;em&gt;x&lt;/em&gt;&lt;br /&gt;
+  $\text{argmax}_y P(y|x)$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Use &lt;strong&gt;Bayes Rule&lt;/strong&gt; to break this down into &lt;strong&gt;two components&lt;/strong&gt; to be learned separately:&lt;br /&gt;
+  $= \text{argmax}_y P(x|y)P(y)$
+    &lt;ul&gt;
+      &lt;li&gt;$P(x\vert y)$: &lt;strong&gt;Translation model&lt;/strong&gt; that models how words and phrases should be translated (&lt;em&gt;fidelity&lt;/em&gt;); Learnt from parallel data.&lt;/li&gt;
+      &lt;li&gt;$P(y)$: &lt;strong&gt;Language Model&lt;/strong&gt; that models how to write good English (&lt;em&gt;fluency&lt;/em&gt;). Learnt from monolingual data.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Question: How to learn translation model $P(x\vert y)$?
+    &lt;ul&gt;
+      &lt;li&gt;First, need large amount of &lt;strong&gt;parallel data&lt;/strong&gt;&lt;br /&gt;
+  (e.g., pairs of human-translated French/English sentences)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;learning-alignment-for-smt&quot;&gt;Learning alignment for SMT&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Question: How to learn translation model $P(x\vert y)$ from the parallel corpus?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Break it down further: Introduce latent &lt;em&gt;a&lt;/em&gt; variable into the model:&lt;br /&gt;
+  $P(x, a|y)$&lt;br /&gt;
+  where &lt;em&gt;a&lt;/em&gt; is the &lt;strong&gt;alignment&lt;/strong&gt;, i.e. word-level correspondence between source sentence &lt;em&gt;x&lt;/em&gt; and target sentence &lt;em&gt;y&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Alignment is the &lt;strong&gt;correspondence between particular words&lt;/strong&gt; in the translated sentence pair, capturing the grammatical differences between languages. &lt;strong&gt;Typological differences&lt;/strong&gt; lead to complicated alignments.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Alignment is complex:&lt;br /&gt;
+  Some words have &lt;strong&gt;no counterpart&lt;/strong&gt;&lt;br /&gt;
+  Alignment can be &lt;strong&gt;many-to-one&lt;/strong&gt;, &lt;strong&gt;one-to-many&lt;/strong&gt;, or &lt;strong&gt;many-to-many&lt;/strong&gt;(phrase-level)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;We learn $P(x, a\vert y)$ as a combination of many factors, including:
+    &lt;ul&gt;
+      &lt;li&gt;Probability of particular words aligning (also depends on position in sent)&lt;/li&gt;
+      &lt;li&gt;Probability of particular words having a particular fertility (number of corresponding words)&lt;/li&gt;
+      &lt;li&gt;etc.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Alignments &lt;em&gt;a&lt;/em&gt; are &lt;strong&gt;latent variables&lt;/strong&gt;: They aren’t explicitly specified in the data
+    &lt;ul&gt;
+      &lt;li&gt;Require the use of special learning algorithms (like Expectation-Maximization) for learning the parameters of distributions with latent variables&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;decoding-for-smt&quot;&gt;Decoding for SMT&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;How to compute $\text{argmax}_y$?&lt;/li&gt;
+  &lt;li&gt;Translation Model $P(x\vert y)$&lt;/li&gt;
+  &lt;li&gt;Language Model $P(y)$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Enumerating every possible &lt;em&gt;y&lt;/em&gt; and calculate the probability is too expensive;&lt;br /&gt;
+  $\rightarrow$ Impose strong &lt;strong&gt;independence assumptions&lt;/strong&gt; in model, use dynamic programming for globally optimal solutions (e.g. Viterbi algorithm). This process is called &lt;strong&gt;&lt;em&gt;decoding&lt;/em&gt;&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_1.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;about-smt&quot;&gt;about SMT&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;SMT was a huge research field&lt;/li&gt;
+  &lt;li&gt;The best systems were extremely complex
+    &lt;ul&gt;
+      &lt;li&gt;Hundreds of important details we haven’t mentioned here&lt;/li&gt;
+      &lt;li&gt;Systems had many separately-designed subcomponents&lt;/li&gt;
+      &lt;li&gt;Lots of feature engineering; need to design features to capture particular language phenomena&lt;/li&gt;
+      &lt;li&gt;Require compiling and maintaining extra resources (like tables of equivalent phrases)&lt;/li&gt;
+      &lt;li&gt;Lots of human effort to maintain; repeated effort for each language pair&lt;/li&gt;
+      &lt;li&gt;Fairly successful, &lt;em&gt;Google Translate&lt;/em&gt; launched in mid 2000s.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;neural-machine-translation-2014&quot;&gt;Neural Machine Translation (2014~)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Neural Machine Translation (NMT)&lt;/strong&gt; is a way to do Machine Translation with a &lt;em&gt;single end-to-end neural network&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The neural network architecture is called a &lt;strong&gt;sequence-to-sequence&lt;/strong&gt; model (aka &lt;strong&gt;seq2seq&lt;/strong&gt;) and it involves &lt;strong&gt;two RNNs&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sequence-to-sequence-model&quot;&gt;Sequence-to-sequence Model&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_2.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
+(Note: This diagram shows &lt;strong&gt;test time&lt;/strong&gt; behavior: decoder output is fed in as next step’s input)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sequence-to-sequence is useful for &lt;strong&gt;more than just MT&lt;/strong&gt;&lt;br /&gt;
+  Many NLP tasks can be phrased as sequence-to-sequence:
+    &lt;ul&gt;
+      &lt;li&gt;Summarization (long text $\rightarrow$ short text)&lt;/li&gt;
+      &lt;li&gt;Dialogue (previous utterances $\rightarrow$ next utterance)&lt;/li&gt;
+      &lt;li&gt;Parsing (input text $\rightarrow$ output parse as sequence)&lt;/li&gt;
+      &lt;li&gt;Code generation (natural language $\rightarrow$ Python code)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;An example of a &lt;strong&gt;Conditional Language Model&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Language Model&lt;/strong&gt; because the decoder is predicting the next word of the target sentence &lt;em&gt;y&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Conditional&lt;/strong&gt; because its prediction are &lt;em&gt;also&lt;/em&gt; conditioned on the source sentence &lt;em&gt;x&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;NMT directly calculates $P(y\vert x)$:&lt;br /&gt;
+  $P(y|x) = P(y_1|x)P(y_2|y_1,x)P(y_3|y_1,y_2,x)\ldots P(y_T|y_1,\ldots, y_{T-1}, x)$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Question: How to &lt;strong&gt;train&lt;/strong&gt; a NMT system?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;training-a-neural-machine-translation-system&quot;&gt;Training a Neural Machine Translation system&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_3.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;End-to-End: update all of the parameters of the both encoder and decoder.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;multi-layer-rnns&quot;&gt;Multi-layer RNNs&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;RNNs are already “deep” on one dimension (they unroll horizontally over many timesteps), but shallow; a single layer of recurrent structure about the sentences.&lt;/li&gt;
+  &lt;li&gt;We can also make them “deep” in another dimension by &lt;strong&gt;applying multiple RNNs&lt;/strong&gt; -  a multi-layer RNN(or &lt;strong&gt;stacked RNNs&lt;/strong&gt;). This allows the network to compute &lt;strong&gt;more complex representations&lt;/strong&gt;; The lower RNNs should compute lower-level features and the higher RNNs should compute higher-level features.&lt;/li&gt;
+  &lt;li&gt;It’s not same: four LSTMs with a hidden state 500 each are more powerful than one 2000 layer LSTM (though we have the same number of parameters roughly).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;multi-layer-deep-encoder-decoder-machine-translation-net&quot;&gt;Multi-layer deep encoder-decoder machine translation net&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_4.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;multi-layer-rnns-in-practice&quot;&gt;Multi-layer RNNs in practice&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;High-performing RNNs are usually multi-layer&lt;/strong&gt; (but aren’t as deep as convolutional or feed-forward networks)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;For example: In a 2017 paper, (&lt;em&gt;“Massive Exploration of Neural Machine Translation Architecutres”, Britz et al&lt;/em&gt;.) find that for Neural Machine Translation, &lt;strong&gt;2 to 4 layers&lt;/strong&gt; is best for the encoder RNN, and &lt;strong&gt;4 layers&lt;/strong&gt; is best for the decoder RNN
+    &lt;ul&gt;
+      &lt;li&gt;Often 2 layers is a lot better than 1, and 3 might be a little better than 2 (rules of thumb)&lt;/li&gt;
+      &lt;li&gt;Usually, &lt;strong&gt;skip-connections/dense-connections&lt;/strong&gt; are needed to train deeper RNNs (e.g., 8 layers)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Transformer&lt;/strong&gt;-based networks (e.g., BERT) are usually deeper, like &lt;strong&gt;12 or 24 layers&lt;/strong&gt; having a lot of skipping-like connections.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;greedy-decoding&quot;&gt;Greedy Decoding&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Greedy decoding&lt;/strong&gt;(take most probable word on each step) is what we saw so far; taking argmax on each step of the decoder
+    &lt;ul&gt;
+      &lt;li&gt;Problem: has no way to undo decisions&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;exhaustive-search-decoding&quot;&gt;Exhaustive search decoding&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ideally, we want to find a (length &lt;em&gt;T&lt;/em&gt;) translation &lt;em&gt;y&lt;/em&gt; that maximizes&lt;br /&gt;
+  \(\begin{align*}
+  P(y|x) &amp;amp;= P(y_1|x)P(y_2|y_1,x)P(y_3|y_1,y_2,x)\ldots P(y_T|y_1,\ldots, y_{T-1}, x) \\
+  &amp;amp;= \prod_{t=1}^T P(y_t|y_1,\ldots,y_{t-1},x)
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We could try computing &lt;strong&gt;all possible sequences&lt;/strong&gt; &lt;em&gt;y&lt;/em&gt;&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;This means that on each step &lt;em&gt;t&lt;/em&gt; of the decoder, we’re tracking $V^t$ possible partial translations, where &lt;em&gt;V&lt;/em&gt; is vocab size&lt;/li&gt;
+      &lt;li&gt;This $O(V^T)$ complexity is &lt;strong&gt;far too expensive&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;beam-search-decoding&quot;&gt;Beam search decoding&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Core idea: On each step of decoder, keep track of the &lt;em&gt;k most probable&lt;/em&gt; partial translations (which we call &lt;strong&gt;&lt;em&gt;hypotheses&lt;/em&gt;&lt;/strong&gt;)
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;k&lt;/em&gt; is the &lt;strong&gt;beam size&lt;/strong&gt; (in practice around 5 to 10)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;A hypothesis $y_1, \ldots, y_t$ has a &lt;strong&gt;score&lt;/strong&gt; which is its log probability:&lt;br /&gt;
+  $\text{score}(y_1, \ldots, y_t) = \log P_{LM}(y_1, \ldots, y_t|x) = \sum_{i=1}^t \log P_{LM}(y_i|y_1, \ldots, y_{i-1},x)$
+    &lt;ul&gt;
+      &lt;li&gt;Scores are all negative, and higher is better&lt;/li&gt;
+      &lt;li&gt;Search for high-scoring hypotheses, tracking top &lt;em&gt;k&lt;/em&gt; on each step&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Not guaranteed&lt;/strong&gt; to find optimal solution, but much more efficient&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Stopping criterion
+    &lt;ul&gt;
+      &lt;li&gt;In &lt;strong&gt;greedy decoding&lt;/strong&gt;, usually we decode until the model produces an &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;END&amp;gt;&lt;/code&gt; token&lt;/strong&gt; (“&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;START&amp;gt;&lt;/code&gt; &lt;em&gt;he hit me with a pie&lt;/em&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;END&amp;gt;&lt;/code&gt;”)&lt;/li&gt;
+      &lt;li&gt;In &lt;strong&gt;beam search decoding&lt;/strong&gt;, different hypotheses may produce &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;END&amp;gt;&lt;/code&gt; tokens on &lt;strong&gt;different timesteps&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;When a hypothesis produces &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;END&amp;gt;&lt;/code&gt;, that hypothesis is &lt;strong&gt;complete&lt;/strong&gt;.&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;Place it aside&lt;/strong&gt; and continue exploring other hypotheses via beam search.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Usually continue beam search until:
+        &lt;ul&gt;
+          &lt;li&gt;We reach timestep &lt;em&gt;T&lt;/em&gt; or we have at least &lt;em&gt;n&lt;/em&gt; completed hypotheses (where &lt;em&gt;T&lt;/em&gt; and &lt;em&gt;n&lt;/em&gt; are some pre-defined cutoff)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Finishing up
+    &lt;ul&gt;
+      &lt;li&gt;We have our list of completed hypotheses. Then how to select top one with highest score?&lt;/li&gt;
+      &lt;li&gt;Each hypothesis $y_1,\ldots, y_t$ on our list has a score:&lt;br /&gt;
+  \(\text{score}(y_1, \ldots, y_t) = \log P_{LM}(y_1, \ldots, y_t|x) = \sum_{i=1}^t \log P_{LM}(y_i|y_1, \ldots, y_{i-1},x)\)&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Problem: longer hypotheses have lower scores&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;Fix: Normalize by length.&lt;br /&gt;
+  \(\frac{1}{t}\sum_{i=1}^t \log P_{LM}(y_i|y_1, \ldots, y_{i-1},x)\)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;advantages-of-nmt&quot;&gt;Advantages of NMT&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Better &lt;strong&gt;performance&lt;/strong&gt;:&lt;br /&gt;
+  More &lt;strong&gt;fluent&lt;/strong&gt;&lt;br /&gt;
+  Better use of &lt;strong&gt;context&lt;/strong&gt;&lt;br /&gt;
+  Better use of &lt;strong&gt;phrase similarities&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A &lt;strong&gt;single neural network&lt;/strong&gt; to be optimized end-to-end&lt;br /&gt;
+  No subcomponents to be individually optimized&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Requires much less &lt;strong&gt;human engineering effort&lt;/strong&gt;&lt;br /&gt;
+  No feature engineering&lt;br /&gt;
+  Same method for all language pairs&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;disadvantages-of-nmt&quot;&gt;Disadvantages of NMT&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Less interpretable&lt;/strong&gt;&lt;br /&gt;
+  Hard to debug&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Difficult to control&lt;/strong&gt;&lt;br /&gt;
+  For example, can’t easily specify rules or guidelines for translation&lt;br /&gt;
+  Safety concerns&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-do-we-evaluate-machine-translation&quot;&gt;How do we evaluate Machine Translation?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;BLEU&lt;/strong&gt; (Bilingual Evaluation Understudy)&lt;br /&gt;
+  Compares the machine-written translation to one or several human-written translation(s), and computes a &lt;strong&gt;similarity score&lt;/strong&gt; based on:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;n&lt;/em&gt;-gram precision (usually 1 to 4)&lt;/li&gt;
+      &lt;li&gt;Plus a penalty for too-short system translations&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Useful but imperfect&lt;br /&gt;
+  There are many valid ways to translate a sentence&lt;br /&gt;
+  So a good translation can get a poor BLEU score because it has low &lt;em&gt;n&lt;/em&gt;-gram overlap with the human translation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;mt-progress-over-time&quot;&gt;MT progress over time&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_5.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NMT: perhaps the biggest success story of NLP Deep Learning?&lt;br /&gt;
+  Neural Machine Translation went from a &lt;strong&gt;fringe research attempt&lt;/strong&gt; in 2014 to the &lt;strong&gt;leading standard method&lt;/strong&gt; in 2016
+    &lt;ul&gt;
+      &lt;li&gt;2014: First seq2seq paper published&lt;/li&gt;
+      &lt;li&gt;2016: Google Translate switches from SMT to NMT – and by 2018 everyone has&lt;/li&gt;
+      &lt;li&gt;SMT systems, built by hundreds of engineers over many years, outperformed by NMT systems trained by a &lt;strong&gt;small group&lt;/strong&gt; of engineers in a few &lt;strong&gt;months&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Many difficulties remain:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Out-of-vocabulary&lt;/strong&gt; words&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Domain mismatch&lt;/strong&gt; between train and test data&lt;/li&gt;
+      &lt;li&gt;Maintaining &lt;strong&gt;context&lt;/strong&gt; over longer text&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Low-resource&lt;/strong&gt; language pairs&lt;/li&gt;
+      &lt;li&gt;Failures to accurately capture &lt;strong&gt;sentence meaning&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Pronoun&lt;/strong&gt; (or &lt;strong&gt;zero pronoun&lt;/strong&gt;) &lt;strong&gt;resolution&lt;/strong&gt; errors&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Morphological agreement&lt;/strong&gt; errors&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Bias&lt;/strong&gt; in training data&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;attention&quot;&gt;ATTENTION&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_6.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Information bottlenect: the last hidden state of encoder RNN needs to capture &lt;em&gt;all information&lt;/em&gt; about the source sentence.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Core idea: on each step of the decoder, &lt;strong&gt;use direct connection to the encoder&lt;/strong&gt; to &lt;strong&gt;focus on a particular part&lt;/strong&gt; of the source sequence&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Each step, dot products a decoder hidden state to all encoder hidden states and get &lt;em&gt;Attention scores&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Take softmax to turn scores into &lt;em&gt;Attention distribution&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Using this distribution, take a &lt;strong&gt;weighted sum&lt;/strong&gt; of the encoder hidden states to calculate &lt;em&gt;Attention output&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Concatenate with decoder hidden state, predict $\hat{y_i}$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_7.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="cs224n" /><summary type="html">New Task: Machine Translation Pre-Neural Machine Translation Machine Translation (MT) is the task of translating a sentence x from one language (the source language) to a sentence y in another language (the target language). 1990s-2010s: Statistical Machine Translation Core idea: Learn a probabilistic model from data Find best translated sentence y, given sentence x $\text{argmax}_y P(y|x)$ Use Bayes Rule to break this down into two components to be learned separately: $= \text{argmax}_y P(x|y)P(y)$ $P(x\vert y)$: Translation model that models how words and phrases should be translated (fidelity); Learnt from parallel data. $P(y)$: Language Model that models how to write good English (fluency). Learnt from monolingual data. Question: How to learn translation model $P(x\vert y)$? First, need large amount of parallel data (e.g., pairs of human-translated French/English sentences) Learning alignment for SMT Question: How to learn translation model $P(x\vert y)$ from the parallel corpus? Break it down further: Introduce latent a variable into the model: $P(x, a|y)$ where a is the alignment, i.e. word-level correspondence between source sentence x and target sentence y Alignment is the correspondence between particular words in the translated sentence pair, capturing the grammatical differences between languages. Typological differences lead to complicated alignments. Alignment is complex: Some words have no counterpart Alignment can be many-to-one, one-to-many, or many-to-many(phrase-level) We learn $P(x, a\vert y)$ as a combination of many factors, including: Probability of particular words aligning (also depends on position in sent) Probability of particular words having a particular fertility (number of corresponding words) etc. Alignments a are latent variables: They aren’t explicitly specified in the data Require the use of special learning algorithms (like Expectation-Maximization) for learning the parameters of distributions with latent variables Decoding for SMT How to compute $\text{argmax}_y$? Translation Model $P(x\vert y)$ Language Model $P(y)$ Enumerating every possible y and calculate the probability is too expensive; $\rightarrow$ Impose strong independence assumptions in model, use dynamic programming for globally optimal solutions (e.g. Viterbi algorithm). This process is called decoding. about SMT SMT was a huge research field The best systems were extremely complex Hundreds of important details we haven’t mentioned here Systems had many separately-designed subcomponents Lots of feature engineering; need to design features to capture particular language phenomena Require compiling and maintaining extra resources (like tables of equivalent phrases) Lots of human effort to maintain; repeated effort for each language pair Fairly successful, Google Translate launched in mid 2000s. Neural Machine Translation (2014~) Neural Machine Translation (NMT) is a way to do Machine Translation with a single end-to-end neural network The neural network architecture is called a sequence-to-sequence model (aka seq2seq) and it involves two RNNs Sequence-to-sequence Model (Note: This diagram shows test time behavior: decoder output is fed in as next step’s input) Sequence-to-sequence is useful for more than just MT Many NLP tasks can be phrased as sequence-to-sequence: Summarization (long text $\rightarrow$ short text) Dialogue (previous utterances $\rightarrow$ next utterance) Parsing (input text $\rightarrow$ output parse as sequence) Code generation (natural language $\rightarrow$ Python code) An example of a Conditional Language Model Language Model because the decoder is predicting the next word of the target sentence y Conditional because its prediction are also conditioned on the source sentence x NMT directly calculates $P(y\vert x)$: $P(y|x) = P(y_1|x)P(y_2|y_1,x)P(y_3|y_1,y_2,x)\ldots P(y_T|y_1,\ldots, y_{T-1}, x)$ Question: How to train a NMT system? Training a Neural Machine Translation system End-to-End: update all of the parameters of the both encoder and decoder. Multi-layer RNNs RNNs are already “deep” on one dimension (they unroll horizontally over many timesteps), but shallow; a single layer of recurrent structure about the sentences. We can also make them “deep” in another dimension by applying multiple RNNs - a multi-layer RNN(or stacked RNNs). This allows the network to compute more complex representations; The lower RNNs should compute lower-level features and the higher RNNs should compute higher-level features. It’s not same: four LSTMs with a hidden state 500 each are more powerful than one 2000 layer LSTM (though we have the same number of parameters roughly). Multi-layer deep encoder-decoder machine translation net Multi-layer RNNs in practice High-performing RNNs are usually multi-layer (but aren’t as deep as convolutional or feed-forward networks) For example: In a 2017 paper, (“Massive Exploration of Neural Machine Translation Architecutres”, Britz et al.) find that for Neural Machine Translation, 2 to 4 layers is best for the encoder RNN, and 4 layers is best for the decoder RNN Often 2 layers is a lot better than 1, and 3 might be a little better than 2 (rules of thumb) Usually, skip-connections/dense-connections are needed to train deeper RNNs (e.g., 8 layers) Transformer-based networks (e.g., BERT) are usually deeper, like 12 or 24 layers having a lot of skipping-like connections. Greedy Decoding Greedy decoding(take most probable word on each step) is what we saw so far; taking argmax on each step of the decoder Problem: has no way to undo decisions Exhaustive search decoding Ideally, we want to find a (length T) translation y that maximizes \(\begin{align*} P(y|x) &amp;amp;= P(y_1|x)P(y_2|y_1,x)P(y_3|y_1,y_2,x)\ldots P(y_T|y_1,\ldots, y_{T-1}, x) \\ &amp;amp;= \prod_{t=1}^T P(y_t|y_1,\ldots,y_{t-1},x) \end{align*}\) We could try computing all possible sequences y This means that on each step t of the decoder, we’re tracking $V^t$ possible partial translations, where V is vocab size This $O(V^T)$ complexity is far too expensive Beam search decoding Core idea: On each step of decoder, keep track of the k most probable partial translations (which we call hypotheses) k is the beam size (in practice around 5 to 10) A hypothesis $y_1, \ldots, y_t$ has a score which is its log probability: $\text{score}(y_1, \ldots, y_t) = \log P_{LM}(y_1, \ldots, y_t|x) = \sum_{i=1}^t \log P_{LM}(y_i|y_1, \ldots, y_{i-1},x)$ Scores are all negative, and higher is better Search for high-scoring hypotheses, tracking top k on each step Not guaranteed to find optimal solution, but much more efficient Stopping criterion In greedy decoding, usually we decode until the model produces an &amp;lt;END&amp;gt; token (“&amp;lt;START&amp;gt; he hit me with a pie &amp;lt;END&amp;gt;”) In beam search decoding, different hypotheses may produce &amp;lt;END&amp;gt; tokens on different timesteps When a hypothesis produces &amp;lt;END&amp;gt;, that hypothesis is complete. Place it aside and continue exploring other hypotheses via beam search. Usually continue beam search until: We reach timestep T or we have at least n completed hypotheses (where T and n are some pre-defined cutoff) Finishing up We have our list of completed hypotheses. Then how to select top one with highest score? Each hypothesis $y_1,\ldots, y_t$ on our list has a score: \(\text{score}(y_1, \ldots, y_t) = \log P_{LM}(y_1, \ldots, y_t|x) = \sum_{i=1}^t \log P_{LM}(y_i|y_1, \ldots, y_{i-1},x)\) Problem: longer hypotheses have lower scores Fix: Normalize by length. \(\frac{1}{t}\sum_{i=1}^t \log P_{LM}(y_i|y_1, \ldots, y_{i-1},x)\) Advantages of NMT Better performance: More fluent Better use of context Better use of phrase similarities A single neural network to be optimized end-to-end No subcomponents to be individually optimized Requires much less human engineering effort No feature engineering Same method for all language pairs Disadvantages of NMT Less interpretable Hard to debug Difficult to control For example, can’t easily specify rules or guidelines for translation Safety concerns How do we evaluate Machine Translation? BLEU (Bilingual Evaluation Understudy) Compares the machine-written translation to one or several human-written translation(s), and computes a similarity score based on: n-gram precision (usually 1 to 4) Plus a penalty for too-short system translations Useful but imperfect There are many valid ways to translate a sentence So a good translation can get a poor BLEU score because it has low n-gram overlap with the human translation MT progress over time NMT: perhaps the biggest success story of NLP Deep Learning? Neural Machine Translation went from a fringe research attempt in 2014 to the leading standard method in 2016 2014: First seq2seq paper published 2016: Google Translate switches from SMT to NMT – and by 2018 everyone has SMT systems, built by hundreds of engineers over many years, outperformed by NMT systems trained by a small group of engineers in a few months Many difficulties remain: Out-of-vocabulary words Domain mismatch between train and test data Maintaining context over longer text Low-resource language pairs Failures to accurately capture sentence meaning Pronoun (or zero pronoun) resolution errors Morphological agreement errors Bias in training data ATTENTION Information bottlenect: the last hidden state of encoder RNN needs to capture all information about the source sentence. Core idea: on each step of the decoder, use direct connection to the encoder to focus on a particular part of the source sequence Each step, dot products a decoder hidden state to all encoder hidden states and get Attention scores Take softmax to turn scores into Attention distribution Using this distribution, take a weighted sum of the encoder hidden states to calculate Attention output Concatenate with decoder hidden state, predict $\hat{y_i}$</summary></entry><entry><title type="html">cs224n - Lecture 6. Simple and LSTM RNNs</title><link href="http://0.0.0.0:4000/cs224n_lec6" rel="alternate" type="text/html" title="cs224n - Lecture 6. Simple and LSTM RNNs" /><published>2022-03-20T00:00:00+00:00</published><updated>2022-03-20T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec6</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec6">&lt;h3 id=&quot;the-simple-rnn-language-model&quot;&gt;The Simple RNN Language Model&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec5_13.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;training-an-rnn-language-model&quot;&gt;Training an RNN Language Model&lt;/h3&gt;
@@ -1831,274 +2153,4 @@ J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substac
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;iframe src=&quot;https://www.kaggle.com/embed/kwondalhyeon/starfish-detection-w-tf-object-detection-api?kernelSessionId=87885389&quot; height=&quot;1200&quot; style=&quot;margin: 0 auto; width: 100%; max-width: 100%;&quot; frameborder=&quot;0&quot; scrolling=&quot;auto&quot; title=&quot;Starfish detection w/ TF Object Detection API&quot;&gt;&lt;/iframe&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">TensorFlow - Help Protect the Great Barrier Reef Worked in Feb. 2022. to study object detection model Task: Underwater + Small object detection Score(IoU=0.50:0.95): mAP@100: 0.364686 / AR@100: 0.491768 / Expected F2: 0.459727 Direct link: kaggle notebook</summary></entry><entry><title type="html">cs231n - Lecture 15. Detection and Segmentation</title><link href="http://0.0.0.0:4000/cs231n_lec15" rel="alternate" type="text/html" title="cs231n - Lecture 15. Detection and Segmentation" /><published>2022-02-07T00:00:00+00:00</published><updated>2022-02-07T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs231n_lec15</id><content type="html" xml:base="http://0.0.0.0:4000/cs231n_lec15">&lt;h3 id=&quot;computer-vision-tasks&quot;&gt;Computer Vision Tasks&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Image Classification: No spatial extent&lt;/li&gt;
-  &lt;li&gt;Semantic Segmentation: No objects, just pixels&lt;/li&gt;
-  &lt;li&gt;Object Detection/ Instance Segmentation: Multiple objects&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;semantic-segmentation&quot;&gt;Semantic Segmentation&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Paired training data:&lt;br /&gt;
-  For each training image, &lt;strong&gt;each pixel is labeled&lt;/strong&gt; with a semantic category.&lt;/li&gt;
-  &lt;li&gt;At test time, classify each pixel of a new image.&lt;/li&gt;
-  &lt;li&gt;Problem:&lt;br /&gt;
-  Classifying with only single pixel does not include context information.&lt;/li&gt;
-  &lt;li&gt;Idea:
-    &lt;ul&gt;
-      &lt;li&gt;Sliding Window&lt;br /&gt;
-  Extract patch from full image, classify center pixel with CNN.&lt;br /&gt;
-  $\color{red}{(-)}$ Very inefficient, not reusing shared features between overlapping patches.&lt;/li&gt;
-      &lt;li&gt;Convolution&lt;br /&gt;
-  Encode the entire image with conv net, and do semantic segmentation on top.&lt;br /&gt;
-  $\color{red}{(-)}$ CNN architectures often change the spatial sizes, but semantic segmentation requires the output size to be same as input size.&lt;/li&gt;
-      &lt;li&gt;Fully Convolutional&lt;br /&gt;
-  Design a network with &lt;strong&gt;only&lt;/strong&gt; convolutional layers without downsampling operators&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec15_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
-  $\color{red}{(-)}$ convolutions at original image resolution is very expensive&lt;br /&gt;
-  $\rightarrow$ Design convolutional network with &lt;strong&gt;downsampling and upsampling&lt;/strong&gt;&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec15_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Downsampling: Pooling, strided convolution&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;In-Network Upsampling: Unpooling, strided transpose convolution&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Unpooling:&lt;br /&gt;
-  Nearest Neighbor: copy-paste to extended region&lt;br /&gt;
-  “Bed of Nails”: no positional argument, pad with zeros&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Max Unpooling: use positions from poolying layer ahead, pad with zeros&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Learnable Downsampling: Strided convolution&lt;br /&gt;
-  Output is a dot product between filter and input&lt;br /&gt;
-  Stride gives ratio between movement in input and output&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Learnable Upsampling: Transposed convolution&lt;br /&gt;
-  Input gives weight for filter&lt;br /&gt;
-  Output contains copies of the filter weighted by the input, summing at where at overlaps in the output&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec15_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Summary&lt;br /&gt;
-  Label each pixel in the image with a category label&lt;br /&gt;
-  Don’t differentiate instances, only care about pixels&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;object-detection&quot;&gt;Object Detection&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Multiple Objects:&lt;br /&gt;
-  Each image needs a different number of outputs;&lt;br /&gt;
-  $\rightarrow$ Apply a CNN to many different crops of the image, CNN classifies each crop as object or background.&lt;br /&gt;
-  $\color{red}{(-)}$ Need to apply CNN to huge number of locations, scales, and aspect ratios, very computationally expensive.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;r-cnn&quot;&gt;R-CNN&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_4.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;Girshick et al, “Rich feature hierarchies for accurate object detection and
-semantic segmentation”, CVPR 2014&lt;/em&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;2-stage Detector: Region Proposal + Region Classification
-    &lt;ol&gt;
-      &lt;li&gt;Image as input&lt;/li&gt;
-      &lt;li&gt;Crop bounding boxes with Selective Search&lt;br /&gt;
- Warp into same size pixels for CNN model&lt;/li&gt;
-      &lt;li&gt;Input Warped images into CNN&lt;/li&gt;
-      &lt;li&gt;Run classification on each&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Algorithm:
-    &lt;ol&gt;
-      &lt;li&gt;Region Proposals: Selective Search&lt;br /&gt;
- Find “blobby” image regions that are likely to contain objects.&lt;br /&gt;
- Relatively fast to run; e.g. Selective Search gives 2000 region proposals in a few seconds on CPU.&lt;/li&gt;
-      &lt;li&gt;CNN:&lt;br /&gt;
- For a pre-trained CNN architecture, change the number of classes on the last classification layer(detection classes &lt;em&gt;N&lt;/em&gt; + background &lt;em&gt;1&lt;/em&gt;), fine-tune with dataset for Object Detection. From the region proposal input, outputs a fixed-length feature vector.&lt;/li&gt;
-      &lt;li&gt;SVM: Category-Specific Linear SVMs&lt;br /&gt;
- Positive: ground-truth boxes&lt;br /&gt;
- Negative: IoU under 0.3&lt;br /&gt;
- Scores each feature vector for classes, classifies whether each one is positive/negative(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;is_object&lt;/code&gt;).&lt;/li&gt;
-      &lt;li&gt;Non-Maximum Suppression: with concept of &lt;strong&gt;IoU&lt;/strong&gt;&lt;br /&gt;
- Intersection over Union; area of intersection divided by area of union&lt;br /&gt;
- If there are two boxes with IoU over 0.5, consider them proposed on the same object, leave one with the highest score.&lt;/li&gt;
-      &lt;li&gt;Bounding Box Regression: adjust boxes from Selective Search
-        &lt;ul&gt;
-          &lt;li&gt;Algorithm:&lt;br /&gt;
- Assume a bounding box $P^i = (P_x^i, P_y^i, P_w^i, P_h^i)$,&lt;br /&gt;
- Ground-truth box $G = (G_x, G_y, G_w, G_h)$.&lt;br /&gt;
- Define a function $d$, mapping $P$ close to $G$;&lt;br /&gt;
- \(\hat{G}_x = P_w d_x(P) + P_x\)&lt;br /&gt;
- \(\hat{G}_y = P_h d_y(P) + P_y\)&lt;br /&gt;
- \(\hat{G}_w = P_w \mbox{exp}(d_w(P))\)&lt;br /&gt;
- \(\hat{G}_h = P_h \mbox{exp}(d_h(P))\)&lt;br /&gt;
- where $d_{\star}(P) = w_{\star}^T \phi_5(P)$, is modeled as a linear function(learnable weight vector &lt;em&gt;w&lt;/em&gt;) of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POOL5&lt;/code&gt; features of proposal &lt;em&gt;P&lt;/em&gt;($\phi_5(P)$). We learn $w_{\star}$ by optimizing the regularized least squares objective(Ridge regression)&lt;br /&gt;
-  &lt;em&gt;Learnable parameters on: 2, 3, 5&lt;/em&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Summary:&lt;br /&gt;
-  Score: 53.7% on Pascal VOC 2010&lt;br /&gt;
-  Problem:&lt;br /&gt;
-      1. Low Performance; Warping images into 224x224 size for AlexNet&lt;br /&gt;
-      2. Slow; Using all candidates from Selective Search&lt;br /&gt;
-      3. Not GPU-optimized; Using Selective Search and SVM&lt;br /&gt;
-      4. No Back Propagation; Not sharing computations&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;fast-r-cnn&quot;&gt;Fast R-CNN&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_5.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;Girshick, “Fast R-CNN”, ICCV 2015&lt;/em&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;idea:&lt;br /&gt;
-  Pass the image through convnet &lt;strong&gt;before&lt;/strong&gt; cropping. Crop the conv feature instead.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Algorithm:
-    &lt;ol&gt;
-      &lt;li&gt;Pass the full image through pre-trained CNN and extract feature maps.&lt;/li&gt;
-      &lt;li&gt;Get RoIs from a proposal method(Selective Search) and crop by RoI Pooling, get fixed size feature vectors.&lt;/li&gt;
-      &lt;li&gt;With RoI feature vectors, pass some fully connected layers and split into two branches.&lt;/li&gt;
-      &lt;li&gt;1) pass softmax and classify the class of RoI. no SVM used. 2) Run bounding box regression.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Cropping Features: RoI Pool &lt;!--[](href) link to terminologies --&gt;
-    &lt;ol&gt;
-      &lt;li&gt;Project RoI proposals(on input image) onto CNN image features.&lt;/li&gt;
-      &lt;li&gt;Divide into subregions.&lt;/li&gt;
-      &lt;li&gt;Run pooling(Max-pool) within each subregion.&lt;br /&gt;
-  $\rightarrow$ Region features always be the same size regardless of input region size&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;faster-r-cnn&quot;&gt;Faster R-CNN&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_6.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;Ren et al, “Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks”, NIPS 2015&lt;/em&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;idea:&lt;br /&gt;
-  Fast R-CNN is not GPU-optimized; runtime dominated by region proposals.&lt;br /&gt;
-  By inserting Region Proposal Network(RPN), implemented end-to-end architecture.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Algorithm:
-    &lt;ol&gt;
-      &lt;li&gt;Pass the full image through pre-trained CNN and extract feature maps.&lt;/li&gt;
-      &lt;li&gt;RPN:&lt;br /&gt;
- For &lt;em&gt;K&lt;/em&gt; different anchor boxes of different size and scale at each point in the feature map, predict whether it contains an object(binary classification), and also predict a corrections from the anchor to the ground-truth box(regress 4 numbers per pixel).&lt;br /&gt;
- &lt;img src=&quot;/assets/images/cs231n_lec15_7.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;Jointly train with 4 losses:&lt;br /&gt;
- 1) RPN classify object / not object&lt;br /&gt;
- 2) RPN regress box coordinates&lt;br /&gt;
- 3) Final classification score (object classes)&lt;br /&gt;
- 4) Final box coordinates&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Glossing over many details:
-    &lt;ul&gt;
-      &lt;li&gt;Ignore overlapping proposals with non-max suppression&lt;/li&gt;
-      &lt;li&gt;How are anchors determined?&lt;/li&gt;
-      &lt;li&gt;How do we sample positive / negative samples for training the RPN?&lt;/li&gt;
-      &lt;li&gt;How to parameterize bounding box regression?&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Two-stage object detector:
-    &lt;ul&gt;
-      &lt;li&gt;First stage: Run once per image
-        &lt;ul&gt;
-          &lt;li&gt;Backbone network&lt;/li&gt;
-          &lt;li&gt;Region proposal network(RPN)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Second stage: Run once per region
-        &lt;ul&gt;
-          &lt;li&gt;Crop features: RoI pool/ align&lt;/li&gt;
-          &lt;li&gt;Predict object class&lt;/li&gt;
-          &lt;li&gt;Prediction bbox offset&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;single-stage-object-detectors-yolo--ssd--retinanet&quot;&gt;Single-Stage Object Detectors: YOLO / SSD / RetinaNet&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Algorithm:
-    &lt;ol&gt;
-      &lt;li&gt;Divide input imgae into grid&lt;/li&gt;
-      &lt;li&gt;Image a set of &lt;strong&gt;base boxes&lt;/strong&gt; centered at each grid cell&lt;/li&gt;
-      &lt;li&gt;Within each grid cell:
-        &lt;ul&gt;
-          &lt;li&gt;Regress from each of the &lt;em&gt;B&lt;/em&gt; base boxes to a final box with 5 numbers(dx, dy, dh, dw, confidence)&lt;/li&gt;
-          &lt;li&gt;Predict scores for each of &lt;em&gt;C&lt;/em&gt; classes(including background as a class)&lt;/li&gt;
-          &lt;li&gt;Looks a lot like RPN, but category-specific&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_8.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;instance-segmentation-mask-r-cnn&quot;&gt;Instance Segmentation: Mask R-CNN&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;He et al, “Mask R-CNN”, ICCV 2017&lt;br /&gt;
-&lt;img src=&quot;/assets/images/cs231n_lec15_9.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/images/cs231n_lec15_10.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/images/cs231n_lec15_11.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/images/cs231n_lec15_12.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/images/cs231n_lec15_13.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;open-source-frameworks&quot;&gt;Open Source Frameworks&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/tensorflow/models/tree/master/research/object_detection&quot;&gt;TensorFlow Detection API&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://github.com/facebookresearch/detectron2&quot;&gt;Detectron2(Pytorch)&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;beyond-2d-object-detection&quot;&gt;Beyond 2D Object Detection&lt;/h2&gt;
-
-&lt;h3 id=&quot;object-detection--captioning-dense-captioning&quot;&gt;Object Detection + Captioning: Dense Captioning&lt;/h3&gt;
-
-&lt;h3 id=&quot;dense-video-captioning-timestep-t&quot;&gt;Dense Video Captioning: timestep “T”&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_14.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;objects--relationships-scene-graphs&quot;&gt;Objects + Relationships: Scene Graphs&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_15.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/images/cs231n_lec15_16.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;3d-object-detection&quot;&gt;3D Object Detection&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/cs231n_lec15_17.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;2D bounding box: (x, y, w, h)&lt;br /&gt;
-  $\rightarrow$ 3D oriented bounding box: (x, y, z, w, h, l, r, p, y)&lt;br /&gt;
-  $\rightarrow$ Simplified bbox: no roll &amp;amp; pitch&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Simple Camera Model:&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec15_18.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;br /&gt;
-  A point on the image plane corresponds to a &lt;strong&gt;ray&lt;/strong&gt; in the 3D space&lt;br /&gt;
-  A 2D bounding box on an image is a &lt;strong&gt;frustrum&lt;/strong&gt; in the 3D space&lt;br /&gt;
-  Localize an object in 3D: The object can be anywhere in the &lt;strong&gt;camera viewing frustrum&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Monocular Camera:&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/cs231n_lec15_19.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;80%&quot; /&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Same idea as Faster RCNN, but proposals are in 3D&lt;/li&gt;
-      &lt;li&gt;3D bounding box proposal, regress 3D box parameters + class score&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;3D Shape Prediction: Mesh R-CNN
-&lt;img src=&quot;/assets/images/cs231n_lec15_20.png&quot; alt=&quot;png&quot; width=&quot;50%&amp;quot;, height=&amp;quot;80%&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs231n" /><summary type="html">Computer Vision Tasks Image Classification: No spatial extent Semantic Segmentation: No objects, just pixels Object Detection/ Instance Segmentation: Multiple objects Semantic Segmentation Paired training data: For each training image, each pixel is labeled with a semantic category. At test time, classify each pixel of a new image. Problem: Classifying with only single pixel does not include context information. Idea: Sliding Window Extract patch from full image, classify center pixel with CNN. $\color{red}{(-)}$ Very inefficient, not reusing shared features between overlapping patches. Convolution Encode the entire image with conv net, and do semantic segmentation on top. $\color{red}{(-)}$ CNN architectures often change the spatial sizes, but semantic segmentation requires the output size to be same as input size. Fully Convolutional Design a network with only convolutional layers without downsampling operators $\color{red}{(-)}$ convolutions at original image resolution is very expensive $\rightarrow$ Design convolutional network with downsampling and upsampling Downsampling: Pooling, strided convolution In-Network Upsampling: Unpooling, strided transpose convolution Unpooling: Nearest Neighbor: copy-paste to extended region “Bed of Nails”: no positional argument, pad with zeros Max Unpooling: use positions from poolying layer ahead, pad with zeros Learnable Downsampling: Strided convolution Output is a dot product between filter and input Stride gives ratio between movement in input and output Learnable Upsampling: Transposed convolution Input gives weight for filter Output contains copies of the filter weighted by the input, summing at where at overlaps in the output Summary Label each pixel in the image with a category label Don’t differentiate instances, only care about pixels Object Detection Multiple Objects: Each image needs a different number of outputs; $\rightarrow$ Apply a CNN to many different crops of the image, CNN classifies each crop as object or background. $\color{red}{(-)}$ Need to apply CNN to huge number of locations, scales, and aspect ratios, very computationally expensive. R-CNN Girshick et al, “Rich feature hierarchies for accurate object detection and semantic segmentation”, CVPR 2014 2-stage Detector: Region Proposal + Region Classification Image as input Crop bounding boxes with Selective Search Warp into same size pixels for CNN model Input Warped images into CNN Run classification on each Algorithm: Region Proposals: Selective Search Find “blobby” image regions that are likely to contain objects. Relatively fast to run; e.g. Selective Search gives 2000 region proposals in a few seconds on CPU. CNN: For a pre-trained CNN architecture, change the number of classes on the last classification layer(detection classes N + background 1), fine-tune with dataset for Object Detection. From the region proposal input, outputs a fixed-length feature vector. SVM: Category-Specific Linear SVMs Positive: ground-truth boxes Negative: IoU under 0.3 Scores each feature vector for classes, classifies whether each one is positive/negative(is_object). Non-Maximum Suppression: with concept of IoU Intersection over Union; area of intersection divided by area of union If there are two boxes with IoU over 0.5, consider them proposed on the same object, leave one with the highest score. Bounding Box Regression: adjust boxes from Selective Search Algorithm: Assume a bounding box $P^i = (P_x^i, P_y^i, P_w^i, P_h^i)$, Ground-truth box $G = (G_x, G_y, G_w, G_h)$. Define a function $d$, mapping $P$ close to $G$; \(\hat{G}_x = P_w d_x(P) + P_x\) \(\hat{G}_y = P_h d_y(P) + P_y\) \(\hat{G}_w = P_w \mbox{exp}(d_w(P))\) \(\hat{G}_h = P_h \mbox{exp}(d_h(P))\) where $d_{\star}(P) = w_{\star}^T \phi_5(P)$, is modeled as a linear function(learnable weight vector w) of the POOL5 features of proposal P($\phi_5(P)$). We learn $w_{\star}$ by optimizing the regularized least squares objective(Ridge regression) Learnable parameters on: 2, 3, 5 Summary: Score: 53.7% on Pascal VOC 2010 Problem: 1. Low Performance; Warping images into 224x224 size for AlexNet 2. Slow; Using all candidates from Selective Search 3. Not GPU-optimized; Using Selective Search and SVM 4. No Back Propagation; Not sharing computations Fast R-CNN Girshick, “Fast R-CNN”, ICCV 2015 idea: Pass the image through convnet before cropping. Crop the conv feature instead. Algorithm: Pass the full image through pre-trained CNN and extract feature maps. Get RoIs from a proposal method(Selective Search) and crop by RoI Pooling, get fixed size feature vectors. With RoI feature vectors, pass some fully connected layers and split into two branches. 1) pass softmax and classify the class of RoI. no SVM used. 2) Run bounding box regression. Cropping Features: RoI Pool Project RoI proposals(on input image) onto CNN image features. Divide into subregions. Run pooling(Max-pool) within each subregion. $\rightarrow$ Region features always be the same size regardless of input region size Faster R-CNN Ren et al, “Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks”, NIPS 2015 idea: Fast R-CNN is not GPU-optimized; runtime dominated by region proposals. By inserting Region Proposal Network(RPN), implemented end-to-end architecture. Algorithm: Pass the full image through pre-trained CNN and extract feature maps. RPN: For K different anchor boxes of different size and scale at each point in the feature map, predict whether it contains an object(binary classification), and also predict a corrections from the anchor to the ground-truth box(regress 4 numbers per pixel). Jointly train with 4 losses: 1) RPN classify object / not object 2) RPN regress box coordinates 3) Final classification score (object classes) 4) Final box coordinates Glossing over many details: Ignore overlapping proposals with non-max suppression How are anchors determined? How do we sample positive / negative samples for training the RPN? How to parameterize bounding box regression? Two-stage object detector: First stage: Run once per image Backbone network Region proposal network(RPN) Second stage: Run once per region Crop features: RoI pool/ align Predict object class Prediction bbox offset Single-Stage Object Detectors: YOLO / SSD / RetinaNet Algorithm: Divide input imgae into grid Image a set of base boxes centered at each grid cell Within each grid cell: Regress from each of the B base boxes to a final box with 5 numbers(dx, dy, dh, dw, confidence) Predict scores for each of C classes(including background as a class) Looks a lot like RPN, but category-specific Instance Segmentation: Mask R-CNN He et al, “Mask R-CNN”, ICCV 2017 Open Source Frameworks TensorFlow Detection API Detectron2(Pytorch) Beyond 2D Object Detection Object Detection + Captioning: Dense Captioning Dense Video Captioning: timestep “T” Objects + Relationships: Scene Graphs 3D Object Detection 2D bounding box: (x, y, w, h) $\rightarrow$ 3D oriented bounding box: (x, y, z, w, h, l, r, p, y) $\rightarrow$ Simplified bbox: no roll &amp;amp; pitch Simple Camera Model: A point on the image plane corresponds to a ray in the 3D space A 2D bounding box on an image is a frustrum in the 3D space Localize an object in 3D: The object can be anywhere in the camera viewing frustrum Monocular Camera: Same idea as Faster RCNN, but proposals are in 3D 3D bounding box proposal, regress 3D box parameters + class score 3D Shape Prediction: Mesh R-CNN</summary></entry></feed>
+&lt;iframe src=&quot;https://www.kaggle.com/embed/kwondalhyeon/starfish-detection-w-tf-object-detection-api?kernelSessionId=87885389&quot; height=&quot;1200&quot; style=&quot;margin: 0 auto; width: 100%; max-width: 100%;&quot; frameborder=&quot;0&quot; scrolling=&quot;auto&quot; title=&quot;Starfish detection w/ TF Object Detection API&quot;&gt;&lt;/iframe&gt;</content><author><name>Darron Kwon</name></author><category term="projects" /><summary type="html">TensorFlow - Help Protect the Great Barrier Reef Worked in Feb. 2022. to study object detection model Task: Underwater + Small object detection Score(IoU=0.50:0.95): mAP@100: 0.364686 / AR@100: 0.491768 / Expected F2: 0.459727 Direct link: kaggle notebook</summary></entry></feed>

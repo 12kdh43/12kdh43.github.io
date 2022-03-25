@@ -40,7 +40,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
 
 
 
-    <title>cs231n - Lecture 5. Convolutional Neural Networks</title>
+    <title>cs224n - Lecture 7. Translation, Seq2Seq, Attention</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -69,30 +69,30 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="" />
     <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
-    <link rel="canonical" href="http://0.0.0.0:4000/cs231n_lec5" />
+    <link rel="canonical" href="http://0.0.0.0:4000/cs224n_lec7" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="cs231n - Lecture 5. Convolutional Neural Networks" />
-    <meta property="og:description" content="Convolutional Neural Networks ConvNets are everywhere Classification, Retrieval, Detection, Segmentation, Image Captioning, etc. Recap: Fully Connected Layer $32\times 32\times 3$ image $\rightarrow$ stretch to $3072\times 1$ Then a dot product of $3072\times 1$ input x and scoring weights W, Wx is in $10 \times 3072$. With some activation function, we" />
-    <meta property="og:url" content="http://0.0.0.0:4000/cs231n_lec5" />
+    <meta property="og:title" content="cs224n - Lecture 7. Translation, Seq2Seq, Attention" />
+    <meta property="og:description" content="New Task: Machine Translation Pre-Neural Machine Translation Machine Translation (MT) is the task of translating a sentence x from one language (the source language) to a sentence y in another language (the target language). 1990s-2010s: Statistical Machine Translation Core idea: Learn a probabilistic model from data Find best translated sentence" />
+    <meta property="og:url" content="http://0.0.0.0:4000/cs224n_lec7" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta property="article:author" content="https://www.facebook.com/" />
-    <meta property="article:published_time" content="2021-12-18T15:00:00+00:00" />
-    <meta property="article:modified_time" content="2021-12-18T15:00:00+00:00" />
-    <meta property="article:tag" content="cs231n" />
+    <meta property="article:published_time" content="2022-03-23T00:00:00+00:00" />
+    <meta property="article:modified_time" content="2022-03-23T00:00:00+00:00" />
+    <meta property="article:tag" content="cs224n" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="cs231n - Lecture 5. Convolutional Neural Networks" />
-    <meta name="twitter:description" content="Convolutional Neural Networks ConvNets are everywhere Classification, Retrieval, Detection, Segmentation, Image Captioning, etc. Recap: Fully Connected Layer $32\times 32\times 3$ image $\rightarrow$ stretch to $3072\times 1$ Then a dot product of $3072\times 1$ input x and scoring weights W, Wx is in $10 \times 3072$. With some activation function, we" />
+    <meta name="twitter:title" content="cs224n - Lecture 7. Translation, Seq2Seq, Attention" />
+    <meta name="twitter:description" content="New Task: Machine Translation Pre-Neural Machine Translation Machine Translation (MT) is the task of translating a sentence x from one language (the source language) to a sentence y in another language (the target language). 1990s-2010s: Statistical Machine Translation Core idea: Learn a probabilistic model from data Find best translated sentence" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Darron's Devlog" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="cs231n" />
+    <meta name="twitter:data2" content="cs224n" />
     <meta name="twitter:site" content="@" />
     <meta name="twitter:creator" content="@" />
     <meta property="og:image:width" content="1400" />
@@ -107,7 +107,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "name": "Darron's Devlog",
         "logo": "http://0.0.0.0:4000/"
     },
-    "url": "http://0.0.0.0:4000/cs231n_lec5",
+    "url": "http://0.0.0.0:4000/cs224n_lec7",
     "image": {
         "@type": "ImageObject",
         "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
@@ -116,9 +116,9 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://0.0.0.0:4000/cs231n_lec5"
+        "@id": "http://0.0.0.0:4000/cs224n_lec7"
     },
-    "description": "Convolutional Neural Networks ConvNets are everywhere Classification, Retrieval, Detection, Segmentation, Image Captioning, etc. Recap: Fully Connected Layer $32\times 32\times 3$ image $\rightarrow$ stretch to $3072\times 1$ Then a dot product of $3072\times 1$ input x and scoring weights W, Wx is in $10 \times 3072$. With some activation function, we"
+    "description": "New Task: Machine Translation Pre-Neural Machine Translation Machine Translation (MT) is the task of translating a sentence x from one language (the source language) to a sentence y in another language (the target language). 1990s-2010s: Statistical Machine Translation Core idea: Learn a probabilistic model from data Find best translated sentence"
 }
     </script>
 
@@ -131,7 +131,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="cs231n - Lecture 5. Convolutional Neural Networks" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="cs224n - Lecture 7. Translation, Seq2Seq, Attention" href="/feed.xml" />
 
 
 </head>
@@ -186,110 +186,352 @@ into the {body} of the default.hbs template -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
-        <article class="post-full  tag-cs231n  no-image">
+        <article class="post-full  tag-cs224n  no-image">
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="18 December 2021">18 December 2021</time>
+                    <time class="post-full-meta-date" datetime="23 March 2022">23 March 2022</time>
                     
                         <span class="date-divider">/</span>
                         
 							
                             
-                               <a href='/tag/cs231n/'>CS231N</a>
+                               <a href='/tag/cs224n/'>CS224N</a>
                             
                         
                     
                 </section>
-                <h1 class="post-full-title">cs231n - Lecture 5. Convolutional Neural Networks</h1>
+                <h1 class="post-full-title">cs224n - Lecture 7. Translation, Seq2Seq, Attention</h1>
             </header>
 	<!--
             
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h3 id="convolutional-neural-networks">Convolutional Neural Networks</h3>
+                    <h2 id="new-task-machine-translation">New Task: Machine Translation</h2>
+
+<h2 id="pre-neural-machine-translation">Pre-Neural Machine Translation</h2>
+<p><strong>Machine Translation (MT)</strong> is the task of translating a sentence <em>x</em> from one language (the <strong>source language</strong>) to a sentence <em>y</em> in another language (the <strong>target language</strong>).</p>
+
+<h3 id="1990s-2010s-statistical-machine-translation">1990s-2010s: Statistical Machine Translation</h3>
 <ul>
-  <li>
-    <p>ConvNets are everywhere<br />
-  Classification, Retrieval, Detection, Segmentation, Image Captioning, etc.</p>
+  <li>Core idea: Learn a <strong>probabilistic model</strong> from <strong>data</strong>
+    <ul>
+      <li>Find best translated sentence <em>y</em>, given sentence <em>x</em><br />
+  $\text{argmax}_y P(y|x)$</li>
+    </ul>
   </li>
-  <li>
-    <p>Recap: Fully Connected Layer<br />
-  $32\times 32\times 3$ image $\rightarrow$ stretch to $3072\times 1$<br />
-  Then a dot product of $3072\times 1$ input <em>x</em> and scoring weights <em>W</em>, <em>Wx</em> is in $10 \times 3072$. With some activation function, we can make classification scores in <em>10</em> classes.</p>
+  <li>Use <strong>Bayes Rule</strong> to break this down into <strong>two components</strong> to be learned separately:<br />
+  $= \text{argmax}_y P(x|y)P(y)$
+    <ul>
+      <li>$P(x\vert y)$: <strong>Translation model</strong> that models how words and phrases should be translated (<em>fidelity</em>); Learnt from parallel data.</li>
+      <li>$P(y)$: <strong>Language Model</strong> that models how to write good English (<em>fluency</em>). Learnt from monolingual data.</li>
+    </ul>
+  </li>
+  <li>Question: How to learn translation model $P(x\vert y)$?
+    <ul>
+      <li>First, need large amount of <strong>parallel data</strong><br />
+  (e.g., pairs of human-translated French/English sentences)</li>
+    </ul>
   </li>
 </ul>
 
-<h3 id="convolution-layer-preserve-spatial-structure">Convolution Layer: preserve spatial structure</h3>
+<h3 id="learning-alignment-for-smt">Learning alignment for SMT</h3>
 <ul>
   <li>
-    <p>Convolve the filter with the image, slide over the image spatially, computing dot products. Filters always extend the full depth of the input volume.<br />
-<img src="/assets/images/cs231n_lec5_0.png" alt="png" width="60%&quot;, height=&quot;60%" /><br />
-Convolve(slide) over all spatial locations, we can make an activation map of size $28\times 28\times 1$ for each convolution filter. For example, if we had <em>6</em> $5\times 5$ filters, we’ll get <em>6</em> separate activation maps. We stack these up to get a “new image” of size $28\times 28\times 6$.</p>
+    <p>Question: How to learn translation model $P(x\vert y)$ from the parallel corpus?</p>
   </li>
   <li>
-    <p>ConvNet is a sequence of Convolution Layers, interspersed with activation functions.<br />
-<img src="/assets/images/cs231n_lec5_1.png" alt="png" width="70%&quot;, height=&quot;70%" /><br />
-Input convolved repeatedly with filters shrinks volumes spatially. By each sequence, an image is processed from low-level features to high-level features. Shrinking too fast is not good, doesn’t work well.</p>
-  </li>
-  <li>
-    <p>We call the layer convolutional because it is related to convolution of two signals: \(f[x,y]*g[x,y]=\sum_{n_1=-\infty}^\infty \sum_{n_2=-\infty}^\infty f[n_1,n_2]\cdot g[x-n_1,y-n_2]\); elementwise multiplication and sum of a filter and the signal (image)</p>
-  </li>
-  <li>
-    <p>Zero pad the border:<br />
-  The data on the border of an image will be convolved only once with each filter, while the others on the center of an image will be treated several times. Zero padding is introduced to solve this problem.</p>
-  </li>
-  <li>
-    <p>General CONV layers:<br />
-  with $N\times N$ input, $F\times F$ filter, applied with stride <em>s</em>, pad with <em>p</em> pixel border, the output is <strong>$(N+2P-F)/s + 1$</strong></p>
-  </li>
-  <li>
-    <p>Example:<br />
-  Input volume <strong>$32\times 32\times 3$</strong><br />
-  <strong><em>10</em> $5\times 5$</strong> filters with stride <strong><em>1</em></strong>, pad <strong><em>2</em></strong></p>
-
-    <p>$\rightarrow$ Output volume size: $(32+2*2-5)/1+1=32$ spatially, so $32\times 32\times 10$.</p>
-
-    <p>$\rightarrow$ Number of parameters in this layer: each filter has $5\times 5\times 3+1=76$ parameters(<em>+1</em> for bias), thus for all <em>760</em> params.</p>
+    <p>Break it down further: Introduce latent <em>a</em> variable into the model:<br />
+  $P(x, a|y)$<br />
+  where <em>a</em> is the <strong>alignment</strong>, i.e. word-level correspondence between source sentence <em>x</em> and target sentence <em>y</em></p>
   </li>
 </ul>
 
-<p><img src="/assets/images/cs231n_lec5_1.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
+<p><img src="/assets/images/cs224n/lec7_0.png" alt="png" width="60%&quot;, height=&quot;100%" /></p>
 
-<ul>
-  <li>$1\times 1$ convolution layers used:<br />
-  To reduce the number of channels, so the number of parameters,<br />
-  Then we can perform a deeper layers(Bottleneck architecture).</li>
-</ul>
-
-<h3 id="pooling-layer">Pooling layer</h3>
 <ul>
   <li>
-    <p>Summarize the data in a partial space, into some representations<br />
-  Reducing output dimensions and the number of parameters<br />
-  Make it smaller and more manageable<br />
-  Operate over each activation map independently(downsampling)</p>
+    <p>Alignment is the <strong>correspondence between particular words</strong> in the translated sentence pair, capturing the grammatical differences between languages. <strong>Typological differences</strong> lead to complicated alignments.</p>
   </li>
   <li>
-    <p>e.g. max pool with $2\times 2$ filters and stride <em>2</em>, $4\times 4$ input reduced to $2\times 2$ output consisted of regional maximums.</p>
+    <p>Alignment is complex:<br />
+  Some words have <strong>no counterpart</strong><br />
+  Alignment can be <strong>many-to-one</strong>, <strong>one-to-many</strong>, or <strong>many-to-many</strong>(phrase-level)</p>
+  </li>
+  <li>We learn $P(x, a\vert y)$ as a combination of many factors, including:
+    <ul>
+      <li>Probability of particular words aligning (also depends on position in sent)</li>
+      <li>Probability of particular words having a particular fertility (number of corresponding words)</li>
+      <li>etc.</li>
+    </ul>
+  </li>
+  <li>Alignments <em>a</em> are <strong>latent variables</strong>: They aren’t explicitly specified in the data
+    <ul>
+      <li>Require the use of special learning algorithms (like Expectation-Maximization) for learning the parameters of distributions with latent variables</li>
+    </ul>
   </li>
 </ul>
 
-<h3 id="fully-connected-layer-fc-layer">Fully Connected Layer (FC layer)</h3>
+<h3 id="decoding-for-smt">Decoding for SMT</h3>
+<ol>
+  <li>How to compute $\text{argmax}_y$?</li>
+  <li>Translation Model $P(x\vert y)$</li>
+  <li>Language Model $P(y)$</li>
+</ol>
+
 <ul>
-  <li>Contains neurons that connect to the entire input volume, as in ordinary Neural
-Networks. Stacked and followed by some activations, finally we make predictions or classifications.</li>
+  <li>Enumerating every possible <em>y</em> and calculate the probability is too expensive;<br />
+  $\rightarrow$ Impose strong <strong>independence assumptions</strong> in model, use dynamic programming for globally optimal solutions (e.g. Viterbi algorithm). This process is called <strong><em>decoding</em></strong>.</li>
 </ul>
 
-<h3 id="summary">Summary</h3>
+<p><img src="/assets/images/cs224n/lec7_1.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<h3 id="about-smt">about SMT</h3>
 <ul>
-  <li>ConvNets stack CONV,POOL,FC layers</li>
-  <li>Trend towards smaller filters and deeper architectures</li>
-  <li>Trend towards getting rid of POOL/FC layers (just CONV)</li>
-  <li>Historically architectures looked like <code class="language-plaintext highlighter-rouge">[(CONV-RELU)*N-POOL?]*M-(FC-RELU)*K,SOFTMAX</code> where <em>N</em> is usually up to <em>~5</em>, <em>M</em> is large, $0\le K \le 2$.</li>
-  <li>but recent advances such as ResNet/GoogLeNet have challenged this paradigm</li>
+  <li>SMT was a huge research field</li>
+  <li>The best systems were extremely complex
+    <ul>
+      <li>Hundreds of important details we haven’t mentioned here</li>
+      <li>Systems had many separately-designed subcomponents</li>
+      <li>Lots of feature engineering; need to design features to capture particular language phenomena</li>
+      <li>Require compiling and maintaining extra resources (like tables of equivalent phrases)</li>
+      <li>Lots of human effort to maintain; repeated effort for each language pair</li>
+      <li>Fairly successful, <em>Google Translate</em> launched in mid 2000s.</li>
+    </ul>
+  </li>
 </ul>
+
+<h2 id="neural-machine-translation-2014">Neural Machine Translation (2014~)</h2>
+<ul>
+  <li>
+    <p><strong>Neural Machine Translation (NMT)</strong> is a way to do Machine Translation with a <em>single end-to-end neural network</em></p>
+  </li>
+  <li>
+    <p>The neural network architecture is called a <strong>sequence-to-sequence</strong> model (aka <strong>seq2seq</strong>) and it involves <strong>two RNNs</strong></p>
+  </li>
+</ul>
+
+<h3 id="sequence-to-sequence-model">Sequence-to-sequence Model</h3>
+<p><img src="/assets/images/cs224n/lec7_2.png" alt="png" width="100%&quot;, height=&quot;100%" /><br />
+(Note: This diagram shows <strong>test time</strong> behavior: decoder output is fed in as next step’s input)</p>
+
+<ul>
+  <li>Sequence-to-sequence is useful for <strong>more than just MT</strong><br />
+  Many NLP tasks can be phrased as sequence-to-sequence:
+    <ul>
+      <li>Summarization (long text $\rightarrow$ short text)</li>
+      <li>Dialogue (previous utterances $\rightarrow$ next utterance)</li>
+      <li>Parsing (input text $\rightarrow$ output parse as sequence)</li>
+      <li>Code generation (natural language $\rightarrow$ Python code)</li>
+    </ul>
+  </li>
+  <li>An example of a <strong>Conditional Language Model</strong>
+    <ul>
+      <li><strong>Language Model</strong> because the decoder is predicting the next word of the target sentence <em>y</em></li>
+      <li><strong>Conditional</strong> because its prediction are <em>also</em> conditioned on the source sentence <em>x</em></li>
+    </ul>
+  </li>
+  <li>
+    <p>NMT directly calculates $P(y\vert x)$:<br />
+  $P(y|x) = P(y_1|x)P(y_2|y_1,x)P(y_3|y_1,y_2,x)\ldots P(y_T|y_1,\ldots, y_{T-1}, x)$</p>
+  </li>
+  <li>Question: How to <strong>train</strong> a NMT system?</li>
+</ul>
+
+<h3 id="training-a-neural-machine-translation-system">Training a Neural Machine Translation system</h3>
+<p><img src="/assets/images/cs224n/lec7_3.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+<ul>
+  <li>End-to-End: update all of the parameters of the both encoder and decoder.</li>
+</ul>
+
+<h3 id="multi-layer-rnns">Multi-layer RNNs</h3>
+<ul>
+  <li>RNNs are already “deep” on one dimension (they unroll horizontally over many timesteps), but shallow; a single layer of recurrent structure about the sentences.</li>
+  <li>We can also make them “deep” in another dimension by <strong>applying multiple RNNs</strong> -  a multi-layer RNN(or <strong>stacked RNNs</strong>). This allows the network to compute <strong>more complex representations</strong>; The lower RNNs should compute lower-level features and the higher RNNs should compute higher-level features.</li>
+  <li>It’s not same: four LSTMs with a hidden state 500 each are more powerful than one 2000 layer LSTM (though we have the same number of parameters roughly).</li>
+</ul>
+
+<h3 id="multi-layer-deep-encoder-decoder-machine-translation-net">Multi-layer deep encoder-decoder machine translation net</h3>
+<p><img src="/assets/images/cs224n/lec7_4.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<h3 id="multi-layer-rnns-in-practice">Multi-layer RNNs in practice</h3>
+<ul>
+  <li>
+    <p><strong>High-performing RNNs are usually multi-layer</strong> (but aren’t as deep as convolutional or feed-forward networks)</p>
+  </li>
+  <li>For example: In a 2017 paper, (<em>“Massive Exploration of Neural Machine Translation Architecutres”, Britz et al</em>.) find that for Neural Machine Translation, <strong>2 to 4 layers</strong> is best for the encoder RNN, and <strong>4 layers</strong> is best for the decoder RNN
+    <ul>
+      <li>Often 2 layers is a lot better than 1, and 3 might be a little better than 2 (rules of thumb)</li>
+      <li>Usually, <strong>skip-connections/dense-connections</strong> are needed to train deeper RNNs (e.g., 8 layers)</li>
+    </ul>
+  </li>
+  <li><strong>Transformer</strong>-based networks (e.g., BERT) are usually deeper, like <strong>12 or 24 layers</strong> having a lot of skipping-like connections.</li>
+</ul>
+
+<h3 id="greedy-decoding">Greedy Decoding</h3>
+<ul>
+  <li><strong>Greedy decoding</strong>(take most probable word on each step) is what we saw so far; taking argmax on each step of the decoder
+    <ul>
+      <li>Problem: has no way to undo decisions</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="exhaustive-search-decoding">Exhaustive search decoding</h3>
+<ul>
+  <li>
+    <p>Ideally, we want to find a (length <em>T</em>) translation <em>y</em> that maximizes<br />
+  \(\begin{align*}
+  P(y|x) &amp;= P(y_1|x)P(y_2|y_1,x)P(y_3|y_1,y_2,x)\ldots P(y_T|y_1,\ldots, y_{T-1}, x) \\
+  &amp;= \prod_{t=1}^T P(y_t|y_1,\ldots,y_{t-1},x)
+  \end{align*}\)</p>
+  </li>
+  <li>
+    <p>We could try computing <strong>all possible sequences</strong> <em>y</em></p>
+    <ul>
+      <li>This means that on each step <em>t</em> of the decoder, we’re tracking $V^t$ possible partial translations, where <em>V</em> is vocab size</li>
+      <li>This $O(V^T)$ complexity is <strong>far too expensive</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="beam-search-decoding">Beam search decoding</h3>
+<ul>
+  <li>Core idea: On each step of decoder, keep track of the <em>k most probable</em> partial translations (which we call <strong><em>hypotheses</em></strong>)
+    <ul>
+      <li><em>k</em> is the <strong>beam size</strong> (in practice around 5 to 10)</li>
+    </ul>
+  </li>
+  <li>A hypothesis $y_1, \ldots, y_t$ has a <strong>score</strong> which is its log probability:<br />
+  $\text{score}(y_1, \ldots, y_t) = \log P_{LM}(y_1, \ldots, y_t|x) = \sum_{i=1}^t \log P_{LM}(y_i|y_1, \ldots, y_{i-1},x)$
+    <ul>
+      <li>Scores are all negative, and higher is better</li>
+      <li>Search for high-scoring hypotheses, tracking top <em>k</em> on each step</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Not guaranteed</strong> to find optimal solution, but much more efficient</p>
+  </li>
+  <li>Stopping criterion
+    <ul>
+      <li>In <strong>greedy decoding</strong>, usually we decode until the model produces an <strong><code class="language-plaintext highlighter-rouge">&lt;END&gt;</code> token</strong> (“<code class="language-plaintext highlighter-rouge">&lt;START&gt;</code> <em>he hit me with a pie</em> <code class="language-plaintext highlighter-rouge">&lt;END&gt;</code>”)</li>
+      <li>In <strong>beam search decoding</strong>, different hypotheses may produce <code class="language-plaintext highlighter-rouge">&lt;END&gt;</code> tokens on <strong>different timesteps</strong>
+        <ul>
+          <li>When a hypothesis produces <code class="language-plaintext highlighter-rouge">&lt;END&gt;</code>, that hypothesis is <strong>complete</strong>.</li>
+          <li><strong>Place it aside</strong> and continue exploring other hypotheses via beam search.</li>
+        </ul>
+      </li>
+      <li>Usually continue beam search until:
+        <ul>
+          <li>We reach timestep <em>T</em> or we have at least <em>n</em> completed hypotheses (where <em>T</em> and <em>n</em> are some pre-defined cutoff)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Finishing up
+    <ul>
+      <li>We have our list of completed hypotheses. Then how to select top one with highest score?</li>
+      <li>Each hypothesis $y_1,\ldots, y_t$ on our list has a score:<br />
+  \(\text{score}(y_1, \ldots, y_t) = \log P_{LM}(y_1, \ldots, y_t|x) = \sum_{i=1}^t \log P_{LM}(y_i|y_1, \ldots, y_{i-1},x)\)</li>
+      <li><strong>Problem: longer hypotheses have lower scores</strong></li>
+      <li>Fix: Normalize by length.<br />
+  \(\frac{1}{t}\sum_{i=1}^t \log P_{LM}(y_i|y_1, \ldots, y_{i-1},x)\)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="advantages-of-nmt">Advantages of NMT</h3>
+<ul>
+  <li>
+    <p>Better <strong>performance</strong>:<br />
+  More <strong>fluent</strong><br />
+  Better use of <strong>context</strong><br />
+  Better use of <strong>phrase similarities</strong></p>
+  </li>
+  <li>
+    <p>A <strong>single neural network</strong> to be optimized end-to-end<br />
+  No subcomponents to be individually optimized</p>
+  </li>
+  <li>
+    <p>Requires much less <strong>human engineering effort</strong><br />
+  No feature engineering<br />
+  Same method for all language pairs</p>
+  </li>
+</ul>
+
+<h3 id="disadvantages-of-nmt">Disadvantages of NMT</h3>
+<ul>
+  <li>
+    <p><strong>Less interpretable</strong><br />
+  Hard to debug</p>
+  </li>
+  <li>
+    <p><strong>Difficult to control</strong><br />
+  For example, can’t easily specify rules or guidelines for translation<br />
+  Safety concerns</p>
+  </li>
+</ul>
+
+<h3 id="how-do-we-evaluate-machine-translation">How do we evaluate Machine Translation?</h3>
+<ul>
+  <li><strong>BLEU</strong> (Bilingual Evaluation Understudy)<br />
+  Compares the machine-written translation to one or several human-written translation(s), and computes a <strong>similarity score</strong> based on:
+    <ul>
+      <li><em>n</em>-gram precision (usually 1 to 4)</li>
+      <li>Plus a penalty for too-short system translations</li>
+    </ul>
+  </li>
+  <li>Useful but imperfect<br />
+  There are many valid ways to translate a sentence<br />
+  So a good translation can get a poor BLEU score because it has low <em>n</em>-gram overlap with the human translation</li>
+</ul>
+
+<h3 id="mt-progress-over-time">MT progress over time</h3>
+<p><img src="/assets/images/cs224n/lec7_5.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<ul>
+  <li>NMT: perhaps the biggest success story of NLP Deep Learning?<br />
+  Neural Machine Translation went from a <strong>fringe research attempt</strong> in 2014 to the <strong>leading standard method</strong> in 2016
+    <ul>
+      <li>2014: First seq2seq paper published</li>
+      <li>2016: Google Translate switches from SMT to NMT – and by 2018 everyone has</li>
+      <li>SMT systems, built by hundreds of engineers over many years, outperformed by NMT systems trained by a <strong>small group</strong> of engineers in a few <strong>months</strong></li>
+    </ul>
+  </li>
+  <li>Many difficulties remain:
+    <ul>
+      <li><strong>Out-of-vocabulary</strong> words</li>
+      <li><strong>Domain mismatch</strong> between train and test data</li>
+      <li>Maintaining <strong>context</strong> over longer text</li>
+      <li><strong>Low-resource</strong> language pairs</li>
+      <li>Failures to accurately capture <strong>sentence meaning</strong></li>
+      <li><strong>Pronoun</strong> (or <strong>zero pronoun</strong>) <strong>resolution</strong> errors</li>
+      <li><strong>Morphological agreement</strong> errors</li>
+      <li><strong>Bias</strong> in training data</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="attention">ATTENTION</h2>
+<p><img src="/assets/images/cs224n/lec7_6.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+<ul>
+  <li>
+    <p>Information bottlenect: the last hidden state of encoder RNN needs to capture <em>all information</em> about the source sentence.</p>
+  </li>
+  <li>
+    <p>Core idea: on each step of the decoder, <strong>use direct connection to the encoder</strong> to <strong>focus on a particular part</strong> of the source sequence</p>
+    <ul>
+      <li>Each step, dot products a decoder hidden state to all encoder hidden states and get <em>Attention scores</em></li>
+      <li>Take softmax to turn scores into <em>Attention distribution</em></li>
+      <li>Using this distribution, take a <strong>weighted sum</strong> of the encoder hidden states to calculate <em>Attention output</em></li>
+      <li>Concatenate with decoder hidden state, predict $\hat{y_i}$</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec7_7.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
 
                 </div>
             </section>
@@ -339,9 +581,9 @@ Networks. Stacked and followed by some activations, finally we make predictions 
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function () {
-                            var this_page_url = 'http://0.0.0.0:4000/cs231n_lec5';
-                            var this_page_identifier = '/cs231n_lec5';
-                            var this_page_title = 'cs231n - Lecture 5. Convolutional Neural Networks';
+                            var this_page_url = 'http://0.0.0.0:4000/cs224n_lec7';
+                            var this_page_identifier = '/cs224n_lec7';
+                            var this_page_title = 'cs224n - Lecture 7. Translation, Seq2Seq, Attention';
                         };
                         (function() {
                             var d = document, s = d.createElement('script');
@@ -376,7 +618,7 @@ Networks. Stacked and followed by some activations, finally we make predictions 
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; Darron's Devlog &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/cs231n/">Cs231n</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/cs224n/">Cs224n</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -386,30 +628,14 @@ Networks. Stacked and followed by some activations, finally we make predictions 
                                 
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
                                   
                                 
                                   
                                     
                                         
                                         
-                                            <li><a href="/cs231n_lec15">cs231n - Lecture 15. Detection and Segmentation</a></li>
+                                            <li><a href="/cs224n_lec6">cs224n - Lecture 6. Simple and LSTM RNNs</a></li>
                                         
                                     
                                   
@@ -418,18 +644,16 @@ Networks. Stacked and followed by some activations, finally we make predictions 
                                     
                                         
                                         
-                                            <li><a href="/cs231n_lec14">cs231n - Lecture 14. Visualizing and Understanding</a></li>
+                                            <li><a href="/cs224n_lec5">cs224n - Lecture 5. Language Models and RNNs</a></li>
                                         
                                     
-                                  
-                                
                                   
                                 
                                   
                                     
                                         
                                         
-                                            <li><a href="/cs231n_lec13">cs231n - Lecture 13. Self-Supervised Learning</a></li>
+                                            <li><a href="/cs224n_lec4">cs224n - Lecture 4. Dependency Parsing</a></li>
                                         
                                     
                                   
@@ -456,56 +680,39 @@ Networks. Stacked and followed by some activations, finally we make predictions 
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
+                                  
+                                
+                                  
+                                
                                   
                                 
                                   
@@ -543,9 +750,9 @@ Networks. Stacked and followed by some activations, finally we make predictions 
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/cs231n/">
+                            <a href="/tag/cs224n/">
                                 
-                                    See all 13 posts  →
+                                    See all 6 posts  →
                                 
                             </a>
                         </footer>
@@ -555,57 +762,27 @@ Networks. Stacked and followed by some activations, finally we make predictions 
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
             
-                    <article class="post-card post-template no-image">
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs231n_lec6">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Cs231n</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">cs231n - Lecture 6. Hardware and Software</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>Deeplearning Software The point of deep learning frameworks (1) Quick to develop and test new ideas (2) Automatically compute gradients (3) Run it all efficiently on GPU (wrap cuDNN, cuBLAS, OpenCL, etc) Computational</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                
-            </footer>
-        </div>
-    </article>
-
-            
 
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
             
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs231n_lec4">
+            <a class="post-card-content-link" href="/cs224n_lec6">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Cs231n</span>
+                                <span class="post-card-tags">Cs224n</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">cs231n - Lecture 4. Neural Networks and Backpropagation</h2>
+                    <h2 class="post-card-title">cs224n - Lecture 6. Simple and LSTM RNNs</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>Image Features Problem: Linear Classifiers are not very powerful Visual Viewpoint: Linear classifiers learn one template per class Geometric Viewpoint: Linear classifiers can only draw linear decision boundaries Image Features: Motivation After applying</p>
+                        <p>The Simple RNN Language Model Training an RNN Language Model Get a big corpus of text which is a sequence of words $x^{(1)}, \ldots, x^{(T)}$ Feed into RNN-LM; compute output distribution $\hat{y}^{(t)}$ for</p>
                     
                 </section>
             </a>
@@ -632,18 +809,18 @@ Networks. Stacked and followed by some activations, finally we make predictions 
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">cs231n - Lecture 5. Convolutional Neural Networks</div>
+    <div class="floating-header-title">cs224n - Lecture 7. Translation, Seq2Seq, Attention</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs231n+-+Lecture+5.+Convolutional+Neural+Networks&amp;url=https://12kdh43.github.io/cs231n_lec5"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs224n+-+Lecture+7.+Translation%2C+Seq2Seq%2C+Attention&amp;url=https://12kdh43.github.io/cs224n_lec7"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs231n_lec5"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs224n_lec7"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
