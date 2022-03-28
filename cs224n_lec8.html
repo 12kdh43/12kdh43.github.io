@@ -40,7 +40,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
 
 
 
-    <title>cs231n - Lecture 10. Recurrent Neural Networks</title>
+    <title>cs224n - Lecture 8. Attention (Cont.)</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -69,30 +69,30 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="" />
     <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
-    <link rel="canonical" href="http://0.0.0.0:4000/cs231n_lec10" />
+    <link rel="canonical" href="http://0.0.0.0:4000/cs224n_lec8" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="cs231n - Lecture 10. Recurrent Neural Networks" />
-    <meta property="og:description" content="RNN: Process Sequences one to one; vanilla neural networks one to many; e.g. Image Captioning(image to sequence of words) many to one; e.g. Action Prediction(video sequence to action class) many to many(1); e.g. Video Captioning(video sequence to caption) many to many(2); e.g. Video Classification on frame level Why existing convnets" />
-    <meta property="og:url" content="http://0.0.0.0:4000/cs231n_lec10" />
+    <meta property="og:title" content="cs224n - Lecture 8. Attention (Cont.)" />
+    <meta property="og:description" content="Attention Encoder hidden states $\mathbf{h}_1, \ldots, \mathbf{h}_N \in \mathbb{R}^h$ On timestep $t$, we have Decoder hidden state $\mathbf{s}_t \in \mathbb{R}^h$ Attention score $\mathbf{e}^t$ for this step: \(\mathbf{e}^t = \left[ \mathbf{s}_t^T \mathbf{h}_1, \ldots, \mathbf{s}_t^T \mathbf{h}_N \right] \in \mathbb{R}^N\) Take softmax to get the Attention distribution: \(\alpha^t = \text{softmax}(\mathbf{e}^t) \in \mathbb{R}^N\) Use" />
+    <meta property="og:url" content="http://0.0.0.0:4000/cs224n_lec8" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta property="article:author" content="https://www.facebook.com/" />
-    <meta property="article:published_time" content="2022-01-03T15:00:00+00:00" />
-    <meta property="article:modified_time" content="2022-01-03T15:00:00+00:00" />
-    <meta property="article:tag" content="cs231n" />
+    <meta property="article:published_time" content="2022-03-23T00:00:00+00:00" />
+    <meta property="article:modified_time" content="2022-03-23T00:00:00+00:00" />
+    <meta property="article:tag" content="cs224n" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="cs231n - Lecture 10. Recurrent Neural Networks" />
-    <meta name="twitter:description" content="RNN: Process Sequences one to one; vanilla neural networks one to many; e.g. Image Captioning(image to sequence of words) many to one; e.g. Action Prediction(video sequence to action class) many to many(1); e.g. Video Captioning(video sequence to caption) many to many(2); e.g. Video Classification on frame level Why existing convnets" />
+    <meta name="twitter:title" content="cs224n - Lecture 8. Attention (Cont.)" />
+    <meta name="twitter:description" content="Attention Encoder hidden states $\mathbf{h}_1, \ldots, \mathbf{h}_N \in \mathbb{R}^h$ On timestep $t$, we have Decoder hidden state $\mathbf{s}_t \in \mathbb{R}^h$ Attention score $\mathbf{e}^t$ for this step: \(\mathbf{e}^t = \left[ \mathbf{s}_t^T \mathbf{h}_1, \ldots, \mathbf{s}_t^T \mathbf{h}_N \right] \in \mathbb{R}^N\) Take softmax to get the Attention distribution: \(\alpha^t = \text{softmax}(\mathbf{e}^t) \in \mathbb{R}^N\) Use" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Darron's Devlog" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="cs231n" />
+    <meta name="twitter:data2" content="cs224n" />
     <meta name="twitter:site" content="@" />
     <meta name="twitter:creator" content="@" />
     <meta property="og:image:width" content="1400" />
@@ -107,7 +107,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "name": "Darron's Devlog",
         "logo": "http://0.0.0.0:4000/"
     },
-    "url": "http://0.0.0.0:4000/cs231n_lec10",
+    "url": "http://0.0.0.0:4000/cs224n_lec8",
     "image": {
         "@type": "ImageObject",
         "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
@@ -116,9 +116,9 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://0.0.0.0:4000/cs231n_lec10"
+        "@id": "http://0.0.0.0:4000/cs224n_lec8"
     },
-    "description": "RNN: Process Sequences one to one; vanilla neural networks one to many; e.g. Image Captioning(image to sequence of words) many to one; e.g. Action Prediction(video sequence to action class) many to many(1); e.g. Video Captioning(video sequence to caption) many to many(2); e.g. Video Classification on frame level Why existing convnets"
+    "description": "Attention Encoder hidden states $\mathbf{h}_1, \ldots, \mathbf{h}_N \in \mathbb{R}^h$ On timestep $t$, we have Decoder hidden state $\mathbf{s}_t \in \mathbb{R}^h$ Attention score $\mathbf{e}^t$ for this step: \(\mathbf{e}^t = \left[ \mathbf{s}_t^T \mathbf{h}_1, \ldots, \mathbf{s}_t^T \mathbf{h}_N \right] \in \mathbb{R}^N\) Take softmax to get the Attention distribution: \(\alpha^t = \text{softmax}(\mathbf{e}^t) \in \mathbb{R}^N\) Use"
 }
     </script>
 
@@ -131,7 +131,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="cs231n - Lecture 10. Recurrent Neural Networks" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="cs224n - Lecture 8. Attention (Cont.)" href="/feed.xml" />
 
 
 </head>
@@ -186,243 +186,124 @@ into the {body} of the default.hbs template -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
-        <article class="post-full  tag-cs231n  no-image">
+        <article class="post-full  tag-cs224n  no-image">
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime=" 3 January 2022"> 3 January 2022</time>
+                    <time class="post-full-meta-date" datetime="23 March 2022">23 March 2022</time>
                     
                         <span class="date-divider">/</span>
                         
 							
                             
-                               <a href='/tag/cs231n/'>CS231N</a>
+                               <a href='/tag/cs224n/'>CS224N</a>
                             
                         
                     
                 </section>
-                <h1 class="post-full-title">cs231n - Lecture 10. Recurrent Neural Networks</h1>
+                <h1 class="post-full-title">cs224n - Lecture 8. Attention (Cont.)</h1>
             </header>
 	<!--
             
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h2 id="rnn-process-sequences">RNN: Process Sequences</h2>
-<p><img src="/assets/images/cs231n_lec10_0.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
+                    <h2 id="attention">Attention</h2>
+<p><img src="/assets/images/cs224n/lec7_7.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
 <ul>
-  <li>one to one; vanilla neural networks</li>
-  <li>one to many; e.g. Image Captioning(image to sequence of words)</li>
-  <li>many to one; e.g. Action Prediction(video sequence to action class)</li>
-  <li>many to many(1); e.g. Video Captioning(video sequence to caption)</li>
-  <li>
-    <p>many to many(2); e.g. Video Classification on frame level</p>
-  </li>
-  <li>Why existing convnets are insufficient?:<br />
-  Variable sequence length inputs and outputs</li>
+  <li><strong>Encoder hidden states</strong> $\mathbf{h}_1, \ldots, \mathbf{h}_N \in \mathbb{R}^h$</li>
+  <li>On timestep $t$, we have <strong>Decoder hidden state</strong> $\mathbf{s}_t \in \mathbb{R}^h$</li>
+  <li><strong>Attention score</strong> $\mathbf{e}^t$ for this step:<br />
+  \(\mathbf{e}^t = \left[ \mathbf{s}_t^T \mathbf{h}_1, \ldots, \mathbf{s}_t^T \mathbf{h}_N \right] \in \mathbb{R}^N\)</li>
+  <li>Take softmax to get the <strong>Attention distribution</strong>:<br />
+  \(\alpha^t = \text{softmax}(\mathbf{e}^t) \in \mathbb{R}^N\)</li>
+  <li>Use $\alpha^t$ to take a weighted sum of the encoder hidden states to get the <strong>Attention output</strong>:<br />
+  \(\mathbf{a}_t = \sum_{i=1}^N \alpha_i^t \mathbf{h}_i \in \mathbb{R}^h\)</li>
+  <li>Finally, concatenate the attention output $\mathbf{a}_t$ with the decoder hidden state $s_t$ and proceed as in the non-attention seq2seq model<br />
+  \(\left[ \mathbf{a}_t ; \mathbf{s}_t \right] \in \mathbb{R}^{2h}\)</li>
 </ul>
 
-<p><img src="/assets/images/cs231n_lec10_1.png" alt="png" width="70%&quot;, height=&quot;70%" /></p>
+<h3 id="attention-is-great">Attention is great</h3>
 <ul>
-  <li>
-    <p>Key idea: RNNs have an “internal state” that is updated as a sequence is processed.</p>
-  </li>
-  <li>RNN hidden state update:<br />
-  \(h_t = f_W(h_{t-1}, x_t)\)<br />
-  The same function and the same set of parameters are used at every time step.</li>
-  <li>
-    <p>RNN output generation: \(y_t = f_{W_hy}(h_t)\)</p>
-  </li>
-  <li>Simple(Vanilla) RNN: The state consists of a single hidden vector <em>h</em><br />
-  $h_t = \mbox{tanh}(W_hh h_{t-1} + W_{xh}x_t)$<br />
-  $y_t = W_{hy}h_t$</li>
+  <li>Attention significantly improves NMT performance<br />
+  Allow decoder to focus on certain parts of the source</li>
+  <li>Attention provides more “human-like” model of the MT process<br />
+  You can look back at the source sentence while translating, rather than needing to remember it all</li>
+  <li>Attention solves the <strong>bottleneck problem</strong><br />
+  Attention allows decoder to look directly at source; bypass bottleneck</li>
+  <li>Attention helps with the <strong>vanishing gradient problem</strong><br />
+  Provides shortcut to faraway states</li>
+  <li>Attention provides <strong>some interpretability</strong><br />
+  By inspecting attention distribution, we can see what the decoder was focusing on; we can get (soft) <strong>alignment</strong> for free. Without explicitly trained an alignment system, the network just learned alignment by itself</li>
 </ul>
 
-<h3 id="sequence-to-sequenceseq2seq-many-to-one--one-to-many">Sequence to Sequence(Seq2Seq): Many-to-One + One-to-Many</h3>
+<h3 id="attention-variants">Attention variants</h3>
 <ul>
-  <li>
-    <p>Many-to-One: Encode input sequence in a single vector<br />
-  One-to-Many: Produce output sequence from single input vector<br />
-  Encoder produces the last hidden state $h_T$ and decoder uses it as a default $h_0$. Weights($W_1, W_2$) are re-used for each procedure.</p>
-  </li>
-  <li>
-    <p>Example: Character-level Language Model Sampling</p>
-  </li>
+  <li>With some <strong>values</strong> \(\mathbf{h}_1, \ldots, \mathbf{h}_N \in \mathbb{R}^{d_1}\) and a <strong>query</strong> \(\mathbf{s} \in \mathbb{R}^{d_2}\),<br />
+  Attention always involves:<br />
+      1. Computing the <strong>attention scores</strong> $\mathbf{e}\in\mathbb{R}^N$<br />
+      2. Taking softmax to get <strong>attention distribution</strong>:<br />
+          $\alpha = \text{softmax}(\mathbf{e})\in\mathbb{R}^N$<br />
+      3. Take weighted sum of values to get <strong>attention output</strong>:<br />
+          $\mathbf{a} = \sum_{i=1}^N \alpha_i \mathbf{h}_i \in \mathbb{R}^{d_1}$</li>
 </ul>
 
-<p><img src="/assets/images/cs231n_lec10_2.png" alt="png" width="40%&quot;, height=&quot;40%" /></p>
-
-<h3 id="backpropagation">Backpropagation</h3>
+<p>$\rightarrow$ There are multiple ways to compute <em>attention scores</em> $\mathbf{e}\in \mathbb{R}^N$ from $\mathbf{h}_1, \ldots, \mathbf{h}_N \in \mathbb{R}^{d_1}$ and $\mathbf{s} \in \mathbb{R}^{d_2}$:</p>
 <ul>
-  <li>Backpropagation through time: Computationally Expensive<br />
-  Forward through entire sequence to compute loss, then backward through entire sequence to compute gradient.</li>
-  <li><strong>Truncated</strong> Backpropagation through time:<br />
-  Run forward and backward through <strong>chunks of the sequence</strong> instead of whole sequence. Carry hidden states forward in time forever, but only backpropagate for some smaller number of steps.</li>
-</ul>
-
-<h3 id="rnn-tradeoffs">RNN tradeoffs</h3>
-<ul>
-  <li>RNN Advantages:
+  <li>Basic dot-product attention: $\mathbf{e}_i = \mathbf{s}^T \mathbf{h}_i \in \mathbb{R}$
     <ul>
-      <li>Can process any length input</li>
-      <li>Computation for step t can (in theory) use information from many steps back</li>
-      <li>Model size doesn’t increase for longer input</li>
-      <li>Same weights applied on every timestep, so there is symmetry in how inputs are processed.</li>
+      <li>What we saw earlier, assume that $d_1 = d_2$.</li>
     </ul>
   </li>
-  <li>RNN Disadvantages:
+  <li>Multiplicative attention: $\mathbf{e}_i = \mathbf{s}^T \mathbf{W} \mathbf{h}_i \in \mathbb{R}$
     <ul>
-      <li>Recurrent computation is slow</li>
-      <li>In practice, difficult to access information from many steps back</li>
+      <li><em>Luong, Pham, and Manning 2015</em></li>
+      <li>Where $\mathbf{W} \in \mathbb{R}^{d_2 \times d_1}$ is a weight matrix of learnable parameters(but too many!)</li>
+    </ul>
+  </li>
+  <li>Reduced rank multiplicative attention: $e_i = \mathbf{s}^T(\mathbf{U}^T \mathbf{V})h_i = (\mathbf{U}s)^T (\mathbf{V}h_i)$
+    <ul>
+      <li>low rank matrices $\mathbf{U} \in \mathbb{R}^{k\times d_2}$, $\mathbf{V} \in \mathbb{R}^{k\times d_1}$, $k \ll d_1, d_2$</li>
+    </ul>
+  </li>
+  <li>Additive attention: $\mathbf{e}_i = \mathbf{v}^T \tanh (\mathbf{W}_1 \mathbf{h}_i + \mathbf{W}_2 \mathbf{s}) \in \mathbb{R}$
+    <ul>
+      <li><em>Bahdanau, Cho, and Bengio 2014</em></li>
+      <li>Where  $\mathbf{W}_1 \in \mathbb{R}^{d_3 \times d_1}$, $\mathbf{W}_2 \in \mathbb{R}^{d_3 \times d_2}$ are weighted matrices and $\mathbf{v} \in \mathbb{R}^{d_3}$ is a weight vector.</li>
+      <li>$d_3$ (the attention dimensionality) is a hyperparameter</li>
+      <li>“<em>Additive</em>” is a weird name; it’s really using a neural net layer.</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="image-captioning-cnn--rnn">Image Captioning: CNN + RNN</h3>
+<h3 id="attention-is-a-general-deep-learning-technique">Attention is a general Deep Learning technique</h3>
+<p>Attention is a great way to improve the sequence-to-sequence model for Machine Translation. However, you can use attention in many architectures (not just seq2seq) and many tasks (not just MT)</p>
+
+<blockquote>
+  <p>More general definition of attention:</p>
+  <ul>
+    <li>Given a set of vector <strong>values</strong>, and a vector <strong>query</strong>, <strong>attention</strong> is a technique to compute a weighted sum of the values, dependent on the query.</li>
+  </ul>
+</blockquote>
+
 <ul>
-  <li>Instead of the final FC layer and the classifier in CNN, use FC output <em>v</em>(say 4096 length vector) to formulate the default hidden state $h_0$ in RNN.
+  <li>
+    <p>We sometimes say that the <em>query attends to the values</em>. A kind of memory access mechanism.</p>
+  </li>
+  <li><strong>Intuition</strong>:
     <ul>
-      <li>before: $h = \mbox{tanh}(W_{xh}\ast x+W_{hh}\ast h)$</li>
-      <li>now: $h=\mbox{tanh}(W_{xh}\ast x + W_{hh}\ast h + W_{ih}\ast v)$</li>
+      <li>The weighted sum is a <strong>selective summary</strong> of the information contained in the values, where the query determines which values to focus on.</li>
+      <li>Attention is a way to obtain a <strong>fixed-size representation of an arbitrary set of representations</strong> (the values), dependent on some other representation (the query).</li>
     </ul>
   </li>
-  <li>RNN for Image Captioning<br />
-  Re-sample the previous output $y_{t-1}$ as the next input $x_t$, iterate untill $y_t$ sample takes <code class="language-plaintext highlighter-rouge">&lt;END&gt;</code> token.</li>
-</ul>
-
-<h3 id="visual-question-answering-rnns-with-attention">Visual Question Answering: RNNs with Attention</h3>
-<p><img src="/assets/images/cs231n_lec10_3.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
-
-<h3 id="other-tasks">Other tasks</h3>
-<ul>
-  <li>Visual Dialog: Conversations about images</li>
-  <li>Visual Language Navigation: Go to the living room<br />
-  Agent encodes instructions in language and uses an RNN to generate a series of movements as the visual input changes after each move.</li>
-  <li>Visual Question Answering: Dataset Bias<br />
-  With different types(Image + Question + Answer) of data used, model performances are better.</li>
-</ul>
-
-<h3 id="long-short-term-memory-lstm">Long Short Term Memory (LSTM)</h3>
-<ul>
-  <li>Vanilla RNN<br />
-  \(h_t = \mbox{tanh}(W_{hh}h_{t-1} + W_{xh}x_t) \\
-      = \mbox{tanh}\left(
-          (W_{hh} \ W_{hx}) {\begin{pmatrix} h_{t-1} \\ x_t \end{pmatrix}}
-                  \right) \\
-      = \mbox{tanh}\left(
-          W {\begin{pmatrix} h_{t-1} \\ x_t \end{pmatrix}}
-                  \right)\)</li>
-  <li>
-    <p>\(\frac{\partial h_t}{\partial h_{t-1}} = \mbox{tanh}' (W_{hh}h_{t-1} + W_{xh}x_t)W_{hh}\)<br />
-  $\frac{\partial L}{\partial W} = \sum_{t=1}^T \frac{\partial L_t}{\partial W}$</p>
-
-\[\begin{align*}
-  \frac{\partial L_T}{\partial W} &amp;= \frac{\partial L_T}{\partial h_T}
-                                      \frac{\partial h_t}{\partial h_{t-1}}\cdots
-                                      \frac{\partial h_1}{\partial W} \\
-                                   &amp;= \frac{\partial L_T}{\partial h_T}(\prod_{t=2}^T \frac{\partial h_t}{\partial h_{t-1}})\frac{\partial h_1}{\partial W} \\
-                                  &amp;= \frac{\partial L_T}{\partial h_T}(\prod_{t=2}^T \mbox{tanh}'(W_{hh}h_{t-1} + W_{xh}x_t))W_{hh}^{T-1} \frac{\partial h_1}{\partial W}
-  \end{align*}\]
-  </li>
-  <li>Problem<br />
-  As the output of <em>tanh</em> function are in range of <code class="language-plaintext highlighter-rouge">[-1,1]</code> and almost smaller than 1, vanilla RNN has <strong><em>vanishing gradients</em></strong>. If we assume no non-linearity, the gradient will be \(\frac{\partial L_T}{\partial W} = \frac{\partial L_T}{\partial h_T}W_{hh}^{T-1}\frac{\partial h_1}{\partial W}\). In this case, when the largest singular value is greater than 1, we have exploding gradients, while the value is smaller than 1, we have vanishing gradients.</li>
-</ul>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">H</span> <span class="o">=</span> <span class="mi">5</span>	<span class="c1"># dimensionality of hidden state
-</span><span class="n">T</span> <span class="o">=</span> <span class="mi">50</span>	<span class="c1"># number of time steps
-</span><span class="n">Whh</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
-
-<span class="c1"># forward pass of an RNN (ignoring inputs x)
-</span><span class="n">hs</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">ss</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">hs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-    <span class="n">ss</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Whh</span><span class="p">,</span> <span class="n">hs</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">hs</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ss</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
-	
-<span class="c1"># backward pass of the RNN
-</span><span class="n">dhs</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">dss</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">dhs</span><span class="p">[</span><span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="c1">#start off the chain with random gradient
-</span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">xrange</span><span class="p">(</span><span class="n">T</span><span class="p">)):</span>
-    <span class="n">dss</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">hs</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">dhs</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>	<span class="c1"># backprop through the nonlinearity
-</span>	<span class="n">dhs</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Whh</span><span class="p">.</span><span class="n">T</span><span class="p">,</span> <span class="n">dss</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>	<span class="c1"># backprop into previous hidden state
-</span>		<span class="c1"># "Whh.T" multiplied by "T" times!
-</span></code></pre></div></div>
-<ul>
-  <li>
-    <p>For exploding gradients: control with gradient clipping.<br />
-  For vanishing gradients: change the architecture, LSTM introduced.</p>
-  </li>
-  <li>
-    <p>LSTM:<br />
-  \(\begin{pmatrix} i \\ f \\ o \\ g \end{pmatrix} =
-  \begin{pmatrix} \sigma \\ \sigma \\ \sigma \\ \mbox{tanh}\end{pmatrix} W \begin{pmatrix} h_{t-1} \\ x_t \end{pmatrix}\)<br />
-  \(c_t = f \odot c_{t-1} + i \odot g\), <em>memory cell update</em><br />
-  \(h_t = o \odot \mbox{tanh}(c_t)\), <em>hidden state update</em><br />
-  where <em>W</em> is a stack of $W_h$ and $W_x$</p>
-  </li>
-</ul>
-
-<p><img src="/assets/images/cs231n_lec10_4.png" alt="png" width="60%&quot;, height=&quot;60%" /><br />
-i: Input gate, whether to write to cell<br />
-f: Forget gate, Whether to erase cell<br />
-o: Output gate, How much to reveal cell<br />
-g: Gate gate, How much to write to cell</p>
-
-<p><img src="/assets/images/cs231n_lec10_5.png" alt="png" width="60%&quot;, height=&quot;60%" /></p>
-
-<ul>
-  <li>
-    <p>Backpropagation from $c_t$ to $c_{t-1}$ only elementwise multiplication by <em>f</em>, no matrix multiply by <em>W</em>. Notice that the gradient contains the <em>f</em> gate’s vector of activations; it allows better control of gradients values, using suitable parameter updates of the forget gate. Also notice that are added through the <em>f, i, g,</em> and <em>o</em> gates, we can have better balancing of gradient values.</p>
-  </li>
-  <li>
-    <p>Recall: “PlainNets” vs. ResNets<br />
-  ResNet is to PlainNet what LSTM is to RNN, kind of.<br />
-  <em>Additive skip connections</em></p>
-  </li>
-  <li>
-    <p>Do LSTMs solve the vanishing gradient problem?:<br />
-  The LSTM architecture makes it easier for the RNN to preserve information over many timesteps. e.g. If $f=1$ and $i=0$, then the information of that cell is preserved indefinitely. By contrast, it’s harder for vanilla RNN to learn a recurrent weight matrix $W_h$ that preserves information in hidden state.<br />
-  LSTM doesn’t guarantee that there is no vanishing/exploding gradient, but it does provide an easier way for the model to learn long-distance dependencies.</p>
-  </li>
-  <li>
-    <p>in between: Highway Networks, <em>Srivastava et al, 2015, [arXiv:1505.00387v2]</em><br />
-  A new architecture designed to ease gradient-based training of very deep networks. To regulate the flow of information and enlarge the possibility of studying extremely deep and efficient architectures.<br />
-  $g = T(x, W_T)$, $y = g \odot H(x, W_H) + (1-g)\odot x$</p>
-  </li>
-</ul>
-
-<h3 id="other-rnn-variants">Other RNN Variants</h3>
-<ul>
-  <li>Neural Architecture Search(NAS) with Reinforcement Learning, <em>Zoph et Le, 2017</em>
+  <li><strong>Upshot</strong>:
     <ul>
-      <li>RNN to design model; idea that we can represent the model architecture with a variable-length string.</li>
-      <li>Apply reinforcement learning on a neural network to maximize the accuracy(as a reward) on validation set, find a good architecture.</li>
+      <li>Attention has become the powerful, flexible, general way pointer and memory manipulation in deep learning models. A new idea from after 2010!</li>
     </ul>
   </li>
-  <li>GRU; smaller LSTM, <em>“Learning phrase representations using rnn encoder-decoder for statistical machine translation”, Cho et al., 2014</em></li>
-  <li><em>“An Empirical Exploration of Recurrent Network Architectures”, Jozefowicz et al., 2015</em></li>
-  <li><em>LSTM: A Search Space Odyssey, Greff et al., 2015</em></li>
 </ul>
 
-<h3 id="recurrence-for-vision">Recurrence for Vision</h3>
-<ul>
-  <li>LSTM wer a good default choice until this year</li>
-  <li>Use variants like GRU if you want faster compute and less parameters</li>
-  <li>Use transformers (next lecture) as they are dominating NLP models</li>
-  <li>almost everyday there is a new vision transformer model</li>
-</ul>
-
-<h3 id="summary">Summary</h3>
-<ul>
-  <li>RNNs allow a lot of flexibility in architecture design</li>
-  <li>Vanilla RNNs are simple but don’t work very well</li>
-  <li>Common to use LSTM or GRU: their additive interactions improve gradient flow</li>
-  <li>Backward flow of gradients in RNN can explode or vanish. Exploding is controlled with gradient clipping. Vanishing is controlled with additive interactions (LSTM)</li>
-  <li>Better/simpler architectures are a hot topic of current research, as well as new paradigms for reasoning over sequences</li>
-  <li>Better understanding (both theoretical and empirical) is needed.</li>
-</ul>
 
                 </div>
             </section>
@@ -472,9 +353,9 @@ g: Gate gate, How much to write to cell</p>
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function () {
-                            var this_page_url = 'http://0.0.0.0:4000/cs231n_lec10';
-                            var this_page_identifier = '/cs231n_lec10';
-                            var this_page_title = 'cs231n - Lecture 10. Recurrent Neural Networks';
+                            var this_page_url = 'http://0.0.0.0:4000/cs224n_lec8';
+                            var this_page_identifier = '/cs224n_lec8';
+                            var this_page_title = 'cs224n - Lecture 8. Attention (Cont.)';
                         };
                         (function() {
                             var d = document, s = d.createElement('script');
@@ -509,7 +390,7 @@ g: Gate gate, How much to write to cell</p>
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; Darron's Devlog &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/cs231n/">Cs231n</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/cs224n/">Cs224n</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -519,32 +400,14 @@ g: Gate gate, How much to write to cell</p>
                                 
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
                                   
                                 
                                   
                                     
                                         
                                         
-                                            <li><a href="/cs231n_lec15">cs231n - Lecture 15. Detection and Segmentation</a></li>
+                                            <li><a href="/cs224n_lec7">cs224n - Lecture 7. Translation, Seq2Seq, Attention</a></li>
                                         
                                     
                                   
@@ -553,18 +416,7 @@ g: Gate gate, How much to write to cell</p>
                                     
                                         
                                         
-                                            <li><a href="/cs231n_lec14">cs231n - Lecture 14. Visualizing and Understanding</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                            <li><a href="/cs231n_lec13">cs231n - Lecture 13. Self-Supervised Learning</a></li>
+                                            <li><a href="/cs224n_lec6">cs224n - Lecture 6. Simple and LSTM RNNs</a></li>
                                         
                                     
                                   
@@ -573,23 +425,7 @@ g: Gate gate, How much to write to cell</p>
                                     
                                         
                                         
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
-                                        
-                                    
-                                  
-                                
-                                  
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
+                                            <li><a href="/cs224n_lec5">cs224n - Lecture 5. Language Models and RNNs</a></li>
                                         
                                     
                                   
@@ -623,24 +459,39 @@ g: Gate gate, How much to write to cell</p>
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                    
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
                                   
                                 
                                   
@@ -678,9 +529,9 @@ g: Gate gate, How much to write to cell</p>
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/cs231n/">
+                            <a href="/tag/cs224n/">
                                 
-                                    See all 13 posts  →
+                                    See all 7 posts  →
                                 
                             </a>
                         </footer>
@@ -690,57 +541,27 @@ g: Gate gate, How much to write to cell</p>
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
             
-                    <article class="post-card post-template no-image">
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs231n_lec11">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Cs231n</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">cs231n - Lecture 11. Attention and Transformers</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>Attention with RNNs Image Captioning using spatial features Input: Image I Output: Sequence y $= y_1, y_2, \ldots, y_T$ Encoder: $h_0 = f_W(z)$, where z is spatial CNN features, $f_W(\cdot)$ is an MLP</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                
-            </footer>
-        </div>
-    </article>
-
-            
 
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
             
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs231n_lec9">
+            <a class="post-card-content-link" href="/cs224n_lec7">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Cs231n</span>
+                                <span class="post-card-tags">Cs224n</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">cs231n - Lecture 9. CNN Architectures</h2>
+                    <h2 class="post-card-title">cs224n - Lecture 7. Translation, Seq2Seq, Attention</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>Review LeCun et al., 1998 $5\times 5$ Conv filters applied at stride 1 $2\times 2$ Subsampling (Pooling) layers applied at stride 2 i.e. architecture is [CONV-POOL-CONV-POOL-FC-FC] Stride: Downsample output activations Padding: Preserve input</p>
+                        <p>New Task: Machine Translation Pre-Neural Machine Translation Machine Translation (MT) is the task of translating a sentence x from one language (the source language) to a sentence y in another language (the target</p>
                     
                 </section>
             </a>
@@ -767,18 +588,18 @@ g: Gate gate, How much to write to cell</p>
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">cs231n - Lecture 10. Recurrent Neural Networks</div>
+    <div class="floating-header-title">cs224n - Lecture 8. Attention (Cont.)</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs231n+-+Lecture+10.+Recurrent+Neural+Networks&amp;url=https://12kdh43.github.io/cs231n_lec10"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs224n+-+Lecture+8.+Attention+%28Cont.%29&amp;url=https://12kdh43.github.io/cs224n_lec8"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs231n_lec10"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs224n_lec8"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 

@@ -8,6 +8,115 @@
     
       
       <item>
+        <title>cs224n - Lecture 8. Attention (Cont.)</title>
+        
+          <description>&lt;h2 id=&quot;attention&quot;&gt;Attention&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_7.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Encoder hidden states&lt;/strong&gt; $\mathbf{h}_1, \ldots, \mathbf{h}_N \in \mathbb{R}^h$&lt;/li&gt;
+  &lt;li&gt;On timestep $t$, we have &lt;strong&gt;Decoder hidden state&lt;/strong&gt; $\mathbf{s}_t \in \mathbb{R}^h$&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Attention score&lt;/strong&gt; $\mathbf{e}^t$ for this step:&lt;br /&gt;
+  \(\mathbf{e}^t = \left[ \mathbf{s}_t^T \mathbf{h}_1, \ldots, \mathbf{s}_t^T \mathbf{h}_N \right] \in \mathbb{R}^N\)&lt;/li&gt;
+  &lt;li&gt;Take softmax to get the &lt;strong&gt;Attention distribution&lt;/strong&gt;:&lt;br /&gt;
+  \(\alpha^t = \text{softmax}(\mathbf{e}^t) \in \mathbb{R}^N\)&lt;/li&gt;
+  &lt;li&gt;Use $\alpha^t$ to take a weighted sum of the encoder hidden states to get the &lt;strong&gt;Attention output&lt;/strong&gt;:&lt;br /&gt;
+  \(\mathbf{a}_t = \sum_{i=1}^N \alpha_i^t \mathbf{h}_i \in \mathbb{R}^h\)&lt;/li&gt;
+  &lt;li&gt;Finally, concatenate the attention output $\mathbf{a}_t$ with the decoder hidden state $s_t$ and proceed as in the non-attention seq2seq model&lt;br /&gt;
+  \(\left[ \mathbf{a}_t ; \mathbf{s}_t \right] \in \mathbb{R}^{2h}\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;attention-is-great&quot;&gt;Attention is great&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Attention significantly improves NMT performance&lt;br /&gt;
+  Allow decoder to focus on certain parts of the source&lt;/li&gt;
+  &lt;li&gt;Attention provides more “human-like” model of the MT process&lt;br /&gt;
+  You can look back at the source sentence while translating, rather than needing to remember it all&lt;/li&gt;
+  &lt;li&gt;Attention solves the &lt;strong&gt;bottleneck problem&lt;/strong&gt;&lt;br /&gt;
+  Attention allows decoder to look directly at source; bypass bottleneck&lt;/li&gt;
+  &lt;li&gt;Attention helps with the &lt;strong&gt;vanishing gradient problem&lt;/strong&gt;&lt;br /&gt;
+  Provides shortcut to faraway states&lt;/li&gt;
+  &lt;li&gt;Attention provides &lt;strong&gt;some interpretability&lt;/strong&gt;&lt;br /&gt;
+  By inspecting attention distribution, we can see what the decoder was focusing on; we can get (soft) &lt;strong&gt;alignment&lt;/strong&gt; for free. Without explicitly trained an alignment system, the network just learned alignment by itself&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;attention-variants&quot;&gt;Attention variants&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;With some &lt;strong&gt;values&lt;/strong&gt; \(\mathbf{h}_1, \ldots, \mathbf{h}_N \in \mathbb{R}^{d_1}\) and a &lt;strong&gt;query&lt;/strong&gt; \(\mathbf{s} \in \mathbb{R}^{d_2}\),&lt;br /&gt;
+  Attention always involves:&lt;br /&gt;
+      1. Computing the &lt;strong&gt;attention scores&lt;/strong&gt; $\mathbf{e}\in\mathbb{R}^N$&lt;br /&gt;
+      2. Taking softmax to get &lt;strong&gt;attention distribution&lt;/strong&gt;:&lt;br /&gt;
+          $\alpha = \text{softmax}(\mathbf{e})\in\mathbb{R}^N$&lt;br /&gt;
+      3. Take weighted sum of values to get &lt;strong&gt;attention output&lt;/strong&gt;:&lt;br /&gt;
+          $\mathbf{a} = \sum_{i=1}^N \alpha_i \mathbf{h}_i \in \mathbb{R}^{d_1}$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$\rightarrow$ There are multiple ways to compute &lt;em&gt;attention scores&lt;/em&gt; $\mathbf{e}\in \mathbb{R}^N$ from $\mathbf{h}_1, \ldots, \mathbf{h}_N \in \mathbb{R}^{d_1}$ and $\mathbf{s} \in \mathbb{R}^{d_2}$:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Basic dot-product attention: $\mathbf{e}_i = \mathbf{s}^T \mathbf{h}_i \in \mathbb{R}$
+    &lt;ul&gt;
+      &lt;li&gt;What we saw earlier, assume that $d_1 = d_2$.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Multiplicative attention: $\mathbf{e}_i = \mathbf{s}^T \mathbf{W} \mathbf{h}_i \in \mathbb{R}$
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;Luong, Pham, and Manning 2015&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Where $\mathbf{W} \in \mathbb{R}^{d_2 \times d_1}$ is a weight matrix of learnable parameters(but too many!)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Reduced rank multiplicative attention: $e_i = \mathbf{s}^T(\mathbf{U}^T \mathbf{V})h_i = (\mathbf{U}s)^T (\mathbf{V}h_i)$
+    &lt;ul&gt;
+      &lt;li&gt;low rank matrices $\mathbf{U} \in \mathbb{R}^{k\times d_2}$, $\mathbf{V} \in \mathbb{R}^{k\times d_1}$, $k \ll d_1, d_2$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Additive attention: $\mathbf{e}_i = \mathbf{v}^T \tanh (\mathbf{W}_1 \mathbf{h}_i + \mathbf{W}_2 \mathbf{s}) \in \mathbb{R}$
+    &lt;ul&gt;
+      &lt;li&gt;&lt;em&gt;Bahdanau, Cho, and Bengio 2014&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;Where  $\mathbf{W}_1 \in \mathbb{R}^{d_3 \times d_1}$, $\mathbf{W}_2 \in \mathbb{R}^{d_3 \times d_2}$ are weighted matrices and $\mathbf{v} \in \mathbb{R}^{d_3}$ is a weight vector.&lt;/li&gt;
+      &lt;li&gt;$d_3$ (the attention dimensionality) is a hyperparameter&lt;/li&gt;
+      &lt;li&gt;“&lt;em&gt;Additive&lt;/em&gt;” is a weird name; it’s really using a neural net layer.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;attention-is-a-general-deep-learning-technique&quot;&gt;Attention is a general Deep Learning technique&lt;/h3&gt;
+&lt;p&gt;Attention is a great way to improve the sequence-to-sequence model for Machine Translation. However, you can use attention in many architectures (not just seq2seq) and many tasks (not just MT)&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;More general definition of attention:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Given a set of vector &lt;strong&gt;values&lt;/strong&gt;, and a vector &lt;strong&gt;query&lt;/strong&gt;, &lt;strong&gt;attention&lt;/strong&gt; is a technique to compute a weighted sum of the values, dependent on the query.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;We sometimes say that the &lt;em&gt;query attends to the values&lt;/em&gt;. A kind of memory access mechanism.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Intuition&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;The weighted sum is a &lt;strong&gt;selective summary&lt;/strong&gt; of the information contained in the values, where the query determines which values to focus on.&lt;/li&gt;
+      &lt;li&gt;Attention is a way to obtain a &lt;strong&gt;fixed-size representation of an arbitrary set of representations&lt;/strong&gt; (the values), dependent on some other representation (the query).&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Upshot&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Attention has become the powerful, flexible, general way pointer and memory manipulation in deep learning models. A new idea from after 2010!&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs224n_lec8</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs224n_lec8</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>cs224n - Lecture 7. Translation, Seq2Seq, Attention</title>
         
           <description>&lt;h2 id=&quot;new-task-machine-translation&quot;&gt;New Task: Machine Translation&lt;/h2&gt;
