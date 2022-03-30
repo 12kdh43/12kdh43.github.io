@@ -8,6 +8,442 @@
     
       
       <item>
+        <title>cs224n - Lecture 9. Self-Attention and Transformers</title>
+        
+          <description>&lt;h2 id=&quot;so-far-recurrent-models-for-most-nlp&quot;&gt;So far: recurrent models for (most) NLP&lt;/h2&gt;
+
+&lt;p&gt;
+	&lt;img src=&quot;/assets/images/cs224n/lec9_0.png&quot; alt=&quot;png&quot; width=&quot;40%&quot; style=&quot;float: left&quot; /&gt;
+	&lt;br /&gt;
+	- Circa 2016, the de facto strategy in NLP is to &lt;strong&gt;encode&lt;/strong&gt;
+	sentences with a bidirectional LSTM. &lt;br /&gt;
+	(for example, the source sentence in a translation) &lt;br /&gt;  
+	&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;br /&gt;
+	- Define your output (parse, sentence, summary) as a sequence, and use an (unidirectional) LSTM to generate it. &lt;br /&gt;   
+	&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;br /&gt;
+	- Use attention to allow flexible access to memory.  
+&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Seq2Seq models need to process variable-length inputs into fixed-length representations&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To deal with seq2seq problems, we learned end-to-end differentiable system using an encoder-decoder architecture.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instead of entirely new ways of looking at problems, we’re trying to find the best &lt;strong&gt;building blocks&lt;/strong&gt; to plug into our models and enable broad progress.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec9_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;issues-with-recurrent-models-linear-interaction-distance&quot;&gt;Issues with recurrent models: Linear interaction distance&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;RNNs are unrolled “left-to-right”:&lt;br /&gt;
+  This encodes linear locality: a useful heuristic
+    &lt;ul&gt;
+      &lt;li&gt;Nearby words often affect each other’s meanings&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Problem&lt;/strong&gt;: RNNs take &lt;strong&gt;O(sequence length)&lt;/strong&gt; steps for distant word pairs to interact.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec9_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Hard to learn long-distance dependencies (because gradient problems)&lt;/li&gt;
+      &lt;li&gt;Linear order of words is “baked in”; linear order isn’t the right way to think about sentences&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;issues-with-recurrent-models-lack-of-parallelizability&quot;&gt;Issues with recurrent models: Lack of parallelizability&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Forward and backward passes have &lt;strong&gt;O(sequence length)&lt;/strong&gt; unparallelizable operations
+    &lt;ul&gt;
+      &lt;li&gt;Future RNN hidden states can’t be computed in full before past RNN hidden states have been computed; not GPU friendly, inhibits training on very large datasets.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;alternatives-word-windows&quot;&gt;Alternatives: Word windows&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Word window models aggregate local contexts (Also known as 1D convolution)
+    &lt;ul&gt;
+      &lt;li&gt;Number of unparallelizable operations does not increase sequence length&lt;br /&gt;
+  (&lt;strong&gt;O(1)&lt;/strong&gt; dependence in time)&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec9_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;What about in long-distance dependencies?
+    &lt;ul&gt;
+      &lt;li&gt;Stacking word window layers allows interaction between farther words&lt;/li&gt;
+      &lt;li&gt;Maximum Interaction distance = &lt;strong&gt;sequence length / window size&lt;/strong&gt;&lt;br /&gt;
+  But if your sequences are too long, you’ll just ignore long-distance context
+  &lt;img src=&quot;/assets/images/cs224n/lec9_4.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;alternatives-attention&quot;&gt;Alternatives: Attention&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Attention&lt;/strong&gt; treats each word’s representation as a &lt;strong&gt;query&lt;/strong&gt; to access and
+incorporate information from &lt;strong&gt;a set of values&lt;/strong&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;Out of the encoder-decoder structure; think about attention &lt;strong&gt;within a single sentence&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;Number of unparallelizable operations does not increase sequence length; not parallelizable in depth but parallelizable in time.&lt;/li&gt;
+      &lt;li&gt;Maximum interaction distance: &lt;strong&gt;O(1)&lt;/strong&gt;, since all words interact at every layer&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec9_5.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;self-attention&quot;&gt;Self-Attention&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Recall: Attention operates on &lt;strong&gt;queries&lt;/strong&gt;, &lt;strong&gt;keys&lt;/strong&gt;, and &lt;strong&gt;values&lt;/strong&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;queries: $q_1, q_2, \ldots, q_T \in \mathbb{R}^d$&lt;/li&gt;
+      &lt;li&gt;keys: $k_1, k_2, \ldots, k_T \in \mathbb{R}d$&lt;/li&gt;
+      &lt;li&gt;values: $v_1, v_2, \ldots, v_T \in \mathbb{R}d$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In &lt;strong&gt;self-attention&lt;/strong&gt;, the queries, keys, and values are drawn from the &lt;strong&gt;same source&lt;/strong&gt;.&lt;br /&gt;
+  For example, if the output of the previous layer is $x_1, \ldots, x_T$ (one vec per word), we could let $v_i = k_i = q_i = x_i$ (use the same vectors for all of them).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The (dot product) self-attention operation is as follows:
+    &lt;ul&gt;
+      &lt;li&gt;Compute &lt;strong&gt;key-query&lt;/strong&gt; affinities: $e_{ij} = q_i^T k_j $&lt;/li&gt;
+      &lt;li&gt;Compute attention weights from affinities(softmax):&lt;br /&gt;
+  \(\begin{align*}
+  \alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{j^\prime} \exp(e_{ij^\prime})}
+  \end{align*}\)&lt;/li&gt;
+      &lt;li&gt;Compute outputs as weighted sum of &lt;strong&gt;values&lt;/strong&gt;&lt;br /&gt;
+  \(\begin{align*}
+  \text{output}_i = \sum_j \alpha_{ij}v_j
+  \end{align*}\)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Q: FCN vs Self-Attention?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;self-attention-as-an-nlp-building-block&quot;&gt;Self-attention as an NLP building block&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec9_6.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Can self-attention replace the recurrence? &lt;strong&gt;NO&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sequence-order&quot;&gt;Sequence order&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Self-attention is an operation on &lt;strong&gt;sets&lt;/strong&gt;; it has &lt;strong&gt;no inherent notion of order&lt;/strong&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;To fix this, encode the order of the sentence.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Consider representing each &lt;strong&gt;sequence index&lt;/strong&gt; as a &lt;strong&gt;vector&lt;/strong&gt;;&lt;br /&gt;
+  $p_i \in \mathbb{R}^d$, for \(i \in \left\{ 1,2,\ldots, T \right\}\) are position vectors&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Let $\tilde{v}_i, \tilde{k}_i, \tilde{q}_i$ be our old inputs, then add $p_i$ to inputs;&lt;br /&gt;
+  $v_i = \tilde{v}_i + p_i$&lt;br /&gt;
+  $q_i = \tilde{q}_i + p_i$&lt;br /&gt;
+  $k_i = \tilde{k}_i + p_i$
+    &lt;ul&gt;
+      &lt;li&gt;In deep self-attention networks, we do this at the first layer; you could concatenate them as well, but mostly, just add.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Position representation vectors through sinusoids
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Sinusoidal position representations&lt;/strong&gt;: concatenate sinusoidal functions of varying periods&lt;br /&gt;
+ &lt;img src=&quot;/assets/images/cs224n/lec9_7.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;Pros:
+        &lt;ul&gt;
+          &lt;li&gt;Periodicity indicates that maybe “absolute position” isn’t as important&lt;/li&gt;
+          &lt;li&gt;Maybe can extrapolate to longer sequences as periods restart!&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Cons:
+        &lt;ul&gt;
+          &lt;li&gt;Not learnable; also the extrapolation doesn’t really work!&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Position representation vectors learned from scratch
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Learned absolute position representations&lt;/strong&gt;: Let a matrix $p \in \mathbb{R}^{d \times T}$ and each learnable parameters $p_i$ be a column of that matrix; Most systems use this!&lt;/li&gt;
+      &lt;li&gt;Pros:
+        &lt;ul&gt;
+          &lt;li&gt;Flexibility: each position gets to be learned to fit the data&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Cons:
+        &lt;ul&gt;
+          &lt;li&gt;Definitely can’t extrapolate to indices outside $1, \ldots, T$.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Some more flexible representations of position:
+        &lt;ul&gt;
+          &lt;li&gt;Relative linear position attention (&lt;em&gt;Shaw et al., 2018&lt;/em&gt;)&lt;/li&gt;
+          &lt;li&gt;Dependency syntax-based position (&lt;em&gt;Wang et al., 2019&lt;/em&gt;)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;nonlinearities&quot;&gt;Nonlinearities&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;There are no elementwise nonlinearities in self-attention; stacking more self-attention layers just re-averages &lt;strong&gt;value&lt;/strong&gt; vectors.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Easy fix: add a &lt;strong&gt;feed-forward network&lt;/strong&gt; to post-process each output vector.&lt;br /&gt;
+  (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Self-Att. - FF - Self-Att. - FF - ...&lt;/code&gt;)&lt;br /&gt;
+  \(\begin{align*}
+  m_i &amp;amp;= MLP(\text{output}_i) \\
+      &amp;amp;= W_2 \ast \text{ReLU}(W_1 \times \text{output}_i + b_1) + b_2
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;masking-the-future&quot;&gt;Masking the future&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;To use self-attention in &lt;strong&gt;decoders&lt;/strong&gt;, we need to ensure we don’t “look at the future” when predicting a sequence.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Easily: at every timestep, we could change the set of &lt;strong&gt;keys and queries&lt;/strong&gt; to include only past words. But it’s inefficient dealing with tensors, not parallelizable.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instead, to enable parallelization, &lt;strong&gt;mask out attention&lt;/strong&gt; to future words by setting attention scores to $-\infty$ (attention weights to 0).&lt;br /&gt;
+  $e_{ij} = \begin{cases} q_i^T k_j, &amp;amp; j &amp;lt; i &lt;br /&gt;
+                          -\infty, &amp;amp; j \ge i \end{cases}$&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec9_8.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;recap-necessities-for-a-self-attention-building-block&quot;&gt;Recap: Necessities for a self-attention building block&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Self-attention&lt;/strong&gt;: the basis of the method&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Position representations&lt;/strong&gt;:&lt;br /&gt;
+  Specify the sequence order, since self-attention is an unordered function of its inputs.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Nonlinearities&lt;/strong&gt;:&lt;br /&gt;
+  At the output of the self-attention block, frequently implemented as a simple feed-forward network.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Masking&lt;/strong&gt;:&lt;br /&gt;
+  In order to parallelize operations while not looking at the future, keeps information about the future from “leaking” to the past.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;transformer&quot;&gt;Transformer&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;The Transformer Encoder-Decodr (&lt;em&gt;Vaswani et al., 2017&lt;/em&gt;)&lt;br /&gt;
+  At a high level look;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec9_9.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What’s left in a Transformer Encoder Block:
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;Key-query-value attention&lt;/strong&gt;: How do we get input vectors from a single word embedding?&lt;/li&gt;
+      &lt;li&gt;__Multi-headed attention: Attend to multiple places in a single layer&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Tricks to help with training&lt;/strong&gt;:
+        &lt;ul&gt;
+          &lt;li&gt;Residual connections&lt;/li&gt;
+          &lt;li&gt;Layer normalization&lt;/li&gt;
+          &lt;li&gt;Scaling the dot product
+  These tricks &lt;strong&gt;don’t improve&lt;/strong&gt; what the model is able to do; they help improve the training process. Both of these types of modeling improvements are very important.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-transformer-encoder-key-query-value-attention&quot;&gt;The Transformer Encoder: Key-Query-Value Attention&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Let $x_1, \ldots, x_T \in \mathbb{R}^d$ be input vectors to the Transformer encoder. Then keys, queries, values are:
+    &lt;ul&gt;
+      &lt;li&gt;$k_i = Kx_i$, where $K \in \mathbb{R}^{d \times d}$ is the key matrix.&lt;/li&gt;
+      &lt;li&gt;$q_i = Qx_i$, where $Q \in \mathbb{R}^{d \times d}$ is the query matrix.&lt;/li&gt;
+      &lt;li&gt;$v_i = Vx_i$, where $V \in \mathbb{R}^{d \times d}$ is the value matrix.&lt;br /&gt;
+These matrices (of learnable parameters) allow &lt;em&gt;different aspects&lt;/em&gt; of the $x$ vectors to be used/emphasized in each of the three roles.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Computed in matrices,
+    &lt;ul&gt;
+      &lt;li&gt;Let $X = \left[ x_1; \ldots; x_T \right] \in \mathbb{R}^{T\times d}$ be the concatenation of input vectors.&lt;/li&gt;
+      &lt;li&gt;First, note that $XK \in \mathbb{R}^{T\times d}$, $XQ \in \mathbb{R}^{T\times d}$, $XV \in \mathbb{R}^{T\times d}$.&lt;/li&gt;
+      &lt;li&gt;The output tensor is defined as $\text{output} = \text{softmax}(XQ(XK)^T) \times XV$.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Take the query-key dot products in one matrix multiplication: $XQ(XK)^T = XQK^T X^T \in \mathbb{T}^{T\times T} $ (All pairs of attention scores)&lt;/li&gt;
+  &lt;li&gt;Take softmax, and compute the weighted average with another matrix multiplication: $\text{output} \in \mathbb{T}^{T\times d}$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;the-transformer-encoder-multi-headed-attention&quot;&gt;The Transformer Encoder: Multi-headed attention&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;What if we want to look in multiple places in the sentence at once?
+    &lt;ul&gt;
+      &lt;li&gt;For word $i$, self-attention “looks” where $x_i^T Q^T K x_j$ is high, but maybe we want to focus on different $j$ for different reasons?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Define &lt;strong&gt;multiple attention “heads”&lt;/strong&gt; through multiple $Q, K, V$ matrices:
+    &lt;ul&gt;
+      &lt;li&gt;Let $Q_l, K_l, V_l \in \mathbb{R}^{d\times \frac{d}{h}}$, where $h$ is the number of attention heads, and $l$ ranges from $1$ to $h$.&lt;/li&gt;
+      &lt;li&gt;Each attention head performs attention independently:&lt;br /&gt;
+  $\text{output}_l = \text{softmax}(XQ_l K_l^T X^T) \ast X V_l \in \mathbb{R}^{d/h}$&lt;/li&gt;
+      &lt;li&gt;Then combine the all outputs from the heads:&lt;br /&gt;
+  $\text{output} = Y\left[ \text{output}_1; \ldots, \text{output}_h \right]$, where $Y \in \mathbb{R}^{d\times d}$.&lt;/li&gt;
+      &lt;li&gt;Each head gets to “look” at different things and construct value vectors differently.&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec9_10.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-transformer-encoder-residual-connections-he-et-al-2016&quot;&gt;The Transformer Encoder: Residual connections [He et al., 2016]&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Residual connections&lt;/strong&gt; are a trick to help models train better.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instead of $X^{(i)} = \text{Layer}(X^{(i-1)})$ (where $i$ represents the layer)&lt;br /&gt;
+  We let $X^{(i)} = X^{(i-1)} + \text{Layer}(X^{(i-1)})$ (so we only have to learn “the residual” from the previous layer)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Solves vanishing gradient problem&lt;/li&gt;
+  &lt;li&gt;Residual connections are thought to make the &lt;em&gt;loss landscape&lt;/em&gt; considerably smoother (thus easier training!)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec9_11.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;the-transformer-encoder-layer-normalization-ba-et-al-2016&quot;&gt;The Transformer Encoder: Layer normalization [Ba et al., 2016]&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Layer normalization&lt;/strong&gt; is a trick to help models train faster.
+    &lt;ul&gt;
+      &lt;li&gt;Idea: cut down on uninformative variation in hidden vector values by normalizing to unit mean and standard deviation &lt;strong&gt;within each layer&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;LayerNorm’s success may be due to its normalizing gradients (&lt;em&gt;Xu et al., 2019&lt;/em&gt;)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Let $x\in \mathbb{R}^d$ be an individual (word) vector in the model.
+    &lt;ul&gt;
+      &lt;li&gt;Let the mean $\mu = \sum_{j=1}^d x_j \in \mathbb{R}$&lt;/li&gt;
+      &lt;li&gt;Let the standard deviation $\sigma = \sqrt{\frac{1}{d}\sum_{j=1}^d (x_j-\mu)^2} \in \mathbb{R}$&lt;/li&gt;
+      &lt;li&gt;Let $\gamma \in \mathbb{R}^d$ and $\beta \in \mathbb{R}$ be learned “gain” and “bias” parameters (Can omit)&lt;/li&gt;
+      &lt;li&gt;Then layer normalization computes:&lt;br /&gt;
+  \(\begin{align*}\text{output} = \frac{x-\mu}{\sigma + \epsilon}\ast\gamma + \beta
+  \end{align*}\);&lt;br /&gt;
+  (Normalize by scalar mean and variance, and modulate by learned elementwise gain and bias)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-transformer-encoder-scaled-dot-product-vaswani-et-al-2017&quot;&gt;The Transformer Encoder: Scaled Dot Product [Vaswani et al., 2017]&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;When dimensionality $d$ becomes large, dot products between vectors tend to become large.&lt;br /&gt;
+  Because of this, inputs to the softmax function can be large, making the gradients small (leading to saturate region)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instead of the self-attention functiopn we’ve seen:&lt;br /&gt;
+  $\text{output}_l = \text{softmax}(XQ_l K_l^T X^T) \ast X V_l$&lt;br /&gt;
+  We divide the attention scores by $\sqrt{d/h}$, to stop the scores from becoming large just as a function of $d/h$ (The dimensionality divided by the number of heads.):&lt;br /&gt;
+  $\text{output}_l = \text{softmax}(\frac{XQ_l K_l^T X^T}{\sqrt{d/h}}) \ast X V_l$&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;now-look-at-the-decoder-blocks&quot;&gt;Now look at the Decoder Blocks&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec9_12.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;the-transformer-decoder-cross-attention-details&quot;&gt;The Transformer Decoder: Cross-attention (details)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Let $h_1, \ldots, h_T$ be &lt;strong&gt;output&lt;/strong&gt; vecotrs &lt;strong&gt;from&lt;/strong&gt; the Transformer &lt;strong&gt;encoder&lt;/strong&gt; (the last block); $x_i \in \mathbb{R}^d$&lt;br /&gt;
+  Let $z_1, \ldots, z_T$ be input vectors from the Transformer &lt;strong&gt;decoder&lt;/strong&gt;, $z_i\in \mathbb{R}^d$&lt;br /&gt;
+  Then keys and values are drawn from the &lt;strong&gt;encoder&lt;/strong&gt; (like a memory); $k_i = Kh_i, v_i = Vh_i$&lt;br /&gt;
+  The queries are drawn from the &lt;strong&gt;decoder&lt;/strong&gt;; $q_i = Qz_i$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In matrices:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Let $H = \left[ h_1; \ldots, h_T \right] \in \mathbb{R}^{T\times d}$ be the concatenation of encoder vecotrs.&lt;/li&gt;
+      &lt;li&gt;Let $Z = \left[ z_1; \ldots, z_T \right] \in \mathbb{R}^{T\times d}$ be the concatenation of decoder vectors.&lt;/li&gt;
+      &lt;li&gt;The output is defined as $\text{output} = \text{softmax}(ZQ(HK)^T)\times HV$.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;what-would-we-like-to-fix-about-the-transformer&quot;&gt;What would we like to fix about the Transformer?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Quadratic compute in self-attention&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Computing all pairs of interactions means our computation grows quadratically with the sequence length.&lt;/li&gt;
+      &lt;li&gt;For recurrent models, it only grew linearly.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Position representations&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Are simple absolute indices the best we can do to represent position?&lt;/li&gt;
+      &lt;li&gt;Relative linear position attention (&lt;em&gt;Shaw et al., 2018&lt;/em&gt;)&lt;/li&gt;
+      &lt;li&gt;Dependency syntax-based position (&lt;em&gt;Wang et al., 2019&lt;/em&gt;)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;quadratic-computation-as-a-function-of-sequence-length&quot;&gt;Quadratic computation as a function of sequence length&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;One of the benefits of self-attention over recurrence was that it’s highly parallelizable.&lt;br /&gt;
+  However, its total number of operations grows as $O(T^2 d)$, where $T$ is the sequence length, and $d$ is the dimensionality.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec9_13.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Think of $d$ as around &lt;strong&gt;1,000&lt;/strong&gt;.&lt;br /&gt;
+  So, for a single (shortish) sentence, $T \le 30; T^2 \le$ &lt;strong&gt;900&lt;/strong&gt;.&lt;br /&gt;
+  In practice, we set a bound like $T = 512$.&lt;br /&gt;
+  But what if we’d like &lt;strong&gt;$T\ge 10,000$&lt;/strong&gt;? to work on long documents?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;recent-work-on-improving-on-quadratic-self-attention-cost&quot;&gt;Recent work on improving on quadratic self-attention cost&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Considerable recent work has gone into the question,&lt;br /&gt;
+  &lt;em&gt;Can we build models like Transformers without paying the $O(T^2)$ all-pairs self-attention cost?&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Linformer&lt;/strong&gt; (&lt;em&gt;Wang et al., 2020&lt;/em&gt;)&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec9_14.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Key idea: map the sequence length dimension to a lower-dimensional space for values, keys.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;BigBird&lt;/strong&gt; (&lt;em&gt;Zaheer et al., 2021&lt;/em&gt;)&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec9_15.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Key idea: replace all-pairs interactions with a family of other interactions, like &lt;strong&gt;local windows&lt;/strong&gt;, &lt;strong&gt;looking at everything&lt;/strong&gt;, and &lt;strong&gt;random interactions&lt;/strong&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Sat, 26 Mar 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs224n_lec9</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs224n_lec9</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>cs224n - Lecture 8. Attention (Cont.)</title>
         
           <description>&lt;h2 id=&quot;attention&quot;&gt;Attention&lt;/h2&gt;

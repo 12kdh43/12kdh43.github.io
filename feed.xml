@@ -1,4 +1,425 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-28T06:16:53+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">cs224n - Lecture 7. Translation, Seq2Seq, Attention</title><link href="http://0.0.0.0:4000/cs224n_lec7" rel="alternate" type="text/html" title="cs224n - Lecture 7. Translation, Seq2Seq, Attention" /><published>2022-03-23T00:00:00+00:00</published><updated>2022-03-23T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec7</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec7">&lt;h2 id=&quot;new-task-machine-translation&quot;&gt;New Task: Machine Translation&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-03-30T11:50:57+00:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Darron’s Devlog</title><entry><title type="html">cs224n - Lecture 9. Self-Attention and Transformers</title><link href="http://0.0.0.0:4000/cs224n_lec9" rel="alternate" type="text/html" title="cs224n - Lecture 9. Self-Attention and Transformers" /><published>2022-03-26T00:00:00+00:00</published><updated>2022-03-26T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec9</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec9">&lt;h2 id=&quot;so-far-recurrent-models-for-most-nlp&quot;&gt;So far: recurrent models for (most) NLP&lt;/h2&gt;
+
+&lt;p&gt;
+	&lt;img src=&quot;/assets/images/cs224n/lec9_0.png&quot; alt=&quot;png&quot; width=&quot;40%&quot; style=&quot;float: left&quot; /&gt;
+	&lt;br /&gt;
+	- Circa 2016, the de facto strategy in NLP is to &lt;strong&gt;encode&lt;/strong&gt;
+	sentences with a bidirectional LSTM. &lt;br /&gt;
+	(for example, the source sentence in a translation) &lt;br /&gt;  
+	&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;br /&gt;
+	- Define your output (parse, sentence, summary) as a sequence, and use an (unidirectional) LSTM to generate it. &lt;br /&gt;   
+	&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;br /&gt;
+	- Use attention to allow flexible access to memory.  
+&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Seq2Seq models need to process variable-length inputs into fixed-length representations&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To deal with seq2seq problems, we learned end-to-end differentiable system using an encoder-decoder architecture.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instead of entirely new ways of looking at problems, we’re trying to find the best &lt;strong&gt;building blocks&lt;/strong&gt; to plug into our models and enable broad progress.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec9_1.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;issues-with-recurrent-models-linear-interaction-distance&quot;&gt;Issues with recurrent models: Linear interaction distance&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;RNNs are unrolled “left-to-right”:&lt;br /&gt;
+  This encodes linear locality: a useful heuristic
+    &lt;ul&gt;
+      &lt;li&gt;Nearby words often affect each other’s meanings&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Problem&lt;/strong&gt;: RNNs take &lt;strong&gt;O(sequence length)&lt;/strong&gt; steps for distant word pairs to interact.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec9_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Hard to learn long-distance dependencies (because gradient problems)&lt;/li&gt;
+      &lt;li&gt;Linear order of words is “baked in”; linear order isn’t the right way to think about sentences&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;issues-with-recurrent-models-lack-of-parallelizability&quot;&gt;Issues with recurrent models: Lack of parallelizability&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Forward and backward passes have &lt;strong&gt;O(sequence length)&lt;/strong&gt; unparallelizable operations
+    &lt;ul&gt;
+      &lt;li&gt;Future RNN hidden states can’t be computed in full before past RNN hidden states have been computed; not GPU friendly, inhibits training on very large datasets.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;alternatives-word-windows&quot;&gt;Alternatives: Word windows&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Word window models aggregate local contexts (Also known as 1D convolution)
+    &lt;ul&gt;
+      &lt;li&gt;Number of unparallelizable operations does not increase sequence length&lt;br /&gt;
+  (&lt;strong&gt;O(1)&lt;/strong&gt; dependence in time)&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec9_3.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;What about in long-distance dependencies?
+    &lt;ul&gt;
+      &lt;li&gt;Stacking word window layers allows interaction between farther words&lt;/li&gt;
+      &lt;li&gt;Maximum Interaction distance = &lt;strong&gt;sequence length / window size&lt;/strong&gt;&lt;br /&gt;
+  But if your sequences are too long, you’ll just ignore long-distance context
+  &lt;img src=&quot;/assets/images/cs224n/lec9_4.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;alternatives-attention&quot;&gt;Alternatives: Attention&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Attention&lt;/strong&gt; treats each word’s representation as a &lt;strong&gt;query&lt;/strong&gt; to access and
+incorporate information from &lt;strong&gt;a set of values&lt;/strong&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;Out of the encoder-decoder structure; think about attention &lt;strong&gt;within a single sentence&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;Number of unparallelizable operations does not increase sequence length; not parallelizable in depth but parallelizable in time.&lt;/li&gt;
+      &lt;li&gt;Maximum interaction distance: &lt;strong&gt;O(1)&lt;/strong&gt;, since all words interact at every layer&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec9_5.png&quot; alt=&quot;png&quot; width=&quot;70%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;self-attention&quot;&gt;Self-Attention&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Recall: Attention operates on &lt;strong&gt;queries&lt;/strong&gt;, &lt;strong&gt;keys&lt;/strong&gt;, and &lt;strong&gt;values&lt;/strong&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;queries: $q_1, q_2, \ldots, q_T \in \mathbb{R}^d$&lt;/li&gt;
+      &lt;li&gt;keys: $k_1, k_2, \ldots, k_T \in \mathbb{R}d$&lt;/li&gt;
+      &lt;li&gt;values: $v_1, v_2, \ldots, v_T \in \mathbb{R}d$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In &lt;strong&gt;self-attention&lt;/strong&gt;, the queries, keys, and values are drawn from the &lt;strong&gt;same source&lt;/strong&gt;.&lt;br /&gt;
+  For example, if the output of the previous layer is $x_1, \ldots, x_T$ (one vec per word), we could let $v_i = k_i = q_i = x_i$ (use the same vectors for all of them).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The (dot product) self-attention operation is as follows:
+    &lt;ul&gt;
+      &lt;li&gt;Compute &lt;strong&gt;key-query&lt;/strong&gt; affinities: $e_{ij} = q_i^T k_j $&lt;/li&gt;
+      &lt;li&gt;Compute attention weights from affinities(softmax):&lt;br /&gt;
+  \(\begin{align*}
+  \alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{j^\prime} \exp(e_{ij^\prime})}
+  \end{align*}\)&lt;/li&gt;
+      &lt;li&gt;Compute outputs as weighted sum of &lt;strong&gt;values&lt;/strong&gt;&lt;br /&gt;
+  \(\begin{align*}
+  \text{output}_i = \sum_j \alpha_{ij}v_j
+  \end{align*}\)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Q: FCN vs Self-Attention?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;self-attention-as-an-nlp-building-block&quot;&gt;Self-attention as an NLP building block&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec9_6.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Can self-attention replace the recurrence? &lt;strong&gt;NO&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sequence-order&quot;&gt;Sequence order&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Self-attention is an operation on &lt;strong&gt;sets&lt;/strong&gt;; it has &lt;strong&gt;no inherent notion of order&lt;/strong&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;To fix this, encode the order of the sentence.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Consider representing each &lt;strong&gt;sequence index&lt;/strong&gt; as a &lt;strong&gt;vector&lt;/strong&gt;;&lt;br /&gt;
+  $p_i \in \mathbb{R}^d$, for \(i \in \left\{ 1,2,\ldots, T \right\}\) are position vectors&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Let $\tilde{v}_i, \tilde{k}_i, \tilde{q}_i$ be our old inputs, then add $p_i$ to inputs;&lt;br /&gt;
+  $v_i = \tilde{v}_i + p_i$&lt;br /&gt;
+  $q_i = \tilde{q}_i + p_i$&lt;br /&gt;
+  $k_i = \tilde{k}_i + p_i$
+    &lt;ul&gt;
+      &lt;li&gt;In deep self-attention networks, we do this at the first layer; you could concatenate them as well, but mostly, just add.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Position representation vectors through sinusoids
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Sinusoidal position representations&lt;/strong&gt;: concatenate sinusoidal functions of varying periods&lt;br /&gt;
+ &lt;img src=&quot;/assets/images/cs224n/lec9_7.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;Pros:
+        &lt;ul&gt;
+          &lt;li&gt;Periodicity indicates that maybe “absolute position” isn’t as important&lt;/li&gt;
+          &lt;li&gt;Maybe can extrapolate to longer sequences as periods restart!&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Cons:
+        &lt;ul&gt;
+          &lt;li&gt;Not learnable; also the extrapolation doesn’t really work!&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Position representation vectors learned from scratch
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Learned absolute position representations&lt;/strong&gt;: Let a matrix $p \in \mathbb{R}^{d \times T}$ and each learnable parameters $p_i$ be a column of that matrix; Most systems use this!&lt;/li&gt;
+      &lt;li&gt;Pros:
+        &lt;ul&gt;
+          &lt;li&gt;Flexibility: each position gets to be learned to fit the data&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Cons:
+        &lt;ul&gt;
+          &lt;li&gt;Definitely can’t extrapolate to indices outside $1, \ldots, T$.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Some more flexible representations of position:
+        &lt;ul&gt;
+          &lt;li&gt;Relative linear position attention (&lt;em&gt;Shaw et al., 2018&lt;/em&gt;)&lt;/li&gt;
+          &lt;li&gt;Dependency syntax-based position (&lt;em&gt;Wang et al., 2019&lt;/em&gt;)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;nonlinearities&quot;&gt;Nonlinearities&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;There are no elementwise nonlinearities in self-attention; stacking more self-attention layers just re-averages &lt;strong&gt;value&lt;/strong&gt; vectors.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Easy fix: add a &lt;strong&gt;feed-forward network&lt;/strong&gt; to post-process each output vector.&lt;br /&gt;
+  (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Self-Att. - FF - Self-Att. - FF - ...&lt;/code&gt;)&lt;br /&gt;
+  \(\begin{align*}
+  m_i &amp;amp;= MLP(\text{output}_i) \\
+      &amp;amp;= W_2 \ast \text{ReLU}(W_1 \times \text{output}_i + b_1) + b_2
+  \end{align*}\)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;masking-the-future&quot;&gt;Masking the future&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;To use self-attention in &lt;strong&gt;decoders&lt;/strong&gt;, we need to ensure we don’t “look at the future” when predicting a sequence.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Easily: at every timestep, we could change the set of &lt;strong&gt;keys and queries&lt;/strong&gt; to include only past words. But it’s inefficient dealing with tensors, not parallelizable.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instead, to enable parallelization, &lt;strong&gt;mask out attention&lt;/strong&gt; to future words by setting attention scores to $-\infty$ (attention weights to 0).&lt;br /&gt;
+  $e_{ij} = \begin{cases} q_i^T k_j, &amp;amp; j &amp;lt; i &lt;br /&gt;
+                          -\infty, &amp;amp; j \ge i \end{cases}$&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec9_8.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;recap-necessities-for-a-self-attention-building-block&quot;&gt;Recap: Necessities for a self-attention building block&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Self-attention&lt;/strong&gt;: the basis of the method&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Position representations&lt;/strong&gt;:&lt;br /&gt;
+  Specify the sequence order, since self-attention is an unordered function of its inputs.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Nonlinearities&lt;/strong&gt;:&lt;br /&gt;
+  At the output of the self-attention block, frequently implemented as a simple feed-forward network.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Masking&lt;/strong&gt;:&lt;br /&gt;
+  In order to parallelize operations while not looking at the future, keeps information about the future from “leaking” to the past.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;transformer&quot;&gt;Transformer&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;The Transformer Encoder-Decodr (&lt;em&gt;Vaswani et al., 2017&lt;/em&gt;)&lt;br /&gt;
+  At a high level look;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec9_9.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What’s left in a Transformer Encoder Block:
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;Key-query-value attention&lt;/strong&gt;: How do we get input vectors from a single word embedding?&lt;/li&gt;
+      &lt;li&gt;__Multi-headed attention: Attend to multiple places in a single layer&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Tricks to help with training&lt;/strong&gt;:
+        &lt;ul&gt;
+          &lt;li&gt;Residual connections&lt;/li&gt;
+          &lt;li&gt;Layer normalization&lt;/li&gt;
+          &lt;li&gt;Scaling the dot product
+  These tricks &lt;strong&gt;don’t improve&lt;/strong&gt; what the model is able to do; they help improve the training process. Both of these types of modeling improvements are very important.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-transformer-encoder-key-query-value-attention&quot;&gt;The Transformer Encoder: Key-Query-Value Attention&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Let $x_1, \ldots, x_T \in \mathbb{R}^d$ be input vectors to the Transformer encoder. Then keys, queries, values are:
+    &lt;ul&gt;
+      &lt;li&gt;$k_i = Kx_i$, where $K \in \mathbb{R}^{d \times d}$ is the key matrix.&lt;/li&gt;
+      &lt;li&gt;$q_i = Qx_i$, where $Q \in \mathbb{R}^{d \times d}$ is the query matrix.&lt;/li&gt;
+      &lt;li&gt;$v_i = Vx_i$, where $V \in \mathbb{R}^{d \times d}$ is the value matrix.&lt;br /&gt;
+These matrices (of learnable parameters) allow &lt;em&gt;different aspects&lt;/em&gt; of the $x$ vectors to be used/emphasized in each of the three roles.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Computed in matrices,
+    &lt;ul&gt;
+      &lt;li&gt;Let $X = \left[ x_1; \ldots; x_T \right] \in \mathbb{R}^{T\times d}$ be the concatenation of input vectors.&lt;/li&gt;
+      &lt;li&gt;First, note that $XK \in \mathbb{R}^{T\times d}$, $XQ \in \mathbb{R}^{T\times d}$, $XV \in \mathbb{R}^{T\times d}$.&lt;/li&gt;
+      &lt;li&gt;The output tensor is defined as $\text{output} = \text{softmax}(XQ(XK)^T) \times XV$.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Take the query-key dot products in one matrix multiplication: $XQ(XK)^T = XQK^T X^T \in \mathbb{T}^{T\times T} $ (All pairs of attention scores)&lt;/li&gt;
+  &lt;li&gt;Take softmax, and compute the weighted average with another matrix multiplication: $\text{output} \in \mathbb{T}^{T\times d}$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;the-transformer-encoder-multi-headed-attention&quot;&gt;The Transformer Encoder: Multi-headed attention&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;What if we want to look in multiple places in the sentence at once?
+    &lt;ul&gt;
+      &lt;li&gt;For word $i$, self-attention “looks” where $x_i^T Q^T K x_j$ is high, but maybe we want to focus on different $j$ for different reasons?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Define &lt;strong&gt;multiple attention “heads”&lt;/strong&gt; through multiple $Q, K, V$ matrices:
+    &lt;ul&gt;
+      &lt;li&gt;Let $Q_l, K_l, V_l \in \mathbb{R}^{d\times \frac{d}{h}}$, where $h$ is the number of attention heads, and $l$ ranges from $1$ to $h$.&lt;/li&gt;
+      &lt;li&gt;Each attention head performs attention independently:&lt;br /&gt;
+  $\text{output}_l = \text{softmax}(XQ_l K_l^T X^T) \ast X V_l \in \mathbb{R}^{d/h}$&lt;/li&gt;
+      &lt;li&gt;Then combine the all outputs from the heads:&lt;br /&gt;
+  $\text{output} = Y\left[ \text{output}_1; \ldots, \text{output}_h \right]$, where $Y \in \mathbb{R}^{d\times d}$.&lt;/li&gt;
+      &lt;li&gt;Each head gets to “look” at different things and construct value vectors differently.&lt;br /&gt;
+  &lt;img src=&quot;/assets/images/cs224n/lec9_10.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-transformer-encoder-residual-connections-he-et-al-2016&quot;&gt;The Transformer Encoder: Residual connections [He et al., 2016]&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Residual connections&lt;/strong&gt; are a trick to help models train better.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instead of $X^{(i)} = \text{Layer}(X^{(i-1)})$ (where $i$ represents the layer)&lt;br /&gt;
+  We let $X^{(i)} = X^{(i-1)} + \text{Layer}(X^{(i-1)})$ (so we only have to learn “the residual” from the previous layer)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Solves vanishing gradient problem&lt;/li&gt;
+  &lt;li&gt;Residual connections are thought to make the &lt;em&gt;loss landscape&lt;/em&gt; considerably smoother (thus easier training!)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec9_11.png&quot; alt=&quot;png&quot; width=&quot;40%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;the-transformer-encoder-layer-normalization-ba-et-al-2016&quot;&gt;The Transformer Encoder: Layer normalization [Ba et al., 2016]&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Layer normalization&lt;/strong&gt; is a trick to help models train faster.
+    &lt;ul&gt;
+      &lt;li&gt;Idea: cut down on uninformative variation in hidden vector values by normalizing to unit mean and standard deviation &lt;strong&gt;within each layer&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;LayerNorm’s success may be due to its normalizing gradients (&lt;em&gt;Xu et al., 2019&lt;/em&gt;)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Let $x\in \mathbb{R}^d$ be an individual (word) vector in the model.
+    &lt;ul&gt;
+      &lt;li&gt;Let the mean $\mu = \sum_{j=1}^d x_j \in \mathbb{R}$&lt;/li&gt;
+      &lt;li&gt;Let the standard deviation $\sigma = \sqrt{\frac{1}{d}\sum_{j=1}^d (x_j-\mu)^2} \in \mathbb{R}$&lt;/li&gt;
+      &lt;li&gt;Let $\gamma \in \mathbb{R}^d$ and $\beta \in \mathbb{R}$ be learned “gain” and “bias” parameters (Can omit)&lt;/li&gt;
+      &lt;li&gt;Then layer normalization computes:&lt;br /&gt;
+  \(\begin{align*}\text{output} = \frac{x-\mu}{\sigma + \epsilon}\ast\gamma + \beta
+  \end{align*}\);&lt;br /&gt;
+  (Normalize by scalar mean and variance, and modulate by learned elementwise gain and bias)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-transformer-encoder-scaled-dot-product-vaswani-et-al-2017&quot;&gt;The Transformer Encoder: Scaled Dot Product [Vaswani et al., 2017]&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;When dimensionality $d$ becomes large, dot products between vectors tend to become large.&lt;br /&gt;
+  Because of this, inputs to the softmax function can be large, making the gradients small (leading to saturate region)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instead of the self-attention functiopn we’ve seen:&lt;br /&gt;
+  $\text{output}_l = \text{softmax}(XQ_l K_l^T X^T) \ast X V_l$&lt;br /&gt;
+  We divide the attention scores by $\sqrt{d/h}$, to stop the scores from becoming large just as a function of $d/h$ (The dimensionality divided by the number of heads.):&lt;br /&gt;
+  $\text{output}_l = \text{softmax}(\frac{XQ_l K_l^T X^T}{\sqrt{d/h}}) \ast X V_l$&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;now-look-at-the-decoder-blocks&quot;&gt;Now look at the Decoder Blocks&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec9_12.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;the-transformer-decoder-cross-attention-details&quot;&gt;The Transformer Decoder: Cross-attention (details)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Let $h_1, \ldots, h_T$ be &lt;strong&gt;output&lt;/strong&gt; vecotrs &lt;strong&gt;from&lt;/strong&gt; the Transformer &lt;strong&gt;encoder&lt;/strong&gt; (the last block); $x_i \in \mathbb{R}^d$&lt;br /&gt;
+  Let $z_1, \ldots, z_T$ be input vectors from the Transformer &lt;strong&gt;decoder&lt;/strong&gt;, $z_i\in \mathbb{R}^d$&lt;br /&gt;
+  Then keys and values are drawn from the &lt;strong&gt;encoder&lt;/strong&gt; (like a memory); $k_i = Kh_i, v_i = Vh_i$&lt;br /&gt;
+  The queries are drawn from the &lt;strong&gt;decoder&lt;/strong&gt;; $q_i = Qz_i$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In matrices:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Let $H = \left[ h_1; \ldots, h_T \right] \in \mathbb{R}^{T\times d}$ be the concatenation of encoder vecotrs.&lt;/li&gt;
+      &lt;li&gt;Let $Z = \left[ z_1; \ldots, z_T \right] \in \mathbb{R}^{T\times d}$ be the concatenation of decoder vectors.&lt;/li&gt;
+      &lt;li&gt;The output is defined as $\text{output} = \text{softmax}(ZQ(HK)^T)\times HV$.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;what-would-we-like-to-fix-about-the-transformer&quot;&gt;What would we like to fix about the Transformer?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Quadratic compute in self-attention&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Computing all pairs of interactions means our computation grows quadratically with the sequence length.&lt;/li&gt;
+      &lt;li&gt;For recurrent models, it only grew linearly.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Position representations&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Are simple absolute indices the best we can do to represent position?&lt;/li&gt;
+      &lt;li&gt;Relative linear position attention (&lt;em&gt;Shaw et al., 2018&lt;/em&gt;)&lt;/li&gt;
+      &lt;li&gt;Dependency syntax-based position (&lt;em&gt;Wang et al., 2019&lt;/em&gt;)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;quadratic-computation-as-a-function-of-sequence-length&quot;&gt;Quadratic computation as a function of sequence length&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;One of the benefits of self-attention over recurrence was that it’s highly parallelizable.&lt;br /&gt;
+  However, its total number of operations grows as $O(T^2 d)$, where $T$ is the sequence length, and $d$ is the dimensionality.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec9_13.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Think of $d$ as around &lt;strong&gt;1,000&lt;/strong&gt;.&lt;br /&gt;
+  So, for a single (shortish) sentence, $T \le 30; T^2 \le$ &lt;strong&gt;900&lt;/strong&gt;.&lt;br /&gt;
+  In practice, we set a bound like $T = 512$.&lt;br /&gt;
+  But what if we’d like &lt;strong&gt;$T\ge 10,000$&lt;/strong&gt;? to work on long documents?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;recent-work-on-improving-on-quadratic-self-attention-cost&quot;&gt;Recent work on improving on quadratic self-attention cost&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Considerable recent work has gone into the question,&lt;br /&gt;
+  &lt;em&gt;Can we build models like Transformers without paying the $O(T^2)$ all-pairs self-attention cost?&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Linformer&lt;/strong&gt; (&lt;em&gt;Wang et al., 2020&lt;/em&gt;)&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec9_14.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Key idea: map the sequence length dimension to a lower-dimensional space for values, keys.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;BigBird&lt;/strong&gt; (&lt;em&gt;Zaheer et al., 2021&lt;/em&gt;)&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec9_15.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Key idea: replace all-pairs interactions with a family of other interactions, like &lt;strong&gt;local windows&lt;/strong&gt;, &lt;strong&gt;looking at everything&lt;/strong&gt;, and &lt;strong&gt;random interactions&lt;/strong&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Darron Kwon</name></author><category term="cs224n" /><summary type="html">So far: recurrent models for (most) NLP - Circa 2016, the de facto strategy in NLP is to encode sentences with a bidirectional LSTM. (for example, the source sentence in a translation) - Define your output (parse, sentence, summary) as a sequence, and use an (unidirectional) LSTM to generate it. - Use attention to allow flexible access to memory. Seq2Seq models need to process variable-length inputs into fixed-length representations To deal with seq2seq problems, we learned end-to-end differentiable system using an encoder-decoder architecture. Instead of entirely new ways of looking at problems, we’re trying to find the best building blocks to plug into our models and enable broad progress. Issues with recurrent models: Linear interaction distance RNNs are unrolled “left-to-right”: This encodes linear locality: a useful heuristic Nearby words often affect each other’s meanings Problem: RNNs take O(sequence length) steps for distant word pairs to interact. Hard to learn long-distance dependencies (because gradient problems) Linear order of words is “baked in”; linear order isn’t the right way to think about sentences Issues with recurrent models: Lack of parallelizability Forward and backward passes have O(sequence length) unparallelizable operations Future RNN hidden states can’t be computed in full before past RNN hidden states have been computed; not GPU friendly, inhibits training on very large datasets. Alternatives: Word windows Word window models aggregate local contexts (Also known as 1D convolution) Number of unparallelizable operations does not increase sequence length (O(1) dependence in time) What about in long-distance dependencies? Stacking word window layers allows interaction between farther words Maximum Interaction distance = sequence length / window size But if your sequences are too long, you’ll just ignore long-distance context Alternatives: Attention Attention treats each word’s representation as a query to access and incorporate information from a set of values. Out of the encoder-decoder structure; think about attention within a single sentence. Number of unparallelizable operations does not increase sequence length; not parallelizable in depth but parallelizable in time. Maximum interaction distance: O(1), since all words interact at every layer Self-Attention Recall: Attention operates on queries, keys, and values. queries: $q_1, q_2, \ldots, q_T \in \mathbb{R}^d$ keys: $k_1, k_2, \ldots, k_T \in \mathbb{R}d$ values: $v_1, v_2, \ldots, v_T \in \mathbb{R}d$ In self-attention, the queries, keys, and values are drawn from the same source. For example, if the output of the previous layer is $x_1, \ldots, x_T$ (one vec per word), we could let $v_i = k_i = q_i = x_i$ (use the same vectors for all of them). The (dot product) self-attention operation is as follows: Compute key-query affinities: $e_{ij} = q_i^T k_j $ Compute attention weights from affinities(softmax): \(\begin{align*} \alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{j^\prime} \exp(e_{ij^\prime})} \end{align*}\) Compute outputs as weighted sum of values \(\begin{align*} \text{output}_i = \sum_j \alpha_{ij}v_j \end{align*}\) Q: FCN vs Self-Attention? Self-attention as an NLP building block Can self-attention replace the recurrence? NO. Sequence order Self-attention is an operation on sets; it has no inherent notion of order. To fix this, encode the order of the sentence. Consider representing each sequence index as a vector; $p_i \in \mathbb{R}^d$, for \(i \in \left\{ 1,2,\ldots, T \right\}\) are position vectors Let $\tilde{v}_i, \tilde{k}_i, \tilde{q}_i$ be our old inputs, then add $p_i$ to inputs; $v_i = \tilde{v}_i + p_i$ $q_i = \tilde{q}_i + p_i$ $k_i = \tilde{k}_i + p_i$ In deep self-attention networks, we do this at the first layer; you could concatenate them as well, but mostly, just add. Position representation vectors through sinusoids Sinusoidal position representations: concatenate sinusoidal functions of varying periods Pros: Periodicity indicates that maybe “absolute position” isn’t as important Maybe can extrapolate to longer sequences as periods restart! Cons: Not learnable; also the extrapolation doesn’t really work! Position representation vectors learned from scratch Learned absolute position representations: Let a matrix $p \in \mathbb{R}^{d \times T}$ and each learnable parameters $p_i$ be a column of that matrix; Most systems use this! Pros: Flexibility: each position gets to be learned to fit the data Cons: Definitely can’t extrapolate to indices outside $1, \ldots, T$. Some more flexible representations of position: Relative linear position attention (Shaw et al., 2018) Dependency syntax-based position (Wang et al., 2019) Nonlinearities There are no elementwise nonlinearities in self-attention; stacking more self-attention layers just re-averages value vectors. Easy fix: add a feed-forward network to post-process each output vector. (Self-Att. - FF - Self-Att. - FF - ...) \(\begin{align*} m_i &amp;amp;= MLP(\text{output}_i) \\ &amp;amp;= W_2 \ast \text{ReLU}(W_1 \times \text{output}_i + b_1) + b_2 \end{align*}\) Masking the future To use self-attention in decoders, we need to ensure we don’t “look at the future” when predicting a sequence. Easily: at every timestep, we could change the set of keys and queries to include only past words. But it’s inefficient dealing with tensors, not parallelizable. Instead, to enable parallelization, mask out attention to future words by setting attention scores to $-\infty$ (attention weights to 0). $e_{ij} = \begin{cases} q_i^T k_j, &amp;amp; j &amp;lt; i -\infty, &amp;amp; j \ge i \end{cases}$ Recap: Necessities for a self-attention building block Self-attention: the basis of the method Position representations: Specify the sequence order, since self-attention is an unordered function of its inputs. Nonlinearities: At the output of the self-attention block, frequently implemented as a simple feed-forward network. Masking: In order to parallelize operations while not looking at the future, keeps information about the future from “leaking” to the past. Transformer The Transformer Encoder-Decodr (Vaswani et al., 2017) At a high level look; What’s left in a Transformer Encoder Block: Key-query-value attention: How do we get input vectors from a single word embedding? __Multi-headed attention: Attend to multiple places in a single layer Tricks to help with training: Residual connections Layer normalization Scaling the dot product These tricks don’t improve what the model is able to do; they help improve the training process. Both of these types of modeling improvements are very important. The Transformer Encoder: Key-Query-Value Attention Let $x_1, \ldots, x_T \in \mathbb{R}^d$ be input vectors to the Transformer encoder. Then keys, queries, values are: $k_i = Kx_i$, where $K \in \mathbb{R}^{d \times d}$ is the key matrix. $q_i = Qx_i$, where $Q \in \mathbb{R}^{d \times d}$ is the query matrix. $v_i = Vx_i$, where $V \in \mathbb{R}^{d \times d}$ is the value matrix. These matrices (of learnable parameters) allow different aspects of the $x$ vectors to be used/emphasized in each of the three roles. Computed in matrices, Let $X = \left[ x_1; \ldots; x_T \right] \in \mathbb{R}^{T\times d}$ be the concatenation of input vectors. First, note that $XK \in \mathbb{R}^{T\times d}$, $XQ \in \mathbb{R}^{T\times d}$, $XV \in \mathbb{R}^{T\times d}$. The output tensor is defined as $\text{output} = \text{softmax}(XQ(XK)^T) \times XV$. Take the query-key dot products in one matrix multiplication: $XQ(XK)^T = XQK^T X^T \in \mathbb{T}^{T\times T} $ (All pairs of attention scores) Take softmax, and compute the weighted average with another matrix multiplication: $\text{output} \in \mathbb{T}^{T\times d}$ The Transformer Encoder: Multi-headed attention What if we want to look in multiple places in the sentence at once? For word $i$, self-attention “looks” where $x_i^T Q^T K x_j$ is high, but maybe we want to focus on different $j$ for different reasons? Define multiple attention “heads” through multiple $Q, K, V$ matrices: Let $Q_l, K_l, V_l \in \mathbb{R}^{d\times \frac{d}{h}}$, where $h$ is the number of attention heads, and $l$ ranges from $1$ to $h$. Each attention head performs attention independently: $\text{output}_l = \text{softmax}(XQ_l K_l^T X^T) \ast X V_l \in \mathbb{R}^{d/h}$ Then combine the all outputs from the heads: $\text{output} = Y\left[ \text{output}_1; \ldots, \text{output}_h \right]$, where $Y \in \mathbb{R}^{d\times d}$. Each head gets to “look” at different things and construct value vectors differently. The Transformer Encoder: Residual connections [He et al., 2016] Residual connections are a trick to help models train better. Instead of $X^{(i)} = \text{Layer}(X^{(i-1)})$ (where $i$ represents the layer) We let $X^{(i)} = X^{(i-1)} + \text{Layer}(X^{(i-1)})$ (so we only have to learn “the residual” from the previous layer) Solves vanishing gradient problem Residual connections are thought to make the loss landscape considerably smoother (thus easier training!) The Transformer Encoder: Layer normalization [Ba et al., 2016] Layer normalization is a trick to help models train faster. Idea: cut down on uninformative variation in hidden vector values by normalizing to unit mean and standard deviation within each layer. LayerNorm’s success may be due to its normalizing gradients (Xu et al., 2019) Let $x\in \mathbb{R}^d$ be an individual (word) vector in the model. Let the mean $\mu = \sum_{j=1}^d x_j \in \mathbb{R}$ Let the standard deviation $\sigma = \sqrt{\frac{1}{d}\sum_{j=1}^d (x_j-\mu)^2} \in \mathbb{R}$ Let $\gamma \in \mathbb{R}^d$ and $\beta \in \mathbb{R}$ be learned “gain” and “bias” parameters (Can omit) Then layer normalization computes: \(\begin{align*}\text{output} = \frac{x-\mu}{\sigma + \epsilon}\ast\gamma + \beta \end{align*}\); (Normalize by scalar mean and variance, and modulate by learned elementwise gain and bias) The Transformer Encoder: Scaled Dot Product [Vaswani et al., 2017] When dimensionality $d$ becomes large, dot products between vectors tend to become large. Because of this, inputs to the softmax function can be large, making the gradients small (leading to saturate region) Instead of the self-attention functiopn we’ve seen: $\text{output}_l = \text{softmax}(XQ_l K_l^T X^T) \ast X V_l$ We divide the attention scores by $\sqrt{d/h}$, to stop the scores from becoming large just as a function of $d/h$ (The dimensionality divided by the number of heads.): $\text{output}_l = \text{softmax}(\frac{XQ_l K_l^T X^T}{\sqrt{d/h}}) \ast X V_l$ Now look at the Decoder Blocks The Transformer Decoder: Cross-attention (details) Let $h_1, \ldots, h_T$ be output vecotrs from the Transformer encoder (the last block); $x_i \in \mathbb{R}^d$ Let $z_1, \ldots, z_T$ be input vectors from the Transformer decoder, $z_i\in \mathbb{R}^d$ Then keys and values are drawn from the encoder (like a memory); $k_i = Kh_i, v_i = Vh_i$ The queries are drawn from the decoder; $q_i = Qz_i$ In matrices: Let $H = \left[ h_1; \ldots, h_T \right] \in \mathbb{R}^{T\times d}$ be the concatenation of encoder vecotrs. Let $Z = \left[ z_1; \ldots, z_T \right] \in \mathbb{R}^{T\times d}$ be the concatenation of decoder vectors. The output is defined as $\text{output} = \text{softmax}(ZQ(HK)^T)\times HV$. What would we like to fix about the Transformer? Quadratic compute in self-attention: Computing all pairs of interactions means our computation grows quadratically with the sequence length. For recurrent models, it only grew linearly. Position representations: Are simple absolute indices the best we can do to represent position? Relative linear position attention (Shaw et al., 2018) Dependency syntax-based position (Wang et al., 2019) Quadratic computation as a function of sequence length One of the benefits of self-attention over recurrence was that it’s highly parallelizable. However, its total number of operations grows as $O(T^2 d)$, where $T$ is the sequence length, and $d$ is the dimensionality. Think of $d$ as around 1,000. So, for a single (shortish) sentence, $T \le 30; T^2 \le$ 900. In practice, we set a bound like $T = 512$. But what if we’d like $T\ge 10,000$? to work on long documents? Recent work on improving on quadratic self-attention cost Considerable recent work has gone into the question, Can we build models like Transformers without paying the $O(T^2)$ all-pairs self-attention cost? Linformer (Wang et al., 2020) Key idea: map the sequence length dimension to a lower-dimensional space for values, keys. BigBird (Zaheer et al., 2021) Key idea: replace all-pairs interactions with a family of other interactions, like local windows, looking at everything, and random interactions.</summary></entry><entry><title type="html">cs224n - Lecture 7. Translation, Seq2Seq, Attention</title><link href="http://0.0.0.0:4000/cs224n_lec7" rel="alternate" type="text/html" title="cs224n - Lecture 7. Translation, Seq2Seq, Attention" /><published>2022-03-23T00:00:00+00:00</published><updated>2022-03-23T00:00:00+00:00</updated><id>http://0.0.0.0:4000/cs224n_lec7</id><content type="html" xml:base="http://0.0.0.0:4000/cs224n_lec7">&lt;h2 id=&quot;new-task-machine-translation&quot;&gt;New Task: Machine Translation&lt;/h2&gt;
 
 &lt;h2 id=&quot;pre-neural-machine-translation&quot;&gt;Pre-Neural Machine Translation&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Machine Translation (MT)&lt;/strong&gt; is the task of translating a sentence &lt;em&gt;x&lt;/em&gt; from one language (the &lt;strong&gt;source language&lt;/strong&gt;) to a sentence &lt;em&gt;y&lt;/em&gt; in another language (the &lt;strong&gt;target language&lt;/strong&gt;).&lt;/p&gt;
@@ -2095,137 +2516,4 @@ J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substac
 \frac{\partial}{\partial v_c} \log P(o|c) &amp;amp;= u_o - \frac{\sum_{x=1}^V \exp(u_x^T v_c)u_x}{\sum_{w=1}^V \exp(u_w^T v_c)} \\
 	&amp;amp; = u_o - \sum_{x=1}^V \underbrace{\frac{\exp(u_x^T v_c)}{\sum_{w=1}^V \exp(u_w^T v_c)}}_{\mbox{softmax formula}} u_x \\
 	&amp;amp; = u_o - \underbrace{\sum_{x=1}^V P(x|c) u_x}_{\mbox{Expectation}} \\
-	&amp;amp; = \mbox{observed} - \mbox{expected} \end{align*}\)&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="cs224n" /><summary type="html">Objectives The foundations of the effective modern methods for deep learning applied to NLP; from basics to key methods used in NLP: RNN, Attention, Transformers, etc.) A big picture understanding of human languages and the difficulties in understanding and producing them An understanding of and ability to build systems (in PyTorch) for some of the major problems in NLP: Word meaning, dependency parsing, machine translation, question answering NLP tasks: Easy: Spell Checking, Keyword Search, Finding Synonyms Medium: Parsing information from websites, documents, etc. Hard: Machine Translation, Semantic Analysis, Coreference, QA Word meaning Commonest linguistic way of thinking of meaning: signifier (symbol) $\Leftrightarrow$ signified (idea or thing) $=$ denotational semantics Common NLP solution: Use, e.g., WordNet, a thesaurus containing lists of synonym sets and hypernyms(“is a” relationships). Problems with resources like WordNet Great as a resource but missing nuance Missing new meanings of words; impossible to keep up-to-date Subjective Requires human labor to create and adapt Can’t compute accurate word similarity Representing words as discrete symbols In traditional NLP, we regard words as discrete symbols - a localist representation. $\rightarrow$ in a statistical machine learning systems, such symbols for words are separately represented by one-hot vectors. Thus we need to have huge vector dimension corresponding to the number of words in vocabulary. But with discrete symbols, two vectors are orthogonal and there is no natural notion of similarity for one-hot vectors. Solution: Could try to rely on WordNet’s list of synonyms to get similarity? But it is well-known to fail badly; incompleteness, etc. Instead: learn to encode similarity in the vecotr themselves. Representing words by their context Distributional semantics: A word’s meaning is given by the words that frequently appear close-by “You shall know a word by the company it keeps” (J. R. Firth 1957:11) One of the most successful ideas of modern statistical NLP When a word w appears in a text, its context is the set of words that appear nearby(within a fixed-size window). Use the many contexts of w to build up a representation of w Word vectors A dense vector for each word, chosen so that it is similar to vectors of words that appear in similar contexts Note: as a distributed representation, word vectors are also called word embeddings or (neural) words representations Word2vec Word2vec: overview Word2vec(Mikolov et al. 2013) is a framework for learning word vectors idea: We have a large corpus(“body”) of text Every word in a fixed vocabulary is representated by a vector Go through each position t in the text, which has a center word c and context(“outside”) words o Use the similarity of the word vectors for c and o to calculate the probability of o given c(or vice versa) Keep adjusting the word vectors to maximize this probability We can learn these word vectors from just a big pile of text by doing this distributional similarity task of being able to predict what words occur in the context of other words. Example windows and process for computing $P(w_{t+j}|w_t)$ Word2vec: objective function For each position $t = 1, \ldots, T$, predict context words within a window of fixed size m, given center word $w_j$. Data likelihood: \(\begin{align*} L(\theta) = \prod_{t=1}^T \prod_{\substack{-m\leqq j\leqq m \\ j\ne 0}} P(w_{t+j}|w_t;\theta) \end{align*}\) where $\theta$ is all variables to be optimized. The objective function $J(\theta)$ is the (average) negative log likelihood: \(\begin{align*} J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substack{-m\leqq j\leqq m \\ j\ne 0}}\log P(w_{t+j}|w_t;\theta) \end{align*}\) Minimizing objective function $\Leftrightarrow$ Maximizing predictive accuracy Question: How to calculate $P(w_{t+j}\vert w_t;\theta)$? Answer: We will use two vectors per word w: $v_w$ when w is a center word $u_w$ when w is a context word Then for a centor word c and a context word o: \(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\) Word2vec: prediction function \(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\) $u_w^T v_c$: Dot product compares similarity of o and c. $u^T v = u\ .v = \sum_{i=1}^n u_i v_i$ Larger dot product = larger probability $\exp$: Exponentiation makes anything positive $\sum_{w \in V}\exp(u_w^T v_c)$: Normalize over entire vocabulary to give probability distribution. This is an example of the softmax function $\mathbb{R}^n \rightarrow (0,1)^n$(Open region) that maps arbitary values $x_i$ to a probability distribution $p_i$ \(\mbox{softmax}(x_i) = \frac{\exp(x_i)}{\sum_{j=1}^n\exp(x_j)} = p_i\) To train the model: Optimize value of parameters to minimize loss Recall: $\theta$ represents all the model parameters, in one long vector In our case, with d-dimensional vectors and V-many words, we have: $\theta \in \mathbb{R}^{2dV}$ Remember: every word has two vectors We optimize these parameters by walking down the gradient(gradient descent) We compute all vector gradients Word2vec derivations of gradient \(\begin{align*} J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substack{-m\leqq j\leqq m \\ j\ne 0}}\log P(w_{t+j}|w_t;\theta) \end{align*}\) \(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\) \(\frac{\partial}{\partial v_c} \log \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)} = \underbrace{\frac{\partial}{\partial v_c} \log \exp(u_o^T v_c)}_{(1)} - \underbrace{\frac{\partial}{\partial v_c} \log \sum_{w=1}^V \exp(u_w^T v_c)}_{(2)}\) \(\begin{align*}\cdots (1) &amp;amp;= \frac{\partial}{\partial v_c} u_o^T v_c \\ &amp;amp;= u_o \end{align*}\) \(\begin{align*}\cdots (2) &amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \frac{\partial}{\partial v_c} \exp(u_x^T v_c) \\ &amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \exp(u_x^T v_c) \cdot \frac{\partial}{\partial v_c} u_x^T v_c \\ &amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \exp(u_x^T v_c) \cdot u_x \\ \end{align*} \\\) \(\begin{align*} \frac{\partial}{\partial v_c} \log P(o|c) &amp;amp;= u_o - \frac{\sum_{x=1}^V \exp(u_x^T v_c)u_x}{\sum_{w=1}^V \exp(u_w^T v_c)} \\ &amp;amp; = u_o - \sum_{x=1}^V \underbrace{\frac{\exp(u_x^T v_c)}{\sum_{w=1}^V \exp(u_w^T v_c)}}_{\mbox{softmax formula}} u_x \\ &amp;amp; = u_o - \underbrace{\sum_{x=1}^V P(x|c) u_x}_{\mbox{Expectation}} \\ &amp;amp; = \mbox{observed} - \mbox{expected} \end{align*}\)</summary></entry><entry><title type="html">Mask R-CNN</title><link href="http://0.0.0.0:4000/Mask_R-CNN" rel="alternate" type="text/html" title="Mask R-CNN" /><published>2022-02-15T00:00:00+00:00</published><updated>2022-02-15T00:00:00+00:00</updated><id>http://0.0.0.0:4000/Mask_R-CNN</id><content type="html" xml:base="http://0.0.0.0:4000/Mask_R-CNN">&lt;h2 id=&quot;mask-r-cnn&quot;&gt;Mask R-CNN&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;Kaiming He, Georgia Gkioxari, Piotr Dollár, Ross Girshick, ICCV 2017&lt;/em&gt;&lt;br /&gt;
-&lt;a href=&quot;https://github.com/facebookresearch/Detectron&quot;&gt;https://github.com/facebookresearch/Detectron&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;whats-different&quot;&gt;What’s different?&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Models so far&lt;br /&gt;
-  R-CNN: 2-stage model for Object detection&lt;br /&gt;
-  Fast R-CNN: RoI on feature map&lt;br /&gt;
-  Faster R-CNN: RPN network&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;Instance Segmentation&lt;/em&gt;&lt;br /&gt;
-  Combining to tasks:
-    &lt;ul&gt;
-      &lt;li&gt;Object detection(Fast/Faster R-CNN): classify individual objects and localize each using a bounding box.&lt;/li&gt;
-      &lt;li&gt;Semantic segmentation(FCN; Fully Convolutional Network): classify each pixel into a fixed set of categories without differentiating object instances.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Mask R-CNN:&lt;br /&gt;
-  1) Model for &lt;em&gt;instance segmentation&lt;/em&gt;: Mask prediction branch&lt;br /&gt;
-  2) FPN(feature pyramid network) before RPN&lt;br /&gt;
-  3) RoI align&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;mask-prediction&quot;&gt;Mask prediction&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Mask loss&lt;br /&gt;
-  In the second stage, in parallel to predicting the class and box offset, Mask R-CNN also outputs a binary mask(ones to the object and zeros elsewhere) for each RoI. Defined multi-task loss on each sampled RoI: $L = L_{cls} + L_{box} + L_{mask}$&lt;br /&gt;
-  The mask branch has a $Km^2$-dimensional output for each RoI, which encodes &lt;em&gt;K&lt;/em&gt; binary masks of resolution $m\times m$, one for each of the &lt;em&gt;K&lt;/em&gt; classes. To this we apply a per-pixel sigmoid, and define $L_{mask}$ as the &lt;strong&gt;average binary cross-entropy loss&lt;/strong&gt;.  For an RoI associated with ground-truth class &lt;em&gt;k&lt;/em&gt;, $L_{mask}$ is only defined on the &lt;em&gt;k&lt;/em&gt;-th mask(other mask outputs do not contribute to the loss).&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;Decouples&lt;/em&gt; mask and class prediction&lt;br /&gt;
-  This definition of mask loss allows the network to generate masks for each class without competition among classes; we rely on the dedicated classification branch to predict the class label used to select the output mask.&lt;br /&gt;
-  With a per-pixel sigmoid and a binary loss, masks do not compete across classes; in contrast to FCNs for semantic segmentation using a per-pixel softmax and a multinomial cross-entropy loss.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Mask Representation&lt;br /&gt;
-  Unlike class labels or box offsets, extracting the spatial structure of masks can be addressed naturally by the pixel-to-pixel correspondence provided by convolutions.&lt;br /&gt;
-  Predicting an $m\times m$ mask from each RoI using an FCN, allows each layer in the mask branch to have $m\times m$ object spatial layout without collapsing it into a vector representation that lacks spatial dimensions.&lt;br /&gt;
-  This pixel-to-pixel behavior requires RoI features, small cropped feature maps, to be well aligned to faithfully preserve the explicit per-pixel spatial correspondence; &lt;em&gt;RoIAlign&lt;/em&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;roialign&quot;&gt;RoIAlign&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;RoIPool(or RoI Pooling)&lt;br /&gt;
-  &lt;em&gt;Quantizes&lt;/em&gt; a floating-number RoI to the discrete granularity(integerize by &lt;em&gt;rounding&lt;/em&gt;) of the feature map, its result is then subdivided into spatial bins, and finally feature values covered by each bin are aggregated(usually by max pooling).
-    &lt;ul&gt;
-      &lt;li&gt;Problem: Quantizations introduce misalignments between the RoI and the extracted features. This may not impact classification, which is robust to small translations, but it has a large negative effect on predicting pixel-accurate masks.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;RoIAlign layer&lt;br /&gt;
-  Instead of any quantization of the RoI boundaries or bins, use bilinear interpolation(&lt;a href=&quot;https://arxiv.org/abs/1506.02025&quot;&gt;Spatial transformer networks&lt;/a&gt;) to compute the exact values of the input features at four regularly sampled locations in each RoI bin, and aggregate the result(using max or average).&lt;br /&gt;
-  e.g.&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_0.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_1.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
-  (from CS231n lecture)&lt;br /&gt;
-  Feature $f_{xy}$ for point $(x, y)$ is a linear combination of features at its four neighboring grid cells:&lt;br /&gt;
-  $f_{xy} = \sum_{i,j=1}^2 f_{i,j} \text{max}(0, 1 - \left\vert x - x_i \right\vert) \text{max}(0, 1 - \left\vert y - y_i \right\vert)$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;RoIAlign improves mask accuracy by relative 10% to 50%, showing bigger gains under stricter localization metrics.&lt;br /&gt;
-&lt;!--
-  [Understanding Region of Interest — (RoI Pooling)](https://towardsdatascience.com/understanding-region-of-interest-part-1-roi-pooling-e4f5dd65bb44)  
-  [Understanding Region of Interest — (RoI Align and RoI Warp)](https://towardsdatascience.com/understanding-region-of-interest-part-2-roi-align-and-roi-warp-f795196fc193)  
---&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;network-architecture&quot;&gt;Network Architecture&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;backbone&lt;/em&gt;:  Faster R-CNN with an FPN(ResNet-FPN)
-    &lt;ul&gt;
-      &lt;li&gt;FPN, Feature pyramid network(&lt;a href=&quot;https://arxiv.org/abs/1612.03144&quot;&gt;Lin et al.&lt;/a&gt;):&lt;br /&gt;
-  Uses a top-down architecture with lateral connections to build an in-network feature pyramid from a single-scale input.&lt;/li&gt;
-      &lt;li&gt;RPN:&lt;br /&gt;
-  RoI align on each FPN feature maps&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;head&lt;/em&gt;:&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_2.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
-  Add a fully convolutional mask prediction branch, extending the Faster R-CNN box heads from the ResNet and FPN papers. Train with additional mask loss.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;experiments&quot;&gt;Experiments&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Comparison to the sota methods in instance segmentation&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/papers/Mask_R-CNN_3.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;/assets/images/papers/Mask_R-CNN_4.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Ablations
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Architecture&lt;/strong&gt;&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_5.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Multinomial vs. Independent Masks&lt;/strong&gt;&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_6.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Class-Specific vs. Class-Agnostic Masks&lt;/strong&gt;&lt;br /&gt;
-  Interestingly, Mask R-CNN with classagnostic masks(predicting a single &lt;em&gt;m×m&lt;/em&gt; output regardless of class)) is nearly as effective as class-specific masks(default; &lt;em&gt;m×m&lt;/em&gt; mask per class).&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;RoIAlign&lt;/strong&gt;&lt;br /&gt;
-  ResNet50-C4 backbone of stride 16&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_7.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
-  ResNet-50-C5 backbone of stride 32&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_8.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
-  Note that with RoIAlign, using stride-32 C5 features is more accurate than using stride-16 C4 features. Used with FPN, which has finer multi-level strides, RoIAlign shows better result.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Mask branch&lt;/strong&gt;&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_9.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Bounding Box Detection Results&lt;/strong&gt;&lt;br /&gt;
-  Our approach largely closes the gap between object detection and the more 	challenging instance segmentation task.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/papers/Mask_R-CNN_10.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;mask-r-cnn-for-human-pose-estimation&quot;&gt;Mask R-CNN for Human Pose Estimation&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;By modeling a keypoint’s location as a one-hot mask, and adopt Mask R-CNN to predict &lt;em&gt;K&lt;/em&gt; masks, one for each of &lt;em&gt;K&lt;/em&gt; keypoint types, this framework can easily be extended to human pose estimation.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Main Results and Ablations&lt;/strong&gt;:&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_11.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_12.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;br /&gt;
-  &lt;img src=&quot;/assets/images/papers/Mask_R-CNN_13.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;$\therefore$ We have &lt;em&gt;a unified model that can simultaneously predict boxes, segments, and keypoints&lt;/em&gt; while running at 5 fps.&lt;/p&gt;
-
-&lt;!-- https://ganghee-lee.tistory.com/40 --&gt;</content><author><name>Darron Kwon</name></author><category term="papers" /><summary type="html">Mask R-CNN Kaiming He, Georgia Gkioxari, Piotr Dollár, Ross Girshick, ICCV 2017 https://github.com/facebookresearch/Detectron What’s different? Models so far R-CNN: 2-stage model for Object detection Fast R-CNN: RoI on feature map Faster R-CNN: RPN network Instance Segmentation Combining to tasks: Object detection(Fast/Faster R-CNN): classify individual objects and localize each using a bounding box. Semantic segmentation(FCN; Fully Convolutional Network): classify each pixel into a fixed set of categories without differentiating object instances. Mask R-CNN: 1) Model for instance segmentation: Mask prediction branch 2) FPN(feature pyramid network) before RPN 3) RoI align Mask prediction Mask loss In the second stage, in parallel to predicting the class and box offset, Mask R-CNN also outputs a binary mask(ones to the object and zeros elsewhere) for each RoI. Defined multi-task loss on each sampled RoI: $L = L_{cls} + L_{box} + L_{mask}$ The mask branch has a $Km^2$-dimensional output for each RoI, which encodes K binary masks of resolution $m\times m$, one for each of the K classes. To this we apply a per-pixel sigmoid, and define $L_{mask}$ as the average binary cross-entropy loss. For an RoI associated with ground-truth class k, $L_{mask}$ is only defined on the k-th mask(other mask outputs do not contribute to the loss). Decouples mask and class prediction This definition of mask loss allows the network to generate masks for each class without competition among classes; we rely on the dedicated classification branch to predict the class label used to select the output mask. With a per-pixel sigmoid and a binary loss, masks do not compete across classes; in contrast to FCNs for semantic segmentation using a per-pixel softmax and a multinomial cross-entropy loss. Mask Representation Unlike class labels or box offsets, extracting the spatial structure of masks can be addressed naturally by the pixel-to-pixel correspondence provided by convolutions. Predicting an $m\times m$ mask from each RoI using an FCN, allows each layer in the mask branch to have $m\times m$ object spatial layout without collapsing it into a vector representation that lacks spatial dimensions. This pixel-to-pixel behavior requires RoI features, small cropped feature maps, to be well aligned to faithfully preserve the explicit per-pixel spatial correspondence; RoIAlign. RoIAlign RoIPool(or RoI Pooling) Quantizes a floating-number RoI to the discrete granularity(integerize by rounding) of the feature map, its result is then subdivided into spatial bins, and finally feature values covered by each bin are aggregated(usually by max pooling). Problem: Quantizations introduce misalignments between the RoI and the extracted features. This may not impact classification, which is robust to small translations, but it has a large negative effect on predicting pixel-accurate masks. RoIAlign layer Instead of any quantization of the RoI boundaries or bins, use bilinear interpolation(Spatial transformer networks) to compute the exact values of the input features at four regularly sampled locations in each RoI bin, and aggregate the result(using max or average). e.g. (from CS231n lecture) Feature $f_{xy}$ for point $(x, y)$ is a linear combination of features at its four neighboring grid cells: $f_{xy} = \sum_{i,j=1}^2 f_{i,j} \text{max}(0, 1 - \left\vert x - x_i \right\vert) \text{max}(0, 1 - \left\vert y - y_i \right\vert)$ RoIAlign improves mask accuracy by relative 10% to 50%, showing bigger gains under stricter localization metrics. Network Architecture backbone: Faster R-CNN with an FPN(ResNet-FPN) FPN, Feature pyramid network(Lin et al.): Uses a top-down architecture with lateral connections to build an in-network feature pyramid from a single-scale input. RPN: RoI align on each FPN feature maps head: Add a fully convolutional mask prediction branch, extending the Faster R-CNN box heads from the ResNet and FPN papers. Train with additional mask loss. Experiments Comparison to the sota methods in instance segmentation Ablations Architecture Multinomial vs. Independent Masks Class-Specific vs. Class-Agnostic Masks Interestingly, Mask R-CNN with classagnostic masks(predicting a single m×m output regardless of class)) is nearly as effective as class-specific masks(default; m×m mask per class). RoIAlign ResNet50-C4 backbone of stride 16 ResNet-50-C5 backbone of stride 32 Note that with RoIAlign, using stride-32 C5 features is more accurate than using stride-16 C4 features. Used with FPN, which has finer multi-level strides, RoIAlign shows better result. Mask branch Bounding Box Detection Results Our approach largely closes the gap between object detection and the more challenging instance segmentation task. Mask R-CNN for Human Pose Estimation By modeling a keypoint’s location as a one-hot mask, and adopt Mask R-CNN to predict K masks, one for each of K keypoint types, this framework can easily be extended to human pose estimation. Main Results and Ablations: $\therefore$ We have a unified model that can simultaneously predict boxes, segments, and keypoints while running at 5 fps.</summary></entry></feed>
+	&amp;amp; = \mbox{observed} - \mbox{expected} \end{align*}\)&lt;/p&gt;</content><author><name>Darron Kwon</name></author><category term="cs224n" /><summary type="html">Objectives The foundations of the effective modern methods for deep learning applied to NLP; from basics to key methods used in NLP: RNN, Attention, Transformers, etc.) A big picture understanding of human languages and the difficulties in understanding and producing them An understanding of and ability to build systems (in PyTorch) for some of the major problems in NLP: Word meaning, dependency parsing, machine translation, question answering NLP tasks: Easy: Spell Checking, Keyword Search, Finding Synonyms Medium: Parsing information from websites, documents, etc. Hard: Machine Translation, Semantic Analysis, Coreference, QA Word meaning Commonest linguistic way of thinking of meaning: signifier (symbol) $\Leftrightarrow$ signified (idea or thing) $=$ denotational semantics Common NLP solution: Use, e.g., WordNet, a thesaurus containing lists of synonym sets and hypernyms(“is a” relationships). Problems with resources like WordNet Great as a resource but missing nuance Missing new meanings of words; impossible to keep up-to-date Subjective Requires human labor to create and adapt Can’t compute accurate word similarity Representing words as discrete symbols In traditional NLP, we regard words as discrete symbols - a localist representation. $\rightarrow$ in a statistical machine learning systems, such symbols for words are separately represented by one-hot vectors. Thus we need to have huge vector dimension corresponding to the number of words in vocabulary. But with discrete symbols, two vectors are orthogonal and there is no natural notion of similarity for one-hot vectors. Solution: Could try to rely on WordNet’s list of synonyms to get similarity? But it is well-known to fail badly; incompleteness, etc. Instead: learn to encode similarity in the vecotr themselves. Representing words by their context Distributional semantics: A word’s meaning is given by the words that frequently appear close-by “You shall know a word by the company it keeps” (J. R. Firth 1957:11) One of the most successful ideas of modern statistical NLP When a word w appears in a text, its context is the set of words that appear nearby(within a fixed-size window). Use the many contexts of w to build up a representation of w Word vectors A dense vector for each word, chosen so that it is similar to vectors of words that appear in similar contexts Note: as a distributed representation, word vectors are also called word embeddings or (neural) words representations Word2vec Word2vec: overview Word2vec(Mikolov et al. 2013) is a framework for learning word vectors idea: We have a large corpus(“body”) of text Every word in a fixed vocabulary is representated by a vector Go through each position t in the text, which has a center word c and context(“outside”) words o Use the similarity of the word vectors for c and o to calculate the probability of o given c(or vice versa) Keep adjusting the word vectors to maximize this probability We can learn these word vectors from just a big pile of text by doing this distributional similarity task of being able to predict what words occur in the context of other words. Example windows and process for computing $P(w_{t+j}|w_t)$ Word2vec: objective function For each position $t = 1, \ldots, T$, predict context words within a window of fixed size m, given center word $w_j$. Data likelihood: \(\begin{align*} L(\theta) = \prod_{t=1}^T \prod_{\substack{-m\leqq j\leqq m \\ j\ne 0}} P(w_{t+j}|w_t;\theta) \end{align*}\) where $\theta$ is all variables to be optimized. The objective function $J(\theta)$ is the (average) negative log likelihood: \(\begin{align*} J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substack{-m\leqq j\leqq m \\ j\ne 0}}\log P(w_{t+j}|w_t;\theta) \end{align*}\) Minimizing objective function $\Leftrightarrow$ Maximizing predictive accuracy Question: How to calculate $P(w_{t+j}\vert w_t;\theta)$? Answer: We will use two vectors per word w: $v_w$ when w is a center word $u_w$ when w is a context word Then for a centor word c and a context word o: \(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\) Word2vec: prediction function \(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\) $u_w^T v_c$: Dot product compares similarity of o and c. $u^T v = u\ .v = \sum_{i=1}^n u_i v_i$ Larger dot product = larger probability $\exp$: Exponentiation makes anything positive $\sum_{w \in V}\exp(u_w^T v_c)$: Normalize over entire vocabulary to give probability distribution. This is an example of the softmax function $\mathbb{R}^n \rightarrow (0,1)^n$(Open region) that maps arbitary values $x_i$ to a probability distribution $p_i$ \(\mbox{softmax}(x_i) = \frac{\exp(x_i)}{\sum_{j=1}^n\exp(x_j)} = p_i\) To train the model: Optimize value of parameters to minimize loss Recall: $\theta$ represents all the model parameters, in one long vector In our case, with d-dimensional vectors and V-many words, we have: $\theta \in \mathbb{R}^{2dV}$ Remember: every word has two vectors We optimize these parameters by walking down the gradient(gradient descent) We compute all vector gradients Word2vec derivations of gradient \(\begin{align*} J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substack{-m\leqq j\leqq m \\ j\ne 0}}\log P(w_{t+j}|w_t;\theta) \end{align*}\) \(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\) \(\frac{\partial}{\partial v_c} \log \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)} = \underbrace{\frac{\partial}{\partial v_c} \log \exp(u_o^T v_c)}_{(1)} - \underbrace{\frac{\partial}{\partial v_c} \log \sum_{w=1}^V \exp(u_w^T v_c)}_{(2)}\) \(\begin{align*}\cdots (1) &amp;amp;= \frac{\partial}{\partial v_c} u_o^T v_c \\ &amp;amp;= u_o \end{align*}\) \(\begin{align*}\cdots (2) &amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \frac{\partial}{\partial v_c} \exp(u_x^T v_c) \\ &amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \exp(u_x^T v_c) \cdot \frac{\partial}{\partial v_c} u_x^T v_c \\ &amp;amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \exp(u_x^T v_c) \cdot u_x \\ \end{align*} \\\) \(\begin{align*} \frac{\partial}{\partial v_c} \log P(o|c) &amp;amp;= u_o - \frac{\sum_{x=1}^V \exp(u_x^T v_c)u_x}{\sum_{w=1}^V \exp(u_w^T v_c)} \\ &amp;amp; = u_o - \sum_{x=1}^V \underbrace{\frac{\exp(u_x^T v_c)}{\sum_{w=1}^V \exp(u_w^T v_c)}}_{\mbox{softmax formula}} u_x \\ &amp;amp; = u_o - \underbrace{\sum_{x=1}^V P(x|c) u_x}_{\mbox{Expectation}} \\ &amp;amp; = \mbox{observed} - \mbox{expected} \end{align*}\)</summary></entry></feed>

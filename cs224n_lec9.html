@@ -40,7 +40,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
 
 
 
-    <title>cs224n - Lecture 2. Neural Classifiers</title>
+    <title>cs224n - Lecture 9. Self-Attention and Transformers</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -69,24 +69,24 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="" />
     <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
-    <link rel="canonical" href="http://0.0.0.0:4000/cs224n_lec2" />
+    <link rel="canonical" href="http://0.0.0.0:4000/cs224n_lec9" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="cs224n - Lecture 2. Neural Classifiers" />
-    <meta property="og:description" content="Review: Main idea of word2vec Start with random word vectors Iterate through each word in the whole corpus Try to predict surrounding words using word vectors: $P(o\mid c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}$ Learning: Update vectors so they can predict actual surrounding words better Doing no more than this," />
-    <meta property="og:url" content="http://0.0.0.0:4000/cs224n_lec2" />
+    <meta property="og:title" content="cs224n - Lecture 9. Self-Attention and Transformers" />
+    <meta property="og:description" content="So far: recurrent models for (most) NLP - Circa 2016, the de facto strategy in NLP is to encode sentences with a bidirectional LSTM. (for example, the source sentence in a translation) - Define your output (parse, sentence, summary) as a sequence, and use an (unidirectional) LSTM to generate it." />
+    <meta property="og:url" content="http://0.0.0.0:4000/cs224n_lec9" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta property="article:author" content="https://www.facebook.com/" />
-    <meta property="article:published_time" content="2022-03-05T00:00:00+00:00" />
-    <meta property="article:modified_time" content="2022-03-05T00:00:00+00:00" />
+    <meta property="article:published_time" content="2022-03-26T00:00:00+00:00" />
+    <meta property="article:modified_time" content="2022-03-26T00:00:00+00:00" />
     <meta property="article:tag" content="cs224n" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="cs224n - Lecture 2. Neural Classifiers" />
-    <meta name="twitter:description" content="Review: Main idea of word2vec Start with random word vectors Iterate through each word in the whole corpus Try to predict surrounding words using word vectors: $P(o\mid c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}$ Learning: Update vectors so they can predict actual surrounding words better Doing no more than this," />
+    <meta name="twitter:title" content="cs224n - Lecture 9. Self-Attention and Transformers" />
+    <meta name="twitter:description" content="So far: recurrent models for (most) NLP - Circa 2016, the de facto strategy in NLP is to encode sentences with a bidirectional LSTM. (for example, the source sentence in a translation) - Define your output (parse, sentence, summary) as a sequence, and use an (unidirectional) LSTM to generate it." />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -107,7 +107,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "name": "Darron's Devlog",
         "logo": "http://0.0.0.0:4000/"
     },
-    "url": "http://0.0.0.0:4000/cs224n_lec2",
+    "url": "http://0.0.0.0:4000/cs224n_lec9",
     "image": {
         "@type": "ImageObject",
         "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
@@ -116,9 +116,9 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://0.0.0.0:4000/cs224n_lec2"
+        "@id": "http://0.0.0.0:4000/cs224n_lec9"
     },
-    "description": "Review: Main idea of word2vec Start with random word vectors Iterate through each word in the whole corpus Try to predict surrounding words using word vectors: $P(o\mid c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}$ Learning: Update vectors so they can predict actual surrounding words better Doing no more than this,"
+    "description": "So far: recurrent models for (most) NLP - Circa 2016, the de facto strategy in NLP is to encode sentences with a bidirectional LSTM. (for example, the source sentence in a translation) - Define your output (parse, sentence, summary) as a sequence, and use an (unidirectional) LSTM to generate it."
 }
     </script>
 
@@ -131,7 +131,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="cs224n - Lecture 2. Neural Classifiers" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="cs224n - Lecture 9. Self-Attention and Transformers" href="/feed.xml" />
 
 
 </head>
@@ -190,7 +190,7 @@ into the {body} of the default.hbs template -->
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime=" 5 March 2022"> 5 March 2022</time>
+                    <time class="post-full-meta-date" datetime="26 March 2022">26 March 2022</time>
                     
                         <span class="date-divider">/</span>
                         
@@ -201,283 +201,434 @@ into the {body} of the default.hbs template -->
                         
                     
                 </section>
-                <h1 class="post-full-title">cs224n - Lecture 2. Neural Classifiers</h1>
+                <h1 class="post-full-title">cs224n - Lecture 9. Self-Attention and Transformers</h1>
             </header>
 	<!--
             
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h3 id="review-main-idea-of-word2vec">Review: Main idea of word2vec</h3>
-<ul>
-  <li>Start with random word vectors</li>
-  <li>Iterate through each word in the whole corpus</li>
-  <li>Try to predict surrounding words using word vectors: $P(o\mid c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}$</li>
-  <li><strong>Learning</strong>: Update vectors so they can predict actual surrounding words better</li>
-  <li>Doing no more than this, this algorithm learns word vectors that capture well word similarity and meaningful directions in a wordspace.<br />
-<img src="/assets/images/cs224n/lec2_0.png" alt="png" width="60%&quot;, height=&quot;80%" /></li>
-  <li>A “bag of words” model; doesn’t actually pay any attention to word order or position. The model makes the same predictions at each position; the probability estimate would be the same if it is next to the center word or a bit further away.</li>
-  <li>
-    <p>We want a model that gives a reasonably high probability estimate to <em>all</em> words that occur in the context(at all often)</p>
-  </li>
-  <li>Word2vec maximizes objective function by putting similar words nearby in high dimensional vector space</li>
-</ul>
+                    <h2 id="so-far-recurrent-models-for-most-nlp">So far: recurrent models for (most) NLP</h2>
 
-<h3 id="optimization-gradient-descent">Optimization: Gradient Descent</h3>
-<ul>
-  <li>To learn good word vectors: minimize a cost function $J(\theta)$</li>
-  <li><strong>Gradient Descent</strong> is an algorithm to minimize $J(\theta)$ by changing $\theta$</li>
-  <li>idea: from current value of $\theta$, calculate gradient of $J(\theta)$, then take small step in the direction of <em>negative</em> gradient. Repreat.<br />
-<img src="/assets/images/cs224n/lec2_1.png" alt="png" width="60%&quot;, height=&quot;80%" /></li>
-  <li>Algorithm:
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-  <span class="n">theta_grad</span> <span class="o">=</span> <span class="n">evaluate_gradient</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
-  <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">theta_grad</span>
-</code></pre></div>    </div>
-  </li>
-</ul>
+<p>
+	<img src="/assets/images/cs224n/lec9_0.png" alt="png" width="40%" style="float: left" />
+	<br />
+	- Circa 2016, the de facto strategy in NLP is to <strong>encode</strong>
+	sentences with a bidirectional LSTM. <br />
+	(for example, the source sentence in a translation) <br />  
+	<br />
+	<br />
+	<br />
+	- Define your output (parse, sentence, summary) as a sequence, and use an (unidirectional) LSTM to generate it. <br />   
+	<br />
+	<br />
+	<br />
+	<br />
+	- Use attention to allow flexible access to memory.  
+</p>
 
-<h3 id="stochastic-gradient-descent">Stochastic Gradient Descent</h3>
-<ul>
-  <li><strong>Problem</strong>: $J(\theta)$ is a function of <strong>all</strong> windows in the corpus (often, billions!); so $\nabla_\theta J(\theta)$ is very expensive to compute</li>
-  <li>Solution: Stochastic gradient descent(SGD)
-    <ul>
-      <li>Repeatedly sample windows, and update after each one, or each small batch</li>
-    </ul>
-  </li>
-  <li>Algorithm:
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-  <span class="n">window</span> <span class="o">=</span> <span class="n">sample_window</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
-  <span class="n">theta_grad</span> <span class="o">=</span> <span class="n">evaluate_gradient</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
-  <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">theta_grad</span>
-</code></pre></div>    </div>
-  </li>
-  <li>Stochastic gradients with word vectors (Aside)
-    <ul>
-      <li>iteratively take gradients at each such window for SGD</li>
-      <li>But in each window, we only have at most <em>2m + 1</em> words,<br />
-  so $\nabla_\theta J(\theta)$ is very sparse:<br />
-  \(\nabla_\theta J_t(\theta) = \begin{bmatrix} 0  \\ \vdots \\ \nabla_{v_{\text{like}}} \\ \vdots 0 \\ \nabla_{u_I} \\ \vdots \\ \nabla_{u_{\text{learning}}} \\ \vdots \end{bmatrix} \in \mathbb{R}^{2dV}\)</li>
-      <li>We might only update the word vectors that actually appear.</li>
-      <li>Solution: either you need sparse matrix update operations to only update certain <strong>rows</strong>(in most DL packages) of full embedding matrices <em>U</em> and <em>V</em>, or you need to keep around a hash for word vectors.<br />
-  <img src="/assets/images/cs224n/lec2_2.png" alt="png" width="40%&quot;, height=&quot;80%" /></li>
-      <li>If you have millions of word vectors and do distributed computing, it is important to not have to send gigantic updates around.</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="2b-word2vec-algorithm-family-more-details">2b. Word2vec algorithm family: More details</h3>
-<ul>
-  <li>Why two vectors? $\rightarrow$ Easier optimization. Average both at the end
-    <ul>
-      <li>But can implement the algorithm with just one vector per word, and it works slightly better, but it makes the algorithm much more complicated.</li>
-    </ul>
-  </li>
-  <li>Two model variants:
-    <ol>
-      <li>Skip-grams(SG)<br />
- Predict context(“outside”) words (position independent) given center word</li>
-      <li>Continuous Bag of Words(CBOW)<br />
- Predict center word from (bag of) context words<br />
-  <em>We presented: Skip-gram model</em></li>
-    </ol>
-  </li>
-  <li>Additional efficiency in training:
-    <ul>
-      <li>Negative sampling<br />
-  <em>So far: Focus on naive softmax(simpler, but expensive training method)</em></li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="the-skip-gram-model-with-negative-samplingsgns">The skip-gram model with negative sampling(SGNS)</h3>
-<ul>
-  <li>The normalization term is computationally expensive, especially on the denominator of $P(o\mid c)$.</li>
-  <li>Main idea: train binary logistic regressions for a true pair (center word and a word in its context window) versus several noise pairs (the center word paired with a random word)</li>
-  <li>From paper: <em>“Distributed Representations of Words and Phrases and their Compositionality” (Mikolov et al. 2013)</em></li>
-  <li>Overall objective function(to maximize):<br />
-  \(J(\theta) = \frac{1}{T}\sum_{t=1}^T J_t(\theta)\)<br />
-  \(J_t(\theta) = \log\sigma(u_o^T u_c) + \sum_{i=1}^k \mathbb{E}_{j~P(w)}\left[ \log\sigma(-u_j^T v_c) \right]\)<br />
-  where the logistic/sigmoid function: $\sigma(x) = \frac{1}{1+ e^{-x}}$</li>
-  <li>We maximize the probability of two words co-occuring in first log and minimize probability of noise words:<br />
-  $J_{\text{neg-sample}}(u_o, v_c, U) = -\log \sigma(u_o^T v_c) - \sum_{k\in { \text{K sampled indicies} }} \log \sigma(-u_k^T v_c)$</li>
-  <li>We take <em>k</em> negative samples (using word probabilities)</li>
-  <li>Maximize probability that real outside word appears, minimize probability that random words appear around center word</li>
-  <li>Another trick: sample with $P(w) = U(w)^{3/4} / Z$, the unigram distribution $U(w)$ raised to the $3/4$ power (We provide this function in the starter code)</li>
-  <li>The power makes less frequent words be sampled more often</li>
-</ul>
-
-<h3 id="why-not-capture-co-occurrence-counts-directly">Why not capture co-occurrence counts directly?</h3>
-<ul>
-  <li>Building a co-occurrence matrix <em>X</em>
-    <ul>
-      <li>2 options: windows vs. full document</li>
-      <li>Window: Similar to word2vec, use window around each word and captures some syntactic and semantic information<br />
-  <img src="/assets/images/cs224n/lec2_3.png" alt="png" width="80%&quot;, height=&quot;80%" /></li>
-      <li>Word-document co-occurrence matrix will give general topics (all sports terms will have similar entries) learning to “Latent Semantic Analysis”; in tasks like information retrieval</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="co-occurrence-vectors">Co-occurrence vectors</h3>
-<ul>
-  <li>Simple count co-occurrence vectors
-    <ul>
-      <li>Vectors increase in size with vocabulary</li>
-      <li>Very high dimensional: require a lot of storage (though sparse)</li>
-      <li>Subsequent classification models have sparsity issues $\rightarrow$ Models are less robust</li>
-    </ul>
-  </li>
-  <li>Low-dimensional vectors
-    <ul>
-      <li>idea: store “most” of the important information in a fixed, small number of directions: a dense vector</li>
-      <li>Usually 25-1000 directions, similar to word2vec</li>
-      <li>How to reduce the dimensionality?</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="classic-method-dimensionality-reduction-on-x">Classic Method: Dimensionality Reduction on X</h3>
-<ul>
-  <li>Singular Value Decomposition of co-occurrence matrix <em>X</em><br />
-  Factorizes <em>X</em> into $U\Sigma V^T$, where <em>U</em> and <em>V</em> are orthonormal<br />
-  <img src="/assets/images/cs224n/lec2_4.png" alt="png" width="60%&quot;, height=&quot;80%" /><br />
-  Corresponding to the columns without singular values in $\Sigma$, bottom rows in $V^T$ are ignored. The singular values inside the diagonal matrix $\Sigma$ are ordered from largest down to smallest. Retaining only <em>k</em> singular values, in order to generalize, the lower dimensional representation $\hat{X}$ is the best rank <em>k</em> approximation to <em>X</em>, in terms of least squares.</li>
-</ul>
-
-<h3 id="hacks-to-x-several-used-in-rohde-et-al-2005-in-coals">Hacks to X (several used in Rohde et al. 2005 in COALS)</h3>
 <ul>
   <li>
-    <p>Running an SVD on a raw count co-occurrence matrix works poorly; In the mathematical assumptions of SVD, we are expecting to have normally distributed errors. But there are exceedingly common words like “a”, “the”, and “and”, and there is a very large number of rare words.</p>
+    <p>Seq2Seq models need to process variable-length inputs into fixed-length representations</p>
   </li>
-  <li>Scaling the counts in the cells can help <strong>a lot</strong>
+  <li>
+    <p>To deal with seq2seq problems, we learned end-to-end differentiable system using an encoder-decoder architecture.</p>
+  </li>
+  <li>
+    <p>Instead of entirely new ways of looking at problems, we’re trying to find the best <strong>building blocks</strong> to plug into our models and enable broad progress.</p>
+  </li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec9_1.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+
+<h3 id="issues-with-recurrent-models-linear-interaction-distance">Issues with recurrent models: Linear interaction distance</h3>
+<ul>
+  <li>RNNs are unrolled “left-to-right”:<br />
+  This encodes linear locality: a useful heuristic
     <ul>
-      <li>Problem: function words(<em>the, he, has</em>) are too frequent $\rightarrow$ syntax has too much impact. Some fixes:
+      <li>Nearby words often affect each other’s meanings</li>
+    </ul>
+  </li>
+  <li><strong>Problem</strong>: RNNs take <strong>O(sequence length)</strong> steps for distant word pairs to interact.<br />
+<img src="/assets/images/cs224n/lec9_2.png" alt="png" width="80%&quot;, height=&quot;100%" />
+    <ul>
+      <li>Hard to learn long-distance dependencies (because gradient problems)</li>
+      <li>Linear order of words is “baked in”; linear order isn’t the right way to think about sentences</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="issues-with-recurrent-models-lack-of-parallelizability">Issues with recurrent models: Lack of parallelizability</h3>
+<ul>
+  <li>Forward and backward passes have <strong>O(sequence length)</strong> unparallelizable operations
+    <ul>
+      <li>Future RNN hidden states can’t be computed in full before past RNN hidden states have been computed; not GPU friendly, inhibits training on very large datasets.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="alternatives-word-windows">Alternatives: Word windows</h3>
+<ul>
+  <li>Word window models aggregate local contexts (Also known as 1D convolution)
+    <ul>
+      <li>Number of unparallelizable operations does not increase sequence length<br />
+  (<strong>O(1)</strong> dependence in time)<br />
+  <img src="/assets/images/cs224n/lec9_3.png" alt="png" width="80%&quot;, height=&quot;100%" /></li>
+    </ul>
+  </li>
+  <li>What about in long-distance dependencies?
+    <ul>
+      <li>Stacking word window layers allows interaction between farther words</li>
+      <li>Maximum Interaction distance = <strong>sequence length / window size</strong><br />
+  But if your sequences are too long, you’ll just ignore long-distance context
+  <img src="/assets/images/cs224n/lec9_4.png" alt="png" width="100%&quot;, height=&quot;100%" /></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="alternatives-attention">Alternatives: Attention</h3>
+<ul>
+  <li><strong>Attention</strong> treats each word’s representation as a <strong>query</strong> to access and
+incorporate information from <strong>a set of values</strong>.
+    <ul>
+      <li>Out of the encoder-decoder structure; think about attention <strong>within a single sentence</strong>.</li>
+      <li>Number of unparallelizable operations does not increase sequence length; not parallelizable in depth but parallelizable in time.</li>
+      <li>Maximum interaction distance: <strong>O(1)</strong>, since all words interact at every layer<br />
+  <img src="/assets/images/cs224n/lec9_5.png" alt="png" width="70%&quot;, height=&quot;100%" /></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="self-attention">Self-Attention</h2>
+<ul>
+  <li>Recall: Attention operates on <strong>queries</strong>, <strong>keys</strong>, and <strong>values</strong>.
+    <ul>
+      <li>queries: $q_1, q_2, \ldots, q_T \in \mathbb{R}^d$</li>
+      <li>keys: $k_1, k_2, \ldots, k_T \in \mathbb{R}d$</li>
+      <li>values: $v_1, v_2, \ldots, v_T \in \mathbb{R}d$</li>
+    </ul>
+  </li>
+  <li>
+    <p>In <strong>self-attention</strong>, the queries, keys, and values are drawn from the <strong>same source</strong>.<br />
+  For example, if the output of the previous layer is $x_1, \ldots, x_T$ (one vec per word), we could let $v_i = k_i = q_i = x_i$ (use the same vectors for all of them).</p>
+  </li>
+  <li>The (dot product) self-attention operation is as follows:
+    <ul>
+      <li>Compute <strong>key-query</strong> affinities: $e_{ij} = q_i^T k_j $</li>
+      <li>Compute attention weights from affinities(softmax):<br />
+  \(\begin{align*}
+  \alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{j^\prime} \exp(e_{ij^\prime})}
+  \end{align*}\)</li>
+      <li>Compute outputs as weighted sum of <strong>values</strong><br />
+  \(\begin{align*}
+  \text{output}_i = \sum_j \alpha_{ij}v_j
+  \end{align*}\)</li>
+    </ul>
+  </li>
+  <li>Q: FCN vs Self-Attention?</li>
+</ul>
+
+<h3 id="self-attention-as-an-nlp-building-block">Self-attention as an NLP building block</h3>
+<p><img src="/assets/images/cs224n/lec9_6.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+
+<ul>
+  <li>Can self-attention replace the recurrence? <strong>NO</strong>.</li>
+</ul>
+
+<h3 id="sequence-order">Sequence order</h3>
+<ul>
+  <li>Self-attention is an operation on <strong>sets</strong>; it has <strong>no inherent notion of order</strong>.
+    <ul>
+      <li>To fix this, encode the order of the sentence.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Consider representing each <strong>sequence index</strong> as a <strong>vector</strong>;<br />
+  $p_i \in \mathbb{R}^d$, for \(i \in \left\{ 1,2,\ldots, T \right\}\) are position vectors</p>
+  </li>
+  <li>Let $\tilde{v}_i, \tilde{k}_i, \tilde{q}_i$ be our old inputs, then add $p_i$ to inputs;<br />
+  $v_i = \tilde{v}_i + p_i$<br />
+  $q_i = \tilde{q}_i + p_i$<br />
+  $k_i = \tilde{k}_i + p_i$
+    <ul>
+      <li>In deep self-attention networks, we do this at the first layer; you could concatenate them as well, but mostly, just add.</li>
+    </ul>
+  </li>
+</ul>
+
+<ol>
+  <li>Position representation vectors through sinusoids
+    <ul>
+      <li><strong>Sinusoidal position representations</strong>: concatenate sinusoidal functions of varying periods<br />
+ <img src="/assets/images/cs224n/lec9_7.png" alt="png" width="100%&quot;, height=&quot;100%" /></li>
+      <li>Pros:
         <ul>
-          <li>log the frequencies</li>
-          <li>$min(X,t)$, with $t\approx 100$</li>
-          <li>ignore the function words</li>
+          <li>Periodicity indicates that maybe “absolute position” isn’t as important</li>
+          <li>Maybe can extrapolate to longer sequences as periods restart!</li>
+        </ul>
+      </li>
+      <li>Cons:
+        <ul>
+          <li>Not learnable; also the extrapolation doesn’t really work!</li>
         </ul>
       </li>
     </ul>
   </li>
-  <li>Ramped windows that count closer words more than further away words</li>
-  <li>Use Pearson correlations instead of counts, then set negative values to <em>0</em></li>
-  <li>Etc.</li>
-  <li>Result:<br />
-  Interesting semantic patterns emerge in the scaled vectors; something like a word vector analogies.<br />
-  <img src="/assets/images/cs224n/lec2_5.png" alt="png" width="60%&quot;, height=&quot;80%" /></li>
-</ul>
+  <li>Position representation vectors learned from scratch
+    <ul>
+      <li><strong>Learned absolute position representations</strong>: Let a matrix $p \in \mathbb{R}^{d \times T}$ and each learnable parameters $p_i$ be a column of that matrix; Most systems use this!</li>
+      <li>Pros:
+        <ul>
+          <li>Flexibility: each position gets to be learned to fit the data</li>
+        </ul>
+      </li>
+      <li>Cons:
+        <ul>
+          <li>Definitely can’t extrapolate to indices outside $1, \ldots, T$.</li>
+        </ul>
+      </li>
+      <li>Some more flexible representations of position:
+        <ul>
+          <li>Relative linear position attention (<em>Shaw et al., 2018</em>)</li>
+          <li>Dependency syntax-based position (<em>Wang et al., 2019</em>)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
 
-<h3 id="towards-glove-count-based-vs-direct-prediction">Towards GloVe: Count based vs. direct prediction</h3>
-<p><img src="/assets/images/cs224n/lec2_6.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
-
-<h3 id="encoding-meaning-components-in-vector-differences">Encoding meaning components in vector differences</h3>
+<h3 id="nonlinearities">Nonlinearities</h3>
 <ul>
-  <li><em>Pennington, Socher, and Manning, EMNLP 2014</em></li>
-  <li>What properties needed to make vector analogies work?</li>
   <li>
-    <p>Crucial insight: Ratios of co-occurrence probabilities can encode meaning components<br />
-<img src="/assets/images/cs224n/lec2_7.png" alt="png" width="80%&quot;, height=&quot;80%" /><br />
-<img src="/assets/images/cs224n/lec2_8.png" alt="png" width="80%&quot;, height=&quot;80%" /></p>
+    <p>There are no elementwise nonlinearities in self-attention; stacking more self-attention layers just re-averages <strong>value</strong> vectors.</p>
   </li>
-  <li>Q: How can we capture ratios of co-occurrence probabilities as linear meaning components in a word vector space?</li>
-  <li>A: Log-bilinear model: the dot product between two word vectors attempts to approximate the log of the probability of co-occurrence; \(w_i \cdot w_j = \log P(i|j)\)<br />
-  $\rightarrow$ with vector differences \(w_x \cdot (w_a - w_b) = \log \frac{P(x\mid a)}{P(x \mid b)}\)</li>
+  <li>
+    <p>Easy fix: add a <strong>feed-forward network</strong> to post-process each output vector.<br />
+  (<code class="language-plaintext highlighter-rouge">Self-Att. - FF - Self-Att. - FF - ...</code>)<br />
+  \(\begin{align*}
+  m_i &amp;= MLP(\text{output}_i) \\
+      &amp;= W_2 \ast \text{ReLU}(W_1 \times \text{output}_i + b_1) + b_2
+  \end{align*}\)</p>
+  </li>
 </ul>
 
-<h3 id="combining-the-best-of-both-worlds-glove">Combining the best of both worlds: GloVe</h3>
+<h3 id="masking-the-future">Masking the future</h3>
 <ul>
-  <li><em>Pennington, Socher, and Manning, EMNLP 2014</em></li>
-  <li>With \(w_i \cdot w_j = \log P(i|j)\),<br />
-  explicit loss function \(J = \sum_{i,j=1}^V f(X_{ij})(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2\)<br />
-  to make the dot product to be similar to the log of the co-occurrence. To not have very common words dominate, capped the effect of high word counts using $f$ function. Optimize <em>J</em> directly on the co-occurrence count matrix.
+  <li>
+    <p>To use self-attention in <strong>decoders</strong>, we need to ensure we don’t “look at the future” when predicting a sequence.</p>
+  </li>
+  <li>
+    <p>Easily: at every timestep, we could change the set of <strong>keys and queries</strong> to include only past words. But it’s inefficient dealing with tensors, not parallelizable.</p>
+  </li>
+  <li>
+    <p>Instead, to enable parallelization, <strong>mask out attention</strong> to future words by setting attention scores to $-\infty$ (attention weights to 0).<br />
+  $e_{ij} = \begin{cases} q_i^T k_j, &amp; j &lt; i <br />
+                          -\infty, &amp; j \ge i \end{cases}$<br />
+  <img src="/assets/images/cs224n/lec9_8.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+  </li>
+</ul>
+
+<h3 id="recap-necessities-for-a-self-attention-building-block">Recap: Necessities for a self-attention building block</h3>
+<ul>
+  <li><strong>Self-attention</strong>: the basis of the method</li>
+  <li><strong>Position representations</strong>:<br />
+  Specify the sequence order, since self-attention is an unordered function of its inputs.</li>
+  <li><strong>Nonlinearities</strong>:<br />
+  At the output of the self-attention block, frequently implemented as a simple feed-forward network.</li>
+  <li><strong>Masking</strong>:<br />
+  In order to parallelize operations while not looking at the future, keeps information about the future from “leaking” to the past.</li>
+</ul>
+
+<h2 id="transformer">Transformer</h2>
+<ul>
+  <li>The Transformer Encoder-Decodr (<em>Vaswani et al., 2017</em>)<br />
+  At a high level look;</li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec9_9.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<ul>
+  <li>What’s left in a Transformer Encoder Block:
+    <ol>
+      <li><strong>Key-query-value attention</strong>: How do we get input vectors from a single word embedding?</li>
+      <li>__Multi-headed attention: Attend to multiple places in a single layer</li>
+      <li><strong>Tricks to help with training</strong>:
+        <ul>
+          <li>Residual connections</li>
+          <li>Layer normalization</li>
+          <li>Scaling the dot product
+  These tricks <strong>don’t improve</strong> what the model is able to do; they help improve the training process. Both of these types of modeling improvements are very important.</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="the-transformer-encoder-key-query-value-attention">The Transformer Encoder: Key-Query-Value Attention</h3>
+<ul>
+  <li>Let $x_1, \ldots, x_T \in \mathbb{R}^d$ be input vectors to the Transformer encoder. Then keys, queries, values are:
     <ul>
-      <li>Fast training</li>
-      <li>Scalable to hugh corpora</li>
-      <li>Good performance even with small corpus and small vectors</li>
+      <li>$k_i = Kx_i$, where $K \in \mathbb{R}^{d \times d}$ is the key matrix.</li>
+      <li>$q_i = Qx_i$, where $Q \in \mathbb{R}^{d \times d}$ is the query matrix.</li>
+      <li>$v_i = Vx_i$, where $V \in \mathbb{R}^{d \times d}$ is the value matrix.<br />
+These matrices (of learnable parameters) allow <em>different aspects</em> of the $x$ vectors to be used/emphasized in each of the three roles.</li>
+    </ul>
+  </li>
+  <li>Computed in matrices,
+    <ul>
+      <li>Let $X = \left[ x_1; \ldots; x_T \right] \in \mathbb{R}^{T\times d}$ be the concatenation of input vectors.</li>
+      <li>First, note that $XK \in \mathbb{R}^{T\times d}$, $XQ \in \mathbb{R}^{T\times d}$, $XV \in \mathbb{R}^{T\times d}$.</li>
+      <li>The output tensor is defined as $\text{output} = \text{softmax}(XQ(XK)^T) \times XV$.</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="how-to-evaluate-word-vectors">How to evaluate word vectors?</h3>
+<ol>
+  <li>Take the query-key dot products in one matrix multiplication: $XQ(XK)^T = XQK^T X^T \in \mathbb{T}^{T\times T} $ (All pairs of attention scores)</li>
+  <li>Take softmax, and compute the weighted average with another matrix multiplication: $\text{output} \in \mathbb{T}^{T\times d}$</li>
+</ol>
+
+<h3 id="the-transformer-encoder-multi-headed-attention">The Transformer Encoder: Multi-headed attention</h3>
 <ul>
-  <li>Related to general evaluation in NLP: intrinsic vs. extrinsic</li>
-  <li>Intrinsic:
+  <li>What if we want to look in multiple places in the sentence at once?
     <ul>
-      <li>Evaluation on a specific/intermediate subtask</li>
-      <li>Fast to compute</li>
-      <li>Helps to understand that system</li>
-      <li>Not clear if really helpful unless correlation to real task is established</li>
+      <li>For word $i$, self-attention “looks” where $x_i^T Q^T K x_j$ is high, but maybe we want to focus on different $j$ for different reasons?</li>
     </ul>
   </li>
-  <li>Extrinsic:
+  <li>Define <strong>multiple attention “heads”</strong> through multiple $Q, K, V$ matrices:
     <ul>
-      <li>Evaluation on a real task</li>
-      <li>Can take a long time to compute accuracy</li>
-      <li>Unclear if the subsystem is the problem or its interaction or other subsystems</li>
-      <li>If replacing exactly one subsystem with another improves accuracy $\rightarrow$ Winning!</li>
+      <li>Let $Q_l, K_l, V_l \in \mathbb{R}^{d\times \frac{d}{h}}$, where $h$ is the number of attention heads, and $l$ ranges from $1$ to $h$.</li>
+      <li>Each attention head performs attention independently:<br />
+  $\text{output}_l = \text{softmax}(XQ_l K_l^T X^T) \ast X V_l \in \mathbb{R}^{d/h}$</li>
+      <li>Then combine the all outputs from the heads:<br />
+  $\text{output} = Y\left[ \text{output}_1; \ldots, \text{output}_h \right]$, where $Y \in \mathbb{R}^{d\times d}$.</li>
+      <li>Each head gets to “look” at different things and construct value vectors differently.<br />
+  <img src="/assets/images/cs224n/lec9_10.png" alt="png" width="100%&quot;, height=&quot;100%" /></li>
     </ul>
   </li>
 </ul>
 
-<h3 id="intrinsic-word-vector-evaluation">Intrinsic word vector evaluation</h3>
+<h3 id="the-transformer-encoder-residual-connections-he-et-al-2016">The Transformer Encoder: Residual connections [He et al., 2016]</h3>
 <ul>
-  <li>Word Vector Analogies<br />
-  |a:b :: c:?| $\rightarrow$ $d = \text{argmax}_i \frac{(x_b -x_a +x_c)^T x_i}{\lVert x_b -x_a +x_c\rVert}$<br />
-  (e.g. man:woman :: king:?)</li>
-  <li>Evalute word vectors by how well their cosine distance after addition captures intuitive semantic and syntactic analogy questions</li>
-  <li>Discarding the input words from the search!</li>
-  <li>Problem: What if the information is there but not linear?</li>
+  <li>
+    <p><strong>Residual connections</strong> are a trick to help models train better.</p>
+  </li>
+  <li>
+    <p>Instead of $X^{(i)} = \text{Layer}(X^{(i-1)})$ (where $i$ represents the layer)<br />
+  We let $X^{(i)} = X^{(i-1)} + \text{Layer}(X^{(i-1)})$ (so we only have to learn “the residual” from the previous layer)</p>
+  </li>
+  <li>Solves vanishing gradient problem</li>
+  <li>Residual connections are thought to make the <em>loss landscape</em> considerably smoother (thus easier training!)</li>
 </ul>
 
-<h3 id="glove-visualizations">GloVe Visualizations</h3>
-<p><img src="/assets/images/cs224n/lec2_9.png" alt="png" width="70%&quot;, height=&quot;80%" /></p>
+<p><img src="/assets/images/cs224n/lec9_11.png" alt="png" width="40%&quot;, height=&quot;100%" /></p>
 
-<h3 id="analogy-evaluation-and-hyperparameters">Analogy evaluation and hyperparameters</h3>
-<p><img src="/assets/images/cs224n/lec2_10.png" alt="png" width="70%&quot;, height=&quot;80%" /></p>
-
-<p><img src="/assets/images/cs224n/lec2_11.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
-
-<h3 id="another-intrinsic-word-vector-evaluation">Another intrinsic word vector evaluation</h3>
+<h3 id="the-transformer-encoder-layer-normalization-ba-et-al-2016">The Transformer Encoder: Layer normalization [Ba et al., 2016]</h3>
 <ul>
-  <li>Word vector distances and their correlation with human judgements</li>
-  <li>Example dataset: WordSim353 <a href="http://www.cs.technion.ac.il/~gabr/resources/data/wordsim353/">http://www.cs.technion.ac.il/~gabr/resources/data/wordsim353/</a></li>
-</ul>
-
-<p><img src="/assets/images/cs224n/lec2_12.png" alt="png" width="50%&quot;, height=&quot;80%" /><br />
-<img src="/assets/images/cs224n/lec2_13.png" alt="png" width="70%&quot;, height=&quot;80%" /></p>
-<ul>
-  <li>Some ideas from Glove paper have been shown to improve skip-gram(SG) model also (e.g., average both vectors)</li>
-</ul>
-
-<h3 id="extrinsic-word-vector-evaluation">Extrinsic word vector evaluation</h3>
-<ul>
-  <li>All subsequent NLP tasks</li>
-  <li>One example where good word vectors should help directly: <strong>named entity recognition</strong>: identifying references to a person, organization or location</li>
-</ul>
-
-<p><img src="/assets/images/cs224n/lec2_14.png" alt="png" width="60%&quot;, height=&quot;80%" /></p>
-
-<h3 id="word-senses">Word senses</h3>
-<ul>
-  <li>Most words have lots of meanings
+  <li><strong>Layer normalization</strong> is a trick to help models train faster.
     <ul>
-      <li>Especially common words</li>
-      <li>Especially words that have existed for a long time</li>
+      <li>Idea: cut down on uninformative variation in hidden vector values by normalizing to unit mean and standard deviation <strong>within each layer</strong>.</li>
+      <li>LayerNorm’s success may be due to its normalizing gradients (<em>Xu et al., 2019</em>)</li>
     </ul>
   </li>
-  <li>Does one vector caputre all these meanings or do we have a mess?</li>
+  <li>Let $x\in \mathbb{R}^d$ be an individual (word) vector in the model.
+    <ul>
+      <li>Let the mean $\mu = \sum_{j=1}^d x_j \in \mathbb{R}$</li>
+      <li>Let the standard deviation $\sigma = \sqrt{\frac{1}{d}\sum_{j=1}^d (x_j-\mu)^2} \in \mathbb{R}$</li>
+      <li>Let $\gamma \in \mathbb{R}^d$ and $\beta \in \mathbb{R}$ be learned “gain” and “bias” parameters (Can omit)</li>
+      <li>Then layer normalization computes:<br />
+  \(\begin{align*}\text{output} = \frac{x-\mu}{\sigma + \epsilon}\ast\gamma + \beta
+  \end{align*}\);<br />
+  (Normalize by scalar mean and variance, and modulate by learned elementwise gain and bias)</li>
+    </ul>
+  </li>
 </ul>
 
-<h4 id="linear-algebric-structure-of-word-senses-with-applications-to-polysemy-arora--ma--tacl-2018"><em>“Linear Algebric Structure of Word Senses, with Applications to Polysemy”, Arora, …, Ma, …, TACL 2018</em></h4>
+<h3 id="the-transformer-encoder-scaled-dot-product-vaswani-et-al-2017">The Transformer Encoder: Scaled Dot Product [Vaswani et al., 2017]</h3>
 <ul>
-  <li>Different senses of a word reside in a linear superposition(weighted sum) in standard word embeddings like word2vec</li>
-  <li>\(v_{\text{pike}} = \alpha_1 v_{\text{pike}_2} + \alpha_2 v_{\text{pike}_2} + \alpha_3 v_{\text{pike}_3}\)<br />
-  where $\alpha_1 = \frac{f_1}{f_1+f_2+f_3}$, etc., for frequency <em>f</em></li>
-  <li>Surprising result:<br />
-  Commonly, it is impossible to reconstruct the original components from their sum, but, because of ideas from <em>sparse coding</em> you can actually separate out the senses(providing they are relatively common)!<br />
-<img src="/assets/images/cs224n/lec2_15.png" alt="png" width="80%&quot;, height=&quot;80%" /></li>
+  <li>
+    <p>When dimensionality $d$ becomes large, dot products between vectors tend to become large.<br />
+  Because of this, inputs to the softmax function can be large, making the gradients small (leading to saturate region)</p>
+  </li>
+  <li>
+    <p>Instead of the self-attention functiopn we’ve seen:<br />
+  $\text{output}_l = \text{softmax}(XQ_l K_l^T X^T) \ast X V_l$<br />
+  We divide the attention scores by $\sqrt{d/h}$, to stop the scores from becoming large just as a function of $d/h$ (The dimensionality divided by the number of heads.):<br />
+  $\text{output}_l = \text{softmax}(\frac{XQ_l K_l^T X^T}{\sqrt{d/h}}) \ast X V_l$</p>
+  </li>
+</ul>
+
+<h2 id="now-look-at-the-decoder-blocks">Now look at the Decoder Blocks</h2>
+<p><img src="/assets/images/cs224n/lec9_12.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<h3 id="the-transformer-decoder-cross-attention-details">The Transformer Decoder: Cross-attention (details)</h3>
+<ul>
+  <li>
+    <p>Let $h_1, \ldots, h_T$ be <strong>output</strong> vecotrs <strong>from</strong> the Transformer <strong>encoder</strong> (the last block); $x_i \in \mathbb{R}^d$<br />
+  Let $z_1, \ldots, z_T$ be input vectors from the Transformer <strong>decoder</strong>, $z_i\in \mathbb{R}^d$<br />
+  Then keys and values are drawn from the <strong>encoder</strong> (like a memory); $k_i = Kh_i, v_i = Vh_i$<br />
+  The queries are drawn from the <strong>decoder</strong>; $q_i = Qz_i$</p>
+  </li>
+  <li>
+    <p>In matrices:</p>
+    <ul>
+      <li>Let $H = \left[ h_1; \ldots, h_T \right] \in \mathbb{R}^{T\times d}$ be the concatenation of encoder vecotrs.</li>
+      <li>Let $Z = \left[ z_1; \ldots, z_T \right] \in \mathbb{R}^{T\times d}$ be the concatenation of decoder vectors.</li>
+      <li>The output is defined as $\text{output} = \text{softmax}(ZQ(HK)^T)\times HV$.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="what-would-we-like-to-fix-about-the-transformer">What would we like to fix about the Transformer?</h3>
+<ul>
+  <li><strong>Quadratic compute in self-attention</strong>:
+    <ul>
+      <li>Computing all pairs of interactions means our computation grows quadratically with the sequence length.</li>
+      <li>For recurrent models, it only grew linearly.</li>
+    </ul>
+  </li>
+  <li><strong>Position representations</strong>:
+    <ul>
+      <li>Are simple absolute indices the best we can do to represent position?</li>
+      <li>Relative linear position attention (<em>Shaw et al., 2018</em>)</li>
+      <li>Dependency syntax-based position (<em>Wang et al., 2019</em>)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="quadratic-computation-as-a-function-of-sequence-length">Quadratic computation as a function of sequence length</h3>
+<ul>
+  <li>One of the benefits of self-attention over recurrence was that it’s highly parallelizable.<br />
+  However, its total number of operations grows as $O(T^2 d)$, where $T$ is the sequence length, and $d$ is the dimensionality.</li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec9_13.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+
+<ul>
+  <li>Think of $d$ as around <strong>1,000</strong>.<br />
+  So, for a single (shortish) sentence, $T \le 30; T^2 \le$ <strong>900</strong>.<br />
+  In practice, we set a bound like $T = 512$.<br />
+  But what if we’d like <strong>$T\ge 10,000$</strong>? to work on long documents?</li>
+</ul>
+
+<h3 id="recent-work-on-improving-on-quadratic-self-attention-cost">Recent work on improving on quadratic self-attention cost</h3>
+<ul>
+  <li>
+    <p>Considerable recent work has gone into the question,<br />
+  <em>Can we build models like Transformers without paying the $O(T^2)$ all-pairs self-attention cost?</em></p>
+  </li>
+  <li><strong>Linformer</strong> (<em>Wang et al., 2020</em>)<br />
+<img src="/assets/images/cs224n/lec9_14.png" alt="png" width="100%&quot;, height=&quot;100%" />
+    <ul>
+      <li>Key idea: map the sequence length dimension to a lower-dimensional space for values, keys.</li>
+    </ul>
+  </li>
+  <li><strong>BigBird</strong> (<em>Zaheer et al., 2021</em>)<br />
+<img src="/assets/images/cs224n/lec9_15.png" alt="png" width="100%&quot;, height=&quot;100%" />
+    <ul>
+      <li>Key idea: replace all-pairs interactions with a family of other interactions, like <strong>local windows</strong>, <strong>looking at everything</strong>, and <strong>random interactions</strong>.</li>
+    </ul>
+  </li>
 </ul>
 
 
@@ -529,9 +680,9 @@ into the {body} of the default.hbs template -->
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function () {
-                            var this_page_url = 'http://0.0.0.0:4000/cs224n_lec2';
-                            var this_page_identifier = '/cs224n_lec2';
-                            var this_page_title = 'cs224n - Lecture 2. Neural Classifiers';
+                            var this_page_url = 'http://0.0.0.0:4000/cs224n_lec9';
+                            var this_page_identifier = '/cs224n_lec9';
+                            var this_page_title = 'cs224n - Lecture 9. Self-Attention and Transformers';
                         };
                         (function() {
                             var d = document, s = d.createElement('script');
@@ -577,11 +728,6 @@ into the {body} of the default.hbs template -->
                                 
                                   
                                     
-                                        
-                                        
-                                            <li><a href="/cs224n_lec9">cs224n - Lecture 9. Self-Attention and Transformers</a></li>
-                                        
-                                    
                                   
                                 
                                   
@@ -606,12 +752,7 @@ into the {body} of the default.hbs template -->
                                     
                                         
                                         
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
+                                            <li><a href="/cs224n_lec6">cs224n - Lecture 6. Simple and LSTM RNNs</a></li>
                                         
                                     
                                   
@@ -631,6 +772,16 @@ into the {body} of the default.hbs template -->
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
                                     
                                   
                                 
@@ -724,43 +875,13 @@ into the {body} of the default.hbs template -->
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
             
-                    <article class="post-card post-template no-image">
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs224n_lec3">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Cs224n</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">cs224n - Lecture 3. Backprop and Neural Networks</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>Named Entity Recognition(NER) Task: find and classify names in text Possible uses: Tracking mentions of particular entities in documents For question answering, answers are usually named entities Often followed by Named Entity Linking/Canonicalization</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                
-            </footer>
-        </div>
-    </article>
-
-            
 
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
             
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs224n_lec1">
+            <a class="post-card-content-link" href="/cs224n_lec8">
                 <header class="post-card-header">
                     
                         
@@ -770,11 +891,11 @@ into the {body} of the default.hbs template -->
                         
                     
 
-                    <h2 class="post-card-title">cs224n - Lecture 1. Word Vectors</h2>
+                    <h2 class="post-card-title">cs224n - Lecture 8. Attention (Cont.)</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>Objectives The foundations of the effective modern methods for deep learning applied to NLP; from basics to key methods used in NLP: RNN, Attention, Transformers, etc.) A big picture understanding of human languages</p>
+                        <p>Attention Encoder hidden states $\mathbf{h}_1, \ldots, \mathbf{h}_N \in \mathbb{R}^h$ On timestep $t$, we have Decoder hidden state $\mathbf{s}_t \in \mathbb{R}^h$ Attention score $\mathbf{e}^t$ for this step: \(\mathbf{e}^t = \left[ \mathbf{s}_t^T \mathbf{h}_1, \ldots, \mathbf{s}_t^T</p>
                     
                 </section>
             </a>
@@ -801,18 +922,18 @@ into the {body} of the default.hbs template -->
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">cs224n - Lecture 2. Neural Classifiers</div>
+    <div class="floating-header-title">cs224n - Lecture 9. Self-Attention and Transformers</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs224n+-+Lecture+2.+Neural+Classifiers&amp;url=https://12kdh43.github.io/cs224n_lec2"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs224n+-+Lecture+9.+Self-Attention+and+Transformers&amp;url=https://12kdh43.github.io/cs224n_lec9"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs224n_lec2"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs224n_lec9"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
