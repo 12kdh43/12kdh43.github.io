@@ -164,6 +164,28 @@ into the {body} of the default.hbs template -->
     <article class="post-card home-template no-image">
         
         <div class="post-card-content">
+            <a class="post-card-content-link" href="/cs224n_lec10">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Cs224n</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">cs224n - Lecture 10. Transformers and Pretraining</h2>
+                </header>
+                <section class="post-card-excerpt">
+					<p>Word structure and subword models Assumpstions we’ve made: Fixed vocab of a number of words, built from the training set. All novel words seen at test time are mapped to a single UNK token. Finite vocabulary assumptions make even less sense in many languages. Many...</p>
+                </section>
+            </a>
+        </div>
+    </article>
+
+    <article class="post-card home-template no-image">
+        
+        <div class="post-card-content">
             <a class="post-card-content-link" href="/cs224n_lec9">
                 <header class="post-card-header">
                     
@@ -196,7 +218,7 @@ into the {body} of the default.hbs template -->
                         
                     
 
-                    <h2 class="post-card-title">cs224n - Lecture 8. Attention (Cont.)</h2>
+                    <h2 class="post-card-title">cs224n - Lecture 8. Attention (Contd.)</h2>
                 </header>
                 <section class="post-card-excerpt">
 					<p>Attention Encoder hidden states $\mathbf{h}_1, \ldots, \mathbf{h}_N \in \mathbb{R}^h$ On timestep $t$, we have Decoder hidden state $\mathbf{s}_t \in \mathbb{R}^h$ Attention score $\mathbf{e}^t$ for this step: \(\mathbf{e}^t = \left[ \mathbf{s}_t^T \mathbf{h}_1, \ldots, \mathbf{s}_t^T \mathbf{h}_N \right] \in \mathbb{R}^N\) Take softmax to get the Attention distribution: \(\alpha^t...</p>
@@ -594,28 +616,6 @@ into the {body} of the default.hbs template -->
                 </header>
                 <section class="post-card-excerpt">
 					<p>RNN: Process Sequences one to one; vanilla neural networks one to many; e.g. Image Captioning(image to sequence of words) many to one; e.g. Action Prediction(video sequence to action class) many to many(1); e.g. Video Captioning(video sequence to caption) many to many(2); e.g. Video Classification on...</p>
-                </section>
-            </a>
-        </div>
-    </article>
-
-    <article class="post-card home-template no-image">
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs231n_lec9">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Cs231n</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">cs231n - Lecture 9. CNN Architectures</h2>
-                </header>
-                <section class="post-card-excerpt">
-					<p>Review LeCun et al., 1998 $5\times 5$ Conv filters applied at stride 1 $2\times 2$ Subsampling (Pooling) layers applied at stride 2 i.e. architecture is [CONV-POOL-CONV-POOL-FC-FC] Stride: Downsample output activations Padding: Preserve input spatial dimensions in output activations Filter: Each conv filter outputs a “slice”...</p>
                 </section>
             </a>
         </div>

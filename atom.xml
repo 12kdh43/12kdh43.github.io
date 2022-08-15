@@ -8,6 +8,413 @@
     
       
       <item>
+        <title>cs224n - Lecture 10. Transformers and Pretraining</title>
+        
+          <description>&lt;h2 id=&quot;word-structure-and-subword-models&quot;&gt;Word structure and subword models&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Assumpstions we’ve made:
+    &lt;ul&gt;
+      &lt;li&gt;Fixed vocab of a number of words, built from the training set.&lt;/li&gt;
+      &lt;li&gt;All &lt;em&gt;novel&lt;/em&gt; words seen at test time are mapped to a single &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UNK&lt;/code&gt; token.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Finite vocabulary assumptions make even &lt;em&gt;less&lt;/em&gt; sense in many languages.
+    &lt;ul&gt;
+      &lt;li&gt;Many Languages exhibit complex &lt;strong&gt;morphology&lt;/strong&gt;, or word structure.
+        &lt;ul&gt;
+          &lt;li&gt;The effect is more word types, each occuring fewer times.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-byte-pair-encoding-algorithm&quot;&gt;The byte-pair encoding algorithm&lt;/h3&gt;
+&lt;p&gt;Subword modeling in NLP encompasses a wide range of methods for reasoning about structure below the word level. (Parts of words, characters, bytes.)&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The dominant modern paradigm is to learn a vocabulary of &lt;strong&gt;parts of words (subword tokens)&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;At training and testing time, each word is split into a sequence of known subwords.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Byte-pair encoding&lt;/strong&gt; is a simple, effective strategy for defining a subword vocabulary.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Start with a vocabulary containing only characters and an “end-of-word” symbol.&lt;/li&gt;
+  &lt;li&gt;Using a corpus of text, find the most common adjacent characters “a,b”; add “ab” as a subword.&lt;/li&gt;
+  &lt;li&gt;Replace instances of the character pair with the new subword; repeat until desired vocab size.&lt;/li&gt;
+  &lt;li&gt;Ex: starting characters {a, b, $\ldots$, z}. Encoding vocab: {a, $\ldots$, z, $\ldots$, apple, app#, #ly, $\ldots$}&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Originally used in NLP for machine translation; now a similar method (WordPiece) is used in pretrained models.&lt;/p&gt;
+
+&lt;p&gt;Common words end up being a part of the subword vocabulary, while rarer words are split into (sometimes intuitive, sometimes not) components. In the worst case, words are split into as many subwords as they have characters.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec10_0.png&quot; alt=&quot;png&quot; width=&quot;80%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Problem:&lt;br /&gt;
+  The model has no idea whether it’s dealing with words or subwords.&lt;br /&gt;
+  A rare(or weird) individual single word can be mapped to as many words as its characters, dominates vocabulary.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;motivating-word-meaning-and-context&quot;&gt;Motivating word meaning and context&lt;/h2&gt;
+&lt;p&gt;Recall the adage we mentioned at the beginning of the course:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“You shall know a word by the company it keeps” (J. R. Firth 1957: 11)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This quote is a summary of &lt;strong&gt;distributional semantics&lt;/strong&gt;, and motivated &lt;strong&gt;word2vec&lt;/strong&gt;. But:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“… the complete meaning of a word is always contextual, and no study of meaning apart from a complete context can be taken seriously.” (J. R. Firth 1935)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Consider I &lt;em&gt;&lt;strong&gt;record&lt;/strong&gt;&lt;/em&gt; the &lt;em&gt;&lt;strong&gt;record&lt;/strong&gt;&lt;/em&gt;: the two instances of &lt;em&gt;&lt;strong&gt;record&lt;/strong&gt;&lt;/em&gt; mean different things.&lt;/p&gt;
+
+&lt;h3 id=&quot;where-we-were-pretrained-word-embeddings&quot;&gt;Where we were: pretrained word embeddings&lt;/h3&gt;
+&lt;p&gt;
+	&lt;img src=&quot;/assets/images/cs224n/lec10_1.png&quot; alt=&quot;png&quot; width=&quot;40%&quot; style=&quot;float: right&quot; /&gt;
+	Circa 2017:&lt;br /&gt;
+	- Start with pretrained word embeddings (no context)&lt;br /&gt;
+	- Learn how to incorporate context in an LSTM or Transformer while training on the task.&lt;br /&gt;
+	&lt;br /&gt;
+	Some issues to think about:&lt;br /&gt;
+	- The training data we have for our downstream task (like question answering) must be sufficient to teach all contextual aspects of language.&lt;br /&gt;
+	- Most of the parameters in our network are randomly initialized!
+&lt;/p&gt;
+
+&lt;h3 id=&quot;where-were-going-pretraining-whole-models&quot;&gt;Where we’re going: pretraining whole models&lt;/h3&gt;
+&lt;p&gt;
+	&lt;img src=&quot;/assets/images/cs224n/lec10_2.png&quot; alt=&quot;png&quot; width=&quot;40%&quot; style=&quot;float: right&quot; /&gt;
+	In modern NLP:&lt;br /&gt;
+	- All (or almost all) parameters in NLP networks are initialized via pretraining.&lt;br /&gt;
+	- Pretraining methods hide parts of the input from the model, and train the model to reconstruct those parts.&lt;br /&gt;
+	&lt;br /&gt;
+	This has been exceptionally effective at building strong:&lt;br /&gt;
+	- representations of language &lt;br /&gt;
+	- parameter initializations for strong NLP models. &lt;br /&gt;
+	- Probability distributions over language that we can sample from
+&lt;/p&gt;
+
+&lt;h3 id=&quot;pretraining-through-language-modeling-dai-and-le-2015&quot;&gt;Pretraining through language modeling [&lt;em&gt;Dai and Le, 2015&lt;/em&gt;]&lt;/h3&gt;
+&lt;p&gt;
+	&lt;img src=&quot;/assets/images/cs224n/lec10_3.png&quot; alt=&quot;png&quot; width=&quot;40%&quot; style=&quot;float: right&quot; /&gt;
+	Recall the language modeling task:&lt;br /&gt;
+	- Model $p_\theta(w_t \vert w_{1:t-1})$, the probability distribution over words given their past contexts. &lt;br /&gt;
+	- There’s lots of data for this! (In English.) &lt;br /&gt;
+	&lt;br /&gt;
+	Pretraining through language modeling: &lt;br /&gt;
+	- Train a neural network to perform language modeling on a large amount of text. &lt;br /&gt;
+	- Save the network parameters. &lt;br /&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&quot;the-pretraining--finetuning-paradigm&quot;&gt;The Pretraining / Finetuning Paradigm&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pretraining can improve NLP applications by serving as parameter initialization&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Step 1: Pretrain (on language modeling)&lt;/strong&gt;&lt;br /&gt;
+  Lots of text; learn general things&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Step 2: Finetune (on your task)&lt;/strong&gt;&lt;br /&gt;
+  Not many labels; adapt to the task&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;stochastic-gradient-descent-and-pretrainfinetune&quot;&gt;Stochastic gradient descent and pretrain/finetune&lt;/h3&gt;
+&lt;p&gt;Why should pretraining and finetuning help, from a “training neural nets” perspective?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Consider, provides parameters $\hat{\theta}$ by approximating \(\text{min}_{\theta} \mathcal{L}_{\text{pretrain}}(\theta)\) (the pretraining loss).&lt;/li&gt;
+  &lt;li&gt;Then, finetuning approximates \(\text{min}_{\theta } \mathcal{L}_{\text{finetune}}(\theta)\), starting at $\hat{\theta}$ (the finetuning loss).&lt;/li&gt;
+  &lt;li&gt;The pretraining may matter because stochastic gradient descent sticks (relatively) close to $\hat{\theta}$ during finetuning.
+    &lt;ul&gt;
+      &lt;li&gt;So, maybe the finetuning local minima near $\hat{\theta}$ tend to generalize well (but still a mystery)&lt;/li&gt;
+      &lt;li&gt;And/or, maybe the gradients of finetuning loss near $\hat{\theta}$ propagate nicely!&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;pretraining-for-three-types-of-architectures&quot;&gt;Pretraining for three types of architectures&lt;/h2&gt;
+&lt;p&gt;
+	&lt;img src=&quot;/assets/images/cs224n/lec10_4.png&quot; alt=&quot;png&quot; width=&quot;40%&quot; style=&quot;float: left&quot; /&gt;
+	&lt;br /&gt;
+	- Language models! What we've seen so far. &lt;br /&gt;
+	- Nice to generate from; can’t condition on future words &lt;br /&gt;
+	&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;br /&gt;
+	- Gets bidirectional context – can condition on future! &lt;br /&gt;
+	- Wait, how do we pretrain them? &lt;br /&gt;
+	  (if you try pretrain it as a language model, the loss will be 0 because you feed the future information)&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;br /&gt;
+	- Good parts of decoders and encoders? &lt;br /&gt;
+	- What’s the best way to pretrain them? &lt;br /&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&quot;pretraining-decoders-1&quot;&gt;Pretraining Decoders (1)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;When pretraining a language model&lt;/strong&gt;, we try to approximate the probability of a word given all of its previous words; $p_\theta(w_t \vert w_{1:t-1})$. &lt;strong&gt;When using language model pretrained decoders&lt;/strong&gt;, we can ignore that they were trained to model $p$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+	&lt;img src=&quot;/assets/images/cs224n/lec10_5.png&quot; alt=&quot;png&quot; width=&quot;40%&quot; style=&quot;float: right&quot; /&gt;
+	- We can finetune them by training a classifier on the last word’s hidden state. &lt;br /&gt;
+	$$\begin{align*}
+	h_1, \ldots, h_T &amp;amp;= \text{Decoder}(w_1, \ldots, w_T) &amp;amp;&amp;amp; (w \text{is a subword}) \\
+	&amp;amp; y \sim Ah_t + b
+	\end{align*}$$
+	- Where $A, b$ are randomly initialized (not pretrained) and specified by the downstream task.&lt;br /&gt;  
+	- Gradients backpropagate through the wholde network, not just the linear layer.
+&lt;/p&gt;
+
+&lt;h3 id=&quot;pretraining-decoders-2&quot;&gt;Pretraining Decoders (2)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;It’s natural to pretrain decoders as language models and then use them as generators, finetuning their $p_\theta(w_t \vert w_{1:t-1})$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+	&lt;img src=&quot;/assets/images/cs224n/lec10_6.png&quot; alt=&quot;png&quot; width=&quot;40%&quot; style=&quot;float: right&quot; /&gt;
+	This is helpful in tasks where the output is a sequence with a vocabulary like that at pretraining time. &lt;br /&gt;
+	- Dialogue (context=dialogue history)&lt;br /&gt;
+	- Summarization (context=document)&lt;br /&gt;
+	$$\begin{align*}
+	h_1, \ldots, h_T &amp;amp;= \text{Decoder}(w_1, \ldots, w_T) \\
+	&amp;amp; w_t \sim Ah_{t-1} + b
+	\end{align*}$$
+	- Where $A, b$ were pretrained in the language model
+&lt;/p&gt;
+
+&lt;h3 id=&quot;generative-pretrained-transformer-gpt-radford-et-al-2018&quot;&gt;Generative Pretrained Transformer (GPT) [&lt;em&gt;Radford et al., 2018&lt;/em&gt;]&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;2018’s GPT was a big success in pretraining a decoder!
+    &lt;ul&gt;
+      &lt;li&gt;Transformer decoder with 12 layers.&lt;/li&gt;
+      &lt;li&gt;768-dimensional hidden states, 3072-dimensional feed-forward hidden layers.&lt;/li&gt;
+      &lt;li&gt;Byte-pair encoding with 40,000 merges. (relatively small vocab)&lt;/li&gt;
+      &lt;li&gt;Trained on BooksCorpus: over 7000 unique books.
+        &lt;ul&gt;
+          &lt;li&gt;Contains long spans of contiguous text, for learning long-distance dependencies.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;The acronym “GPT” never showed up in the original paper; it could stand for “Generative PreTraining” or “Generative Pretrained Transformer”&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;How do we format inputs to our decoder for &lt;strong&gt;finetuning tasks?&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Evaluate on &lt;strong&gt;Natural Language Inference:&lt;/strong&gt; Label pairs of sentences as &lt;em&gt;entailing/contradictory/neutral&lt;/em&gt;&lt;br /&gt;
+  e.g., sentence &lt;strong&gt;entailment&lt;/strong&gt; in&lt;br /&gt;
+  Premise: &lt;em&gt;The man is in the doorway&lt;/em&gt;&lt;br /&gt;
+  Hyphothesis: &lt;em&gt;The person is near the door&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;input format (roughly):&lt;br /&gt;
+  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[START]&lt;/code&gt; &lt;em&gt;The man is in the doorway&lt;/em&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[DELIM]&lt;/code&gt; &lt;em&gt;The person is near the door&lt;/em&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[EXTRACT]&lt;/code&gt;&lt;br /&gt;
+  The linear classifier is applied to the representation of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[EXTRACT]&lt;/code&gt; token.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The amount of task-specific human effort is very low!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;increasingly-convinsing-generations-gpt2-radford-et-al-2018&quot;&gt;Increasingly convinsing generations (GPT2) [&lt;em&gt;Radford et al., 2018&lt;/em&gt;]&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;We mentioned how pretrained decoders can be used &lt;strong&gt;in their capacities as language models&lt;/strong&gt;.&lt;br /&gt;
+&lt;strong&gt;GPT-2&lt;/strong&gt;, a larger version of GPT trained on more data, was shown to produce relatively convincing samples of natural language.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec10_7.png&quot; alt=&quot;png&quot; width=&quot;60%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;pretraining-encoders-what-pretraining-objective-to-use&quot;&gt;Pretraining Encoders: what pretraining objective to use?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Encoders get bidirectional context,&lt;/strong&gt; so we can’t do language modeling!&lt;br /&gt;
+$\rightarrow$ &lt;strong&gt;Masked Language Modeling&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;
+	&lt;img src=&quot;/assets/images/cs224n/lec10_8.png&quot; alt=&quot;png&quot; width=&quot;40%&quot; style=&quot;float: right&quot; /&gt;
+	- Idea: replace some fraction of words in the input with a speical `[MASK]` token; predict these words.&lt;br /&gt;
+	$$\begin{align*}
+	h_1, \ldots, h_T &amp;amp;= \text{Encoder}(w_1, \ldots, w_T) \\
+	&amp;amp; y_i \sim Aw_i + b
+	\end{align*}$$
+	- Only add loss terms from words that are &quot;masked out&quot;. If $\hat{x}$ is the masked version of $x$, we're learning $p_{\theta}(x\vert \hat{x})$.
+&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Devlin et al., 2018&lt;/em&gt; proposed the “Masked LM” objective and &lt;strong&gt;released the weights of a pretrained Transformer&lt;/strong&gt;, a model they labeled &lt;strong&gt;BERT&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Some more details about Masked LM for BERT:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+	&lt;img src=&quot;/assets/images/cs224n/lec10_9.png&quot; alt=&quot;png&quot; width=&quot;40%&quot; style=&quot;float: right&quot; /&gt;
+	Predict a random 15% of (sub)word tokens.&lt;br /&gt;
+	- Replace input word with [MASK] 80% of the time &lt;br /&gt;
+	- Replace input word with a random token 10% of the time &lt;br /&gt;
+	- Leave input word unchanged 10% of the time (but still predict it!) &lt;br /&gt;
+	(So we have three loss terms for example sentence)
+&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Why?: Doesn’t let the model get complacent and not build strong representations of non-masked words.&lt;br /&gt;
+  (No masks are seen at fine-tuning time!)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;bert-bidirectional-encoder-representations-from-transformers&quot;&gt;BERT: Bidirectional Encoder Representations from Transformers&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;The pretraining input to BERT was two separate contiguous chunks of text:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec10_10.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Two chunks of text:&lt;br /&gt;
+  To better pretrain for objectives for downstream applications like QA, where you have two different pieces of text; sometimes actual chunk of text that directly follows the first chunk, or sometimes randomly sampled unrelated.&lt;br /&gt;
+  $\rightarrow$ BERT was trained to predict whether one chunk follows the other or is randomly sampled.
+    &lt;ul&gt;
+      &lt;li&gt;Later work has argued this “next sentence prediction” is not necessary.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Details about BERT
+    &lt;ul&gt;
+      &lt;li&gt;Two models were released:
+        &lt;ul&gt;
+          &lt;li&gt;BERT-base: 12 layers, 768-dim hidden states, 12 attention heads, 110 million params.&lt;/li&gt;
+          &lt;li&gt;BERT-large: 24 layers, 1024-dim hidden states, 16 attention heads, 340 million params.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Trained on:
+        &lt;ul&gt;
+          &lt;li&gt;BooksCorpus (800 million words)&lt;/li&gt;
+          &lt;li&gt;English Wikipedia (2,500 million words)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Pretraining is expensive and impractical on a single GPU.
+        &lt;ul&gt;
+          &lt;li&gt;BERT was pretrained with 64 TPU chips for a total of 4 days.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Finetuning is practical and common on a single GPU
+        &lt;ul&gt;
+          &lt;li&gt;“Pretrain once, finetune many times.”&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;BERT was massively popular and hugely versatile; finetuning BERT led to new state-of-the-art results on a broad range of tasks.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec10_11.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;limitations-of-pretrained-encoders&quot;&gt;Limitations of pretrained encoders&lt;/h3&gt;
+&lt;p&gt;If your task involves generating sequences, consider using a pretrained decoder; BERT and other pretrained encoders don’t naturally lead to nice autoregressive (1-word-at-a-time) generation methods.&lt;br /&gt;
+&lt;img src=&quot;/assets/images/cs224n/lec10_12.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;extensions-of-bert&quot;&gt;Extensions of BERT&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Among a lot of BERT variants, some generally accepted improvements to the BERT pretraining formula:
+    &lt;ul&gt;
+      &lt;li&gt;RoBERTa: mainly just train BERT for longer and remove next sentence prediction &lt;em&gt;[Liu et al., 2019]&lt;/em&gt;&lt;br /&gt;
+  more compute, more data can improve pretraining even when not changing the underlying Transformer encoder.&lt;/li&gt;
+      &lt;li&gt;SpanBERT: masking contiguous spans of words makes a harder, more useful pretraining task &lt;em&gt;[Joshi et al., 2020]&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec10_13.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;pretraining-encoder-decoders-what-pretraining-objective-to-use&quot;&gt;Pretraining Encoder-Decoders: what pretraining objective to use?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;For &lt;strong&gt;encoder-decoders&lt;/strong&gt;, we could do something like &lt;strong&gt;language modeling&lt;/strong&gt;, but where a prefix of every input is provided to the encoder and is not predicted.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+	&lt;img src=&quot;/assets/images/cs224n/lec10_14.png&quot; alt=&quot;png&quot; width=&quot;40%&quot; style=&quot;float: right&quot; /&gt;
+	$$\begin{align*}
+	h_1, \ldots, h_T &amp;amp;= \text{Encoder}(w_1, \ldots, w_T) \\
+	h_{T+1}, \ldots, h_{2T} &amp;amp;= \text{Decoder}(w_1, \ldots, w_T, h_1, \ldots, h_T \\
+	&amp;amp; y_i \sim Aw_i + b, &amp;amp;&amp;amp; i &amp;gt; T
+	\end{align*}$$&lt;br /&gt;
+	The encoder portion benefits from bidirectional context; the decoder portion is used to train the whole model through language modeling.
+&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What &lt;em&gt;Raffel et al., 2018&lt;/em&gt; found to work best was &lt;strong&gt;span corruption.&lt;/strong&gt; Their model: &lt;strong&gt;T5.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec10_15.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Unlike BERT, this model doesn’t specify the length of missing token &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;X&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Raffel et al., 2018&lt;/em&gt; found encoder-decoders to work better than decoders for their tasks, and span corruption (denoising) to work better than language modeling.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A fascinating property of T5:&lt;br /&gt;
+  it can be finetuned to answer a wide range of questions, retrieving knowledge from its parameters.&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;NQ: Natural Questions&lt;/li&gt;
+      &lt;li&gt;WQ: WebQuestions&lt;/li&gt;
+      &lt;li&gt;TQA: Trivia QA&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;All “open-domain” versions&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec10_16.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;what-kinds-of-things-does-pretraining-learn&quot;&gt;What kinds of things does pretraining learn?&lt;/h3&gt;
+&lt;p&gt;There’s increasing evidence that pretrained models learn a wide variety of things about the statistical properties of language. Taking our examples from the start of class:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Stanford University is located in &lt;strong&gt;__&lt;/strong&gt;____, California.&lt;/em&gt; [Trivia]&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;I put ___ fork down on the table.&lt;/em&gt; [syntax]&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;The woman walked across the street, checking for traffic over ___ shoulder.&lt;/em&gt; [coreference]&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;I went to the ocean to see the fish, turtles, seals, and _____.&lt;/em&gt; [lexical semantics/topic]&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Overall, the value I got from the two hours watching it was the sum total of the popcorn and the drink. The movie was ___.&lt;/em&gt; [sentiment]&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Iroh went into the kitchen to make some tea. Standing next to Iroh, Zuko pondered his destiny. Zuko left the &lt;strong&gt;__&lt;/strong&gt;.&lt;/em&gt; [some reasoning – this is harder]&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;I was thinking about the sequence that goes 1, 1, 2, 3, 5, 8, 13, 21, ____&lt;/em&gt; [some basic arithmetic; they don’t learn the Fibonnaci sequence]&lt;/li&gt;
+  &lt;li&gt;Models also learn – and can exacerbate racism, sexism, all manner of bad biases.&lt;/li&gt;
+  &lt;li&gt;More on all this in the interpretability lecture!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;gpt-3-in-context-learning-and-very-large-models&quot;&gt;GPT-3, In-context learning, and very large models&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;So far, we’ve interacted with pretrained models in two ways:
+    &lt;ul&gt;
+      &lt;li&gt;Sample from the distributions they define (maybe providing a prompt)&lt;/li&gt;
+      &lt;li&gt;Fine-tune them on a task we care about, and take their predictions.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Very large language models seem to perform some kind of learning &lt;strong&gt;without gradient steps&lt;/strong&gt; simply from examples you provide within their contexts.&lt;br /&gt;
+  The in-context examples seem to specify the task to be performed, and the conditional distribution mocks performing the task to a certain extent.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Input (prefix within a single Transformer decoder context):&lt;/strong&gt;&lt;br /&gt;
+  thanks -&amp;gt; merci&lt;br /&gt;
+  hello -&amp;gt; bonjour&lt;br /&gt;
+  mint -&amp;gt; menthe&lt;br /&gt;
+  otter -&amp;gt; ?&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Output (conditional generations):&lt;/strong&gt;&lt;br /&gt;
+  loutre…
+  &lt;img src=&quot;/assets/images/cs224n/lec10_17.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;GPT-3 is the canonical example of this. The largest T5 model had 11 billion parameters but &lt;strong&gt;GPT-3 has 175 billion parameters.&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Remarks&lt;br /&gt;
+  These models are still not well-understood.&lt;br /&gt;
+  “Small” models like BERT have become general tools in a wide range of settings.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        
+        <pubDate>Mon, 15 Aug 2022 00:00:00 +0000</pubDate>
+        <link>
+        http://0.0.0.0:4000/cs224n_lec10</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/cs224n_lec10</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>cs224n - Lecture 9. Self-Attention and Transformers</title>
         
           <description>&lt;h2 id=&quot;so-far-recurrent-models-for-most-nlp&quot;&gt;So far: recurrent models for (most) NLP&lt;/h2&gt;
@@ -444,7 +851,7 @@ These matrices (of learnable parameters) allow &lt;em&gt;different aspects&lt;/e
     
       
       <item>
-        <title>cs224n - Lecture 8. Attention (Cont.)</title>
+        <title>cs224n - Lecture 8. Attention (Contd.)</title>
         
           <description>&lt;h2 id=&quot;attention&quot;&gt;Attention&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&quot;/assets/images/cs224n/lec7_7.png&quot; alt=&quot;png&quot; width=&quot;100%&amp;quot;, height=&amp;quot;100%&quot; /&gt;&lt;/p&gt;

@@ -40,7 +40,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
 
 
 
-    <title>cs224n - Lecture 1. Word Vectors</title>
+    <title>cs224n - Lecture 10. Transformers and Pretraining</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -69,24 +69,24 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="" />
     <link rel="shortcut icon" href="http://0.0.0.0:4000/assets/built/images/favicon.jpg" type="image/png" />
-    <link rel="canonical" href="http://0.0.0.0:4000/cs224n_lec1" />
+    <link rel="canonical" href="http://0.0.0.0:4000/cs224n_lec10" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Darron's Devlog" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="cs224n - Lecture 1. Word Vectors" />
-    <meta property="og:description" content="Objectives The foundations of the effective modern methods for deep learning applied to NLP; from basics to key methods used in NLP: RNN, Attention, Transformers, etc.) A big picture understanding of human languages and the difficulties in understanding and producing them An understanding of and ability to build systems (in" />
-    <meta property="og:url" content="http://0.0.0.0:4000/cs224n_lec1" />
+    <meta property="og:title" content="cs224n - Lecture 10. Transformers and Pretraining" />
+    <meta property="og:description" content="Word structure and subword models Assumpstions we’ve made: Fixed vocab of a number of words, built from the training set. All novel words seen at test time are mapped to a single UNK token. Finite vocabulary assumptions make even less sense in many languages. Many Languages exhibit complex morphology, or" />
+    <meta property="og:url" content="http://0.0.0.0:4000/cs224n_lec10" />
     <meta property="og:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta property="article:author" content="https://www.facebook.com/" />
-    <meta property="article:published_time" content="2022-03-02T00:00:00+00:00" />
-    <meta property="article:modified_time" content="2022-03-02T00:00:00+00:00" />
+    <meta property="article:published_time" content="2022-08-15T00:00:00+00:00" />
+    <meta property="article:modified_time" content="2022-08-15T00:00:00+00:00" />
     <meta property="article:tag" content="cs224n" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="cs224n - Lecture 1. Word Vectors" />
-    <meta name="twitter:description" content="Objectives The foundations of the effective modern methods for deep learning applied to NLP; from basics to key methods used in NLP: RNN, Attention, Transformers, etc.) A big picture understanding of human languages and the difficulties in understanding and producing them An understanding of and ability to build systems (in" />
+    <meta name="twitter:title" content="cs224n - Lecture 10. Transformers and Pretraining" />
+    <meta name="twitter:description" content="Word structure and subword models Assumpstions we’ve made: Fixed vocab of a number of words, built from the training set. All novel words seen at test time are mapped to a single UNK token. Finite vocabulary assumptions make even less sense in many languages. Many Languages exhibit complex morphology, or" />
     <meta name="twitter:url" content="http://0.0.0.0:4000/" />
     <meta name="twitter:image" content="http://0.0.0.0:4000/assets/built/images/blog-cover1.png" />
     <meta name="twitter:label1" content="Written by" />
@@ -107,7 +107,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
         "name": "Darron's Devlog",
         "logo": "http://0.0.0.0:4000/"
     },
-    "url": "http://0.0.0.0:4000/cs224n_lec1",
+    "url": "http://0.0.0.0:4000/cs224n_lec10",
     "image": {
         "@type": "ImageObject",
         "url": "http://0.0.0.0:4000/assets/built/images/blog-cover1.png",
@@ -116,9 +116,9 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://0.0.0.0:4000/cs224n_lec1"
+        "@id": "http://0.0.0.0:4000/cs224n_lec10"
     },
-    "description": "Objectives The foundations of the effective modern methods for deep learning applied to NLP; from basics to key methods used in NLP: RNN, Attention, Transformers, etc.) A big picture understanding of human languages and the difficulties in understanding and producing them An understanding of and ability to build systems (in"
+    "description": "Word structure and subword models Assumpstions we’ve made: Fixed vocab of a number of words, built from the training set. All novel words seen at test time are mapped to a single UNK token. Finite vocabulary assumptions make even less sense in many languages. Many Languages exhibit complex morphology, or"
 }
     </script>
 
@@ -131,7 +131,7 @@ MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="cs224n - Lecture 1. Word Vectors" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="cs224n - Lecture 10. Transformers and Pretraining" href="/feed.xml" />
 
 
 </head>
@@ -190,7 +190,7 @@ into the {body} of the default.hbs template -->
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime=" 2 March 2022"> 2 March 2022</time>
+                    <time class="post-full-meta-date" datetime="15 August 2022">15 August 2022</time>
                     
                         <span class="date-divider">/</span>
                         
@@ -201,181 +201,406 @@ into the {body} of the default.hbs template -->
                         
                     
                 </section>
-                <h1 class="post-full-title">cs224n - Lecture 1. Word Vectors</h1>
+                <h1 class="post-full-title">cs224n - Lecture 10. Transformers and Pretraining</h1>
             </header>
 	<!--
             
 	-->
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <h3 id="objectives">Objectives</h3>
+                    <h2 id="word-structure-and-subword-models">Word structure and subword models</h2>
+<ul>
+  <li>Assumpstions we’ve made:
+    <ul>
+      <li>Fixed vocab of a number of words, built from the training set.</li>
+      <li>All <em>novel</em> words seen at test time are mapped to a single <code class="language-plaintext highlighter-rouge">UNK</code> token.</li>
+    </ul>
+  </li>
+  <li>Finite vocabulary assumptions make even <em>less</em> sense in many languages.
+    <ul>
+      <li>Many Languages exhibit complex <strong>morphology</strong>, or word structure.
+        <ul>
+          <li>The effect is more word types, each occuring fewer times.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="the-byte-pair-encoding-algorithm">The byte-pair encoding algorithm</h3>
+<p>Subword modeling in NLP encompasses a wide range of methods for reasoning about structure below the word level. (Parts of words, characters, bytes.)</p>
+<ul>
+  <li>The dominant modern paradigm is to learn a vocabulary of <strong>parts of words (subword tokens)</strong>.</li>
+  <li>At training and testing time, each word is split into a sequence of known subwords.</li>
+</ul>
+
+<p><strong>Byte-pair encoding</strong> is a simple, effective strategy for defining a subword vocabulary.</p>
 <ol>
-  <li>The foundations of the effective modern methods for deep learning applied to NLP; from basics to key methods used in NLP: RNN, Attention, Transformers, etc.)</li>
-  <li>A big picture understanding of human languages and the difficulties in understanding and producing them</li>
-  <li>An understanding of and ability to build systems (in PyTorch) for some of the major problems in NLP: Word meaning, dependency parsing, machine translation, question answering<br />
-<!-- *CS145: translate human language sentences into SQL --></li>
+  <li>Start with a vocabulary containing only characters and an “end-of-word” symbol.</li>
+  <li>Using a corpus of text, find the most common adjacent characters “a,b”; add “ab” as a subword.</li>
+  <li>Replace instances of the character pair with the new subword; repeat until desired vocab size.</li>
+  <li>Ex: starting characters {a, b, $\ldots$, z}. Encoding vocab: {a, $\ldots$, z, $\ldots$, apple, app#, #ly, $\ldots$}</li>
 </ol>
 
+<p>Originally used in NLP for machine translation; now a similar method (WordPiece) is used in pretrained models.</p>
+
+<p>Common words end up being a part of the subword vocabulary, while rarer words are split into (sometimes intuitive, sometimes not) components. In the worst case, words are split into as many subwords as they have characters.<br />
+<img src="/assets/images/cs224n/lec10_0.png" alt="png" width="80%&quot;, height=&quot;100%" /></p>
+
 <ul>
-  <li>NLP tasks:<br />
-  Easy: Spell Checking, Keyword Search, Finding Synonyms<br />
-  Medium: Parsing information from websites, documents, etc.<br />
-  Hard: Machine Translation, Semantic Analysis, Coreference, QA</li>
+  <li>Problem:<br />
+  The model has no idea whether it’s dealing with words or subwords.<br />
+  A rare(or weird) individual single word can be mapped to as many words as its characters, dominates vocabulary.</li>
 </ul>
 
-<h2 id="word-meaning">Word meaning</h2>
+<h2 id="motivating-word-meaning-and-context">Motivating word meaning and context</h2>
+<p>Recall the adage we mentioned at the beginning of the course:</p>
+<blockquote>
+  <p>“You shall know a word by the company it keeps” (J. R. Firth 1957: 11)</p>
+</blockquote>
+
+<p>This quote is a summary of <strong>distributional semantics</strong>, and motivated <strong>word2vec</strong>. But:</p>
+<blockquote>
+  <p>“… the complete meaning of a word is always contextual, and no study of meaning apart from a complete context can be taken seriously.” (J. R. Firth 1935)</p>
+</blockquote>
+
+<p>Consider I <em><strong>record</strong></em> the <em><strong>record</strong></em>: the two instances of <em><strong>record</strong></em> mean different things.</p>
+
+<h3 id="where-we-were-pretrained-word-embeddings">Where we were: pretrained word embeddings</h3>
+<p>
+	<img src="/assets/images/cs224n/lec10_1.png" alt="png" width="40%" style="float: right" />
+	Circa 2017:<br />
+	- Start with pretrained word embeddings (no context)<br />
+	- Learn how to incorporate context in an LSTM or Transformer while training on the task.<br />
+	<br />
+	Some issues to think about:<br />
+	- The training data we have for our downstream task (like question answering) must be sufficient to teach all contextual aspects of language.<br />
+	- Most of the parameters in our network are randomly initialized!
+</p>
+
+<h3 id="where-were-going-pretraining-whole-models">Where we’re going: pretraining whole models</h3>
+<p>
+	<img src="/assets/images/cs224n/lec10_2.png" alt="png" width="40%" style="float: right" />
+	In modern NLP:<br />
+	- All (or almost all) parameters in NLP networks are initialized via pretraining.<br />
+	- Pretraining methods hide parts of the input from the model, and train the model to reconstruct those parts.<br />
+	<br />
+	This has been exceptionally effective at building strong:<br />
+	- representations of language <br />
+	- parameter initializations for strong NLP models. <br />
+	- Probability distributions over language that we can sample from
+</p>
+
+<h3 id="pretraining-through-language-modeling-dai-and-le-2015">Pretraining through language modeling [<em>Dai and Le, 2015</em>]</h3>
+<p>
+	<img src="/assets/images/cs224n/lec10_3.png" alt="png" width="40%" style="float: right" />
+	Recall the language modeling task:<br />
+	- Model $p_\theta(w_t \vert w_{1:t-1})$, the probability distribution over words given their past contexts. <br />
+	- There’s lots of data for this! (In English.) <br />
+	<br />
+	Pretraining through language modeling: <br />
+	- Train a neural network to perform language modeling on a large amount of text. <br />
+	- Save the network parameters. <br />
+</p>
+
+<h3 id="the-pretraining--finetuning-paradigm">The Pretraining / Finetuning Paradigm</h3>
 <ul>
   <li>
-    <p>Commonest linguistic way of thinking of meaning:<br />
-  signifier (symbol) $\Leftrightarrow$ signified (idea or thing)<br />
-  $=$ denotational semantics</p>
+    <p>Pretraining can improve NLP applications by serving as parameter initialization</p>
   </li>
-  <li>
-    <p><strong>Common NLP solution</strong>: Use, e.g., <em>WordNet</em>, a thesaurus containing lists of <strong>synonym sets</strong> and <strong>hypernyms</strong>(“is a” relationships).</p>
-  </li>
-  <li>
-    <p>Problems with resources like WordNet</p>
+  <li><strong>Step 1: Pretrain (on language modeling)</strong><br />
+  Lots of text; learn general things</li>
+  <li><strong>Step 2: Finetune (on your task)</strong><br />
+  Not many labels; adapt to the task</li>
+</ul>
+
+<h3 id="stochastic-gradient-descent-and-pretrainfinetune">Stochastic gradient descent and pretrain/finetune</h3>
+<p>Why should pretraining and finetuning help, from a “training neural nets” perspective?</p>
+
+<ul>
+  <li>Consider, provides parameters $\hat{\theta}$ by approximating \(\text{min}_{\theta} \mathcal{L}_{\text{pretrain}}(\theta)\) (the pretraining loss).</li>
+  <li>Then, finetuning approximates \(\text{min}_{\theta } \mathcal{L}_{\text{finetune}}(\theta)\), starting at $\hat{\theta}$ (the finetuning loss).</li>
+  <li>The pretraining may matter because stochastic gradient descent sticks (relatively) close to $\hat{\theta}$ during finetuning.
     <ul>
-      <li>Great as a resource but missing nuance</li>
-      <li>Missing new meanings of words; impossible to keep up-to-date</li>
-      <li>Subjective</li>
-      <li>Requires human labor to create and adapt</li>
-      <li>Can’t compute accurate word similarity</li>
+      <li>So, maybe the finetuning local minima near $\hat{\theta}$ tend to generalize well (but still a mystery)</li>
+      <li>And/or, maybe the gradients of finetuning loss near $\hat{\theta}$ propagate nicely!</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="representing-words-as-discrete-symbols">Representing words as discrete symbols</h3>
+<h2 id="pretraining-for-three-types-of-architectures">Pretraining for three types of architectures</h2>
+<p>
+	<img src="/assets/images/cs224n/lec10_4.png" alt="png" width="40%" style="float: left" />
+	<br />
+	- Language models! What we've seen so far. <br />
+	- Nice to generate from; can’t condition on future words <br />
+	<br />
+	<br />
+	<br />
+	- Gets bidirectional context – can condition on future! <br />
+	- Wait, how do we pretrain them? <br />
+	  (if you try pretrain it as a language model, the loss will be 0 because you feed the future information)<br />
+	<br />
+	<br />
+	- Good parts of decoders and encoders? <br />
+	- What’s the best way to pretrain them? <br />
+</p>
+
+<h3 id="pretraining-decoders-1">Pretraining Decoders (1)</h3>
 <ul>
-  <li>In traditional NLP, we regard words as discrete symbols - a <em>localist</em> representation.<br />
-  $\rightarrow$ in a statistical machine learning systems, such symbols for words are separately represented by one-hot vectors. Thus we need to have huge vector dimension corresponding to the number of words in vocabulary.
-    <ul>
-      <li>But with discrete symbols, two vectors are orthogonal and there is no natural notion of similarity for one-hot vectors.</li>
-    </ul>
-  </li>
-  <li>Solution:
-    <ul>
-      <li>Could try  to rely on WordNet’s list of synonyms to get similarity?<br />
-  But it is well-known to fail badly; incompleteness, etc.</li>
-      <li>Instead: learn to encode similarity in the vecotr themselves.</li>
-    </ul>
-  </li>
+  <li><strong>When pretraining a language model</strong>, we try to approximate the probability of a word given all of its previous words; $p_\theta(w_t \vert w_{1:t-1})$. <strong>When using language model pretrained decoders</strong>, we can ignore that they were trained to model $p$.</li>
 </ul>
 
-<h3 id="representing-words-by-their-context">Representing words by their context</h3>
+<p>
+	<img src="/assets/images/cs224n/lec10_5.png" alt="png" width="40%" style="float: right" />
+	- We can finetune them by training a classifier on the last word’s hidden state. <br />
+	$$\begin{align*}
+	h_1, \ldots, h_T &amp;= \text{Decoder}(w_1, \ldots, w_T) &amp;&amp; (w \text{is a subword}) \\
+	&amp; y \sim Ah_t + b
+	\end{align*}$$
+	- Where $A, b$ are randomly initialized (not pretrained) and specified by the downstream task.<br />  
+	- Gradients backpropagate through the wholde network, not just the linear layer.
+</p>
+
+<h3 id="pretraining-decoders-2">Pretraining Decoders (2)</h3>
 <ul>
-  <li>Distributional semantics: <strong>A word’s meaning is given by the words that frequently appear close-by</strong>
-    <ul>
-      <li><em>“You shall know a word by the company it keeps”</em> (J. R. Firth 1957:11)</li>
-      <li>One of the most successful ideas of modern statistical NLP</li>
-    </ul>
-  </li>
-  <li>When a word <em>w</em> appears in a text, its <strong>context</strong> is the set of words that appear nearby(within a fixed-size window).</li>
-  <li>Use the many contexts of <em>w</em> to build up a representation of <em>w</em></li>
+  <li>It’s natural to pretrain decoders as language models and then use them as generators, finetuning their $p_\theta(w_t \vert w_{1:t-1})$</li>
 </ul>
 
-<h3 id="word-vectors">Word vectors</h3>
+<p>
+	<img src="/assets/images/cs224n/lec10_6.png" alt="png" width="40%" style="float: right" />
+	This is helpful in tasks where the output is a sequence with a vocabulary like that at pretraining time. <br />
+	- Dialogue (context=dialogue history)<br />
+	- Summarization (context=document)<br />
+	$$\begin{align*}
+	h_1, \ldots, h_T &amp;= \text{Decoder}(w_1, \ldots, w_T) \\
+	&amp; w_t \sim Ah_{t-1} + b
+	\end{align*}$$
+	- Where $A, b$ were pretrained in the language model
+</p>
+
+<h3 id="generative-pretrained-transformer-gpt-radford-et-al-2018">Generative Pretrained Transformer (GPT) [<em>Radford et al., 2018</em>]</h3>
+<ul>
+  <li>2018’s GPT was a big success in pretraining a decoder!
+    <ul>
+      <li>Transformer decoder with 12 layers.</li>
+      <li>768-dimensional hidden states, 3072-dimensional feed-forward hidden layers.</li>
+      <li>Byte-pair encoding with 40,000 merges. (relatively small vocab)</li>
+      <li>Trained on BooksCorpus: over 7000 unique books.
+        <ul>
+          <li>Contains long spans of contiguous text, for learning long-distance dependencies.</li>
+        </ul>
+      </li>
+      <li>The acronym “GPT” never showed up in the original paper; it could stand for “Generative PreTraining” or “Generative Pretrained Transformer”</li>
+    </ul>
+  </li>
+  <li>How do we format inputs to our decoder for <strong>finetuning tasks?</strong>
+    <ul>
+      <li>Evaluate on <strong>Natural Language Inference:</strong> Label pairs of sentences as <em>entailing/contradictory/neutral</em><br />
+  e.g., sentence <strong>entailment</strong> in<br />
+  Premise: <em>The man is in the doorway</em><br />
+  Hyphothesis: <em>The person is near the door</em></li>
+      <li>input format (roughly):<br />
+  <code class="language-plaintext highlighter-rouge">[START]</code> <em>The man is in the doorway</em> <code class="language-plaintext highlighter-rouge">[DELIM]</code> <em>The person is near the door</em> <code class="language-plaintext highlighter-rouge">[EXTRACT]</code><br />
+  The linear classifier is applied to the representation of the <code class="language-plaintext highlighter-rouge">[EXTRACT]</code> token.</li>
+    </ul>
+  </li>
+  <li>The amount of task-specific human effort is very low!</li>
+</ul>
+
+<h3 id="increasingly-convinsing-generations-gpt2-radford-et-al-2018">Increasingly convinsing generations (GPT2) [<em>Radford et al., 2018</em>]</h3>
+<ul>
+  <li>We mentioned how pretrained decoders can be used <strong>in their capacities as language models</strong>.<br />
+<strong>GPT-2</strong>, a larger version of GPT trained on more data, was shown to produce relatively convincing samples of natural language.</li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec10_7.png" alt="png" width="60%&quot;, height=&quot;100%" /></p>
+
+<h3 id="pretraining-encoders-what-pretraining-objective-to-use">Pretraining Encoders: what pretraining objective to use?</h3>
+<p><strong>Encoders get bidirectional context,</strong> so we can’t do language modeling!<br />
+$\rightarrow$ <strong>Masked Language Modeling</strong></p>
+
+<p>
+	<img src="/assets/images/cs224n/lec10_8.png" alt="png" width="40%" style="float: right" />
+	- Idea: replace some fraction of words in the input with a speical `[MASK]` token; predict these words.<br />
+	$$\begin{align*}
+	h_1, \ldots, h_T &amp;= \text{Encoder}(w_1, \ldots, w_T) \\
+	&amp; y_i \sim Aw_i + b
+	\end{align*}$$
+	- Only add loss terms from words that are "masked out". If $\hat{x}$ is the masked version of $x$, we're learning $p_{\theta}(x\vert \hat{x})$.
+</p>
+
 <ul>
   <li>
-    <p>A dense vector for each word, chosen so that it is similar to vectors of words that appear in similar contexts</p>
+    <p><em>Devlin et al., 2018</em> proposed the “Masked LM” objective and <strong>released the weights of a pretrained Transformer</strong>, a model they labeled <strong>BERT</strong>.</p>
   </li>
   <li>
-    <p>Note: as a <em>distributed</em> representation, <em>word vectors</em> are also called <em>word embeddings</em> or <em>(neural) words representations</em></p>
+    <p>Some more details about Masked LM for BERT:</p>
   </li>
 </ul>
 
-<h2 id="word2vec">Word2vec</h2>
-<h3 id="word2vec-overview">Word2vec: overview</h3>
+<p>
+	<img src="/assets/images/cs224n/lec10_9.png" alt="png" width="40%" style="float: right" />
+	Predict a random 15% of (sub)word tokens.<br />
+	- Replace input word with [MASK] 80% of the time <br />
+	- Replace input word with a random token 10% of the time <br />
+	- Leave input word unchanged 10% of the time (but still predict it!) <br />
+	(So we have three loss terms for example sentence)
+</p>
+
 <ul>
-  <li><em>Word2vec</em>(Mikolov et al. 2013) is a framework for learning word vectors</li>
-  <li>idea:
+  <li>Why?: Doesn’t let the model get complacent and not build strong representations of non-masked words.<br />
+  (No masks are seen at fine-tuning time!)</li>
+</ul>
+
+<h3 id="bert-bidirectional-encoder-representations-from-transformers">BERT: Bidirectional Encoder Representations from Transformers</h3>
+<ul>
+  <li>The pretraining input to BERT was two separate contiguous chunks of text:</li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec10_10.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<ul>
+  <li>Two chunks of text:<br />
+  To better pretrain for objectives for downstream applications like QA, where you have two different pieces of text; sometimes actual chunk of text that directly follows the first chunk, or sometimes randomly sampled unrelated.<br />
+  $\rightarrow$ BERT was trained to predict whether one chunk follows the other or is randomly sampled.
     <ul>
-      <li>We have a large corpus(“body”) of text</li>
-      <li>Every word in a fixed vocabulary is representated by a vector</li>
-      <li>Go through each position <em>t</em> in the text, which has a center word <em>c</em> and context(“outside”) words <em>o</em></li>
-      <li>Use the similarity of the word vectors for <em>c</em> and <em>o</em> to calculate the probability of <em>o</em> given <em>c</em>(or vice versa)</li>
-      <li>Keep adjusting the word vectors to maximize this probability</li>
+      <li>Later work has argued this “next sentence prediction” is not necessary.</li>
+    </ul>
+  </li>
+  <li>Details about BERT
+    <ul>
+      <li>Two models were released:
+        <ul>
+          <li>BERT-base: 12 layers, 768-dim hidden states, 12 attention heads, 110 million params.</li>
+          <li>BERT-large: 24 layers, 1024-dim hidden states, 16 attention heads, 340 million params.</li>
+        </ul>
+      </li>
+      <li>Trained on:
+        <ul>
+          <li>BooksCorpus (800 million words)</li>
+          <li>English Wikipedia (2,500 million words)</li>
+        </ul>
+      </li>
+      <li>Pretraining is expensive and impractical on a single GPU.
+        <ul>
+          <li>BERT was pretrained with 64 TPU chips for a total of 4 days.</li>
+        </ul>
+      </li>
+      <li>Finetuning is practical and common on a single GPU
+        <ul>
+          <li>“Pretrain once, finetune many times.”</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>BERT was massively popular and hugely versatile; finetuning BERT led to new state-of-the-art results on a broad range of tasks.</li>
+</ul>
+
+<p><img src="/assets/images/cs224n/lec10_11.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<h3 id="limitations-of-pretrained-encoders">Limitations of pretrained encoders</h3>
+<p>If your task involves generating sequences, consider using a pretrained decoder; BERT and other pretrained encoders don’t naturally lead to nice autoregressive (1-word-at-a-time) generation methods.<br />
+<img src="/assets/images/cs224n/lec10_12.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
+
+<h3 id="extensions-of-bert">Extensions of BERT</h3>
+<ul>
+  <li>Among a lot of BERT variants, some generally accepted improvements to the BERT pretraining formula:
+    <ul>
+      <li>RoBERTa: mainly just train BERT for longer and remove next sentence prediction <em>[Liu et al., 2019]</em><br />
+  more compute, more data can improve pretraining even when not changing the underlying Transformer encoder.</li>
+      <li>SpanBERT: masking contiguous spans of words makes a harder, more useful pretraining task <em>[Joshi et al., 2020]</em></li>
     </ul>
   </li>
 </ul>
 
-<p><em>We can learn these word vectors from just a big pile of text by doing this distributional similarity task of being able to predict what words occur in the context of other words.</em></p>
+<p><img src="/assets/images/cs224n/lec10_13.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
 
+<h3 id="pretraining-encoder-decoders-what-pretraining-objective-to-use">Pretraining Encoder-Decoders: what pretraining objective to use?</h3>
 <ul>
-  <li>Example windows and process for computing $P(w_{t+j}|w_t)$<br />
-<img src="/assets/images/cs224n/lec1_0.png" alt="png" width="80%&quot;, height=&quot;80%" /></li>
+  <li>For <strong>encoder-decoders</strong>, we could do something like <strong>language modeling</strong>, but where a prefix of every input is provided to the encoder and is not predicted.</li>
 </ul>
 
-<h3 id="word2vec-objective-function">Word2vec: objective function</h3>
-<p>For each position $t = 1, \ldots, T$, predict context words within a window of fixed size <em>m</em>, given center word $w_j$. Data likelihood:<br />
-\(\begin{align*}
-L(\theta) = \prod_{t=1}^T \prod_{\substack{-m\leqq j\leqq m \\ j\ne 0}} P(w_{t+j}|w_t;\theta)
-\end{align*}\)<br />
-where $\theta$ is all variables to be optimized.</p>
-
-<p>The objective function $J(\theta)$ is the (average) negative log likelihood:<br />
-\(\begin{align*}
-J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substack{-m\leqq j\leqq m \\ j\ne 0}}\log P(w_{t+j}|w_t;\theta)
-\end{align*}\)<br />
-Minimizing objective function $\Leftrightarrow$ Maximizing predictive accuracy</p>
+<p>
+	<img src="/assets/images/cs224n/lec10_14.png" alt="png" width="40%" style="float: right" />
+	$$\begin{align*}
+	h_1, \ldots, h_T &amp;= \text{Encoder}(w_1, \ldots, w_T) \\
+	h_{T+1}, \ldots, h_{2T} &amp;= \text{Decoder}(w_1, \ldots, w_T, h_1, \ldots, h_T \\
+	&amp; y_i \sim Aw_i + b, &amp;&amp; i &gt; T
+	\end{align*}$$<br />
+	The encoder portion benefits from bidirectional context; the decoder portion is used to train the whole model through language modeling.
+</p>
 
 <ul>
-  <li>Question: How to calculate $P(w_{t+j}\vert w_t;\theta)$?</li>
-  <li>Answer: We will <em>use</em> two vectors per word <em>w</em>:
-    <ul>
-      <li>$v_w$ when <em>w</em> is a center word</li>
-      <li>$u_w$ when <em>w</em> is a context word</li>
-    </ul>
-  </li>
-  <li>Then for a centor word <em>c</em> and a context word <em>o</em>:<br />
-  \(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\)</li>
+  <li>What <em>Raffel et al., 2018</em> found to work best was <strong>span corruption.</strong> Their model: <strong>T5.</strong></li>
 </ul>
 
-<h3 id="word2vec-prediction-function">Word2vec: prediction function</h3>
-<p>\(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\)</p>
-<ol>
-  <li>$u_w^T v_c$: Dot product compares similarity of <em>o</em> and <em>c</em>.<br />
- $u^T v = u\ .v = \sum_{i=1}^n u_i v_i$<br />
- Larger dot product = larger probability</li>
-  <li>$\exp$: Exponentiation makes anything positive</li>
-  <li>$\sum_{w \in V}\exp(u_w^T v_c)$: Normalize over entire vocabulary to give probability distribution.</li>
-</ol>
+<p><img src="/assets/images/cs224n/lec10_15.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
 
 <ul>
   <li>
-    <p>This is an example of the softmax function $\mathbb{R}^n \rightarrow (0,1)^n$(Open region) that maps arbitary values $x_i$ to a probability distribution $p_i$<br />
-  \(\mbox{softmax}(x_i) = \frac{\exp(x_i)}{\sum_{j=1}^n\exp(x_j)} = p_i\)</p>
+    <p>Unlike BERT, this model doesn’t specify the length of missing token <code class="language-plaintext highlighter-rouge">&lt;X&gt;</code>.</p>
   </li>
   <li>
-    <p>To train the model: Optimize value of parameters to minimize loss</p>
+    <p><em>Raffel et al., 2018</em> found encoder-decoders to work better than decoders for their tasks, and span corruption (denoising) to work better than language modeling.</p>
+  </li>
+  <li>
+    <p>A fascinating property of T5:<br />
+  it can be finetuned to answer a wide range of questions, retrieving knowledge from its parameters.</p>
     <ul>
-      <li>Recall: $\theta$ represents all the model parameters, in one long vector</li>
-      <li>In our case, with <em>d</em>-dimensional vectors and <em>V</em>-many words, we have: $\theta \in \mathbb{R}^{2dV}$</li>
-      <li>Remember: every word has two vectors</li>
-      <li>We optimize these parameters by walking down the gradient(gradient descent)</li>
-      <li>We compute <strong>all</strong> vector gradients</li>
+      <li>NQ: Natural Questions</li>
+      <li>WQ: WebQuestions</li>
+      <li>TQA: Trivia QA</li>
     </ul>
+
+    <p>All “open-domain” versions</p>
   </li>
 </ul>
 
-<h3 id="word2vec-derivations-of-gradient">Word2vec derivations of gradient</h3>
-<p>\(\begin{align*}
-J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substack{-m\leqq j\leqq m \\ j\ne 0}}\log P(w_{t+j}|w_t;\theta)
-\end{align*}\)<br />
-\(P(o|c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)}\)</p>
+<p><img src="/assets/images/cs224n/lec10_16.png" alt="png" width="100%&quot;, height=&quot;100%" /></p>
 
-<p>\(\frac{\partial}{\partial v_c} \log \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T v_c)} = \underbrace{\frac{\partial}{\partial v_c} \log \exp(u_o^T v_c)}_{(1)} - \underbrace{\frac{\partial}{\partial v_c} \log \sum_{w=1}^V \exp(u_w^T v_c)}_{(2)}\)<br />
-\(\begin{align*}\cdots (1) &amp;= \frac{\partial}{\partial v_c} u_o^T v_c \\
-							&amp;= u_o \end{align*}\)<br />
-\(\begin{align*}\cdots (2) &amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \frac{\partial}{\partial v_c} \exp(u_x^T v_c) \\
-							&amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \exp(u_x^T v_c) \cdot \frac{\partial}{\partial v_c} u_x^T v_c \\
-							&amp;= \frac{1}{\sum_{w=1}^V \exp(u_w^T v_c)} \cdot \sum_{x=1}^V \exp(u_x^T v_c) \cdot u_x \\
-							\end{align*} \\\)<br />
-\(\begin{align*}
-\frac{\partial}{\partial v_c} \log P(o|c) &amp;= u_o - \frac{\sum_{x=1}^V \exp(u_x^T v_c)u_x}{\sum_{w=1}^V \exp(u_w^T v_c)} \\
-	&amp; = u_o - \sum_{x=1}^V \underbrace{\frac{\exp(u_x^T v_c)}{\sum_{w=1}^V \exp(u_w^T v_c)}}_{\mbox{softmax formula}} u_x \\
-	&amp; = u_o - \underbrace{\sum_{x=1}^V P(x|c) u_x}_{\mbox{Expectation}} \\
-	&amp; = \mbox{observed} - \mbox{expected} \end{align*}\)</p>
+<h3 id="what-kinds-of-things-does-pretraining-learn">What kinds of things does pretraining learn?</h3>
+<p>There’s increasing evidence that pretrained models learn a wide variety of things about the statistical properties of language. Taking our examples from the start of class:</p>
+<ul>
+  <li><em>Stanford University is located in <strong>__</strong>____, California.</em> [Trivia]</li>
+  <li><em>I put ___ fork down on the table.</em> [syntax]</li>
+  <li><em>The woman walked across the street, checking for traffic over ___ shoulder.</em> [coreference]</li>
+  <li><em>I went to the ocean to see the fish, turtles, seals, and _____.</em> [lexical semantics/topic]</li>
+  <li><em>Overall, the value I got from the two hours watching it was the sum total of the popcorn and the drink. The movie was ___.</em> [sentiment]</li>
+  <li><em>Iroh went into the kitchen to make some tea. Standing next to Iroh, Zuko pondered his destiny. Zuko left the <strong>__</strong>.</em> [some reasoning – this is harder]</li>
+  <li><em>I was thinking about the sequence that goes 1, 1, 2, 3, 5, 8, 13, 21, ____</em> [some basic arithmetic; they don’t learn the Fibonnaci sequence]</li>
+  <li>Models also learn – and can exacerbate racism, sexism, all manner of bad biases.</li>
+  <li>More on all this in the interpretability lecture!</li>
+</ul>
+
+<h3 id="gpt-3-in-context-learning-and-very-large-models">GPT-3, In-context learning, and very large models</h3>
+<ul>
+  <li>So far, we’ve interacted with pretrained models in two ways:
+    <ul>
+      <li>Sample from the distributions they define (maybe providing a prompt)</li>
+      <li>Fine-tune them on a task we care about, and take their predictions.</li>
+    </ul>
+  </li>
+  <li>Very large language models seem to perform some kind of learning <strong>without gradient steps</strong> simply from examples you provide within their contexts.<br />
+  The in-context examples seem to specify the task to be performed, and the conditional distribution mocks performing the task to a certain extent.
+    <ul>
+      <li><strong>Input (prefix within a single Transformer decoder context):</strong><br />
+  thanks -&gt; merci<br />
+  hello -&gt; bonjour<br />
+  mint -&gt; menthe<br />
+  otter -&gt; ?</li>
+      <li><strong>Output (conditional generations):</strong><br />
+  loutre…
+  <img src="/assets/images/cs224n/lec10_17.png" alt="png" width="100%&quot;, height=&quot;100%" /></li>
+    </ul>
+  </li>
+  <li>
+    <p>GPT-3 is the canonical example of this. The largest T5 model had 11 billion parameters but <strong>GPT-3 has 175 billion parameters.</strong></p>
+  </li>
+  <li>Remarks<br />
+  These models are still not well-understood.<br />
+  “Small” models like BERT have become general tools in a wide range of settings.</li>
+</ul>
 
 
                 </div>
@@ -426,9 +651,9 @@ J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substac
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function () {
-                            var this_page_url = 'http://0.0.0.0:4000/cs224n_lec1';
-                            var this_page_identifier = '/cs224n_lec1';
-                            var this_page_title = 'cs224n - Lecture 1. Word Vectors';
+                            var this_page_url = 'http://0.0.0.0:4000/cs224n_lec10';
+                            var this_page_identifier = '/cs224n_lec10';
+                            var this_page_title = 'cs224n - Lecture 10. Transformers and Pretraining';
                         };
                         (function() {
                             var d = document, s = d.createElement('script');
@@ -474,11 +699,6 @@ J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substac
                                 
                                   
                                     
-                                        
-                                        
-                                            <li><a href="/cs224n_lec10">cs224n - Lecture 10. Transformers and Pretraining</a></li>
-                                        
-                                    
                                   
                                 
                                   
@@ -503,12 +723,7 @@ J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substac
                                     
                                         
                                         
-                                    
-                                  
-                                
-                                  
-                                    
-                                        
+                                            <li><a href="/cs224n_lec7">cs224n - Lecture 7. Translation, Seq2Seq, Attention</a></li>
                                         
                                     
                                   
@@ -542,6 +757,16 @@ J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substac
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
                                     
                                   
                                 
@@ -628,10 +853,13 @@ J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substac
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
             
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
                     <article class="post-card post-template no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/cs224n_lec2">
+            <a class="post-card-content-link" href="/cs224n_lec9">
                 <header class="post-card-header">
                     
                         
@@ -641,44 +869,11 @@ J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substac
                         
                     
 
-                    <h2 class="post-card-title">cs224n - Lecture 2. Neural Classifiers</h2>
+                    <h2 class="post-card-title">cs224n - Lecture 9. Self-Attention and Transformers</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>Review: Main idea of word2vec Start with random word vectors Iterate through each word in the whole corpus Try to predict surrounding words using word vectors: $P(o\mid c) = \frac{\exp(u_o^T v_c)}{\sum_{w \in V}\exp(u_w^T</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                
-            </footer>
-        </div>
-    </article>
-
-            
-
-            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
-            
-                    <article class="post-card post-template no-image">
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/DevEnv_Setup">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Blog</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">DevEnv Setup</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>For purpose of setting local development environment on a new SSD storage, followed instructions below. Post for later use. Document Enable NVIDIA CUDA on WSL Install stable version of Windows 11 Enable WSL,</p>
+                        <p>So far: recurrent models for (most) NLP - Circa 2016, the de facto strategy in NLP is to encode sentences with a bidirectional LSTM. (for example, the source sentence in a translation) -</p>
                     
                 </section>
             </a>
@@ -705,18 +900,18 @@ J(\theta) = -\frac{1}{T}\log L(\theta) = -\frac{1}{T}\sum_{t=1}^T \sum_{\substac
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">cs224n - Lecture 1. Word Vectors</div>
+    <div class="floating-header-title">cs224n - Lecture 10. Transformers and Pretraining</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs224n+-+Lecture+1.+Word+Vectors&amp;url=https://12kdh43.github.io/cs224n_lec1"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=cs224n+-+Lecture+10.+Transformers+and+Pretraining&amp;url=https://12kdh43.github.io/cs224n_lec10"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs224n_lec1"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://12kdh43.github.io/cs224n_lec10"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
